@@ -5,11 +5,11 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class limelight extends Subsystem {
+public class Limelight extends Subsystem {
 
-    private static limelight m_limelightInstance = new limelight();
+    private static Limelight m_limelightInstance = new limelight();
 
-    private static limelight getInstance() {
+    private static Limelight getInstance() {
         return m_limelightInstance;
     }
 
