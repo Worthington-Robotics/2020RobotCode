@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.ColorSensorV3;
@@ -8,12 +9,12 @@ import frc.lib.util.Util;
 public class ColorWheel extends Subsystem {
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
-    private final ColorSensorV3 colorSensor = new ColorSensorV3(i2cPort);
-    private int[] RGB = new int[]{0, 0, 0};
-    private final String[] wheelColors = new String[]{"B", "Y", "R", "G"};
+    private final ColorSensorV3 colorSensor;
+    private final char[] wheelColors = new char[]{'B', 'Y', 'R', 'G'};
 
     private ColorWheel() {
-
+        periodic = new PeriodicIO();
+        colorSensor = new ColorSensorV3(i2cPort);
     }
 
     private static ColorWheel m_colorWheelInstance = new ColorWheel();
@@ -22,21 +23,28 @@ public class ColorWheel extends Subsystem {
         return m_colorWheelInstance;
     }
 
+    private PeriodicIO periodic;
+
     @Override
     public void readPeriodicInputs() {
-
+        String gameData;
+        gameData = DriverStation.getInstance().getGameSpecificMessage();
+        if(gameData.length() > 0) {
+            periodic.fmsColor = colorCovert(gameData.charAt(0));
+        }
+        else {
+            periodic.fmsColor = 'U';
+        }
     }
 
     @Override
     public void writePeriodicOutputs() {
-        RGB[0] = colorSensor.getRed();
-        RGB[1] = colorSensor.getBlue();
-        RGB[2] = colorSensor.getGreen();
+        periodic.RGB = new int[]{colorSensor.getRed(), colorSensor.getBlue(), colorSensor.getGreen()};
     }
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putString("Vision/Color Detected", colorCovert(colorCovert(cDetected())));
+
     }
 
     /**
@@ -44,7 +52,7 @@ public class ColorWheel extends Subsystem {
      *
      * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
      */
-    private String cDetected() {
+    private char cDetected() {
         //RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255, 255, 0.//
         //H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0//
         final int redH1 = 0; final int redH2 = 360;
@@ -52,27 +60,27 @@ public class ColorWheel extends Subsystem {
         final int greenH = 120;
         final int blueH = 180;
         final int error = 25;
-        int h = RGBtoH(RGB);
+        int h = RGBtoH(periodic.RGB);
         if(Util.epsilonEquals(redH1, error) || Util.epsilonEquals(redH2, error)) {
-            return "R";
+            return 'R';
         }
         else if(Util.epsilonEquals(yellowH, error)) {
-            return "Y";
+            return 'Y';
         }
         else if(Util.epsilonEquals(greenH, error)) {
-            return "G";
+            return 'G';
         }
         else if(Util.epsilonEquals(blueH, error)) {
-            return "B";
+            return 'B';
         }
         else {
-            return "Unknown";
+            return 'U';
         }
     }
 
     /**
      * Takes colors and coverts it from what the robot sees
-     * to hwat the field sees or visa versa
+     * to what the field sees or visa versa
      *
      * @param color Color Red, Yellow, Green, Blue that the robot is seeing
      *              or what the field is seeing.
@@ -80,28 +88,42 @@ public class ColorWheel extends Subsystem {
      * @return Returns the color that the field sensor is sees
      * or what the robot sees
      */
-    private String colorCovert(String color) {
-        color = color.toUpperCase();
+    private static char colorCovert(char color) {
         switch (color) {
-            case "R":
-                return "B";
-            case "B":
-                return "R";
-            case "Y":
-                return "G";
-            case "G":
-                return "Y";
+            case 'R':
+                return 'B';
+            case 'B':
+                return 'R';
+            case 'Y':
+                return 'G';
+            case 'G':
+                return 'Y';
             default:
-                return "Unknown";
+                return 'U';
         }
     }
 
-    private int direction(String color) {
-
-
-
+    /**
+     * Picks the direction the wheel has to spin for maximum efficiency
+     *
+     * @param color takes in a character 'R', 'Y', 'G', 'B' of what the robot sees
+     */
+    private void direction(char color) {
+        String wheelColorsOrder = new String(wheelColors);
+        if(wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) < -1 || wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) == 1) {
+            periodic.direction = 0;
+        }
+        else {
+            periodic.direction = 1;
+        }
     }
 
+    /**
+     * Coverts RGB values to a Hue value
+     *
+     * @param rgb RGB in an ArrayList
+     * @return Hue value of RGB
+     */
     private static int RGBtoH(int[] rgb){
 
         int h, min, max;
@@ -137,6 +159,12 @@ public class ColorWheel extends Subsystem {
     @Override
     public void reset() {
 
+    }
+
+    public class PeriodicIO extends PeriodicIO {
+        char fmsColor = 'U';
+        int direction = 1; //1 for right, 0 for left
+        int[] RGB = new int[]{0, 0, 0};
     }
 
 }
