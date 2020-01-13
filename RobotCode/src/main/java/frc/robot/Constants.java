@@ -10,6 +10,9 @@ public class Constants {
 
     //Solenoid Ports
 
+    //Color Sensor Port
+    public static final int COLOR_SENSOR_PORT = 0;
+
     /**
      * Drivetrain tuned values --------------------------------
      */
