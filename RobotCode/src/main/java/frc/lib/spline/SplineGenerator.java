@@ -49,7 +49,9 @@ public class SplineGenerator {
     public static List<Pose2dWithCurvature> parameterizeSplines(List<? extends Spline> splines, double maxDx,
                                                                 double maxDy, double maxDTheta) {
         List<Pose2dWithCurvature> rv = new ArrayList<>();
-        if (splines.isEmpty()) return rv;
+        if (splines.isEmpty()) {
+            return rv;
+        }
         rv.add(splines.get(0).getPose2dWithCurvature(0.0));
         for (final Spline s : splines) {
             List<Pose2dWithCurvature> samples = parameterizeSpline(s, maxDx, maxDy, maxDTheta);

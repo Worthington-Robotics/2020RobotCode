@@ -13,6 +13,7 @@ public abstract class Subsystem {
     /**
      * Required for the subsystem's looper to be registered to the state machine
      * not required for subsystems that do not use looper
+     *
      * @param enabledLooper the subsystem's Looper
      */
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -37,14 +38,14 @@ public abstract class Subsystem {
     /**
      * Called to stop the autonomous functions of the subsystem and place it in open loop
      */
-    public void onStop(){
+    public void onStop() {
 
     }
 
-    public PeriodicIO getLogger(){
+    public PeriodicIO getLogger() {
         return new PeriodicIO();
     }
 
-    public class PeriodicIO{
+    public class PeriodicIO {
     }
 }

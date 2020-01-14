@@ -104,7 +104,9 @@ public class TimedState<S extends State<S>> implements State<TimedState<S>> {
 
     @Override
     public boolean equals(final Object other) {
-        if (other == null || !(other instanceof TimedState<?>)) return false;
+        if (other == null || !(other instanceof TimedState<?>)) {
+            return false;
+        }
         TimedState<?> ts = (TimedState<?>) other;
         return state().equals(ts.state()) && Util.epsilonEquals(t(), ts.t());
     }

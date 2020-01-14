@@ -33,8 +33,11 @@ public class VersionData {
     public static String getInfo(String key) {
         try {
             File version;
-            if (RobotBase.isReal()) version = new File(Filesystem.getDeployDirectory(), "version.dat");
-            else version = new File(Filesystem.getLaunchDirectory(), "src\\main\\deploy\\version.dat");
+            if (RobotBase.isReal()) {
+                version = new File(Filesystem.getDeployDirectory(), "version.dat");
+            } else {
+                version = new File(Filesystem.getLaunchDirectory(), "src\\main\\deploy\\version.dat");
+            }
             List<String> lines = Files.readAllLines(version.toPath());
             int i = 0;
             int equalsInd = 0;

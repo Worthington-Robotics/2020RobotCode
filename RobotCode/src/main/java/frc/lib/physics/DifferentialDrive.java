@@ -106,7 +106,9 @@ public class DifferentialDrive {
         dynamics.wheel_velocity = solveInverseKinematics(chassis_velocity);
         dynamics.chassis_velocity = chassis_velocity;
         dynamics.curvature = dynamics.chassis_velocity.angular / dynamics.chassis_velocity.linear;
-        if (Double.isNaN(dynamics.curvature)) dynamics.curvature = 0.0;
+        if (Double.isNaN(dynamics.curvature)) {
+            dynamics.curvature = 0.0;
+        }
         dynamics.voltage = voltage;
         solveForwardDynamics(dynamics);
         return dynamics;
@@ -117,7 +119,9 @@ public class DifferentialDrive {
         dynamics.wheel_velocity = wheel_velocity;
         dynamics.chassis_velocity = solveForwardKinematics(wheel_velocity);
         dynamics.curvature = dynamics.chassis_velocity.angular / dynamics.chassis_velocity.linear;
-        if (Double.isNaN(dynamics.curvature)) dynamics.curvature = 0.0;
+        if (Double.isNaN(dynamics.curvature)) {
+            dynamics.curvature = 0.0;
+        }
         dynamics.voltage = voltage;
         solveForwardDynamics(dynamics);
         return dynamics;
@@ -155,7 +159,9 @@ public class DifferentialDrive {
         // total angular accel = linear_accel * curvature + v^2 * dcurvature
         dynamics.dcurvature = (dynamics.chassis_acceleration.angular - dynamics.chassis_acceleration.linear * dynamics.curvature) /
                 (dynamics.chassis_velocity.linear * dynamics.chassis_velocity.linear);
-        if (Double.isNaN(dynamics.dcurvature)) dynamics.dcurvature = 0.0;
+        if (Double.isNaN(dynamics.dcurvature)) {
+            dynamics.dcurvature = 0.0;
+        }
 
         // Resolve chassis accelerations to each wheel.
         dynamics.wheel_acceleration.left = dynamics.chassis_acceleration.linear - dynamics.chassis_acceleration
@@ -169,11 +175,15 @@ public class DifferentialDrive {
         DriveDynamics dynamics = new DriveDynamics();
         dynamics.chassis_velocity = chassis_velocity;
         dynamics.curvature = dynamics.chassis_velocity.angular / dynamics.chassis_velocity.linear;
-        if (Double.isNaN(dynamics.curvature)) dynamics.curvature = 0.0;
+        if (Double.isNaN(dynamics.curvature)) {
+            dynamics.curvature = 0.0;
+        }
         dynamics.chassis_acceleration = chassis_acceleration;
         dynamics.dcurvature = (dynamics.chassis_acceleration.angular - dynamics.chassis_acceleration.linear * dynamics.curvature) /
                 (dynamics.chassis_velocity.linear * dynamics.chassis_velocity.linear);
-        if (Double.isNaN(dynamics.dcurvature)) dynamics.dcurvature = 0.0;
+        if (Double.isNaN(dynamics.dcurvature)) {
+            dynamics.dcurvature = 0.0;
+        }
         dynamics.wheel_velocity = solveInverseKinematics(chassis_velocity);
         dynamics.wheel_acceleration = solveInverseKinematics(chassis_acceleration);
         solveInverseDynamics(dynamics);
@@ -184,11 +194,15 @@ public class DifferentialDrive {
         DriveDynamics dynamics = new DriveDynamics();
         dynamics.chassis_velocity = solveForwardKinematics(wheel_velocity);
         dynamics.curvature = dynamics.chassis_velocity.angular / dynamics.chassis_velocity.linear;
-        if (Double.isNaN(dynamics.curvature)) dynamics.curvature = 0.0;
+        if (Double.isNaN(dynamics.curvature)) {
+            dynamics.curvature = 0.0;
+        }
         dynamics.chassis_acceleration = solveForwardKinematics(wheel_acceleration);
         dynamics.dcurvature = (dynamics.chassis_acceleration.angular - dynamics.chassis_acceleration.linear * dynamics.curvature) /
                 (dynamics.chassis_velocity.linear * dynamics.chassis_velocity.linear);
-        if (Double.isNaN(dynamics.dcurvature)) dynamics.dcurvature = 0.0;
+        if (Double.isNaN(dynamics.dcurvature)) {
+            dynamics.dcurvature = 0.0;
+        }
         dynamics.wheel_velocity = wheel_velocity;
         dynamics.wheel_acceleration = wheel_acceleration;
         solveInverseDynamics(dynamics);

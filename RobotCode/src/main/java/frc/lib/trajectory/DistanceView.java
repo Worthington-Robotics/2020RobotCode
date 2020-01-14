@@ -18,10 +18,12 @@ public class DistanceView<S extends State<S>> implements TrajectoryView<S> {
 
     @Override
     public TrajectorySamplePoint<S> sample(double distance) {
-        if (distance >= last_interpolant())
+        if (distance >= last_interpolant()) {
             return new TrajectorySamplePoint<S>(trajectory_.getPoint(trajectory_.length() - 1));
-        if (distance <= 0.0)
+        }
+        if (distance <= 0.0) {
             return new TrajectorySamplePoint<S>(trajectory_.getPoint(0));
+        }
         for (int i = 1; i < distances_.length; ++i) {
             final TrajectoryPoint<S> s = trajectory_.getPoint(i);
             if (distances_[i] >= distance) {

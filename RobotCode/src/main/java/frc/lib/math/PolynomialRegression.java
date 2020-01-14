@@ -76,8 +76,9 @@ public class PolynomialRegression {
 
             // find least squares solution
             qr = new QRDecomposition(matrixX);
-            if (qr.isFullRank())
+            if (qr.isFullRank()) {
                 break;
+            }
 
             // decrease degree and try again
             this.degree--;
@@ -91,8 +92,9 @@ public class PolynomialRegression {
 
         // mean of y[] values
         double sum = 0.0;
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             sum += y[i];
+        }
         double mean = sum / n;
 
         // total variation to be accounted for
@@ -114,8 +116,9 @@ public class PolynomialRegression {
      */
     public double beta(int j) {
         // to make -0.0 print as 0.0
-        if (Math.abs(beta.get(j, 0)) < 1E-4)
+        if (Math.abs(beta.get(j, 0)) < 1E-4) {
             return 0.0;
+        }
         return beta.get(j, 0);
     }
 
@@ -134,8 +137,9 @@ public class PolynomialRegression {
      * @return the coefficient of determination <em>R</em><sup>2</sup>, which is a real number between 0 and 1
      */
     public double R2() {
-        if (sst == 0.0)
+        if (sst == 0.0) {
             return 1.0; // constant function
+        }
         return 1.0 - sse / sst;
     }
 
@@ -148,8 +152,9 @@ public class PolynomialRegression {
     public double predict(double x) {
         // horner's method
         double y = 0.0;
-        for (int j = degree; j >= 0; j--)
+        for (int j = degree; j >= 0; j--) {
             y = beta(j) + (x * y);
+        }
         return y;
     }
 
@@ -159,17 +164,19 @@ public class PolynomialRegression {
         int j = degree;
 
         // ignoring leading zero coefficients
-        while (j >= 0 && Math.abs(beta(j)) < 1E-5)
+        while (j >= 0 && Math.abs(beta(j)) < 1E-5) {
             j--;
+        }
 
         // create remaining terms
         while (j >= 0) {
-            if (j == 0)
+            if (j == 0) {
                 s.append(String.format("%.2f ", beta(j)));
-            else if (j == 1)
+            } else if (j == 1) {
                 s.append(String.format("%.2f x + ", beta(j)));
-            else
+            } else {
                 s.append(String.format("%.2f x^%d + ", beta(j), j));
+            }
             j--;
         }
         s = s.append("  (R^2 = " + String.format("%.3f", R2()) + ")");

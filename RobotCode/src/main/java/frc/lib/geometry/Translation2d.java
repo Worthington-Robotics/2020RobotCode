@@ -148,7 +148,9 @@ public class Translation2d implements ITranslation2d<Translation2d> {
 
     @Override
     public boolean equals(final Object other) {
-        if (other == null || !(other instanceof Translation2d)) return false;
+        if (other == null || !(other instanceof Translation2d)) {
+            return false;
+        }
         return distance((Translation2d) other) < Util.kEpsilon;
     }
 
