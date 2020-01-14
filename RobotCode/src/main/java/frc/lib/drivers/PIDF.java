@@ -1,6 +1,7 @@
 package frc.lib.drivers;
 
 import java.util.concurrent.locks.ReentrantLock;
+
 import frc.lib.util.Util;
 
 public class PIDF {
@@ -14,24 +15,25 @@ public class PIDF {
 
     protected static final double DEFAULT_DT = 0.010;
 
-    public PIDF(double kP, double kD){
+    public PIDF(double kP, double kD) {
         this(kP, 0, kD, 0, DEFAULT_DT, 0);
     }
 
-    public PIDF(double kP, double kI, double kD, double iMax){
+    public PIDF(double kP, double kI, double kD, double iMax) {
         this(kP, kI, kD, 0, DEFAULT_DT, iMax);
     }
 
     /**
      * Complete PIDF constructor
+     *
      * @param kP
      * @param kI
      * @param kD
-     * @param kF Not yet implemented
-     * @param dT discrete time step for control loop
+     * @param kF   Not yet implemented
+     * @param dT   discrete time step for control loop
      * @param iMax maximum integral windup
      */
-    public PIDF(double kP, double kI, double kD, double kF, double dT, double iMax){
+    public PIDF(double kP, double kI, double kD, double kF, double dT, double iMax) {
         this.kP = kP;
         this.kI = kI;
         this.kD = kD;
@@ -47,9 +49,9 @@ public class PIDF {
      * default states. Also disables the PID if it was currently
      * in use within the software
      */
-    public void reset(){
+    public void reset() {
         calculationMutex.lock();
-        try{
+        try {
             error = lastError = derivative = integral = setPoint = 0;
             continuous = enabled = false;
         } finally {
@@ -60,20 +62,20 @@ public class PIDF {
     /**
      * Allows the PID controller to return a nonzero output
      */
-    public void enable(){
+    public void enable() {
         enabled = true;
     }
 
     /**
      * Stops the PID from returning a nonzero output
      */
-    public void disable(){
+    public void disable() {
         enabled = false;
     }
 
-    public void setPoint(double setPoint){
+    public void setPoint(double setPoint) {
         calculationMutex.lock();
-        try{
+        try {
             this.setPoint = setPoint;
         } finally {
             calculationMutex.unlock();
@@ -82,17 +84,18 @@ public class PIDF {
 
     /**
      * Sets the P, I and D gains
+     *
      * @param kP
      * @param kI
      * @param kD
      */
-    public void setPID(double kP, double kI, double kD){
+    public void setPID(double kP, double kI, double kD) {
         setPIDF(kP, kI, kD, kF);
     }
 
-    public void setPIDF(double kP, double kI, double kD, double kF){
+    public void setPIDF(double kP, double kI, double kD, double kF) {
         calculationMutex.lock();
-        try{
+        try {
             this.kP = kP;
             this.kI = kI;
             this.kD = kD;
@@ -101,20 +104,23 @@ public class PIDF {
             calculationMutex.unlock();
         }
     }
-    
+
     /**
      * Returns the current calculated output of this PID
      * based on the current position
+     *
      * @param input system position
      * @return calculated motor power to apply (%)
      */
-    public double update(double input){
-        if(!enabled) return 0.0;
-        
+    public double update(double input) {
+        if (!enabled) {
+            return 0.0;
+        }
+
         final double result;
         calculationMutex.lock();
 
-        try{
+        try {
             // calculate p term
             error = getContinuousError(setPoint - input);
 
@@ -123,13 +129,15 @@ public class PIDF {
 
             // calculate and bound I term to iMax
             integral += error * dT;
-            if(Math.abs(integral) > iMax) integral = Math.signum(integral) * iMax;
+            if (Math.abs(integral) > iMax) {
+                integral = Math.signum(integral) * iMax;
+            }
 
             // save last error for d term
             lastError = error;
 
-            result = error * kP + integral * kI +  derivative * kD;
-        } finally{
+            result = error * kP + integral * kI + derivative * kD;
+        } finally {
             calculationMutex.unlock();
         }
 
@@ -137,7 +145,7 @@ public class PIDF {
     }
 
     /**
-     * Wraps error around for continuous inputs. The original 
+     * Wraps error around for continuous inputs. The original
      * error is returned if continuous mode is disabled.
      *
      * @param error The current error of the PID controller.
@@ -162,13 +170,14 @@ public class PIDF {
      * Sets the PID to use a continuous mode calculation that
      * makes both ends of the range effectively the same point
      * !!!YOU MUST MAKE SURE TO SET THE RANGE IF YOU USE THIS MODE!!!
+     *
      * @param continuous
      */
-    public void setContinuous(boolean continuous){
+    public void setContinuous(boolean continuous) {
         calculationMutex.lock();
-        try{
+        try {
             this.continuous = continuous;
-        } finally{
+        } finally {
             calculationMutex.unlock();
         }
     }
@@ -176,23 +185,24 @@ public class PIDF {
     /**
      * Sets the min am maxium values defining the input range for this
      * PID controller. Only needed for continuous PIDs
+     *
      * @param minimumInput
      * @param maximumInput
      */
-    public void setInputRange(double minimumInput, double maximumInput){
-        if(maximumInput < minimumInput){
+    public void setInputRange(double minimumInput, double maximumInput) {
+        if (maximumInput < minimumInput) {
             throw new RuntimeException("Attempted to set a maximum input range lesser than the minimum");
-        } 
+        }
 
         calculationMutex.lock();
-        try{
+        try {
             inputRange = maximumInput - minimumInput;
-        } finally{
+        } finally {
             calculationMutex.unlock();
         }
     }
 
-    public boolean onTarget(double epsilon){
+    public boolean onTarget(double epsilon) {
         return Util.epsilonEquals(error, 0, epsilon);
     }
 

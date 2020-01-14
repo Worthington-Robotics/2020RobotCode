@@ -42,7 +42,6 @@ public class TrajectoryIterator<S extends State<S>> {
     }
 
     /**
-     *
      * @param additional_progress to advance trajectory to
      * @return the sample point at given progress
      */

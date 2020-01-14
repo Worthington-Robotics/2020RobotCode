@@ -205,8 +205,9 @@ public class QuinticHermiteSpline extends Spline {
         while (count < kMaxIterations) {
             runOptimizationIteration(splines);
             double current = sumDCurvature2(splines);
-            if (prev - current < kMinDelta)
+            if (prev - current < kMinDelta) {
                 return current;
+            }
             prev = current;
             count++;
         }

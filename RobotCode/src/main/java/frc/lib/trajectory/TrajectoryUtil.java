@@ -110,9 +110,10 @@ public class TrajectoryUtil {
 
     /**
      * creates an optimized spilne form a list of poses
+     *
      * @param waypoints -- list of pose2D
-     * @param maxDx -- maximum change in X
-     * @param maxDy -- maximum change in Y
+     * @param maxDx     -- maximum change in X
+     * @param maxDy     -- maximum change in Y
      * @param maxDTheta -- maximum change in angle
      * @return a trajectory generated against a set of splines
      */

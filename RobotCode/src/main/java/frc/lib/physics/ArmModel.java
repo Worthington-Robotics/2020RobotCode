@@ -38,7 +38,7 @@ public class ArmModel {
     /**
      * Generates an X Y coordinate for the end effector based on two angles.
      * Can be angular position, velocity or acceleration. Uses a vector based
-     * representation for calculation. NOTE: domains are reversed though due to having 
+     * representation for calculation. NOTE: domains are reversed though due to having
      * 0 degrees as vertical
      *
      * @param prox angle of the proximal joint
@@ -53,6 +53,7 @@ public class ArmModel {
 
 
     //TODO nuke this
+
     /**
      * Generates a set of angles for an xy coordinate
      * <p>Can be position, velocity or acceleration
@@ -78,9 +79,10 @@ public class ArmModel {
     /**
      * function to determine if the arm state falls in a possible
      * state of interference with itself or known geometry.
+     *
      * @return
      */
-    public boolean checkForInterference(){
+    public boolean checkForInterference() {
         //TODO implement this
         return false;
     }
@@ -104,10 +106,11 @@ public class ArmModel {
         public double dist = 0.0;
 
         /**
-         * The current state of a 2 axis arm. 
+         * The current state of a 2 axis arm.
          * This can represent position, velocity, torque, voltage, etc depending on context
+         *
          * @param proximal value
-         * @param distal value 
+         * @param distal   value
          */
         public ArmState(double prox, double dist) {
             this.prox = prox;
@@ -121,7 +124,7 @@ public class ArmModel {
             return prox;
         }
 
-        public double getDistal(){
+        public double getDistal() {
             return dist;
         }
 
@@ -129,7 +132,7 @@ public class ArmModel {
             prox = val;
         }
 
-        public void setDistal(double val){
+        public void setDistal(double val) {
             dist = val;
         }
 
@@ -139,7 +142,7 @@ public class ArmModel {
             return fmt.format(prox) + ", " + fmt.format(dist);
         }
 
-        public boolean isNAN(){
+        public boolean isNAN() {
             return prox == Double.NaN || dist == Double.NaN;
         }
     }

@@ -51,10 +51,10 @@ public class StateMachine {
                 }
             }
             state.set(-1);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             state.set(-3);
-        } finally{
+        } finally {
             //run all cleanup procedures
             SmartDashboard.putNumber("StateMachine/state", state.get());
             stateLock.set(false);
@@ -67,12 +67,15 @@ public class StateMachine {
 
     /**
      * starts the state machine (if not already runnning a descriptor)
+     *
      * @param descrip the descriptor to run in the machine
      * @return true if the machine was started successfully
      */
     public static boolean runMachine(StateMachineDescriptor descrip) {
         //if the machine is currenly running it must be shut down independently in order to start a new descriptor
-        if(stateLock.get()) return false;
+        if (stateLock.get()) {
+            return false;
+        }
 
         //entered a resettable state
         //reset the state booleans
@@ -81,7 +84,7 @@ public class StateMachine {
 
         //move the new state machine in
         descriptor = descrip;
-        
+
         //start the new state machine thread
         Thread thread = new Thread(Man);
         thread.start();
@@ -91,17 +94,18 @@ public class StateMachine {
 
     /**
      * gets the current status of the state machine
+     *
      * @return true if the machine is currently running
      */
-    public static boolean isRunning(){
+    public static boolean isRunning() {
         return stateLock.get();
     }
 
     /**
      * forces the state machine to stop and exit within the next iteration.
      */
-    public static void assertStop(){
-        if(!wantStop.get()){
+    public static void assertStop() {
+        if (!wantStop.get()) {
             wantStop.set(true);
             System.out.println("State Machine Halting");
         }

@@ -30,7 +30,7 @@ public class Looper implements ILooper {
 
     private final Runnable runnable_ = () -> {
         synchronized (taskRunningLock_) {
-            if (running_ ) {
+            if (running_) {
                 double now = Timer.getFPGATimestamp();
 
                 for (Loop loop : loops_) {

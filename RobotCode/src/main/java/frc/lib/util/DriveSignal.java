@@ -35,7 +35,7 @@ public class DriveSignal {
     }
 
     //manipulation functions
-    public DriveSignal invert(){
+    public DriveSignal invert() {
         mLeftMotor *= -1;
         mRightMotor *= -1;
         return this;
