@@ -2,18 +2,26 @@ package frc.robot.subsystems;
 
 import frc.lib.loops.ILooper;
 
+//design pattern for caching periodic writes to avoid hammering the HAL/CAN.
 public abstract class Subsystem {
 
     /**
      * Updates all periodic variables and sensors
      */
-    public void readPeriodicInputs() {
+    public abstract void readPeriodicInputs();
+
+    /**
+     * Required for the subsystem's looper to be registered to the state machine
+     * not required for subsystems that do not use looper
+     * @param enabledLooper the subsystem's Looper
+     */
+    public void registerEnabledLoops(ILooper enabledLooper) {
+
     }
 
     /**
      * Writes the periodic outputs to actuators (motors and ect...)
      */
-    // Optional design pattern for caching periodic writes to avoid hammering the HAL/CAN.
     public abstract void writePeriodicOutputs();
 
     /**
@@ -21,20 +29,22 @@ public abstract class Subsystem {
      */
     public abstract void outputTelemetry();
 
-
     /**
      * Called to reset and configure the subsystem
      */
     public abstract void reset();
 
     /**
-     * Required for the subsystem's looper to be registered to the state machine
-     * not required for subsystems that do not use looper
-     *
-     * @param enabledLooper the subsystem's Looper
+     * Called to stop the autonomous functions of the subsystem and place it in open loop
      */
-    public void registerEnabledLoops(ILooper enabledLooper) {
+    public void onStop(){
 
     }
 
+    public PeriodicIO getLogger(){
+        return new PeriodicIO();
+    }
+
+    public class PeriodicIO{
+    }
 }
