@@ -58,5 +58,7 @@ public class Constants {
     public static final double DRIVE_LEFT_KD = 25; //20 for practice
     public static final double DRIVE_LEFT_KF = 0.53;
 
+	public static final double kPathFollowingMaxAccel = 0;
+
 
 }
