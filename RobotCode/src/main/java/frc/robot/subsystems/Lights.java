@@ -20,13 +20,14 @@ public class Lights extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         // TODO Auto-generated method stub
-        switch(ColorWheel.getInstance().cDetected()) {
+        /*switch(ColorWheel.getInstance().cDetected()) {
             case 'R': colorH = 0; break;
             case 'Y': colorH = 60; break;
             case 'G': colorH = 120; break;
             case 'B': colorH = 180; break;
             case 'U': break;
-        }
+        }*/
+        colorH = 0;
         
 
     }
