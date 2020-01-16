@@ -51,7 +51,7 @@ public class ColorWheel extends Subsystem {
      *
      * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
      */
-    private char cDetected() {
+    public char cDetected() {
         //RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255, 255, 0.//
         //H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0//
         final int redH1 = 0;
