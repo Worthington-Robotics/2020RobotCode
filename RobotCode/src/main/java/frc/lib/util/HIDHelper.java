@@ -2,10 +2,9 @@ package frc.lib.util;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class HIDHelper{
+public class HIDHelper {
 
     /**
-     *
      * @param constants HID constants
      * @return double array following X(0), Y(1), Z(2)
      */
@@ -17,8 +16,8 @@ public class HIDHelper{
         return out;
     }
 
-    private static double applyScalarCut(double stickInput, double deadBand, double scalarCut, int pow){
-        return evalDeadBand(stickInput,deadBand,pow) * scalarCut;
+    private static double applyScalarCut(double stickInput, double deadBand, double scalarCut, int pow) {
+        return evalDeadBand(stickInput, deadBand, pow) * scalarCut;
     }
 
     // figures out if the stick value is within the deadband
@@ -34,25 +33,28 @@ public class HIDHelper{
         }
     }
 
-    public static double getAxisMapped(double input, double min_output, double max_output){
+    public static double getAxisMapped(double input, double min_output, double max_output) {
         return (input - -1) * (max_output - min_output) / (1 - -1) + max_output;
     }
 
 
-    public static class HIDConstants{
+    public static class HIDConstants {
         private Joystick joystick;
         private double deadBand, scalarCutX, scalarCutY, scalarCutZ;
         private int polyFunct;
-        public HIDConstants(Joystick joystick, double deadBand, double scalarCutX, double scalarCutY, double scalarCutZ, int polyFunct){
+
+        public HIDConstants(Joystick joystick, double deadBand, double scalarCutX, double scalarCutY, double scalarCutZ, int polyFunct) {
             this.joystick = joystick;
-            this.deadBand =  deadBand;
+            this.deadBand = deadBand;
             this.scalarCutX = scalarCutX;
             this.scalarCutY = scalarCutY;
             this.scalarCutZ = scalarCutZ;
             this.polyFunct = polyFunct;
         }
 
-        public static Joystick getJoystick(HIDConstants hid){return hid.joystick;}
+        public static Joystick getJoystick(HIDConstants hid) {
+            return hid.joystick;
+        }
     }
 
 }

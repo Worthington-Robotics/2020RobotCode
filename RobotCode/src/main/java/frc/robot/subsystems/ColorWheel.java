@@ -29,10 +29,9 @@ public class ColorWheel extends Subsystem {
     public void readPeriodicInputs() {
         String gameData;
         gameData = DriverStation.getInstance().getGameSpecificMessage();
-        if(gameData.length() > 0) {
+        if (gameData.length() > 0) {
             periodic.fmsColor = colorCovert(gameData.charAt(0));
-        }
-        else {
+        } else {
             periodic.fmsColor = 'U';
         }
     }
@@ -52,28 +51,25 @@ public class ColorWheel extends Subsystem {
      *
      * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
      */
-    private char cDetected() {
+    public char cDetected() {
         //RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255, 255, 0.//
         //H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0//
-        final int redH1 = 0; final int redH2 = 360;
+        final int redH1 = 0;
+        final int redH2 = 360;
         final int yellowH = 60;
         final int greenH = 120;
         final int blueH = 180;
         final int error = 25;
         int h = RGBtoH(periodic.RGB);
-        if(Util.epsilonEquals(redH1, error) || Util.epsilonEquals(redH2, error)) {
+        if (Util.epsilonEquals(redH1, error) || Util.epsilonEquals(redH2, error)) {
             return 'R';
-        }
-        else if(Util.epsilonEquals(yellowH, error)) {
+        } else if (Util.epsilonEquals(yellowH, error)) {
             return 'Y';
-        }
-        else if(Util.epsilonEquals(greenH, error)) {
+        } else if (Util.epsilonEquals(greenH, error)) {
             return 'G';
-        }
-        else if(Util.epsilonEquals(blueH, error)) {
+        } else if (Util.epsilonEquals(blueH, error)) {
             return 'B';
-        }
-        else {
+        } else {
             return 'U';
         }
     }
@@ -84,7 +80,6 @@ public class ColorWheel extends Subsystem {
      *
      * @param color Color Red, Yellow, Green, Blue that the robot is seeing
      *              or what the field is seeing.
-     *
      * @return Returns the color that the field sensor is sees
      * or what the robot sees
      */
@@ -110,10 +105,9 @@ public class ColorWheel extends Subsystem {
      */
     private void direction(char color) {
         String wheelColorsOrder = new String(wheelColors);
-        if(wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) < -1 || wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) == 1) {
+        if (wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) < -1 || wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) == 1) {
             periodic.direction = 0;
-        }
-        else {
+        } else {
             periodic.direction = 1;
         }
     }
@@ -124,7 +118,7 @@ public class ColorWheel extends Subsystem {
      * @param rgb RGB in an ArrayList
      * @return Hue value of RGB
      */
-    private static int RGBtoH(int[] rgb){
+    private static int RGBtoH(int[] rgb) {
 
         int h, min, max;
         double delta;
@@ -135,23 +129,25 @@ public class ColorWheel extends Subsystem {
         delta = max - min;
 
         //
-        if( max == 0 ) {
+        if (max == 0) {
             h = -1;
             return h;
         }
 
         // H
-        if( rgb[0] == max )
-            h = (int) ((( rgb[1] - rgb[2] ) / delta) % 6); // between yellow & magenta
-        else if( rgb[1] == max )
-            h = (int) (2 + ( rgb[2] - rgb[0] ) / delta); // between cyan & yellow
-        else
-            h = (int) (4 + ( rgb[0] - rgb[1] ) / delta); // between magenta & cyan
+        if (rgb[0] == max) {
+            h = (int) (((rgb[1] - rgb[2]) / delta) % 6); // between yellow & magenta
+        } else if (rgb[1] == max) {
+            h = (int) (2 + (rgb[2] - rgb[0]) / delta); // between cyan & yellow
+        } else {
+            h = (int) (4 + (rgb[0] - rgb[1]) / delta); // between magenta & cyan
+        }
 
         h *= 60;    // degrees
 
-        if( h < 0 )
+        if (h < 0) {
             h += 360;
+        }
 
         return h;
     }

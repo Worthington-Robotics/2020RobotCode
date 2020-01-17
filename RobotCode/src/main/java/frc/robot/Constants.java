@@ -1,4 +1,5 @@
 package frc.robot;
+
 public class Constants {
     /**
      * device ID declarations ---------------------------------
@@ -12,6 +13,10 @@ public class Constants {
 
     //Color Sensor Port
     public static final int COLOR_SENSOR_PORT = 0;
+    
+    //LED Data/Ports
+    public static final int LED_PORT = 1;
+    public static final int LED_LENGTH = 60;
 
     /**
      * Drivetrain tuned values --------------------------------
@@ -57,5 +62,6 @@ public class Constants {
     public static final double DRIVE_LEFT_KD = 25; //20 for practice
     public static final double DRIVE_LEFT_KF = 0.53;
 
+	public static final double kPathFollowingMaxAccel = 0;
 
 }

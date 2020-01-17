@@ -19,11 +19,13 @@ public class LineCrossWait extends Action {
 
     public void onLoop() {
         if (isX) {
-            if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x())
+            if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x()) {
                 end = true;
+            }
         } else {
-            if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().y())
+            if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().y()) {
                 end = true;
+            }
         }
     }
 

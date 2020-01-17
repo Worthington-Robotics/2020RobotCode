@@ -49,6 +49,7 @@ public class Pose2d implements IPose2d<Pose2d> {
 
     /**
      * Obtain a new Pose2d from a (constant curvature) velocity.
+     *
      * @see https://github.com/strasdat/Sophus/blob/master/sophus/se2.hpp
      */
     public static Pose2d exp(final Twist2d delta) {
@@ -145,8 +146,9 @@ public class Pose2d implements IPose2d<Pose2d> {
      * Return true if this pose is (nearly) colinear with the another.
      */
     public boolean isColinear(final Pose2d other) {
-        if (!getRotation().isParallel(other.getRotation()))
+        if (!getRotation().isParallel(other.getRotation())) {
             return false;
+        }
         final Twist2d twist = log(inverse().transformBy(other));
         return (Util.epsilonEquals(twist.dy, 0.0) && Util.epsilonEquals(twist.dtheta, 0.0));
     }
@@ -202,7 +204,9 @@ public class Pose2d implements IPose2d<Pose2d> {
 
     @Override
     public boolean equals(final Object other) {
-        if (other == null || !(other instanceof Pose2d)) return false;
+        if (other == null || !(other instanceof Pose2d)) {
+            return false;
+        }
         return epsilonEquals((Pose2d) other, Util.kEpsilon);
     }
 

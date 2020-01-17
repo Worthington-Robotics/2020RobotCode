@@ -19,27 +19,30 @@ public class SubsystemManager implements ILooper {
 
     /**
      * a manager class to handle all of the individual subsystems
+     *
      * @param allSubsystems -- a list of subsystems in order of importance.
-     * Dependent subsystems should be reset before their parents
-     * @param ignoreLogger -- ignores the initialization of the logger
-     * and any subsequent errors it may generate
+     *                      Dependent subsystems should be reset before their parents
+     * @param ignoreLogger  -- ignores the initialization of the logger
+     *                      and any subsequent errors it may generate
      */
-    public SubsystemManager(List<Subsystem> allSubsystems, boolean ignoreLogger){
+    public SubsystemManager(List<Subsystem> allSubsystems, boolean ignoreLogger) {
         mAllSubsystems = allSubsystems;
 
         //get all subsystems to log from
         final List<Subsystem.PeriodicIO> allToLog = new ArrayList<>();
         mAllSubsystems.forEach((s) -> allToLog.add(s.getLogger()));
 
-        try{
+        try {
             //create reflecting logger
             logger = new ReflectingLogger<>(allToLog);
-        } catch (Exception e){
+        } catch (Exception e) {
             // show logger failed to init
             DriverStation.reportError("Logger unable to start", e.getStackTrace());
 
             //throw the runtime error only if turned on via argument
-            if(!ignoreLogger) throw new RuntimeException("Error instantiating the logger");
+            if (!ignoreLogger) {
+                throw new RuntimeException("Error instantiating the logger");
+            }
         }
 
     }
@@ -47,9 +50,9 @@ public class SubsystemManager implements ILooper {
     /**
      * Runs a pass of the reflection based logger over all substems
      */
-    public void logTelemetry(){
+    public void logTelemetry() {
         //make sure logger is properly initialized
-        if(logger != null) {
+        if (logger != null) {
             // create current list of subsystem IO
             final List<Subsystem.PeriodicIO> allToLog = new ArrayList<>();
             mAllSubsystems.forEach((s) -> allToLog.add(s.getLogger()));
@@ -62,7 +65,7 @@ public class SubsystemManager implements ILooper {
     /**
      * Runs the output telemetry method on all subsystems to communicate data
      */
-    public void outputTelemetry(){
+    public void outputTelemetry() {
         mAllSubsystems.forEach(Subsystem::outputTelemetry);
     }
 
@@ -70,7 +73,7 @@ public class SubsystemManager implements ILooper {
      * Calls the onStop method for all subsystems to put the robot into
      * an open loop control mode
      */
-    public void onStop(){
+    public void onStop() {
         mAllSubsystems.forEach(Subsystem::onStop);
     }
 
@@ -79,7 +82,7 @@ public class SubsystemManager implements ILooper {
      * with the subsystem manager. If the order is incorrect determinism
      * during the reset may be lost
      */
-    public void resetAllSubsystems(){
+    public void resetAllSubsystems() {
         mAllSubsystems.forEach(Subsystem::reset);
     }
 

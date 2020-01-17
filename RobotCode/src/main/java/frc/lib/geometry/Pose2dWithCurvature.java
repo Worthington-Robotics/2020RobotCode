@@ -94,7 +94,9 @@ public class Pose2dWithCurvature implements IPose2d<Pose2dWithCurvature>, ICurva
 
     @Override
     public boolean equals(final Object other) {
-        if (other == null || !(other instanceof Pose2dWithCurvature)) return false;
+        if (other == null || !(other instanceof Pose2dWithCurvature)) {
+            return false;
+        }
         Pose2dWithCurvature p2dwc = (Pose2dWithCurvature) other;
         return getPose().equals(p2dwc.getPose()) && Util.epsilonEquals(getCurvature(), p2dwc.getCurvature()) && Util.epsilonEquals(getDCurvatureDs(), p2dwc.getDCurvatureDs());
     }

@@ -42,16 +42,18 @@ public class ActionGroup {
     /**
      * determines when to begin state advancement
      * <p>handles self terminated actions automatically
+     *
      * @return true when all actions are finished
      */
     public boolean isFinished() {
-        if (t_Start + t_Timeout <= Timer.getFPGATimestamp()) return true;
+        if (t_Start + t_Timeout <= Timer.getFPGATimestamp()) {
+            return true;
+        }
         boolean temp = true;
         for (Action action : group) {
-            if(action.isFinished()){
+            if (action.isFinished()) {
                 action.doStop();
-            }
-            else{
+            } else {
                 temp = false;
             }
         }

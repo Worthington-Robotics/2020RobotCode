@@ -19,6 +19,7 @@ public abstract class Action {
 
     /**
      * method that tells the state machine the action is finished earlier than the scheduler
+     *
      * @return true when action is ready to self terminate
      */
     public abstract boolean isFinished();
@@ -32,8 +33,8 @@ public abstract class Action {
      * non implemented method by child class
      * <p>prevents onstop from being called multiple times
      */
-    public void doStop(){
-        if(!hasStopped){
+    public void doStop() {
+        if (!hasStopped) {
             onStop();
             hasStopped = true;
         }
@@ -42,14 +43,14 @@ public abstract class Action {
     /**
      * converts an action to a wpilib command for buttons
      */
-    public static Command toCommand(Action action){
+    public static Command toCommand(Action action) {
         return new Command() {
 
-            protected void initialize(){
+            protected void initialize() {
                 action.onStart();
             }
 
-            protected void execute(){
+            protected void execute() {
                 action.onLoop();
             }
 
@@ -57,7 +58,7 @@ public abstract class Action {
                 return action.isFinished();
             }
 
-            protected void end(){
+            protected void end() {
                 action.onStop();
             }
         };
