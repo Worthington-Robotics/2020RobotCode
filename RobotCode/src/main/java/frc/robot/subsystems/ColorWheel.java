@@ -157,7 +157,7 @@ public class ColorWheel extends Subsystem {
 
     }
 
-    public class PeriodicIO extends PeriodicIO {
+    public class PeriodicIO extends Subsystem.PeriodicIO {
         char fmsColor = 'U';
         int direction = 1; //1 for right, 0 for left
         int[] RGB = new int[]{0, 0, 0};
