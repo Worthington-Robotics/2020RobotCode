@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import com.revrobotics.ColorSensorV3;
+import frc.robot.Constants;
 import frc.lib.util.Util;
+import java.awt.Color;
 
 public class ColorWheel extends Subsystem {
 
@@ -51,29 +53,39 @@ public class ColorWheel extends Subsystem {
      * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
      */
     public char cDetected() {
-        return colorFromRGB(periodic.RGB);   
+        return colorFromRGB(periodic.RGB);
     }
 
-    public char colorFromRGB(int[] RGB){
+    public static char colorFromRGB(int[] RGB){
         //RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255, 255, 0.
         //H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0
-        final int redH1 = 0;
-        final int redH2 = 360;
-        final int yellowH = 60;
-        final int greenH = 120;
-        final int blueH = 180;
-        final int error = 25;
-        int h = RGBtoH(RGB);
-        if (Util.epsilonEquals(redH1, error) || Util.epsilonEquals(redH2, error)) {
-            return 'R';
-        } else if (Util.epsilonEquals(yellowH, error)) {
-            return 'Y';
-        } else if (Util.epsilonEquals(greenH, error)) {
-            return 'G';
-        } else if (Util.epsilonEquals(blueH, error)) {
-            return 'B';
-        } else {
+
+        float[] hsv = new float[3];
+        Color.RGBtoHSB(RGB[0], RGB[1], RGB[2], hsv);
+        //System.out.println(hsv[0] + ", " + hsv[1] + ", " + hsv[2]);
+        hsv[0] *= 360;
+        hsv[1] *= 100;
+        hsv[2] *= 100;
+        //System.out.println(hsv[0] + ", " + hsv[1] + ", " + hsv[2]);
+
+        if(hsv[2] < Constants.valLimit || hsv[1] < Constants.satLimit) {
             return 'U';
+        }
+        else {
+            if (Util.epsilonEquals(hsv[0], Constants.redH1, Constants.error) || Util.epsilonEquals(hsv[0], Constants.redH2, Constants.error)) {
+                return 'R';
+            }
+            else if (Util.epsilonEquals(hsv[0], Constants.yellowH, Constants.error)) {
+                return 'Y';
+            }
+            else if (Util.epsilonEquals(hsv[0], Constants.greenH, Constants.error)) {
+                return 'G';
+            }
+            else if (Util.epsilonEquals(hsv[0], Constants.blueH, Constants.error)) {
+                return 'B';
+            } else {
+                return 'U';
+            }
         }
     }
 
@@ -113,46 +125,6 @@ public class ColorWheel extends Subsystem {
         } else {
             periodic.direction = 1;
         }
-    }
-
-    /**
-     * Coverts RGB values to a Hue value
-     *
-     * @param rgb RGB in an ArrayList
-     * @return Hue value of RGB
-     */
-    private static int RGBtoH(int[] rgb) {
-
-        int h, min, max;
-        double delta;
-
-        min = Math.min(Math.min(rgb[0], rgb[1]), rgb[2]);
-        max = Math.max(Math.max(rgb[0], rgb[1]), rgb[2]);
-
-        delta = max - min;
-
-        //
-        if (max == 0) {
-            h = -1;
-            return h;
-        }
-
-        // H
-        if (rgb[0] == max) {
-            h = (int) (((rgb[1] - rgb[2]) / delta) % 6); // between yellow & magenta
-        } else if (rgb[1] == max) {
-            h = (int) (2 + (rgb[2] - rgb[0]) / delta); // between cyan & yellow
-        } else {
-            h = (int) (4 + (rgb[0] - rgb[1]) / delta); // between magenta & cyan
-        }
-
-        h *= 60;    // degrees
-
-        if (h < 0) {
-            h += 360;
-        }
-
-        return h;
     }
 
     @Override
