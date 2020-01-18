@@ -11,10 +11,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
-    - name: move dir
-      run: cd .\RobotCode\
-    - name: check dir
-      run: ls
     - name: Build with Gradle
       run: ./gradlew build
+      working-directory: .\RobotCode\
     
