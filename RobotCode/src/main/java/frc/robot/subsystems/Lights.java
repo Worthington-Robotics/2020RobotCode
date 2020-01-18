@@ -18,7 +18,7 @@ public class Lights extends Subsystem {
     public static Lights getInstance() {
         return m_lightsInstance;
     }
-    
+
     @Override
     public void readPeriodicInputs() {
         interpretColor(ColorWheel.getInstance().cDetected());
@@ -33,7 +33,13 @@ public class Lights extends Subsystem {
          
          mled.setData(mLEDBuffer);
     }
-
+    
+    /*
+    * This converts the char inputted into a hue value.
+    * 
+    * @param color color RGBY as a char, capitals only
+    * @return hue value of the color inputted
+    */
     public int interpretColor(char color) {
         switch(color) {
             case 'R': return 0; 
