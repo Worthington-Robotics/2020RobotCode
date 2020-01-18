@@ -1,5 +1,4 @@
 package frc.robot.subsystems.Shooter;
-
 import frc.robot.subsystems.Subsystem;
 
 public class Flywheel extends Subsystem {
@@ -35,9 +34,7 @@ public class Flywheel extends Subsystem {
     public void reset() {
 
     }
-    public static calcRPM () {
-        
-    }
+
     public class PeriodicIO {
 
     }
