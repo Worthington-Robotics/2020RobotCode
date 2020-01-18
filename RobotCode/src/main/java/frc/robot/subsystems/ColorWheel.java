@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.ColorSensorV3;
 import frc.lib.util.Util;
 
@@ -52,15 +51,19 @@ public class ColorWheel extends Subsystem {
      * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
      */
     public char cDetected() {
-        //RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255, 255, 0.//
-        //H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0//
+        return colorFromRGB(periodic.RGB);   
+    }
+
+    public char colorFromRGB(int[] RGB){
+        //RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255, 255, 0.
+        //H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0
         final int redH1 = 0;
         final int redH2 = 360;
         final int yellowH = 60;
         final int greenH = 120;
         final int blueH = 180;
         final int error = 25;
-        int h = RGBtoH(periodic.RGB);
+        int h = RGBtoH(RGB);
         if (Util.epsilonEquals(redH1, error) || Util.epsilonEquals(redH2, error)) {
             return 'R';
         } else if (Util.epsilonEquals(yellowH, error)) {
@@ -75,7 +78,7 @@ public class ColorWheel extends Subsystem {
     }
 
     /**
-     * Takes colors and coverts it from what the robot sees
+     * Takes colors and converts it from what the robot sees
      * to what the field sees or visa versa
      *
      * @param color Color Red, Yellow, Green, Blue that the robot is seeing
@@ -157,10 +160,11 @@ public class ColorWheel extends Subsystem {
 
     }
 
-    public class PeriodicIO extends PeriodicIO {
+    public class PeriodicIO extends Subsystem.PeriodicIO {
         char fmsColor = 'U';
         int direction = 1; //1 for right, 0 for left
         int[] RGB = new int[]{0, 0, 0};
     }
+
 
 }

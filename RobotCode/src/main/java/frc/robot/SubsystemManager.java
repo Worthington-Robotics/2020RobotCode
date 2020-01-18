@@ -2,7 +2,6 @@ package frc.robot;
 
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.loops.Looper;
 import frc.lib.util.ReflectingLogger;
 import frc.robot.subsystems.Subsystem;
 
@@ -141,14 +140,14 @@ public class SubsystemManager implements ILooper {
         }
     }
 
-    public void registerEnabledLoops(Looper enabledLooper) {
+    /*public void registerEnabledLoops(Looper enabledLooper) {
         mAllSubsystems.forEach((s) -> s.registerEnabledLoops(this));
         enabledLooper.register(new EnabledLoop());
     }
 
     public void registerDisabledLoops(Looper disabledLooper) {
         disabledLooper.register(new DisabledLoop());
-    }
+    }*/
 
     @Override
     public void register(Loop loop) {

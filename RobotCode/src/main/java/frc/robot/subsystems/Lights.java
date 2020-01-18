@@ -14,26 +14,16 @@ public class Lights extends Subsystem {
         mled.setLength(mLEDBuffer.getLength());
     }
     private static Lights m_lightsInstance = new Lights();
-    private Lights getInstance() {
+    public static Lights getInstance() {
         return m_lightsInstance;
     }
     @Override
     public void readPeriodicInputs() {
-        // TODO Auto-generated method stub
-        switch(ColorWheel.getInstance().cDetected()) {
-            case 'R': colorH = 0; break;
-            case 'Y': colorH = 60; break;
-            case 'G': colorH = 120; break;
-            case 'B': colorH = 180; break;
-            case 'U': break;
-        }
-        
-
+        interpretColor(ColorWheel.getInstance().cDetected());
     }
 
     @Override
     public void writePeriodicOutputs() {
-        // TODO Auto-generated method stub
         for (var i = 0; i < mLEDBuffer.getLength(); i++) {
             // Sets the specified LED to the RGB values for red
             mLEDBuffer.setHSV(i, colorH, 100, 75);
@@ -44,13 +34,21 @@ public class Lights extends Subsystem {
 
     @Override
     public void reset() {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void outputTelemetry() {
-        // TODO Auto-generated method stub
 
+    }
+    public int interpretColor(char color) {
+        switch(color) {
+            case 'R': return 0; 
+            case 'Y': return 60; 
+            case 'G': return 120;
+            case 'B': return 180;
+            default: return 300;
+            
+        }
     }
 
 }
