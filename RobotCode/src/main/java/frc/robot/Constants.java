@@ -64,4 +64,8 @@ public class Constants {
 
 	public static final double kPathFollowingMaxAccel = 0;
 
+	public static final boolean ENABLE_MP_TEST_MODE = false;
+
+	public static double LOOPER_DT;
+
 }
