@@ -13,10 +13,12 @@ public class Lights extends Subsystem {
         mLEDBuffer = new AddressableLEDBuffer(Constants.LED_LENGTH);
         mled.setLength(mLEDBuffer.getLength());
     }
+
     private static Lights m_lightsInstance = new Lights();
     public static Lights getInstance() {
         return m_lightsInstance;
     }
+    
     @Override
     public void readPeriodicInputs() {
         interpretColor(ColorWheel.getInstance().cDetected());
