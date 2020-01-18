@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.PWMTalonFX;
+import edu.wpi.first.wpilibj.PWMTalonSRX;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.robot.subsystems.Subsystem;
@@ -8,11 +10,10 @@ public class Shooter extends Subsystem {
 
     private static Shooter m_Shooter = new Shooter();
     public static Shooter getInstance(){return m_Shooter;}
-    private PWMTalonFX Talon1, Talon2;
-    private TalonSR
+    private TalonSRX Talon1, Talon2;
     private Shooter(){
-        Talon1 = new PWMTalonFX(1);
-        Talon2 = new PWMTalonFX(2);
+        Talon1 = new TalonSRX(1);
+        Talon2 = new TalonSRX(2);
     }
 
 
