@@ -29,17 +29,22 @@ public class Looper implements ILooper {
     }
 
     private final Runnable runnable_ = () -> {
-        synchronized (taskRunningLock_) {
-            if (running_) {
-                double now = Timer.getFPGATimestamp();
-
-                for (Loop loop : loops_) {
-                    loop.onLoop(now);
+        try{
+            synchronized (taskRunningLock_) {
+                if (running_) {
+                    double now = Timer.getFPGATimestamp();
+    
+                    for (Loop loop : loops_) {
+                        loop.onLoop(now);
+                    }
+    
+                    dt_ = now - timestamp_;
+                    timestamp_ = now;
                 }
-
-                dt_ = now - timestamp_;
-                timestamp_ = now;
             }
+        } catch(Exception e){
+            System.out.println("Crash occured on iteration of loop");
+            handleCrash(e);
         }
     };
 
@@ -53,14 +58,19 @@ public class Looper implements ILooper {
     public synchronized void start() {
         if (!running_) {
             System.out.println("Starting loops");
-            synchronized (taskRunningLock_) {
-                timestamp_ = Timer.getFPGATimestamp();
-                for (Loop loop : loops_) {
-                    loop.onStart(timestamp_);
+            try{
+                synchronized (taskRunningLock_) {
+                    timestamp_ = Timer.getFPGATimestamp();
+                    for (Loop loop : loops_) {
+                        loop.onStart(timestamp_);
+                    }
+                    running_ = true;
                 }
-                running_ = true;
-            }
-            notifier_.startPeriodic(kPeriod);
+                notifier_.startPeriodic(kPeriod);
+            }  catch(Exception e){
+                System.out.println("Crash occured on startup of loop");
+                handleCrash(e);
+            } 
         }
     }
 
@@ -68,18 +78,26 @@ public class Looper implements ILooper {
         if (running_) {
             System.out.println("Stopping loops");
             notifier_.stop();
-            synchronized (taskRunningLock_) {
-                running_ = false;
-                timestamp_ = Timer.getFPGATimestamp();
-                for (Loop loop : loops_) {
-                    System.out.println("Stopping " + loop);
-                    loop.onStop(timestamp_);
+            try{
+                synchronized (taskRunningLock_) {
+                    running_ = false;
+                    timestamp_ = Timer.getFPGATimestamp();
+                    for (Loop loop : loops_) {
+                        System.out.println("Stopping " + loop);
+                        loop.onStop(timestamp_);
+                    }
                 }
-            }
+            }  catch(Exception e){
+                System.out.println("Crash occured on startup of loop");
+                handleCrash(e);
+            } 
         }
     }
 
-    public void outputToSmartDashboard() {
-        SmartDashboard.putNumber("looper_dt", dt_);
+    private void handleCrash(Exception e){
+        System.out.println("Looper crashed!");
+        e.printStackTrace();
+        System.out.println("The software will now restart");
+        System.exit(-1);
     }
 }
