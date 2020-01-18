@@ -32,14 +32,6 @@ public class Lights extends Subsystem {
          mled.setData(mLEDBuffer);
     }
 
-    @Override
-    public void reset() {
-    }
-
-    @Override
-    public void outputTelemetry() {
-
-    }
     public int interpretColor(char color) {
         switch(color) {
             case 'R': return 0; 
@@ -51,4 +43,13 @@ public class Lights extends Subsystem {
         }
     }
 
+    @Override
+    public void reset() {
+    }
+
+    @Override
+    public void outputTelemetry() {
+
+    }
+    
 }
