@@ -84,7 +84,7 @@ public class ColorWheel extends Subsystem {
             else if (Util.epsilonEquals(hsv[0], Constants.blueH, Constants.error)) {
                 return 'B';
             } else {
-                return 'U';
+                return 'Q';
             }
         }
     }
