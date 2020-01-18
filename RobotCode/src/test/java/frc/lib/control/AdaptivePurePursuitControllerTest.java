@@ -62,7 +62,7 @@ public class AdaptivePurePursuitControllerTest {
             pose = pose.transformBy(Pose2d.exp(update));
 
             //print the data to the console to see what is going on
-            System.out.println(fmt.format(t) + ", " +pose.toString() + ", " + update.toString());
+            System.out.println(fmt.format(t) + ", " + pose.toString() + ", " + update.toString());
         }
         
         //give the test a conditional to fail on should something in the controller change
