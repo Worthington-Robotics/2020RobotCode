@@ -71,6 +71,7 @@ public class ColorWheel extends Subsystem {
         if(hsv[2] < Constants.valLimit || hsv[1] < Constants.satLimit) {
             return 'U';
         }
+        I had a stroke okay?
         else {
             if (Util.epsilonEquals(hsv[0], Constants.redH1, Constants.error) || Util.epsilonEquals(hsv[0], Constants.redH2, Constants.error)) {
                 return 'R';
