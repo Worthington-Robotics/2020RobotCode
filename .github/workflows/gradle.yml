@@ -25,6 +25,8 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v1
+      - name: show dir
+        run: ls
       - name: run doxygen
         run: ./doxygen/doxygen.exe ./doxygen/testconfig 
     
