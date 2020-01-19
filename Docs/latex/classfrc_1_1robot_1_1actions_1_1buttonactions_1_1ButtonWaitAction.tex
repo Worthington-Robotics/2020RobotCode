@@ -1,0 +1,108 @@
+\hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction}{}\doxysection{frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action Class Reference}
+\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction}\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+Inheritance diagram for frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_adc0872d4c5f364dbc43da2f294861ebb}{Button\+Wait\+Action}} (Joystick \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a45831f57f4fb4119f23d8f6ede9f76cc}{stick}}, int \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a0d61575d8b8d0bce358b99408a62d98f}{button}})
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a65e46a631f17317bab438552f6072bc3}{on\+Start}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a14415bb788d12bdb50cd4523293f5175}{on\+Loop}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a2f4ff562a68183c8ff6a5d02331fbd62}{is\+Finished}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a3ab70e51ffdd202b9905de2b6b9f0916}{on\+Stop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Joystick \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a45831f57f4fb4119f23d8f6ede9f76cc}{stick}}
+\item 
+int \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a0d61575d8b8d0bce358b99408a62d98f}{button}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_adc0872d4c5f364dbc43da2f294861ebb}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_adc0872d4c5f364dbc43da2f294861ebb}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!ButtonWaitAction@{ButtonWaitAction}}
+\index{ButtonWaitAction@{ButtonWaitAction}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{ButtonWaitAction()}{ButtonWaitAction()}}
+{\footnotesize\ttfamily frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+Button\+Wait\+Action (\begin{DoxyParamCaption}\item[{Joystick}]{stick,  }\item[{int}]{button }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a2f4ff562a68183c8ff6a5d02331fbd62}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a2f4ff562a68183c8ff6a5d02331fbd62}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!isFinished@{isFinished}}
+\index{isFinished@{isFinished}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{isFinished()}{isFinished()}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+is\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+method that tells the state machine the action is finished earlier than the scheduler
+
+\begin{DoxyReturn}{Returns}
+true when action is ready to self terminate 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_aa46adc8589149ab919957f865f7615a6}{frc.\+lib.\+statemachine.\+Action}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a14415bb788d12bdb50cd4523293f5175}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a14415bb788d12bdb50cd4523293f5175}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!onLoop@{onLoop}}
+\index{onLoop@{onLoop}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{onLoop()}{onLoop()}}
+{\footnotesize\ttfamily void frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+on\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run while action loops 
+
+approx every 20 miliseconds 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_a40e48c9038e7bda1b8a309fa56a825dd}{frc.\+lib.\+statemachine.\+Action}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a65e46a631f17317bab438552f6072bc3}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a65e46a631f17317bab438552f6072bc3}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!onStart@{onStart}}
+\index{onStart@{onStart}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run on action start 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_a2163914f4ba190772bc22b649909449c}{frc.\+lib.\+statemachine.\+Action}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a3ab70e51ffdd202b9905de2b6b9f0916}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a3ab70e51ffdd202b9905de2b6b9f0916}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!onStop@{onStop}}
+\index{onStop@{onStop}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
+{\footnotesize\ttfamily void frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+on\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run when the action has ben called by the state machine to stop 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_af91695d73d63291a3b80096b5d520fa2}{frc.\+lib.\+statemachine.\+Action}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a0d61575d8b8d0bce358b99408a62d98f}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a0d61575d8b8d0bce358b99408a62d98f}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!button@{button}}
+\index{button@{button}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{button}{button}}
+{\footnotesize\ttfamily int frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+button\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a45831f57f4fb4119f23d8f6ede9f76cc}\label{classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction_a45831f57f4fb4119f23d8f6ede9f76cc}} 
+\index{frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}!stick@{stick}}
+\index{stick@{stick}!frc.robot.actions.buttonactions.ButtonWaitAction@{frc.robot.actions.buttonactions.ButtonWaitAction}}
+\doxysubsubsection{\texorpdfstring{stick}{stick}}
+{\footnotesize\ttfamily Joystick frc.\+robot.\+actions.\+buttonactions.\+Button\+Wait\+Action.\+stick\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/actions/buttonactions/\mbox{\hyperlink{ButtonWaitAction_8java}{Button\+Wait\+Action.\+java}}\end{DoxyCompactItemize}

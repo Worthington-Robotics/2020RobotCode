@@ -1,0 +1,105 @@
+\hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{}\doxysection{frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor Class Reference}
+\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a4f2243ca3621cbb94b776a963f1d6b27}{State\+Machine\+Descriptor}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a6e27c27a6de60e4f45ee647dac6bf447}{add\+Sequential}} (\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action}{Action}} action, long timeout\+\_\+ms)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a1c049ecbe43379d600721a26faf72c1d}{add\+Parallel}} (\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action}{Action}}\mbox{[}$\,$\mbox{]} actions, long timeout\+\_\+ms)
+\item 
+Concurrent\+Linked\+Queue$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_ab370def776cc19e21e102f3d9af467ac}{get\+States}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a8c4ef218b1018acf38cafe7f86eb08a4}{on\+Start}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a5416cfa99cd61e386a75c5c2fb88c7cb}{on\+Stop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Concurrent\+Linked\+Queue$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a091481457627311630286a79f0d6be78}{queued\+States}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a4f2243ca3621cbb94b776a963f1d6b27}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a4f2243ca3621cbb94b776a963f1d6b27}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!StateMachineDescriptor@{StateMachineDescriptor}}
+\index{StateMachineDescriptor@{StateMachineDescriptor}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{StateMachineDescriptor()}{StateMachineDescriptor()}}
+{\footnotesize\ttfamily frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+State\+Machine\+Descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a1c049ecbe43379d600721a26faf72c1d}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a1c049ecbe43379d600721a26faf72c1d}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!addParallel@{addParallel}}
+\index{addParallel@{addParallel}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{addParallel()}{addParallel()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+add\+Parallel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action}{Action}}\mbox{[}$\,$\mbox{]}}]{actions,  }\item[{long}]{timeout\+\_\+ms }\end{DoxyParamCaption})}
+
+adds a parallel state to the state machine queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em actions} & the array of actions to create a state from \\
+\hline
+{\em timeout\+\_\+ms} & the timeout in ms of the state \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a6e27c27a6de60e4f45ee647dac6bf447}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a6e27c27a6de60e4f45ee647dac6bf447}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!addSequential@{addSequential}}
+\index{addSequential@{addSequential}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{addSequential()}{addSequential()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+add\+Sequential (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action}{Action}}}]{action,  }\item[{long}]{timeout\+\_\+ms }\end{DoxyParamCaption})}
+
+adds a sequential state to the state machine queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em action} & the action to be executed during the state \\
+\hline
+{\em timeout\+\_\+ms} & the timeout in ms of the state \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_ab370def776cc19e21e102f3d9af467ac}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_ab370def776cc19e21e102f3d9af467ac}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!getStates@{getStates}}
+\index{getStates@{getStates}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{getStates()}{getStates()}}
+{\footnotesize\ttfamily Concurrent\+Linked\+Queue$<$\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}}$>$ frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+get\+States (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+gets the queue object underlying the descriptor
+
+\begin{DoxyReturn}{Returns}
+the queue containing all the states 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a8c4ef218b1018acf38cafe7f86eb08a4}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a8c4ef218b1018acf38cafe7f86eb08a4}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!onStart@{onStart}}
+\index{onStart@{onStart}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run when the state machine is first started 
+
+does not have to be an action. this can be any real code \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a5416cfa99cd61e386a75c5c2fb88c7cb}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a5416cfa99cd61e386a75c5c2fb88c7cb}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!onStop@{onStop}}
+\index{onStop@{onStop}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+on\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run when the state machine is stopped 
+
+does not have to be an action. this can be any real code 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a091481457627311630286a79f0d6be78}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor_a091481457627311630286a79f0d6be78}} 
+\index{frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}!queuedStates@{queuedStates}}
+\index{queuedStates@{queuedStates}!frc.lib.statemachine.StateMachineDescriptor@{frc.lib.statemachine.StateMachineDescriptor}}
+\doxysubsubsection{\texorpdfstring{queuedStates}{queuedStates}}
+{\footnotesize\ttfamily Concurrent\+Linked\+Queue$<$\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}}$>$ frc.\+lib.\+statemachine.\+State\+Machine\+Descriptor.\+queued\+States\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/statemachine/\mbox{\hyperlink{StateMachineDescriptor_8java}{State\+Machine\+Descriptor.\+java}}\end{DoxyCompactItemize}

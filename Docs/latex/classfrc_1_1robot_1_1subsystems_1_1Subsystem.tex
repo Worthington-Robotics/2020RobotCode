@@ -1,0 +1,103 @@
+\hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{}\doxysection{frc.\+robot.\+subsystems.\+Subsystem Class Reference}
+\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem}\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+Inheritance diagram for frc.\+robot.\+subsystems.\+Subsystem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.803543cm]{classfrc_1_1robot_1_1subsystems_1_1Subsystem}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO}{Periodic\+IO}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}{read\+Periodic\+Inputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a4d27c0d71c9a6d4f86158568ce742170}{register\+Enabled\+Loops}} (\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}} enabled\+Looper)
+\item 
+abstract void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}{write\+Periodic\+Outputs}} ()
+\item 
+abstract void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}{output\+Telemetry}} ()
+\item 
+abstract void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}{reset}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_ac8aef31a06cfdbafe5195b52239e30e7}{on\+Stop}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO}{Periodic\+IO}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a85da3addbc2a686ec984c9319517b972}{get\+Logger}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a85da3addbc2a686ec984c9319517b972}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a85da3addbc2a686ec984c9319517b972}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!getLogger@{getLogger}}
+\index{getLogger@{getLogger}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{getLogger()}{getLogger()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO}{Periodic\+IO}} frc.\+robot.\+subsystems.\+Subsystem.\+get\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_ac8aef31a06cfdbafe5195b52239e30e7}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_ac8aef31a06cfdbafe5195b52239e30e7}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!onStop@{onStop}}
+\index{onStop@{onStop}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Subsystem.\+on\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called to stop the autonomous functions of the subsystem and place it in open loop \mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!outputTelemetry@{outputTelemetry}}
+\index{outputTelemetry@{outputTelemetry}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{outputTelemetry()}{outputTelemetry()}}
+{\footnotesize\ttfamily abstract void frc.\+robot.\+subsystems.\+Subsystem.\+output\+Telemetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Outputs all logging information to the Smart\+Dashboard 
+
+Reimplemented in \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a053bbf9a090627233ae54f09c307e666}{frc.\+robot.\+subsystems.\+Color\+Wheel}}, \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Lights_ae04b281880489ed6e8538482d0ba6cce}{frc.\+robot.\+subsystems.\+Lights}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a882529c4bfba2a73690f377c8500fd80}{frc.\+robot.\+subsystems.\+Limelight}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!readPeriodicInputs@{readPeriodicInputs}}
+\index{readPeriodicInputs@{readPeriodicInputs}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{readPeriodicInputs()}{readPeriodicInputs()}}
+{\footnotesize\ttfamily abstract void frc.\+robot.\+subsystems.\+Subsystem.\+read\+Periodic\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Updates all periodic variables and sensors 
+
+Reimplemented in \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a5e16df8c374b7fbb272ca15696e094cd}{frc.\+robot.\+subsystems.\+Color\+Wheel}}, \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a07be92d21d0cf08931cf04c08c6dc775}{frc.\+robot.\+subsystems.\+Limelight}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Lights_a082a01330909abb68e568c32494a63eb}{frc.\+robot.\+subsystems.\+Lights}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a4d27c0d71c9a6d4f86158568ce742170}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a4d27c0d71c9a6d4f86158568ce742170}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!registerEnabledLoops@{registerEnabledLoops}}
+\index{registerEnabledLoops@{registerEnabledLoops}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{registerEnabledLoops()}{registerEnabledLoops()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Subsystem.\+register\+Enabled\+Loops (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}}}]{enabled\+Looper }\end{DoxyParamCaption})}
+
+Required for the subsystem\textquotesingle{}s looper to be registered to the state machine not required for subsystems that do not use looper
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled\+Looper} & the subsystem\textquotesingle{}s Looper \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily abstract void frc.\+robot.\+subsystems.\+Subsystem.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Called to reset and configure the subsystem 
+
+Reimplemented in \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a55161c6d89b5b6697d665f590c5ce03e}{frc.\+robot.\+subsystems.\+Color\+Wheel}}, \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a84d29fdbbcd30756955c791e1e1f75da}{frc.\+robot.\+subsystems.\+Limelight}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Lights_a13f6463cff002eb3aa2420c573a0ba00}{frc.\+robot.\+subsystems.\+Lights}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}\label{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}} 
+\index{frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}!writePeriodicOutputs@{writePeriodicOutputs}}
+\index{writePeriodicOutputs@{writePeriodicOutputs}!frc.robot.subsystems.Subsystem@{frc.robot.subsystems.Subsystem}}
+\doxysubsubsection{\texorpdfstring{writePeriodicOutputs()}{writePeriodicOutputs()}}
+{\footnotesize\ttfamily abstract void frc.\+robot.\+subsystems.\+Subsystem.\+write\+Periodic\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [abstract]}}
+
+Writes the periodic outputs to actuators (motors and ect...) 
+
+Reimplemented in \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a675e73f185dcae29921da640ea190e47}{frc.\+robot.\+subsystems.\+Color\+Wheel}}, \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a87f8a2f8f199e0a8361d2dc6091695f6}{frc.\+robot.\+subsystems.\+Limelight}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Lights_a85755e63a660201c9c95022326d68fe0}{frc.\+robot.\+subsystems.\+Lights}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/subsystems/\mbox{\hyperlink{Subsystem_8java}{Subsystem.\+java}}\end{DoxyCompactItemize}

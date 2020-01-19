@@ -1,0 +1,52 @@
+\hypertarget{interfacefrc_1_1lib_1_1math_1_1Interpolable}{}\doxysection{frc.\+lib.\+math.\+Interpolable$<$ T $>$ Interface Template Reference}
+\label{interfacefrc_1_1lib_1_1math_1_1Interpolable}\index{frc.lib.math.Interpolable$<$ T $>$@{frc.lib.math.Interpolable$<$ T $>$}}
+Inheritance diagram for frc.\+lib.\+math.\+Interpolable$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.333333cm]{interfacefrc_1_1lib_1_1math_1_1Interpolable}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+T \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable_a6e622abf8219ce4ca104f7787cf34b27}{interpolate}} (T other, double x)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}} is an interface used by an Interpolating Tree as the Value type. Given two end points and an interpolation parameter on \mbox{[}0, 1\mbox{]}, it calculates a new \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}} representing the interpolated value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$\+T$>$} & The Type of \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{Interpolating\+Tree\+Map}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interfacefrc_1_1lib_1_1math_1_1Interpolable_a6e622abf8219ce4ca104f7787cf34b27}\label{interfacefrc_1_1lib_1_1math_1_1Interpolable_a6e622abf8219ce4ca104f7787cf34b27}} 
+\index{frc.lib.math.Interpolable$<$ T $>$@{frc.lib.math.Interpolable$<$ T $>$}!interpolate@{interpolate}}
+\index{interpolate@{interpolate}!frc.lib.math.Interpolable$<$ T $>$@{frc.lib.math.Interpolable$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{interpolate()}{interpolate()}}
+{\footnotesize\ttfamily T \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{frc.\+lib.\+math.\+Interpolable}}$<$ T $>$.interpolate (\begin{DoxyParamCaption}\item[{T}]{other,  }\item[{double}]{x }\end{DoxyParamCaption})}
+
+Interpolates between this value and an other value according to a given parameter. If x is 0, the method should return this value. If x is 1, the method should return the other value. If 0 $<$ x $<$ 1, the return value should be interpolated proportionally between the two.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The value of the upper bound \\
+\hline
+{\em x} & The requested value. Should be between 0 and 1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Interpolable$<$\+T$>$ The estimated average between the surrounding data 
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/math/\mbox{\hyperlink{Interpolable_8java}{Interpolable.\+java}}\end{DoxyCompactItemize}

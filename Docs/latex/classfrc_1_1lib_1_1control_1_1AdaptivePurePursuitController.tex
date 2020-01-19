@@ -1,0 +1,83 @@
+\hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController}{}\doxysection{frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller Class Reference}
+\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController}\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Circle}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a514e218552d13924036faef284871a3e}{Adaptive\+Pure\+Pursuit\+Controller}} (double fixed\+\_\+lookahead, double max\+\_\+accel, double nominal\+\_\+dt, \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}} path, boolean reversed, double path\+\_\+completion\+\_\+tolerance)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a382f400f2cb272c74b1c152c8a449e54}{is\+Done}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a8b43659441a67bf6269f3c4ce53ac217}{update}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} robot\+\_\+pose, double now)
+\item 
+Set$<$ String $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a6e19582420d3e1565689bf5a2bba1f6e}{get\+Markers\+Crossed}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static Optional$<$ Circle $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a477a944d8949e5ff869def67d56b9f03}{join\+Path}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} robot\+\_\+pose, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} lookahead\+\_\+point)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a3ff4d8af69a680b3f9f61602d04bba43}{k\+Epsilon}} = 1E-\/9
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements an adaptive pure pursuit controller. See\+: \href{https://www.ri.cmu.edu/pub_files/pub1/kelly_alonzo_1994_4/kelly_alonzo_1994_4}{\texttt{ https\+://www.\+ri.\+cmu.\+edu/pub\+\_\+files/pub1/kelly\+\_\+alonzo\+\_\+1994\+\_\+4/kelly\+\_\+alonzo\+\_\+1994\+\_\+4}} .pdf
+
+Basically, we find a spot on the path we\textquotesingle{}d like to follow and calculate the wheel speeds necessary to make us land on that spot. The target spot is a specified distance ahead of us, and we look further ahead the greater our tracking error. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a514e218552d13924036faef284871a3e}\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a514e218552d13924036faef284871a3e}} 
+\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}!AdaptivePurePursuitController@{AdaptivePurePursuitController}}
+\index{AdaptivePurePursuitController@{AdaptivePurePursuitController}!frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsubsection{\texorpdfstring{AdaptivePurePursuitController()}{AdaptivePurePursuitController()}}
+{\footnotesize\ttfamily frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller.\+Adaptive\+Pure\+Pursuit\+Controller (\begin{DoxyParamCaption}\item[{double}]{fixed\+\_\+lookahead,  }\item[{double}]{max\+\_\+accel,  }\item[{double}]{nominal\+\_\+dt,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}}}]{path,  }\item[{boolean}]{reversed,  }\item[{double}]{path\+\_\+completion\+\_\+tolerance }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a6e19582420d3e1565689bf5a2bba1f6e}\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a6e19582420d3e1565689bf5a2bba1f6e}} 
+\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}!getMarkersCrossed@{getMarkersCrossed}}
+\index{getMarkersCrossed@{getMarkersCrossed}!frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsubsection{\texorpdfstring{getMarkersCrossed()}{getMarkersCrossed()}}
+{\footnotesize\ttfamily Set$<$String$>$ frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller.\+get\+Markers\+Crossed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a382f400f2cb272c74b1c152c8a449e54}\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a382f400f2cb272c74b1c152c8a449e54}} 
+\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}!isDone@{isDone}}
+\index{isDone@{isDone}!frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsubsection{\texorpdfstring{isDone()}{isDone()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller.\+is\+Done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a477a944d8949e5ff869def67d56b9f03}\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a477a944d8949e5ff869def67d56b9f03}} 
+\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}!joinPath@{joinPath}}
+\index{joinPath@{joinPath}!frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsubsection{\texorpdfstring{joinPath()}{joinPath()}}
+{\footnotesize\ttfamily static Optional$<$Circle$>$ frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller.\+join\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}}]{robot\+\_\+pose,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{lookahead\+\_\+point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a8b43659441a67bf6269f3c4ce53ac217}\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a8b43659441a67bf6269f3c4ce53ac217}} 
+\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}!update@{update}}
+\index{update@{update}!frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller.\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}}]{robot\+\_\+pose,  }\item[{double}]{now }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a3ff4d8af69a680b3f9f61602d04bba43}\label{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController_a3ff4d8af69a680b3f9f61602d04bba43}} 
+\index{frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}!kEpsilon@{kEpsilon}}
+\index{kEpsilon@{kEpsilon}!frc.lib.control.AdaptivePurePursuitController@{frc.lib.control.AdaptivePurePursuitController}}
+\doxysubsubsection{\texorpdfstring{kEpsilon}{kEpsilon}}
+{\footnotesize\ttfamily final double frc.\+lib.\+control.\+Adaptive\+Pure\+Pursuit\+Controller.\+k\+Epsilon = 1E-\/9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/control/\mbox{\hyperlink{AdaptivePurePursuitController_8java}{Adaptive\+Pure\+Pursuit\+Controller.\+java}}\end{DoxyCompactItemize}

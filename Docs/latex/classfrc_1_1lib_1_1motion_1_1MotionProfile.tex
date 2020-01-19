@@ -1,0 +1,357 @@
+\hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile}{}\doxysection{frc.\+lib.\+motion.\+Motion\+Profile Class Reference}
+\label{classfrc_1_1lib_1_1motion_1_1MotionProfile}\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac407b2d1e1710bbad80daa59db536c41}{Motion\+Profile}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a36c95b3c66f9c878220840e24b77817c}{Motion\+Profile}} (List$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_aff2088061bad419fc57ca728fad17a54}{segments}})
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_adab10169e8b29dd4187edc93d83b9d49}{is\+Valid}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a5eb0b044ea6c0551f47f307552c2d6b9}{is\+Empty}} ()
+\item 
+Optional$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a26d4c12375712766ad83b7f37cb14267}{state\+By\+Time}} (double t)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_adbcc211e3f9c5022ea5cc46a674f3bd4}{state\+By\+Time\+Clamped}} (double t)
+\item 
+Optional$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a4e1bbe554e71c9a1d23fc653b48e25e9}{first\+State\+By\+Pos}} (double pos)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a78a26943d877982f66748022c9ad9b4d}{trim\+Before\+Time}} (double t)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a23c91fad154ea91f4ea0869fd72da0ab}{clear}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a426fd63140fd9eef35cb13fa1360a82d}{reset}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} initial\+\_\+state)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a38862b351d7929bc707f92f16074091f}{consolidate}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_accbb438d595fc8a95bfbbd4926640a9a}{append\+Control}} (double acc, double dt)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac808718205a1c89b154cd44328d64e59}{append\+Segment}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}} segment)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a22773172bf2d13a76e3ecb91f888243e}{append\+Profile}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} profile)
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a17fdfb278d14037b01a6b4d1015f5221}{size}} ()
+\item 
+List$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_aff2088061bad419fc57ca728fad17a54}{segments}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a534ff91bf1aadf7f655c12ea85eec03b}{start\+State}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a0c17c9c5c25c81da5f6e45c16a326878}{start\+Time}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a78149f023ab4b1aa66494fbf710b9cd6}{start\+Pos}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_aaeab814e89dfa52266ef0453f0516980}{end\+State}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a7e5d27e852bb3b9934b5a9bf9d15db83}{end\+Time}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a830ef26dd95937657e1a47226bf7a87b}{end\+Pos}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac9ef262397c48d1f0d4bb82f88e598d9}{duration}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a6157372b1fb1dd241eae207b79ab1959}{length}} ()
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a8dc62ea69314535d883c73f3f0c548d2}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile_a5c61036a6c503ab2728126bac11cbe0b}{m\+Segments}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A motion profile specifies a 1D time-\/parameterized trajectory. The trajectory is composed of successively coincident Motion\+Segments from which the desired state of motion at any given distance or time can be calculated. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac407b2d1e1710bbad80daa59db536c41}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac407b2d1e1710bbad80daa59db536c41}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!MotionProfile@{MotionProfile}}
+\index{MotionProfile@{MotionProfile}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{MotionProfile()}{MotionProfile()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+Profile.\+Motion\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Create an empty \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}}. \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a36c95b3c66f9c878220840e24b77817c}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a36c95b3c66f9c878220840e24b77817c}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!MotionProfile@{MotionProfile}}
+\index{MotionProfile@{MotionProfile}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{MotionProfile()}{MotionProfile()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+Profile.\+Motion\+Profile (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}} $>$}]{segments }\end{DoxyParamCaption})}
+
+Create a \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} from an existing list of segments (note that validity is not checked).
+
+
+\begin{DoxyParams}{Parameters}
+{\em segments} & The new segments of the profile. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_accbb438d595fc8a95bfbbd4926640a9a}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_accbb438d595fc8a95bfbbd4926640a9a}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!appendControl@{appendControl}}
+\index{appendControl@{appendControl}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{appendControl()}{appendControl()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+append\+Control (\begin{DoxyParamCaption}\item[{double}]{acc,  }\item[{double}]{dt }\end{DoxyParamCaption})}
+
+Add to the profile by applying an acceleration control for a given time. This is appended to the previous last state.
+
+
+\begin{DoxyParams}{Parameters}
+{\em acc} & The acceleration to apply. \\
+\hline
+{\em dt} & The period of time to apply the given acceleration. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a22773172bf2d13a76e3ecb91f888243e}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a22773172bf2d13a76e3ecb91f888243e}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!appendProfile@{appendProfile}}
+\index{appendProfile@{appendProfile}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{appendProfile()}{appendProfile()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+append\+Profile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}}}]{profile }\end{DoxyParamCaption})}
+
+Add to the profile by inserting a new profile after the final state. No validity checking is done.
+
+
+\begin{DoxyParams}{Parameters}
+{\em profile} & The profile to add. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac808718205a1c89b154cd44328d64e59}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac808718205a1c89b154cd44328d64e59}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!appendSegment@{appendSegment}}
+\index{appendSegment@{appendSegment}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{appendSegment()}{appendSegment()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+append\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}}}]{segment }\end{DoxyParamCaption})}
+
+Add to the profile by inserting a new segment. No validity checking is done.
+
+
+\begin{DoxyParams}{Parameters}
+{\em segment} & The segment to add. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a23c91fad154ea91f4ea0869fd72da0ab}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a23c91fad154ea91f4ea0869fd72da0ab}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!clear@{clear}}
+\index{clear@{clear}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Remove all segments. \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a38862b351d7929bc707f92f16074091f}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a38862b351d7929bc707f92f16074091f}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!consolidate@{consolidate}}
+\index{consolidate@{consolidate}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{consolidate()}{consolidate()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+consolidate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Remove redundant segments (segments whose start and end states are coincident). \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac9ef262397c48d1f0d4bb82f88e598d9}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_ac9ef262397c48d1f0d4bb82f88e598d9}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!duration@{duration}}
+\index{duration@{duration}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{duration()}{duration()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+Profile.\+duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The duration of the entire profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a830ef26dd95937657e1a47226bf7a87b}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a830ef26dd95937657e1a47226bf7a87b}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!endPos@{endPos}}
+\index{endPos@{endPos}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{endPos()}{endPos()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+Profile.\+end\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The pos of the last state in the profile (or NaN if empty). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_aaeab814e89dfa52266ef0453f0516980}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_aaeab814e89dfa52266ef0453f0516980}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!endState@{endState}}
+\index{endState@{endState}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{endState()}{endState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Profile.\+end\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The last state in the profile (or k\+Invalid\+State if empty). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a7e5d27e852bb3b9934b5a9bf9d15db83}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a7e5d27e852bb3b9934b5a9bf9d15db83}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!endTime@{endTime}}
+\index{endTime@{endTime}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{endTime()}{endTime()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+Profile.\+end\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The time of the last state in the profile (or NaN if empty). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a4e1bbe554e71c9a1d23fc653b48e25e9}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a4e1bbe554e71c9a1d23fc653b48e25e9}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!firstStateByPos@{firstStateByPos}}
+\index{firstStateByPos@{firstStateByPos}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{firstStateByPos()}{firstStateByPos()}}
+{\footnotesize\ttfamily Optional$<$\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}$>$ frc.\+lib.\+motion.\+Motion\+Profile.\+first\+State\+By\+Pos (\begin{DoxyParamCaption}\item[{double}]{pos }\end{DoxyParamCaption})}
+
+Get the interpolated \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} by distance (the \char`\"{}pos()\char`\"{} field of \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}). Note that since a profile may reverse, this method only returns the {\itshape first} instance of this position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Empty if the profile never crosses pos or if the profile is invalid, or the resulting \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a5eb0b044ea6c0551f47f307552c2d6b9}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a5eb0b044ea6c0551f47f307552c2d6b9}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{isEmpty()}{isEmpty()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+Profile.\+is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Check if the profile is empty.
+
+\begin{DoxyReturn}{Returns}
+True if there are no segments. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_adab10169e8b29dd4187edc93d83b9d49}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_adab10169e8b29dd4187edc93d83b9d49}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!isValid@{isValid}}
+\index{isValid@{isValid}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+Profile.\+is\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Checks if the given \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} is valid. This checks that\+: 
+
+
+\begin{DoxyEnumerate}
+\item All segments are valid. 
+\end{DoxyEnumerate}
+
+
+\begin{DoxyEnumerate}
+\item Successive segments are C1 continuous in position and C0 continuous in velocity.
+\end{DoxyEnumerate}
+
+\begin{DoxyReturn}{Returns}
+True if the \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} is valid. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a6157372b1fb1dd241eae207b79ab1959}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a6157372b1fb1dd241eae207b79ab1959}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!length@{length}}
+\index{length@{length}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+Profile.\+length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The total distance covered by the profile. Note that distance is the sum of absolute distances of all segments, so a reversing profile will count the distance covered in each direction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a426fd63140fd9eef35cb13fa1360a82d}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a426fd63140fd9eef35cb13fa1360a82d}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!reset@{reset}}
+\index{reset@{reset}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{initial\+\_\+state }\end{DoxyParamCaption})}
+
+Remove all segments and initialize to the desired state (actually a segment of length 0 that starts and ends at initial\+\_\+state).
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+state} & The \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} to initialize to. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_aff2088061bad419fc57ca728fad17a54}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_aff2088061bad419fc57ca728fad17a54}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!segments@{segments}}
+\index{segments@{segments}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{segments()}{segments()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}}$>$ frc.\+lib.\+motion.\+Motion\+Profile.\+segments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The list of segments. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a17fdfb278d14037b01a6b4d1015f5221}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a17fdfb278d14037b01a6b4d1015f5221}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!size@{size}}
+\index{size@{size}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int frc.\+lib.\+motion.\+Motion\+Profile.\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The number of segments. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a78149f023ab4b1aa66494fbf710b9cd6}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a78149f023ab4b1aa66494fbf710b9cd6}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!startPos@{startPos}}
+\index{startPos@{startPos}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{startPos()}{startPos()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+Profile.\+start\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The pos of the first state in the profile (or NaN if empty). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a534ff91bf1aadf7f655c12ea85eec03b}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a534ff91bf1aadf7f655c12ea85eec03b}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!startState@{startState}}
+\index{startState@{startState}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{startState()}{startState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Profile.\+start\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The first state in the profile (or k\+Invalid\+State if empty). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a0c17c9c5c25c81da5f6e45c16a326878}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a0c17c9c5c25c81da5f6e45c16a326878}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!startTime@{startTime}}
+\index{startTime@{startTime}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{startTime()}{startTime()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+Profile.\+start\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The time of the first state in the profile (or NaN if empty). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a26d4c12375712766ad83b7f37cb14267}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a26d4c12375712766ad83b7f37cb14267}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!stateByTime@{stateByTime}}
+\index{stateByTime@{stateByTime}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{stateByTime()}{stateByTime()}}
+{\footnotesize\ttfamily Optional$<$\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}$>$ frc.\+lib.\+motion.\+Motion\+Profile.\+state\+By\+Time (\begin{DoxyParamCaption}\item[{double}]{t }\end{DoxyParamCaption})}
+
+Get the interpolated \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} at any given time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The time to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Empty if the time is outside the time bounds of the profile, or the resulting \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_adbcc211e3f9c5022ea5cc46a674f3bd4}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_adbcc211e3f9c5022ea5cc46a674f3bd4}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!stateByTimeClamped@{stateByTimeClamped}}
+\index{stateByTimeClamped@{stateByTimeClamped}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{stateByTimeClamped()}{stateByTimeClamped()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Profile.\+state\+By\+Time\+Clamped (\begin{DoxyParamCaption}\item[{double}]{t }\end{DoxyParamCaption})}
+
+Get the interpolated \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} at any given time, clamping to the endpoints if time is out of bounds.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The time to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} at time t, or closest to it if t is outside the profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a8dc62ea69314535d883c73f3f0c548d2}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a8dc62ea69314535d883c73f3f0c548d2}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!toString@{toString}}
+\index{toString@{toString}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+motion.\+Motion\+Profile.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a78a26943d877982f66748022c9ad9b4d}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a78a26943d877982f66748022c9ad9b4d}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!trimBeforeTime@{trimBeforeTime}}
+\index{trimBeforeTime@{trimBeforeTime}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{trimBeforeTime()}{trimBeforeTime()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Profile.\+trim\+Before\+Time (\begin{DoxyParamCaption}\item[{double}]{t }\end{DoxyParamCaption})}
+
+Remove all parts of the profile prior to the query time. This eliminates whole segments and also shortens any segments containing t.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The query time. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionProfile_a5c61036a6c503ab2728126bac11cbe0b}\label{classfrc_1_1lib_1_1motion_1_1MotionProfile_a5c61036a6c503ab2728126bac11cbe0b}} 
+\index{frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}!mSegments@{mSegments}}
+\index{mSegments@{mSegments}!frc.lib.motion.MotionProfile@{frc.lib.motion.MotionProfile}}
+\doxysubsubsection{\texorpdfstring{mSegments}{mSegments}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}}$>$ frc.\+lib.\+motion.\+Motion\+Profile.\+m\+Segments\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/motion/\mbox{\hyperlink{MotionProfile_8java}{Motion\+Profile.\+java}}\end{DoxyCompactItemize}

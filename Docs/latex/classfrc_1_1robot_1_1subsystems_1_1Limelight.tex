@@ -1,0 +1,151 @@
+\hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight}{}\doxysection{frc.\+robot.\+subsystems.\+Limelight Class Reference}
+\label{classfrc_1_1robot_1_1subsystems_1_1Limelight}\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+Inheritance diagram for frc.\+robot.\+subsystems.\+Limelight\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfrc_1_1robot_1_1subsystems_1_1Limelight}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a07be92d21d0cf08931cf04c08c6dc775}{read\+Periodic\+Inputs}} ()
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a87f8a2f8f199e0a8361d2dc6091695f6}{write\+Periodic\+Outputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a882529c4bfba2a73690f377c8500fd80}{output\+Telemetry}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a84d29fdbbcd30756955c791e1e1f75da}{reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight}{Limelight}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a350e036350287f133f32f319d3ebbf74}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Network\+Table \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a2a9df500daa4ba855b37149f218a23ea}{table}} = Network\+Table\+Instance.\+get\+Default().get\+Table(\char`\"{}limelight\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a59cfe41079f8432c1e6ea6a0e2747461}{tx}} = table.\+get\+Entry(\char`\"{}tx\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a43ceaf42d12b022174b6fc0066a0d584}{ty}} = table.\+get\+Entry(\char`\"{}ty\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_aba07d6e6caa8c95120af3e4aee0bdc26}{ta}} = table.\+get\+Entry(\char`\"{}ta\char`\"{})
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_acf1b94c8d57e01897a38084bb23633e1}{x}} = 0.\+0
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a5d1263d160be69161d58ccf5534dbb4f}{y}} = 0.\+0
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a465de6b7f1d298b6232e51b003a806d5}{area}} = 0.\+0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight}{Limelight}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight_a7bc88b8009b59df417aa9c0fb484aacc}{m\+\_\+limelight\+Instance}} = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight}{Limelight}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a350e036350287f133f32f319d3ebbf74}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a350e036350287f133f32f319d3ebbf74}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight}{Limelight}} frc.\+robot.\+subsystems.\+Limelight.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a882529c4bfba2a73690f377c8500fd80}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a882529c4bfba2a73690f377c8500fd80}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!outputTelemetry@{outputTelemetry}}
+\index{outputTelemetry@{outputTelemetry}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{outputTelemetry()}{outputTelemetry()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Limelight.\+output\+Telemetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Outputs all logging information to the Smart\+Dashboard 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a07be92d21d0cf08931cf04c08c6dc775}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a07be92d21d0cf08931cf04c08c6dc775}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!readPeriodicInputs@{readPeriodicInputs}}
+\index{readPeriodicInputs@{readPeriodicInputs}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{readPeriodicInputs()}{readPeriodicInputs()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Limelight.\+read\+Periodic\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Updates all periodic variables and sensors 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a84d29fdbbcd30756955c791e1e1f75da}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a84d29fdbbcd30756955c791e1e1f75da}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Limelight.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called to reset and configure the subsystem 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a87f8a2f8f199e0a8361d2dc6091695f6}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a87f8a2f8f199e0a8361d2dc6091695f6}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!writePeriodicOutputs@{writePeriodicOutputs}}
+\index{writePeriodicOutputs@{writePeriodicOutputs}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{writePeriodicOutputs()}{writePeriodicOutputs()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Limelight.\+write\+Periodic\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Writes the periodic outputs to actuators (motors and ect...) 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a465de6b7f1d298b6232e51b003a806d5}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a465de6b7f1d298b6232e51b003a806d5}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!area@{area}}
+\index{area@{area}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{area}{area}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Limelight.\+area = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a7bc88b8009b59df417aa9c0fb484aacc}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a7bc88b8009b59df417aa9c0fb484aacc}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!m\_limelightInstance@{m\_limelightInstance}}
+\index{m\_limelightInstance@{m\_limelightInstance}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{m\_limelightInstance}{m\_limelightInstance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight}{Limelight}} frc.\+robot.\+subsystems.\+Limelight.\+m\+\_\+limelight\+Instance = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Limelight}{Limelight}}()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_aba07d6e6caa8c95120af3e4aee0bdc26}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_aba07d6e6caa8c95120af3e4aee0bdc26}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!ta@{ta}}
+\index{ta@{ta}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{ta}{ta}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Limelight.\+ta = table.\+get\+Entry(\char`\"{}ta\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a2a9df500daa4ba855b37149f218a23ea}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a2a9df500daa4ba855b37149f218a23ea}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!table@{table}}
+\index{table@{table}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{table}{table}}
+{\footnotesize\ttfamily Network\+Table frc.\+robot.\+subsystems.\+Limelight.\+table = Network\+Table\+Instance.\+get\+Default().get\+Table(\char`\"{}limelight\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a59cfe41079f8432c1e6ea6a0e2747461}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a59cfe41079f8432c1e6ea6a0e2747461}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!tx@{tx}}
+\index{tx@{tx}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{tx}{tx}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Limelight.\+tx = table.\+get\+Entry(\char`\"{}tx\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a43ceaf42d12b022174b6fc0066a0d584}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a43ceaf42d12b022174b6fc0066a0d584}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!ty@{ty}}
+\index{ty@{ty}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{ty}{ty}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Limelight.\+ty = table.\+get\+Entry(\char`\"{}ty\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_acf1b94c8d57e01897a38084bb23633e1}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_acf1b94c8d57e01897a38084bb23633e1}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!x@{x}}
+\index{x@{x}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Limelight.\+x = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Limelight_a5d1263d160be69161d58ccf5534dbb4f}\label{classfrc_1_1robot_1_1subsystems_1_1Limelight_a5d1263d160be69161d58ccf5534dbb4f}} 
+\index{frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}!y@{y}}
+\index{y@{y}!frc.robot.subsystems.Limelight@{frc.robot.subsystems.Limelight}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Limelight.\+y = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/subsystems/\mbox{\hyperlink{Limelight_8java}{Limelight.\+java}}\end{DoxyCompactItemize}
