@@ -1,9 +1,10 @@
 package frc.robot.subsystems;
 
 import frc.lib.loops.ILooper;
+import frc.lib.util.Logable;
 
 //design pattern for caching periodic writes to avoid hammering the HAL/CAN.
-public abstract class Subsystem {
+public abstract class Subsystem extends Logable {
 
     /**
      * Updates all periodic variables and sensors
@@ -42,10 +43,13 @@ public abstract class Subsystem {
 
     }
 
-    public PeriodicIO getLogger() {
+    public LogData getLogger(){
         return new PeriodicIO();
     }
 
-    public class PeriodicIO {
+    /**
+     * Inheritable data class for capuring log data from the subsystems
+     */
+    public class PeriodicIO extends Logable.LogData{
     }
 }
