@@ -4,9 +4,10 @@ on:
   schedule:
     - cron: 0 12 * * 0-6
   push:
-    branches:
-      - master
-      - RobotTest
+    #branches:
+      #- master
+      #- RobotTest
+
 
 jobs:
   build:
@@ -19,13 +20,13 @@ jobs:
       with:
         java-version: 1.11
     - name: Build with Gradle
-      run: ./gradlew build
+      # run: ./gradlew build
       working-directory: ./RobotCode/
       
   docs:
     runs-on: [windows-latest]
     timeout-minutes: 5
-    needs: [build]
+    #needs: [build]
     steps:
       - uses: actions/checkout@v1
       - name: show dir
