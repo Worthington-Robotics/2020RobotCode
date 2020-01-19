@@ -1,0 +1,61 @@
+\hypertarget{classfrc_1_1lib_1_1util_1_1HIDHelper}{}\doxysection{frc.\+lib.\+util.\+H\+I\+D\+Helper Class Reference}
+\label{classfrc_1_1lib_1_1util_1_1HIDHelper}\index{frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries H\+I\+D\+Constants}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1HIDHelper_abc399e43b78e919e9f4e682d64a28f25}{get\+Adj\+Stick}} (H\+I\+D\+Constants constants)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1HIDHelper_afc6bd33d097635c23bddfd9e307281f6}{get\+Axis\+Mapped}} (double input, double min\+\_\+output, double max\+\_\+output)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1HIDHelper_a85766157e99cc90e8d0f0e2690dfe7aa}{apply\+Scalar\+Cut}} (double stick\+Input, double dead\+Band, double scalar\+Cut, int pow)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1HIDHelper_a5510a1b86654e5d3cf033f79b5809591}{eval\+Dead\+Band}} (double stick\+Inpt, double dead\+Band, int pow)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1HIDHelper_a85766157e99cc90e8d0f0e2690dfe7aa}\label{classfrc_1_1lib_1_1util_1_1HIDHelper_a85766157e99cc90e8d0f0e2690dfe7aa}} 
+\index{frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}!applyScalarCut@{applyScalarCut}}
+\index{applyScalarCut@{applyScalarCut}!frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}}
+\doxysubsubsection{\texorpdfstring{applyScalarCut()}{applyScalarCut()}}
+{\footnotesize\ttfamily static double frc.\+lib.\+util.\+H\+I\+D\+Helper.\+apply\+Scalar\+Cut (\begin{DoxyParamCaption}\item[{double}]{stick\+Input,  }\item[{double}]{dead\+Band,  }\item[{double}]{scalar\+Cut,  }\item[{int}]{pow }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1HIDHelper_a5510a1b86654e5d3cf033f79b5809591}\label{classfrc_1_1lib_1_1util_1_1HIDHelper_a5510a1b86654e5d3cf033f79b5809591}} 
+\index{frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}!evalDeadBand@{evalDeadBand}}
+\index{evalDeadBand@{evalDeadBand}!frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}}
+\doxysubsubsection{\texorpdfstring{evalDeadBand()}{evalDeadBand()}}
+{\footnotesize\ttfamily static double frc.\+lib.\+util.\+H\+I\+D\+Helper.\+eval\+Dead\+Band (\begin{DoxyParamCaption}\item[{double}]{stick\+Inpt,  }\item[{double}]{dead\+Band,  }\item[{int}]{pow }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1HIDHelper_abc399e43b78e919e9f4e682d64a28f25}\label{classfrc_1_1lib_1_1util_1_1HIDHelper_abc399e43b78e919e9f4e682d64a28f25}} 
+\index{frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}!getAdjStick@{getAdjStick}}
+\index{getAdjStick@{getAdjStick}!frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}}
+\doxysubsubsection{\texorpdfstring{getAdjStick()}{getAdjStick()}}
+{\footnotesize\ttfamily static double \mbox{[}$\,$\mbox{]} frc.\+lib.\+util.\+H\+I\+D\+Helper.\+get\+Adj\+Stick (\begin{DoxyParamCaption}\item[{H\+I\+D\+Constants}]{constants }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em constants} & H\+ID constants \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double array following X(0), Y(1), Z(2) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1HIDHelper_afc6bd33d097635c23bddfd9e307281f6}\label{classfrc_1_1lib_1_1util_1_1HIDHelper_afc6bd33d097635c23bddfd9e307281f6}} 
+\index{frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}!getAxisMapped@{getAxisMapped}}
+\index{getAxisMapped@{getAxisMapped}!frc.lib.util.HIDHelper@{frc.lib.util.HIDHelper}}
+\doxysubsubsection{\texorpdfstring{getAxisMapped()}{getAxisMapped()}}
+{\footnotesize\ttfamily static double frc.\+lib.\+util.\+H\+I\+D\+Helper.\+get\+Axis\+Mapped (\begin{DoxyParamCaption}\item[{double}]{input,  }\item[{double}]{min\+\_\+output,  }\item[{double}]{max\+\_\+output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/util/\mbox{\hyperlink{HIDHelper_8java}{H\+I\+D\+Helper.\+java}}\end{DoxyCompactItemize}

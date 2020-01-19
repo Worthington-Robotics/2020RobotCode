@@ -1,0 +1,114 @@
+\hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{}\doxysection{frc.\+lib.\+util.\+Reflecting\+Logger$<$ T $>$ Class Template Reference}
+\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger}\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a348089b3a62e01741c5e2cadb16f57dd}{Reflecting\+Logger}} (List$<$ T $>$ subsystem\+I\+Os)  throws File\+Not\+Found\+Exception 
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a3eb2a03e7dee51898cc4e8a0cda29114}{Reflecting\+Logger}} (List$<$ T $>$ subsystem\+I\+Os, File logging\+File)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a146719aeaa45579f2cd2834bd1e53102}{Reflecting\+Logger}} (List$<$ T $>$ subsystem\+I\+Os, File logging\+File, Boolean allow\+Rethrow)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a98fc0f2eb76f753adca972f25a634140}{update}} (List$<$ T $>$ subsystem\+I\+Os)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static File \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a81f046319976aef60f9eda8ed7a1e90a}{get\+Mount}} (String subsystem\+Name)  throws File\+Not\+Found\+Exception 
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a9a6d20981fbc4de93945a6d81f2a6b6c}{write\+Line}} (String line)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_ae6b3a8bc50244f34d07866ba547d5643}{get\+Time\+Stamped\+File\+Name}} (String subsystem\+Name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Print\+Writer \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a5680b375cdc87640f89a09e04ec1c2d7}{output}} = null
+\item 
+Map$<$ Field, T $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_ac2e675d40ee844b93b2a5af78f6cb088}{class\+Field\+Map}} = new Linked\+Hash\+Map$<$$>$()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final String \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a41202b826997c7b5cc42fc04cfdf281e}{file\+Seperator}} = \char`\"{}, \char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a348089b3a62e01741c5e2cadb16f57dd}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a348089b3a62e01741c5e2cadb16f57dd}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!ReflectingLogger@{ReflectingLogger}}
+\index{ReflectingLogger@{ReflectingLogger}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ReflectingLogger()}{ReflectingLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}} (\begin{DoxyParamCaption}\item[{List$<$ T $>$}]{subsystem\+I\+Os }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a3eb2a03e7dee51898cc4e8a0cda29114}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a3eb2a03e7dee51898cc4e8a0cda29114}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!ReflectingLogger@{ReflectingLogger}}
+\index{ReflectingLogger@{ReflectingLogger}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ReflectingLogger()}{ReflectingLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}} (\begin{DoxyParamCaption}\item[{List$<$ T $>$}]{subsystem\+I\+Os,  }\item[{File}]{logging\+File }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a146719aeaa45579f2cd2834bd1e53102}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a146719aeaa45579f2cd2834bd1e53102}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!ReflectingLogger@{ReflectingLogger}}
+\index{ReflectingLogger@{ReflectingLogger}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ReflectingLogger()}{ReflectingLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}} (\begin{DoxyParamCaption}\item[{List$<$ T $>$}]{subsystem\+I\+Os,  }\item[{File}]{logging\+File,  }\item[{Boolean}]{allow\+Rethrow }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a81f046319976aef60f9eda8ed7a1e90a}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a81f046319976aef60f9eda8ed7a1e90a}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!getMount@{getMount}}
+\index{getMount@{getMount}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getMount()}{getMount()}}
+{\footnotesize\ttfamily static File \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.get\+Mount (\begin{DoxyParamCaption}\item[{String}]{subsystem\+Name }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_ae6b3a8bc50244f34d07866ba547d5643}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_ae6b3a8bc50244f34d07866ba547d5643}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!getTimeStampedFileName@{getTimeStampedFileName}}
+\index{getTimeStampedFileName@{getTimeStampedFileName}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getTimeStampedFileName()}{getTimeStampedFileName()}}
+{\footnotesize\ttfamily static String \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.get\+Time\+Stamped\+File\+Name (\begin{DoxyParamCaption}\item[{String}]{subsystem\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a98fc0f2eb76f753adca972f25a634140}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a98fc0f2eb76f753adca972f25a634140}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!update@{update}}
+\index{update@{update}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.update (\begin{DoxyParamCaption}\item[{List$<$ T $>$}]{subsystem\+I\+Os }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a9a6d20981fbc4de93945a6d81f2a6b6c}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a9a6d20981fbc4de93945a6d81f2a6b6c}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!writeLine@{writeLine}}
+\index{writeLine@{writeLine}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{writeLine()}{writeLine()}}
+{\footnotesize\ttfamily synchronized void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.write\+Line (\begin{DoxyParamCaption}\item[{String}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_ac2e675d40ee844b93b2a5af78f6cb088}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_ac2e675d40ee844b93b2a5af78f6cb088}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!classFieldMap@{classFieldMap}}
+\index{classFieldMap@{classFieldMap}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{classFieldMap}{classFieldMap}}
+{\footnotesize\ttfamily Map$<$Field, T$>$ \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.class\+Field\+Map = new Linked\+Hash\+Map$<$$>$()\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a41202b826997c7b5cc42fc04cfdf281e}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a41202b826997c7b5cc42fc04cfdf281e}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!fileSeperator@{fileSeperator}}
+\index{fileSeperator@{fileSeperator}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{fileSeperator}{fileSeperator}}
+{\footnotesize\ttfamily final String \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.file\+Seperator = \char`\"{}, \char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a5680b375cdc87640f89a09e04ec1c2d7}\label{classfrc_1_1lib_1_1util_1_1ReflectingLogger_a5680b375cdc87640f89a09e04ec1c2d7}} 
+\index{frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}!output@{output}}
+\index{output@{output}!frc.lib.util.ReflectingLogger$<$ T $>$@{frc.lib.util.ReflectingLogger$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{output}{output}}
+{\footnotesize\ttfamily Print\+Writer \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{frc.\+lib.\+util.\+Reflecting\+Logger}}$<$ T $>$.output = null\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/util/\mbox{\hyperlink{ReflectingLogger_8java}{Reflecting\+Logger.\+java}}\end{DoxyCompactItemize}

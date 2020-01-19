@@ -1,0 +1,168 @@
+\hypertarget{classfrc_1_1lib_1_1loops_1_1Looper}{}\doxysection{frc.\+lib.\+loops.\+Looper Class Reference}
+\label{classfrc_1_1lib_1_1loops_1_1Looper}\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+Inheritance diagram for frc.\+lib.\+loops.\+Looper\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfrc_1_1lib_1_1loops_1_1Looper}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a950c52b26920d80519eba8ea8f1f8e23}{Looper}} ()
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a597e37cc0b7133c3e094ce912721b8e6}{register}} (\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}} loop)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a847d84f53916349d91f7a7fbaca6be33}{start}} ()
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_ace5d40f62a81f09c3554dcec619f2187}{stop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a3415a54561238d7a73e35649941cc419}{k\+Period}} = \mbox{\hyperlink{classfrc_1_1robot_1_1Constants_aca617ee09eb871a624bab615f42b2857}{Constants.\+L\+O\+O\+P\+E\+R\+\_\+\+DT}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_ad5bac2a08fe7e6d06b4799f7a84029e7}{handle\+Crash}} (Exception e)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_af787e58f8bc65861f89f01b40d1da1ed}{running\+\_\+}}
+\item 
+final Notifier \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a9ec0ceffdcfc5f426bedbee1a1af6778}{notifier\+\_\+}}
+\item 
+final List$<$ \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a6f31f42a108198ff8e14b316b467b6e6}{loops\+\_\+}} = new Array\+List$<$$>$()
+\item 
+final Object \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_ab17eed09ed384ac34f5a3afc5b4c62ab}{task\+Running\+Lock\+\_\+}} = new Object()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a350dc61d9d175e4fb84aaeb2c49327aa}{timestamp\+\_\+}} = 0
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a1b9de719d9946a898541c4d42c561e1d}{dt\+\_\+}} = 0
+\item 
+final Runnable \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a9df15a2d19223e3b3582fbe78ccf161a}{runnable\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This code runs all of the robot\textquotesingle{}s loops. \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}} objects are stored in a List object. They are started when the robot powers up and stopped after the match. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a950c52b26920d80519eba8ea8f1f8e23}\label{classfrc_1_1lib_1_1loops_1_1Looper_a950c52b26920d80519eba8ea8f1f8e23}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!Looper@{Looper}}
+\index{Looper@{Looper}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{Looper()}{Looper()}}
+{\footnotesize\ttfamily frc.\+lib.\+loops.\+Looper.\+Looper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_ad5bac2a08fe7e6d06b4799f7a84029e7}\label{classfrc_1_1lib_1_1loops_1_1Looper_ad5bac2a08fe7e6d06b4799f7a84029e7}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!handleCrash@{handleCrash}}
+\index{handleCrash@{handleCrash}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{handleCrash()}{handleCrash()}}
+{\footnotesize\ttfamily void frc.\+lib.\+loops.\+Looper.\+handle\+Crash (\begin{DoxyParamCaption}\item[{Exception}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a597e37cc0b7133c3e094ce912721b8e6}\label{classfrc_1_1lib_1_1loops_1_1Looper_a597e37cc0b7133c3e094ce912721b8e6}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!register@{register}}
+\index{register@{register}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily synchronized void frc.\+lib.\+loops.\+Looper.\+register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}}}]{loop }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper_ade8f34d71453a87b1682e7c393d929cd}{frc.\+lib.\+loops.\+I\+Looper}}.
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a847d84f53916349d91f7a7fbaca6be33}\label{classfrc_1_1lib_1_1loops_1_1Looper_a847d84f53916349d91f7a7fbaca6be33}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!start@{start}}
+\index{start@{start}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily synchronized void frc.\+lib.\+loops.\+Looper.\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_ace5d40f62a81f09c3554dcec619f2187}\label{classfrc_1_1lib_1_1loops_1_1Looper_ace5d40f62a81f09c3554dcec619f2187}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!stop@{stop}}
+\index{stop@{stop}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily synchronized void frc.\+lib.\+loops.\+Looper.\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a1b9de719d9946a898541c4d42c561e1d}\label{classfrc_1_1lib_1_1loops_1_1Looper_a1b9de719d9946a898541c4d42c561e1d}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!dt\_@{dt\_}}
+\index{dt\_@{dt\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{dt\_}{dt\_}}
+{\footnotesize\ttfamily double frc.\+lib.\+loops.\+Looper.\+dt\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a3415a54561238d7a73e35649941cc419}\label{classfrc_1_1lib_1_1loops_1_1Looper_a3415a54561238d7a73e35649941cc419}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!kPeriod@{kPeriod}}
+\index{kPeriod@{kPeriod}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{kPeriod}{kPeriod}}
+{\footnotesize\ttfamily final double frc.\+lib.\+loops.\+Looper.\+k\+Period = \mbox{\hyperlink{classfrc_1_1robot_1_1Constants_aca617ee09eb871a624bab615f42b2857}{Constants.\+L\+O\+O\+P\+E\+R\+\_\+\+DT}}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a6f31f42a108198ff8e14b316b467b6e6}\label{classfrc_1_1lib_1_1loops_1_1Looper_a6f31f42a108198ff8e14b316b467b6e6}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!loops\_@{loops\_}}
+\index{loops\_@{loops\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{loops\_}{loops\_}}
+{\footnotesize\ttfamily final List$<$\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}}$>$ frc.\+lib.\+loops.\+Looper.\+loops\+\_\+ = new Array\+List$<$$>$()\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a9ec0ceffdcfc5f426bedbee1a1af6778}\label{classfrc_1_1lib_1_1loops_1_1Looper_a9ec0ceffdcfc5f426bedbee1a1af6778}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!notifier\_@{notifier\_}}
+\index{notifier\_@{notifier\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{notifier\_}{notifier\_}}
+{\footnotesize\ttfamily final Notifier frc.\+lib.\+loops.\+Looper.\+notifier\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a9df15a2d19223e3b3582fbe78ccf161a}\label{classfrc_1_1lib_1_1loops_1_1Looper_a9df15a2d19223e3b3582fbe78ccf161a}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!runnable\_@{runnable\_}}
+\index{runnable\_@{runnable\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{runnable\_}{runnable\_}}
+{\footnotesize\ttfamily final Runnable frc.\+lib.\+loops.\+Looper.\+runnable\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= () -\/> \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{try}\{}
+\DoxyCodeLine{            \textcolor{keyword}{synchronized} (\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_ab17eed09ed384ac34f5a3afc5b4c62ab}{taskRunningLock\_}}) \{}
+\DoxyCodeLine{                \textcolor{keywordflow}{if} (\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_af787e58f8bc65861f89f01b40d1da1ed}{running\_}}) \{}
+\DoxyCodeLine{                    \textcolor{keywordtype}{double} now = Timer.getFPGATimestamp();}
+\DoxyCodeLine{    }
+\DoxyCodeLine{                    \textcolor{keywordflow}{for} (Loop loop : \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a6f31f42a108198ff8e14b316b467b6e6}{loops\_}}) \{}
+\DoxyCodeLine{                        loop.onLoop(now);}
+\DoxyCodeLine{                    \}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{                    \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a1b9de719d9946a898541c4d42c561e1d}{dt\_}} = now -\/ \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a350dc61d9d175e4fb84aaeb2c49327aa}{timestamp\_}};}
+\DoxyCodeLine{                    \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_a350dc61d9d175e4fb84aaeb2c49327aa}{timestamp\_}} = now;}
+\DoxyCodeLine{                \}}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{catch}(Exception e)\{}
+\DoxyCodeLine{            System.out.println(\textcolor{stringliteral}{"Crash occured on iteration of loop"});}
+\DoxyCodeLine{            \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper_ad5bac2a08fe7e6d06b4799f7a84029e7}{handleCrash}}(e);}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_af787e58f8bc65861f89f01b40d1da1ed}\label{classfrc_1_1lib_1_1loops_1_1Looper_af787e58f8bc65861f89f01b40d1da1ed}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!running\_@{running\_}}
+\index{running\_@{running\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+loops.\+Looper.\+running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_ab17eed09ed384ac34f5a3afc5b4c62ab}\label{classfrc_1_1lib_1_1loops_1_1Looper_ab17eed09ed384ac34f5a3afc5b4c62ab}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!taskRunningLock\_@{taskRunningLock\_}}
+\index{taskRunningLock\_@{taskRunningLock\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{taskRunningLock\_}{taskRunningLock\_}}
+{\footnotesize\ttfamily final Object frc.\+lib.\+loops.\+Looper.\+task\+Running\+Lock\+\_\+ = new Object()\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1loops_1_1Looper_a350dc61d9d175e4fb84aaeb2c49327aa}\label{classfrc_1_1lib_1_1loops_1_1Looper_a350dc61d9d175e4fb84aaeb2c49327aa}} 
+\index{frc.lib.loops.Looper@{frc.lib.loops.Looper}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!frc.lib.loops.Looper@{frc.lib.loops.Looper}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily double frc.\+lib.\+loops.\+Looper.\+timestamp\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/loops/\mbox{\hyperlink{Looper_8java}{Looper.\+java}}\end{DoxyCompactItemize}

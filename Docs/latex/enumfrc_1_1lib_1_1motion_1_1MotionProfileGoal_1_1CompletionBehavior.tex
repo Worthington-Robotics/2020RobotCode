@@ -1,0 +1,48 @@
+\hypertarget{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior}{}\doxysection{frc.\+lib.\+motion.\+Motion\+Profile\+Goal.\+Completion\+Behavior Enum Reference}
+\label{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior}\index{frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_a2101cb45ee668f05db626e14a5822d91}{O\+V\+E\+R\+S\+H\+O\+OT}}
+\item 
+\mbox{\hyperlink{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_ac9a4107eba5810633f0a29d1cf8d76d8}{V\+I\+O\+L\+A\+T\+E\+\_\+\+M\+A\+X\+\_\+\+A\+C\+C\+EL}}
+\item 
+\mbox{\hyperlink{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_aa4a3b17ca1550e7aedb616e56fafe822}{V\+I\+O\+L\+A\+T\+E\+\_\+\+M\+A\+X\+\_\+\+A\+B\+S\+\_\+\+V\+EL}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A goal consists of a desired position and specified maximum velocity magnitude. But what should we do if we would reach the goal at a velocity greater than the maximum? This enum allows a user to specify a preference on behavior in this case. 
+
+Example use-\/cases of each\+: 
+
+O\+V\+E\+R\+S\+H\+O\+OT -\/ Generally used with a goal max\+\_\+abs\+\_\+vel of 0.\+0 to stop at the desired pos without violating any constraints. 
+
+V\+I\+O\+L\+A\+T\+E\+\_\+\+M\+A\+X\+\_\+\+A\+C\+C\+EL -\/ If we absolutely do not want to pass the goal and are unwilling to violate the max\+\_\+abs\+\_\+vel (for example, there is an obstacle in front of us -\/ slam the brakes harder than we\textquotesingle{}d like in order to avoid hitting it). 
+
+V\+I\+O\+L\+A\+T\+E\+\_\+\+M\+A\+X\+\_\+\+A\+B\+S\+\_\+\+V\+EL -\/ If the max velocity is just a general guideline and not a hard performance limit, it\textquotesingle{}s better to slightly exceed it to avoid skidding wheels. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_a2101cb45ee668f05db626e14a5822d91}\label{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_a2101cb45ee668f05db626e14a5822d91}} 
+\index{frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}!OVERSHOOT@{OVERSHOOT}}
+\index{OVERSHOOT@{OVERSHOOT}!frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}}
+\doxysubsubsection{\texorpdfstring{OVERSHOOT}{OVERSHOOT}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+Profile\+Goal.\+Completion\+Behavior.\+O\+V\+E\+R\+S\+H\+O\+OT}
+
+\mbox{\Hypertarget{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_aa4a3b17ca1550e7aedb616e56fafe822}\label{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_aa4a3b17ca1550e7aedb616e56fafe822}} 
+\index{frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}!VIOLATE\_MAX\_ABS\_VEL@{VIOLATE\_MAX\_ABS\_VEL}}
+\index{VIOLATE\_MAX\_ABS\_VEL@{VIOLATE\_MAX\_ABS\_VEL}!frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}}
+\doxysubsubsection{\texorpdfstring{VIOLATE\_MAX\_ABS\_VEL}{VIOLATE\_MAX\_ABS\_VEL}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+Profile\+Goal.\+Completion\+Behavior.\+V\+I\+O\+L\+A\+T\+E\+\_\+\+M\+A\+X\+\_\+\+A\+B\+S\+\_\+\+V\+EL}
+
+\mbox{\Hypertarget{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_ac9a4107eba5810633f0a29d1cf8d76d8}\label{enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior_ac9a4107eba5810633f0a29d1cf8d76d8}} 
+\index{frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}!VIOLATE\_MAX\_ACCEL@{VIOLATE\_MAX\_ACCEL}}
+\index{VIOLATE\_MAX\_ACCEL@{VIOLATE\_MAX\_ACCEL}!frc.lib.motion.MotionProfileGoal.CompletionBehavior@{frc.lib.motion.MotionProfileGoal.CompletionBehavior}}
+\doxysubsubsection{\texorpdfstring{VIOLATE\_MAX\_ACCEL}{VIOLATE\_MAX\_ACCEL}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+Profile\+Goal.\+Completion\+Behavior.\+V\+I\+O\+L\+A\+T\+E\+\_\+\+M\+A\+X\+\_\+\+A\+C\+C\+EL}
+
+
+
+The documentation for this enum was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/motion/\mbox{\hyperlink{MotionProfileGoal_8java}{Motion\+Profile\+Goal.\+java}}\end{DoxyCompactItemize}

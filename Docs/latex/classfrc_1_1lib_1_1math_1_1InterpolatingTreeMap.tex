@@ -1,0 +1,112 @@
+\hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{}\doxysection{frc.\+lib.\+math.\+Interpolating\+Tree\+Map$<$ K extends Inverse\+Interpolable$<$ K,, V extends Interpolable$<$ V $>$ Class Template Reference}
+\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+Inheritance diagram for frc.\+lib.\+math.\+Interpolating\+Tree\+Map$<$ K extends Inverse\+Interpolable$<$ K,, V extends Interpolable$<$ V $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.924399cm]{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a3d7d0e40bfbd0abf3d9b2c03954ac29a}{Interpolating\+Tree\+Map}} (int maximum\+Size)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_ae16733a707efcc4cd719ff57b7737da8}{Interpolating\+Tree\+Map}} ()
+\item 
+V \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_acbe9d19230706798cea4059413d2015f}{put}} (K key, V value)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_ad4b15b3b181703f8e7fd711d566388b6}{put\+All}} (Map$<$? extends K, ? extends V $>$ map)
+\item 
+V \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a90c2cbb9014d21fb6741ed6c1350c34d}{get\+Interpolated}} (K key)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final long \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a8ee6e89ca6b5a4d9879ceac03fe8e887}{serial\+Version\+U\+ID}} = 8347275262778054124L
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interpolating Tree Maps are used to get values at points that are not defined by making a guess from points that are defined. This uses linear interpolation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$\+K$>$} & The type of the key (must implement \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}) \\
+\hline
+{\em $<$\+V$>$} & The type of the value (must implement \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a3d7d0e40bfbd0abf3d9b2c03954ac29a}\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a3d7d0e40bfbd0abf3d9b2c03954ac29a}} 
+\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}!InterpolatingTreeMap@{InterpolatingTreeMap}}
+\index{InterpolatingTreeMap@{InterpolatingTreeMap}!frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{InterpolatingTreeMap()}{InterpolatingTreeMap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{frc.\+lib.\+math.\+Interpolating\+Tree\+Map}}$<$ K extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}$<$ K,, V extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}$<$ V $>$.\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{Interpolating\+Tree\+Map}} (\begin{DoxyParamCaption}\item[{int}]{maximum\+Size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_ae16733a707efcc4cd719ff57b7737da8}\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_ae16733a707efcc4cd719ff57b7737da8}} 
+\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}!InterpolatingTreeMap@{InterpolatingTreeMap}}
+\index{InterpolatingTreeMap@{InterpolatingTreeMap}!frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{InterpolatingTreeMap()}{InterpolatingTreeMap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{frc.\+lib.\+math.\+Interpolating\+Tree\+Map}}$<$ K extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}$<$ K,, V extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}$<$ V $>$.\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{Interpolating\+Tree\+Map}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a90c2cbb9014d21fb6741ed6c1350c34d}\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a90c2cbb9014d21fb6741ed6c1350c34d}} 
+\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}!getInterpolated@{getInterpolated}}
+\index{getInterpolated@{getInterpolated}!frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{getInterpolated()}{getInterpolated()}}
+{\footnotesize\ttfamily V \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{frc.\+lib.\+math.\+Interpolating\+Tree\+Map}}$<$ K extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}$<$ K,, V extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}$<$ V $>$.get\+Interpolated (\begin{DoxyParamCaption}\item[{K}]{key }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Lookup for a value (does not have to exist) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+V or null; V if it is \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}} or exists, null if it is at a bound and cannot average 
+\end{DoxyReturn}
+Get surrounding keys for interpolation
+
+If attempting interpolation at ends of tree, return the nearest data point
+
+Get surrounding values for interpolation\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_acbe9d19230706798cea4059413d2015f}\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_acbe9d19230706798cea4059413d2015f}} 
+\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}!put@{put}}
+\index{put@{put}!frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{put()}{put()}}
+{\footnotesize\ttfamily V \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{frc.\+lib.\+math.\+Interpolating\+Tree\+Map}}$<$ K extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}$<$ K,, V extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}$<$ V $>$.put (\begin{DoxyParamCaption}\item[{K}]{key,  }\item[{V}]{value }\end{DoxyParamCaption})}
+
+Inserts a key value pair, and trims the tree if a max size is specified
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key for inserted data \\
+\hline
+{\em value} & Value for inserted data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_ad4b15b3b181703f8e7fd711d566388b6}\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_ad4b15b3b181703f8e7fd711d566388b6}} 
+\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}!putAll@{putAll}}
+\index{putAll@{putAll}!frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{putAll()}{putAll()}}
+{\footnotesize\ttfamily void \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{frc.\+lib.\+math.\+Interpolating\+Tree\+Map}}$<$ K extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}$<$ K,, V extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}$<$ V $>$.put\+All (\begin{DoxyParamCaption}\item[{Map$<$? extends K, ? extends V $>$}]{map }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a8ee6e89ca6b5a4d9879ceac03fe8e887}\label{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap_a8ee6e89ca6b5a4d9879ceac03fe8e887}} 
+\index{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}!serialVersionUID@{serialVersionUID}}
+\index{serialVersionUID@{serialVersionUID}!frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$@{frc.lib.math.InterpolatingTreeMap$<$ K extends InverseInterpolable$<$ K,, V extends Interpolable$<$ V $>$}}
+\doxysubsubsection{\texorpdfstring{serialVersionUID}{serialVersionUID}}
+{\footnotesize\ttfamily final long \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{frc.\+lib.\+math.\+Interpolating\+Tree\+Map}}$<$ K extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}}$<$ K,, V extends \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1Interpolable}{Interpolable}}$<$ V $>$.serial\+Version\+U\+ID = 8347275262778054124L\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/math/\mbox{\hyperlink{InterpolatingTreeMap_8java}{Interpolating\+Tree\+Map.\+java}}\end{DoxyCompactItemize}

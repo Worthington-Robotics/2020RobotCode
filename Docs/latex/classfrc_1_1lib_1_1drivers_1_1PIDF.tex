@@ -1,0 +1,255 @@
+\hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF}{}\doxysection{frc.\+lib.\+drivers.\+P\+I\+DF Class Reference}
+\label{classfrc_1_1lib_1_1drivers_1_1PIDF}\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_af6c7e6ba66cf9e71ade9c9896ec5e2bc}{P\+I\+DF}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}{kP}}, double kD)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a56b3f00a0b6bd3a325dc7af7816aba01}{P\+I\+DF}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}{kP}}, double kI, double kD, double i\+Max)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a5ff0fae70684da50e3335a429d6cb2e4}{P\+I\+DF}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}{kP}}, double kI, double kD, double kF, double dT, double i\+Max)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a682f8cf38e3c06ee91c5d3bd709950de}{reset}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a4491133e44f12ccb180c3384e41b774f}{enable}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a71d43f9075506c356969ab18291666ee}{disable}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a252f9a3cc4df675f6853411acb3cb8f9}{set\+Point}} (double set\+Point)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_acb95744bdfdb42a88cbfb16bacb75264}{set\+P\+ID}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}{kP}}, double kI, double kD)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a640a988433558a9d90b2067f9b7f53de}{set\+P\+I\+DF}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}{kP}}, double kI, double kD, double kF)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a63f39fea1d560104d2a15c166b5cf090}{update}} (double input)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a0e64163c7ca57725fc6c1a66c7a9fb0e}{set\+Continuous}} (boolean \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_aa834427bf6246ec7ff370cad947a594b}{continuous}})
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_abb716d93a595c88db3395d5c82777aa6}{set\+Input\+Range}} (double minimum\+Input, double maximum\+Input)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a6daaeb721a2d5d39e4013087be9870ed}{on\+Target}} (double epsilon)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a0d3b0dad7674715d93fb78c8ebb20792}{get\+Continuous\+Error}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_abd62f74840658be79d9857a7e34e0ae4}{error}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}{kP}} = 0
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_abd62f74840658be79d9857a7e34e0ae4}{error}}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_aa834427bf6246ec7ff370cad947a594b}{continuous}}
+\item 
+Reentrant\+Lock \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_ae2121184c2b886d870a5632eb5403e40}{calculation\+Mutex}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a8a8bb20848361f5b062651a154591a96}{D\+E\+F\+A\+U\+L\+T\+\_\+\+DT}} = 0.\+010
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF_a6df2532a856ccd4c005021a6a30d4413}{clamp}} (double value, double low, double high)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_af6c7e6ba66cf9e71ade9c9896ec5e2bc}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_af6c7e6ba66cf9e71ade9c9896ec5e2bc}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!PIDF@{PIDF}}
+\index{PIDF@{PIDF}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{PIDF()}{PIDF()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily frc.\+lib.\+drivers.\+P\+I\+D\+F.\+P\+I\+DF (\begin{DoxyParamCaption}\item[{double}]{kP,  }\item[{double}]{kD }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a56b3f00a0b6bd3a325dc7af7816aba01}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a56b3f00a0b6bd3a325dc7af7816aba01}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!PIDF@{PIDF}}
+\index{PIDF@{PIDF}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{PIDF()}{PIDF()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily frc.\+lib.\+drivers.\+P\+I\+D\+F.\+P\+I\+DF (\begin{DoxyParamCaption}\item[{double}]{kP,  }\item[{double}]{kI,  }\item[{double}]{kD,  }\item[{double}]{i\+Max }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a5ff0fae70684da50e3335a429d6cb2e4}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a5ff0fae70684da50e3335a429d6cb2e4}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!PIDF@{PIDF}}
+\index{PIDF@{PIDF}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{PIDF()}{PIDF()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily frc.\+lib.\+drivers.\+P\+I\+D\+F.\+P\+I\+DF (\begin{DoxyParamCaption}\item[{double}]{kP,  }\item[{double}]{kI,  }\item[{double}]{kD,  }\item[{double}]{kF,  }\item[{double}]{dT,  }\item[{double}]{i\+Max }\end{DoxyParamCaption})}
+
+Complete \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF}{P\+I\+DF}} constructor
+
+
+\begin{DoxyParams}{Parameters}
+{\em kP} & \\
+\hline
+{\em kI} & \\
+\hline
+{\em kD} & \\
+\hline
+{\em kF} & Not yet implemented \\
+\hline
+{\em dT} & discrete time step for control loop \\
+\hline
+{\em i\+Max} & maximum integral windup \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a6df2532a856ccd4c005021a6a30d4413}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a6df2532a856ccd4c005021a6a30d4413}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!clamp@{clamp}}
+\index{clamp@{clamp}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{clamp()}{clamp()}}
+{\footnotesize\ttfamily static double frc.\+lib.\+drivers.\+P\+I\+D\+F.\+clamp (\begin{DoxyParamCaption}\item[{double}]{value,  }\item[{double}]{low,  }\item[{double}]{high }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a71d43f9075506c356969ab18291666ee}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a71d43f9075506c356969ab18291666ee}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!disable@{disable}}
+\index{disable@{disable}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{disable()}{disable()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+disable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Stops the P\+ID from returning a nonzero output \mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a4491133e44f12ccb180c3384e41b774f}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a4491133e44f12ccb180c3384e41b774f}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!enable@{enable}}
+\index{enable@{enable}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{enable()}{enable()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+enable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allows the P\+ID controller to return a nonzero output \mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a0d3b0dad7674715d93fb78c8ebb20792}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a0d3b0dad7674715d93fb78c8ebb20792}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!getContinuousError@{getContinuousError}}
+\index{getContinuousError@{getContinuousError}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{getContinuousError()}{getContinuousError()}}
+{\footnotesize\ttfamily double frc.\+lib.\+drivers.\+P\+I\+D\+F.\+get\+Continuous\+Error (\begin{DoxyParamCaption}\item[{double}]{error }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Wraps error around for continuous inputs. The original error is returned if continuous mode is disabled.
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & The current error of the P\+ID controller. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error for continuous inputs. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a6daaeb721a2d5d39e4013087be9870ed}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a6daaeb721a2d5d39e4013087be9870ed}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!onTarget@{onTarget}}
+\index{onTarget@{onTarget}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{onTarget()}{onTarget()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+drivers.\+P\+I\+D\+F.\+on\+Target (\begin{DoxyParamCaption}\item[{double}]{epsilon }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a682f8cf38e3c06ee91c5d3bd709950de}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a682f8cf38e3c06ee91c5d3bd709950de}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!reset@{reset}}
+\index{reset@{reset}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Resets values internal to the P\+ID back to their default states. Also disables the P\+ID if it was currently in use within the software \mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a0e64163c7ca57725fc6c1a66c7a9fb0e}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a0e64163c7ca57725fc6c1a66c7a9fb0e}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!setContinuous@{setContinuous}}
+\index{setContinuous@{setContinuous}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{setContinuous()}{setContinuous()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+set\+Continuous (\begin{DoxyParamCaption}\item[{boolean}]{continuous }\end{DoxyParamCaption})}
+
+Sets the P\+ID to use a continuous mode calculation that makes both ends of the range effectively the same point !!!\+Y\+OU M\+U\+ST M\+A\+KE S\+U\+RE TO S\+ET T\+HE R\+A\+N\+GE IF Y\+OU U\+SE T\+H\+IS M\+O\+D\+E!!!
+
+
+\begin{DoxyParams}{Parameters}
+{\em continuous} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_abb716d93a595c88db3395d5c82777aa6}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_abb716d93a595c88db3395d5c82777aa6}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!setInputRange@{setInputRange}}
+\index{setInputRange@{setInputRange}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{setInputRange()}{setInputRange()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+set\+Input\+Range (\begin{DoxyParamCaption}\item[{double}]{minimum\+Input,  }\item[{double}]{maximum\+Input }\end{DoxyParamCaption})}
+
+Sets the min am maxium values defining the input range for this P\+ID controller. Only needed for continuous P\+I\+Ds
+
+
+\begin{DoxyParams}{Parameters}
+{\em minimum\+Input} & \\
+\hline
+{\em maximum\+Input} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_acb95744bdfdb42a88cbfb16bacb75264}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_acb95744bdfdb42a88cbfb16bacb75264}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!setPID@{setPID}}
+\index{setPID@{setPID}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{setPID()}{setPID()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+set\+P\+ID (\begin{DoxyParamCaption}\item[{double}]{kP,  }\item[{double}]{kI,  }\item[{double}]{kD }\end{DoxyParamCaption})}
+
+Sets the P, I and D gains
+
+
+\begin{DoxyParams}{Parameters}
+{\em kP} & \\
+\hline
+{\em kI} & \\
+\hline
+{\em kD} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a640a988433558a9d90b2067f9b7f53de}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a640a988433558a9d90b2067f9b7f53de}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!setPIDF@{setPIDF}}
+\index{setPIDF@{setPIDF}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{setPIDF()}{setPIDF()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+set\+P\+I\+DF (\begin{DoxyParamCaption}\item[{double}]{kP,  }\item[{double}]{kI,  }\item[{double}]{kD,  }\item[{double}]{kF }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a252f9a3cc4df675f6853411acb3cb8f9}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a252f9a3cc4df675f6853411acb3cb8f9}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!setPoint@{setPoint}}
+\index{setPoint@{setPoint}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{setPoint()}{setPoint()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+P\+I\+D\+F.\+set\+Point (\begin{DoxyParamCaption}\item[{double}]{set\+Point }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a63f39fea1d560104d2a15c166b5cf090}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a63f39fea1d560104d2a15c166b5cf090}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!update@{update}}
+\index{update@{update}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily double frc.\+lib.\+drivers.\+P\+I\+D\+F.\+update (\begin{DoxyParamCaption}\item[{double}]{input }\end{DoxyParamCaption})}
+
+Returns the current calculated output of this P\+ID based on the current position
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & system position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+calculated motor power to apply (\%) 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_ae2121184c2b886d870a5632eb5403e40}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_ae2121184c2b886d870a5632eb5403e40}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!calculationMutex@{calculationMutex}}
+\index{calculationMutex@{calculationMutex}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{calculationMutex}{calculationMutex}}
+{\footnotesize\ttfamily Reentrant\+Lock frc.\+lib.\+drivers.\+P\+I\+D\+F.\+calculation\+Mutex\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_aa834427bf6246ec7ff370cad947a594b}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_aa834427bf6246ec7ff370cad947a594b}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!continuous@{continuous}}
+\index{continuous@{continuous}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{continuous}{continuous}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+drivers.\+P\+I\+D\+F.\+continuous\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_a8a8bb20848361f5b062651a154591a96}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_a8a8bb20848361f5b062651a154591a96}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!DEFAULT\_DT@{DEFAULT\_DT}}
+\index{DEFAULT\_DT@{DEFAULT\_DT}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_DT}{DEFAULT\_DT}}
+{\footnotesize\ttfamily final double frc.\+lib.\+drivers.\+P\+I\+D\+F.\+D\+E\+F\+A\+U\+L\+T\+\_\+\+DT = 0.\+010\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_abd62f74840658be79d9857a7e34e0ae4}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_abd62f74840658be79d9857a7e34e0ae4}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!error@{error}}
+\index{error@{error}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{error}{error}}
+{\footnotesize\ttfamily double frc.\+lib.\+drivers.\+P\+I\+D\+F.\+error\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}\label{classfrc_1_1lib_1_1drivers_1_1PIDF_adf9c8136dcae7cf54a35298e54901ae7}} 
+\index{frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}!kP@{kP}}
+\index{kP@{kP}!frc.lib.drivers.PIDF@{frc.lib.drivers.PIDF}}
+\doxysubsubsection{\texorpdfstring{kP}{kP}}
+{\footnotesize\ttfamily double frc.\+lib.\+drivers.\+P\+I\+D\+F.\+kP = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/drivers/\mbox{\hyperlink{PIDF_8java}{P\+I\+D\+F.\+java}}\end{DoxyCompactItemize}

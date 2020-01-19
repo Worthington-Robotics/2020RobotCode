@@ -1,0 +1,123 @@
+\hypertarget{classfrc_1_1lib_1_1control_1_1Path}{}\doxysection{frc.\+lib.\+control.\+Path Class Reference}
+\label{classfrc_1_1lib_1_1control_1_1Path}\index{frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Waypoint}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_a42c5610ffdb9fbc198bba2763cf97d61}{Path}} (List$<$ Waypoint $>$ waypoints)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_ae364749ba85c143dbe18abf6addfa304}{update}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} position)
+\item 
+Set$<$ String $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_a7abee9c603f3b03759ceb673c97e4cbf}{get\+Markers\+Crossed}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_ae17f6d8ea55935ae080c176e849a6a8c}{get\+Remaining\+Length}} ()
+\item 
+Path\+Segment.\+Sample \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_a00133a2aacba6eb70e27ccbbe006bae1}{get\+Lookahead\+Point}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} position, double lookahead\+\_\+distance)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ Waypoint $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_a96092b51542a673bfccb087f222fd3e5}{m\+Waypoints}}
+\item 
+List$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment}{Path\+Segment}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_ad8fb455fa18617953ee096559bfdd527}{m\+Segments}}
+\item 
+Set$<$ String $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_a981220eadb3900ff73d59010b2645d96}{m\+Markers\+Crossed}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path_a144be46966387ac43a192dfb59d2a9fe}{k\+Segment\+Complete\+Percentage}} = .\+99
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}} is a recording of the path that the robot takes. \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}} objects consist of a List of Waypoints that the robot passes by. Using multiple Waypoints in a \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}} object and the robot\textquotesingle{}s current speed, the code can extrapolate future Waypoints and predict the robot\textquotesingle{}s motion. It can also dictate the robot\textquotesingle{}s motion along the set path. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_a42c5610ffdb9fbc198bba2763cf97d61}\label{classfrc_1_1lib_1_1control_1_1Path_a42c5610ffdb9fbc198bba2763cf97d61}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!Path@{Path}}
+\index{Path@{Path}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{Path()}{Path()}}
+{\footnotesize\ttfamily frc.\+lib.\+control.\+Path.\+Path (\begin{DoxyParamCaption}\item[{List$<$ Waypoint $>$}]{waypoints }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_a00133a2aacba6eb70e27ccbbe006bae1}\label{classfrc_1_1lib_1_1control_1_1Path_a00133a2aacba6eb70e27ccbbe006bae1}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!getLookaheadPoint@{getLookaheadPoint}}
+\index{getLookaheadPoint@{getLookaheadPoint}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{getLookaheadPoint()}{getLookaheadPoint()}}
+{\footnotesize\ttfamily Path\+Segment.\+Sample frc.\+lib.\+control.\+Path.\+get\+Lookahead\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{position,  }\item[{double}]{lookahead\+\_\+distance }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The robot\textquotesingle{}s current position \\
+\hline
+{\em lookahead\+\_\+distance} & A specified distance to predict a future waypoint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A segment of the robot\textquotesingle{}s predicted motion with start/end points and speed. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_a7abee9c603f3b03759ceb673c97e4cbf}\label{classfrc_1_1lib_1_1control_1_1Path_a7abee9c603f3b03759ceb673c97e4cbf}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!getMarkersCrossed@{getMarkersCrossed}}
+\index{getMarkersCrossed@{getMarkersCrossed}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{getMarkersCrossed()}{getMarkersCrossed()}}
+{\footnotesize\ttfamily Set$<$String$>$ frc.\+lib.\+control.\+Path.\+get\+Markers\+Crossed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_ae17f6d8ea55935ae080c176e849a6a8c}\label{classfrc_1_1lib_1_1control_1_1Path_ae17f6d8ea55935ae080c176e849a6a8c}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!getRemainingLength@{getRemainingLength}}
+\index{getRemainingLength@{getRemainingLength}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{getRemainingLength()}{getRemainingLength()}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path.\+get\+Remaining\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_ae364749ba85c143dbe18abf6addfa304}\label{classfrc_1_1lib_1_1control_1_1Path_ae364749ba85c143dbe18abf6addfa304}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!update@{update}}
+\index{update@{update}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path.\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{position }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & An initial position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the distance from the position to the first point on the path 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_a144be46966387ac43a192dfb59d2a9fe}\label{classfrc_1_1lib_1_1control_1_1Path_a144be46966387ac43a192dfb59d2a9fe}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!kSegmentCompletePercentage@{kSegmentCompletePercentage}}
+\index{kSegmentCompletePercentage@{kSegmentCompletePercentage}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{kSegmentCompletePercentage}{kSegmentCompletePercentage}}
+{\footnotesize\ttfamily final double frc.\+lib.\+control.\+Path.\+k\+Segment\+Complete\+Percentage = .\+99\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_a981220eadb3900ff73d59010b2645d96}\label{classfrc_1_1lib_1_1control_1_1Path_a981220eadb3900ff73d59010b2645d96}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!mMarkersCrossed@{mMarkersCrossed}}
+\index{mMarkersCrossed@{mMarkersCrossed}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{mMarkersCrossed}{mMarkersCrossed}}
+{\footnotesize\ttfamily Set$<$String$>$ frc.\+lib.\+control.\+Path.\+m\+Markers\+Crossed\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_ad8fb455fa18617953ee096559bfdd527}\label{classfrc_1_1lib_1_1control_1_1Path_ad8fb455fa18617953ee096559bfdd527}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!mSegments@{mSegments}}
+\index{mSegments@{mSegments}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{mSegments}{mSegments}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment}{Path\+Segment}}$>$ frc.\+lib.\+control.\+Path.\+m\+Segments\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1Path_a96092b51542a673bfccb087f222fd3e5}\label{classfrc_1_1lib_1_1control_1_1Path_a96092b51542a673bfccb087f222fd3e5}} 
+\index{frc.lib.control.Path@{frc.lib.control.Path}!mWaypoints@{mWaypoints}}
+\index{mWaypoints@{mWaypoints}!frc.lib.control.Path@{frc.lib.control.Path}}
+\doxysubsubsection{\texorpdfstring{mWaypoints}{mWaypoints}}
+{\footnotesize\ttfamily List$<$Waypoint$>$ frc.\+lib.\+control.\+Path.\+m\+Waypoints\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/control/\mbox{\hyperlink{Path_8java}{Path.\+java}}\end{DoxyCompactItemize}
