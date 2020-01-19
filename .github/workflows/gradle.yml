@@ -4,9 +4,9 @@ on:
   schedule:
     - cron: 0 12 * * 0-6
   push:
-    #branches:
-      #- master
-      #- RobotTest
+    branches:
+      - master
+      - RobotTest
 
 
 jobs:
@@ -19,20 +19,18 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
-    #- name: Build with Gradle
-      # run: ./gradlew build
-    #  working-directory: ./RobotCode/
+    - name: Build with Gradle
+      run: ./gradlew build
+      working-directory: ./RobotCode/
       
-  docs:
-    runs-on: [windows-latest]
-    timeout-minutes: 5
+  #docs:
+   # runs-on: [windows-latest]
+    #timeout-minutes: 5
     #needs: [build]
-    steps:
-      - uses: actions/checkout@v1
-      - name: show dir
-        run: ls
-        working-directory: ./doxygen/
-      - name: run doxygen
-        run: ./doxygen/doxygen.exe ./doxygen/testconfig 
+    #steps:
+     # - uses: actions/checkout@v1
+      #- name: run doxygen
+       # run: ./doxygen/doxygen.exe ./doxygen/testconfig 
+      #- uses: actions/commit@v1
     
     
