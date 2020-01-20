@@ -1,0 +1,79 @@
+\hypertarget{interfacefrc_1_1lib_1_1loops_1_1Loop}{}\doxysection{frc.\+lib.\+loops.\+Loop Interface Reference}
+\label{interfacefrc_1_1lib_1_1loops_1_1Loop}\index{frc.lib.loops.Loop@{frc.lib.loops.Loop}}
+Inheritance diagram for frc.\+lib.\+loops.\+Loop\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacefrc_1_1lib_1_1loops_1_1Loop}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop_ac3a8e2c83a3816dd918f519a2a25c5e2}{on\+Start}} (double timestamp)
+\item 
+void \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop_a679f8c8b33753e3a9b5b34333f4b88b3}{on\+Loop}} (double timestamp)
+\item 
+void \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop_a87a743c38e82adc9df61819c40e5f797}{on\+Stop}} (double timestamp)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for loops, which are routine that run periodically in the robot code (such as periodic gyroscope calibration, etc.) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interfacefrc_1_1lib_1_1loops_1_1Loop_a679f8c8b33753e3a9b5b34333f4b88b3}\label{interfacefrc_1_1lib_1_1loops_1_1Loop_a679f8c8b33753e3a9b5b34333f4b88b3}} 
+\index{frc.lib.loops.Loop@{frc.lib.loops.Loop}!onLoop@{onLoop}}
+\index{onLoop@{onLoop}!frc.lib.loops.Loop@{frc.lib.loops.Loop}}
+\doxysubsubsection{\texorpdfstring{onLoop()}{onLoop()}}
+{\footnotesize\ttfamily void frc.\+lib.\+loops.\+Loop.\+on\+Loop (\begin{DoxyParamCaption}\item[{double}]{timestamp }\end{DoxyParamCaption})}
+
+what the loop runs while run by the subsystem manager
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & handled by subsystem manager \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1DisabledLoop_a6586bf3dabaee3183e0060be0e0024b2}{frc.\+robot.\+Subsystem\+Manager.\+Disabled\+Loop}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1EnabledLoop_a6d28c1c8c3088292cac6435a0dc2f1f0}{frc.\+robot.\+Subsystem\+Manager.\+Enabled\+Loop}}.
+
+\mbox{\Hypertarget{interfacefrc_1_1lib_1_1loops_1_1Loop_ac3a8e2c83a3816dd918f519a2a25c5e2}\label{interfacefrc_1_1lib_1_1loops_1_1Loop_ac3a8e2c83a3816dd918f519a2a25c5e2}} 
+\index{frc.lib.loops.Loop@{frc.lib.loops.Loop}!onStart@{onStart}}
+\index{onStart@{onStart}!frc.lib.loops.Loop@{frc.lib.loops.Loop}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void frc.\+lib.\+loops.\+Loop.\+on\+Start (\begin{DoxyParamCaption}\item[{double}]{timestamp }\end{DoxyParamCaption})}
+
+what the loop runs when started by the subsystem manager
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & handled by subsystem manager \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1DisabledLoop_a08165bd97276cb92771748988ec8a1a1}{frc.\+robot.\+Subsystem\+Manager.\+Disabled\+Loop}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1EnabledLoop_adfac72638e7797b11ca011fdce3adfbc}{frc.\+robot.\+Subsystem\+Manager.\+Enabled\+Loop}}.
+
+\mbox{\Hypertarget{interfacefrc_1_1lib_1_1loops_1_1Loop_a87a743c38e82adc9df61819c40e5f797}\label{interfacefrc_1_1lib_1_1loops_1_1Loop_a87a743c38e82adc9df61819c40e5f797}} 
+\index{frc.lib.loops.Loop@{frc.lib.loops.Loop}!onStop@{onStop}}
+\index{onStop@{onStop}!frc.lib.loops.Loop@{frc.lib.loops.Loop}}
+\doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
+{\footnotesize\ttfamily void frc.\+lib.\+loops.\+Loop.\+on\+Stop (\begin{DoxyParamCaption}\item[{double}]{timestamp }\end{DoxyParamCaption})}
+
+what the loop runs when ended by the subsystem manager
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & handled by subsystem manager \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1DisabledLoop_add5b353dccbb4873d74b28dd07b03660}{frc.\+robot.\+Subsystem\+Manager.\+Disabled\+Loop}}, and \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1EnabledLoop_ae514154cb213c1e58d9cbcf4c4d83e0a}{frc.\+robot.\+Subsystem\+Manager.\+Enabled\+Loop}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/loops/\mbox{\hyperlink{Loop_8java}{Loop.\+java}}\end{DoxyCompactItemize}

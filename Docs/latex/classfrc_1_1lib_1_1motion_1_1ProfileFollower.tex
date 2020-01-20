@@ -1,0 +1,339 @@
+\hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower}{}\doxysection{frc.\+lib.\+motion.\+Profile\+Follower Class Reference}
+\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower}\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a64fd92f8c2b391dd630a858f846975c2}{Profile\+Follower}} (double kp, double ki, double kv, double kffv, double kffa, double ks)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ab81e67f09f5d381fbb66640ff8e45bb1}{set\+Gains}} (double kp, double ki, double kv, double kffv, double kffa, double ks)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a676558f728573f38104c2078af3d5b55}{reset\+Profile}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ad76ec09a0f72a6225eddcc3b57265bec}{set\+Goal\+And\+Constraints}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} goal, \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} constraints)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_afa22860fa37532b0e5bcec99ad6b3a1d}{set\+Goal}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} goal)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a6f5c99c666d994ec184eecbe478028e4}{get\+Goal}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a99f678122290e1afc5ed49b2c86e99c1}{set\+Constraints}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} constraints)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a53a67cd60980a8ea495738491ff67a47}{get\+Setpoint}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a75b6973d9d69bf5a30fe9093d7fc482a}{reset\+Setpoint}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a8516eef9b11262820ea3811d051fa956}{reset\+Integral}} ()
+\item 
+synchronized double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a7aedaad383ce41de05e91f4c930fb82b}{update}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} latest\+\_\+state, double t)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a5a0affb07dc16f333d51c346d6bda751}{set\+Min\+Output}} (double min\+\_\+output)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3acffbab5619e93b57b1ae3ec3d95dc1}{set\+Max\+Output}} (double max\+\_\+output)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ad2566247058a2140f80cd3942e104032}{get\+Pos\+Error}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a00b01216ecd0655eea4d8d8c1173a368}{get\+Vel\+Error}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_aacbcde0231548de1f6579fc1cf5ccb40}{is\+Finished\+Profile}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_af5c05bde3a5285ec90f1c5b9f8008507}{on\+Target}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a895329663eb0fb8815e48188732ffcc3}{m\+Kp}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_abc283f5c94228eb865826ca55f8d1ee0}{m\+Ki}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a0fccb9d20248f5ae966f6558a76a7e25}{m\+Kv}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a4897219461ac362b3f6cebb4cea4b770}{m\+Kffv}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3d7522ba34c923d7a7f88626bd94d706}{m\+Kffa}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ada2fbe94015d1833812417554e69c8d7}{m\+Ks}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_aab75d4e2ca97a0dde4db532e8f8dc3aa}{m\+Min\+Output}} = Double.\+N\+E\+G\+A\+T\+I\+V\+E\+\_\+\+I\+N\+F\+I\+N\+I\+TY
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a365154aeefee909f0b916535d37d3a92}{m\+Max\+Output}} = Double.\+P\+O\+S\+I\+T\+I\+V\+E\+\_\+\+I\+N\+F\+I\+N\+I\+TY
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a101a1c879bfe8623d908c051f23c8bde}{m\+Latest\+Actual\+State}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a103ef8ce9ea38720e2ddcf7fb49dc5a1}{m\+Initial\+State}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_afabf8445898fe1d56dd5fadb987b58e7}{m\+Latest\+Pos\+Error}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_af61a7f47fe6dcd6d44be8ecf4d155f15}{m\+Latest\+Vel\+Error}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a5f8ae1dfef2bff86121aa915c5efd9f3}{m\+Total\+Error}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_acfa797030c2cb98ef14ec197c77bc500}{m\+Goal}} = null
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3fefdd14cbd324fef4f6715138a92535}{m\+Constraints}} = null
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator}{Setpoint\+Generator}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a0d13f54e83d2aa9b3688bfab32d20532}{m\+Setpoint\+Generator}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator}{Setpoint\+Generator}}()
+\item 
+Setpoint\+Generator.\+Setpoint \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a185ecd8aad0c4686db57efe8247da3ef}{m\+Latest\+Setpoint}} = null
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A controller for tracking a profile generated to attain a \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}}. The controller uses feedforward on acceleration, velocity, and position; proportional feedback on velocity and position; and integral feedback on position. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a64fd92f8c2b391dd630a858f846975c2}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a64fd92f8c2b391dd630a858f846975c2}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!ProfileFollower@{ProfileFollower}}
+\index{ProfileFollower@{ProfileFollower}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{ProfileFollower()}{ProfileFollower()}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Profile\+Follower.\+Profile\+Follower (\begin{DoxyParamCaption}\item[{double}]{kp,  }\item[{double}]{ki,  }\item[{double}]{kv,  }\item[{double}]{kffv,  }\item[{double}]{kffa,  }\item[{double}]{ks }\end{DoxyParamCaption})}
+
+Create a new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower}{Profile\+Follower}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em kp} & The proportional gain on position error. \\
+\hline
+{\em ki} & The integral gain on position error. \\
+\hline
+{\em kv} & The proportional gain on velocity error (or derivative gain on position error). \\
+\hline
+{\em kffv} & The feedforward gain on velocity. Should be 1.\+0 if the units of the profile match the units of the output. \\
+\hline
+{\em kffa} & The feedforward gain on acceleration. \\
+\hline
+{\em ks} & The throttle required to break static friction. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a6f5c99c666d994ec184eecbe478028e4}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a6f5c99c666d994ec184eecbe478028e4}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!getGoal@{getGoal}}
+\index{getGoal@{getGoal}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{getGoal()}{getGoal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} frc.\+lib.\+motion.\+Profile\+Follower.\+get\+Goal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+The current goal (null if no goal has been set since the latest call to reset()). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ad2566247058a2140f80cd3942e104032}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ad2566247058a2140f80cd3942e104032}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!getPosError@{getPosError}}
+\index{getPosError@{getPosError}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{getPosError()}{getPosError()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+get\+Pos\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a53a67cd60980a8ea495738491ff67a47}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a53a67cd60980a8ea495738491ff67a47}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!getSetpoint@{getSetpoint}}
+\index{getSetpoint@{getSetpoint}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{getSetpoint()}{getSetpoint()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Profile\+Follower.\+get\+Setpoint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a00b01216ecd0655eea4d8d8c1173a368}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a00b01216ecd0655eea4d8d8c1173a368}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!getVelError@{getVelError}}
+\index{getVelError@{getVelError}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{getVelError()}{getVelError()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+get\+Vel\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_aacbcde0231548de1f6579fc1cf5ccb40}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_aacbcde0231548de1f6579fc1cf5ccb40}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!isFinishedProfile@{isFinishedProfile}}
+\index{isFinishedProfile@{isFinishedProfile}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{isFinishedProfile()}{isFinishedProfile()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Profile\+Follower.\+is\+Finished\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+We are finished the profile when the final setpoint has been generated. Note that this does not check whether we are anywhere close to the final setpoint, however.
+
+\begin{DoxyReturn}{Returns}
+True if the final setpoint has been generated for the current goal. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_af5c05bde3a5285ec90f1c5b9f8008507}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_af5c05bde3a5285ec90f1c5b9f8008507}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!onTarget@{onTarget}}
+\index{onTarget@{onTarget}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{onTarget()}{onTarget()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Profile\+Follower.\+on\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+We are on target if our actual state achieves the goal (where the definition of achievement depends on the goal\textquotesingle{}s completion behavior).
+
+\begin{DoxyReturn}{Returns}
+True if we have actually achieved the current goal. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a8516eef9b11262820ea3811d051fa956}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a8516eef9b11262820ea3811d051fa956}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!resetIntegral@{resetIntegral}}
+\index{resetIntegral@{resetIntegral}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{resetIntegral()}{resetIntegral()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+reset\+Integral (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a676558f728573f38104c2078af3d5b55}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a676558f728573f38104c2078af3d5b55}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!resetProfile@{resetProfile}}
+\index{resetProfile@{resetProfile}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{resetProfile()}{resetProfile()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+reset\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Completely clear all state related to the current profile (min and max outputs are maintained). \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a75b6973d9d69bf5a30fe9093d7fc482a}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a75b6973d9d69bf5a30fe9093d7fc482a}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!resetSetpoint@{resetSetpoint}}
+\index{resetSetpoint@{resetSetpoint}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{resetSetpoint()}{resetSetpoint()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+reset\+Setpoint (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Reset just the setpoint. This means that the latest\+\_\+state provided to \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a7aedaad383ce41de05e91f4c930fb82b}{update()}} will be used rather than feeding forward the previous setpoint the next time \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a7aedaad383ce41de05e91f4c930fb82b}{update()}} is called. This almost always forces a \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} update, and may be warranted if tracking error gets very large. \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a99f678122290e1afc5ed49b2c86e99c1}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a99f678122290e1afc5ed49b2c86e99c1}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!setConstraints@{setConstraints}}
+\index{setConstraints@{setConstraints}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{setConstraints()}{setConstraints()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+set\+Constraints (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}}}]{constraints }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ab81e67f09f5d381fbb66640ff8e45bb1}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ab81e67f09f5d381fbb66640ff8e45bb1}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!setGains@{setGains}}
+\index{setGains@{setGains}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{setGains()}{setGains()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+set\+Gains (\begin{DoxyParamCaption}\item[{double}]{kp,  }\item[{double}]{ki,  }\item[{double}]{kv,  }\item[{double}]{kffv,  }\item[{double}]{kffa,  }\item[{double}]{ks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_afa22860fa37532b0e5bcec99ad6b3a1d}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_afa22860fa37532b0e5bcec99ad6b3a1d}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!setGoal@{setGoal}}
+\index{setGoal@{setGoal}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{setGoal()}{setGoal()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+set\+Goal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}}}]{goal }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ad76ec09a0f72a6225eddcc3b57265bec}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ad76ec09a0f72a6225eddcc3b57265bec}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!setGoalAndConstraints@{setGoalAndConstraints}}
+\index{setGoalAndConstraints@{setGoalAndConstraints}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{setGoalAndConstraints()}{setGoalAndConstraints()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+set\+Goal\+And\+Constraints (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}}}]{goal,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}}}]{constraints }\end{DoxyParamCaption})}
+
+Specify a goal and constraints for achieving the goal. \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3acffbab5619e93b57b1ae3ec3d95dc1}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3acffbab5619e93b57b1ae3ec3d95dc1}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!setMaxOutput@{setMaxOutput}}
+\index{setMaxOutput@{setMaxOutput}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{setMaxOutput()}{setMaxOutput()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+set\+Max\+Output (\begin{DoxyParamCaption}\item[{double}]{max\+\_\+output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a5a0affb07dc16f333d51c346d6bda751}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a5a0affb07dc16f333d51c346d6bda751}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!setMinOutput@{setMinOutput}}
+\index{setMinOutput@{setMinOutput}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{setMinOutput()}{setMinOutput()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Profile\+Follower.\+set\+Min\+Output (\begin{DoxyParamCaption}\item[{double}]{min\+\_\+output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a7aedaad383ce41de05e91f4c930fb82b}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a7aedaad383ce41de05e91f4c930fb82b}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!update@{update}}
+\index{update@{update}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily synchronized double frc.\+lib.\+motion.\+Profile\+Follower.\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{latest\+\_\+state,  }\item[{double}]{t }\end{DoxyParamCaption})}
+
+Update the setpoint and apply the control gains to generate a control output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em latest\+\_\+state} & The latest {\itshape actual} state, used only for feedback purposes (unless this is the first iteration or reset()/reset\+Setpoint() was just called, in which case this is the new start state for the profile). \\
+\hline
+{\em t} & The timestamp for which the setpoint is desired. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An output that reflects the control output to apply to achieve the new setpoint. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3fefdd14cbd324fef4f6715138a92535}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3fefdd14cbd324fef4f6715138a92535}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mConstraints@{mConstraints}}
+\index{mConstraints@{mConstraints}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mConstraints}{mConstraints}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Constraints = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_acfa797030c2cb98ef14ec197c77bc500}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_acfa797030c2cb98ef14ec197c77bc500}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mGoal@{mGoal}}
+\index{mGoal@{mGoal}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mGoal}{mGoal}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Goal = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a103ef8ce9ea38720e2ddcf7fb49dc5a1}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a103ef8ce9ea38720e2ddcf7fb49dc5a1}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mInitialState@{mInitialState}}
+\index{mInitialState@{mInitialState}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mInitialState}{mInitialState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Initial\+State\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3d7522ba34c923d7a7f88626bd94d706}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a3d7522ba34c923d7a7f88626bd94d706}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mKffa@{mKffa}}
+\index{mKffa@{mKffa}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mKffa}{mKffa}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Kffa\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a4897219461ac362b3f6cebb4cea4b770}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a4897219461ac362b3f6cebb4cea4b770}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mKffv@{mKffv}}
+\index{mKffv@{mKffv}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mKffv}{mKffv}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Kffv\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_abc283f5c94228eb865826ca55f8d1ee0}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_abc283f5c94228eb865826ca55f8d1ee0}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mKi@{mKi}}
+\index{mKi@{mKi}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mKi}{mKi}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Ki\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a895329663eb0fb8815e48188732ffcc3}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a895329663eb0fb8815e48188732ffcc3}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mKp@{mKp}}
+\index{mKp@{mKp}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mKp}{mKp}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Kp\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ada2fbe94015d1833812417554e69c8d7}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_ada2fbe94015d1833812417554e69c8d7}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mKs@{mKs}}
+\index{mKs@{mKs}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mKs}{mKs}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Ks\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a0fccb9d20248f5ae966f6558a76a7e25}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a0fccb9d20248f5ae966f6558a76a7e25}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mKv@{mKv}}
+\index{mKv@{mKv}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mKv}{mKv}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Kv\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a101a1c879bfe8623d908c051f23c8bde}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a101a1c879bfe8623d908c051f23c8bde}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mLatestActualState@{mLatestActualState}}
+\index{mLatestActualState@{mLatestActualState}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mLatestActualState}{mLatestActualState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Latest\+Actual\+State\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_afabf8445898fe1d56dd5fadb987b58e7}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_afabf8445898fe1d56dd5fadb987b58e7}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mLatestPosError@{mLatestPosError}}
+\index{mLatestPosError@{mLatestPosError}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mLatestPosError}{mLatestPosError}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Latest\+Pos\+Error\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a185ecd8aad0c4686db57efe8247da3ef}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a185ecd8aad0c4686db57efe8247da3ef}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mLatestSetpoint@{mLatestSetpoint}}
+\index{mLatestSetpoint@{mLatestSetpoint}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mLatestSetpoint}{mLatestSetpoint}}
+{\footnotesize\ttfamily Setpoint\+Generator.\+Setpoint frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Latest\+Setpoint = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_af61a7f47fe6dcd6d44be8ecf4d155f15}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_af61a7f47fe6dcd6d44be8ecf4d155f15}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mLatestVelError@{mLatestVelError}}
+\index{mLatestVelError@{mLatestVelError}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mLatestVelError}{mLatestVelError}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Latest\+Vel\+Error\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a365154aeefee909f0b916535d37d3a92}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a365154aeefee909f0b916535d37d3a92}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mMaxOutput@{mMaxOutput}}
+\index{mMaxOutput@{mMaxOutput}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mMaxOutput}{mMaxOutput}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Max\+Output = Double.\+P\+O\+S\+I\+T\+I\+V\+E\+\_\+\+I\+N\+F\+I\+N\+I\+TY\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_aab75d4e2ca97a0dde4db532e8f8dc3aa}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_aab75d4e2ca97a0dde4db532e8f8dc3aa}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mMinOutput@{mMinOutput}}
+\index{mMinOutput@{mMinOutput}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mMinOutput}{mMinOutput}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Min\+Output = Double.\+N\+E\+G\+A\+T\+I\+V\+E\+\_\+\+I\+N\+F\+I\+N\+I\+TY\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a0d13f54e83d2aa9b3688bfab32d20532}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a0d13f54e83d2aa9b3688bfab32d20532}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mSetpointGenerator@{mSetpointGenerator}}
+\index{mSetpointGenerator@{mSetpointGenerator}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mSetpointGenerator}{mSetpointGenerator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator}{Setpoint\+Generator}} frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Setpoint\+Generator = new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator}{Setpoint\+Generator}}()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a5f8ae1dfef2bff86121aa915c5efd9f3}\label{classfrc_1_1lib_1_1motion_1_1ProfileFollower_a5f8ae1dfef2bff86121aa915c5efd9f3}} 
+\index{frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}!mTotalError@{mTotalError}}
+\index{mTotalError@{mTotalError}!frc.lib.motion.ProfileFollower@{frc.lib.motion.ProfileFollower}}
+\doxysubsubsection{\texorpdfstring{mTotalError}{mTotalError}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Profile\+Follower.\+m\+Total\+Error\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/motion/\mbox{\hyperlink{ProfileFollower_8java}{Profile\+Follower.\+java}}\end{DoxyCompactItemize}

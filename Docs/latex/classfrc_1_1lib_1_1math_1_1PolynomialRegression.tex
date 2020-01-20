@@ -1,0 +1,206 @@
+\hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression}{}\doxysection{frc.\+lib.\+math.\+Polynomial\+Regression Class Reference}
+\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression}\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ae97211030b877e8e21f567afebfbcafb}{Polynomial\+Regression}} (double\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} xy, int \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa5f2d38a8058db5cf04d9e15ed564c93}{degree}})
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa9d2787fed5368c97b623bf19d89836a}{Polynomial\+Regression}} (double\mbox{[}$\,$\mbox{]} x, double\mbox{[}$\,$\mbox{]} y, int \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa5f2d38a8058db5cf04d9e15ed564c93}{degree}})
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a8c79cc57690627fcd4991e8cd213feb4}{beta}} (int j)
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_af49180a90c0d9660bd8a96d5840e63dd}{degree}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a91d5829404d6a866cd93daec5ad490c1}{R2}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ad86fe4672c9ca596e43842bbe5cf2082}{predict}} (double x)
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ad0c59064d627ae93453143f0e3f53cf9}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a01fd46e075865d092b32ccaaa56d4ee6}{solve}} (double\mbox{[}$\,$\mbox{]} x, double\mbox{[}$\,$\mbox{]} y, int \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa5f2d38a8058db5cf04d9e15ed564c93}{degree}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa5f2d38a8058db5cf04d9e15ed564c93}{degree}}
+\item 
+Matrix \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aab830ab85398366485bd2d4ee46333ea}{beta}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a610c6427a8860618dd05ee0773baaa64}{sse}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_adb66b0d363f4afba427c30bddaf184dd}{sst}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ae97211030b877e8e21f567afebfbcafb}{PolynomialRegression}} }
+\end{DoxyCode}
+ class performs a polynomial regression on an set of {\itshape N} data points ( {\itshape y\textsubscript{i}}, {\itshape x\textsubscript{i}}). That is, it fits a polynomial {\itshape y} = {$\beta$}\textsubscript{0} + {$\beta$}\textsubscript{1} {\itshape x} + {$\beta$}\textsubscript{2} {\itshape x}\textsuperscript{2} + ... + {$\beta$}\textsubscript{{\itshape d}} {\itshape x}\textsuperscript{{\itshape d}} (where {\itshape y} is the response variable, {\itshape x} is the predictor variable, and the {$\beta$}\textsubscript{{\itshape i}} are the regression coefficients) that minimizes the sum of squared residuals of the multiple regression model. It also computes associated the coefficient of determination {\itshape R}\textsuperscript{2}. 
+
+This implementation performs a Q\+R-\/decomposition of the underlying Vandermonde matrix, so it is not the fastest or most numerically stable way to perform the polynomial regression.
+
+\begin{DoxyAuthor}{Author}
+Robert Sedgewick 
+
+Kevin Wayne 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ae97211030b877e8e21f567afebfbcafb}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ae97211030b877e8e21f567afebfbcafb}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!PolynomialRegression@{PolynomialRegression}}
+\index{PolynomialRegression@{PolynomialRegression}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{PolynomialRegression()}{PolynomialRegression()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+math.\+Polynomial\+Regression.\+Polynomial\+Regression (\begin{DoxyParamCaption}\item[{double}]{xy\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{int}]{degree }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa9d2787fed5368c97b623bf19d89836a}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa9d2787fed5368c97b623bf19d89836a}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!PolynomialRegression@{PolynomialRegression}}
+\index{PolynomialRegression@{PolynomialRegression}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{PolynomialRegression()}{PolynomialRegression()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+math.\+Polynomial\+Regression.\+Polynomial\+Regression (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{x,  }\item[{double\mbox{[}$\,$\mbox{]}}]{y,  }\item[{int}]{degree }\end{DoxyParamCaption})}
+
+Performs a polynomial regression on the data points
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(y[i], x[i]) }
+\end{DoxyCode}
+ .
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & the values of the predictor variable \\
+\hline
+{\em y} & the corresponding values of the response variable \\
+\hline
+{\em degree} & the degree of the polynomial to fit \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a8c79cc57690627fcd4991e8cd213feb4}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a8c79cc57690627fcd4991e8cd213feb4}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!beta@{beta}}
+\index{beta@{beta}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{beta()}{beta()}}
+{\footnotesize\ttfamily double frc.\+lib.\+math.\+Polynomial\+Regression.\+beta (\begin{DoxyParamCaption}\item[{int}]{j }\end{DoxyParamCaption})}
+
+Returns the
+\begin{DoxyCode}{0}
+\DoxyCodeLine{j }
+\end{DoxyCode}
+ th regression coefficient.
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & the index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the
+\begin{DoxyCode}{0}
+\DoxyCodeLine{j }
+\end{DoxyCode}
+ th regression coefficient 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_af49180a90c0d9660bd8a96d5840e63dd}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_af49180a90c0d9660bd8a96d5840e63dd}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!degree@{degree}}
+\index{degree@{degree}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{degree()}{degree()}}
+{\footnotesize\ttfamily int frc.\+lib.\+math.\+Polynomial\+Regression.\+degree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the degree of the polynomial to fit.
+
+\begin{DoxyReturn}{Returns}
+the degree of the polynomial to fit 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ad86fe4672c9ca596e43842bbe5cf2082}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ad86fe4672c9ca596e43842bbe5cf2082}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!predict@{predict}}
+\index{predict@{predict}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily double frc.\+lib.\+math.\+Polynomial\+Regression.\+predict (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})}
+
+Returns the expected response
+\begin{DoxyCode}{0}
+\DoxyCodeLine{y }
+\end{DoxyCode}
+ given the value of the predictor variable
+\begin{DoxyCode}{0}
+\DoxyCodeLine{x }
+\end{DoxyCode}
+ .
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & the value of the predictor variable \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the expected response
+\begin{DoxyCode}{0}
+\DoxyCodeLine{y }
+\end{DoxyCode}
+ given the value of the predictor variable
+\begin{DoxyCode}{0}
+\DoxyCodeLine{x }
+\end{DoxyCode}
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a91d5829404d6a866cd93daec5ad490c1}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a91d5829404d6a866cd93daec5ad490c1}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!R2@{R2}}
+\index{R2@{R2}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{R2()}{R2()}}
+{\footnotesize\ttfamily double frc.\+lib.\+math.\+Polynomial\+Regression.\+R2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the coefficient of determination {\itshape R}\textsuperscript{2}.
+
+\begin{DoxyReturn}{Returns}
+the coefficient of determination {\itshape R}\textsuperscript{2}, which is a real number between 0 and 1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a01fd46e075865d092b32ccaaa56d4ee6}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a01fd46e075865d092b32ccaaa56d4ee6}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!solve@{solve}}
+\index{solve@{solve}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{solve()}{solve()}}
+{\footnotesize\ttfamily void frc.\+lib.\+math.\+Polynomial\+Regression.\+solve (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{x,  }\item[{double\mbox{[}$\,$\mbox{]}}]{y,  }\item[{int}]{degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ad0c59064d627ae93453143f0e3f53cf9}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_ad0c59064d627ae93453143f0e3f53cf9}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!toString@{toString}}
+\index{toString@{toString}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+math.\+Polynomial\+Regression.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aab830ab85398366485bd2d4ee46333ea}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aab830ab85398366485bd2d4ee46333ea}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!beta@{beta}}
+\index{beta@{beta}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{beta}{beta}}
+{\footnotesize\ttfamily Matrix frc.\+lib.\+math.\+Polynomial\+Regression.\+beta\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa5f2d38a8058db5cf04d9e15ed564c93}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_aa5f2d38a8058db5cf04d9e15ed564c93}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!degree@{degree}}
+\index{degree@{degree}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{degree}{degree}}
+{\footnotesize\ttfamily int frc.\+lib.\+math.\+Polynomial\+Regression.\+degree\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a610c6427a8860618dd05ee0773baaa64}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_a610c6427a8860618dd05ee0773baaa64}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!sse@{sse}}
+\index{sse@{sse}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{sse}{sse}}
+{\footnotesize\ttfamily double frc.\+lib.\+math.\+Polynomial\+Regression.\+sse\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1math_1_1PolynomialRegression_adb66b0d363f4afba427c30bddaf184dd}\label{classfrc_1_1lib_1_1math_1_1PolynomialRegression_adb66b0d363f4afba427c30bddaf184dd}} 
+\index{frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}!sst@{sst}}
+\index{sst@{sst}!frc.lib.math.PolynomialRegression@{frc.lib.math.PolynomialRegression}}
+\doxysubsubsection{\texorpdfstring{sst}{sst}}
+{\footnotesize\ttfamily double frc.\+lib.\+math.\+Polynomial\+Regression.\+sst\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/math/\mbox{\hyperlink{PolynomialRegression_8java}{Polynomial\+Regression.\+java}}\end{DoxyCompactItemize}

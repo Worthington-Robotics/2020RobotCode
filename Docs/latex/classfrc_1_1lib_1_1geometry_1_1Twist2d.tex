@@ -1,0 +1,113 @@
+\hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d}{}\doxysection{frc.\+lib.\+geometry.\+Twist2d Class Reference}
+\label{classfrc_1_1lib_1_1geometry_1_1Twist2d}\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a0201f011814f14f21227b660e9c696d7}{Twist2d}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_afd4ef428829ba5a1a46eb7cb152e7820}{dx}}, double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a586975e6cf59cb906f20fe3afedc2cbe}{dy}}, double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a65705408678210317fa9e99d89d8cfe3}{dtheta}})
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_ae7fcc41d43a117a8dad1d6722185fd61}{scaled}} (double scale)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_ad7b8324f75594b9216080e371331f553}{norm}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a46c663ded7a328bd2bb42f0cc4e48f52}{curvature}} ()
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_aea36cbb932ecc1471e8d335d48ffecf6}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static final \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a28980924a72f5d78a2aa3a6d39ee2327}{identity}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_afd4ef428829ba5a1a46eb7cb152e7820}{dx}}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a586975e6cf59cb906f20fe3afedc2cbe}{dy}}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_a65705408678210317fa9e99d89d8cfe3}{dtheta}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d_aa5d21e4fe01f4e91dc01f8a70d778ed9}{k\+Identity}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}}(0.\+0, 0.\+0, 0.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A movement along an arc at constant curvature and velocity. We can use ideas from \char`\"{}differential calculus\char`\"{} to create new Rigid\+Transform2d\textquotesingle{}s from a \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} and visa versa. 
+
+A Twist can be used to represent a difference between two poses, a velocity, an acceleration, etc. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_a0201f011814f14f21227b660e9c696d7}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_a0201f011814f14f21227b660e9c696d7}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!Twist2d@{Twist2d}}
+\index{Twist2d@{Twist2d}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{Twist2d()}{Twist2d()}}
+{\footnotesize\ttfamily frc.\+lib.\+geometry.\+Twist2d.\+Twist2d (\begin{DoxyParamCaption}\item[{double}]{dx,  }\item[{double}]{dy,  }\item[{double}]{dtheta }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_a46c663ded7a328bd2bb42f0cc4e48f52}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_a46c663ded7a328bd2bb42f0cc4e48f52}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!curvature@{curvature}}
+\index{curvature@{curvature}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{curvature()}{curvature()}}
+{\footnotesize\ttfamily double frc.\+lib.\+geometry.\+Twist2d.\+curvature (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_a28980924a72f5d78a2aa3a6d39ee2327}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_a28980924a72f5d78a2aa3a6d39ee2327}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!identity@{identity}}
+\index{identity@{identity}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{identity()}{identity()}}
+{\footnotesize\ttfamily static final \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+lib.\+geometry.\+Twist2d.\+identity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_ad7b8324f75594b9216080e371331f553}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_ad7b8324f75594b9216080e371331f553}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!norm@{norm}}
+\index{norm@{norm}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}}
+{\footnotesize\ttfamily double frc.\+lib.\+geometry.\+Twist2d.\+norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_ae7fcc41d43a117a8dad1d6722185fd61}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_ae7fcc41d43a117a8dad1d6722185fd61}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!scaled@{scaled}}
+\index{scaled@{scaled}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{scaled()}{scaled()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+lib.\+geometry.\+Twist2d.\+scaled (\begin{DoxyParamCaption}\item[{double}]{scale }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_aea36cbb932ecc1471e8d335d48ffecf6}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_aea36cbb932ecc1471e8d335d48ffecf6}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!toString@{toString}}
+\index{toString@{toString}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+geometry.\+Twist2d.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_a65705408678210317fa9e99d89d8cfe3}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_a65705408678210317fa9e99d89d8cfe3}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!dtheta@{dtheta}}
+\index{dtheta@{dtheta}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{dtheta}{dtheta}}
+{\footnotesize\ttfamily final double frc.\+lib.\+geometry.\+Twist2d.\+dtheta}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_afd4ef428829ba5a1a46eb7cb152e7820}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_afd4ef428829ba5a1a46eb7cb152e7820}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!dx@{dx}}
+\index{dx@{dx}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{dx}{dx}}
+{\footnotesize\ttfamily final double frc.\+lib.\+geometry.\+Twist2d.\+dx}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_a586975e6cf59cb906f20fe3afedc2cbe}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_a586975e6cf59cb906f20fe3afedc2cbe}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!dy@{dy}}
+\index{dy@{dy}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{dy}{dy}}
+{\footnotesize\ttfamily final double frc.\+lib.\+geometry.\+Twist2d.\+dy}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1geometry_1_1Twist2d_aa5d21e4fe01f4e91dc01f8a70d778ed9}\label{classfrc_1_1lib_1_1geometry_1_1Twist2d_aa5d21e4fe01f4e91dc01f8a70d778ed9}} 
+\index{frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}!kIdentity@{kIdentity}}
+\index{kIdentity@{kIdentity}!frc.lib.geometry.Twist2d@{frc.lib.geometry.Twist2d}}
+\doxysubsubsection{\texorpdfstring{kIdentity}{kIdentity}}
+{\footnotesize\ttfamily final \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+lib.\+geometry.\+Twist2d.\+k\+Identity = new \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}}(0.\+0, 0.\+0, 0.\+0)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/geometry/\mbox{\hyperlink{Twist2d_8java}{Twist2d.\+java}}\end{DoxyCompactItemize}
