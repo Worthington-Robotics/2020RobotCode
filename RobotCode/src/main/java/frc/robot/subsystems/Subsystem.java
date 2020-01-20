@@ -44,7 +44,7 @@ public abstract class Subsystem extends Logable {
     }
 
     public LogData getLogger(){
-        return new PeriodicIO();
+        return null;
     }
 
     /**

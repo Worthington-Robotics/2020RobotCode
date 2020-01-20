@@ -30,6 +30,7 @@ public class ReflectingLogger<T> {
     public ReflectingLogger(List<T> dataClasses, File loggingFile, Boolean allowRethrow) {
         //generate map of subsystem IO's and fields
         for (T dataClass : dataClasses) {
+            if(dataClass == null) continue;
             for (Field field : dataClass.getClass().getFields()) {
                 classFieldMap.put(field, dataClass);
             }
@@ -74,6 +75,7 @@ public class ReflectingLogger<T> {
 
         //generate map of subsystem IO's and fields
         for (T dataClass : dataClasses) {
+            if(dataClass == null) continue;
             for (Field field : dataClass.getClass().getFields()) {
                 classFieldMap.put(field, dataClass);
             }
@@ -88,6 +90,9 @@ public class ReflectingLogger<T> {
         for (Map.Entry<Field, T> entry : classFieldMap.entrySet()) {
             //append separator
             line.append(dataSeperator);
+
+            //this shouldnt happen but is here for safety reasons
+            if(entry == null) continue;
 
             //Attempt to append subsystem IO value
             try {
