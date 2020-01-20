@@ -17,7 +17,7 @@ public class SubsystemManager implements ILooper {
 
     private final List<Subsystem> mAllSubsystems;
     private List<Loop> mLoops = new ArrayList<>();
-    final List<LogData> allToLog = new ArrayList<>();
+    final List<Logable> logables = new ArrayList<>();
     private ReflectingLogger<LogData> logger;
     private boolean mIgnoreLogger;
 
@@ -34,7 +34,7 @@ public class SubsystemManager implements ILooper {
         mIgnoreLogger = ignoreLogger;
 
         //get all subsystems to log from
-        mAllSubsystems.forEach((s) -> allToLog.add(s.getLogger()));
+        mAllSubsystems.forEach((s) -> logables.add(s));
     }
 
     /**
@@ -42,12 +42,15 @@ public class SubsystemManager implements ILooper {
      * @param logables the list of logable classes to pull data from
      */
     public void addLoggingSource(List<Logable> logables){
-        logables.forEach((s) -> allToLog.add(s.getLogger()));
+        logables.forEach((s) -> logables.add(s));
     }
 
     private void createLogging(){
         try {
             //create reflecting logger
+            final List<LogData> allToLog = new ArrayList<>();
+            logables.forEach((s) -> allToLog.add(s.getLogger()));
+
             logger = new ReflectingLogger<>(allToLog);
         } catch (Exception e) {
             // show logger failed to init
@@ -69,7 +72,7 @@ public class SubsystemManager implements ILooper {
         if (logger != null) {
             // create current list of subsystem IO
             final List<LogData> allToLog = new ArrayList<>();
-            mAllSubsystems.forEach((s) -> allToLog.add(s.getLogger()));
+            logables.forEach((s) -> allToLog.add(s.getLogger()));
 
             //update the logger from the current form of the list
             logger.update(allToLog);
