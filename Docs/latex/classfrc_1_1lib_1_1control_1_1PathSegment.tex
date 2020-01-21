@@ -1,0 +1,155 @@
+\hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment}{}\doxysection{frc.\+lib.\+control.\+Path\+Segment Class Reference}
+\label{classfrc_1_1lib_1_1control_1_1PathSegment}\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Closest\+Point\+Report}
+\item 
+class {\bfseries Sample}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a2e2cc62212166b6e47c1602eb25137b8}{Path\+Segment}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} start, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} end, double speed)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a793613c3c1498947f6b7d57c28897510}{update\+Start}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} new\+\_\+start)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_ae6bf9a2d6d4613d3f6329a56c1e9d44b}{get\+Speed}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a5009d4b0403d69447d21fae30e41e015}{get\+Start}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_af5ff8a67a44aa4555548a86467653dfc}{get\+End}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a49f235446abf05418e14424541e83421}{get\+Length}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_ab777dc5f718792526636562e549a4403}{interpolate}} (double index)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_ade6bce2f87a6f8395a4ab454386d2129}{dot\+Product}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} other)
+\item 
+Closest\+Point\+Report \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_adecd00702fe1f352606be4d30127c4ab}{get\+Closest\+Point}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} query\+\_\+point)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a470cc01b5d56522285b203d57908ddb5}{m\+Speed}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a31e0763a5b11a44ee53206c79d906c28}{m\+Start}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_acc798e61a0c200d7090f05e705ac9dd4}{m\+End}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a6dc11679d037ef2f7d7301bb28674b72}{m\+Start\+To\+End}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a23a4c5db9bfc02e01b78827ac0d31f21}{m\+Length}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final double \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment_a88f91a3cf819d27566d03b24b84da1c0}{k\+Epsilon}} = 1E-\/9
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1PathSegment}{Path\+Segment}} consists of two Translation2d objects (the start and end points) as well as the speed of the robot. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a2e2cc62212166b6e47c1602eb25137b8}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a2e2cc62212166b6e47c1602eb25137b8}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!PathSegment@{PathSegment}}
+\index{PathSegment@{PathSegment}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{PathSegment()}{PathSegment()}}
+{\footnotesize\ttfamily frc.\+lib.\+control.\+Path\+Segment.\+Path\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{start,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{end,  }\item[{double}]{speed }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_ade6bce2f87a6f8395a4ab454386d2129}\label{classfrc_1_1lib_1_1control_1_1PathSegment_ade6bce2f87a6f8395a4ab454386d2129}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!dotProduct@{dotProduct}}
+\index{dotProduct@{dotProduct}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{dotProduct()}{dotProduct()}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path\+Segment.\+dot\+Product (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{other }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_adecd00702fe1f352606be4d30127c4ab}\label{classfrc_1_1lib_1_1control_1_1PathSegment_adecd00702fe1f352606be4d30127c4ab}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!getClosestPoint@{getClosestPoint}}
+\index{getClosestPoint@{getClosestPoint}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{getClosestPoint()}{getClosestPoint()}}
+{\footnotesize\ttfamily Closest\+Point\+Report frc.\+lib.\+control.\+Path\+Segment.\+get\+Closest\+Point (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{query\+\_\+point }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_af5ff8a67a44aa4555548a86467653dfc}\label{classfrc_1_1lib_1_1control_1_1PathSegment_af5ff8a67a44aa4555548a86467653dfc}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!getEnd@{getEnd}}
+\index{getEnd@{getEnd}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{getEnd()}{getEnd()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} frc.\+lib.\+control.\+Path\+Segment.\+get\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a49f235446abf05418e14424541e83421}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a49f235446abf05418e14424541e83421}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!getLength@{getLength}}
+\index{getLength@{getLength}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{getLength()}{getLength()}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path\+Segment.\+get\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_ae6bf9a2d6d4613d3f6329a56c1e9d44b}\label{classfrc_1_1lib_1_1control_1_1PathSegment_ae6bf9a2d6d4613d3f6329a56c1e9d44b}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{getSpeed()}{getSpeed()}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path\+Segment.\+get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a5009d4b0403d69447d21fae30e41e015}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a5009d4b0403d69447d21fae30e41e015}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!getStart@{getStart}}
+\index{getStart@{getStart}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{getStart()}{getStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} frc.\+lib.\+control.\+Path\+Segment.\+get\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_ab777dc5f718792526636562e549a4403}\label{classfrc_1_1lib_1_1control_1_1PathSegment_ab777dc5f718792526636562e549a4403}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!interpolate@{interpolate}}
+\index{interpolate@{interpolate}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{interpolate()}{interpolate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} frc.\+lib.\+control.\+Path\+Segment.\+interpolate (\begin{DoxyParamCaption}\item[{double}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a793613c3c1498947f6b7d57c28897510}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a793613c3c1498947f6b7d57c28897510}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!updateStart@{updateStart}}
+\index{updateStart@{updateStart}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{updateStart()}{updateStart()}}
+{\footnotesize\ttfamily void frc.\+lib.\+control.\+Path\+Segment.\+update\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}}}]{new\+\_\+start }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a88f91a3cf819d27566d03b24b84da1c0}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a88f91a3cf819d27566d03b24b84da1c0}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!kEpsilon@{kEpsilon}}
+\index{kEpsilon@{kEpsilon}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{kEpsilon}{kEpsilon}}
+{\footnotesize\ttfamily final double frc.\+lib.\+control.\+Path\+Segment.\+k\+Epsilon = 1E-\/9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_acc798e61a0c200d7090f05e705ac9dd4}\label{classfrc_1_1lib_1_1control_1_1PathSegment_acc798e61a0c200d7090f05e705ac9dd4}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!mEnd@{mEnd}}
+\index{mEnd@{mEnd}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{mEnd}{mEnd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} frc.\+lib.\+control.\+Path\+Segment.\+m\+End\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a23a4c5db9bfc02e01b78827ac0d31f21}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a23a4c5db9bfc02e01b78827ac0d31f21}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!mLength@{mLength}}
+\index{mLength@{mLength}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{mLength}{mLength}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path\+Segment.\+m\+Length\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a470cc01b5d56522285b203d57908ddb5}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a470cc01b5d56522285b203d57908ddb5}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!mSpeed@{mSpeed}}
+\index{mSpeed@{mSpeed}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{mSpeed}{mSpeed}}
+{\footnotesize\ttfamily double frc.\+lib.\+control.\+Path\+Segment.\+m\+Speed\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a31e0763a5b11a44ee53206c79d906c28}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a31e0763a5b11a44ee53206c79d906c28}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!mStart@{mStart}}
+\index{mStart@{mStart}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{mStart}{mStart}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} frc.\+lib.\+control.\+Path\+Segment.\+m\+Start\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1control_1_1PathSegment_a6dc11679d037ef2f7d7301bb28674b72}\label{classfrc_1_1lib_1_1control_1_1PathSegment_a6dc11679d037ef2f7d7301bb28674b72}} 
+\index{frc.lib.control.PathSegment@{frc.lib.control.PathSegment}!mStartToEnd@{mStartToEnd}}
+\index{mStartToEnd@{mStartToEnd}!frc.lib.control.PathSegment@{frc.lib.control.PathSegment}}
+\doxysubsubsection{\texorpdfstring{mStartToEnd}{mStartToEnd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Translation2d}{Translation2d}} frc.\+lib.\+control.\+Path\+Segment.\+m\+Start\+To\+End\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/control/\mbox{\hyperlink{PathSegment_8java}{Path\+Segment.\+java}}\end{DoxyCompactItemize}

@@ -1,0 +1,46 @@
+\hypertarget{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{}\doxysection{frc.\+lib.\+math.\+Inverse\+Interpolable$<$ T $>$ Interface Template Reference}
+\label{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}\index{frc.lib.math.InverseInterpolable$<$ T $>$@{frc.lib.math.InverseInterpolable$<$ T $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable_aea69d0ec30b6ecd31e90d861fb907e8f}{inverse\+Interpolate}} (T upper, T query)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}} is an interface used by an Interpolating Tree as the Key type. Given two endpoint keys and a third query key, an \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}} object can calculate the interpolation parameter of the query key on the interval \mbox{[}0, 1\mbox{]}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$\+T$>$} & The Type of \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{Inverse\+Interpolable}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{Interpolating\+Tree\+Map}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable_aea69d0ec30b6ecd31e90d861fb907e8f}\label{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable_aea69d0ec30b6ecd31e90d861fb907e8f}} 
+\index{frc.lib.math.InverseInterpolable$<$ T $>$@{frc.lib.math.InverseInterpolable$<$ T $>$}!inverseInterpolate@{inverseInterpolate}}
+\index{inverseInterpolate@{inverseInterpolate}!frc.lib.math.InverseInterpolable$<$ T $>$@{frc.lib.math.InverseInterpolable$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{inverseInterpolate()}{inverseInterpolate()}}
+{\footnotesize\ttfamily double \mbox{\hyperlink{interfacefrc_1_1lib_1_1math_1_1InverseInterpolable}{frc.\+lib.\+math.\+Inverse\+Interpolable}}$<$ T $>$.inverse\+Interpolate (\begin{DoxyParamCaption}\item[{T}]{upper,  }\item[{T}]{query }\end{DoxyParamCaption})}
+
+Given this point (lower), a query point (query), and an upper point (upper), estimate how far (on \mbox{[}0, 1\mbox{]}) between \textquotesingle{}lower\textquotesingle{} and \textquotesingle{}upper\textquotesingle{} the query point lies.
+
+
+\begin{DoxyParams}{Parameters}
+{\em upper} & \\
+\hline
+{\em query} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The interpolation parameter on \mbox{[}0, 1\mbox{]} representing how far between this point and the upper point the query point lies. 
+\end{DoxyReturn}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/math/\mbox{\hyperlink{InverseInterpolable_8java}{Inverse\+Interpolable.\+java}}\end{DoxyCompactItemize}

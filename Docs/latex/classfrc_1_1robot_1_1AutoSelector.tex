@@ -1,0 +1,65 @@
+\hypertarget{classfrc_1_1robot_1_1AutoSelector}{}\doxysection{frc.\+robot.\+Auto\+Selector Class Reference}
+\label{classfrc_1_1robot_1_1AutoSelector}\index{frc.robot.AutoSelector@{frc.robot.AutoSelector}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static String\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classfrc_1_1robot_1_1AutoSelector_ae0105c83dde5ea8dcc1e01e2af79e31e}{build\+Array}} ()
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} \mbox{\hyperlink{classfrc_1_1robot_1_1AutoSelector_a32094511a7b190bb24d7f05bea02ec89}{auto\+Select}} (String selection)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static User\+Selection \mbox{\hyperlink{classfrc_1_1robot_1_1AutoSelector_a78974a1d44e00877c31d480227363c5f}{get\+Sel\+From\+Str}} (String name)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1AutoSelector_a32094511a7b190bb24d7f05bea02ec89}\label{classfrc_1_1robot_1_1AutoSelector_a32094511a7b190bb24d7f05bea02ec89}} 
+\index{frc.robot.AutoSelector@{frc.robot.AutoSelector}!autoSelect@{autoSelect}}
+\index{autoSelect@{autoSelect}!frc.robot.AutoSelector@{frc.robot.AutoSelector}}
+\doxysubsubsection{\texorpdfstring{autoSelect()}{autoSelect()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} frc.\+robot.\+Auto\+Selector.\+auto\+Select (\begin{DoxyParamCaption}\item[{String}]{selection }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+This method determines the Auto mode based on the fed game data and the dashboard data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em selection} & -\/ a string with the name of the selected autonomous. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the proper auto command to run. It should include all movements in one command 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1AutoSelector_ae0105c83dde5ea8dcc1e01e2af79e31e}\label{classfrc_1_1robot_1_1AutoSelector_ae0105c83dde5ea8dcc1e01e2af79e31e}} 
+\index{frc.robot.AutoSelector@{frc.robot.AutoSelector}!buildArray@{buildArray}}
+\index{buildArray@{buildArray}!frc.robot.AutoSelector@{frc.robot.AutoSelector}}
+\doxysubsubsection{\texorpdfstring{buildArray()}{buildArray()}}
+{\footnotesize\ttfamily static String \mbox{[}$\,$\mbox{]} frc.\+robot.\+Auto\+Selector.\+build\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Method to get an array of names for all selections
+
+\begin{DoxyReturn}{Returns}
+string array of enum names 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1AutoSelector_a78974a1d44e00877c31d480227363c5f}\label{classfrc_1_1robot_1_1AutoSelector_a78974a1d44e00877c31d480227363c5f}} 
+\index{frc.robot.AutoSelector@{frc.robot.AutoSelector}!getSelFromStr@{getSelFromStr}}
+\index{getSelFromStr@{getSelFromStr}!frc.robot.AutoSelector@{frc.robot.AutoSelector}}
+\doxysubsubsection{\texorpdfstring{getSelFromStr()}{getSelFromStr()}}
+{\footnotesize\ttfamily static User\+Selection frc.\+robot.\+Auto\+Selector.\+get\+Sel\+From\+Str (\begin{DoxyParamCaption}\item[{String}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Gets the enum object that matches the fed string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & checked against all possible enum name parameters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The internally used enum for auto calculations 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/\mbox{\hyperlink{AutoSelector_8java}{Auto\+Selector.\+java}}\end{DoxyCompactItemize}

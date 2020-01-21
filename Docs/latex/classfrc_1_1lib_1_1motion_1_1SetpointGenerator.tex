@@ -1,0 +1,109 @@
+\hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator}{}\doxysection{frc.\+lib.\+motion.\+Setpoint\+Generator Class Reference}
+\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator}\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Setpoint}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_aa8bf0ed09737c1e1ec0c852266482c6e}{Setpoint\+Generator}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_ab6c9771e0e60a332c482b3671f8708a6}{reset}} ()
+\item 
+synchronized Setpoint \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a04673fa76367d5500848ed744e752c78}{get\+Setpoint}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} constraints, \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} goal, \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} prev\+\_\+state, double t)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_adea7f541eeb480516a21d6ab23e29cf5}{get\+Profile}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a72123efe9ca2d6923cad85af228925e4}{m\+Profile}} = null
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a9b8c76778eab245011b1cf9b75673a14}{m\+Goal}} = null
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_af4cdf917ea11d1551a9cc5306df7971b}{m\+Constraints}} = null
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A Setpoint\+Generate does just-\/in-\/time motion profile generation to supply a stream of setpoints that obey the given constraints to a controller. The profile is regenerated when any of the inputs change, but is cached (and trimmed as we go) if the only update is to the current state. 
+
+Note that typically for smooth control, a user will feed the last iteration\textquotesingle{}s setpoint as the argument to \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a04673fa76367d5500848ed744e752c78}{get\+Setpoint()}}, and should only use a measured state directly on the first iteration or if a large disturbance is detected. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_aa8bf0ed09737c1e1ec0c852266482c6e}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_aa8bf0ed09737c1e1ec0c852266482c6e}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!SetpointGenerator@{SetpointGenerator}}
+\index{SetpointGenerator@{SetpointGenerator}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{SetpointGenerator()}{SetpointGenerator()}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Setpoint\+Generator.\+Setpoint\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_adea7f541eeb480516a21d6ab23e29cf5}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_adea7f541eeb480516a21d6ab23e29cf5}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!getProfile@{getProfile}}
+\index{getProfile@{getProfile}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{getProfile()}{getProfile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} frc.\+lib.\+motion.\+Setpoint\+Generator.\+get\+Profile (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the full profile from the latest call to \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a04673fa76367d5500848ed744e752c78}{get\+Setpoint()}}. Useful to check estimated time or distance to goal.
+
+\begin{DoxyReturn}{Returns}
+The profile from the latest call to \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a04673fa76367d5500848ed744e752c78}{get\+Setpoint()}}, or null if there is not yet a profile. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a04673fa76367d5500848ed744e752c78}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a04673fa76367d5500848ed744e752c78}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!getSetpoint@{getSetpoint}}
+\index{getSetpoint@{getSetpoint}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{getSetpoint()}{getSetpoint()}}
+{\footnotesize\ttfamily synchronized Setpoint frc.\+lib.\+motion.\+Setpoint\+Generator.\+get\+Setpoint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}}}]{constraints,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}}}]{goal,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{prev\+\_\+state,  }\item[{double}]{t }\end{DoxyParamCaption})}
+
+Get a new Setpoint (and generate a new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} if necessary).
+
+
+\begin{DoxyParams}{Parameters}
+{\em constraints} & The constraints to use. \\
+\hline
+{\em goal} & The goal to use. \\
+\hline
+{\em prev\+\_\+state} & The previous setpoint (or measured state of the system to do a reset). \\
+\hline
+{\em t} & The time to generate a setpoint for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new Setpoint at time t. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_ab6c9771e0e60a332c482b3671f8708a6}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_ab6c9771e0e60a332c482b3671f8708a6}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!reset@{reset}}
+\index{reset@{reset}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Setpoint\+Generator.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Force a reset of the profile. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_af4cdf917ea11d1551a9cc5306df7971b}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_af4cdf917ea11d1551a9cc5306df7971b}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!mConstraints@{mConstraints}}
+\index{mConstraints@{mConstraints}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{mConstraints}{mConstraints}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileConstraints}{Motion\+Profile\+Constraints}} frc.\+lib.\+motion.\+Setpoint\+Generator.\+m\+Constraints = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a9b8c76778eab245011b1cf9b75673a14}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a9b8c76778eab245011b1cf9b75673a14}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!mGoal@{mGoal}}
+\index{mGoal@{mGoal}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{mGoal}{mGoal}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfileGoal}{Motion\+Profile\+Goal}} frc.\+lib.\+motion.\+Setpoint\+Generator.\+m\+Goal = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a72123efe9ca2d6923cad85af228925e4}\label{classfrc_1_1lib_1_1motion_1_1SetpointGenerator_a72123efe9ca2d6923cad85af228925e4}} 
+\index{frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}!mProfile@{mProfile}}
+\index{mProfile@{mProfile}!frc.lib.motion.SetpointGenerator@{frc.lib.motion.SetpointGenerator}}
+\doxysubsubsection{\texorpdfstring{mProfile}{mProfile}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionProfile}{Motion\+Profile}} frc.\+lib.\+motion.\+Setpoint\+Generator.\+m\+Profile = null\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/motion/\mbox{\hyperlink{SetpointGenerator_8java}{Setpoint\+Generator.\+java}}\end{DoxyCompactItemize}

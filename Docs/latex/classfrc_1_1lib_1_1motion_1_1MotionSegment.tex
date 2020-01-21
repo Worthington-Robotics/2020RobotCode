@@ -1,0 +1,128 @@
+\hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment}{}\doxysection{frc.\+lib.\+motion.\+Motion\+Segment Class Reference}
+\label{classfrc_1_1lib_1_1motion_1_1MotionSegment}\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_af1c8a39f79f39c88ac07d2a8d19c021f}{Motion\+Segment}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2791e48712dc5a29f2c0ae8091fedcec}{start}}, \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2e1349d05c66f721e8b386c5e3b9d603}{end}})
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_ae0f62210254d14bfff51a4171ceb45d5}{is\+Valid}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_ae8b63c0c3d966f79e46126105f801981}{contains\+Time}} (double t)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a9ecea1e8fcf764e650360d8fbd2c260b}{contains\+Pos}} (double pos)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2791e48712dc5a29f2c0ae8091fedcec}{start}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_acd7983a12b6ff6a7e7a74342e2b4a893}{set\+Start}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2791e48712dc5a29f2c0ae8091fedcec}{start}})
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2e1349d05c66f721e8b386c5e3b9d603}{end}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a79003dc28160258da37639b4ba926456}{set\+End}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2e1349d05c66f721e8b386c5e3b9d603}{end}})
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a8c27d4ea050ffe0107357d52c9955365}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_ad3a4f957351f239277caa31d932c2e68}{m\+Start}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment_a9201e7695e74c19a8a98f1f8e66a7e46}{m\+End}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionSegment}{Motion\+Segment}} is a movement from a start \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} to an end \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} with a constant acceleration. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_af1c8a39f79f39c88ac07d2a8d19c021f}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_af1c8a39f79f39c88ac07d2a8d19c021f}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!MotionSegment@{MotionSegment}}
+\index{MotionSegment@{MotionSegment}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{MotionSegment()}{MotionSegment()}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+Segment.\+Motion\+Segment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{start,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{end }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_a9ecea1e8fcf764e650360d8fbd2c260b}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_a9ecea1e8fcf764e650360d8fbd2c260b}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!containsPos@{containsPos}}
+\index{containsPos@{containsPos}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{containsPos()}{containsPos()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+Segment.\+contains\+Pos (\begin{DoxyParamCaption}\item[{double}]{pos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_ae8b63c0c3d966f79e46126105f801981}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_ae8b63c0c3d966f79e46126105f801981}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!containsTime@{containsTime}}
+\index{containsTime@{containsTime}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{containsTime()}{containsTime()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+Segment.\+contains\+Time (\begin{DoxyParamCaption}\item[{double}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2e1349d05c66f721e8b386c5e3b9d603}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2e1349d05c66f721e8b386c5e3b9d603}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!end@{end}}
+\index{end@{end}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Segment.\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_ae0f62210254d14bfff51a4171ceb45d5}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_ae0f62210254d14bfff51a4171ceb45d5}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!isValid@{isValid}}
+\index{isValid@{isValid}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+Segment.\+is\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Verifies that\+: 
+
+
+\begin{DoxyEnumerate}
+\item All segments have a constant acceleration. 
+\end{DoxyEnumerate}
+
+
+\begin{DoxyEnumerate}
+\item All segments have monotonic position (sign of velocity doesn\textquotesingle{}t change). 
+\end{DoxyEnumerate}
+
+
+\begin{DoxyEnumerate}
+\item The time, position, velocity, and acceleration of the profile are consistent. 
+\end{DoxyEnumerate}\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_a79003dc28160258da37639b4ba926456}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_a79003dc28160258da37639b4ba926456}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!setEnd@{setEnd}}
+\index{setEnd@{setEnd}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{setEnd()}{setEnd()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Segment.\+set\+End (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{end }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_acd7983a12b6ff6a7e7a74342e2b4a893}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_acd7983a12b6ff6a7e7a74342e2b4a893}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!setStart@{setStart}}
+\index{setStart@{setStart}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{setStart()}{setStart()}}
+{\footnotesize\ttfamily void frc.\+lib.\+motion.\+Motion\+Segment.\+set\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{start }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2791e48712dc5a29f2c0ae8091fedcec}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_a2791e48712dc5a29f2c0ae8091fedcec}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!start@{start}}
+\index{start@{start}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Segment.\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_a8c27d4ea050ffe0107357d52c9955365}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_a8c27d4ea050ffe0107357d52c9955365}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!toString@{toString}}
+\index{toString@{toString}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+motion.\+Motion\+Segment.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_a9201e7695e74c19a8a98f1f8e66a7e46}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_a9201e7695e74c19a8a98f1f8e66a7e46}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!mEnd@{mEnd}}
+\index{mEnd@{mEnd}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{mEnd}{mEnd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Segment.\+m\+End\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionSegment_ad3a4f957351f239277caa31d932c2e68}\label{classfrc_1_1lib_1_1motion_1_1MotionSegment_ad3a4f957351f239277caa31d932c2e68}} 
+\index{frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}!mStart@{mStart}}
+\index{mStart@{mStart}!frc.lib.motion.MotionSegment@{frc.lib.motion.MotionSegment}}
+\doxysubsubsection{\texorpdfstring{mStart}{mStart}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+Segment.\+m\+Start\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/motion/\mbox{\hyperlink{MotionSegment_8java}{Motion\+Segment.\+java}}\end{DoxyCompactItemize}

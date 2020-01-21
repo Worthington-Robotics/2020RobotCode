@@ -67,6 +67,20 @@ public class Constants {
 
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
-	public static double LOOPER_DT;
+	public static double LOOPER_DT = 0.01;
+
+	//Color Wheel Constants
+    public static final int redH1 = 0;
+    public static final int redH2 = 360;
+    public static final int yellowH = 60;
+    public static final int greenH = 120;
+    public static final int blueH = 180;
+    public static final int error = 10;
+
+    public static final int satLimit = 80;
+    public static final int valLimit = 80;
+
+    //Limelight Constants
+    public static final double fov = 0.0;
 
 }

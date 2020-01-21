@@ -10,11 +10,12 @@ public class ColorWheelTest {
     @Test
     public void colorFromRGBTest() {
         ArrayList<Character> colors = new ArrayList<>();
-        for (int r = 0; r < 256; r+=10) {
-            for (int g = 0; g < 256; g+=10) {
-                for (int b = 0; b < 256; b+=10) {
-                    final char color =  ColorWheel.getInstance().colorFromRGB(new int[]{r,g,b});
+        for (int r = 0; r < 255; r+=10) {
+            for (int g = 0; g < 255; g+=10) {
+                for (int b = 0; b < 255; b+=10) {
+                    final char color =  ColorWheel.colorFromRGB(new int[]{r, g, b});
                     System.out.println(r + ", " + g + ", " + b + ", " + color);
+
                     colors.add(color);
                 }
             }

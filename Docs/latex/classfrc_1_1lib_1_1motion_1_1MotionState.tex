@@ -1,0 +1,228 @@
+\hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState}{}\doxysection{frc.\+lib.\+motion.\+Motion\+State Class Reference}
+\label{classfrc_1_1lib_1_1motion_1_1MotionState}\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a7ded4f7d198d4e20abe5e0701f22558f}{Motion\+State}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}{t}}, double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a963266d4b9d9b111dcaeee132d5556dc}{pos}}, double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a79b700a2109d71ff4f0a10d2a41603ec}{vel}}, double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_acbe0108857e2c93ccb506eb64f1815a2}{acc}})
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ac4963fd7488b5c2951995954bb9ee567}{Motion\+State}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} state)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_aac33df70cda4af0d9cc1577dd33a5005}{t}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_acfc537ff95f246ca4c304a22f1606def}{pos}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a8b1b8ff63fbd084fb5bac586acf2e88b}{vel}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ad755fa4096d93a63b95caf2d50690e8d}{vel2}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a2184488b53057e8c50bbaeefc54e553a}{acc}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_aa06964b2520451c24f919ff1e08ec40c}{extrapolate}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}{t}})
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_af31840bdd45d7f41b886f9690336da77}{extrapolate}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}{t}}, double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_acbe0108857e2c93ccb506eb64f1815a2}{acc}})
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a699f4afe7bf39a6b586658fcc913dfec}{next\+Time\+At\+Pos}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a963266d4b9d9b111dcaeee132d5556dc}{pos}})
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a61c9b9e8cb1b760131eeb5f5b522d812}{to\+String}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a2613676c4b5eed58fe4495651d47a109}{equals}} (Object other)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_abe6b74633eaf3e780c8d282db3d4ec93}{equals}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} other, double epsilon)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a703f6611caefa5df3e8c4497accec51a}{coincident}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} other)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a37e0cd573d069182f0017cfe02c4618b}{coincident}} (\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} other, double epsilon)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a7dbc192024a8db7b18189c1afd91b94e}{flipped}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ad3a78242b717350958ffa63aea5a75ee}{k\+Invalid\+State}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}(Double.\+NaN, Double.\+NaN, Double.\+NaN, Double.\+NaN)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}{t}}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a963266d4b9d9b111dcaeee132d5556dc}{pos}}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a79b700a2109d71ff4f0a10d2a41603ec}{vel}}
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_acbe0108857e2c93ccb506eb64f1815a2}{acc}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} is a completely specified state of 1D motion through time. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a7ded4f7d198d4e20abe5e0701f22558f}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a7ded4f7d198d4e20abe5e0701f22558f}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!MotionState@{MotionState}}
+\index{MotionState@{MotionState}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{MotionState()}{MotionState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+State.\+Motion\+State (\begin{DoxyParamCaption}\item[{double}]{t,  }\item[{double}]{pos,  }\item[{double}]{vel,  }\item[{double}]{acc }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_ac4963fd7488b5c2951995954bb9ee567}\label{classfrc_1_1lib_1_1motion_1_1MotionState_ac4963fd7488b5c2951995954bb9ee567}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!MotionState@{MotionState}}
+\index{MotionState@{MotionState}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{MotionState()}{MotionState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+motion.\+Motion\+State.\+Motion\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{state }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a2184488b53057e8c50bbaeefc54e553a}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a2184488b53057e8c50bbaeefc54e553a}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!acc@{acc}}
+\index{acc@{acc}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{acc()}{acc()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+State.\+acc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a703f6611caefa5df3e8c4497accec51a}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a703f6611caefa5df3e8c4497accec51a}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!coincident@{coincident}}
+\index{coincident@{coincident}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{coincident()}{coincident()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+State.\+coincident (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{other }\end{DoxyParamCaption})}
+
+Checks if two Motion\+States are coincident (t, pos, and vel are equal within a nominal tolerance, but acceleration may be different). \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a37e0cd573d069182f0017cfe02c4618b}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a37e0cd573d069182f0017cfe02c4618b}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!coincident@{coincident}}
+\index{coincident@{coincident}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{coincident()}{coincident()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+State.\+coincident (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{other,  }\item[{double}]{epsilon }\end{DoxyParamCaption})}
+
+Checks if two Motion\+States are coincident (t, pos, and vel are equal within a specified tolerance, but acceleration may be different). \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_abe6b74633eaf3e780c8d282db3d4ec93}\label{classfrc_1_1lib_1_1motion_1_1MotionState_abe6b74633eaf3e780c8d282db3d4ec93}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!equals@{equals}}
+\index{equals@{equals}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{equals()}{equals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+State.\+equals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}}]{other,  }\item[{double}]{epsilon }\end{DoxyParamCaption})}
+
+Checks if two Motion\+States are epsilon-\/equals (all fields are equal within a specified tolerance). \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a2613676c4b5eed58fe4495651d47a109}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a2613676c4b5eed58fe4495651d47a109}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!equals@{equals}}
+\index{equals@{equals}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{equals()}{equals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+motion.\+Motion\+State.\+equals (\begin{DoxyParamCaption}\item[{Object}]{other }\end{DoxyParamCaption})}
+
+Checks if two Motion\+States are epsilon-\/equals (all fields are equal within a nominal tolerance). \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_aa06964b2520451c24f919ff1e08ec40c}\label{classfrc_1_1lib_1_1motion_1_1MotionState_aa06964b2520451c24f919ff1e08ec40c}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!extrapolate@{extrapolate}}
+\index{extrapolate@{extrapolate}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{extrapolate()}{extrapolate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+State.\+extrapolate (\begin{DoxyParamCaption}\item[{double}]{t }\end{DoxyParamCaption})}
+
+Extrapolates this \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} to the specified time by applying this \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}\textquotesingle{}s acceleration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The time of the new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} that is a valid predecessor (if t$<$=0) or successor (if t$>$=0) of this state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_af31840bdd45d7f41b886f9690336da77}\label{classfrc_1_1lib_1_1motion_1_1MotionState_af31840bdd45d7f41b886f9690336da77}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!extrapolate@{extrapolate}}
+\index{extrapolate@{extrapolate}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{extrapolate()}{extrapolate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+State.\+extrapolate (\begin{DoxyParamCaption}\item[{double}]{t,  }\item[{double}]{acc }\end{DoxyParamCaption})}
+
+Extrapolates this \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} to the specified time by applying a given acceleration to the (t, pos, vel) portion of this \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & The time of the new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}. \\
+\hline
+{\em acc} & The acceleration to apply. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} that is a valid predecessor (if t$<$=0) or successor (if t$>$=0) of this state (with the specified accel). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a7dbc192024a8db7b18189c1afd91b94e}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a7dbc192024a8db7b18189c1afd91b94e}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!flipped@{flipped}}
+\index{flipped@{flipped}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{flipped()}{flipped()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+State.\+flipped (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns a \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} that is the mirror image of this one. Pos, vel, and acc are all negated, but time is not. \mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a699f4afe7bf39a6b586658fcc913dfec}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a699f4afe7bf39a6b586658fcc913dfec}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!nextTimeAtPos@{nextTimeAtPos}}
+\index{nextTimeAtPos@{nextTimeAtPos}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{nextTimeAtPos()}{nextTimeAtPos()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+State.\+next\+Time\+At\+Pos (\begin{DoxyParamCaption}\item[{double}]{pos }\end{DoxyParamCaption})}
+
+Find the next time (first time $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}{Motion\+State.\+t()}}) that this \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} will be at pos. This is an inverse of the \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_aa06964b2520451c24f919ff1e08ec40c}{extrapolate()}} method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The time when we are next at \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState_a963266d4b9d9b111dcaeee132d5556dc}{pos()}} if we are extrapolating with a positive dt. NaN if we never reach pos. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_acfc537ff95f246ca4c304a22f1606def}\label{classfrc_1_1lib_1_1motion_1_1MotionState_acfc537ff95f246ca4c304a22f1606def}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!pos@{pos}}
+\index{pos@{pos}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{pos()}{pos()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+State.\+pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_aac33df70cda4af0d9cc1577dd33a5005}\label{classfrc_1_1lib_1_1motion_1_1MotionState_aac33df70cda4af0d9cc1577dd33a5005}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!t@{t}}
+\index{t@{t}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{t()}{t()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+State.\+t (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a61c9b9e8cb1b760131eeb5f5b522d812}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a61c9b9e8cb1b760131eeb5f5b522d812}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!toString@{toString}}
+\index{toString@{toString}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+motion.\+Motion\+State.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a8b1b8ff63fbd084fb5bac586acf2e88b}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a8b1b8ff63fbd084fb5bac586acf2e88b}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!vel@{vel}}
+\index{vel@{vel}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{vel()}{vel()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+State.\+vel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_ad755fa4096d93a63b95caf2d50690e8d}\label{classfrc_1_1lib_1_1motion_1_1MotionState_ad755fa4096d93a63b95caf2d50690e8d}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!vel2@{vel2}}
+\index{vel2@{vel2}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{vel2()}{vel2()}}
+{\footnotesize\ttfamily double frc.\+lib.\+motion.\+Motion\+State.\+vel2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_acbe0108857e2c93ccb506eb64f1815a2}\label{classfrc_1_1lib_1_1motion_1_1MotionState_acbe0108857e2c93ccb506eb64f1815a2}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!acc@{acc}}
+\index{acc@{acc}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{acc}{acc}}
+{\footnotesize\ttfamily final double frc.\+lib.\+motion.\+Motion\+State.\+acc\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_ad3a78242b717350958ffa63aea5a75ee}\label{classfrc_1_1lib_1_1motion_1_1MotionState_ad3a78242b717350958ffa63aea5a75ee}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!kInvalidState@{kInvalidState}}
+\index{kInvalidState@{kInvalidState}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{kInvalidState}{kInvalidState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}} frc.\+lib.\+motion.\+Motion\+State.\+k\+Invalid\+State = new \mbox{\hyperlink{classfrc_1_1lib_1_1motion_1_1MotionState}{Motion\+State}}(Double.\+NaN, Double.\+NaN, Double.\+NaN, Double.\+NaN)\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a963266d4b9d9b111dcaeee132d5556dc}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a963266d4b9d9b111dcaeee132d5556dc}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!pos@{pos}}
+\index{pos@{pos}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily final double frc.\+lib.\+motion.\+Motion\+State.\+pos\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}\label{classfrc_1_1lib_1_1motion_1_1MotionState_ac735341e5299e7253d234f14964a0604}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!t@{t}}
+\index{t@{t}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily final double frc.\+lib.\+motion.\+Motion\+State.\+t\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1motion_1_1MotionState_a79b700a2109d71ff4f0a10d2a41603ec}\label{classfrc_1_1lib_1_1motion_1_1MotionState_a79b700a2109d71ff4f0a10d2a41603ec}} 
+\index{frc.lib.motion.MotionState@{frc.lib.motion.MotionState}!vel@{vel}}
+\index{vel@{vel}!frc.lib.motion.MotionState@{frc.lib.motion.MotionState}}
+\doxysubsubsection{\texorpdfstring{vel}{vel}}
+{\footnotesize\ttfamily final double frc.\+lib.\+motion.\+Motion\+State.\+vel\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/motion/\mbox{\hyperlink{MotionState_8java}{Motion\+State.\+java}}\end{DoxyCompactItemize}

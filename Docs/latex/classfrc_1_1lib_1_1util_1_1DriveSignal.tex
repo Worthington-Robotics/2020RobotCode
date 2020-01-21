@@ -1,0 +1,124 @@
+\hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal}{}\doxysection{frc.\+lib.\+util.\+Drive\+Signal Class Reference}
+\label{classfrc_1_1lib_1_1util_1_1DriveSignal}\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a0392727602caa06de0c924e7b1d1e685}{Drive\+Signal}} (double linear, double angular)
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a41fd71042a2c86c883efaea29321e14d}{Drive\+Signal}} (double left, double right, boolean brake\+Mode)
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_ad7de829335e9d97b78e35c8b781a66d9}{get\+Left}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_af3eae2cd56a5e5bf05892821c5530118}{get\+Right}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_ab3d6bed5d9f0a1d45bba548fbd43fa53}{get\+Brake\+Mode}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a85f3e3e638f2ae0caf54f50aa477fd4e}{invert}} ()
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_acb1235ee63f8d89d79e558cc07908c17}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a8096ba47c1593a529446724d1ad47dca}{N\+E\+U\+T\+R\+AL}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}(0, 0)
+\item 
+static final \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a17b6e72e201f09b5e227a477c5074d6c}{B\+R\+A\+KE}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}(0, 0, true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a47638912f166130bbd71d31fa02ce45f}{m\+Right\+Motor}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a20b042d317e5f4c536004ad21296dc2f}{m\+Left\+Motor}}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal_a9b441c9efac1938683b5dd853f973882}{m\+Brake\+Mode}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A drivetrain command consisting of the linear and angular motor settings and whether the brake mode is enabled. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a0392727602caa06de0c924e7b1d1e685}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a0392727602caa06de0c924e7b1d1e685}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!DriveSignal@{DriveSignal}}
+\index{DriveSignal@{DriveSignal}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{DriveSignal()}{DriveSignal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+util.\+Drive\+Signal.\+Drive\+Signal (\begin{DoxyParamCaption}\item[{double}]{linear,  }\item[{double}]{angular }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a41fd71042a2c86c883efaea29321e14d}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a41fd71042a2c86c883efaea29321e14d}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!DriveSignal@{DriveSignal}}
+\index{DriveSignal@{DriveSignal}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{DriveSignal()}{DriveSignal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily frc.\+lib.\+util.\+Drive\+Signal.\+Drive\+Signal (\begin{DoxyParamCaption}\item[{double}]{left,  }\item[{double}]{right,  }\item[{boolean}]{brake\+Mode }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_ab3d6bed5d9f0a1d45bba548fbd43fa53}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_ab3d6bed5d9f0a1d45bba548fbd43fa53}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!getBrakeMode@{getBrakeMode}}
+\index{getBrakeMode@{getBrakeMode}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{getBrakeMode()}{getBrakeMode()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+util.\+Drive\+Signal.\+get\+Brake\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_ad7de829335e9d97b78e35c8b781a66d9}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_ad7de829335e9d97b78e35c8b781a66d9}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!getLeft@{getLeft}}
+\index{getLeft@{getLeft}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{getLeft()}{getLeft()}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Drive\+Signal.\+get\+Left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_af3eae2cd56a5e5bf05892821c5530118}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_af3eae2cd56a5e5bf05892821c5530118}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!getRight@{getRight}}
+\index{getRight@{getRight}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{getRight()}{getRight()}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Drive\+Signal.\+get\+Right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a85f3e3e638f2ae0caf54f50aa477fd4e}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a85f3e3e638f2ae0caf54f50aa477fd4e}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!invert@{invert}}
+\index{invert@{invert}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} frc.\+lib.\+util.\+Drive\+Signal.\+invert (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_acb1235ee63f8d89d79e558cc07908c17}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_acb1235ee63f8d89d79e558cc07908c17}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!toString@{toString}}
+\index{toString@{toString}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+util.\+Drive\+Signal.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a17b6e72e201f09b5e227a477c5074d6c}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a17b6e72e201f09b5e227a477c5074d6c}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!BRAKE@{BRAKE}}
+\index{BRAKE@{BRAKE}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{BRAKE}{BRAKE}}
+{\footnotesize\ttfamily final \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} frc.\+lib.\+util.\+Drive\+Signal.\+B\+R\+A\+KE = new \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}(0, 0, true)\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a9b441c9efac1938683b5dd853f973882}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a9b441c9efac1938683b5dd853f973882}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!mBrakeMode@{mBrakeMode}}
+\index{mBrakeMode@{mBrakeMode}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{mBrakeMode}{mBrakeMode}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+util.\+Drive\+Signal.\+m\+Brake\+Mode\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a20b042d317e5f4c536004ad21296dc2f}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a20b042d317e5f4c536004ad21296dc2f}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!mLeftMotor@{mLeftMotor}}
+\index{mLeftMotor@{mLeftMotor}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{mLeftMotor}{mLeftMotor}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Drive\+Signal.\+m\+Left\+Motor\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a47638912f166130bbd71d31fa02ce45f}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a47638912f166130bbd71d31fa02ce45f}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!mRightMotor@{mRightMotor}}
+\index{mRightMotor@{mRightMotor}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{mRightMotor}{mRightMotor}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Drive\+Signal.\+m\+Right\+Motor\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1DriveSignal_a8096ba47c1593a529446724d1ad47dca}\label{classfrc_1_1lib_1_1util_1_1DriveSignal_a8096ba47c1593a529446724d1ad47dca}} 
+\index{frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}!NEUTRAL@{NEUTRAL}}
+\index{NEUTRAL@{NEUTRAL}!frc.lib.util.DriveSignal@{frc.lib.util.DriveSignal}}
+\doxysubsubsection{\texorpdfstring{NEUTRAL}{NEUTRAL}}
+{\footnotesize\ttfamily final \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} frc.\+lib.\+util.\+Drive\+Signal.\+N\+E\+U\+T\+R\+AL = new \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}(0, 0)\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/util/\mbox{\hyperlink{DriveSignal_8java}{Drive\+Signal.\+java}}\end{DoxyCompactItemize}

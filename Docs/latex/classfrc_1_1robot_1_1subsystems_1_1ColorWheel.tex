@@ -1,0 +1,203 @@
+\hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{}\doxysection{frc.\+robot.\+subsystems.\+Color\+Wheel Class Reference}
+\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+Inheritance diagram for frc.\+robot.\+subsystems.\+Color\+Wheel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1PeriodicIO}{Periodic\+IO}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a5e16df8c374b7fbb272ca15696e094cd}{read\+Periodic\+Inputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a675e73f185dcae29921da640ea190e47}{write\+Periodic\+Outputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a053bbf9a090627233ae54f09c307e666}{output\+Telemetry}} ()
+\item 
+char \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a00294cfe8fae55b0441e7df55b8cdd1e}{c\+Detected}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a55161c6d89b5b6697d665f590c5ce03e}{reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{Color\+Wheel}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a42b997ca339696e61d13252a3128beba}{get\+Instance}} ()
+\item 
+static char \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a059983268ff697e3537b42f724fe6f2e}{color\+From\+R\+GB}} (int\mbox{[}$\,$\mbox{]} R\+GB)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ae819e33969fa1015fb0514e31c23b623}{Color\+Wheel}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a12c7acce642d6da112289019772200e3}{direction}} (char color)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static char \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ad0d6abcf5c487d70fd36d4845daaa4aa}{color\+Covert}} (char color)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final I2\+C.\+Port \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_aa79fae46bf632ea84f41219dcfdad450}{i2c\+Port}} = I2\+C.\+Port.\+k\+Onboard
+\item 
+final Color\+Sensor\+V3 \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a39e0fed493d771128af185bb695adb83}{color\+Sensor}}
+\item 
+final char\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_af264faa737eefd1cbee17086d2b87140}{wheel\+Colors}} = new char\mbox{[}$\,$\mbox{]}\{\textquotesingle{}B\textquotesingle{}, \textquotesingle{}Y\textquotesingle{}, \textquotesingle{}R\textquotesingle{}, \textquotesingle{}G\textquotesingle{}\}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1PeriodicIO}{Periodic\+IO}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ad4f399effac4c753467ecc5ef15c812b}{periodic}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{Color\+Wheel}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a60cd18977b7eb7c78234f09c5c4f3432}{m\+\_\+color\+Wheel\+Instance}} = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{Color\+Wheel}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ae819e33969fa1015fb0514e31c23b623}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ae819e33969fa1015fb0514e31c23b623}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!ColorWheel@{ColorWheel}}
+\index{ColorWheel@{ColorWheel}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{ColorWheel()}{ColorWheel()}}
+{\footnotesize\ttfamily frc.\+robot.\+subsystems.\+Color\+Wheel.\+Color\+Wheel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a00294cfe8fae55b0441e7df55b8cdd1e}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a00294cfe8fae55b0441e7df55b8cdd1e}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!cDetected@{cDetected}}
+\index{cDetected@{cDetected}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{cDetected()}{cDetected()}}
+{\footnotesize\ttfamily char frc.\+robot.\+subsystems.\+Color\+Wheel.\+c\+Detected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This returns the color that the sensor sees on the wheel
+
+\begin{DoxyReturn}{Returns}
+color the sensor sees on the wheel (Red, Yellow, Green, or Blue) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ad0d6abcf5c487d70fd36d4845daaa4aa}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ad0d6abcf5c487d70fd36d4845daaa4aa}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!colorCovert@{colorCovert}}
+\index{colorCovert@{colorCovert}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{colorCovert()}{colorCovert()}}
+{\footnotesize\ttfamily static char frc.\+robot.\+subsystems.\+Color\+Wheel.\+color\+Covert (\begin{DoxyParamCaption}\item[{char}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Takes colors and converts it from what the robot sees to what the field sees or visa versa
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Color Red, Yellow, Green, Blue that the robot is seeing or what the field is seeing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the color that the field sensor is sees or what the robot sees 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a059983268ff697e3537b42f724fe6f2e}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a059983268ff697e3537b42f724fe6f2e}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!colorFromRGB@{colorFromRGB}}
+\index{colorFromRGB@{colorFromRGB}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{colorFromRGB()}{colorFromRGB()}}
+{\footnotesize\ttfamily static char frc.\+robot.\+subsystems.\+Color\+Wheel.\+color\+From\+R\+GB (\begin{DoxyParamCaption}\item[{int\mbox{[}$\,$\mbox{]}}]{R\+GB }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a12c7acce642d6da112289019772200e3}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a12c7acce642d6da112289019772200e3}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!direction@{direction}}
+\index{direction@{direction}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{direction()}{direction()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Color\+Wheel.\+direction (\begin{DoxyParamCaption}\item[{char}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Picks the direction the wheel has to spin for maximum efficiency
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & takes in a character \textquotesingle{}R\textquotesingle{}, \textquotesingle{}Y\textquotesingle{}, \textquotesingle{}G\textquotesingle{}, \textquotesingle{}B\textquotesingle{} of what the robot sees \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a42b997ca339696e61d13252a3128beba}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a42b997ca339696e61d13252a3128beba}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{Color\+Wheel}} frc.\+robot.\+subsystems.\+Color\+Wheel.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a053bbf9a090627233ae54f09c307e666}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a053bbf9a090627233ae54f09c307e666}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!outputTelemetry@{outputTelemetry}}
+\index{outputTelemetry@{outputTelemetry}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{outputTelemetry()}{outputTelemetry()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Color\+Wheel.\+output\+Telemetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Outputs all logging information to the Smart\+Dashboard 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a5e16df8c374b7fbb272ca15696e094cd}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a5e16df8c374b7fbb272ca15696e094cd}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!readPeriodicInputs@{readPeriodicInputs}}
+\index{readPeriodicInputs@{readPeriodicInputs}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{readPeriodicInputs()}{readPeriodicInputs()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Color\+Wheel.\+read\+Periodic\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Updates all periodic variables and sensors 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a55161c6d89b5b6697d665f590c5ce03e}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a55161c6d89b5b6697d665f590c5ce03e}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Color\+Wheel.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called to reset and configure the subsystem 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a675e73f185dcae29921da640ea190e47}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a675e73f185dcae29921da640ea190e47}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!writePeriodicOutputs@{writePeriodicOutputs}}
+\index{writePeriodicOutputs@{writePeriodicOutputs}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{writePeriodicOutputs()}{writePeriodicOutputs()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Color\+Wheel.\+write\+Periodic\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Writes the periodic outputs to actuators (motors and ect...) 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a39e0fed493d771128af185bb695adb83}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a39e0fed493d771128af185bb695adb83}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!colorSensor@{colorSensor}}
+\index{colorSensor@{colorSensor}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{colorSensor}{colorSensor}}
+{\footnotesize\ttfamily final Color\+Sensor\+V3 frc.\+robot.\+subsystems.\+Color\+Wheel.\+color\+Sensor\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_aa79fae46bf632ea84f41219dcfdad450}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_aa79fae46bf632ea84f41219dcfdad450}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!i2cPort@{i2cPort}}
+\index{i2cPort@{i2cPort}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{i2cPort}{i2cPort}}
+{\footnotesize\ttfamily final I2\+C.\+Port frc.\+robot.\+subsystems.\+Color\+Wheel.\+i2c\+Port = I2\+C.\+Port.\+k\+Onboard\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a60cd18977b7eb7c78234f09c5c4f3432}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_a60cd18977b7eb7c78234f09c5c4f3432}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!m\_colorWheelInstance@{m\_colorWheelInstance}}
+\index{m\_colorWheelInstance@{m\_colorWheelInstance}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{m\_colorWheelInstance}{m\_colorWheelInstance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{Color\+Wheel}} frc.\+robot.\+subsystems.\+Color\+Wheel.\+m\+\_\+color\+Wheel\+Instance = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel}{Color\+Wheel}}()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ad4f399effac4c753467ecc5ef15c812b}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_ad4f399effac4c753467ecc5ef15c812b}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!periodic@{periodic}}
+\index{periodic@{periodic}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{periodic}{periodic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1PeriodicIO}{Periodic\+IO}} frc.\+robot.\+subsystems.\+Color\+Wheel.\+periodic\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_af264faa737eefd1cbee17086d2b87140}\label{classfrc_1_1robot_1_1subsystems_1_1ColorWheel_af264faa737eefd1cbee17086d2b87140}} 
+\index{frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}!wheelColors@{wheelColors}}
+\index{wheelColors@{wheelColors}!frc.robot.subsystems.ColorWheel@{frc.robot.subsystems.ColorWheel}}
+\doxysubsubsection{\texorpdfstring{wheelColors}{wheelColors}}
+{\footnotesize\ttfamily final char \mbox{[}$\,$\mbox{]} frc.\+robot.\+subsystems.\+Color\+Wheel.\+wheel\+Colors = new char\mbox{[}$\,$\mbox{]}\{\textquotesingle{}B\textquotesingle{}, \textquotesingle{}Y\textquotesingle{}, \textquotesingle{}R\textquotesingle{}, \textquotesingle{}G\textquotesingle{}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/subsystems/\mbox{\hyperlink{ColorWheel_8java}{Color\+Wheel.\+java}}\end{DoxyCompactItemize}
