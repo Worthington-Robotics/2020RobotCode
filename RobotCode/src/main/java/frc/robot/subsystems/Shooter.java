@@ -1,19 +1,20 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.PWMTalonFX;
-import edu.wpi.first.wpilibj.PWMTalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.robot.subsystems.Subsystem;
+import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
 
     private static Shooter m_Shooter = new Shooter();
     public static Shooter getInstance(){return m_Shooter;}
-    private TalonSRX Talon1, Talon2;
+    private ShooterIO periodic;
+    private TalonFX Talon1, Talon2;
     private Shooter(){
-        Talon1 = new TalonSRX(1);
-        Talon2 = new TalonSRX(2);
+        Talon1 = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
+        Talon2 = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
+
+        reset();
     }
 
 
@@ -24,7 +25,9 @@ public class Shooter extends Subsystem {
     public void readPeriodicInputs() {
 
     }
-
+    public static double calcRPM(){
+        return 0.0;
+    }
     public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
 
@@ -81,10 +84,12 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void reset() {
-
+        periodic = new ShooterIO();
     }
-
-    public class PeriodicIO {
+    public Subsystem.PeriodicIO getLogger(){
+        return periodic;
+    }
+    public class ShooterIO extends Subsystem.PeriodicIO{
 
     }
 }
