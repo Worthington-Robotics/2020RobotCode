@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class SubsystemManager implements ILooper {
 
     private final List<Subsystem> mAllSubsystems;
-    private List<Loop> mLoops = new ArrayList<>();
+    private final List<Loop> mLoops = new ArrayList<>();
     final List<Logable> logables = new ArrayList<>();
     private ReflectingLogger<LogData> logger;
-    private boolean mIgnoreLogger;
+    private final boolean mIgnoreLogger;
 
     /**
      * a manager class to handle all of the individual subsystems
@@ -29,30 +29,35 @@ public class SubsystemManager implements ILooper {
      * @param ignoreLogger  -- ignores the initialization of the logger
      *                      and any subsequent errors it may generate
      */
-    public SubsystemManager(List<Subsystem> allSubsystems, boolean ignoreLogger) {
+    public SubsystemManager(final List<Subsystem> allSubsystems, final boolean ignoreLogger) {
         mAllSubsystems = allSubsystems;
         mIgnoreLogger = ignoreLogger;
 
         //get all subsystems to log from
-        mAllSubsystems.forEach((s) -> logables.add(s));
+        logables.addAll(allSubsystems);
     }
 
     /**
      * Registers any additonal logables to be logged when the robot is enabled.
-     * @param logables the list of logable classes to pull data from
+     * @param toLog the list of logable classes to pull data from
      */
-    public void addLoggingSource(List<Logable> logables){
-        logables.forEach((s) -> logables.add(s));
+    public void addLoggingSource(final List<Logable> toLog){
+        logables.addAll(new ArrayList<Logable>(toLog));
     }
 
     private void createLogging(){
         try {
+            String logableNames = "Logging on: ";
             //create reflecting logger
-            final List<LogData> allToLog = new ArrayList<>();
-            logables.forEach((s) -> allToLog.add(s.getLogger()));
+            List<LogData> logData = new ArrayList<>();
+            for (Logable logable: logables) {
+                logableNames += logable.getClass().getSimpleName() + ", ";
+                logData.add(logable.getLogger());
+            }
+            System.out.println(logableNames);
 
-            logger = new ReflectingLogger<>(allToLog);
-        } catch (Exception e) {
+            logger = new ReflectingLogger<>(logData);
+        } catch (final Exception e) {
             // show logger failed to init
             DriverStation.reportError("Logger unable to start", e.getStackTrace());
 
@@ -71,11 +76,11 @@ public class SubsystemManager implements ILooper {
         //make sure logger is properly initialized
         if (logger != null) {
             // create current list of subsystem IO
-            final List<LogData> allToLog = new ArrayList<>();
-            logables.forEach((s) -> allToLog.add(s.getLogger()));
+            final List<LogData> logData = new ArrayList<>();
+            logables.forEach((logable) -> logData.add(logable.getLogger()));
 
             //update the logger from the current form of the list
-            logger.update(allToLog);
+            logger.update(logData);
         }
     }
 
@@ -106,22 +111,22 @@ public class SubsystemManager implements ILooper {
     private class EnabledLoop implements Loop {
 
         @Override
-        public void onStart(double timestamp) {
+        public void onStart(final double timestamp) {
             createLogging();
-            for (Loop l : mLoops) {
+            for (final Loop l : mLoops) {
                 l.onStart(timestamp);
             }
         }
 
         @Override
-        public void onLoop(double timestamp) {
-            for (Subsystem s : mAllSubsystems) {
+        public void onLoop(final double timestamp) {
+            for (final Subsystem s : mAllSubsystems) {
                 s.readPeriodicInputs();
             }
-            for (Loop l : mLoops) {
+            for (final Loop l : mLoops) {
                 l.onLoop(timestamp);
             }
-            for (Subsystem s : mAllSubsystems) {
+            for (final Subsystem s : mAllSubsystems) {
                 s.writePeriodicOutputs();
             }
 
@@ -130,8 +135,8 @@ public class SubsystemManager implements ILooper {
         }
 
         @Override
-        public void onStop(double timestamp) {
-            for (Loop l : mLoops) {
+        public void onStop(final double timestamp) {
+            for (final Loop l : mLoops) {
                 l.onStop(timestamp);
             }
             logger.close();
@@ -141,22 +146,22 @@ public class SubsystemManager implements ILooper {
     private class DisabledLoop implements Loop {
 
         @Override
-        public void onStart(double timestamp) {
+        public void onStart(final double timestamp) {
 
         }
 
         @Override
-        public void onLoop(double timestamp) {
-            for (Subsystem s : mAllSubsystems) {
+        public void onLoop(final double timestamp) {
+            for (final Subsystem s : mAllSubsystems) {
                 s.readPeriodicInputs();
             }
-            for (Subsystem s : mAllSubsystems) {
+            for (final Subsystem s : mAllSubsystems) {
                 s.writePeriodicOutputs();
             }
         }
 
         @Override
-        public void onStop(double timestamp) {
+        public void onStop(final double timestamp) {
         }
     }
 

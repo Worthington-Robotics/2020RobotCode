@@ -4,7 +4,7 @@ import frc.lib.loops.ILooper;
 import frc.lib.util.Logable;
 
 //design pattern for caching periodic writes to avoid hammering the HAL/CAN.
-public abstract class Subsystem extends Logable {
+public abstract class Subsystem implements Logable {
 
     /**
      * Updates all periodic variables and sensors

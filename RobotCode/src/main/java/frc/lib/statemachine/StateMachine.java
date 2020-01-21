@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class StateMachine extends Logable{
+public class StateMachine implements Logable{
 
     private static final StateMachine instance =  new StateMachine();
 

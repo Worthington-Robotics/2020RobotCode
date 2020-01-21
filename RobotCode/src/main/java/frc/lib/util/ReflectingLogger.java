@@ -8,6 +8,7 @@ import frc.lib.exceptions.DirectoryNotFoundException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -98,7 +99,12 @@ public class ReflectingLogger<T> {
             try {
                 if(entry.getKey().get(entry.getValue()) == null){
                     line.append("null");
-                } else if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
+                } else if (entry.getKey().getType().isArray()){
+                    final int len = Array.getLength(entry.getKey().get(entry.getValue()));
+                    for(int i = 0; i < len; i++){
+                        line.append(Array.get(entry.getKey().get(entry.getValue()), i) + " ");
+                    }
+                }else if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
                     line.append(((CSVWritable) entry.getKey().get(entry.getValue())).toCSV());
                 } else {
                     line.append(entry.getKey().get(entry.getValue()).toString());
