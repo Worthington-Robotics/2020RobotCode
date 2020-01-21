@@ -27,7 +27,7 @@ public class ColorWheel extends Subsystem {
         return m_colorWheelInstance;
     }
 
-    private PeriodicIO periodic;
+    private ColorWheelIO periodic;
 
     @Override
     public void readPeriodicInputs() {
@@ -134,11 +134,11 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void reset() {
-        periodic = new PeriodicIO();
+        periodic = new ColorWheelIO();
         colorSensor.configureColorSensor(ColorSensorResolution.kColorSensorRes18bit, ColorSensorMeasurementRate.kColorRate100ms, GainFactor.kGain1x);
     }
 
-    public class PeriodicIO extends Subsystem.PeriodicIO {
+    public class ColorWheelIO extends Subsystem.PeriodicIO {
         public char fmsColor = 'U';
         public double distance = 0;
         public int[] RGB = new int[]{0, 0, 0};

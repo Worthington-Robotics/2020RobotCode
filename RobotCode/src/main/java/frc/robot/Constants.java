@@ -79,4 +79,8 @@ public class Constants {
 
     public static final int satLimit = 80;
     public static final int valLimit = 80;
+
+    //Limelight Constants
+    public static final double fov = 0.0;
+
 }
