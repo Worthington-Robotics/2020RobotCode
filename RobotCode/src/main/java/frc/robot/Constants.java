@@ -6,7 +6,8 @@ public class Constants {
      */
 
     //Talon IDs
-
+    public static final int SHOOTER_FLYWHEEL_RIGHT = 1;
+    public static final int SHOOTER_FLYWHEEL_LEFT = 2;
     //Spark Ports
 
     //Solenoid Ports
