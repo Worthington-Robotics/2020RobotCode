@@ -2,20 +2,23 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import com.revrobotics.ColorSensorV3;
+import frc.lib.drivers.ColorSensorV3;
 import frc.robot.Constants;
 import frc.lib.util.Util;
 import java.awt.Color;
+
+import static frc.lib.drivers.ColorSensorV3.*;
 
 public class ColorWheel extends Subsystem {
 
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 colorSensor;
     private final char[] wheelColors = new char[]{'B', 'Y', 'R', 'G'};
+    private String wheelColorsOrder = new String(wheelColors);
 
     private ColorWheel() {
-        periodic = new PeriodicIO();
         colorSensor = new ColorSensorV3(i2cPort);
+        reset();
     }
 
     private static ColorWheel m_colorWheelInstance = new ColorWheel();
@@ -69,7 +72,7 @@ public class ColorWheel extends Subsystem {
         //System.out.println(hsv[0] + ", " + hsv[1] + ", " + hsv[2]);
 
         if(hsv[2] < Constants.valLimit || hsv[1] < Constants.satLimit) {
-            return 'Q';
+            return 'U';
         }
         else {
             if (Util.epsilonEquals(hsv[0], Constants.redH1, Constants.error) || Util.epsilonEquals(hsv[0], Constants.redH2, Constants.error)) {
@@ -114,29 +117,31 @@ public class ColorWheel extends Subsystem {
     }
 
     /**
-     * Picks the direction the wheel has to spin for maximum efficiency
+     * Picks the direction the wheel has to spin for maximum efficiency and calculates distance
      *
-     * @param color takes in a character 'R', 'Y', 'G', 'B' of what the robot sees
      */
-    private void direction(char color) {
-        String wheelColorsOrder = new String(wheelColors);
-        if (wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) < -1 || wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected()) == 1) {
-            periodic.direction = 0;
+    private void distance() {
+        periodic.colorDirectionCalc = wheelColorsOrder.indexOf(colorCovert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected());
+        if (periodic.colorDirectionCalc == -3) {
+            periodic.distance = -12.5;
+        }
+        else if (periodic.colorDirectionCalc == 3) {
+            periodic.distance = 12.5;
         } else {
-            periodic.direction = 1;
+            periodic.distance = periodic.colorDirectionCalc * 12.5;
         }
     }
 
     @Override
     public void reset() {
-
+        periodic = new PeriodicIO();
+        colorSensor.configureColorSensor(ColorSensorResolution.kColorSensorRes18bit, ColorSensorMeasurementRate.kColorRate100ms, GainFactor.kGain1x);
     }
 
     public class PeriodicIO extends Subsystem.PeriodicIO {
-        char fmsColor = 'U';
-        int direction = 1; //1 for right, 0 for left
-        int[] RGB = new int[]{0, 0, 0};
+        public char fmsColor = 'U';
+        public double distance = 0;
+        public int[] RGB = new int[]{0, 0, 0};
+        public int colorDirectionCalc;
     }
-
-
 }
