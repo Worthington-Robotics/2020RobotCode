@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -69,7 +70,8 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void writePeriodicOutputs() {
-
+        Talon1.set(ControlMode.PercentOutput, periodic.demand);
+        Talon2.set(ControlMode.PercentOutput, periodic.demand);
     }
 
     /**
@@ -99,6 +101,10 @@ public class Shooter extends Subsystem {
         periodic = new ShooterIO();
     }
 
+    public void setDemand(double newDemand){
+        periodic.demand = newDemand;
+    }
+
     public Subsystem.PeriodicIO getLogger() {
         return periodic;
     }
@@ -107,5 +113,6 @@ public class Shooter extends Subsystem {
         private double targetX = 0.0;
         private double targetY = 0.0;
         private double targetArea = 0.0;
+        public double demand = 0.0;
     }
 }
