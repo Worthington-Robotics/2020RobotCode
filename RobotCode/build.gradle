@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2020.2.2"
+    id "org.frc4145.versiondata" version "1.02"
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -68,3 +69,6 @@ jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
 }
+
+//targets the new version ID plugin to run on deploy
+discoverRoborio.dependsOn versionData
