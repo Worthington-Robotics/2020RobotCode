@@ -114,7 +114,6 @@ public class Drive extends Subsystem {
         periodic.left_error = driveFrontLeft.getClosedLoopError();
         periodic.right_error = driveFrontRight.getClosedLoopError();
 
-        //periodic.B2 = Constants.MASTER.getRawButton(2);
         periodic.left_pos_ticks = -driveFrontLeft.getSelectedSensorPosition(0);
         periodic.right_pos_ticks = -driveFrontRight.getSelectedSensorPosition(0);
         periodic.left_velocity_ticks_per_100ms = -driveFrontLeft.getSelectedSensorVelocity(0);
@@ -130,11 +129,6 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-        /*if (periodic.B2) {
-            periodic.left_demand = -periodic.left_demand;
-            periodic.right_demand = -periodic.right_demand;
-        } else {
-        }*/
         if (mDriveControlState == DriveControlState.OPEN_LOOP || mDriveControlState == DriveControlState.ANGLE_PID || (mDriveControlState == DriveControlState.PROFILING_TEST && Constants.RAMPUP)) {
             driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
             driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand);
@@ -376,17 +370,12 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
         SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
-        //SmartDashboard.putNumber("Drive/Misc/Left FeedForward", periodic.left_feedforward);
-        //SmartDashboard.putNumber("Drive/Misc/Left Acceleration", periodic.left_accl);
-
 
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
         SmartDashboard.putNumber("Drive/Right/Talon Voltage Out", driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Right/Encoder Counts", periodic.right_pos_ticks);
-        //SmartDashboard.putNumber("Drive/Misc/Right FeedForward", periodic.right_feedforward);
-        //SmartDashboard.putNumber("Drive/Misc/Right Acceleration", periodic.right_accl);
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
