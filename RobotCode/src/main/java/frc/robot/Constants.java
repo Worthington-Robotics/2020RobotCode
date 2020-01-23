@@ -6,11 +6,19 @@ public class Constants {
      */
 
     //Talon IDs
-
+    public static final int SUPERSTRUCTURE_ABOVE_BELT = 7;
+    public static final int SUPERSTRUCTURE_BELOW_BELT = 8;
+    public static final int SUPERSTRUCTURE_DELIVERY_BELT = 9;
+    public static final int SUPERSTRUCTURE_INTAKE = 10;
     //Spark Ports
 
     //Solenoid Ports
-
+    public static final int TRANS_LOW_ID = 0;
+    public static final int TRANS_HIGH_ID = 1;
+    public static final int CLIMB_FRONT_LOW_ID = 2;
+    public static final int CLIMB_FRONT_HIGH_ID = 3;
+    public static final int LOCK_LOW_ID = 4;
+    public static final int LOCK_HIGH_ID = 5;
     //Color Sensor Port
     public static final int COLOR_SENSOR_PORT = 0;
     
