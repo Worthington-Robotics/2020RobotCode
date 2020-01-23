@@ -8,6 +8,7 @@ public class Constants {
     //Talon IDs
     public static final int SHOOTER_FLYWHEEL_RIGHT = 1;
     public static final int SHOOTER_FLYWHEEL_LEFT = 2;
+    public static final int COLOR_WHEEL = 3;
     //Spark Ports
 
     //Solenoid Ports
@@ -22,6 +23,9 @@ public class Constants {
     /**
      * Drivetrain tuned values --------------------------------
      */
+
+    //Encoder Constants
+    public static final double ENCODER_5046_CPR = 1024;
 
     //Physical Constants
     public static final double DRIVE_WHEEL_TRACK_WIDTH_INCHES = 21.75;
@@ -70,17 +74,25 @@ public class Constants {
 	public static double LOOPER_DT = 0.01;
 
 	//Color Wheel Constants
-    public static final int redH1 = 0;
-    public static final int redH2 = 360;
-    public static final int yellowH = 60;
-    public static final int greenH = 120;
-    public static final int blueH = 180;
-    public static final int error = 10;
+    public static final int COLOR_WHEEL_RED_HUE1 = 0;
+    public static final int COLOR_WHEEL_RED_HUE2 = 360;
+    public static final int COLOR_WHEEL_YELLOW_HUE = 60;
+    public static final int COLOR_WHEEL_GREEN_HUE = 120;
+    public static final int COLOR_WHEEL_BLUE_HUE = 180;
+    public static final int COLOR_WHEEL_HUE_ERROR = 10;
 
-    public static final int satLimit = 80;
-    public static final int valLimit = 80;
+    public static final int COLOR_WHEEL_SAT_LIMIT = 80;
+    public static final int COLOR_WHEEL_VAL_LIMIT = 80;
+
+    public static final double COLOR_WHEEL_SPINNER_DIA = 2.0;
+
+    public static final double COLOR_WHEEL_KF = 0.0; //TODO TUNE PID
+    public static final double COLOR_WHEEL_KP = 0.0;
+    public static final double COLOR_WHEEL_KI = 0.0;
+    public static final double COLOR_WHEEL_KD = 0.0;
+    public static final double COLOR_WHEEL_VCOMP = 0.0;
 
     //Limelight Constants
-    public static final double fov = 0.0;
+    public static final double LIMELIGHT_DEG_FOV = 0.0; //TODO CALCULATE FOV
 
 }
