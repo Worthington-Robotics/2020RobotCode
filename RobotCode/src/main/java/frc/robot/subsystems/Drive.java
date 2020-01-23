@@ -8,10 +8,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Pose2d;
-import frc.lib.geometry.Pose2dWithCurvature;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
@@ -22,10 +20,10 @@ import frc.robot.Constants;
 public class Drive extends Subsystem {
 
     //construct one and only 1 instance of this class
-    private static Drive m_DriveInstance = new Drive();
+    private static Drive Instance = new Drive();
 
     public static Drive getInstance() {
-        return m_DriveInstance;
+        return Instance;
     }
 
     //used internally for data
