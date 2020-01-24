@@ -1,13 +1,22 @@
 package frc.robot.subsystems;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Constants;
 
 public class Lights extends Subsystem {
     private int colorH = 0;
     private AddressableLED mled;
     private AddressableLEDBuffer mLEDBuffer;
+    private int numberOfBalls;
+    private boolean targeted, uprightsUp;
+    private Color allianceColor;
+    private lightModes currentLightMode = lightModes.indexNum;
     private Lights() {
         mled = new AddressableLED(Constants.LED_PORT);
         mLEDBuffer = new AddressableLEDBuffer(Constants.LED_LENGTH);
@@ -21,17 +30,42 @@ public class Lights extends Subsystem {
 
     @Override
     public void readPeriodicInputs() {
-        interpretColor(ColorWheel.getInstance().cDetected());
+        if (DriverStation.getInstance().getAlliance() == Alliance.Blue) {
+            allianceColor = Color.kBlue;
+        } else if (DriverStation.getInstance().getAlliance() == Alliance.Red) {
+            allianceColor = Color.kRed;
+        } else {
+            allianceColor = Color.kChocolate;
+        }
+        colorH = interpretColor(ColorWheel.getInstance().cDetected());
     }
 
     @Override
     public void writePeriodicOutputs() {
-        for (var i = 0; i < mLEDBuffer.getLength(); i++) {
-            // Sets the specified LED to the RGB values for red
-            mLEDBuffer.setHSV(i, colorH, 100, 75);
-         }
-         
-         mled.setData(mLEDBuffer);
+        switch (currentLightMode) {
+            case colorWheel: for (var i = 0; i < mLEDBuffer.getLength(); i++) {
+                // Sets the specified LED to the RGB values for red
+                mLEDBuffer.setHSV(i, colorH, 100, 75);
+            } break;
+            case targeting: if (targeted){
+                for(var i = 0; i < mLEDBuffer.getLength(); i++) {
+                    mLEDBuffer.setRGB(i, 13, 239, 66);
+                    }
+            } else {
+                for(var i = 0; i < mLEDBuffer.getLength(); i++) {
+                    mLEDBuffer.setRGB(i, 220, 61, 42);
+                    }
+            } break;
+            case indexNum: if (numberOfBalls >= 1 && numberOfBalls <= 4) {
+                    for(var i = 0; i < (mLEDBuffer.getLength() * (.2*numberOfBalls)); i++) {
+                    mLEDBuffer.setRGB(i, 254, 226, 62);
+                    }
+            } break;
+            default: for(var i = 0; i < mLEDBuffer.getLength(); i++) {
+                mLEDBuffer.setLED(i, allianceColor);
+            }break;
+        }
+    mled.setData(mLEDBuffer);
     }
     
     /*
@@ -58,6 +92,12 @@ public class Lights extends Subsystem {
     @Override
     public void outputTelemetry() {
 
+    }
+    
+    enum lightModes {
+        targeting,
+        colorWheel,
+        indexNum;
     }
     
 }
