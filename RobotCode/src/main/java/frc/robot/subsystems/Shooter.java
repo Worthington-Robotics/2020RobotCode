@@ -1,0 +1,111 @@
+package frc.robot.subsystems;
+
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import frc.lib.loops.ILooper;
+import frc.lib.loops.Loop;
+import frc.robot.Constants;
+
+public class Shooter extends Subsystem {
+
+    private static Shooter m_Shooter = new Shooter();
+    private ShooterIO periodic;
+    private TalonFX Talon1, Talon2;
+    private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    private NetworkTableEntry tx = table.getEntry("tx");
+    private NetworkTableEntry ty = table.getEntry("ty");
+    private NetworkTableEntry ta = table.getEntry("ta");
+    private NetworkTableEntry camtran = table.getEntry("camtran");
+    private Shooter() {
+        Talon1 = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
+        Talon2 = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
+        configLimelight();
+
+        reset();
+    }
+
+    public static Shooter getInstance() {
+        return m_Shooter;
+    }
+
+    public static double calcRPM() {
+        return 0.0;
+    }
+
+    /**
+     * Updates all periodic variables and sensors
+     */
+    @Override
+    public void readPeriodicInputs() {
+        periodic.targetArea = ta.getDouble(0.0);
+        periodic.targetX = tx.getDouble(0.0);
+        periodic.targetY = ty.getDouble(0.0);
+    }
+
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(new Loop() {
+
+            @Override
+            public void onStart(double timestamp) {
+
+            }
+
+            @Override
+            public void onLoop(double timestamp) {
+
+            }
+
+            @Override
+            public void onStop(double timestamp) {
+
+            }
+        });
+    }
+
+    /**
+     * Writes the periodic outputs to actuators (motors and ect...)
+     */
+    @Override
+    public void writePeriodicOutputs() {
+
+    }
+
+    /**
+     * Outputs all logging information to the SmartDashboard
+     */
+    @Override
+    public void outputTelemetry() {
+
+    }
+
+    public void configLimelight() {
+        //Forces led on
+        table.getEntry("ledMode").setNumber(3);
+        //Sets limelight's current pipeline to 0
+        table.getEntry("pipeline").setNumber(0);
+        //Sets the mode of the camera to vision processor mode
+        table.getEntry("camMode").setNumber(0);
+        //Defaults Limelight's snapshotting feature to off
+        table.getEntry("snapshot").setNumber(0);
+    }
+
+    /**
+     * Called to reset and configure the subsystem
+     */
+    @Override
+    public void reset() {
+        periodic = new ShooterIO();
+    }
+
+    public Subsystem.PeriodicIO getLogger() {
+        return periodic;
+    }
+
+    public class ShooterIO extends Subsystem.PeriodicIO {
+        private double targetX = 0.0;
+        private double targetY = 0.0;
+        private double targetArea = 0.0;
+    }
+}
