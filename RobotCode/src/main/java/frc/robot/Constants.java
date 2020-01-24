@@ -84,7 +84,7 @@ public class Constants {
     public static final int COLOR_WHEEL_SAT_LIMIT = 80;
     public static final int COLOR_WHEEL_VAL_LIMIT = 80;
 
-    public static final double COLOR_WHEEL_ROTATION_DISTANCE = 50 * Math.PI;
+    public static final double COLOR_WHEEL_ROTATION_DISTANCE = 3.2 * (16 * Math.PI);
 
     public static final double COLOR_WHEEL_SPINNER_DIA = 2.0;
 
