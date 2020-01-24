@@ -1,35 +1,39 @@
 package frc.lib.util;
 
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Timer;
 import frc.lib.exceptions.DirectoryNotFoundException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReflectingLogger<T> {
 
-    private static final String fileSeperator = ", ";
+    private static final String dataSeperator = ", ";
 
     private PrintWriter output = null;
     private Map<Field, T> classFieldMap = new LinkedHashMap<>();
 
-    public ReflectingLogger(List<T> subsystemIOs) throws FileNotFoundException {
-        this(subsystemIOs, getMount("robotdata"), false);
+    public ReflectingLogger(List<T> dataClasses) throws FileNotFoundException {
+        this(dataClasses, getMount("robotdata"), false);
     }
 
-    public ReflectingLogger(List<T> subsystemIOs, File loggingFile) {
-        this(subsystemIOs, loggingFile, false);
+    public ReflectingLogger(List<T> dataClasses, File loggingFile) {
+        this(dataClasses, loggingFile, false);
     }
 
-    public ReflectingLogger(List<T> subsystemIOs, File loggingFile, Boolean allowRethrow) {
+    public ReflectingLogger(List<T> dataClasses, File loggingFile, Boolean allowRethrow) {
         //generate map of subsystem IO's and fields
-        for (T subsystemIO : subsystemIOs) {
-            for (Field field : subsystemIO.getClass().getFields()) {
-                classFieldMap.put(field, subsystemIO);
+        for (T dataClass : dataClasses) {
+            if(dataClass == null) continue;
+            for (Field field : dataClass.getClass().getFields()) {
+                classFieldMap.put(field, dataClass);
             }
         }
 
@@ -41,7 +45,7 @@ public class ReflectingLogger<T> {
             StringBuffer line = new StringBuffer();
             line.append("time");
             for (Map.Entry<Field, T> entry : classFieldMap.entrySet()) {
-                line.append(fileSeperator);
+                line.append(dataSeperator);
                 line.append(entry.getKey().getName());
             }
 
@@ -58,7 +62,12 @@ public class ReflectingLogger<T> {
         }
     }
 
-    public void update(List<T> subsystemIOs) {
+    /**
+     * function that writes the next update to the log file
+     * reads a list of data classes and dumps their contents into a file
+     * @param dataClasses the list of 
+     */
+    public void update(List<T> dataClasses) {
 
         //no writer avaliable to update exit the update
         if (output.equals(null)) {
@@ -66,9 +75,10 @@ public class ReflectingLogger<T> {
         }
 
         //generate map of subsystem IO's and fields
-        for (T subsystemIO : subsystemIOs) {
-            for (Field field : subsystemIO.getClass().getFields()) {
-                classFieldMap.put(field, subsystemIO);
+        for (T dataClass : dataClasses) {
+            if(dataClass == null) continue;
+            for (Field field : dataClass.getClass().getFields()) {
+                classFieldMap.put(field, dataClass);
             }
         }
 
@@ -80,11 +90,21 @@ public class ReflectingLogger<T> {
         //for all fields in map generate
         for (Map.Entry<Field, T> entry : classFieldMap.entrySet()) {
             //append separator
-            line.append(fileSeperator);
+            line.append(dataSeperator);
+
+            //this shouldnt happen but is here for safety reasons
+            if(entry == null) continue;
 
             //Attempt to append subsystem IO value
             try {
-                if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
+                if(entry.getKey().get(entry.getValue()) == null){
+                    line.append("null");
+                } else if (entry.getKey().getType().isArray()){
+                    final int len = Array.getLength(entry.getKey().get(entry.getValue()));
+                    for(int i = 0; i < len; i++){
+                        line.append(Array.get(entry.getKey().get(entry.getValue()), i) + " ");
+                    }
+                }else if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
                     line.append(((CSVWritable) entry.getKey().get(entry.getValue())).toCSV());
                 } else {
                     line.append(entry.getKey().get(entry.getValue()).toString());
@@ -98,6 +118,10 @@ public class ReflectingLogger<T> {
         writeLine(line.toString());
     }
 
+    /**
+     * method to write a line to the currently open file
+     * @param line the complied line of text to write and flush to the file 
+     */
     protected synchronized void writeLine(String line) {
         if (output != null) {
             output.println(line);
@@ -105,45 +129,70 @@ public class ReflectingLogger<T> {
         }
     }
 
-    public static File getMount(String subsystemName) throws FileNotFoundException {
-        //create base file reference looking for the media directory
-        File media = new File("/media");
-        if (!media.exists()) {
-            throw new DirectoryNotFoundException("/media");
+    public synchronized void close(){
+        if(output != null){
+            output.flush();
+            output.close();
+            classFieldMap.clear();
         }
+    }
 
-        if (media.listFiles().length < 1) {
-            throw new DirectoryNotFoundException("No media devices found in system");
-        }
+    /**
+     * a function to scan for a logging folder inside a usb device mounted to the roborio
+     * this is beacuse folders will remain mounted due to a strange kernel issue
+     * @param fileName general name of the file to generate with
+     * @return a file reference to the created logging file in the usb drive's logging folder
+     * @throws FileNotFoundException if a logging directory is not found a DirectoryNotFoundException
+     *  will be thrown
+     */
+    public static File getMount(String fileName) throws FileNotFoundException {
+        if(RobotBase.isReal()){
 
-        //Locate the currently active media drive by finding a nested logging directory
-        File logging_path = null;
-        for (File mount : media.listFiles()) {
-            logging_path = new File(mount.getAbsolutePath() + "/logging");
-            if (logging_path.isDirectory()) {
-                System.out.println(logging_path.getAbsolutePath());
-                break;
+            //create base file reference looking for the media directory
+            File media = new File("/media");
+            if (!media.exists()) {
+                throw new DirectoryNotFoundException("/media");
             }
-            logging_path = null;
+
+            if (media.listFiles().length < 1) {
+                throw new DirectoryNotFoundException("No media devices found in system");
+            }
+
+            //Locate the currently active media drive by finding a nested logging directory
+            File logging_path = null;
+            for (File mount : media.listFiles()) {
+                logging_path = new File(mount.getAbsolutePath() + "/logging");
+                if (logging_path.isDirectory()) {
+                    System.out.println(logging_path.getAbsolutePath());
+                    break;
+                }
+                logging_path = null;
+            }
+
+            if (logging_path.equals(null)) {
+                throw new DirectoryNotFoundException("No media device with a logging directory was found");
+            }
+
+            File fileref = new File(logging_path.getAbsolutePath() + File.separator + getTimeStampedFileName(fileName));
+
+            //if(!fileref.canWrite()) throw new FileInvalidException(fileref.getAbsolutePath() + " cannot be written to");
+
+            return fileref;
         }
-
-        if (logging_path.equals(null)) {
-            throw new DirectoryNotFoundException("No media device with a logging directory was found");
+        else{
+            return new File(Filesystem.getLaunchDirectory(), "src\\main\\deploy\\" + getTimeStampedFileName(fileName));
         }
-
-        File fileref = new File(logging_path.getAbsolutePath() + File.separator + getTimeStampedFileName(subsystemName));
-
-        //if(!fileref.canWrite()) throw new FileInvalidException(fileref.getAbsolutePath() + " cannot be written to");
-
-        return fileref;
 
     }
 
-    private static String getTimeStampedFileName(String subsystemName) {
+    /**
+     * Generates a new file name tagged with the creation time and the overall file name
+     */
+    private static String getTimeStampedFileName(String fileName) {
         SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS");
         outputFormatter.setTimeZone(TimeZone.getTimeZone("US/Eastern"));
         String newDateString = outputFormatter.format(new Date());
-        return subsystemName + "_" + newDateString + "_LOG.csv";
+        return fileName + "_" + newDateString + "_LOG.csv";
     }
 
 }

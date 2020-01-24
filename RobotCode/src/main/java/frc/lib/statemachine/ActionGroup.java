@@ -8,6 +8,12 @@ public class ActionGroup {
     private LinkedList<Action> group;
     private double t_Start, t_Timeout;
 
+    /**
+     * Constructs an action group from an array of actions. Actions will 
+     * be handled in the order they are added to the group
+     * @param actions the array of actions to construc the group with
+     * @param timeout_ms the timeout of the whoe group in msec
+     */
     ActionGroup(Action[] actions, long timeout_ms) {
         t_Timeout = (double) timeout_ms / 1000.000;
         group = new LinkedList<>();
@@ -17,14 +23,21 @@ public class ActionGroup {
 
     }
 
+    /**
+     * Constructs an action group frm a single action. Actions will 
+     * be handled in the order they are added to the group
+     * @param action the single action to contruct the group from
+     * @param timeout_ms the timeout of the group in msec
+     */
     ActionGroup(Action action, long timeout_ms) {
-        t_Timeout = (double) timeout_ms / 1000.00000000000000000000000000000000000000000000000000000000000000000000000000000000;
+        t_Timeout = (double) timeout_ms / 1000.000;
         group = new LinkedList<>();
         group.add(action);
     }
 
     /**
-     * records start time of state then executes all actions onStart
+     * Runs the on-start code for each action in the group.
+     * Also records the start time of state
      */
     public void onStart() {
         t_Start = Timer.getFPGATimestamp();
@@ -32,18 +45,21 @@ public class ActionGroup {
     }
 
     /**
-     * runs the onloop code of all actions in the group
-     * <p>executes in order added to group
+     * Runs the on-loop code for each action in the group.
      */
     public void onLoop() {
         group.forEach(Action::onLoop);
     }
 
     /**
-     * determines when to begin state advancement
-     * <p>handles self terminated actions automatically
+     * Determines if the state is ready to be advanced. This can
+     * happen forcefully on a timeout or if all action in the 
+     * group time out individually. 
+     * <p>This also handles calling the stop code on actions who
+     * have completed independently.
      *
-     * @return true when all actions are finished
+     * @return true if all actions in the group have finished or
+     * if they should be forcibly timed out
      */
     public boolean isFinished() {
         if (t_Start + t_Timeout <= Timer.getFPGATimestamp()) {
@@ -61,10 +77,23 @@ public class ActionGroup {
     }
 
     /**
-     * forceful exit for all actions in the group
+     * forcibly terminate all actions within the group
      */
     public void onStop() {
         group.forEach(Action::doStop);
+    }
+
+    /**
+     * gets a string representation of the class names inside the action group
+     * @return a string of all class names in the group
+     */
+    public String toString(){
+        String classNames = "";
+        for (int i = 0; i < group.size(); i++) {
+            classNames += group.get(i).getClass().getSimpleName();
+            if(i < group.size() - 1) classNames += " ";
+        }
+        return classNames;
     }
 
 }
