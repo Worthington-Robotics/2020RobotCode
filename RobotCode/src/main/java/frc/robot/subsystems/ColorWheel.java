@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.I2C;
 import frc.lib.drivers.ColorSensorV3;
 import frc.robot.Constants;
 import frc.lib.util.Util;
-
 import java.awt.Color;
-
 import static frc.lib.drivers.ColorSensorV3.*;
 
 public class ColorWheel extends Subsystem {
@@ -51,14 +49,14 @@ public class ColorWheel extends Subsystem {
     public void writePeriodicOutputs() {
         periodic.RGB = new int[]{colorSensor.getRed(), colorSensor.getBlue(), colorSensor.getGreen()};
         if (!periodic.colorMotorPidOn) {
-            colorWheelTalon.set(ControlMode.PercentOutput, 0);
+            colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
         } else {
             colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.distance));
         }
     }
 
     private double inchesToTicks(double inches) {
-        return Constants.ENCODER_5046_CPR / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI);
+        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.ENCODER_5046_CPR;
     }
 
     @Override

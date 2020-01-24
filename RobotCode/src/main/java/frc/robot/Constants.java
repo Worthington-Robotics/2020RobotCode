@@ -84,6 +84,8 @@ public class Constants {
     public static final int COLOR_WHEEL_SAT_LIMIT = 80;
     public static final int COLOR_WHEEL_VAL_LIMIT = 80;
 
+    public static final double COLOR_WHEEL_ROTATION_DISTANCE = 50 * Math.PI;
+
     public static final double COLOR_WHEEL_SPINNER_DIA = 2.0;
 
     public static final double COLOR_WHEEL_KF = 0.0; //TODO TUNE PID
@@ -91,6 +93,8 @@ public class Constants {
     public static final double COLOR_WHEEL_KI = 0.0;
     public static final double COLOR_WHEEL_KD = 0.0;
     public static final double COLOR_WHEEL_VCOMP = 0.0;
+
+    
 
     //Limelight Constants
     public static final double LIMELIGHT_DEG_FOV = 0.0; //TODO CALCULATE FOV
