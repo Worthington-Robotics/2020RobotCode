@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -12,18 +14,19 @@ import frc.robot.Constants;
 public class Shooter extends Subsystem {
 
     private static Shooter m_Shooter = new Shooter();
+    private ShooterMode flywheelMode = ShooterMode.OPEN_LOOP;
     private ShooterIO periodic;
-    private TalonFX Talon1, Talon2;
+    private TalonFX rightFlywheelFalcon, leftFlywheelFalcon;
+    private TalonSRX turretControl;
     private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     private NetworkTableEntry tx = table.getEntry("tx");
     private NetworkTableEntry ty = table.getEntry("ty");
     private NetworkTableEntry ta = table.getEntry("ta");
     private NetworkTableEntry camtran = table.getEntry("camtran");
     private Shooter() {
-        Talon1 = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
-        Talon2 = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
-        configLimelight();
-
+        rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
+        leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
+        turretControl = new TalonSRX(Constants.TURRET_CONTROL);
         reset();
     }
 
@@ -70,8 +73,20 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void writePeriodicOutputs() {
-        Talon1.set(ControlMode.PercentOutput, periodic.demand);
-        Talon2.set(ControlMode.PercentOutput, periodic.demand);
+        switch (flywheelMode) {
+            case OPEN_LOOP:
+                System.out.println("In Open Loop");
+                leftFlywheelFalcon1.set(ControlMode.PercentOutput, periodic.demand);
+                flywheelFalcon2.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
+                break;
+            case RPM_CONTROL:
+                System.out.println("In RPM Control Mode");
+                break;
+            default:
+                break;
+        }
+        flywheelFalcon1.set(ControlMode.PercentOutput, periodic.demand);
+        flywheelFalcon2.set(ControlMode.PercentOutput, periodic.demand);
     }
 
     /**
@@ -99,6 +114,7 @@ public class Shooter extends Subsystem {
     @Override
     public void reset() {
         periodic = new ShooterIO();
+        configLimelight();;
     }
 
     public void setDemand(double newDemand){
@@ -109,6 +125,14 @@ public class Shooter extends Subsystem {
         return periodic;
     }
 
+    public enum ShooterMode {
+        DISABLED,
+        OPEN_LOOP,
+        RPM_CONTROL;
+            public String toString() {
+                return name().charAt(0) + name().substring(1).toLowerCase();
+            }
+    }
     public class ShooterIO extends Subsystem.PeriodicIO {
         private double targetX = 0.0;
         private double targetY = 0.0;
