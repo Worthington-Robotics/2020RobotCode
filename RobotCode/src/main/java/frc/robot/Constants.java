@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import frc.lib.util.HIDHelper;
+
 public class Constants {
     /**
      * device ID declarations ---------------------------------
@@ -86,4 +89,19 @@ public class Constants {
 
     public static final int satLimit = 80;
     public static final int valLimit = 80;
+
+    /**
+     * Superstructure belt constants
+     */
+    public static final double FULL_SPEED_BELT = 0.75;
+    public static final double STOP_BELT = 0;
+
+    /**
+     * Joystick
+     */
+    //Stick Constants
+    public static final Joystick MASTER = new Joystick(0);
+    public static final Joystick LAUNCH_PAD = new Joystick(1);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.2, 0.99, 0.99, 0.6, 2);
+    public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.2, 0.99, 0.99, 0.8, 2);
 }
