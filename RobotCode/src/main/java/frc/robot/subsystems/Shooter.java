@@ -76,17 +76,19 @@ public class Shooter extends Subsystem {
         switch (flywheelMode) {
             case OPEN_LOOP:
                 System.out.println("In Open Loop");
-                leftFlywheelFalcon1.set(ControlMode.PercentOutput, periodic.demand);
-                flywheelFalcon2.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
+                leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.demand);
+                rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
                 break;
             case RPM_CONTROL:
+                leftFlywheelFalcon.set(ControlMode.Velocity, periodic.demand);
+                rightFlywheelFalcon.set(ControlMode.Follower, periodic.demand);
                 System.out.println("In RPM Control Mode");
                 break;
             default:
                 break;
         }
-        flywheelFalcon1.set(ControlMode.PercentOutput, periodic.demand);
-        flywheelFalcon2.set(ControlMode.PercentOutput, periodic.demand);
+        leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.demand);
+        rightFlywheelFalcon.set(ControlMode.PercentOutput, periodic.demand);
     }
 
     /**
