@@ -20,6 +20,11 @@ public class Constants {
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
 
+    /* 
+        Turret tuned values ---------------
+    */
+    public static final double TURRET_CONTROL_PID_P = 0;
+    public static final double TURRET_CONTROL_PID_D = 0;
     /**
      * Drivetrain tuned values --------------------------------
      */
@@ -69,6 +74,11 @@ public class Constants {
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
 	public static double LOOPER_DT = 0.01;
+
+	public static double LEFTFLYWHEELFALCON_KD = 0.0;
+    public static double LEFTFLYWHEELFALCON_KP = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KD = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KP = 0.0;
 
 	//Color Wheel Constants
     public static final int redH1 = 0;
