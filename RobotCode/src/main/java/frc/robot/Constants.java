@@ -20,6 +20,11 @@ public class Constants {
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
 
+    /* 
+        Turret tuned values ---------------
+    */
+    public static final double TURRET_CONTROL_PID_P = 0;
+    public static final double TURRET_CONTROL_PID_D = 0;
     /**
      * Drivetrain tuned values --------------------------------
      */
