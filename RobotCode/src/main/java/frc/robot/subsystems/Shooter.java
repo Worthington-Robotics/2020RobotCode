@@ -14,7 +14,8 @@ import frc.robot.Constants;
 public class Shooter extends Subsystem {
 
     private static Shooter m_Shooter = new Shooter();
-    private ShooterMode flywheelMode = ShooterMode.OPEN_LOOP;
+    private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
+    private MotorControlMode turretMode = MotorControlMode.DISABLED;
     private ShooterIO periodic;
     private TalonFX rightFlywheelFalcon, leftFlywheelFalcon;
     private TalonSRX turretControl;
@@ -75,20 +76,31 @@ public class Shooter extends Subsystem {
     public void writePeriodicOutputs() {
         switch (flywheelMode) {
             case OPEN_LOOP:
-                System.out.println("In Open Loop");
-                leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.demand);
+                leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.flywheelDemand);
                 rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
                 break;
-            case RPM_CONTROL:
-                leftFlywheelFalcon.set(ControlMode.Velocity, periodic.demand);
-                rightFlywheelFalcon.set(ControlMode.Follower, periodic.demand);
-                System.out.println("In RPM Control Mode");
+            case PID_MODE:
+                leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
+                rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
                 break;
             default:
+            leftFlywheelFalcon.set(ControlMode.Disabled, 0);
+            rightFlywheelFalcon.set(ControlMode.Disabled, 0);
                 break;
         }
-        leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.demand);
-        rightFlywheelFalcon.set(ControlMode.PercentOutput, periodic.demand);
+                switch (turretMode) {
+                    case OPEN_LOOP:
+                        turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
+                        break;
+                    case PID_MODE:
+                        turretControl.set(ControlMode.Position, periodic.turretDemand);
+                        break;
+                    default:
+                    turretControl.set(ControlMode.Disabled, 0);
+                        break;
+        }
+        System.out.println("Flywheel is in " + flywheelMode);
+        System.out.println("Turret is in " + turretControl);
     }
 
     /**
@@ -110,27 +122,55 @@ public class Shooter extends Subsystem {
         table.getEntry("snapshot").setNumber(0);
     }
 
+    public void configTalons() {
+        turretControl.config_kP(1, Constants.TURRET_CONTROL_PID_P);
+        turretControl.config_kD(1, Constants.TURRET_CONTROL_PID_D);
+    }
+
     /**
      * Called to reset and configure the subsystem
      */
     @Override
     public void reset() {
         periodic = new ShooterIO();
-        configLimelight();;
+        configLimelight();
+        configTalons();
     }
 
-    public void setDemand(double newDemand){
-        periodic.demand = newDemand;
+    public void setFlywheelRPM(){
+        if(flywheelMode != MotorControlMode.PID_MODE)
+            flywheelMode = MotorControlMode.PID_MODE;
+        leftFlywheelFalcon.set(ControlMode.Velocity, 0); //TODO add safety that moves to hold current speed
+        rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
+
+    public void setTurretRPM(){
+        if(turretMode != MotorControlMode.PID_MODE)
+            turretMode = MotorControlMode.PID_MODE;
+        turretControl.set(ControlMode.Velocity, 0);
+    }
+
+    public void setFlywheelDemand(double newDemand){
+        if(flywheelMode != MotorControlMode.OPEN_LOOP)
+            flywheelMode = MotorControlMode.OPEN_LOOP;
+        periodic.flywheelDemand = newDemand;
+    }
+
+    public void setTurretDemand(double newDemand){
+        if(turretMode != MotorControlMode.OPEN_LOOP)
+            turretMode = MotorControlMode.OPEN_LOOP;
+        periodic.turretDemand = newDemand;
+    }
+
 
     public Subsystem.PeriodicIO getLogger() {
         return periodic;
     }
 
-    public enum ShooterMode {
+    public enum MotorControlMode {
         DISABLED,
         OPEN_LOOP,
-        RPM_CONTROL;
+        PID_MODE;
             public String toString() {
                 return name().charAt(0) + name().substring(1).toLowerCase();
             }
@@ -139,6 +179,9 @@ public class Shooter extends Subsystem {
         private double targetX = 0.0;
         private double targetY = 0.0;
         private double targetArea = 0.0;
-        public double demand = 0.0;
+        public double flywheelDemand = 0.0;
+        public double flywheelRPM = 0.0;
+        public double turretDemand = 0.0;
+        public double turretRPM = 0.0;
     }
 }
