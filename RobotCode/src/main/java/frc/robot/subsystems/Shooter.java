@@ -125,6 +125,10 @@ public class Shooter extends Subsystem {
     public void configTalons() {
         turretControl.config_kP(1, Constants.TURRET_CONTROL_PID_P);
         turretControl.config_kD(1, Constants.TURRET_CONTROL_PID_D);
+        rightFlywheelFalcon.config_kP(1, Constants.RIGHTFLYWHEELFALCON_KP);
+        rightFlywheelFalcon.config_kD(1, Constants.RIGHTFLYWHEELFALCON_KD);
+        leftFlywheelFalcon.config_kP(1, Constants.LEFTFLYWHEELFALCON_KP);
+        leftFlywheelFalcon.config_kD(1, Constants.LEFTFLYWHEELFALCON_KD);
     }
 
     /**
