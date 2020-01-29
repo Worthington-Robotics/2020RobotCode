@@ -24,6 +24,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry ty = table.getEntry("ty");
     private NetworkTableEntry ta = table.getEntry("ta");
     private NetworkTableEntry camtran = table.getEntry("camtran");
+
     private Shooter() {
         rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
         leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
@@ -84,20 +85,20 @@ public class Shooter extends Subsystem {
                 rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
                 break;
             default:
-            leftFlywheelFalcon.set(ControlMode.Disabled, 0);
-            rightFlywheelFalcon.set(ControlMode.Disabled, 0);
+                leftFlywheelFalcon.set(ControlMode.Disabled, 0);
+                rightFlywheelFalcon.set(ControlMode.Disabled, 0);
                 break;
         }
-                switch (turretMode) {
-                    case OPEN_LOOP:
-                        turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
-                        break;
-                    case PID_MODE:
-                        turretControl.set(ControlMode.Position, periodic.turretDemand);
-                        break;
-                    default:
-                    turretControl.set(ControlMode.Disabled, 0);
-                        break;
+        switch (turretMode) {
+            case OPEN_LOOP:
+                turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
+                break;
+            case PID_MODE:
+                turretControl.set(ControlMode.Position, periodic.turretDemand);
+                break;
+            default:
+                turretControl.set(ControlMode.Disabled, 0);
+                break;
         }
         System.out.println("Flywheel is in " + flywheelMode);
         System.out.println("Turret is in " + turretControl);
@@ -141,27 +142,27 @@ public class Shooter extends Subsystem {
         configTalons();
     }
 
-    public void setFlywheelRPM(){
-        if(flywheelMode != MotorControlMode.PID_MODE)
+    public void setFlywheelRPM() {
+        if (flywheelMode != MotorControlMode.PID_MODE)
             flywheelMode = MotorControlMode.PID_MODE;
         leftFlywheelFalcon.set(ControlMode.Velocity, 0); //TODO add safety that moves to hold current speed
         rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
 
-    public void setTurretRPM(){
-        if(turretMode != MotorControlMode.PID_MODE)
+    public void setTurretRPM() {
+        if (turretMode != MotorControlMode.PID_MODE)
             turretMode = MotorControlMode.PID_MODE;
         turretControl.set(ControlMode.Velocity, 0);
     }
 
-    public void setFlywheelDemand(double newDemand){
-        if(flywheelMode != MotorControlMode.OPEN_LOOP)
+    public void setFlywheelDemand(double newDemand) {
+        if (flywheelMode != MotorControlMode.OPEN_LOOP)
             flywheelMode = MotorControlMode.OPEN_LOOP;
         periodic.flywheelDemand = newDemand;
     }
 
-    public void setTurretDemand(double newDemand){
-        if(turretMode != MotorControlMode.OPEN_LOOP)
+    public void setTurretDemand(double newDemand) {
+        if (turretMode != MotorControlMode.OPEN_LOOP)
             turretMode = MotorControlMode.OPEN_LOOP;
         periodic.turretDemand = newDemand;
     }
@@ -175,10 +176,12 @@ public class Shooter extends Subsystem {
         DISABLED,
         OPEN_LOOP,
         PID_MODE;
-            public String toString() {
-                return name().charAt(0) + name().substring(1).toLowerCase();
-            }
+
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
+
     public class ShooterIO extends Subsystem.PeriodicIO {
         private double targetX = 0.0;
         private double targetY = 0.0;
