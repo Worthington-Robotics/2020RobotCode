@@ -9,6 +9,7 @@ public class Constants {
     public static final int SHOOTER_FLYWHEEL_RIGHT = 1;
     public static final int SHOOTER_FLYWHEEL_LEFT = 2;
     public static final int COLOR_WHEEL = 3;
+    public static final int TURRET_CONTROL = 13;
     //Spark Ports
 
     //Solenoid Ports
@@ -20,6 +21,11 @@ public class Constants {
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
 
+    /* 
+        Turret tuned values ---------------
+    */
+    public static final double TURRET_CONTROL_PID_P = 0;
+    public static final double TURRET_CONTROL_PID_D = 0;
     /**
      * Drivetrain tuned values --------------------------------
      */
@@ -72,6 +78,11 @@ public class Constants {
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
 	public static double LOOPER_DT = 0.01;
+
+	public static double LEFTFLYWHEELFALCON_KD = 0.0;
+    public static double LEFTFLYWHEELFALCON_KP = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KD = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KP = 0.0;
 
 	//Color Wheel Constants
     public static final int COLOR_WHEEL_RED_HUE1 = 0;
