@@ -43,25 +43,40 @@ public class ColorWheel extends Subsystem {
             periodic.fmsColor = 'U';
         }
         periodic.closedLoopError = colorWheelTalon.getClosedLoopError();
+        if (!(periodic.currentColor == 'U')) {
+            periodic.colorWheelReading = true;
+        } else {
+            periodic.colorWheelReading = false;
+        }
     }
 
     @Override
     public void writePeriodicOutputs() {
         periodic.RGB = new int[]{colorSensor.getRed(), colorSensor.getBlue(), colorSensor.getGreen()};
-        if (!periodic.colorMotorPidOn) {
-            colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
-        } else {
-            colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.distance));
-        }
-    }
-
-    private double inchesToTicks(double inches) {
-        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.ENCODER_5046_CPR;
+        periodic.currentColor = colorFromRGB(periodic.RGB);
+        if (periodic.colorWheelReading) {
+            if (periodic.fmsColor == 'U') {
+                if (!periodic.colorMotorPidOn) {
+                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
+                }
+            } else {
+                if (!periodic.colorMotorPidOn) {
+                    distance();
+                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.distance));
+                }
+            }
+        } else {}
     }
 
     @Override
     public void outputTelemetry() {
 
+    }
+
+    // User Created Methods
+    
+    private double inchesToTicks(double inches) {
+        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.ENCODER_5046_CPR;
     }
 
     /**
@@ -187,10 +202,12 @@ public class ColorWheel extends Subsystem {
     public class ColorWheelIO extends Subsystem.PeriodicIO {
         public double closedLoopError = 0;
         public char fmsColor = 'U';
+        public char currentColor = 'U';
         public double distance = 0;
         public int[] RGB = new int[]{0, 0, 0};
         public int colorDirectionCalc;
         public double demand = 0.0;
         public boolean colorMotorPidOn = false;
+        public boolean colorWheelReading = false;
     }
 }
