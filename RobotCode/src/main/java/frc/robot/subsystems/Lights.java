@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -38,6 +36,8 @@ public class Lights extends Subsystem {
             allianceColor = Color.kChocolate;
         }
         colorH = interpretColor(ColorWheel.getInstance().cDetected());
+        //TODO Add Light Implementation for indexer
+        //TODO Implement targeting
     }
 
     @Override
