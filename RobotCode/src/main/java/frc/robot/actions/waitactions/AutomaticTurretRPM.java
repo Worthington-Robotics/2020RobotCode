@@ -14,7 +14,7 @@ public class AutomaticTurretRPM extends Action {
 
     public void onStart() {
         Shooter.getInstance().setRPMOnTarget(false);
-        goalRPM = Shooter.getInstance().calcRPM();
+        goalRPM = Shooter.getInstance().RPMToTicksPer100ms(Shooter.getInstance().calculateRPM(Shooter.getInstance().limelightRanging()));
         Shooter.getInstance().setFlywheelRPM(goalRPM);
     }
 

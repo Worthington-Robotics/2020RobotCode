@@ -36,10 +36,6 @@ public class Shooter extends Subsystem {
         return m_Shooter;
     }
 
-    public static double calcRPM() {
-        return 0.0;
-    }
-
     /**
      * Updates all periodic variables and sensors
      */
@@ -142,7 +138,22 @@ public class Shooter extends Subsystem {
         configLimelight();
         configTalons();
     }
-    
+
+    public double limelightRanging()
+    {
+        return 0; //TODO implement an algoithm to convert tA into a useful range in inches
+    }
+
+    public double calculateRPM(double distance)
+    {
+        return 0; //TODO implement the equation to calculate the required inittal velocity and then convert to revolutions per Miniut
+    }
+
+    public double RPMToTicksPer100ms(double RPM)
+    {
+        return 0; //TODO Implement a convertion to convert RPM to tickes per 100ms
+    }
+
     public void setFlywheelRPM(double demand){
         if(flywheelMode != MotorControlMode.PID_MODE)
 
@@ -151,10 +162,10 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
 
-    public void setTurretRPM() {
+    public void setTurretRPM(double demand) {
         if (turretMode != MotorControlMode.PID_MODE)
             turretMode = MotorControlMode.PID_MODE;
-        turretControl.set(ControlMode.Velocity, 0);
+        turretControl.set(ControlMode.Velocity, demand);
     }
 
     public void setFlywheelDemand(double newDemand) {
