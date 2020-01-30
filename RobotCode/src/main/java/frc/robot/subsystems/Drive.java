@@ -2,13 +2,10 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -20,7 +17,6 @@ import frc.lib.control.AdaptivePurePursuitController;
 import frc.lib.control.Path;
 import frc.lib.drivers.PIDF;
 import frc.lib.geometry.Pose2d;
-import frc.lib.geometry.Pose2dWithCurvature;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.geometry.Twist2d;
 import frc.lib.loops.ILooper;
@@ -29,10 +25,6 @@ import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 import frc.robot.Kinematics;
-/*TODO
-feedforward should not be in periodic IO
-you should merge the fixed robot.java in and register drive then pose estimator
-*/
 
 public class Drive extends Subsystem {
 
@@ -156,7 +148,7 @@ public class Drive extends Subsystem {
         driveFrontRight = new TalonFX(Constants.DRIVE_FRONT_RIGHT_ID);
         driveMiddleRight = new TalonFX(Constants.DRIVE_MIDDLE_RIGHT_ID);
         driveBackRight = new TalonFX(Constants.DRIVE_BACK_RIGHT_ID);
-        pigeonIMU = new PigeonIMU(0);
+        pigeonIMU = new PigeonIMU(Constants.PIGION_ID);
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
@@ -372,9 +364,6 @@ public class Drive extends Subsystem {
         }
         periodic.left_demand = signal.getLeft();
         periodic.right_demand = signal.getRight();
-        periodic.left_feedforward = feedforward.getLeft();
-        periodic.right_feedforward = feedforward.getRight();
-
     }
 
     public boolean isDoneWithTrajectory() {
@@ -430,12 +419,10 @@ public class Drive extends Subsystem {
         private double left_accl = 0.0;
         private double left_demand = 0.0;
         private double left_distance = 0.0;
-        private double left_feedforward = 0.0;
 
         private double right_accl = 0.0;
         private double right_demand = 0.0;
         private double right_distance = 0.0;
-        private double right_feedforward = 0.0;
 
     }
 

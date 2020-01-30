@@ -8,7 +8,8 @@ public class Constants {
      * device ID declarations ---------------------------------
      */
     
-
+    //Pigion ID
+    public static final int PIGION_ID = 0;
     //Talon IDs
     public static final int DRIVE_FRONT_LEFT_ID = 1;
     public static final int DRIVE_MIDDLE_LEFT_ID = 2;
