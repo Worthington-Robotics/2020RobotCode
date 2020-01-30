@@ -87,6 +87,7 @@ public class Drive extends Subsystem {
                     case ANGLE_PID:
                         periodic.PIDOutput = anglePID.update(periodic.gyro_heading.getDegrees());
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.PIDOutput));
+                        //System.out.println("Angle PID Mode X: " + periodic.operatorInput[0] + " Y: " + periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2] + " PID Output: " + periodic.PIDOutput);
                         break;
                     default:
                         System.out.println("You fool, unexpected control state");

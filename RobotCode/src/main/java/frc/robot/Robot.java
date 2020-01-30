@@ -18,6 +18,7 @@ import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
+import frc.robot.actions.driveactions.GyroLock;
 import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Lights;
@@ -138,6 +139,8 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
+        JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
+        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
         shift.whileHeld(Action.toCommand(new Shift()));
     }
 
