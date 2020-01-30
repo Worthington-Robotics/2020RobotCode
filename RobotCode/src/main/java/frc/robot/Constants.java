@@ -39,7 +39,12 @@ public class Constants {
      * Drivetrain tuned values --------------------------------
      */
 
-    //Test Flags
+    //Path Following Constants
+    public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
+    public static final double DRIVETRAIN_UPDATE_RATE = 0;
+    public static final double PATH_FOLLOWING_MAX_ACCELERATION = 0;
+    public static final double DRIVE_MAX_VEL = 0; //in/s
+    //Test Flags 
     public static final boolean RAMPUP = false;
     public static final double MP_TEST_SPEED = 72; //in/s
     //Physical Constants

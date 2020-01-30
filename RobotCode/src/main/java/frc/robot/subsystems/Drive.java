@@ -14,18 +14,17 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.control.AdaptivePurePursuitController;
+import frc.lib.control.Path;
 import frc.lib.drivers.PIDF;
 import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Pose2dWithCurvature;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.trajectory.TrajectoryIterator;
-import frc.lib.trajectory.timing.TimedState;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-import frc.robot.planners.DriveMotionPlanner;
 
 public class Drive extends Subsystem {
 
@@ -42,7 +41,6 @@ public class Drive extends Subsystem {
 
     // used internally for data
     private DriveControlState mDriveControlState = DriveControlState.OPEN_LOOP;
-    private DriveMotionPlanner mMotionPlanner;
     private boolean mOverrideTrajectory = false;
     private DriveIO periodic;
     private PigeonIMU pigeonIMU;
@@ -146,7 +144,6 @@ public class Drive extends Subsystem {
 
     private Drive() {
         anglePID = new PIDF(Constants.ANGLE_KP, Constants.ANGLE_KD);
-        mMotionPlanner = new DriveMotionPlanner();
         driveFrontLeft = new TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
         driveMiddleLeft = new VictorSPX(Constants.DRIVE_MIDDLE_LEFT_ID);
         driveBackLeft = new VictorSPX(Constants.DRIVE_BACK_LEFT_ID);
@@ -209,9 +206,7 @@ public class Drive extends Subsystem {
 
     public void reset() {
         mOverrideTrajectory = false;
-        mMotionPlanner.reset();
         // pigeonIMU.enterCalibrationMode(PigeonIMU.CalibrationMode.Temperature);
-        mMotionPlanner.setFollowerType(DriveMotionPlanner.FollowerType.NONLINEAR_FEEDBACK);
         periodic = new DriveIO();
         setHeading(Rotation2d.fromDegrees(0));
         resetEncoders();
@@ -301,28 +296,10 @@ public class Drive extends Subsystem {
 
     private void updatePathFollower() {
         if (mDriveControlState == DriveControlState.PATH_FOLLOWING) {
-            final double now = Timer.getFPGATimestamp();
-
-            DriveMotionPlanner.Output output = mMotionPlanner.update(now,
-                    PoseEstimator.getInstance().getFieldToVehicle(now));
-
-            periodic.error = mMotionPlanner.error();
-            periodic.path_setpoint = mMotionPlanner.setpoint();
-
             if (!mOverrideTrajectory) {
-                DriveSignal signal = new DriveSignal(radiansPerSecondToTicksPer100ms(output.left_velocity),
-                        radiansPerSecondToTicksPer100ms(output.right_velocity));
-
-                setVelocity(signal,
-                        new DriveSignal(output.left_feedforward_voltage / 12, output.right_feedforward_voltage / 12));
-                periodic.left_accl = radiansPerSecondToTicksPer100ms(output.left_accel) / 1000;
-                periodic.right_accl = radiansPerSecondToTicksPer100ms(output.right_accel) / 1000;
-
             } else {
                 setVelocity(DriveSignal.BRAKE, DriveSignal.BRAKE);
                 mDriveControlState = DriveControlState.OPEN_LOOP;
-                mMotionPlanner.reset();
-
             }
         } else {
             DriverStation.reportError("Drive is not in path following state", false);
@@ -393,20 +370,7 @@ public class Drive extends Subsystem {
 
     }
 
-    public synchronized void setTrajectory(TrajectoryIterator<TimedState<Pose2dWithCurvature>> trajectory) {
-        if (mMotionPlanner != null) {
-            mOverrideTrajectory = false;
-            mMotionPlanner.reset();
-            mMotionPlanner.setTrajectory(trajectory);
-            mDriveControlState = DriveControlState.PATH_FOLLOWING;
-        }
-    }
-
     public boolean isDoneWithTrajectory() {
-        if (mMotionPlanner == null || mDriveControlState != DriveControlState.PATH_FOLLOWING) {
-            return true;
-        }
-        return mMotionPlanner.isDone() || mOverrideTrajectory;
     }
 
     public void outputTelemetry() {
@@ -415,28 +379,18 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Drive/Error/X", periodic.error.getTranslation().x());
         SmartDashboard.putNumber("Drive/Error/Y", periodic.error.getTranslation().y());
         SmartDashboard.putNumber("Drive/Error/Theta", periodic.error.getRotation().getDegrees());
-        SmartDashboard.putNumber("Drive/Setpoint/X", periodic.path_setpoint.state().getTranslation().x());
-        SmartDashboard.putNumber("Drive/Setpoint/Y", periodic.path_setpoint.state().getTranslation().y());
-        SmartDashboard.putNumber("Drive/Setpoint/Theta", periodic.path_setpoint.state().getRotation().getDegrees());
 
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
         SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
-        // SmartDashboard.putNumber("Drive/Misc/Left FeedForward",
-        // periodic.left_feedforward);
-        // SmartDashboard.putNumber("Drive/Misc/Left Acceleration", periodic.left_accl);
 
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
         SmartDashboard.putNumber("Drive/Right/Talon Voltage Out", driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Right/Encoder Counts", periodic.right_pos_ticks);
-        // SmartDashboard.putNumber("Drive/Misc/Right FeedForward",
-        // periodic.right_feedforward);
-        // SmartDashboard.putNumber("Drive/Misc/Right Acceleration",
-        // periodic.right_accl);
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -481,14 +435,19 @@ public class Drive extends Subsystem {
 
         double climber_power = 0;
 
-        TimedState<Pose2dWithCurvature> path_setpoint = new TimedState<>(Pose2dWithCurvature.identity());
-
     }
 
     /**
      * internal methods beyond this point
      **/
 
+    public synchronized void followPath(Path path, boolean reversed) {
+        pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
+                Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 1);
+        mDriveControlState = DriveControlState.PATH_FOLLOWING;
+        updatePathFollower();
+    }
+    
     private static double rotationsToInches(double rotations) {
         return rotations * Math.PI * Constants.DRIVE_WHEEL_DIAMETER_INCHES;
     }
