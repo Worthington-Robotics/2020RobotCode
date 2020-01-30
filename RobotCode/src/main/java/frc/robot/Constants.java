@@ -19,10 +19,16 @@ public class Constants {
     //LED Data/Ports
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
+    /*
+        Flywheel Tuned Values
+    */
+    public static final double IDLE_RPM = 4000;
+    public static final double RPM_ACCEPTIBLE_ERROR = 300; // Ticks per 100 ms
 
     /* 
         Turret tuned values ---------------
     */
+    public static final double TURRET_MAX_SPEED = .75;
     public static final double TURRET_CONTROL_PID_P = 0;
     public static final double TURRET_CONTROL_PID_D = 0;
     /**

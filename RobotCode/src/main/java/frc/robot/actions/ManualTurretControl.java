@@ -1,16 +1,26 @@
 package frc.robot.actions;
 
 import frc.lib.statemachine.Action;
+import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
 
-public class SetManualFlywheel extends Action {
-
+public class ManualTurretControl extends Action {
+        public boolean isCounterClockwise;
+    public ManualTurretControl(boolean CCW)
+    {
+        isCounterClockwise = CCW;
+    }
     /**
      * code to run on action start
      */
     @Override
     public void onStart() {
-        Shooter.getInstance().setFlywheelDemand(1);
+        if(isCounterClockwise)
+        {
+            Shooter.getInstance().setTurretDemand(Constants.TURRET_MAX_SPEED);
+        }else{
+            Shooter.getInstance().setTurretDemand(-1 * Constants.TURRET_MAX_SPEED);
+        }
     }
 
     /**
@@ -37,6 +47,6 @@ public class SetManualFlywheel extends Action {
      */
     @Override
     public void onStop() {
-
+        Shooter.getInstance().setTurretDemand(0);
     }
 }

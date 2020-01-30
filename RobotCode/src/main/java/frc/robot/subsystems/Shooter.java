@@ -47,6 +47,7 @@ public class Shooter extends Subsystem {
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
+        periodic.RPMClosedLoopError = rightFlywheelFalcon.getClosedLoopError();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -59,7 +60,7 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-
+                
             }
 
             @Override
@@ -137,10 +138,10 @@ public class Shooter extends Subsystem {
         configTalons();
     }
 
-    public void setFlywheelRPM(){
+    public void setFlywheelRPM(double demand){
         if(flywheelMode != MotorControlMode.PID_MODE)
             flywheelMode = MotorControlMode.PID_MODE;
-        leftFlywheelFalcon.set(ControlMode.Velocity, 0); //TODO add safety that moves to hold current speed
+        leftFlywheelFalcon.set(ControlMode.Velocity, demand); //TODO add safety that moves to hold current speed
         rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
 
@@ -160,6 +161,18 @@ public class Shooter extends Subsystem {
         if(turretMode != MotorControlMode.OPEN_LOOP)
             turretMode = MotorControlMode.OPEN_LOOP;
         periodic.turretDemand = newDemand;
+    }
+
+    public boolean getRPMOnTarget()
+    {
+        return periodic.RPMOnTarget;
+    }
+    public void setRPMOnTarget(boolean isTarget)
+    {
+        periodic.RPMOnTarget = isTarget;
+    }
+    public double getRPMClosedLoopError(){
+        return periodic.RPMClosedLoopError;
     }
 
 
@@ -183,5 +196,7 @@ public class Shooter extends Subsystem {
         public double flywheelRPM = 0.0;
         public double turretDemand = 0.0;
         public double turretRPM = 0.0;
+        public boolean RPMOnTarget = false;
+        public double RPMClosedLoopError = 0;
     }
 }
