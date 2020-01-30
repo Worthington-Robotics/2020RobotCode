@@ -81,6 +81,11 @@ public class Constants {
 
 	public static double LOOPER_DT = 0.01;
 
+	public static double LEFTFLYWHEELFALCON_KD = 0.0;
+    public static double LEFTFLYWHEELFALCON_KP = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KD = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KP = 0.0;
+
 	//Color Wheel Constants
     public static final int redH1 = 0;
     public static final int redH2 = 360;
