@@ -71,6 +71,7 @@ public class PoseEstimator extends Subsystem {
     }
 
     public synchronized void reset(double start_time, Pose2d initial_field_to_vehicle) {
+        periodic = new PoseIO();
         field_to_vehicle_ = new InterpolatingTreeMap<>(observation_buffer_size_);
         field_to_vehicle_.put(new InterpolatingDouble(start_time), initial_field_to_vehicle);
         periodic.distance_driven = 0.0;
@@ -131,4 +132,9 @@ public class PoseEstimator extends Subsystem {
         // TODO Auto-generated method stub
 
     }
+
+    public LogData logData()
+    {
+        return periodic;
+    } 
 }

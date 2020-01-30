@@ -82,6 +82,7 @@ public class Drive extends Subsystem {
                         break;
                     case OPEN_LOOP:
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[2]));
+                        //System.out.println("X: " + periodic.operatorInput[0] + " Y: " + periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
                         break;
                     case ANGLE_PID:
                         periodic.PIDOutput = anglePID.update(periodic.gyro_heading.getDegrees());
@@ -104,6 +105,7 @@ public class Drive extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+        periodic.operatorInput[1] *= -1; //Adjusted back as reverse and forward as forward (Its inverse because of being a flight simulator) 
         double prevLeftTicks = periodic.left_pos_ticks;
         double prevRightTicks = periodic.right_pos_ticks;
         periodic.left_error = driveFrontLeft.getClosedLoopError();
@@ -124,6 +126,7 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
+        //System.out.println(mDriveControlState);
         if (mDriveControlState == DriveControlState.OPEN_LOOP || mDriveControlState == DriveControlState.ANGLE_PID
                 || (mDriveControlState == DriveControlState.PROFILING_TEST && Constants.RAMPUP)) {
             // sets robot to desired gear
@@ -400,30 +403,35 @@ public class Drive extends Subsystem {
 
     public class DriveIO extends PeriodicIO {
         // INPUTS
-        private int left_pos_ticks;
-        private int right_pos_ticks;
-        private int left_velocity_ticks_per_100ms;
-        private int right_velocity_ticks_per_100ms;
-        private Rotation2d gyro_heading = Rotation2d.identity();
-        private Rotation2d gyro_offset = Rotation2d.identity();
-        private Translation2d error = new Translation2d(0, 0);
-        private double right_error = 0;
-        private double left_error = 0;
-        private double gyro_pid_angle = 0;
-        private double[] operatorInput = { 0, 0, 0 };
-        private DoubleSolenoid.Value TransState = Value.kReverse;
-        private double PIDOutput = 0;
+        public int left_pos_ticks;
+        public int right_pos_ticks;
+        public int left_velocity_ticks_per_100ms;
+        public int right_velocity_ticks_per_100ms;
+        public Rotation2d gyro_heading = Rotation2d.identity();
+        public Rotation2d gyro_offset = Rotation2d.identity();
+        public Translation2d error = new Translation2d(0, 0);
+        public double right_error = 0;
+        public double left_error = 0;
+        public double gyro_pid_angle = 0;
+        public double[] operatorInput = { 0, 0, 0 };
+        public DoubleSolenoid.Value TransState = Value.kReverse;
+        public double PIDOutput = 0;
 
         // OUTPUTS
-        private double ramp_Up_Counter = 0;
-        private double left_accl = 0.0;
-        private double left_demand = 0.0;
-        private double left_distance = 0.0;
+        public double ramp_Up_Counter = 0;
+        public double left_accl = 0.0;
+        public double left_demand = 0.0;
+        public double left_distance = 0.0;
 
-        private double right_accl = 0.0;
-        private double right_demand = 0.0;
-        private double right_distance = 0.0;
+        public double right_accl = 0.0;
+        public double right_demand = 0.0;
+        public double right_distance = 0.0;
 
+    }
+
+    public LogData logData()
+    {
+        return periodic;
     }
 
     /**
