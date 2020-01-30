@@ -30,9 +30,7 @@ import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 import frc.robot.Kinematics;
 /*TODO
-Check your hardware bud
 feedforward should not be in periodic IO
-should probably capture the angle PID setpoint in periodicIO
 you should merge the fixed robot.java in and register drive then pose estimator
 */
 
