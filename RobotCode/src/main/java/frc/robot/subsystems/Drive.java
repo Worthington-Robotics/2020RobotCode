@@ -20,11 +20,13 @@ import frc.lib.drivers.PIDF;
 import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Pose2dWithCurvature;
 import frc.lib.geometry.Rotation2d;
+import frc.lib.geometry.Twist2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
+import frc.robot.Kinematics;
 
 public class Drive extends Subsystem {
 
@@ -48,6 +50,7 @@ public class Drive extends Subsystem {
     private TalonSRX driveFrontLeft, driveBackRight, driveFrontRight;
     private VictorSPX driveMiddleLeft, driveMiddleRight, driveBackLeft;
     private PIDF anglePID;
+    private AdaptivePurePursuitController pathFollowingController;
 
     private final Loop mLoop = new Loop() {
 
@@ -297,6 +300,19 @@ public class Drive extends Subsystem {
     private void updatePathFollower() {
         if (mDriveControlState == DriveControlState.PATH_FOLLOWING) {
             if (!mOverrideTrajectory) {
+                Pose2d robot_pose = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue();
+                Twist2d command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
+                DriveSignal setpoint = Kinematics.inverseKinematics(command);
+                //Scaling the controler to a set max velocity
+                double max_vel = 0;
+                max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
+                max_vel = Math.max(max_vel, Math.abs(setpoint.getRight()));
+                if (max_vel > Constants.DRIVE_MAX_VEL) {
+                    double scaling = Constants.DRIVE_MAX_VEL / max_vel;
+                    setpoint = new DriveSignal(setpoint.getLeft() * scaling, setpoint.getRight() * scaling);
+                }
+                periodic.left_demand = radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getLeft()));
+                periodic.right_demand = radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getRight()));
             } else {
                 setVelocity(DriveSignal.BRAKE, DriveSignal.BRAKE);
                 mDriveControlState = DriveControlState.OPEN_LOOP;
@@ -371,6 +387,8 @@ public class Drive extends Subsystem {
     }
 
     public boolean isDoneWithTrajectory() {
+        return (mDriveControlState == DriveControlState.PATH_FOLLOWING && pathFollowingController.isDone())
+                || mDriveControlState != DriveControlState.PATH_FOLLOWING;
     }
 
     public void outputTelemetry() {
@@ -433,8 +451,6 @@ public class Drive extends Subsystem {
         double right_distance = 0.0;
         double right_feedforward = 0.0;
 
-        double climber_power = 0;
-
     }
 
     /**
@@ -447,7 +463,7 @@ public class Drive extends Subsystem {
         mDriveControlState = DriveControlState.PATH_FOLLOWING;
         updatePathFollower();
     }
-    
+
     private static double rotationsToInches(double rotations) {
         return rotations * Math.PI * Constants.DRIVE_WHEEL_DIAMETER_INCHES;
     }
