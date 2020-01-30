@@ -45,6 +45,7 @@ public class Shooter extends Subsystem {
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
         periodic.RPMClosedLoopError = rightFlywheelFalcon.getClosedLoopError();
+        periodic.rotationsClosedLoopError = turretControl.getClosedLoopError();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -211,11 +212,12 @@ public class Shooter extends Subsystem {
         private double targetX = 0.0;
         private double targetY = 0.0;
         private double targetArea = 0.0;
-        public double flywheelDemand = 0.0;
-        public double flywheelRPM = 0.0;
-        public double turretDemand = 0.0;
-        public double turretRPM = 0.0;
-        public boolean RPMOnTarget = false;
-        public double RPMClosedLoopError = 0;
+        private double flywheelDemand = 0.0;
+        private double flywheelRPM = 0.0;
+        private double turretDemand = 0.0;
+        private double turretRPM = 0.0;
+        private boolean RPMOnTarget = false;
+        private double RPMClosedLoopError = 0;
+        private double rotationsClosedLoopError = 0;
     }
 }
