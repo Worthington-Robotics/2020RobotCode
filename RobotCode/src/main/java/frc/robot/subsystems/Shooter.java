@@ -24,6 +24,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry ty = table.getEntry("ty");
     private NetworkTableEntry ta = table.getEntry("ta");
     private NetworkTableEntry camtran = table.getEntry("camtran");
+
     private Shooter() {
         rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
         leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
@@ -35,10 +36,6 @@ public class Shooter extends Subsystem {
         return m_Shooter;
     }
 
-    public static double calcRPM() {
-        return 0.0;
-    }
-
     /**
      * Updates all periodic variables and sensors
      */
@@ -47,6 +44,8 @@ public class Shooter extends Subsystem {
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
+        periodic.RPMClosedLoopError = rightFlywheelFalcon.getClosedLoopError();
+        periodic.rotationsClosedLoopError = turretControl.getClosedLoopError();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -59,7 +58,7 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-
+                
             }
 
             @Override
@@ -84,20 +83,20 @@ public class Shooter extends Subsystem {
                 rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
                 break;
             default:
-            leftFlywheelFalcon.set(ControlMode.Disabled, 0);
-            rightFlywheelFalcon.set(ControlMode.Disabled, 0);
+                leftFlywheelFalcon.set(ControlMode.Disabled, 0);
+                rightFlywheelFalcon.set(ControlMode.Disabled, 0);
                 break;
         }
-                switch (turretMode) {
-                    case OPEN_LOOP:
-                        turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
-                        break;
-                    case PID_MODE:
-                        turretControl.set(ControlMode.Position, periodic.turretDemand);
-                        break;
-                    default:
-                    turretControl.set(ControlMode.Disabled, 0);
-                        break;
+        switch (turretMode) {
+            case OPEN_LOOP:
+                turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
+                break;
+            case PID_MODE:
+                turretControl.set(ControlMode.Position, periodic.turretDemand);
+                break;
+            default:
+                turretControl.set(ControlMode.Disabled, 0);
+                break;
         }
         System.out.println("Flywheel is in " + flywheelMode);
         System.out.println("Turret is in " + turretControl);
@@ -141,29 +140,57 @@ public class Shooter extends Subsystem {
         configTalons();
     }
 
-    public void setFlywheelRPM(){
+    public double limelightRanging()
+    {
+        return 0; //TODO implement an algoithm to convert tA into a useful range in inches
+    }
+
+    public double calculateRPM(double distance)
+    {
+        return 0; //TODO implement the equation to calculate the required inittal velocity and then convert to revolutions per Miniut
+    }
+
+    public double RPMToTicksPer100ms(double RPM)
+    {
+        return 0; //TODO Implement a convertion to convert RPM to tickes per 100ms
+    }
+
+    public void setFlywheelRPM(double demand){
         if(flywheelMode != MotorControlMode.PID_MODE)
+
             flywheelMode = MotorControlMode.PID_MODE;
-        leftFlywheelFalcon.set(ControlMode.Velocity, 0); //TODO add safety that moves to hold current speed
+        leftFlywheelFalcon.set(ControlMode.Velocity, demand); //TODO add safety that moves to hold current speed
         rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
 
-    public void setTurretRPM(){
-        if(turretMode != MotorControlMode.PID_MODE)
+    public void setTurretRPM(double demand) {
+        if (turretMode != MotorControlMode.PID_MODE)
             turretMode = MotorControlMode.PID_MODE;
-        turretControl.set(ControlMode.Velocity, 0);
+        turretControl.set(ControlMode.Velocity, demand);
     }
 
-    public void setFlywheelDemand(double newDemand){
-        if(flywheelMode != MotorControlMode.OPEN_LOOP)
+    public void setFlywheelDemand(double newDemand) {
+        if (flywheelMode != MotorControlMode.OPEN_LOOP)
             flywheelMode = MotorControlMode.OPEN_LOOP;
         periodic.flywheelDemand = newDemand;
     }
 
-    public void setTurretDemand(double newDemand){
-        if(turretMode != MotorControlMode.OPEN_LOOP)
+    public void setTurretDemand(double newDemand) {
+        if (turretMode != MotorControlMode.OPEN_LOOP)
             turretMode = MotorControlMode.OPEN_LOOP;
         periodic.turretDemand = newDemand;
+    }
+
+    public boolean getRPMOnTarget()
+    {
+        return periodic.RPMOnTarget;
+    }
+    public void setRPMOnTarget(boolean isTarget)
+    {
+        periodic.RPMOnTarget = isTarget;
+    }
+    public double getRPMClosedLoopError(){
+        return periodic.RPMClosedLoopError;
     }
 
 
@@ -175,17 +202,22 @@ public class Shooter extends Subsystem {
         DISABLED,
         OPEN_LOOP,
         PID_MODE;
-            public String toString() {
-                return name().charAt(0) + name().substring(1).toLowerCase();
-            }
+
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
+
     public class ShooterIO extends Subsystem.PeriodicIO {
         private double targetX = 0.0;
         private double targetY = 0.0;
         private double targetArea = 0.0;
-        public double flywheelDemand = 0.0;
-        public double flywheelRPM = 0.0;
-        public double turretDemand = 0.0;
-        public double turretRPM = 0.0;
+        private double flywheelDemand = 0.0;
+        private double flywheelRPM = 0.0;
+        private double turretDemand = 0.0;
+        private double turretRPM = 0.0;
+        private boolean RPMOnTarget = false;
+        private double RPMClosedLoopError = 0;
+        private double rotationsClosedLoopError = 0;
     }
 }
