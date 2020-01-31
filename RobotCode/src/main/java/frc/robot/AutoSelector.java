@@ -13,12 +13,14 @@ import frc.lib.statemachine.StateMachineDescriptor;
  */
 enum UserSelection {
 
-    Auto1("Cargo Ship Left", 1),
-    Auto2("Cargo Ship Right", 2),
-    Auto3("Cargo Ship Left (ARM RESET)", 3),
-    Auto4("Cargo Ship Right (ARM RESET)", 4),
-    Auto5("Cargo Ship Left (ABV)", 5),
-    Auto6("Cargo Ship Right (ABV)", 6),
+    Auto1("Auto 1", 1),
+    Auto2("Auto 2", 2),
+    Auto3("Auto 3", 3),
+    Auto4("Auto 4", 4),
+    Auto5("Auto 5", 5),
+    Auto6("Auto 6", 6),
+
+    
     Auto7("Auto Test Protocol", 7),
     Auto20("Remote Operation", 20);
 
