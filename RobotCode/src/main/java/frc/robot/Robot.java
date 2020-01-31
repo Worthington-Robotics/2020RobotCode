@@ -40,6 +40,8 @@ public class Robot extends TimedRobot {
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
+    JoystickButton shift, gyroLock;
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -61,6 +63,13 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+
+        //create buttons and register actions
+        shift = new JoystickButton(Constants.MASTER, 2);
+        shift.whileHeld(Action.toCommand(new Shift()));
+
+        gyroLock = new JoystickButton(Constants.MASTER, 1);
+        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
     }
 
     /**
@@ -137,11 +146,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
-        JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
-        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-        shift.whileHeld(Action.toCommand(new Shift()));
+        Scheduler.getInstance().run();        
     }
 
     @Override
