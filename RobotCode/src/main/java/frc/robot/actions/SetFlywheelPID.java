@@ -2,12 +2,12 @@ package frc.robot.actions;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
-import sun.awt.util.IdentityLinkedList;
 
 public class SetFlywheelPID extends Action {
 
     /**
      * code to run on action start
+     * 
      */
     @Override
     public void onStart() {
@@ -41,6 +41,5 @@ public class SetFlywheelPID extends Action {
      */
     @Override
     public void onStop() {
-        
     }
 }
