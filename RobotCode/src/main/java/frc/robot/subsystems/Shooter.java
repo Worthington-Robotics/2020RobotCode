@@ -157,7 +157,6 @@ public class Shooter extends Subsystem {
 
     public void setFlywheelRPM(double demand){
         if(flywheelMode != MotorControlMode.PID_MODE)
-
             flywheelMode = MotorControlMode.PID_MODE;
         leftFlywheelFalcon.set(ControlMode.Velocity, demand); //TODO add safety that moves to hold current speed
         rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);

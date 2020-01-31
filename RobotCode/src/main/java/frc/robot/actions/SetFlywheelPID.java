@@ -2,16 +2,19 @@ package frc.robot.actions;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
+import sun.awt.util.IdentityLinkedList;
 
-public class SetManualFlywheel extends Action {
+public class SetFlywheelPID extends Action {
 
     /**
      * code to run on action start
      */
     @Override
     public void onStart() {
-        Shooter.getInstance().setFlywheelDemand(1);
-
+        double length = Shooter.getInstance().limelightRanging();
+        double RPM = Shooter.getInstance().calculateRPM(length);
+        double speed = Shooter.getInstance().RPMToTicksPer100ms(RPM);
+        Shooter.getInstance().setFlywheelRPM(speed);
     }
 
     /**
@@ -38,6 +41,6 @@ public class SetManualFlywheel extends Action {
      */
     @Override
     public void onStop() {
-        Shooter.getInstance().setFlywheelDemand(0);
+        
     }
 }
