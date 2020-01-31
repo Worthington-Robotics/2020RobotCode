@@ -139,10 +139,16 @@ public class Shooter extends Subsystem {
         configLimelight();
         configTalons();
     }
+    /**
+     * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches
+     * Equation came from a degree 2 polynomial regression on data points recorded manually
+     * @return lateral distance from limelight lens to target in inches
+     */
 
     public double limelightRanging()
     {
-        return 0; //TODO implement an algoithm to convert tA into a useful range in inches
+        //Equation that takes in ta (See Limelight Docs) and outputs distance from target in inches
+        return 505 - 409 * periodic.targetArea + 119 * periodic.targetArea * periodic.targetArea; 
     }
 
     public double calculateRPM(double distance)
