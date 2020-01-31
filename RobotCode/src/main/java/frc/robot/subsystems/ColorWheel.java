@@ -61,8 +61,8 @@ public class ColorWheel extends Subsystem {
                 }
             } else {
                 if (!periodic.colorMotorPidOn) {
-                    distance();
-                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.distance));
+                    checkIfDone();
+                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.demand));
                 }
             }
         } else {}
@@ -145,21 +145,16 @@ public class ColorWheel extends Subsystem {
         }
     }
 
-    /**
-     * Picks the direction the wheel has to spin for maximum efficiency and calculates distance to spin the control panel
-     *
-     */
-    private void distance() {
-        periodic.colorDirectionCalc = wheelColorsOrder.indexOf(colorConvert(periodic.fmsColor)) - wheelColorsOrder.indexOf(cDetected());
-        if (wheelColorsOrder.indexOf(colorConvert(periodic.fmsColor)) == -1 || wheelColorsOrder.indexOf(cDetected()) == -1) {
-            periodic.distance = 0;
-        } else if (periodic.colorDirectionCalc == -3) {
-            periodic.distance = -12.5;
-        }
-        else if (periodic.colorDirectionCalc == 3) {
-            periodic.distance = 12.5;
+    
+    private void checkIfDone() {
+        if (!(periodic.currentColor == 'U')) {
+            if (!(periodic.currentColor == periodic.fmsColor)) {
+                periodic.demand = 12.0; 
+            } else {
+                periodic.demand = 0;
+            }
         } else {
-            periodic.distance = periodic.colorDirectionCalc * 12.5;
+            periodic.demand = .75;
         }
     }
 
