@@ -66,6 +66,8 @@ public class Constants {
 
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
-	public static double LOOPER_DT;
+    public static double LOOPER_DT;
+    
+    public static final double CLIMBER_EPSILON_CONST = 10;
 
 }
