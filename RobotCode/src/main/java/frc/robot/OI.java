@@ -5,7 +5,5 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import frc.robot.actions.*;
 
 public class OI {
-
-    public OI() {
-    }
+    
 }

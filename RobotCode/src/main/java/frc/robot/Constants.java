@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 public class Constants {
     /**
      * device ID declarations ---------------------------------
@@ -17,6 +19,10 @@ public class Constants {
     //LED Data/Ports
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
+
+    //Stick Ports
+    public static final Joystick MASTER = new Joystick(1);
+    public static final Joystick LAUNCHPAD = new Joystick(2);
 
     /**
      * Drivetrain tuned values --------------------------------

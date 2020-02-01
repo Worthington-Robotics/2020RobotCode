@@ -16,9 +16,8 @@ public class Climber extends Subsystem {
         unfoldSolenoid = new DoubleSolenoid(2, 3);
         extendSolenoid = new DoubleSolenoid(4, 5);
     }
-    public Climber mClimber = new Climber();
-    public Climber getInstance() {return mClimber;}
-
+    public static Climber mClimber = new Climber();
+    public static Climber getInstance() {return mClimber;}
     
     @Override
     public void readPeriodicInputs() {

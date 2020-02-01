@@ -8,8 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.statemachine.Action;
+import frc.robot.actions.climberactions.UnfoldAction;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,6 +26,7 @@ public class Robot extends TimedRobot {
     private static final String kCustomAuto = "My Auto";
     private String m_autoSelected;
     private final SendableChooser<String> m_chooser = new SendableChooser<>();
+    private JoystickButton climbUp, climbDown, unfoldClimb;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -33,6 +37,20 @@ public class Robot extends TimedRobot {
         m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
         m_chooser.addOption("My Auto", kCustomAuto);
         SmartDashboard.putData("Auto choices", m_chooser);
+        //create buttons and register actions
+        unfoldClimb = new JoystickButton(Constants.MASTER, 7);
+        climbDown = new JoystickButton(Constants.MASTER, 8);
+        climbUp = new JoystickButton(Constants.MASTER, 9);
+        unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
+        climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
+        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
+        /*
+        shift = new JoystickButton(Constants.MASTER, 2);
+        shift.whileHeld(Action.toCommand(new Shift()));
+
+        gyroLock = new JoystickButton(Constants.MASTER, 1);
+        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
+        */
     }
 
     /**
