@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.Action;
 import frc.robot.actions.climberactions.ClimbDownAction;
 import frc.robot.actions.climberactions.ClimbUpAction;
+import frc.robot.actions.climberactions.FoldAction;
 import frc.robot.actions.climberactions.UnfoldAction;
 import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,8 +25,8 @@ import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
 import frc.robot.actions.driveactions.GyroLock;
 import frc.robot.actions.driveactions.Shift;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Lights;
+//import frc.robot.subsystems.Drive;
+//import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.PoseEstimator;
 
 /**
@@ -38,15 +39,15 @@ import frc.robot.subsystems.PoseEstimator;
 public class Robot extends TimedRobot {
     private static final String kDefaultAuto = "Default";
     private static final String kCustomAuto = "My Auto";
-    private String m_autoSelected;
+    //private String m_autoSelected;
     private final SendableChooser<String> m_chooser = new SendableChooser<>();
-    private JoystickButton climbUp, climbDown, unfoldClimb;
+    private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb;
     private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
         //register subsystems here
-        Climber.getInstance()
+        Climber.getInstance(),
         //Lights.getInstance(),
-        PoseEstimator.getInstance(),
-        Drive.getInstance()
+        PoseEstimator.getInstance()
+        //Drive.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
@@ -62,9 +63,11 @@ public class Robot extends TimedRobot {
         m_chooser.addOption("My Auto", kCustomAuto);
         SmartDashboard.putData("Auto choices", m_chooser);
         //create buttons and register actions
-        unfoldClimb = new JoystickButton(Constants.MASTER, 7);
-        climbDown = new JoystickButton(Constants.MASTER, 8);
-        climbUp = new JoystickButton(Constants.MASTER, 9);
+        foldClimb = new JoystickButton(Constants.MASTER, 9);
+        unfoldClimb = new JoystickButton(Constants.MASTER, 10);
+        climbDown = new JoystickButton(Constants.MASTER, 11);
+        climbUp = new JoystickButton(Constants.MASTER, 12);
+        foldClimb.whenPressed(Action.toCommand(new FoldAction()));
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
         climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
@@ -158,7 +161,7 @@ public class Robot extends TimedRobot {
         //reset anything here
 
         enabledLooper.start();
-        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
+        //Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
     }
 
     /**

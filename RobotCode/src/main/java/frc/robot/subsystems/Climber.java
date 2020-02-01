@@ -7,7 +7,10 @@ import frc.robot.Constants;
 
 public class Climber extends Subsystem {
     public DoubleSolenoid unfoldSolenoid, extendSolenoid;
-    public DoubleSolenoid.Value unfoldCurrentState, unfoldIntendedState, extendCurrentState, extendIntendedState;
+    public DoubleSolenoid.Value unfoldCurrentState = Value.kOff;
+    public DoubleSolenoid.Value unfoldIntendedState = Value.kOff;
+    public DoubleSolenoid.Value extendCurrentState = Value.kOff;
+    public DoubleSolenoid.Value extendIntendedState = Value.kOff;
     public boolean unfolded = false;
     public boolean intakeDown = false;
     public double shooterAngle = 90;
