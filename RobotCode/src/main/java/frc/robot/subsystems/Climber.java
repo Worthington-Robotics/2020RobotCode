@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Climber extends Subsystem {
     public DoubleSolenoid unfoldSolenoid, extendSolenoid;
-    public boolean unfoldCurrentState, unfoldIntendedState, extendCurrentState, extendIntendedState;
-    public boolean climberUp;
+    public DoubleSolenoid.Value unfoldCurrentState, unfoldIntendedState, extendCurrentState, extendIntendedState;
+    public boolean unfolded = false;
 
     public Climber() {
         unfoldSolenoid = new DoubleSolenoid(2, 3);
@@ -18,23 +18,22 @@ public class Climber extends Subsystem {
     
     @Override
     public void readPeriodicInputs() {
-
-        if (unfoldSolenoid.get() == Value.kForward) {
-            unfoldCurrentState = true;
-        } else if (unfoldSolenoid.get() == Value.kReverse) {
-            unfoldCurrentState = false;
-        }
-        if (extendSolenoid.get() == Value.kForward) {
-            extendCurrentState = true;
-        } else if (extendSolenoid.get() == Value.kReverse) {
-            extendCurrentState = false;
-        }
+        unfoldCurrentState = unfoldSolenoid.get();
+        extendCurrentState = extendSolenoid.get();
     }
 
     @Override
     public void writePeriodicOutputs() {
         if (unfoldCurrentState != unfoldIntendedState) {
-
+            unfoldSolenoid.set(unfoldIntendedState);
+        }
+        if (unfoldCurrentState == Value.kForward) {
+            unfolded = true;
+        } else if (unfoldCurrentState == Value.kReverse) {
+            unfolded = false;
+        }
+        if (extendCurrentState != extendIntendedState && unfoldCurrentState == Value.kForward) {
+            extendSolenoid.set(extendIntendedState);
         }
     }
 
@@ -48,12 +47,13 @@ public class Climber extends Subsystem {
 
     }
 
-    public void setUnfold(Value open) {
-
+    public void setUnfold(Value unfoldValue) {
+        unfoldIntendedState = unfoldValue;
     }
 
-    public class periodicIO extends Subsystem.PeriodicIO {
-        public DoubleSolenoid.Value unfoldsolenoidinput = DoubleSolenoid.Value.kOff;
-        public DoubleSolenoid.Value extendsolenoidinput = DoubleSolenoid.Value.kOff;
+    public void setExtend(Value extendValue) {
+        extendIntendedState = extendValue;
     }
+    
 }
+
