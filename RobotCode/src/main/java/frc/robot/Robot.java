@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 1992-1993 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -18,6 +18,15 @@ import frc.robot.actions.climberactions.ClimbDownAction;
 import frc.robot.actions.climberactions.ClimbUpAction;
 import frc.robot.actions.climberactions.UnfoldAction;
 import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.lib.loops.Looper;
+import frc.lib.statemachine.StateMachine;
+import frc.lib.util.DriveSignal;
+import frc.robot.actions.driveactions.GyroLock;
+import frc.robot.actions.driveactions.Shift;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.PoseEstimator;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,8 +43,14 @@ public class Robot extends TimedRobot {
     private JoystickButton climbUp, climbDown, unfoldClimb;
     private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
         //register subsystems here
-        Climber.getInstance()), true);;
-    
+        Climber.getInstance()
+        //Lights.getInstance(),
+        PoseEstimator.getInstance(),
+        Drive.getInstance()
+    ), true);;
+    private Looper enabledLooper, disabledLooper;
+
+    JoystickButton shift, gyroLock;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -53,13 +68,28 @@ public class Robot extends TimedRobot {
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
         climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
-        /*
+        
+        enabledLooper = new Looper();
+        disabledLooper = new Looper();
+
+        //register the looper threads to the manager to use for enabled and disabled
+        manager.registerEnabledLoops(enabledLooper);
+        manager.registerDisabledLoops(disabledLooper);
+
+        //add any additional logging sources for capture
+        manager.addLoggingSource(Arrays.asList(
+            StateMachine.getInstance()
+        ));
+
+        // publish the auto list to the dashboard "Auto Selector"
+        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+
+        //create buttons and register actions
         shift = new JoystickButton(Constants.MASTER, 2);
         shift.whileHeld(Action.toCommand(new Shift()));
 
         gyroLock = new JoystickButton(Constants.MASTER, 1);
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-        */
     }
 
     /**
@@ -72,6 +102,17 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
+        manager.outputTelemetry();
+    }
+
+    @Override
+    public void disabledInit() {
+        enabledLooper.stop();
+
+        //Run any reset code here
+        StateMachine.getInstance().assertStop();
+
+        disabledLooper.start();
     }
 
     /**
@@ -87,9 +128,19 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        m_autoSelected = m_chooser.getSelected();
-        // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-        System.out.println("Auto selected: " + m_autoSelected);
+        disabledLooper.stop();
+
+        //reset anything here
+
+        enabledLooper.start();
+
+        String[] autoList = AutoSelector.buildArray();
+
+        //pulls auto selector from labview DB
+        String autoSelected = SmartDashboard.getString("Auto Selector", autoList[autoList.length - 1]);
+
+        //schedule the state machine to run the selected autonomous
+        StateMachine.getInstance().runMachine(AutoSelector.autoSelect(autoSelected));
     }
 
     /**
@@ -97,15 +148,17 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        switch (m_autoSelected) {
-            case kCustomAuto:
-                // Put custom auto code here
-                break;
-            case kDefaultAuto:
-            default:
-                // Put default auto code here
-                break;
-        }
+        
+    }
+
+    @Override
+    public void teleopInit() {
+        disabledLooper.stop();
+
+        //reset anything here
+
+        enabledLooper.start();
+        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
     }
 
     /**
@@ -113,6 +166,16 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        Scheduler.getInstance().run();        
+    }
+
+    @Override
+    public void testInit() {
+        disabledLooper.stop();
+
+        //reset anything here
+
+        enabledLooper.start();
     }
 
     /**
@@ -120,5 +183,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+        
     }
 }
