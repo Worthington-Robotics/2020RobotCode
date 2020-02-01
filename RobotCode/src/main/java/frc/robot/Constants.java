@@ -83,6 +83,7 @@ public class Constants {
 
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
+
 	public static double LOOPER_DT = 0.01;
 
 	public static double LEFTFLYWHEELFALCON_KD = 0.0;
@@ -115,5 +116,8 @@ public class Constants {
 
     //Limelight Constants
     public static final double LIMELIGHT_DEG_FOV = 0.0; //TODO CALCULATE FOV
+    
+    public static final double CLIMBER_EPSILON_CONST = 10;
+
 
 }
