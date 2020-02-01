@@ -7,12 +7,17 @@
 
 package frc.robot;
 
+import java.util.Arrays;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.Action;
+import frc.robot.actions.climberactions.ClimbDownAction;
+import frc.robot.actions.climberactions.ClimbUpAction;
 import frc.robot.actions.climberactions.UnfoldAction;
+import frc.robot.subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +32,10 @@ public class Robot extends TimedRobot {
     private String m_autoSelected;
     private final SendableChooser<String> m_chooser = new SendableChooser<>();
     private JoystickButton climbUp, climbDown, unfoldClimb;
+    private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
+        //register subsystems here
+        Climber.getInstance()), true);;
+    
 
     /**
      * This function is run when the robot is first started up and should be
