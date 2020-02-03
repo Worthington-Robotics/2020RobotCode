@@ -7,9 +7,14 @@
 
 package frc.robot;
 
+import java.util.Arrays;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.loops.Looper;
+import frc.lib.statemachine.StateMachine;
+import frc.robot.subsystems.Lights;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,10 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-    private static final String kDefaultAuto = "Default";
-    private static final String kCustomAuto = "My Auto";
-    private String m_autoSelected;
-    private final SendableChooser<String> m_chooser = new SendableChooser<>();
+    private SubsystemManager manager;
+    private Looper enabledLooper, disabledLooper;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -30,9 +33,26 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-        m_chooser.addOption("My Auto", kCustomAuto);
-        SmartDashboard.putData("Auto choices", m_chooser);
+        manager = new SubsystemManager(Arrays.asList(
+            //register subsystems here
+            Lights.getInstance()
+        ), true);
+
+        //create the master looper threads
+        enabledLooper = new Looper();
+        disabledLooper = new Looper();
+
+        //register the looper threads to the manager to use for enabled and disabled
+        manager.registerEnabledLoops(enabledLooper);
+        manager.registerDisabledLoops(disabledLooper);
+
+        //add any additional logging sources for capture
+        manager.addLoggingSource(Arrays.asList(
+            StateMachine.getInstance()
+        ));
+
+        // publish the auto list to the dashboard "Auto Selector"
+        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
     }
 
     /**
@@ -45,6 +65,17 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
+        manager.outputTelemetry();
+    }
+
+    @Override
+    public void disabledInit() {
+        enabledLooper.stop();
+
+        //Run any reset code here
+        StateMachine.getInstance().assertStop();
+
+        disabledLooper.start();
     }
 
     /**
@@ -60,9 +91,19 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        m_autoSelected = m_chooser.getSelected();
-        // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-        System.out.println("Auto selected: " + m_autoSelected);
+        disabledLooper.stop();
+
+        //reset anything here
+
+        enabledLooper.start();
+
+        String[] autoList = AutoSelector.buildArray();
+
+        //pulls auto selector from labview DB
+        String autoSelected = SmartDashboard.getString("Auto Selector", autoList[autoList.length - 1]);
+
+        //schedule the state machine to run the selected autonomous
+        StateMachine.getInstance().runMachine(AutoSelector.autoSelect(autoSelected));
     }
 
     /**
@@ -70,15 +111,16 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        switch (m_autoSelected) {
-            case kCustomAuto:
-                // Put custom auto code here
-                break;
-            case kDefaultAuto:
-            default:
-                // Put default auto code here
-                break;
-        }
+        
+    }
+
+    @Override
+    public void teleopInit() {
+        disabledLooper.stop();
+
+        //reset anything here
+
+        enabledLooper.start();
     }
 
     /**
@@ -86,6 +128,16 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+
+    }
+
+    @Override
+    public void testInit() {
+        disabledLooper.stop();
+
+        //reset anything here
+
+        enabledLooper.start();
     }
 
     /**
@@ -93,5 +145,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+        
     }
 }
