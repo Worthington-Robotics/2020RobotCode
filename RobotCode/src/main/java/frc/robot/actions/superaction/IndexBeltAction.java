@@ -12,7 +12,7 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setIndexBeltDemand(Constants.FULL_SPEED_BELT);
+        superstructure.setIndexBeltsDemand(Constants.HIGH_BELT_DEMAND);
     }
 
     @Override public void onLoop() {
@@ -20,11 +20,11 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public boolean isFinished() {
-        return false;
+        return Constants.DISTANCE_STOP_MM >= superstructure.getIndexDistance();
     }
 
     @Override public void onStop() {
-        superstructure.setIndexBeltDemand(Constants.STOP_BELT);
+        superstructure.setIndexBeltsDemand(Constants.STOP_BELT_DEMAND);
 
     }
 }

@@ -93,8 +93,17 @@ public class Constants {
     /**
      * Superstructure belt constants
      */
-    public static final double FULL_SPEED_BELT = 0.75;
-    public static final double STOP_BELT = 0;
+    // IDs
+    public static final int FLIGHT_SENSOR_DELIVERY = 0;
+    public static final int FLIGHT_SENSOR_INDEX = 1;
+    public static final int FLIGHT_SENSOR_INTAKE = 2;
+    // Demands
+    public static final double FULL_BELT_DEMAND = 1;
+    public static final double HIGH_BELT_DEMAND = 0.75;
+    public static final double STOP_BELT_DEMAND = 0;
+    // Sensor distance before stop (in mm)
+    public static final double DISTANCE_STOP_MM = 25.4;
+    public static final double DISTANCE_EMPTY_MM = 1219.2;
 
     /**
      * Joystick

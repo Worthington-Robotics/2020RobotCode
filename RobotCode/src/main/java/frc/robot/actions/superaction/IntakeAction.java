@@ -12,7 +12,7 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setIntakeDemand(Constants.FULL_SPEED_BELT);
+        superstructure.setIntakeDemand(Constants.HIGH_BELT_DEMAND);
     }
 
     @Override public void onLoop() {
@@ -20,10 +20,10 @@ public class IntakeAction extends Action {
     }
 
     @Override public boolean isFinished() {
-        return false;
+        return Constants.DISTANCE_STOP_MM >= superstructure.getIntakeDistance();
     }
 
     @Override public void onStop() {
-        superstructure.setDeliveryBeltDemand(Constants.STOP_BELT);
+        superstructure.setDeliveryBeltDemand(Constants.STOP_BELT_DEMAND);
     }
 }
