@@ -133,14 +133,14 @@ public class Drive extends Subsystem {
             // sets robot to desired gear
             trans.set(periodic.TransState);
             driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
+            driveMiddleLeft.set(ControlMode.PercentOutput, periodic.left_demand);
+            driveBackLeft.set(ControlMode.PercentOutput, periodic.left_demand);
             driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand);
-            driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
         } else {
             // sets robot to low gear
             trans.set(Value.kReverse);
             driveFrontLeft.set(ControlMode.Velocity, periodic.left_demand);
             driveFrontRight.set(ControlMode.Velocity, periodic.right_demand);
-            driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
         }
     }
 

@@ -11,12 +11,12 @@ public class Constants {
     //Pigion ID
     public static final int PIGION_ID = 0;
     //Talon IDs
-    public static final int DRIVE_FRONT_LEFT_ID = 1;
-    public static final int DRIVE_MIDDLE_LEFT_ID = 2;
-    public static final int DRIVE_BACK_LEFT_ID = 3;
-    public static final int DRIVE_FRONT_RIGHT_ID = 4;
-    public static final int DRIVE_MIDDLE_RIGHT_ID = 5;
-    public static final int DRIVE_BACK_RIGHT_ID = 6;
+    public static final int DRIVE_FRONT_LEFT_ID = 13;
+    public static final int DRIVE_MIDDLE_LEFT_ID = 14;
+    public static final int DRIVE_BACK_LEFT_ID = 15;
+    public static final int DRIVE_FRONT_RIGHT_ID = 0;
+    public static final int DRIVE_MIDDLE_RIGHT_ID = 1;
+    public static final int DRIVE_BACK_RIGHT_ID = 2;
 
     //Spark Ports
 
