@@ -41,6 +41,8 @@ public class Constants {
      * Drivetrain tuned values --------------------------------
      */
 
+    //DEBUG AND TESTING
+    public static final boolean DEBUG = true;
     //Path Following Constants
     public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
     public static final double DRIVETRAIN_UPDATE_RATE = 0;

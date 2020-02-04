@@ -82,6 +82,7 @@ public class Drive extends Subsystem {
                         }
                         break;
                     case OPEN_LOOP:
+
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[2]));
                         // System.out.println("X: " + periodic.operatorInput[0] + " Y: " +
                         // periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
@@ -95,8 +96,14 @@ public class Drive extends Subsystem {
                         break;
                     default:
                         System.out.println("You fool, unexpected control state");
-                    }
 
+                    }
+                    if (Constants.DEBUG) {
+                        if (periodic.savePIDSettings) {
+                            System.out.print("Configed PID");
+                            configPID();
+                        }
+                    }
                 }
             }
 
@@ -109,6 +116,8 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
+        periodic.rightCurrent = driveFrontRight.getStatorCurrent();
+        periodic.leftCurrent = driveFrontLeft.getStatorCurrent();
         periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
         periodic.operatorInput[1] *= -1; // Adjusted back as reverse and forward as forward (Its inverse because of
                                          // being a flight simulator)
@@ -116,6 +125,10 @@ public class Drive extends Subsystem {
         double prevRightTicks = periodic.right_pos_ticks;
         periodic.left_error = driveFrontLeft.getClosedLoopError();
         periodic.right_error = driveFrontRight.getClosedLoopError();
+
+        periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
+        periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
+        periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
 
         periodic.left_pos_ticks = driveFrontLeft.getSelectedSensorPosition(0);
         periodic.right_pos_ticks = driveFrontRight.getSelectedSensorPosition(0);
@@ -160,6 +173,9 @@ public class Drive extends Subsystem {
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
+        SmartDashboard.putNumber("D Slider", 0);
+        SmartDashboard.putNumber("P Slider", 0);
+        SmartDashboard.putBoolean("Save Changes", false);
 
     }
 
@@ -222,6 +238,10 @@ public class Drive extends Subsystem {
     private void resetEncoders() {
         driveFrontRight.setSelectedSensorPosition(0, 0, 0);
         driveFrontLeft.setSelectedSensorPosition(0, 0, 0);
+    }
+
+    private void configPID() {
+        anglePID.setPID(periodic.PIDPUpdate, 0, periodic.PIDDUpdate);
     }
 
     private void configTalons() {
@@ -387,6 +407,10 @@ public class Drive extends Subsystem {
     }
 
     public void outputTelemetry() {
+        double[] PIDData = anglePID.getPID();
+        SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
+        SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
+
         SmartDashboard.putString("Drive/Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
         SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
@@ -428,6 +452,13 @@ public class Drive extends Subsystem {
         public double[] operatorInput = { 0, 0, 0 };
         public DoubleSolenoid.Value TransState = Value.kReverse;
         public double PIDOutput = 0;
+        // Smartdashboard Settings
+        public double PIDDUpdate = 0;
+        public double PIDPUpdate = 0;
+        public boolean savePIDSettings = false;
+        //Logging
+        public double rightCurrent = 0;
+        public double leftCurrent = 0;
 
         // OUTPUTS
         public double ramp_Up_Counter = 0;
@@ -484,31 +515,22 @@ public class Drive extends Subsystem {
         return ((rpm * 512.0) / 75.0);
     }
 
+    /**
+     * Arcade drive method for calculating drivetrain output.
+     * <p>
+     * defined as positive forward on both outputs and turning right yields positive
+     * left output and negative right output
+     * 
+     * @param xSpeed    desired travel velocity
+     * @param zRotation desired rotational velocity
+     * @return a drivesignal for open loop use
+     */
     private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
-        double leftMotorOutput;
-        double rightMotorOutput;
+        final double maxInput = Math.max(Math.max(Math.abs(xSpeed - zRotation), Math.abs(xSpeed + zRotation)), 1);
 
-        double maxInput = Math.copySign(Math.max(Math.abs(xSpeed), Math.abs(zRotation)), xSpeed);
+        final double rightMotorOutput = (xSpeed + zRotation) / maxInput;
+        final double leftMotorOutput = (xSpeed - zRotation) / maxInput;
 
-        if (xSpeed >= 0.0) {
-            // First quadrant, else second quadrant
-            if (zRotation >= 0.0) {
-                leftMotorOutput = maxInput;
-                rightMotorOutput = xSpeed - zRotation;
-            } else {
-                leftMotorOutput = xSpeed + zRotation;
-                rightMotorOutput = maxInput;
-            }
-        } else {
-            // Third quadrant, else fourth quadrant
-            if (zRotation >= 0.0) {
-                leftMotorOutput = xSpeed + zRotation;
-                rightMotorOutput = maxInput;
-            } else {
-                leftMotorOutput = maxInput;
-                rightMotorOutput = xSpeed - zRotation;
-            }
-        }
         return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 

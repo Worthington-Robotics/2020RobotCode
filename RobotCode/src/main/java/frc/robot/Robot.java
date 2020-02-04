@@ -39,8 +39,9 @@ public class Robot extends TimedRobot {
         Drive.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
-
-    JoystickButton shift, gyroLock;
+    
+    private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -65,10 +66,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
 
         //create buttons and register actions
-        shift = new JoystickButton(Constants.MASTER, 2);
         shift.whileHeld(Action.toCommand(new Shift()));
-
-        gyroLock = new JoystickButton(Constants.MASTER, 1);
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
     }
 
