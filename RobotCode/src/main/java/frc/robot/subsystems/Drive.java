@@ -410,6 +410,9 @@ public class Drive extends Subsystem {
 
     public void outputTelemetry() {
         double[] PIDData = anglePID.getPID();
+
+        SmartDashboard.putNumber("Drive/Gyro/CurAngle", periodic.gyro_heading.getDegrees());
+        
         SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
         SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
 
@@ -417,13 +420,15 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
         SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
         SmartDashboard.putNumber("Drive/Error/Y", periodic.error.y());
-
+        
+        SmartDashboard.putNumber("Drive/Left/Current",periodic.leftCurrent);
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
         SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
 
+        SmartDashboard.putNumber("Drive/Right/Current",periodic.rightCurrent);
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
