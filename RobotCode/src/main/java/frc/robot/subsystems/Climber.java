@@ -62,7 +62,9 @@ public class Climber extends Subsystem {
     }
 
     public void setUnfold(Value unfoldValue) {
-        unfoldIntendedState = unfoldValue;
+        if (extendCurrentState != Value.kForward) {
+            unfoldIntendedState = unfoldValue;
+        }
     }
 
     public void setExtend(Value extendValue) {
