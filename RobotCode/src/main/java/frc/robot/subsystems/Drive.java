@@ -4,6 +4,7 @@ import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -11,13 +12,13 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.control.AdaptivePurePursuitController;
 import frc.lib.control.Path;
 import frc.lib.drivers.PIDF;
 import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Rotation2d;
+import frc.lib.geometry.Translation2d;
 import frc.lib.geometry.Twist2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
@@ -43,7 +44,7 @@ public class Drive extends Subsystem {
     private DriveControlState mDriveControlState = DriveControlState.OPEN_LOOP;
     private boolean mOverrideTrajectory = false;
     private DriveIO periodic;
-    private PigeonIMU pigeonIMU;
+    // private PigeonIMU pigeonIMU;
     private DoubleSolenoid trans;
     private TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveMiddleLeft, driveMiddleRight, driveBackLeft;
     private PIDF anglePID;
@@ -82,12 +83,15 @@ public class Drive extends Subsystem {
                         break;
                     case OPEN_LOOP:
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[2]));
-                        //System.out.println("X: " + periodic.operatorInput[0] + " Y: " + periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
+                        // System.out.println("X: " + periodic.operatorInput[0] + " Y: " +
+                        // periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
                         break;
                     case ANGLE_PID:
                         periodic.PIDOutput = anglePID.update(periodic.gyro_heading.getDegrees());
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.PIDOutput));
-                        //System.out.println("Angle PID Mode X: " + periodic.operatorInput[0] + " Y: " + periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2] + " PID Output: " + periodic.PIDOutput);
+                        // System.out.println("Angle PID Mode X: " + periodic.operatorInput[0] + " Y: "
+                        // + periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2] + " PID
+                        // Output: " + periodic.PIDOutput);
                         break;
                     default:
                         System.out.println("You fool, unexpected control state");
@@ -106,7 +110,8 @@ public class Drive extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-        periodic.operatorInput[1] *= -1; //Adjusted back as reverse and forward as forward (Its inverse because of being a flight simulator) 
+        periodic.operatorInput[1] *= -1; // Adjusted back as reverse and forward as forward (Its inverse because of
+                                         // being a flight simulator)
         double prevLeftTicks = periodic.left_pos_ticks;
         double prevRightTicks = periodic.right_pos_ticks;
         periodic.left_error = driveFrontLeft.getClosedLoopError();
@@ -116,7 +121,8 @@ public class Drive extends Subsystem {
         periodic.right_pos_ticks = driveFrontRight.getSelectedSensorPosition(0);
         periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity(0);
         periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity(0);
-        periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
+        // periodic.gyro_heading =
+        // Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
 
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
         periodic.left_distance += deltaLeftTicks * Constants.DRIVE_WHEEL_DIAMETER_INCHES;
@@ -127,14 +133,12 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-        //System.out.println(mDriveControlState);
+        // System.out.println(mDriveControlState);
         if (mDriveControlState == DriveControlState.OPEN_LOOP || mDriveControlState == DriveControlState.ANGLE_PID
                 || (mDriveControlState == DriveControlState.PROFILING_TEST && Constants.RAMPUP)) {
             // sets robot to desired gear
             trans.set(periodic.TransState);
             driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
-            driveMiddleLeft.set(ControlMode.PercentOutput, periodic.left_demand);
-            driveBackLeft.set(ControlMode.PercentOutput, periodic.left_demand);
             driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand);
         } else {
             // sets robot to low gear
@@ -152,7 +156,7 @@ public class Drive extends Subsystem {
         driveFrontRight = new TalonFX(Constants.DRIVE_FRONT_RIGHT_ID);
         driveMiddleRight = new TalonFX(Constants.DRIVE_MIDDLE_RIGHT_ID);
         driveBackRight = new TalonFX(Constants.DRIVE_BACK_RIGHT_ID);
-        pigeonIMU = new PigeonIMU(Constants.PIGION_ID);
+        // pigeonIMU = new PigeonIMU(Constants.PIGION_ID);
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
@@ -169,7 +173,8 @@ public class Drive extends Subsystem {
 
     public synchronized void setHeading(Rotation2d heading) {
         System.out.println("SET HEADING: " + heading.getDegrees());
-        periodic.gyro_offset = heading.rotateBy(Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).inverse());
+        // periodic.gyro_offset =
+        // heading.rotateBy(Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).inverse());
         System.out.println("Gyro offset: " + periodic.gyro_offset.getDegrees());
         periodic.gyro_heading = heading;
     }
@@ -239,18 +244,21 @@ public class Drive extends Subsystem {
         driveFrontLeft.setNeutralMode(NeutralMode.Brake);
         driveFrontLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveFrontLeft.enableVoltageCompensation(true);
+        driveFrontLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         driveMiddleLeft.setInverted(false);
         driveMiddleLeft.setNeutralMode(NeutralMode.Brake);
         driveMiddleLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveMiddleLeft.enableVoltageCompensation(true);
         driveMiddleLeft.follow(driveFrontLeft);
+        driveMiddleLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         driveBackLeft.setInverted(false);
         driveBackLeft.setNeutralMode(NeutralMode.Brake);
         driveBackLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveBackLeft.enableVoltageCompensation(true);
         driveBackLeft.follow(driveFrontLeft);
+        driveBackLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100); // primary
                                                                                                                        // closed-loop,
@@ -274,18 +282,21 @@ public class Drive extends Subsystem {
         driveFrontRight.setNeutralMode(NeutralMode.Brake);
         driveFrontRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveFrontRight.enableVoltageCompensation(true);
+        driveFrontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         driveMiddleRight.setInverted(true);
         driveMiddleRight.setNeutralMode(NeutralMode.Brake);
         driveMiddleRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveMiddleRight.enableVoltageCompensation(true);
         driveMiddleRight.follow(driveFrontRight);
+        driveMiddleRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         driveBackRight.setInverted(true);
         driveBackRight.setNeutralMode(NeutralMode.Brake);
         driveBackRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveBackRight.enableVoltageCompensation(true);
         driveBackRight.follow(driveFrontRight);
+        driveBackRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
     }
 
@@ -307,10 +318,10 @@ public class Drive extends Subsystem {
                     double scaling = Constants.DRIVE_MAX_VEL / max_vel;
                     setpoint = new DriveSignal(setpoint.getLeft() * scaling, setpoint.getRight() * scaling);
                 }
-                periodic.left_demand = radiansPerSecondToTicksPer100ms(
-                        inchesPerSecondToRadiansPerSecond(setpoint.getLeft()));
-                periodic.right_demand = radiansPerSecondToTicksPer100ms(
-                        inchesPerSecondToRadiansPerSecond(setpoint.getRight()));
+                setpoint = new DriveSignal(
+                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getLeft())),
+                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getRight())));
+                setVelocity(setpoint, DriveSignal.NEUTRAL);
             } else {
                 setVelocity(DriveSignal.BRAKE, DriveSignal.BRAKE);
                 mDriveControlState = DriveControlState.OPEN_LOOP;
@@ -378,8 +389,8 @@ public class Drive extends Subsystem {
     public void outputTelemetry() {
         SmartDashboard.putString("Drive/Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
-        SmartDashboard.putNumber("Drive/Error/X", periodic.error.getX());
-        SmartDashboard.putNumber("Drive/Error/Y", periodic.error.getY());
+        SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
+        SmartDashboard.putNumber("Drive/Error/Y", periodic.error.y());
 
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
@@ -430,8 +441,7 @@ public class Drive extends Subsystem {
 
     }
 
-    public LogData logData()
-    {
+    public LogData logData() {
         return periodic;
     }
 
