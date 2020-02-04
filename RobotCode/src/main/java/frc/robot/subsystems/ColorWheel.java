@@ -116,7 +116,7 @@ public class ColorWheel extends Subsystem {
             else if (Util.epsilonEquals(hsv[0], Constants.COLOR_WHEEL_BLUE_HUE, Constants.COLOR_WHEEL_HUE_ERROR)) {
                 return 'B';
             } else {
-                return 'U';
+                return 'U'; 
             }
         }
     }

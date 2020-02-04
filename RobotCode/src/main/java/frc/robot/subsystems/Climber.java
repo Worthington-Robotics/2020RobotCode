@@ -7,7 +7,10 @@ import frc.robot.Constants;
 
 public class Climber extends Subsystem {
     public DoubleSolenoid unfoldSolenoid, extendSolenoid;
-    public DoubleSolenoid.Value unfoldCurrentState, unfoldIntendedState, extendCurrentState, extendIntendedState;
+    public DoubleSolenoid.Value unfoldCurrentState = Value.kOff;
+    public DoubleSolenoid.Value unfoldIntendedState = Value.kOff;
+    public DoubleSolenoid.Value extendCurrentState = Value.kOff;
+    public DoubleSolenoid.Value extendIntendedState = Value.kOff;
     public boolean unfolded = false;
     public boolean intakeDown = false;
     public double shooterAngle = 90;
@@ -16,9 +19,8 @@ public class Climber extends Subsystem {
         unfoldSolenoid = new DoubleSolenoid(2, 3);
         extendSolenoid = new DoubleSolenoid(4, 5);
     }
-    public Climber mClimber = new Climber();
-    public Climber getInstance() {return mClimber;}
-
+    public static Climber mClimber = new Climber();
+    public static Climber getInstance() {return mClimber;}
     
     @Override
     public void readPeriodicInputs() {
