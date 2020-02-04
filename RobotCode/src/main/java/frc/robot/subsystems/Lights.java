@@ -38,6 +38,10 @@ public class Lights extends Subsystem {
         colorH = interpretColor(ColorWheel.getInstance().cDetected());
         //TODO Add Light Implementation for indexer
         //TODO Implement targeting
+        uprightsUp = Climber.getInstance().unfolded;
+        if (uprightsUp) {
+            currentLightMode = lightModes.colorWheel;
+        }
     }
 
     @Override

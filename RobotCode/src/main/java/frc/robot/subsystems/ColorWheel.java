@@ -5,11 +5,10 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import frc.lib.drivers.ColorSensorV3;
+import com.revrobotics.ColorSensorV3;
 import frc.robot.Constants;
 import frc.lib.util.Util;
 import java.awt.Color;
-import static frc.lib.drivers.ColorSensorV3.*;
 
 public class ColorWheel extends Subsystem {
 
