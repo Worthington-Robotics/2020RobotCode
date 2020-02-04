@@ -110,8 +110,6 @@ public class Constants {
 	public static final double kPathFollowingMaxAccel = 0;
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
-
-    public static final double CLIMBER_EPSILON_CONST = 10;
 	public static double LOOPER_DT = 0.01;
 
 	public static double LEFTFLYWHEELFALCON_KD = 0.0;

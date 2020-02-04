@@ -7,10 +7,10 @@ import frc.robot.Constants;
 
 public class Climber extends Subsystem {
     public DoubleSolenoid unfoldSolenoid, extendSolenoid;
-    public DoubleSolenoid.Value unfoldCurrentState = Value.kOff;
-    public DoubleSolenoid.Value unfoldIntendedState = Value.kOff;
-    public DoubleSolenoid.Value extendCurrentState = Value.kOff;
-    public DoubleSolenoid.Value extendIntendedState = Value.kOff;
+    public DoubleSolenoid.Value unfoldCurrentState = Value.kReverse;
+    public DoubleSolenoid.Value unfoldIntendedState = Value.kReverse;
+    public DoubleSolenoid.Value extendCurrentState = Value.kReverse;
+    public DoubleSolenoid.Value extendIntendedState = Value.kReverse;
     public boolean unfolded = false;
     public boolean intakeDown = false;
     public double shooterAngle = 90;
@@ -32,18 +32,22 @@ public class Climber extends Subsystem {
     public void writePeriodicOutputs() {
         if (!intakeDown) {
             if ((Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST)) || (Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST))) {
-                if (unfoldCurrentState != unfoldIntendedState) {
+                if (unfoldCurrentState != unfoldIntendedState && extendCurrentState != Value.kForward) {
                     unfoldSolenoid.set(unfoldIntendedState);
+                    //System.out.println("Unfold Happened");
                 }
                 if (unfoldCurrentState == Value.kForward) {
                     unfolded = true;
                 } else if (unfoldCurrentState == Value.kReverse) {
-                    unfolded = false;
+                   unfolded = false;
                 }
             }
         }
-        if (extendCurrentState != extendIntendedState && unfoldCurrentState == Value.kForward) {
+        if (!unfolded) {
+            extendSolenoid.set(Value.kReverse);
+        } else {
             extendSolenoid.set(extendIntendedState);
+            //System.out.println("Extend Happened");
         }
     }
 
@@ -62,7 +66,9 @@ public class Climber extends Subsystem {
     }
 
     public void setExtend(Value extendValue) {
-        extendIntendedState = extendValue;
+        if (extendValue != extendIntendedState && unfolded) {
+            extendIntendedState = extendValue;
+        }
     }
     
 }

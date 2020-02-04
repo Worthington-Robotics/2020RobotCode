@@ -5,8 +5,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
-import com.revrobotics.ColorSensorV3;
 import frc.robot.Constants;
+import frc.lib.drivers.ColorSensorV3;
+import frc.lib.drivers.ColorSensorV3.*;
 import frc.lib.util.Util;
 import java.awt.Color;
 
@@ -191,6 +192,11 @@ public class ColorWheel extends Subsystem {
         colorWheelTalon.setNeutralMode(NeutralMode.Brake);
         colorWheelTalon.configVoltageCompSaturation(Constants.COLOR_WHEEL_VCOMP);
         colorWheelTalon.enableVoltageCompensation(true);
+    }
+
+    public LogData getLogger(){
+        return periodic;
+
     }
 
     public class ColorWheelIO extends Subsystem.PeriodicIO {

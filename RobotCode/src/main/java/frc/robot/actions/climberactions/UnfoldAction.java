@@ -6,11 +6,10 @@ import frc.robot.subsystems.Climber;
 
 
 public class UnfoldAction extends Action {
-    private boolean done;
     @Override
     public void onStart() {
         Climber.getInstance().setUnfold(DoubleSolenoid.Value.kForward);
-        done = true;
+        System.out.println("Climb is unfolding.");
     }
 
     @Override
@@ -20,7 +19,7 @@ public class UnfoldAction extends Action {
 
     @Override
     public boolean isFinished() {
-        return done;
+        return true;
     }
 
     @Override
