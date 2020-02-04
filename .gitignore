@@ -140,3 +140,6 @@ imgui.ini
 ### IntelliJ ###
 **/.idea/
 *.hprof
+
+### Debug ###
+*.csv

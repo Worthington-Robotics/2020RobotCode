@@ -111,6 +111,10 @@ public class Superstructure extends Subsystem {
         return periodic.intakeDistance;
     }
 
+    public LogData getLogger() {
+        return periodic;
+    }
+
     public class SuperIO extends Subsystem.PeriodicIO {
         // Indexer Data
         public double indexBeltTopDemand;

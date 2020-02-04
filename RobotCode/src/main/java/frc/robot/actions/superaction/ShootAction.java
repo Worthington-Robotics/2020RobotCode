@@ -41,7 +41,7 @@ public class ShootAction extends Action {
         return shootType == ShootType.ALL
                 ? (Constants.DISTANCE_STOP_MM <= superstructure.getIndexDistance()) :
                 (Constants.DISTANCE_STOP_MM >= superstructure.getDeliveryDistance());
-    }
+    }  
 
     @Override public void onStop() {
         superstructure.setDeliveryBeltDemand(STOP_BELT_DEMAND);

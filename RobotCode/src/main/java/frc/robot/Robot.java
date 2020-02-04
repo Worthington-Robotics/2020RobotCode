@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.StateMachine;
 import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.Superstructure;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,7 +36,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         manager = new SubsystemManager(Arrays.asList(
             //register subsystems here
-            Lights.getInstance()
+            Lights.getInstance(),
+            Superstructure.getInstance()
         ), true);
 
         //create the master looper threads
