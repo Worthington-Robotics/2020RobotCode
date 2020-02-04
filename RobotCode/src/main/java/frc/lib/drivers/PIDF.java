@@ -180,6 +180,15 @@ public class PIDF {
         return error;
     }
 
+    public double getError(){
+        calculationMutex.lock();
+        try {
+            return error;
+        } finally {
+            calculationMutex.unlock();
+        }
+    }
+
     /**
      * Sets the PID to use a continuous mode calculation that
      * makes both ends of the range effectively the same point

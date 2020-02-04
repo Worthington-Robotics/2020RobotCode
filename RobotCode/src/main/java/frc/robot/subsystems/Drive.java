@@ -116,6 +116,7 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
+        periodic.AnglePIDError = anglePID.getError();
         periodic.rightCurrent = driveFrontRight.getStatorCurrent();
         periodic.leftCurrent = driveFrontLeft.getStatorCurrent();
         periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
@@ -163,6 +164,7 @@ public class Drive extends Subsystem {
 
     private Drive() {
         anglePID = new PIDF(Constants.ANGLE_KP, Constants.ANGLE_KD);
+        anglePID.setContinuous(true);
         driveFrontLeft = new TalonFX(Constants.DRIVE_FRONT_LEFT_ID);
         driveMiddleLeft = new TalonFX(Constants.DRIVE_MIDDLE_LEFT_ID);
         driveBackLeft = new TalonFX(Constants.DRIVE_BACK_LEFT_ID);
@@ -459,6 +461,7 @@ public class Drive extends Subsystem {
         //Logging
         public double rightCurrent = 0;
         public double leftCurrent = 0;
+        public double AnglePIDError = 0;
 
         // OUTPUTS
         public double ramp_Up_Counter = 0;
