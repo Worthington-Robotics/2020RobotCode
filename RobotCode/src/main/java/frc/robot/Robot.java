@@ -19,6 +19,7 @@ import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
 import frc.robot.actions.driveactions.GyroLock;
 import frc.robot.actions.driveactions.Shift;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.PoseEstimator;
@@ -35,7 +36,8 @@ public class Robot extends TimedRobot {
         //register subsystems here
         Lights.getInstance(),
         PoseEstimator.getInstance(),
-        Drive.getInstance()
+        Drive.getInstance(),
+        ColorWheel.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
     
