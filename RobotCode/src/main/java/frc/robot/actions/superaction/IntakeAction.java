@@ -1,5 +1,6 @@
 package frc.robot.actions.superaction;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.lib.statemachine.Action;
 import frc.robot.Constants;
 import frc.robot.subsystems.Superstructure;
@@ -12,11 +13,12 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setIntakeDemand(Constants.HIGH_BELT_DEMAND);
+        if (superstructure.getArmExtension() != DoubleSolenoid.Value.kOff) {
+            superstructure.setIntakeDemand(Constants.HIGH_BELT_DEMAND);
+        }
     }
 
     @Override public void onLoop() {
-
     }
 
     @Override public boolean isFinished() {
@@ -24,6 +26,6 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setDeliveryBeltDemand(Constants.STOP_BELT_DEMAND);
+        superstructure.setIntakeDemand(Constants.STOP_BELT_DEMAND);
     }
 }

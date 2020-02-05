@@ -16,10 +16,10 @@ public class Superstructure extends Subsystem {
     private SuperIO periodic;
 
     // Indexer
-    private TalonSRX indexBeltAbove;
-    private TalonSRX indexBeltBelow;
+    private TalonSRX indexBelt;
 
-    private TalonSRX deliveryBelt;
+    private TalonSRX deliveryAboveBelt;
+    private TalonSRX deliveryBelowBelt;
 
     // Intake
     private DoubleSolenoid extensionArm;
@@ -36,9 +36,9 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        indexBeltAbove = new TalonSRX(SUPERSTRUCTURE_ABOVE_BELT);
-        indexBeltBelow = new TalonSRX(SUPERSTRUCTURE_BELOW_BELT);
-        deliveryBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_BELT);
+        indexBelt = new TalonSRX(SUPERSTRUCTURE_INDEX_BELT);
+        deliveryAboveBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_ABOVE_BELT);
+        deliveryBelowBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_BELOW_BELT);
 
         extensionArm = new DoubleSolenoid(TRANS_LOW_ID, TRANS_HIGH_ID);
         ballsIntake = new TalonSRX(SUPERSTRUCTURE_INTAKE);
@@ -50,25 +50,34 @@ public class Superstructure extends Subsystem {
         reset();
     }
 
+    /**
+     * Read data from the sensors
+     */
     @Override public synchronized void readPeriodicInputs() {
         periodic.deliveryDistance = deliverySensor.getRange();
         periodic.indexDistance = indexSensor.getRange();
         periodic.intakeDistance = intakeSensor.getRange();
     }
 
+    /**
+     * Update values of the SRXs, DoubleSolenoid
+     */
     @Override public synchronized void writePeriodicOutputs() {
-        indexBeltBelow.set(ControlMode.PercentOutput, periodic.indexBeltBottomDemand);
-        indexBeltAbove.set(ControlMode.PercentOutput, periodic.indexBeltTopDemand);
-        deliveryBelt.set(ControlMode.PercentOutput, periodic.deliveryBeltDemand);
+        indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+        deliveryAboveBelt.set(ControlMode.PercentOutput, periodic.deliveryAboveBeltDemand);
+        deliveryBelowBelt.set(ControlMode.PercentOutput, periodic.deliveryBelowBeltDemand);
 
-        extensionArm.set(periodic.armExtension);
         ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+        extensionArm.set(periodic.armExtension);
     }
 
     @Override public void outputTelemetry() {
 
     }
 
+    /**
+     * Reset the values of the sensors, and reinitialize the IO.
+     */
     @Override public void reset() {
         periodic = new SuperIO();
 
@@ -82,24 +91,32 @@ public class Superstructure extends Subsystem {
         periodic.armExtension = armExtension;
     }
 
-    public void setDeliveryBeltDemand(double deliveryBeltDemand) {
-        periodic.deliveryBeltDemand = deliveryBeltDemand;
+    public void setIndexBeltDemand(double indexBeltDemand) {
+        periodic.indexBeltDemand = indexBeltDemand;
     }
 
-    public void setIndexBeltsDemand(double indexBeltDemand) {
-        periodic.indexBeltTopDemand = indexBeltDemand;
-        periodic.indexBeltBottomDemand = indexBeltDemand;
+    public void setDeliveryBeltsDemand(double demand) {
+        periodic.deliveryAboveBeltDemand = demand;
+        periodic.deliveryBelowBeltDemand = demand;
     }
 
-    public void setIndexBeltTopDemand(double indexBeltDemand) {
-        periodic.indexBeltTopDemand = indexBeltDemand;
+    public void setDeliveryAboveBeltDemand(double demand) {
+        periodic.deliveryAboveBeltDemand = demand;
     }
 
-    public void setIntakeDemand(double intakeDemand) {
-        periodic.intakeDemand = intakeDemand;
+    public void setDeliveryBelowBeltDemand(double demand) {
+        periodic.deliveryBelowBeltDemand = demand;
+    }
+
+    public void setIntakeDemand(double demand) {
+        periodic.intakeDemand = demand;
     }
 
     // Getters
+    public DoubleSolenoid.Value getArmExtension() {
+        return periodic.armExtension;
+    }
+
     public double getDeliveryDistance() {
         return periodic.deliveryDistance;
     }
@@ -118,9 +135,9 @@ public class Superstructure extends Subsystem {
 
     public class SuperIO extends Subsystem.PeriodicIO {
         // Indexer Data
-        public double indexBeltTopDemand;
-        public double indexBeltBottomDemand;
-        public double deliveryBeltDemand;
+        public double indexBeltDemand;
+        public double deliveryAboveBeltDemand;
+        public double deliveryBelowBeltDemand;
         // Input Data
         public double intakeDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;

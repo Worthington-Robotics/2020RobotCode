@@ -12,7 +12,7 @@ public class DeliveryBeltAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setDeliveryBeltDemand(Constants.HIGH_BELT_DEMAND);
+        superstructure.setDeliveryBeltsDemand(Constants.HIGH_BELT_DEMAND);
     }
 
     @Override public void onLoop() {
@@ -24,6 +24,6 @@ public class DeliveryBeltAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setDeliveryBeltDemand(Constants.STOP_BELT_DEMAND);
+        superstructure.setDeliveryBeltsDemand(Constants.STOP_BELT_DEMAND);
     }
 }

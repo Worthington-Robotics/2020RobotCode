@@ -9,9 +9,9 @@ public class Constants {
      */
 
     //Talon IDs
-    public static final int SUPERSTRUCTURE_ABOVE_BELT = 7;
-    public static final int SUPERSTRUCTURE_BELOW_BELT = 8;
-    public static final int SUPERSTRUCTURE_DELIVERY_BELT = 9;
+    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
+    public static final int SUPERSTRUCTURE_DELIVERY_ABOVE_BELT = 8;
+    public static final int SUPERSTRUCTURE_DELIVERY_BELOW_BELT = 9;
     public static final int SUPERSTRUCTURE_INTAKE = 10;
     //Spark Ports
 

@@ -18,19 +18,10 @@ public class ShootAction extends Action {
 
     @Override public void onStart() {
         double demand =
-                shootType == ShootType.ALL ? FULL_BELT_DEMAND : HIGH_BELT_DEMAND;
+                (shootType == ShootType.ALL ? FULL_BELT_DEMAND : HIGH_BELT_DEMAND);
 
-        superstructure.setDeliveryBeltDemand(HIGH_BELT_DEMAND);
-
-        switch (shootType) {
-            case ONE:
-                superstructure.setIndexBeltTopDemand(HIGH_BELT_DEMAND);
-                break;
-            case ALL:
-                superstructure.setIndexBeltsDemand(HIGH_BELT_DEMAND);
-                break;
-            default:
-        }
+        superstructure.setDeliveryBeltsDemand(demand);
+        superstructure.setIndexBeltDemand(demand);
     }
 
     @Override public void onLoop() {
@@ -44,7 +35,7 @@ public class ShootAction extends Action {
     }  
 
     @Override public void onStop() {
-        superstructure.setDeliveryBeltDemand(STOP_BELT_DEMAND);
-        superstructure.setIndexBeltsDemand(STOP_BELT_DEMAND);
+        superstructure.setDeliveryBeltsDemand(STOP_BELT_DEMAND);
+        superstructure.setIndexBeltDemand(STOP_BELT_DEMAND);
     }
 }
