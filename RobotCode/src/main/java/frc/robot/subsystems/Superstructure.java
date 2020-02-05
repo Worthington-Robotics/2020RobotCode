@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.lib.drivers.SimTimeOfFlight;
 
 import static frc.robot.Constants.*;
 
@@ -25,9 +26,9 @@ public class Superstructure extends Subsystem {
     private TalonSRX ballsIntake;
 
     // Sensors
-    private TimeOfFlight deliverySensor;
-    private TimeOfFlight indexSensor;
-    private TimeOfFlight intakeSensor;
+    private SimTimeOfFlight deliverySensor;
+    private SimTimeOfFlight indexSensor;
+    private SimTimeOfFlight intakeSensor;
 
     private static Superstructure instance = new Superstructure();
     public static Superstructure getInstance() {
@@ -42,9 +43,9 @@ public class Superstructure extends Subsystem {
         extensionArm = new DoubleSolenoid(TRANS_LOW_ID, TRANS_HIGH_ID);
         ballsIntake = new TalonSRX(SUPERSTRUCTURE_INTAKE);
 
-        deliverySensor = new TimeOfFlight(FLIGHT_SENSOR_DELIVERY);
-        indexSensor = new TimeOfFlight(FLIGHT_SENSOR_INDEX);
-        intakeSensor = new TimeOfFlight(FLIGHT_SENSOR_INTAKE);
+        deliverySensor = new SimTimeOfFlight(FLIGHT_SENSOR_DELIVERY);
+        indexSensor = new SimTimeOfFlight(FLIGHT_SENSOR_INDEX);
+        intakeSensor = new SimTimeOfFlight(FLIGHT_SENSOR_INTAKE);
 
         reset();
     }
