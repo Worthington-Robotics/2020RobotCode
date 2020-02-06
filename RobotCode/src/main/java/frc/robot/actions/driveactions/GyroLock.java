@@ -9,6 +9,7 @@ public class GyroLock extends Action {
     @Override
     public void onStart() {
         Drive.getInstance().setAnglePidLoop(DriveSignal.NEUTRAL, Drive.getInstance().getHeading().getDegrees());
+        Drive.getInstance().getAnglePID().enable();
     }
 
     @Override
@@ -24,5 +25,6 @@ public class GyroLock extends Action {
     @Override
     public void onStop() {
         Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
+        Drive.getInstance().getAnglePID().disable();
     }
 }

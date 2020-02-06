@@ -34,7 +34,7 @@ public class Constants {
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick LAUNCH_PAD = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.1, 0.99, -0.99, 0.6, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.1, 0.99, 0.99, 0.8, 2);
 
     /**
@@ -76,24 +76,24 @@ public class Constants {
     public static final double DRIVE_ENCODER_PPR = 4096.0; //encoder counts per revolution
 
     //PID Constants
-    public static final double ANGLE_KP = 0.04; // 0.065;
+    public static final double ANGLE_KP = -0.024; // 0.065;
     public static final double ANGLE_KI = 0; // 0.00125;
     public static final double ANGLE_KD = 0; // 0.1
     public static final double ANGLE_PID_EPISLON = 1;
 
-    public static final double DRIVE_RIGHT_KP = 1.2;
+    public static final double DRIVE_RIGHT_KP = 0;
     public static final double DRIVE_RIGHT_KI = 0.0;
-    public static final double DRIVE_RIGHT_KD = 25; // 20 for practice bot
-    public static final double DRIVE_RIGHT_KF = 0.53; //.485
+    public static final double DRIVE_RIGHT_KD = 0; // 20 for practice bot
+    public static final double DRIVE_RIGHT_KF = 0.25; //.485
 
-    public static final double DRIVE_LEFT_KP = 1.1; // .0885
+    public static final double DRIVE_LEFT_KP = 0; // .0885
     public static final double DRIVE_LEFT_KI = 0.0; //NO INTEGRAL it masks deeper problems
-    public static final double DRIVE_LEFT_KD = 25; //20 for practice
-    public static final double DRIVE_LEFT_KF = 0.53;
+    public static final double DRIVE_LEFT_KD = 0; //20 for practice
+    public static final double DRIVE_LEFT_KF = 0.25;
 
 	public static final double kPathFollowingMaxAccel = 0;
 
-	public static final boolean ENABLE_MP_TEST_MODE = false;
+	public static final boolean ENABLE_MP_TEST_MODE = true;
 
 	public static double LOOPER_DT = 0.01;
 
@@ -103,8 +103,8 @@ public class Constants {
     public static final int yellowH = 60;
     public static final int greenH = 120;
     public static final int blueH = 180;
-    public static final int error = 10;
+    public static final int error = 29;
 
-    public static final int satLimit = 80;
-    public static final int valLimit = 80;
+    public static final int satLimit = 0;
+    public static final int valLimit = 0;
 }

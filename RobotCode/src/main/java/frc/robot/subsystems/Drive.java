@@ -26,6 +26,7 @@ import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 import frc.robot.Kinematics;
+import frc.robot.actions.driveactions.AnglePID;
 
 public class Drive extends Subsystem {
 
@@ -115,6 +116,7 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
+        //periodic.gyro_heading = Rotation2d.fromDegrees(SmartDashboard.getNumber("Drive/Gyro/CurAngle", 0));
         periodic.AnglePIDError = anglePID.getError();
         periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
         periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
@@ -128,10 +130,10 @@ public class Drive extends Subsystem {
         periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
         periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
 
-        periodic.left_pos_ticks = driveFrontLeft.getSelectedSensorPosition(0);
-        periodic.right_pos_ticks = driveFrontRight.getSelectedSensorPosition(0);
-        periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity(0);
-        periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity(0);
+        periodic.left_velocity_ticks_per_100ms = (int)driveFrontLeft.getSensorCollection().getIntegratedSensorVelocity();
+        periodic.right_velocity_ticks_per_100ms = (int)driveFrontRight.getSensorCollection().getIntegratedSensorVelocity();
+        periodic.left_pos_ticks = (int)driveFrontLeft.getSensorCollection().getIntegratedSensorPosition();
+        periodic.right_pos_ticks = (int)driveFrontRight.getSensorCollection().getIntegratedSensorPosition();
         periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
 
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
@@ -177,6 +179,10 @@ public class Drive extends Subsystem {
 
     }
 
+    public PIDF getAnglePID()
+    {
+        return anglePID;
+    }
     public void setTrans(DoubleSolenoid.Value state) {
         periodic.TransState = state;
     }
@@ -406,7 +412,8 @@ public class Drive extends Subsystem {
     public void outputTelemetry() {
         double[] PIDData = anglePID.getPID();
 
-        SmartDashboard.putNumber("Drive/Gyro/CurAngle", periodic.gyro_heading.getDegrees());
+        //SmartDashboard.putNumber("Drive/Gyro/CurAngle", periodic.gyro_heading.getDegrees());
+        SmartDashboard.putNumber("Drive/Gyro/Demand", periodic.PIDOutput);
     
         SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
         SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
