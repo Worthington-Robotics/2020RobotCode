@@ -17,11 +17,14 @@ public class ShootAction extends Action {
     }
 
     @Override public void onStart() {
-        double demand =
+        // If not 0 then greater than 0 (performance saving)
+        if (superstructure.getBallCount() != 0) {
+            double demand =
                 (shootType == ShootType.ALL ? FULL_BELT_DEMAND : HIGH_BELT_DEMAND);
 
-        superstructure.setDeliveryBeltsDemand(demand);
-        superstructure.setIndexBeltDemand(demand);
+            superstructure.setDeliveryBeltsDemand(demand);
+            superstructure.setIndexBeltDemand(demand);
+        }
     }
 
     @Override public void onLoop() {
@@ -29,6 +32,13 @@ public class ShootAction extends Action {
     }
 
     @Override public boolean isFinished() {
+        boolean ballsShot = ShootType.ALL == shootType
+            ? (Constants.DISTANCE_STOP_MM <= superstructure.getIndexDistance()) :
+            (Constants.DISTANCE_STOP_MM >= superstructure.getDeliveryDistance());
+
+        if (ballsShot) {
+            superstructure.setBallCount(ShootType.ALL == shootType ? 0 : (superstructure.getBallCount() - 1));
+        }
         return shootType == ShootType.ALL
                 ? (Constants.DISTANCE_STOP_MM <= superstructure.getIndexDistance()) :
                 (Constants.DISTANCE_STOP_MM >= superstructure.getDeliveryDistance());

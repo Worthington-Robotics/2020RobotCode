@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 
 import static frc.robot.Constants.*;
@@ -36,6 +37,8 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
+        SmartDashboard.putNumber("BALLS", periodic.ballCount);
+
         indexBelt = new TalonSRX(SUPERSTRUCTURE_INDEX_BELT);
         deliveryAboveBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_ABOVE_BELT);
         deliveryBelowBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_BELOW_BELT);
@@ -57,6 +60,7 @@ public class Superstructure extends Subsystem {
         periodic.deliveryDistance = deliverySensor.getRange();
         periodic.indexDistance = indexSensor.getRange();
         periodic.intakeDistance = intakeSensor.getRange();
+        SmartDashboard.getNumber("BALLS", periodic.ballCount);
     }
 
     /**
@@ -87,6 +91,10 @@ public class Superstructure extends Subsystem {
     }
 
     // Setters
+    public void setBallCount(int ballCount) {
+        periodic.ballCount = ballCount;
+    }
+
     public void setArmExtension(DoubleSolenoid.Value armExtension) {
         periodic.armExtension = armExtension;
     }
@@ -113,6 +121,10 @@ public class Superstructure extends Subsystem {
     }
 
     // Getters
+    public int getBallCount() {
+        return periodic.ballCount;
+    }
+
     public DoubleSolenoid.Value getArmExtension() {
         return periodic.armExtension;
     }
@@ -138,10 +150,10 @@ public class Superstructure extends Subsystem {
         public double indexBeltDemand;
         public double deliveryAboveBeltDemand;
         public double deliveryBelowBeltDemand;
-        // Input Data
+        // Intake Data
+        public int ballCount;
         public double intakeDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;
-
         // Sensor Data
         private double deliveryDistance;
         private double indexDistance;

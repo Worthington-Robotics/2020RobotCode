@@ -22,7 +22,13 @@ public class IntakeAction extends Action {
     }
 
     @Override public boolean isFinished() {
-        return Constants.DISTANCE_STOP_MM >= superstructure.getIntakeDistance();
+        boolean objDetected = Constants.DISTANCE_STOP_MM >= superstructure.getIntakeDistance();
+        
+        if (objDetected) {
+            superstructure.setBallCount(superstructure.getBallCount() + 1);
+        }
+        
+        return objDetected;
     }
 
     @Override public void onStop() {
