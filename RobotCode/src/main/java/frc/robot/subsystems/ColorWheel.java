@@ -50,8 +50,8 @@ public class ColorWheel extends Subsystem {
             periodic.fms_color = 'U';
         }
         periodic.close_loop_error = colorWheelTalon.getClosedLoopError();
-        periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue, periodic.detected_color.green };
         periodic.detected_color = colorSensor.getColor();
+        periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue, periodic.detected_color.green };
     }
 
     @Override
@@ -69,9 +69,9 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Color Wheel/Red", periodic.detected_color.red);
-        SmartDashboard.putNumber("Color Wheel/Blue", periodic.detected_color.blue);
-        SmartDashboard.putNumber("Color Wheel/Green", periodic.detected_color.green);
+        SmartDashboard.putNumber("Color Wheel/Red", colorSensor.getRed());
+        SmartDashboard.putNumber("Color Wheel/Blue", colorSensor.getBlue());
+        SmartDashboard.putNumber("Color Wheel/Green", colorSensor.getGreen());
         SmartDashboard.putString("Color Wheel/Detected Color", "" + cDetected());
     }
 
@@ -90,7 +90,7 @@ public class ColorWheel extends Subsystem {
         // H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0
 
         final float[] hsv = new float[3];
-        java.awt.Color.RGBtoHSB((int) RGB[0] * 255, (int) RGB[1] * 255, (int) RGB[2] * 255, hsv);
+        java.awt.Color.RGBtoHSB((int) (RGB[0] * 255), (int) (RGB[1] * 255), (int) (RGB[2] * 255), hsv);
         // System.out.println(hsv[0] + ", " + hsv[1] + ", " + hsv[2]);
         hsv[0] *= 360;
         hsv[1] *= 100;
@@ -162,8 +162,8 @@ public class ColorWheel extends Subsystem {
     @Override
     public void reset() {
         periodic = new ColorWheelIO();
-        colorSensor.configureColorSensor(ColorSensorResolution.kColorSensorRes18bit,
-                ColorSensorMeasurementRate.kColorRate100ms, GainFactor.kGain1x);
+        colorSensor.configureColorSensor(ColorSensorResolution.kColorSensorRes16bit,
+                ColorSensorMeasurementRate.kColorRate100ms, GainFactor.kGain3x);
         configTalon();
     }
 
@@ -205,6 +205,6 @@ public class ColorWheel extends Subsystem {
         public int color_direction_calc;
         public double demand = 0.0;
         public boolean color_motor_pid_on = false;
-        public Color detected_color;
+        public Color detected_color = Color.kBlack;
     }
 }
