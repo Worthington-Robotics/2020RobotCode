@@ -7,8 +7,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
+import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
@@ -41,6 +43,8 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void readPeriodicInputs() {
+        periodic.operatorInput = HIDHelper.getAdjStick(Constants.SECOND_STICK);
+        periodic.operatorFlywheelInput = (Constants.SECOND.getRawAxis(3) + 1)/2; //Makes all values positive with -1 being 0 and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
@@ -58,8 +62,30 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-                
+                switch (flywheelMode) {
+                    case OPEN_LOOP:
+                        periodic.flywheelDemand = periodic.operatorFlywheelInput;
+                        break;
+                    case PID_MODE:
+                        //insert calculations for PID mode based on the setpoint and RPM
+                        break;
+                    default:
+                        leftFlywheelFalcon.set(ControlMode.Disabled, 0);
+                        rightFlywheelFalcon.set(ControlMode.Disabled, 0);
+                        break;
+                }
+                switch (turretMode) {
+                    case OPEN_LOOP:
+                        periodic.turretDemand = periodic.operatorInput[1];
+                        break;
+                    case PID_MODE:
+                        //insert a position PID loop and check for safety
+                        break;
+                    default:
+                        turretControl.set(ControlMode.Disabled, 0);
+                        break;
             }
+        }
 
             @Override
             public void onStop(double timestamp) {
@@ -107,6 +133,13 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void outputTelemetry() {
+        SmartDashboard.putNumber("Shooter/Turret/ManualDemand", periodic.turretDemand);
+        SmartDashboard.putNumber("Shooter/Turret/PIDDemand", periodic.turretRPM);
+        SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
+        SmartDashboard.putNumber("Shooter/Flywheel/ManualDemand", periodic.flywheelDemand);
+        SmartDashboard.putNumber("Shooter/Flywheel/ManualDemand", periodic.flywheelRPM);
+        SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
+
 
     }
 
@@ -214,15 +247,17 @@ public class Shooter extends Subsystem {
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
-        private double targetX = 0.0;
-        private double targetY = 0.0;
-        private double targetArea = 0.0;
-        private double flywheelDemand = 0.0;
-        private double flywheelRPM = 0.0;
-        private double turretDemand = 0.0;
-        private double turretRPM = 0.0;
-        private boolean RPMOnTarget = false;
-        private double RPMClosedLoopError = 0;
-        private double rotationsClosedLoopError = 0;
+        public double targetX = 0.0;
+        public double targetY = 0.0;
+        public double targetArea = 0.0;
+        public double flywheelDemand = 0.0;
+        public double flywheelRPM = 0.0;
+        public double turretDemand = 0.0;
+        public double turretRPM = 0.0;
+        public boolean RPMOnTarget = false;
+        public double RPMClosedLoopError = 0;
+        public double rotationsClosedLoopError = 0;
+        public double[] operatorInput = new double[] {0,0,0};
+        public double operatorFlywheelInput = 0;
     }
 }

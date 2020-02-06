@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import frc.lib.util.HIDHelper;
+
 public class Constants {
     /**
      * device ID declarations ---------------------------------
@@ -19,6 +22,13 @@ public class Constants {
     //LED Data/Ports
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
+
+    //JOYSTICK CONSTANTS
+    public static final Joystick MASTER = new Joystick(0);
+    public static final Joystick SECOND = new Joystick(1);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.1, 0.99, 0.99, 0.8, 2);
+
     /*
         Flywheel Tuned Values
     */
