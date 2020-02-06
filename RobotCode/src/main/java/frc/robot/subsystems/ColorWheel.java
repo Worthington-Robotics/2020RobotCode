@@ -21,14 +21,20 @@ public class ColorWheel extends Subsystem {
     private final ColorSensorV3 colorSensor;
     private final char[] wheelColors = new char[] { 'B', 'Y', 'R', 'G' };
     private final String wheelColorsOrder = new String(wheelColors);
-    private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-    private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-    private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-    private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+    // Color Match Stuff
+    private final ColorMatch m_colorMatcher = new ColorMatch();
+    private final Color kBlueTarget = ColorMatch.makeColor(0.128, 0.413, 0.459);
+    private final Color kGreenTarget = ColorMatch.makeColor(0.172, 0.564, 0.264);
+    private final Color kRedTarget = ColorMatch.makeColor(0.498, 0.352, 0.150);
+    private final Color kYellowTarget = ColorMatch.makeColor(0.315, 0.553, 0.132);
 
     private ColorWheel() {
         colorWheelTalon = new TalonSRX(Constants.COLOR_WHEEL);
         colorSensor = new ColorSensorV3(i2cPort);
+        m_colorMatcher.addColorMatch(kBlueTarget);
+        m_colorMatcher.addColorMatch(kGreenTarget);
+        m_colorMatcher.addColorMatch(kRedTarget);
+        m_colorMatcher.addColorMatch(kYellowTarget);
         reset();
     }
 
@@ -51,7 +57,9 @@ public class ColorWheel extends Subsystem {
         }
         periodic.close_loop_error = colorWheelTalon.getClosedLoopError();
         periodic.detected_color = colorSensor.getColor();
-        periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue, periodic.detected_color.green };
+        periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue,
+                periodic.detected_color.green };
+        periodic.color_sensed = colorMatch();
     }
 
     @Override
@@ -69,10 +77,11 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Color Wheel/Red", colorSensor.getRed());
-        SmartDashboard.putNumber("Color Wheel/Blue", colorSensor.getBlue());
-        SmartDashboard.putNumber("Color Wheel/Green", colorSensor.getGreen());
-        SmartDashboard.putString("Color Wheel/Detected Color", "" + cDetected());
+        SmartDashboard.putNumber("Color Wheel/Red", periodic.detected_color.red);
+        SmartDashboard.putNumber("Color Wheel/Blue", periodic.detected_color.blue);
+        SmartDashboard.putNumber("Color Wheel/Green", periodic.detected_color.green);
+        SmartDashboard.putString("Color Wheel/Detected Color", periodic.color_sensed);
+        SmartDashboard.putNumber("Confidence", m_colorMatcher.matchClosestColor(periodic.detected_color).confidence);
     }
 
     /**
@@ -163,7 +172,7 @@ public class ColorWheel extends Subsystem {
     public void reset() {
         periodic = new ColorWheelIO();
         colorSensor.configureColorSensor(ColorSensorResolution.kColorSensorRes16bit,
-                ColorSensorMeasurementRate.kColorRate100ms, GainFactor.kGain3x);
+                ColorSensorMeasurementRate.kColorRate50ms, GainFactor.kGain3x);
         configTalon();
     }
 
@@ -183,6 +192,32 @@ public class ColorWheel extends Subsystem {
         periodic.color_motor_pid_on = motorOn;
     }
 
+    public String colorMatch() {
+
+        /**
+         * Run the color match algorithm on our detected color
+         */
+        String colorString;
+        ColorMatchResult match = m_colorMatcher.matchClosestColor(periodic.detected_color);
+
+        if(match.confidence <= .95)
+            return "Unknown";
+
+        if (match.color == kBlueTarget) {
+            colorString = "Blue";
+        } else if (match.color == kRedTarget) {
+            colorString = "Red";
+        } else if (match.color == kGreenTarget) {
+            colorString = "Green";
+        } else if (match.color == kYellowTarget) {
+            colorString = "Yellow";
+        } else {
+            colorString = "Unknown";
+        }
+
+        return colorString;
+    }
+
     private void configTalon() {
         colorWheelTalon.setSensorPhase(true);
         colorWheelTalon.selectProfileSlot(0, 0);
@@ -197,6 +232,10 @@ public class ColorWheel extends Subsystem {
         colorWheelTalon.enableVoltageCompensation(true);
     }
 
+    public LogData getLogger(){
+        return periodic;
+    }
+
     public class ColorWheelIO extends Subsystem.PeriodicIO {
         public double close_loop_error = 0;
         public char fms_color = 'U';
@@ -206,5 +245,6 @@ public class ColorWheel extends Subsystem {
         public double demand = 0.0;
         public boolean color_motor_pid_on = false;
         public Color detected_color = Color.kBlack;
+        public String color_sensed = "Unknown";
     }
 }
