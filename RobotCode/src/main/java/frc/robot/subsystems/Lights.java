@@ -14,14 +14,16 @@ public class Lights extends Subsystem {
     private int numberOfBalls;
     private boolean targeted, uprightsUp;
     private Color allianceColor;
-    private lightModes currentLightMode = lightModes.indexNum;
+    private lightModes currentLightMode;
+
     private Lights() {
         mled = new AddressableLED(Constants.LED_PORT);
         mLEDBuffer = new AddressableLEDBuffer(Constants.LED_LENGTH);
-        mled.setLength(mLEDBuffer.getLength());
+        reset();
     }
 
     private static Lights m_lightsInstance = new Lights();
+
     public static Lights getInstance() {
         return m_lightsInstance;
     }
@@ -36,8 +38,8 @@ public class Lights extends Subsystem {
             allianceColor = Color.kChocolate;
         }
         colorH = interpretColor(ColorWheel.getInstance().cDetected());
-        //TODO Add Light Implementation for indexer
-        //TODO Implement targeting
+        // TODO Add Light Implementation for indexer
+        // TODO Implement targeting
         uprightsUp = Climber.getInstance().unfolded;
         if (uprightsUp) {
             currentLightMode = lightModes.colorWheel;
@@ -47,61 +49,84 @@ public class Lights extends Subsystem {
     @Override
     public void writePeriodicOutputs() {
         switch (currentLightMode) {
-            case colorWheel: for (var i = 0; i < mLEDBuffer.getLength(); i++) {
+        case colorWheel:
+            for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 // Sets the specified LED to the RGB values for red
                 mLEDBuffer.setHSV(i, colorH, 100, 75);
-            } break;
-            case targeting: if (targeted){
-                for(var i = 0; i < mLEDBuffer.getLength(); i++) {
+            }
+            break;
+        case targeting:
+            if (targeted) {
+                for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                     mLEDBuffer.setRGB(i, 13, 239, 66);
-                    }
+                }
             } else {
-                for(var i = 0; i < mLEDBuffer.getLength(); i++) {
+                for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                     mLEDBuffer.setRGB(i, 220, 61, 42);
-                    }
-            } break;
-            case indexNum: if (numberOfBalls >= 1 && numberOfBalls <= 4) {
-                    for(var i = 0; i < (mLEDBuffer.getLength() * (.2*numberOfBalls)); i++) {
+                }
+            }
+            break;
+        case indexNum:
+            if (numberOfBalls >= 1 && numberOfBalls <= 4) {
+                for (var i = 0; i < (mLEDBuffer.getLength() * (.2 * numberOfBalls)); i++) {
                     mLEDBuffer.setRGB(i, 254, 226, 62);
-                    }
-            } break;
-            default: for(var i = 0; i < mLEDBuffer.getLength(); i++) {
+                }
+            }
+            break;
+        case allianceColor:
+            for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 mLEDBuffer.setLED(i, allianceColor);
-            }break;
+            }
+            break;
+        default:
+            for (var i = 0; i < mLEDBuffer.getLength(); i++) {
+                mLEDBuffer.setLED(i, Color.kChocolate);
+            }
+            break;
         }
-    mled.setData(mLEDBuffer);
+        mled.setData(mLEDBuffer);
     }
-    
+
     /*
-    * This converts the char inputted into a hue value.
-    * 
-    * @param color color RGBY as a char, capitals only
-    * @return hue value of the color inputted
-    */
+     * This converts the char inputted into a hue value.
+     * 
+     * @param color color RGBY as a char, capitals only
+     * 
+     * @return hue value of the color inputted
+     */
     public int interpretColor(char color) {
-        switch(color) {
-            case 'R': return 0; 
-            case 'Y': return 60; 
-            case 'G': return 120;
-            case 'B': return 180;
-            default: return 300;
-            
+        switch (color) {
+        case 'R':
+            return 0;
+        case 'Y':
+            return 60;
+        case 'G':
+            return 120;
+        case 'B':
+            return 180;
+        default:
+            return 300;
+
         }
     }
 
     @Override
     public void reset() {
+        mLEDBuffer = new AddressableLEDBuffer(60);
+        mled.setLength(mLEDBuffer.getLength());
+        mled.setData(mLEDBuffer);
+        mled.start();
+        currentLightMode = lightModes.colorWheel;
+
     }
 
     @Override
     public void outputTelemetry() {
 
     }
-    
+
     enum lightModes {
-        targeting,
-        colorWheel,
-        indexNum;
+        targeting, colorWheel, indexNum, allianceColor;
     }
-    
+
 }
