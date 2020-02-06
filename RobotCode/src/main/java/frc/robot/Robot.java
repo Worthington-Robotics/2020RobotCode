@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
 
 /**
@@ -35,7 +36,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         manager = new SubsystemManager(Arrays.asList(
             //register subsystems here
-            Lights.getInstance()
+            Lights.getInstance(),
+            ColorWheel.getInstance()
         ), true);
 
         //create the master looper threads
