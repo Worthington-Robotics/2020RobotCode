@@ -22,12 +22,20 @@ public class Constants {
     public static final int DRIVE_MIDDLE_RIGHT_ID = 5;
     public static final int DRIVE_BACK_RIGHT_ID = 6;
 
+    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
+    public static final int SUPERSTRUCTURE_DELIVERY_ABOVE_BELT = 8;
+    public static final int SUPERSTRUCTURE_DELIVERY_BELOW_BELT = 9;
+    public static final int SUPERSTRUCTURE_INTAKE = 10;
     //Spark Ports
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 1;
 
+    public static final int CLIMB_FRONT_LOW_ID = 2;
+    public static final int CLIMB_FRONT_HIGH_ID = 3;
+    public static final int LOCK_LOW_ID = 4;
+    public static final int LOCK_HIGH_ID = 5;
     //Color Sensor Port
     public static final int COLOR_SENSOR_PORT = 0;
     
@@ -155,4 +163,28 @@ public class Constants {
 
     public static final int satLimit = 80;
     public static final int valLimit = 80;
+
+    /**
+     * Superstructure belt constants
+     */
+    // IDs
+    public static final int FLIGHT_SENSOR_DELIVERY = 0;
+    public static final int FLIGHT_SENSOR_INDEX = 1;
+    public static final int FLIGHT_SENSOR_INTAKE = 2;
+    // Demands
+    public static final double FULL_BELT_DEMAND = 1;
+    public static final double HIGH_BELT_DEMAND = 0.75;
+    public static final double STOP_BELT_DEMAND = 0;
+    // Sensor distance before stop (in mm)
+    public static final double DISTANCE_STOP_MM = 25.4;
+    public static final double DISTANCE_EMPTY_MM = 1219.2;
+
+    /**
+     * Joystick
+     */
+    //Stick Constants
+    public static final Joystick MASTER = new Joystick(0);
+    public static final Joystick LAUNCH_PAD = new Joystick(1);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.2, 0.99, 0.99, 0.6, 2);
+    public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.2, 0.99, 0.99, 0.8, 2);
 }

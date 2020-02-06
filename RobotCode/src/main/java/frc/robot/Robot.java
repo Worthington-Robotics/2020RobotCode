@@ -21,6 +21,7 @@ import frc.robot.actions.climberactions.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.Superstructure;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
             Lights.getInstance(),
             Climber.getInstance(),
             ColorWheel.getInstance()
+            Superstructure.getInstance()
         ), true);
 
         //create the master looper threads
