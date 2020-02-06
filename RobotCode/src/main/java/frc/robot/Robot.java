@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
             //register subsystems here
             Lights.getInstance(),
             Climber.getInstance(),
-            ColorWheel.getInstance()
+            ColorWheel.getInstance(),
             Superstructure.getInstance()
         ), true);
 
