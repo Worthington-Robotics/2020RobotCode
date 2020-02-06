@@ -30,6 +30,9 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight indexSensor;
     private SimTimeOfFlight intakeSensor;
 
+    // Other Variables
+    private int numberOfBalls;
+
     private static Superstructure instance = new Superstructure();
     public static Superstructure getInstance() {
         return instance;

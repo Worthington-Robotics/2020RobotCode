@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Constants;
@@ -12,9 +13,10 @@ public class Lights extends Subsystem {
     private AddressableLED mled;
     private AddressableLEDBuffer mLEDBuffer;
     private int numberOfBalls;
-    private boolean targeted, uprightsUp;
+    private boolean targeted, uprightsUp, intakeDown, climbUp;
     private Color allianceColor;
     private lightModes currentLightMode;
+    private Value intakeState;
 
     private Lights() {
         mled = new AddressableLED(Constants.LED_PORT);
@@ -30,6 +32,12 @@ public class Lights extends Subsystem {
 
     @Override
     public void readPeriodicInputs() {
+        intakeState = Superstructure.getInstance().getArmExtension();
+        if (intakeState == Value.kForward) {
+            intakeDown = true;
+        } else {
+            intakeDown = false;
+        }
         if (DriverStation.getInstance().getAlliance() == Alliance.Blue) {
             allianceColor = Color.kBlue;
         } else if (DriverStation.getInstance().getAlliance() == Alliance.Red) {
@@ -41,8 +49,14 @@ public class Lights extends Subsystem {
         // TODO Add Light Implementation for indexer
         // TODO Implement targeting
         uprightsUp = Climber.getInstance().unfolded;
-        if (uprightsUp) {
+        climbUp = Climber.getInstance().climbed;
+        if (uprightsUp && !climbUp) {
             currentLightMode = lightModes.colorWheel;
+        } else if (uprightsUp && climbUp) {
+            currentLightMode = lightModes.allianceColor;
+        }
+        if (intakeDown) {
+            currentLightMode = lightModes.indexNum;
         }
     }
 

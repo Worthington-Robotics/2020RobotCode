@@ -16,8 +16,8 @@ public class ColorWheel extends Subsystem {
     private TalonSRX colorWheelTalon;
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 colorSensor;
-    private final char[] wheelColors = new char[]{'B', 'Y', 'R', 'G'};
-    private String wheelColorsOrder = new String(wheelColors);
+    //private final char[] wheelColors = new char[]{'B', 'Y', 'R', 'G'};
+    //private String wheelColorsOrder = new String(wheelColors);
 
     private ColorWheel() {
         colorWheelTalon = new TalonSRX(Constants.COLOR_WHEEL);

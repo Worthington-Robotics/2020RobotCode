@@ -12,6 +12,7 @@ public class Climber extends Subsystem {
     public DoubleSolenoid.Value extendCurrentState = Value.kReverse;
     public DoubleSolenoid.Value extendIntendedState = Value.kReverse;
     public boolean unfolded = false;
+    public boolean climbed = false;
     public boolean intakeDown = false;
     public double shooterAngle = 90;
 
@@ -48,6 +49,11 @@ public class Climber extends Subsystem {
         } else {
             extendSolenoid.set(extendIntendedState);
             //System.out.println("Extend Happened");
+        }
+        if (extendCurrentState == Value.kForward) {
+            climbed = true;
+        } else if (extendCurrentState == Value.kReverse) {
+            climbed = false;
         }
     }
 
