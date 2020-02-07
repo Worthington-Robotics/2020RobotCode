@@ -37,7 +37,7 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        SmartDashboard.putNumber("BALLS", periodic.ballCount);
+        SmartDashboard.putNumber("BALLS", 0);
 
         indexBelt = new TalonSRX(SUPERSTRUCTURE_INDEX_BELT);
         deliveryAboveBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_ABOVE_BELT);
@@ -60,7 +60,6 @@ public class Superstructure extends Subsystem {
         periodic.deliveryDistance = deliverySensor.getRange();
         periodic.indexDistance = indexSensor.getRange();
         periodic.intakeDistance = intakeSensor.getRange();
-        SmartDashboard.getNumber("BALLS", periodic.ballCount);
     }
 
     /**
@@ -76,7 +75,7 @@ public class Superstructure extends Subsystem {
     }
 
     @Override public void outputTelemetry() {
-
+        SmartDashboard.putNumber("BALLS", periodic.ballCount);
     }
 
     /**

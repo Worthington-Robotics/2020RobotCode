@@ -7,6 +7,7 @@ import frc.robot.subsystems.Superstructure;
 
 public class IntakeAction extends Action {
     private Superstructure superstructure;
+    private boolean objectInIntake;
 
     public IntakeAction() {
         superstructure = Superstructure.getInstance();
@@ -25,6 +26,9 @@ public class IntakeAction extends Action {
         boolean objDetected = Constants.DISTANCE_STOP_MM >= superstructure.getIntakeDistance();
         
         if (objDetected) {
+            objectInIntake = true;
+        } else if (objectInIntake) {
+            objectInIntake = false;
             superstructure.setBallCount(superstructure.getBallCount() + 1);
         }
         

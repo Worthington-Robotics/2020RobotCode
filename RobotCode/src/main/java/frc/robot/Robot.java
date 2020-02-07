@@ -10,10 +10,17 @@ package frc.robot;
 import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.superaction.DeliveryBeltAction;
+import frc.robot.actions.superaction.IndexBeltAction;
+import frc.robot.actions.superaction.IntakeAction;
+import frc.robot.actions.superaction.ShootAction;
+import frc.robot.actions.superaction.ShootType;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Superstructure;
 
@@ -25,21 +32,25 @@ import frc.robot.subsystems.Superstructure;
  * project.
  */
 public class Robot extends TimedRobot {
-    private SubsystemManager manager;
+    private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
+        //register subsystems here
+        Lights.getInstance(),
+        Superstructure.getInstance()
+    ), true);;
     private Looper enabledLooper, disabledLooper;
+    
+    private JoystickButton shootAll = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton shootOne = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton indexer = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton intake = new JoystickButton(Constants.MASTER, 5);
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
-    public void robotInit() {
-        manager = new SubsystemManager(Arrays.asList(
-            //register subsystems here
-            Lights.getInstance(),
-            Superstructure.getInstance()
-        ), true);
-
+    public void robotInit(){
         //create the master looper threads
         enabledLooper = new Looper();
         disabledLooper = new Looper();
@@ -55,6 +66,13 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+
+        //create buttons and register actions
+        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
+        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
+        delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
+        indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
+        intake.whileHeld(Action.toCommand(new IntakeAction()));
     }
 
     /**
@@ -130,7 +148,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
+        Scheduler.getInstance().run();
     }
 
     @Override
@@ -147,6 +165,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
-        
+        Scheduler.getInstance().run();
     }
 }
