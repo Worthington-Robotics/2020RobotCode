@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+        System.out.print("INIT");
         setManualFlywheel.whileHeld(Action.toCommand(new SetManualFlywheel()));
         setManualTurret.whileHeld(Action.toCommand(new ManualTurretControl(Constants.SECOND.getRawButton(12))));
     }
@@ -134,6 +135,8 @@ public class Robot extends TimedRobot {
         //reset anything here
 
         enabledLooper.start();
+        setManualFlywheel.whileHeld(Action.toCommand(new SetManualFlywheel()));
+        setManualTurret.whileHeld(Action.toCommand(new ManualTurretControl(Constants.SECOND.getRawButton(12))));
     }
 
     /**

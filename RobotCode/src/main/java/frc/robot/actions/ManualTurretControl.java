@@ -22,7 +22,7 @@ public class ManualTurretControl extends Action {
         }else{
             Shooter.getInstance().setTurretDemand(-1 * Constants.TURRET_MAX_SPEED);
         }
-        System.out.println("Activated");
+        System.out.println("Starting");
     }
 
     /**
