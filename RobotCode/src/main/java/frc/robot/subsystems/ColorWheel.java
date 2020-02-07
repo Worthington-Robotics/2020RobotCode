@@ -85,9 +85,6 @@ public class ColorWheel extends Subsystem {
      *
      * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
      */
-    public char cDetected() {
-        return colorFromRGB(periodic.RGB);
-    }
 
     public static char colorFromRGB(final double[] RGB) {
         // RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255,
@@ -151,9 +148,9 @@ public class ColorWheel extends Subsystem {
      */
     private void distance() {
         periodic.color_direction_calc = wheelColorsOrder.indexOf(colorConvert(periodic.fms_color))
-                - wheelColorsOrder.indexOf(cDetected());
+                - wheelColorsOrder.indexOf(periodic.color_sensed.charAt(0));
         if (wheelColorsOrder.indexOf(colorConvert(periodic.fms_color)) == -1
-                || wheelColorsOrder.indexOf(cDetected()) == -1) {
+                || wheelColorsOrder.indexOf(periodic.color_sensed.charAt(0)) == -1) {
             periodic.distance = 0;
         } else if (periodic.color_direction_calc == -3) {
             periodic.distance = -12.5;
@@ -181,7 +178,7 @@ public class ColorWheel extends Subsystem {
     }
 
     public boolean checkColor() {
-        return periodic.fms_color == cDetected();
+        return periodic.fms_color == periodic.color_sensed.charAt(0);
     }
 
     public void setColorMotorPidOn(final boolean motorOn) {

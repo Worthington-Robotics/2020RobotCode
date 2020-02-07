@@ -138,7 +138,7 @@ public class ColorSensorV3 {
         GainFactor(int i) { this.bVal = (byte) i; }
     }
 
-    enum LEDCurrent {
+    public enum LEDCurrent {
         kPulse2mA(0x00),
         kPulse5mA(0x01),
         kPulse10mA(0x02),
@@ -152,7 +152,7 @@ public class ColorSensorV3 {
         LEDCurrent(int i) { this.bVal = (byte) i; }
     }
 
-    enum LEDPulseFrequency {
+    public enum LEDPulseFrequency {
         kFreq60kHz(0x18), /* default value */
         kFreq70kHz(0x40),
         kFreq80kHz(0x28),
@@ -163,7 +163,7 @@ public class ColorSensorV3 {
         LEDPulseFrequency(int i) { this.bVal = (byte) i; }
     }
 
-    enum ProximitySensorResolution {
+    public enum ProximitySensorResolution {
         kProxRes8bit(0x00),
         kProxRes9bit(0x01),
         kProxRes10bit(0x02),
@@ -173,7 +173,7 @@ public class ColorSensorV3 {
         ProximitySensorResolution(int i) { this.bVal = (byte) i; }
     }
 
-    enum ProximitySensorMeasurementRate {
+    public enum ProximitySensorMeasurementRate {
         kProxRate6ms(0x01),
         kProxRate12ms(0x02),
         kProxRate25ms(0x03),
