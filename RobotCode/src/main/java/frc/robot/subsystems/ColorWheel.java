@@ -254,6 +254,10 @@ public class ColorWheel extends Subsystem {
         colorWheelTalon.enableVoltageCompensation(true);
     }
 
+    public char cDetected() {
+        return periodic.color_sensed.charAt(0);
+    }
+
     public LogData getLogger() {
         return periodic;
 
