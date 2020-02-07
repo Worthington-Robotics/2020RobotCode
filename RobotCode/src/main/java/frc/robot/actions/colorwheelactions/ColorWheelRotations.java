@@ -1,12 +1,13 @@
 package frc.robot.actions.colorwheelactions;
 
 import frc.lib.statemachine.Action;
+import frc.robot.subsystems.ColorWheel;
 
 public class ColorWheelRotations extends Action {
 
     @Override
     public void onStart() {
-        
+       ColorWheel.getInstance().setColorWheelMode(ColorWheel.colorWheelMode.rotation); 
     }
 
     @Override
@@ -16,7 +17,7 @@ public class ColorWheelRotations extends Action {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override

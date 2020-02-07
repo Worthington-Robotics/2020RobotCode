@@ -54,18 +54,24 @@ public class ColorWheel extends Subsystem {
     public void writePeriodicOutputs() {
         periodic.RGB = new int[]{colorSensor.getRed(), colorSensor.getBlue(), colorSensor.getGreen()};
         periodic.currentColor = colorFromRGB(periodic.RGB);
-        if (periodic.colorWheelReading) {
-            if (periodic.fmsColor == 'U') {
-                if (!periodic.colorMotorPidOn) {
-                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
+        if (periodic.currentWheelMode == colorWheelMode.rotation) {
+            if (periodic.colorWheelReading) {
+                if (periodic.fmsColor == 'U') {
+                    if (!periodic.colorMotorPidOn) {
+                        colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
+                    }
                 }
-            } else {
+            } else {}
+        } else if (periodic.currentWheelMode == colorWheelMode.position) {
+            if (periodic.colorWheelReading) {
                 if (!periodic.colorMotorPidOn) {
                     checkIfDone();
                     colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.demand));
                 }
             }
-        } else {}
+        } else {
+            
+        }
     }
 
     @Override
@@ -194,6 +200,10 @@ public class ColorWheel extends Subsystem {
         colorWheelTalon.enableVoltageCompensation(true);
     }
 
+    public void setColorWheelMode(colorWheelMode intendedMode) {
+        periodic.currentWheelMode = intendedMode;
+    }
+
     public LogData getLogger(){
         return periodic;
 
@@ -209,5 +219,11 @@ public class ColorWheel extends Subsystem {
         public double demand = 0.0;
         public boolean colorMotorPidOn = false;
         public boolean colorWheelReading = false;
+        public colorWheelMode currentWheelMode = colorWheelMode.stopped;
+    }
+    public enum colorWheelMode {
+        rotation,
+        position, 
+        stopped;
     }
 }
