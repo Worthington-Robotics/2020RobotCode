@@ -10,10 +10,14 @@ package frc.robot;
 import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.ManualTurretControl;
+import frc.robot.actions.SetManualFlywheel;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Shooter;
@@ -28,6 +32,9 @@ import frc.robot.subsystems.Shooter;
 public class Robot extends TimedRobot {
     private SubsystemManager manager;
     private Looper enabledLooper, disabledLooper;
+    private JoystickButton setManualFlywheel = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton setManualTurret = new JoystickButton(Constants.MASTER, 2);
+
 
     /**
      * This function is run when the robot is first started up and should be
@@ -57,6 +64,8 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+        setManualFlywheel.whileHeld(Action.toCommand(new SetManualFlywheel()));
+        setManualTurret.whileHeld(Action.toCommand(new ManualTurretControl(Constants.SECOND.getRawButton(12))));
     }
 
     /**

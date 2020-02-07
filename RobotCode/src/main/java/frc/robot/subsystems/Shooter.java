@@ -124,8 +124,8 @@ public class Shooter extends Subsystem {
                 turretControl.set(ControlMode.Disabled, 0);
                 break;
         }
-        System.out.println("Flywheel is in " + flywheelMode);
-        System.out.println("Turret is in " + turretControl);
+        //System.out.println("Flywheel is in " + flywheelMode);
+        //System.out.println("Turret is in " + turretMode);
     }
 
     /**

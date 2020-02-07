@@ -9,6 +9,7 @@ public class ManualTurretControl extends Action {
     public ManualTurretControl(boolean CCW)
     {
         isCounterClockwise = CCW;
+        System.out.println("Activated");
     }
     /**
      * code to run on action start
@@ -21,6 +22,7 @@ public class ManualTurretControl extends Action {
         }else{
             Shooter.getInstance().setTurretDemand(-1 * Constants.TURRET_MAX_SPEED);
         }
+        System.out.println("Activated");
     }
 
     /**
@@ -29,6 +31,7 @@ public class ManualTurretControl extends Action {
      */
     @Override
     public void onLoop() {
+        System.out.print("Done");
 
     }
 
