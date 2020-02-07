@@ -10,12 +10,18 @@ package frc.robot;
 import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.climberactions.*;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.Superstructure;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +33,7 @@ import frc.robot.subsystems.Lights;
 public class Robot extends TimedRobot {
     private SubsystemManager manager;
     private Looper enabledLooper, disabledLooper;
+    private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -37,7 +44,9 @@ public class Robot extends TimedRobot {
         manager = new SubsystemManager(Arrays.asList(
             //register subsystems here
             Lights.getInstance(),
-            ColorWheel.getInstance()
+            Climber.getInstance(),
+            ColorWheel.getInstance(),
+            Superstructure.getInstance()
         ), true);
 
         //create the master looper threads
@@ -55,6 +64,15 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+
+        foldClimb = new JoystickButton(Constants.MASTER, 9);
+        unfoldClimb = new JoystickButton(Constants.MASTER, 10);
+        climbDown = new JoystickButton(Constants.MASTER, 11);
+        climbUp = new JoystickButton(Constants.MASTER, 12);
+        foldClimb.whenPressed(Action.toCommand(new FoldAction()));
+        unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
+        climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
+        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
     }
 
     /**
@@ -130,7 +148,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
+        Scheduler.getInstance().run();
     }
 
     @Override

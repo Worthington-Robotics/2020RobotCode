@@ -2,27 +2,61 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorMatch;
+import edu.wpi.first.wpilibj.Joystick;
+import frc.lib.util.HIDHelper;
 
 public class Constants {
     /**
      * device ID declarations ---------------------------------
      */
-
+    
+    //Pigion ID
+    public static final int PIGION_ID = 0;
     //Talon IDs
     public static final int SHOOTER_FLYWHEEL_RIGHT = 1;
     public static final int SHOOTER_FLYWHEEL_LEFT = 2;
     public static final int COLOR_WHEEL = 3;
+    public static final int TURRET_CONTROL = 13;
+    public static final int DRIVE_FRONT_LEFT_ID = 1;
+    public static final int DRIVE_MIDDLE_LEFT_ID = 2;
+    public static final int DRIVE_BACK_LEFT_ID = 3;
+    public static final int DRIVE_FRONT_RIGHT_ID = 4;
+    public static final int DRIVE_MIDDLE_RIGHT_ID = 5;
+    public static final int DRIVE_BACK_RIGHT_ID = 6;
+
+    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
+    public static final int SUPERSTRUCTURE_DELIVERY_ABOVE_BELT = 8;
+    public static final int SUPERSTRUCTURE_DELIVERY_BELOW_BELT = 9;
+    public static final int SUPERSTRUCTURE_INTAKE = 10;
     //Spark Ports
 
     //Solenoid Ports
+    public static final int TRANS_LOW_ID = 0;
+    public static final int TRANS_HIGH_ID = 1;
 
+    public static final int CLIMB_FRONT_LOW_ID = 2;
+    public static final int CLIMB_FRONT_HIGH_ID = 3;
+    public static final int LOCK_LOW_ID = 4;
+    public static final int LOCK_HIGH_ID = 5;
     //Color Sensor Port
     public static final int COLOR_SENSOR_PORT = 0;
     
     //LED Data/Ports
     public static final int LED_PORT = 1;
     public static final int LED_LENGTH = 60;
+    /*
+        Flywheel Tuned Values
+    */
+    public static final double IDLE_RPM = 4000;
+    public static final double RPM_ACCEPTIBLE_ERROR = 300; // Ticks per 100 ms
 
+    /* 
+        Turret tuned values ---------------
+    */
+    public static final double TURRET_MAX_SPEED = .75;
+    public static final double TURRET_CONTROL_PID_P = 0;
+    public static final double TURRET_CONTROL_PID_D = 0;
+    
     /**
      * Drivetrain tuned values --------------------------------
      */
@@ -30,6 +64,14 @@ public class Constants {
     //Encoder Constants
     public static final double ENCODER_5046_CPR = 1024;
 
+    //Path Following Constants
+    public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
+    public static final double DRIVETRAIN_UPDATE_RATE = 0;
+    public static final double PATH_FOLLOWING_MAX_ACCELERATION = 0;
+    public static final double DRIVE_MAX_VEL = 0; //in/s
+    //Test Flags 
+    public static final boolean RAMPUP = false;
+    public static final double MP_TEST_SPEED = 72; //in/s
     //Physical Constants
     public static final double DRIVE_WHEEL_TRACK_WIDTH_INCHES = 21.75;
     public static final double DRIVE_WHEEL_DIAMETER_INCHES = 6.225; // 6
@@ -69,12 +111,15 @@ public class Constants {
     public static final double DRIVE_LEFT_KI = 0.0; //NO INTEGRAL it masks deeper problems
     public static final double DRIVE_LEFT_KD = 25; //20 for practice
     public static final double DRIVE_LEFT_KF = 0.53;
-
 	public static final double kPathFollowingMaxAccel = 0;
-
 	public static final boolean ENABLE_MP_TEST_MODE = false;
 
 	public static double LOOPER_DT = 0.01;
+
+	public static double LEFTFLYWHEELFALCON_KD = 0.0;
+    public static double LEFTFLYWHEELFALCON_KP = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KD = 0.0;
+    public static double RIGHTFLYWHEELFALCON_KP = 0.0;
 
 	//Color Wheel Constants
     public static final int COLOR_WHEEL_RED_HUE1 = 0;
@@ -104,5 +149,41 @@ public class Constants {
 
     //Limelight Constants
     public static final double LIMELIGHT_DEG_FOV = 0.0; //TODO CALCULATE FOV
+    
+    public static final double CLIMBER_EPSILON_CONST = 10;
 
+
+    public static final int redH1 = 0;
+    public static final int redH2 = 360;
+    public static final int yellowH = 60;
+    public static final int greenH = 120;
+    public static final int blueH = 180;
+    public static final int error = 10;
+
+    public static final int satLimit = 80;
+    public static final int valLimit = 80;
+
+    /**
+     * Superstructure belt constants
+     */
+    // IDs
+    public static final int FLIGHT_SENSOR_DELIVERY = 0;
+    public static final int FLIGHT_SENSOR_INDEX = 1;
+    public static final int FLIGHT_SENSOR_INTAKE = 2;
+    // Demands
+    public static final double FULL_BELT_DEMAND = 1;
+    public static final double HIGH_BELT_DEMAND = 0.75;
+    public static final double STOP_BELT_DEMAND = 0;
+    // Sensor distance before stop (in mm)
+    public static final double DISTANCE_STOP_MM = 25.4;
+    public static final double DISTANCE_EMPTY_MM = 1219.2;
+
+    /**
+     * Joystick
+     */
+    //Stick Constants
+    public static final Joystick MASTER = new Joystick(0);
+    public static final Joystick LAUNCH_PAD = new Joystick(1);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.2, 0.99, 0.99, 0.6, 2);
+    public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.2, 0.99, 0.99, 0.8, 2);
 }

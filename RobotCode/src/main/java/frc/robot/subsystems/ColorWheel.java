@@ -10,6 +10,7 @@ import frc.lib.drivers.ColorSensorV3;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import frc.robot.Constants;
+import frc.lib.drivers.ColorSensorV3.*;
 import frc.lib.util.Util;
 import edu.wpi.first.wpilibj.util.Color;
 import static frc.lib.drivers.ColorSensorV3.*;
@@ -51,24 +52,34 @@ public class ColorWheel extends Subsystem {
         } else {
             periodic.fms_color = 'U';
         }
-        periodic.close_loop_error = colorWheelTalon.getClosedLoopError();
         periodic.detected_color = colorSensor.getColor();
         periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue,
                 periodic.detected_color.green };
         periodic.color_sensed = colorMatch();
+        periodic.close_loop_error = colorWheelTalon.getClosedLoopError();
+        if (!(periodic.color_sensed.charAt(0) == 'U')) {
+            periodic.color_wheel_reading = true;
+        } else {
+            periodic.color_wheel_reading = false;
+        }
     }
 
     @Override
     public void writePeriodicOutputs() {
-        if (!periodic.color_motor_pid_on) {
-            colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
+        periodic.RGB = new double[] { (periodic.detected_color.red * 255), (periodic.detected_color.green * 255), (periodic.detected_color.blue * 255) };
+        if (periodic.color_wheel_reading) {
+            if (periodic.fms_color == 'U') {
+                if (!periodic.color_motor_pid_on) {
+                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
+                }
+            } else {
+                if (!periodic.color_motor_pid_on) {
+                    checkIfDone();
+                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.demand));
+                }
+            }
         } else {
-            colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.distance));
         }
-    }
-
-    private double inchesToTicks(final double inches) {
-        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.ENCODER_5046_CPR;
     }
 
     @Override
@@ -78,6 +89,12 @@ public class ColorWheel extends Subsystem {
         SmartDashboard.putNumber("Color Wheel/Green", periodic.detected_color.green);
         SmartDashboard.putString("Color Wheel/Detected Color", periodic.color_sensed);
         SmartDashboard.putNumber("Confidence", m_colorMatcher.matchClosestColor(periodic.detected_color).confidence);
+    }
+
+    // User Created Methods
+
+    private double inchesToTicks(double inches) {
+        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.ENCODER_5046_CPR;
     }
 
     /**
@@ -161,6 +178,18 @@ public class ColorWheel extends Subsystem {
         }
     }
 
+    private void checkIfDone() {
+        if (!(periodic.color_sensed.charAt(0) == 'U')) {
+            if (!(periodic.color_sensed.charAt(0) == periodic.fms_color)) {
+                periodic.demand = 12.0;
+            } else {
+                periodic.demand = 0;
+            }
+        } else {
+            periodic.demand = .75;
+        }
+    }
+
     @Override
     public void reset() {
         periodic = new ColorWheelIO();
@@ -193,7 +222,7 @@ public class ColorWheel extends Subsystem {
         String colorString;
         ColorMatchResult match = m_colorMatcher.matchClosestColor(periodic.detected_color);
 
-        if(match.confidence <= .95)
+        if (match.confidence <= .95)
             return "Unknown";
 
         if (match.color == Constants.kBlueTarget) {
@@ -225,8 +254,9 @@ public class ColorWheel extends Subsystem {
         colorWheelTalon.enableVoltageCompensation(true);
     }
 
-    public LogData getLogger(){
+    public LogData getLogger() {
         return periodic;
+
     }
 
     public class ColorWheelIO extends Subsystem.PeriodicIO {
@@ -236,8 +266,9 @@ public class ColorWheel extends Subsystem {
         public double[] RGB = new double[] { 0, 0, 0 };
         public int color_direction_calc;
         public double demand = 0.0;
-        public boolean color_motor_pid_on = false;
         public Color detected_color = Color.kBlack;
         public String color_sensed = "Unknown";
+        public boolean color_motor_pid_on = false;
+        public boolean color_wheel_reading = false;
     }
 }

@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import org.junit.Test;
-import frc.robot.subsystems.Lights;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.lang.Character;
