@@ -23,18 +23,14 @@ public class ColorWheel extends Subsystem {
     private final String wheelColorsOrder = new String(wheelColors);
     // Color Match Stuff
     private final ColorMatch m_colorMatcher = new ColorMatch();
-    private final Color kBlueTarget = ColorMatch.makeColor(0.128, 0.413, 0.459);
-    private final Color kGreenTarget = ColorMatch.makeColor(0.172, 0.564, 0.264);
-    private final Color kRedTarget = ColorMatch.makeColor(0.498, 0.352, 0.150);
-    private final Color kYellowTarget = ColorMatch.makeColor(0.315, 0.553, 0.132);
 
     private ColorWheel() {
         colorWheelTalon = new TalonSRX(Constants.COLOR_WHEEL);
         colorSensor = new ColorSensorV3(i2cPort);
-        m_colorMatcher.addColorMatch(kBlueTarget);
-        m_colorMatcher.addColorMatch(kGreenTarget);
-        m_colorMatcher.addColorMatch(kRedTarget);
-        m_colorMatcher.addColorMatch(kYellowTarget);
+        m_colorMatcher.addColorMatch(Constants.kBlueTarget);
+        m_colorMatcher.addColorMatch(Constants.kGreenTarget);
+        m_colorMatcher.addColorMatch(Constants.kRedTarget);
+        m_colorMatcher.addColorMatch(Constants.kYellowTarget);
         reset();
     }
 
@@ -203,13 +199,13 @@ public class ColorWheel extends Subsystem {
         if(match.confidence <= .95)
             return "Unknown";
 
-        if (match.color == kBlueTarget) {
+        if (match.color == Constants.kBlueTarget) {
             colorString = "Blue";
-        } else if (match.color == kRedTarget) {
+        } else if (match.color == Constants.kRedTarget) {
             colorString = "Red";
-        } else if (match.color == kGreenTarget) {
+        } else if (match.color == Constants.kGreenTarget) {
             colorString = "Green";
-        } else if (match.color == kYellowTarget) {
+        } else if (match.color == Constants.kYellowTarget) {
             colorString = "Yellow";
         } else {
             colorString = "Unknown";
