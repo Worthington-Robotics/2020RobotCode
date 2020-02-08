@@ -43,6 +43,8 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void readPeriodicInputs() {
+        periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
+        periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
         periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
         periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.MASTER.getRawAxis(3), 1, 0); //Makes all values positive with -1 being 0 and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
@@ -143,6 +145,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
         SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
+        SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
     }
 
     public void configLimelight() {
@@ -179,15 +182,11 @@ public class Shooter extends Subsystem {
      * Method that maps the raw input from the slider on the EXTREME 3D and convert the value to a 0 - 1 bottom to top map
      * 
      */
-    
-    public double sliderMap(double sliderRaw){
-        return ((-1 * sliderRaw) + 1)/2;
-    }
 
     public double degreesToTicks(double degree)
     {
         //implement a ticks to degrees method
-        return degree;
+        return degree * 108; // 4096 * 9.5 / 360
     }
     /**
      * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches
@@ -208,7 +207,7 @@ public class Shooter extends Subsystem {
 
     public double RPMToTicksPer100ms(double RPM)
     {
-        return RPM; //TODO Implement a convertion to convert RPM to tickes per 100ms
+        return RPM * 13.653; // .1 * 2048 * 4/60
     }
 
     public void setFlywheelRPM(double demand){
@@ -277,5 +276,7 @@ public class Shooter extends Subsystem {
         public double rotationsClosedLoopError = 0;
         public double[] operatorInput = new double[] {0,0,0};
         public double operatorFlywheelInput = 0;
+        public double flywheelVelocity = 0;
+        public double flywheelClosedLoopError = 0;
     }
 }
