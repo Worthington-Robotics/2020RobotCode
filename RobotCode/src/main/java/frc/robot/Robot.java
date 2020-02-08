@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 1992-1993 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -23,6 +23,13 @@ import frc.robot.actions.superaction.ShootAction;
 import frc.robot.actions.superaction.ShootType;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Superstructure;
+import frc.lib.util.DriveSignal;
+import frc.robot.actions.driveactions.GyroLock;
+import frc.robot.actions.driveactions.Shift;
+import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.PoseEstimator;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,8 +42,11 @@ public class Robot extends TimedRobot {
     private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
         //register subsystems here
         Lights.getInstance(),
-        Superstructure.getInstance()
-    ), true);;
+        Superstructure.getInstance(),
+        PoseEstimator.getInstance(),
+        Drive.getInstance(),
+        ColorWheel.getInstance()
+    ), true);
     private Looper enabledLooper, disabledLooper;
     
     private JoystickButton shootAll = new JoystickButton(Constants.MASTER, 1);
@@ -44,6 +54,8 @@ public class Robot extends TimedRobot {
     private JoystickButton delivery = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton indexer = new JoystickButton(Constants.MASTER, 4);
     private JoystickButton intake = new JoystickButton(Constants.MASTER, 5);
+    private JoystickButton shift = new JoystickButton(Constants.MASTER, 6);
+    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 8);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -68,6 +80,9 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
 
         //create buttons and register actions
+        shift.whileHeld(Action.toCommand(new Shift()));
+        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
+
         shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
         shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
@@ -141,6 +156,7 @@ public class Robot extends TimedRobot {
         //reset anything here
 
         enabledLooper.start();
+        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
     }
 
     /**

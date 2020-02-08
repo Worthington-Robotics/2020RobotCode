@@ -139,6 +139,7 @@ public class SubsystemManager implements ILooper {
             for (final Loop l : mLoops) {
                 l.onStop(timestamp);
             }
+            if(logger != null)
             logger.close();
         }
     }
