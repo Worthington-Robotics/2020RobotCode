@@ -22,14 +22,11 @@ import frc.robot.actions.driveactions.Inverse;
 import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.PoseEstimator;
 import frc.robot.actions.colorWheelManual;
 import frc.robot.actions.climberactions.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.Lights;
-import frc.robot.subsystems.Superstructure;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,7 +38,6 @@ import frc.robot.subsystems.Superstructure;
 public class Robot extends TimedRobot {
     private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
         //register subsystems here
-        Lights.getInstance(),
         PoseEstimator.getInstance(),
         Drive.getInstance(),
         ColorWheel.getInstance()
