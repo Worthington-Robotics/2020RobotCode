@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 1992-1993 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -24,6 +24,12 @@ import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.PoseEstimator;
+import frc.robot.actions.colorWheelManual;
+import frc.robot.actions.climberactions.*;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.Superstructure;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -69,10 +75,23 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
 
         //create buttons and register actions
+
+        JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
+        JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
+        JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
+        JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+        JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
+        JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
+
+        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
+        foldClimb.whenPressed(Action.toCommand(new FoldAction()));
+        unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
+        climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
+        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-
     }
 
     /**

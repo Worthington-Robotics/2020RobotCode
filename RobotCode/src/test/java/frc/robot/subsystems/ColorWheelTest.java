@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import org.junit.Test;
-import frc.robot.subsystems.Lights;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.lang.Character;
@@ -13,7 +12,7 @@ public class ColorWheelTest {
         for (int r = 0; r < 255; r+=10) {
             for (int g = 0; g < 255; g+=10) {
                 for (int b = 0; b < 255; b+=10) {
-                    final char color =  ColorWheel.colorFromRGB(new int[]{r, g, b});
+                    final char color =  ColorWheel.colorFromRGB(new double[]{r, g, b});
                     System.out.println(r + ", " + g + ", " + b + ", " + color);
 
                     colors.add(color);
