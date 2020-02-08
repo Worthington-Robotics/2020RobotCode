@@ -62,6 +62,10 @@ public class Drive extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
+                if (periodic.inverse) {
+                    periodic.operatorInput[0] *= -1;
+                    periodic.operatorInput[1] *= -1;
+                }
                 synchronized (Drive.this) {
                     if (Constants.ENABLE_MP_TEST_MODE && DriverStation.getInstance().isTest()) {
                         mDriveControlState = DriveControlState.PROFILING_TEST;
@@ -83,7 +87,6 @@ public class Drive extends Subsystem {
                         }
                         break;
                     case OPEN_LOOP:
-
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[0]));
                         // System.out.println("X: " + periodic.operatorInput[0] + " Y: " +
                         // periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
@@ -116,11 +119,15 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
-        //periodic.gyro_heading = Rotation2d.fromDegrees(SmartDashboard.getNumber("Drive/Gyro/CurAngle", 0));
+        // periodic.gyro_heading =
+        // Rotation2d.fromDegrees(SmartDashboard.getNumber("Drive/Gyro/CurAngle", 0));
         periodic.AnglePIDError = anglePID.getError();
         periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
         periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
-        periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+        if (periodic.TransState == DoubleSolenoid.Value.kForward)
+            periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK_SHIFTED);
+        else
+            periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
         double prevLeftTicks = periodic.left_pos_ticks;
         double prevRightTicks = periodic.right_pos_ticks;
         periodic.left_error = driveFrontLeft.getClosedLoopError();
@@ -130,10 +137,12 @@ public class Drive extends Subsystem {
         periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
         periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
 
-        periodic.left_velocity_ticks_per_100ms = (int)driveFrontLeft.getSensorCollection().getIntegratedSensorVelocity();
-        periodic.right_velocity_ticks_per_100ms = (int)driveFrontRight.getSensorCollection().getIntegratedSensorVelocity();
-        periodic.left_pos_ticks = (int)driveFrontLeft.getSensorCollection().getIntegratedSensorPosition();
-        periodic.right_pos_ticks = (int)driveFrontRight.getSensorCollection().getIntegratedSensorPosition();
+        periodic.left_velocity_ticks_per_100ms = (int) driveFrontLeft.getSensorCollection()
+                .getIntegratedSensorVelocity();
+        periodic.right_velocity_ticks_per_100ms = (int) driveFrontRight.getSensorCollection()
+                .getIntegratedSensorVelocity();
+        periodic.left_pos_ticks = (int) driveFrontLeft.getSensorCollection().getIntegratedSensorPosition();
+        periodic.right_pos_ticks = (int) driveFrontRight.getSensorCollection().getIntegratedSensorPosition();
         periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
 
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
@@ -179,10 +188,10 @@ public class Drive extends Subsystem {
 
     }
 
-    public PIDF getAnglePID()
-    {
+    public PIDF getAnglePID() {
         return anglePID;
     }
+
     public void setTrans(DoubleSolenoid.Value state) {
         periodic.TransState = state;
     }
@@ -390,6 +399,10 @@ public class Drive extends Subsystem {
         return anglePID.onTarget(Constants.ANGLE_PID_EPISLON);
     }
 
+    public void setInverse(boolean isInverse) {
+        periodic.inverse = isInverse;
+    }
+
     /**
      * Configures talons for velocity control
      */
@@ -412,9 +425,11 @@ public class Drive extends Subsystem {
     public void outputTelemetry() {
         double[] PIDData = anglePID.getPID();
 
-        //SmartDashboard.putNumber("Drive/Gyro/CurAngle", periodic.gyro_heading.getDegrees());
+        // SmartDashboard.putNumber("Drive/Gyro/CurAngle",
+        // periodic.gyro_heading.getDegrees());
+        SmartDashboard.putBoolean("isInverse", periodic.inverse);
         SmartDashboard.putNumber("Drive/Gyro/Demand", periodic.PIDOutput);
-    
+
         SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
         SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
         SmartDashboard.putNumber("Drive/AnglePID/Set Point", periodic.gyro_pid_angle);
@@ -424,17 +439,17 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
         SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
         SmartDashboard.putNumber("Drive/Error/Y", periodic.error.y());
-        
+
         SmartDashboard.putNumber("Drive/Theta/Error", periodic.AnglePIDError);
 
-        SmartDashboard.putNumber("Drive/Left/Current",periodic.leftCurrent);
+        SmartDashboard.putNumber("Drive/Left/Current", periodic.leftCurrent);
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
         SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
 
-        SmartDashboard.putNumber("Drive/Right/Current",periodic.rightCurrent);
+        SmartDashboard.putNumber("Drive/Right/Current", periodic.rightCurrent);
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
@@ -464,12 +479,13 @@ public class Drive extends Subsystem {
         public double gyro_pid_angle = 0;
         public double[] operatorInput = { 0, 0, 0 };
         public DoubleSolenoid.Value TransState = Value.kReverse;
+        public boolean inverse = false;
         public double PIDOutput = 0;
         // Smartdashboard Settings
         public double PIDDUpdate = 0;
         public double PIDPUpdate = 0;
         public boolean savePIDSettings = false;
-        //Logging
+        // Logging
         public double rightCurrent = 0;
         public double leftCurrent = 0;
         public double AnglePIDError = 0;

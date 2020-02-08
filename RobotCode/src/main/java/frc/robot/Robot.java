@@ -18,6 +18,7 @@ import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
 import frc.robot.actions.driveactions.GyroLock;
+import frc.robot.actions.driveactions.Inverse;
 import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
@@ -40,7 +41,8 @@ public class Robot extends TimedRobot {
         ColorWheel.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
-    
+
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
     private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
 
@@ -67,8 +69,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
 
         //create buttons and register actions
+        inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
+
     }
 
     /**
