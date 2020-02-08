@@ -84,7 +84,7 @@ public class Drive extends Subsystem {
                         break;
                     case OPEN_LOOP:
 
-                        setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[2]));
+                        setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[0]));
                         // System.out.println("X: " + periodic.operatorInput[0] + " Y: " +
                         // periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
                         break;
