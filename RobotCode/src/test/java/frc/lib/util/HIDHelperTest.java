@@ -29,4 +29,43 @@ public class HIDHelperTest{
 
     } 
 
+    @Test
+    public void testMap(){
+        double map = HIDHelper.getAxisMapped(-1, 0, 1);
+        assertEquals(0, map, 0.01);
+        
+        map = HIDHelper.getAxisMapped(0, 0, 1);
+        assertEquals(0.5, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(1, 0, 1);
+        assertEquals(1, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(-1, 0, 100);
+        assertEquals(0, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(0, 0, 100);
+        assertEquals(50, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(1, 0, 100);
+        assertEquals(100, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(-1, -100, 0);
+        assertEquals(-100, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(0, -100, 0);
+        assertEquals(-50, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(1, -100, 0);
+        assertEquals(0, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(-1, 50, 100);
+        assertEquals(50, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(0, 50, 100);
+        assertEquals(75, map, 0.01);
+
+        map = HIDHelper.getAxisMapped(1, 50, 100);
+        assertEquals(100, map, 0.01);
+    }
+
 }
