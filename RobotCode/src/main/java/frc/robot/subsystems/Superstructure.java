@@ -17,10 +17,8 @@ public class Superstructure extends Subsystem {
     private SuperIO periodic;
 
     // Indexer
+    private TalonSRX deliveryBelts;
     private TalonSRX indexBelt;
-
-    private TalonSRX deliveryAboveBelt;
-    private TalonSRX deliveryBelowBelt;
 
     // Intake
     private DoubleSolenoid extensionArm;
@@ -37,11 +35,8 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        SmartDashboard.putNumber("BALLS", 0);
-
         indexBelt = new TalonSRX(SUPERSTRUCTURE_INDEX_BELT);
-        deliveryAboveBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_ABOVE_BELT);
-        deliveryBelowBelt = new TalonSRX(SUPERSTRUCTURE_DELIVERY_BELOW_BELT);
+        deliveryBelts = new TalonSRX(SUPERSTRUCTURE_DELIVERY_BELT);
 
         extensionArm = new DoubleSolenoid(TRANS_LOW_ID, TRANS_HIGH_ID);
         ballsIntake = new TalonSRX(SUPERSTRUCTURE_INTAKE);
@@ -57,25 +52,41 @@ public class Superstructure extends Subsystem {
      * Read data from the sensors
      */
     @Override public synchronized void readPeriodicInputs() {
-        periodic.deliveryDistance = deliverySensor.getRange();
-        periodic.indexDistance = indexSensor.getRange();
-        periodic.intakeDistance = intakeSensor.getRange();
+        if (Constants.DEBUG) {
+            periodic.deliveryDistance = SmartDashboard.getNumber("DELIVERY_SENSOR_DISTANCE", periodic.deliveryDistance);
+            periodic.indexDistance = SmartDashboard.getNumber("INDEXER_SENSOR_DISTANCE", periodic.indexDistance);
+            periodic.intakeDistance = SmartDashboard.getNumber("INTAKE_SENSOR_DISTANCE", periodic.intakeDistance);
+        } else {
+            periodic.deliveryDistance = deliverySensor.getRange();
+            periodic.indexDistance = indexSensor.getRange();
+            periodic.intakeDistance = intakeSensor.getRange();
+        }
     }
 
     /**
      * Update values of the SRXs, DoubleSolenoid
      */
     @Override public synchronized void writePeriodicOutputs() {
-        indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-        deliveryAboveBelt.set(ControlMode.PercentOutput, periodic.deliveryAboveBeltDemand);
-        deliveryBelowBelt.set(ControlMode.PercentOutput, periodic.deliveryBelowBeltDemand);
-
-        ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
-        extensionArm.set(periodic.armExtension);
+        if (Constants.DEBUG) {
+            deliveryBelts.set(ControlMode.PercentOutput, SmartDashboard.getNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand));
+            indexBelt.set(ControlMode.PercentOutput, SmartDashboard.getNumber("INDEXER_DEMAND", periodic.indexBeltDemand));
+            ballsIntake.set(ControlMode.PercentOutput, SmartDashboard.getNumber("INTAKE_DEMAND", periodic.intakeDemand));
+        } else {
+            deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+            indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+            ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+            extensionArm.set(periodic.armExtension);
+        }
     }
 
     @Override public void outputTelemetry() {
         SmartDashboard.putNumber("BALLS", periodic.ballCount);
+        SmartDashboard.putNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
+        SmartDashboard.putNumber("INDEXER_DEMAND", periodic.indexBeltDemand);
+        SmartDashboard.putNumber("INTAKE_DEMAND", periodic.intakeDemand);
+        SmartDashboard.putNumber("DELIVERY_SENSOR_DISTANCE", periodic.deliveryDistance);
+        SmartDashboard.putNumber("INDEXER_SENSOR_DISTANCE", periodic.indexDistance);
+        SmartDashboard.putNumber("INTAKE_SENSOR_DISTANCE", periodic.intakeDistance);
     }
 
     /**
@@ -103,16 +114,7 @@ public class Superstructure extends Subsystem {
     }
 
     public void setDeliveryBeltsDemand(double demand) {
-        periodic.deliveryAboveBeltDemand = demand;
-        periodic.deliveryBelowBeltDemand = demand;
-    }
-
-    public void setDeliveryAboveBeltDemand(double demand) {
-        periodic.deliveryAboveBeltDemand = demand;
-    }
-
-    public void setDeliveryBelowBeltDemand(double demand) {
-        periodic.deliveryBelowBeltDemand = demand;
+        periodic.deliveryBeltsDemand = demand;
     }
 
     public void setIntakeDemand(double demand) {
@@ -147,8 +149,7 @@ public class Superstructure extends Subsystem {
     public class SuperIO extends Subsystem.PeriodicIO {
         // Indexer Data
         public double indexBeltDemand;
-        public double deliveryAboveBeltDemand;
-        public double deliveryBelowBeltDemand;
+        public double deliveryBeltsDemand;
         // Intake Data
         public int ballCount;
         public double intakeDemand;
