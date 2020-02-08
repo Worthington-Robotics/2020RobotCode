@@ -6,6 +6,7 @@ import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
+import frc.robot.Constants;
 
 import static frc.robot.Constants.*;
 
@@ -46,6 +47,14 @@ public class Superstructure extends Subsystem {
         intakeSensor = new SimTimeOfFlight(FLIGHT_SENSOR_INTAKE);
 
         reset();
+
+        SmartDashboard.putNumber("BALLS", periodic.ballCount);
+        SmartDashboard.putNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
+        SmartDashboard.putNumber("INDEXER_DEMAND", periodic.indexBeltDemand);
+        SmartDashboard.putNumber("INTAKE_DEMAND", periodic.intakeDemand);
+        SmartDashboard.putNumber("DELIVERY_SENSOR_DISTANCE", periodic.deliveryDistance);
+        SmartDashboard.putNumber("INDEXER_SENSOR_DISTANCE", periodic.indexDistance);
+        SmartDashboard.putNumber("INTAKE_SENSOR_DISTANCE", periodic.intakeDistance);
     }
 
     /**
@@ -80,13 +89,6 @@ public class Superstructure extends Subsystem {
     }
 
     @Override public void outputTelemetry() {
-        SmartDashboard.putNumber("BALLS", periodic.ballCount);
-        SmartDashboard.putNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
-        SmartDashboard.putNumber("INDEXER_DEMAND", periodic.indexBeltDemand);
-        SmartDashboard.putNumber("INTAKE_DEMAND", periodic.intakeDemand);
-        SmartDashboard.putNumber("DELIVERY_SENSOR_DISTANCE", periodic.deliveryDistance);
-        SmartDashboard.putNumber("INDEXER_SENSOR_DISTANCE", periodic.indexDistance);
-        SmartDashboard.putNumber("INTAKE_SENSOR_DISTANCE", periodic.intakeDistance);
     }
 
     /**
