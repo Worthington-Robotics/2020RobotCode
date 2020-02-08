@@ -43,8 +43,8 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void readPeriodicInputs() {
-        periodic.operatorInput = HIDHelper.getAdjStick(Constants.SECOND_STICK);
-        periodic.operatorFlywheelInput = (Constants.SECOND.getRawAxis(3) + 1)/2; //Makes all values positive with -1 being 0 and 1 being 1
+        periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.MASTER.getRawAxis(3), 1, 0); //Makes all values positive with -1 being 0 and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
@@ -67,7 +67,8 @@ public class Shooter extends Subsystem {
                         periodic.flywheelDemand = periodic.operatorFlywheelInput;
                         break;
                     case PID_MODE:
-                        //insert calculations for PID mode based on the setpoint and RPM
+                        periodic.operatorFlywheelInput = periodic.operatorFlywheelInput * Constants.MAX_RPM;
+                        periodic.flywheelDemand = RPMToTicksPer100ms(periodic.operatorFlywheelInput);
                         break;
                     default:
                         leftFlywheelFalcon.set(ControlMode.Disabled, 0);
@@ -76,10 +77,11 @@ public class Shooter extends Subsystem {
                 }
                 switch (turretMode) {
                     case OPEN_LOOP:
-                        periodic.turretDemand = periodic.operatorInput[1];
+                        periodic.turretDemand = periodic.operatorInput[0];
                         break;
                     case PID_MODE:
-                        //insert a position PID loop and check for safety
+                        periodic.operatorInput[0] = periodic.operatorInput[0] * 90;
+                        periodic.turretDemand = degreesToTicks(periodic.operatorInput[0]);
                         break;
                     default:
                         turretControl.set(ControlMode.Disabled, 0);
@@ -108,6 +110,8 @@ public class Shooter extends Subsystem {
                 leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
                 rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
                 break;
+            case LIMELIGHT_MODE:
+                break;
             default:
                 leftFlywheelFalcon.set(ControlMode.Disabled, 0);
                 rightFlywheelFalcon.set(ControlMode.Disabled, 0);
@@ -120,12 +124,12 @@ public class Shooter extends Subsystem {
             case PID_MODE:
                 turretControl.set(ControlMode.Position, periodic.turretDemand);
                 break;
+            case LIMELIGHT_MODE:
+                break;
             default:
                 turretControl.set(ControlMode.Disabled, 0);
                 break;
         }
-        //System.out.println("Flywheel is in " + flywheelMode);
-        //System.out.println("Turret is in " + turretMode);
     }
 
     /**
@@ -133,14 +137,12 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Shooter/Turret/ManualDemand", periodic.turretDemand);
-        SmartDashboard.putNumber("Shooter/Turret/PIDDemand", periodic.turretRPM);
+        SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput[0]);
+        SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
         SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
-        SmartDashboard.putNumber("Shooter/Flywheel/ManualDemand", periodic.flywheelDemand);
-        SmartDashboard.putNumber("Shooter/Flywheel/ManualDemand", periodic.flywheelRPM);
+        SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
+        SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
-
-
     }
 
     public void configLimelight() {
@@ -172,6 +174,21 @@ public class Shooter extends Subsystem {
         configLimelight();
         configTalons();
     }
+
+    /**
+     * Method that maps the raw input from the slider on the EXTREME 3D and convert the value to a 0 - 1 bottom to top map
+     * 
+     */
+    
+    public double sliderMap(double sliderRaw){
+        return ((-1 * sliderRaw) + 1)/2;
+    }
+
+    public double degreesToTicks(double degree)
+    {
+        //implement a ticks to degrees method
+        return degree;
+    }
     /**
      * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches
      * Equation came from a degree 2 polynomial regression on data points recorded manually
@@ -191,7 +208,7 @@ public class Shooter extends Subsystem {
 
     public double RPMToTicksPer100ms(double RPM)
     {
-        return 0; //TODO Implement a convertion to convert RPM to tickes per 100ms
+        return RPM; //TODO Implement a convertion to convert RPM to tickes per 100ms
     }
 
     public void setFlywheelRPM(double demand){
@@ -239,7 +256,8 @@ public class Shooter extends Subsystem {
     public enum MotorControlMode {
         DISABLED,
         OPEN_LOOP,
-        PID_MODE;
+        PID_MODE,
+        LIMELIGHT_MODE;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();

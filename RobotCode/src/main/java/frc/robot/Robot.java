@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 1892-1893 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -11,13 +11,16 @@ import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.lib.util.DriveSignal;
 import frc.robot.actions.ManualTurretControl;
+import frc.robot.actions.SetFlywheelPID;
 import frc.robot.actions.SetManualFlywheel;
+import frc.robot.actions.TurretPIDControl;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Shooter;
@@ -30,42 +33,41 @@ import frc.robot.subsystems.Shooter;
  * project.
  */
 public class Robot extends TimedRobot {
-    private SubsystemManager manager;
+    private SubsystemManager manager = new SubsystemManager(Arrays.asList(
+            // register subsystems here
+            Lights.getInstance(), Shooter.getInstance(), ColorWheel.getInstance()), true);
     private Looper enabledLooper, disabledLooper;
-    private JoystickButton setManualFlywheel = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton setManualTurret = new JoystickButton(Constants.MASTER, 2);
 
+    private JoystickButton setTurretPID = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton setFlywheelPID = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton setManualTurretButton = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton setManualFlywheelButton = new JoystickButton(Constants.MASTER, 1);
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * This function is run when the robot is first started up and should be used
+     * for any initialization code.
      */
     @Override
     public void robotInit() {
-        manager = new SubsystemManager(Arrays.asList(
-            //register subsystems here
-            Lights.getInstance(),
-            ColorWheel.getInstance(),
-            Shooter.getInstance()
-        ), true);
-
-        //create the master looper threads
+        // create the master looper threads
         enabledLooper = new Looper();
         disabledLooper = new Looper();
 
-        //register the looper threads to the manager to use for enabled and disabled
+        // register the looper threads to the manager to use for enabled and disabled
         manager.registerEnabledLoops(enabledLooper);
         manager.registerDisabledLoops(disabledLooper);
 
-        //add any additional logging sources for capture
-        manager.addLoggingSource(Arrays.asList(
-            StateMachine.getInstance()
-        ));
+        // add any additional logging sources for capture
+        manager.addLoggingSource(Arrays.asList(StateMachine.getInstance()));
 
         // publish the auto list to the dashboard "Auto Selector"
-        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
-        setManualFlywheel.whileHeld(Action.toCommand(new SetManualFlywheel()));
-        setManualTurret.whileHeld(Action.toCommand(new ManualTurretControl(Constants.SECOND.getRawButton(12))));
+        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
+
+        // create buttons and register actions
+        setTurretPID.whenPressed(Action.toCommand(new TurretPIDControl(false)));
+        setFlywheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
+        setManualFlywheelButton.whenPressed(Action.toCommand(new SetManualFlywheel()));
+        setManualTurretButton.whenPressed(Action.toCommand(new ManualTurretControl()));
     }
 
     /**
@@ -141,7 +143,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
+        Scheduler.getInstance().run();        
     }
 
     @Override
@@ -158,6 +160,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
-        
+        Scheduler.getInstance().run(); 
     }
 }

@@ -32,6 +32,7 @@ public class Constants {
     /*
         Flywheel Tuned Values
     */
+    public static final double MAX_RPM = 6000;
     public static final double IDLE_RPM = 4000;
     public static final double RPM_ACCEPTIBLE_ERROR = 300; // Ticks per 100 ms
 

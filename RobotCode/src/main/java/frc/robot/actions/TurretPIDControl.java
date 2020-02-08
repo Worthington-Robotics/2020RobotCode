@@ -3,28 +3,40 @@ package frc.robot.actions;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class SetManualFlywheel extends Action {
+public class TurretPIDControl extends Action {
+
+    private boolean automaticTarget = false;
+
+    public TurretPIDControl(boolean autoTarget) {
+        automaticTarget = autoTarget;
+    }
 
     /**
      * code to run on action start
+     * 
      */
     @Override
     public void onStart() {
-        Shooter.getInstance().setFlywheelDemand(1);
-
+        if (automaticTarget) {
+            //LIMELIGHT angle PID (to be Implemented)
+        } else {
+            Shooter.getInstance().setTurretRPM(0);
+        }
     }
 
     /**
      * code to run while action loops
-     * <p>approx every 20 miliseconds
+     * <p>
+     * approx every 20 miliseconds
      */
     @Override
-        public void onLoop() {
-        
+    public void onLoop() {
+
     }
 
     /**
-     * method that tells the state machine the action is finished earlier than the scheduler
+     * method that tells the state machine the action is finished earlier than the
+     * scheduler
      *
      * @return true when action is ready to self terminate
      */
@@ -38,6 +50,5 @@ public class SetManualFlywheel extends Action {
      */
     @Override
     public void onStop() {
-        Shooter.getInstance().setFlywheelDemand(0);
     }
 }
