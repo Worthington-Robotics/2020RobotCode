@@ -20,7 +20,7 @@ public class DeliveryBeltAction extends Action {
     }
 
     @Override public boolean isFinished() {
-        return Constants.DISTANCE_STOP_MM >= superstructure.getDeliveryDistance();
+        return false;
     }
 
     @Override public void onStop() {

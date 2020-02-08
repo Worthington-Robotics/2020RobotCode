@@ -7,32 +7,20 @@ import frc.robot.subsystems.Superstructure;
 
 public class IntakeAction extends Action {
     private Superstructure superstructure;
-    private boolean objectInIntake;
 
     public IntakeAction() {
         superstructure = Superstructure.getInstance();
     }
 
     @Override public void onStart() {
-        if (superstructure.getArmExtension() != DoubleSolenoid.Value.kOff) {
-            superstructure.setIntakeDemand(Constants.HIGH_BELT_DEMAND);
-        }
+        superstructure.setIntakeDemand(Constants.HIGH_BELT_DEMAND);
     }
 
     @Override public void onLoop() {
     }
 
     @Override public boolean isFinished() {
-        boolean objDetected = Constants.DISTANCE_STOP_MM >= superstructure.getIntakeDistance();
-        
-        if (objDetected) {
-            objectInIntake = true;
-        } else if (objectInIntake) {
-            objectInIntake = false;
-            superstructure.setBallCount(superstructure.getBallCount() + 1);
-        }
-        
-        return objDetected;
+        return false;
     }
 
     @Override public void onStop() {

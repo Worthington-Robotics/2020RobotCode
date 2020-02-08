@@ -30,6 +30,11 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight indexSensor;
     private SimTimeOfFlight intakeSensor;
 
+    // Bool
+    private double DISTANCE_DELIVERY = 25.4;
+    private double DISTANCE_INDEXER = 25.4;
+    private double DISTANCE_INTAKE = 25.4;
+
     private static Superstructure instance = new Superstructure();
     public static Superstructure getInstance() {
         return instance;
@@ -55,6 +60,9 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("DELIVERY_SENSOR_DISTANCE", periodic.deliveryDistance);
         SmartDashboard.putNumber("INDEXER_SENSOR_DISTANCE", periodic.indexDistance);
         SmartDashboard.putNumber("INTAKE_SENSOR_DISTANCE", periodic.intakeDistance);
+        SmartDashboard.putNumber("DELIVERY_SENSOR_THRESHOLD", DISTANCE_DELIVERY);
+        SmartDashboard.putNumber("INDEXER_SENSOR_THRESHOLD", DISTANCE_INDEXER);
+        SmartDashboard.putNumber("INTAKE_SENSOR_THRESHOLD", DISTANCE_INTAKE);
     }
 
     /**
@@ -62,6 +70,10 @@ public class Superstructure extends Subsystem {
      */
     @Override public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
+            DISTANCE_DELIVERY = SmartDashboard.getNumber("DELIVERY_SENSOR_THRESHOLD", 0);
+            DISTANCE_INDEXER = SmartDashboard.getNumber("INDEXER_SENSOR_THRESHOLD", 0);
+            DISTANCE_INTAKE = SmartDashboard.getNumber("INTAKE_SENSOR_THRESHOLD", 0);
+
             periodic.deliveryDistance = SmartDashboard.getNumber("DELIVERY_SENSOR_DISTANCE", periodic.deliveryDistance);
             periodic.indexDistance = SmartDashboard.getNumber("INDEXER_SENSOR_DISTANCE", periodic.indexDistance);
             periodic.intakeDistance = SmartDashboard.getNumber("INTAKE_SENSOR_DISTANCE", periodic.intakeDistance);
@@ -89,6 +101,9 @@ public class Superstructure extends Subsystem {
     }
 
     @Override public void outputTelemetry() {
+        SmartDashboard.putBoolean("DELIVERY_SENSOR_BOOL", DISTANCE_DELIVERY >= getDeliveryDistance());
+        SmartDashboard.putBoolean("INDEXER_SENSOR_BOOL", DISTANCE_INDEXER >= getIndexDistance());
+        SmartDashboard.putBoolean("INTAKE_SENSOR_BOOL", DISTANCE_INTAKE >= getIntakeDistance());
     }
 
     /**

@@ -20,7 +20,7 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public boolean isFinished() {
-        return Constants.DISTANCE_STOP_MM >= superstructure.getIndexDistance();
+        return false;
     }
 
     @Override public void onStop() {

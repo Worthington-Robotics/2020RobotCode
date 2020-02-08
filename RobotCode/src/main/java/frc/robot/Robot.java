@@ -19,8 +19,6 @@ import frc.lib.statemachine.StateMachine;
 import frc.robot.actions.superaction.DeliveryBeltAction;
 import frc.robot.actions.superaction.IndexBeltAction;
 import frc.robot.actions.superaction.IntakeAction;
-import frc.robot.actions.superaction.ShootAction;
-import frc.robot.actions.superaction.ShootType;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Superstructure;
 import frc.lib.util.DriveSignal;
@@ -28,7 +26,6 @@ import frc.robot.actions.driveactions.GyroLock;
 import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.PoseEstimator;
 
 /**
@@ -83,8 +80,8 @@ public class Robot extends TimedRobot {
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
 
-        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
-        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
+//        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
+//        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
