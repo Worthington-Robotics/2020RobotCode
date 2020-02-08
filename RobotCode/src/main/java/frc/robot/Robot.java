@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.colorWheelManual;
 import frc.robot.actions.climberactions.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
@@ -64,6 +65,11 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+
+        JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
+        JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
+        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
 
         foldClimb = new JoystickButton(Constants.MASTER, 9);
         unfoldClimb = new JoystickButton(Constants.MASTER, 10);

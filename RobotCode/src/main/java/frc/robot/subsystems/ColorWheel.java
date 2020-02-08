@@ -45,6 +45,7 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void readPeriodicInputs() {
+        periodic.demand = Constants.MASTER.getRawAxis(3);
         String gameData;
         gameData = DriverStation.getInstance().getGameSpecificMessage();
         if (gameData.length() > 0) {
@@ -66,24 +67,33 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void writePeriodicOutputs() {
-        periodic.RGB = new double[] { (periodic.detected_color.red * 255), (periodic.detected_color.green * 255), (periodic.detected_color.blue * 255) };
-        if (periodic.color_wheel_reading) {
-            if (periodic.fms_color == 'U') {
-                if (!periodic.color_motor_pid_on) {
-                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
-                }
-            } else {
-                if (!periodic.color_motor_pid_on) {
-                    checkIfDone();
-                    colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.demand));
-                }
+        if (periodic.isEnabled) {
+            if (periodic.CCW)
+                colorWheelTalon.set(ControlMode.PercentOutput, -.2);
+            else {
+                colorWheelTalon.set(ControlMode.PercentOutput, .2);
             }
-        } else {
         }
+        else
+        {
+            colorWheelTalon.set(ControlMode.PercentOutput, 0);
+        }
+
+        /*
+         * periodic.RGB = new double[] { (periodic.detected_color.red * 255),
+         * (periodic.detected_color.green * 255), (periodic.detected_color.blue * 255)
+         * }; if (periodic.color_wheel_reading) { if (periodic.fms_color == 'U') { if
+         * (!periodic.color_motor_pid_on) { colorWheelTalon.set(ControlMode.Position,
+         * inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE)); } } else { if
+         * (!periodic.color_motor_pid_on) { checkIfDone();
+         * colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.demand)); }
+         * } } else { }
+         */
     }
 
     @Override
     public void outputTelemetry() {
+        SmartDashboard.putNumber("Color Wheel/Power", periodic.demand);
         SmartDashboard.putNumber("Color Wheel/Red", periodic.detected_color.red);
         SmartDashboard.putNumber("Color Wheel/Blue", periodic.detected_color.blue);
         SmartDashboard.putNumber("Color Wheel/Green", periodic.detected_color.green);
@@ -177,6 +187,15 @@ public class ColorWheel extends Subsystem {
             periodic.distance = periodic.color_direction_calc * 12.5;
         }
     }
+    public void setEnabled(boolean enabled)
+    {
+        periodic.isEnabled = enabled;
+    }
+
+    public void setCCW(boolean CCW)
+    {
+        periodic.CCW = CCW;
+    }
 
     private void checkIfDone() {
         if (!(periodic.color_sensed.charAt(0) == 'U')) {
@@ -264,6 +283,8 @@ public class ColorWheel extends Subsystem {
     }
 
     public class ColorWheelIO extends Subsystem.PeriodicIO {
+        public boolean CCW = false;
+        public boolean isEnabled = false;
         public double close_loop_error = 0;
         public char fms_color = 'U';
         public double distance = 0;
