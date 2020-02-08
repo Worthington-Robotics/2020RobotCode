@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 1992-1993 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -10,11 +10,19 @@ package frc.robot;
 import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.lib.util.DriveSignal;
+import frc.robot.actions.driveactions.GyroLock;
+import frc.robot.actions.driveactions.Shift;
+import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Lights;
+import frc.robot.subsystems.PoseEstimator;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,20 +32,24 @@ import frc.robot.subsystems.Lights;
  * project.
  */
 public class Robot extends TimedRobot {
-    private SubsystemManager manager;
+    private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
+        //register subsystems here
+        Lights.getInstance(),
+        PoseEstimator.getInstance(),
+        Drive.getInstance(),
+        ColorWheel.getInstance()
+    ), true);;
     private Looper enabledLooper, disabledLooper;
+    
+    private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
-    public void robotInit() {
-        manager = new SubsystemManager(Arrays.asList(
-            //register subsystems here
-            Lights.getInstance()
-        ), true);
-
+    public void robotInit(){
         //create the master looper threads
         enabledLooper = new Looper();
         disabledLooper = new Looper();
@@ -53,6 +65,10 @@ public class Robot extends TimedRobot {
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+
+        //create buttons and register actions
+        shift.whileHeld(Action.toCommand(new Shift()));
+        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
     }
 
     /**
@@ -121,6 +137,7 @@ public class Robot extends TimedRobot {
         //reset anything here
 
         enabledLooper.start();
+        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
     }
 
     /**
@@ -128,7 +145,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-
+        Scheduler.getInstance().run();        
     }
 
     @Override

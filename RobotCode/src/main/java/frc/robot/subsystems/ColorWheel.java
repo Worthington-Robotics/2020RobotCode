@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.revrobotics.ColorSensorV3;
 import frc.robot.Constants;
 import frc.lib.util.Util;
@@ -44,7 +46,10 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-
+        SmartDashboard.putNumber("Color Wheel Red", periodic.RGB[0]);
+        SmartDashboard.putNumber("Color Wheel Green", periodic.RGB[1]);
+        SmartDashboard.putNumber("Color Wheel Blue", periodic.RGB[2]);
+        SmartDashboard.putString("Color Detected", "" + cDetected());
     }
 
     /**
@@ -84,7 +89,7 @@ public class ColorWheel extends Subsystem {
             else if (Util.epsilonEquals(hsv[0], Constants.blueH, Constants.error)) {
                 return 'B';
             } else {
-                return 'U';
+                return 'U'; 
             }
         }
     }

@@ -105,6 +105,20 @@ public class PIDF {
         }
     }
 
+    public double[] getPID(){
+        double[] out = new double[4];
+        calculationMutex.lock();
+        try {
+            out[0] = this.kP;
+            out[1] = this.kI;
+            out[2] = this.kD;
+            out[3] = this.kF;
+        } finally {
+            calculationMutex.unlock();
+        }
+        return out;
+    }
+
     /**
      * Returns the current calculated output of this PID
      * based on the current position
@@ -164,6 +178,15 @@ public class PIDF {
         }
 
         return error;
+    }
+
+    public double getError(){
+        calculationMutex.lock();
+        try {
+            return error;
+        } finally {
+            calculationMutex.unlock();
+        }
     }
 
     /**
