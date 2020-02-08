@@ -98,7 +98,8 @@ public class ColorWheel extends Subsystem {
         SmartDashboard.putNumber("Color Wheel/Blue", periodic.detected_color.blue);
         SmartDashboard.putNumber("Color Wheel/Green", periodic.detected_color.green);
         SmartDashboard.putString("Color Wheel/Detected Color", periodic.color_sensed);
-        SmartDashboard.putNumber("Confidence", m_colorMatcher.matchClosestColor(periodic.detected_color).confidence);
+        SmartDashboard.putString("Color Wheel/FMS Color", periodic.fms_color + "");
+        SmartDashboard.putNumber("Color Wheel/Confidence", m_colorMatcher.matchClosestColor(periodic.detected_color).confidence);
     }
 
     // User Created Methods
