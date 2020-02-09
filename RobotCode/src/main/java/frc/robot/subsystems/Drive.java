@@ -26,7 +26,6 @@ import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 import frc.robot.Kinematics;
-import frc.robot.actions.driveactions.AnglePID;
 
 public class Drive extends Subsystem {
 
@@ -119,36 +118,36 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
-        // periodic.gyro_heading =
-        // Rotation2d.fromDegrees(SmartDashboard.getNumber("Drive/Gyro/CurAngle", 0));
-        periodic.AnglePIDError = anglePID.getError();
-        periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
-        periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
         if (periodic.TransState == DoubleSolenoid.Value.kForward)
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK_SHIFTED);
         else
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-        double prevLeftTicks = periodic.left_pos_ticks;
-        double prevRightTicks = periodic.right_pos_ticks;
+
+        periodic.AnglePIDError = anglePID.getError();
+        periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
+
         periodic.left_error = driveFrontLeft.getClosedLoopError();
         periodic.right_error = driveFrontRight.getClosedLoopError();
 
-        periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
-        periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
-        periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
+        periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity();
+        periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity();
 
-        periodic.left_velocity_ticks_per_100ms = (int) driveFrontLeft.getSensorCollection()
-                .getIntegratedSensorVelocity();
-        periodic.right_velocity_ticks_per_100ms = (int) driveFrontRight.getSensorCollection()
-                .getIntegratedSensorVelocity();
-        periodic.left_pos_ticks = (int) driveFrontLeft.getSensorCollection().getIntegratedSensorPosition();
-        periodic.right_pos_ticks = (int) driveFrontRight.getSensorCollection().getIntegratedSensorPosition();
-        periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
+        double prevLeftTicks = periodic.left_pos_ticks;
+        double prevRightTicks = periodic.right_pos_ticks;
+        periodic.left_pos_ticks = driveFrontLeft.getSelectedSensorPosition();
+        periodic.right_pos_ticks = driveFrontRight.getSelectedSensorPosition();
 
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
         periodic.left_distance += deltaLeftTicks * Constants.DRIVE_WHEEL_DIAMETER_INCHES;
         double deltaRightTicks = ((periodic.right_pos_ticks - prevRightTicks) / 4096.0) * Math.PI;
         periodic.right_distance += deltaRightTicks * Constants.DRIVE_WHEEL_DIAMETER_INCHES;
+
+        periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
+        periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
+
+        periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
+        periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
+        periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
 
     }
 
@@ -257,14 +256,13 @@ public class Drive extends Subsystem {
     }
 
     private void configTalons() {
-        ErrorCode sensorPresent = driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
-                0, 100); // primary closed-loop, 100 ms timeout
+        // primary closed-loop, 100 ms timeout
+        ErrorCode sensorPresent = driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100); 
         if (sensorPresent != ErrorCode.OK) {
             DriverStation.reportError("Could not detect left encoder: " + sensorPresent, false);
         }
-        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100); // DO NOT FORGET THIS use
-                                                                                             // 5ms packet time on
-                                                                                             // feedback
+        // DO NOT FORGET THIS! use 5ms packet time on feedback
+        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100); 
         driveFrontLeft.setSensorPhase(true);
         driveFrontLeft.selectProfileSlot(0, 0);
         driveFrontLeft.config_kF(0, Constants.DRIVE_LEFT_KF, 0);
@@ -292,17 +290,13 @@ public class Drive extends Subsystem {
         driveBackLeft.follow(driveFrontLeft);
         driveBackLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
-        sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 100); // primary
-                                                                                                                       // closed-loop,
-                                                                                                                       // 100
-                                                                                                                       // ms
-                                                                                                                       // timeout
+        // primary closed-loop, 100ms timeout
+        sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100); 
         if (sensorPresent != ErrorCode.OK) {
             DriverStation.reportError("Could not detect right encoder: " + sensorPresent, false);
         }
-        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100); // DO NOT FORGET THIS use
-                                                                                             // 5ms packet time on
-                                                                                             // feedback
+        // DO NOT FORGET THIS! use 5ms packet time on feedback
+        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100); 
         driveFrontRight.setSensorPhase(true);
         driveFrontRight.selectProfileSlot(0, 0);
         driveFrontRight.config_kF(0, Constants.DRIVE_RIGHT_KF, 0);
@@ -467,31 +461,35 @@ public class Drive extends Subsystem {
 
     public class DriveIO extends PeriodicIO {
         // INPUTS
-        public int left_pos_ticks;
-        public int right_pos_ticks;
-        public int left_velocity_ticks_per_100ms;
-        public int right_velocity_ticks_per_100ms;
+        public double left_pos_ticks = 0;
+        public double left_error = 0;
+        public double left_velocity_ticks_per_100ms  = 0;
+        public double leftCurrent = 0;
+
+        public double right_pos_ticks = 0;
+        public double right_error = 0;
+        public double right_velocity_ticks_per_100ms = 0;
+        public double rightCurrent = 0;
+
         public Rotation2d gyro_heading = Rotation2d.identity();
         public Rotation2d gyro_offset = Rotation2d.identity();
-        public Translation2d error = new Translation2d(0, 0);
-        public double right_error = 0;
-        public double left_error = 0;
         public double gyro_pid_angle = 0;
+        public double AnglePIDError = 0;
+
+        public Translation2d error = new Translation2d(0, 0);
         public double[] operatorInput = { 0, 0, 0 };
-        public DoubleSolenoid.Value TransState = Value.kReverse;
         public boolean inverse = false;
         public double PIDOutput = 0;
+
         // Smartdashboard Settings
         public double PIDDUpdate = 0;
         public double PIDPUpdate = 0;
-        public boolean savePIDSettings = false;
-        // Logging
-        public double rightCurrent = 0;
-        public double leftCurrent = 0;
-        public double AnglePIDError = 0;
+        public boolean savePIDSettings = false;        
 
         // OUTPUTS
         public double ramp_Up_Counter = 0;
+        public DoubleSolenoid.Value TransState = Value.kReverse;
+
         public double left_accl = 0.0;
         public double left_demand = 0.0;
         public double left_distance = 0.0;
