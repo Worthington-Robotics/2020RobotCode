@@ -18,6 +18,9 @@ import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
 import frc.robot.actions.climberactions.*;
+import frc.robot.actions.colorwheelactions.ColorWheelPosition;
+import frc.robot.actions.colorwheelactions.ColorWheelRotations;
+import frc.robot.actions.colorwheelactions.ColorWheelStop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
@@ -33,7 +36,7 @@ import frc.robot.subsystems.Superstructure;
 public class Robot extends TimedRobot {
     private SubsystemManager manager;
     private Looper enabledLooper, disabledLooper;
-    private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb;
+    private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb, colorWheelPos, colorWheelRot, colorWheelStop;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -65,10 +68,16 @@ public class Robot extends TimedRobot {
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
 
+        colorWheelRot = new JoystickButton(Constants.MASTER, 6);
+        colorWheelPos = new JoystickButton(Constants.MASTER, 7);
+        colorWheelStop = new JoystickButton(Constants.MASTER, 8);
         foldClimb = new JoystickButton(Constants.MASTER, 9);
         unfoldClimb = new JoystickButton(Constants.MASTER, 10);
         climbDown = new JoystickButton(Constants.MASTER, 11);
         climbUp = new JoystickButton(Constants.MASTER, 12);
+        colorWheelRot.whenPressed(Action.toCommand(new ColorWheelRotations()));
+        colorWheelPos.whenPressed(Action.toCommand(new ColorWheelPosition()));
+        colorWheelStop.whenPressed(Action.toCommand(new ColorWheelStop()));
         foldClimb.whenPressed(Action.toCommand(new FoldAction()));
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));

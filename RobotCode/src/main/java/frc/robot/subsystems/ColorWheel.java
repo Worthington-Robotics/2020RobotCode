@@ -66,11 +66,10 @@ public class ColorWheel extends Subsystem {
 
     @Override
     public void writePeriodicOutputs() {
-        periodic.RGB = new int[]{colorSensor.getRed(), colorSensor.getBlue(), colorSensor.getGreen()};
-        periodic.currentColor = colorFromRGB(periodic.RGB);
+        periodic.RGB = new double[]{(periodic.detected_color.red* 255), (periodic.detected_color.green * 255), (periodic.detected_color.blue * 255)};
         if (periodic.currentWheelMode == colorWheelMode.rotation) {
             if (periodic.colorWheelReading) {
-                if (periodic.fmsColor == 'U') {
+                if (periodic.fms_color == 'U') {
                     if (!periodic.colorMotorPidOn) {
                         colorWheelTalon.set(ControlMode.Position, inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE));
                     }
@@ -84,6 +83,7 @@ public class ColorWheel extends Subsystem {
                 }
             }
         } else {
+            colorWheelTalon.set(ControlMode.Velocity, 0);
         }
     }
 
@@ -243,6 +243,10 @@ public class ColorWheel extends Subsystem {
         }
 
         return colorString;
+    }
+    
+    public char cDetected() {
+        return periodic.color_sensed.charAt(0);
     }
 
     private void configTalon() {
