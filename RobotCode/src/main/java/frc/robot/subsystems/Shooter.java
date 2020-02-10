@@ -188,6 +188,10 @@ public class Shooter extends Subsystem {
         //implement a ticks to degrees method
         return degree * 108; // 4096 * 9.5 / 360
     }
+
+    public double ticksToDegrees(double degree) {
+        return 45 * degree / 4864; // 360 / (4096 * 9.5)
+    }
     /**
      * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches
      * Equation came from a degree 2 polynomial regression on data points recorded manually
@@ -272,7 +276,7 @@ public class Shooter extends Subsystem {
         if(turretControl.getSelectedSensorPosition() + degreesToTicks(angle) > Constants.rightTurretLimit) {
             ticksFromOffset = 0.0;
         }
-        return 1 / degreesToTicks(ticksFromOffset);
+        return ticksToDegrees(ticksFromOffset);
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
