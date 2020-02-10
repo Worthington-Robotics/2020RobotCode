@@ -17,16 +17,13 @@ import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
-import frc.robot.actions.driveactions.GyroLock;
-import frc.robot.actions.driveactions.Inverse;
-import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.PoseEstimator;
+import frc.robot.actions.PlayMusic;
 import frc.robot.actions.colorWheelManual;
 import frc.robot.actions.climberactions.*;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Music;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,15 +35,12 @@ import frc.robot.subsystems.ColorWheel;
 public class Robot extends TimedRobot {
     private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
         //register subsystems here
-        PoseEstimator.getInstance(),
-        Drive.getInstance(),
+
         ColorWheel.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
-    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
-    private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton playMusic = new JoystickButton(Constants.MASTER, 6);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -85,9 +79,7 @@ public class Robot extends TimedRobot {
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
         climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
-        inverse.whileHeld(Action.toCommand(new Inverse()));
-        shift.whileHeld(Action.toCommand(new Shift()));
-        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
+        playMusic.whileHeld(Action.toCommand(new PlayMusic()));
     }
 
     /**
@@ -156,7 +148,6 @@ public class Robot extends TimedRobot {
         //reset anything here
 
         enabledLooper.start();
-        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
     }
 
     /**
