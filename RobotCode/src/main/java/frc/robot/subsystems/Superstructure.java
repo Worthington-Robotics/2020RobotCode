@@ -6,6 +6,8 @@ import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
+import frc.lib.loops.ILooper;
+import frc.lib.loops.Loop;
 import frc.robot.Constants;
 
 import static frc.robot.Constants.*;
@@ -18,12 +20,13 @@ public class Superstructure extends Subsystem {
     private SuperIO periodic;
 
     // Indexer
+    private TalonSRX shooterWheel;
     private TalonSRX deliveryBelts;
     private TalonSRX indexBelt;
 
     // Intake
-    private DoubleSolenoid extensionArm;
     private TalonSRX ballsIntake;
+    private DoubleSolenoid extensionArm;
 
     // Sensors
     private SimTimeOfFlight deliverySensor;
@@ -42,11 +45,13 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        indexBelt = new TalonSRX(SUPERSTRUCTURE_INDEX_BELT);
+        shooterWheel = new TalonSRX(SUPERSTRUCTURE_SHOOTER_WHEEL);
         deliveryBelts = new TalonSRX(SUPERSTRUCTURE_DELIVERY_BELT);
+        indexBelt = new TalonSRX(SUPERSTRUCTURE_INDEX_BELT);
 
-        extensionArm = new DoubleSolenoid(TRANS_LOW_ID, TRANS_HIGH_ID);
         ballsIntake = new TalonSRX(SUPERSTRUCTURE_INTAKE);
+        extensionArm = new DoubleSolenoid(TRANS_LOW_ID, TRANS_HIGH_ID);
+
 
         deliverySensor = new SimTimeOfFlight(FLIGHT_SENSOR_DELIVERY);
         indexSensor = new SimTimeOfFlight(FLIGHT_SENSOR_INDEX);
@@ -91,29 +96,6 @@ public class Superstructure extends Subsystem {
      */
     @Override
     public synchronized void writePeriodicOutputs() {
-        switch (periodic.state) {
-        case 0:
-
-            break;
-        case 1:
-
-            break;
-        case 2:
-
-            break;
-        case 3:
-
-            break;
-        case 4:
-
-            break;
-        case 5:
-
-            break;
-
-        default:
-            break;
-        }
         /*
          * if (Constants.DEBUG) { deliveryBelts.set(ControlMode.PercentOutput,
          * SmartDashboard.getNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand));
@@ -128,7 +110,52 @@ public class Superstructure extends Subsystem {
          */
     }
 
+    @Override public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(new Loop() {
+            @Override public void onStart(double timestamp) {
+
+            }
+
+            @Override public void onLoop(double timestamp) {
+                switch(periodic.state) {
+                    case INIT:
+                        init();
+                        break;
+                    case ONE_BALL:
+
+                        break;
+                    case TWO_TO_FOUR_BALLS:
+
+                        break;
+                    case FULL_SYSTEM:
+
+                        break;
+                    case SHOOT:
+
+                        break;
+                    case DUMP_SYSTEM:
+
+                        break;
+                    default:
+                }
+            }
+
+            @Override public void onStop(double timestamp) {
+
+            }
+        });
     }
+
+    public void init() {
+        deliveryBelts.set(ControlMode.PercentOutput, FULL_BELT_DEMAND);
+        indexBelt.set(ControlMode.PercentOutput, FULL_BELT_DEMAND);
+        ballsIntake.set(ControlMode.PercentOutput, FULL_BELT_DEMAND);
+    }
+
+    public void oneBall() {
+        
+    }
+
 
     @Override
     public void outputTelemetry() {
@@ -197,7 +224,7 @@ public class Superstructure extends Subsystem {
 
     public class SuperIO extends Subsystem.PeriodicIO {
         // Current State
-        public int state = -1;
+        public SuperState state = SuperState.DEFAULT;
         // Indexer Data
         public double indexBeltDemand;
         public double deliveryBeltsDemand;
@@ -206,8 +233,26 @@ public class Superstructure extends Subsystem {
         public double intakeDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;
         // Sensor Data
-        private double deliveryDistance;
-        private double indexDistance;
-        private double intakeDistance;
+        public double deliveryDistance;
+        public double indexDistance;
+        public double intakeDistance;
+    }
+
+    enum SuperState {
+        DEFAULT(-1),
+        INIT(0),
+        ONE_BALL(1),
+        TWO_TO_FOUR_BALLS(2),
+        FULL_SYSTEM(3),
+        SHOOT(4),
+        DUMP_SYSTEM(4);
+
+        private int stateNumber;
+
+        SuperState(int stateNumber) {
+            this.stateNumber = stateNumber;
+        }
+
+
     }
 }

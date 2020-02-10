@@ -17,8 +17,9 @@ public class Constants {
     public static final int DRIVE_FRONT_RIGHT_ID = 0;
     public static final int DRIVE_MIDDLE_RIGHT_ID = 1;
     public static final int DRIVE_BACK_RIGHT_ID = 2;
-    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
+    public static final int SUPERSTRUCTURE_SHOOTER_WHEEL = 7;
     public static final int SUPERSTRUCTURE_DELIVERY_BELT = 8;
+    public static final int SUPERSTRUCTURE_INDEX_BELT = 9;
     public static final int SUPERSTRUCTURE_INTAKE = 10;
 
     //Spark Ports
