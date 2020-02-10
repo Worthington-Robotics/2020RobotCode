@@ -36,6 +36,7 @@ public class Superstructure extends Subsystem {
     private double DISTANCE_INTAKE = 25.4;
 
     private static Superstructure instance = new Superstructure();
+
     public static Superstructure getInstance() {
         return instance;
     }
@@ -68,7 +69,8 @@ public class Superstructure extends Subsystem {
     /**
      * Read data from the sensors
      */
-    @Override public synchronized void readPeriodicInputs() {
+    @Override
+    public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
             DISTANCE_DELIVERY = SmartDashboard.getNumber("DELIVERY_SENSOR_THRESHOLD", 0);
             DISTANCE_INDEXER = SmartDashboard.getNumber("INDEXER_SENSOR_THRESHOLD", 0);
@@ -87,20 +89,49 @@ public class Superstructure extends Subsystem {
     /**
      * Update values of the SRXs, DoubleSolenoid
      */
-    @Override public synchronized void writePeriodicOutputs() {
-        if (Constants.DEBUG) {
-            deliveryBelts.set(ControlMode.PercentOutput, SmartDashboard.getNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand));
-            indexBelt.set(ControlMode.PercentOutput, SmartDashboard.getNumber("INDEXER_DEMAND", periodic.indexBeltDemand));
-            ballsIntake.set(ControlMode.PercentOutput, SmartDashboard.getNumber("INTAKE_DEMAND", periodic.intakeDemand));
-        } else {
-            deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-            indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-            ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
-            extensionArm.set(periodic.armExtension);
+    @Override
+    public synchronized void writePeriodicOutputs() {
+        switch (periodic.state) {
+        case 0:
+
+            break;
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+
+        default:
+            break;
         }
+        /*
+         * if (Constants.DEBUG) { deliveryBelts.set(ControlMode.PercentOutput,
+         * SmartDashboard.getNumber("DELIVERY_DEMAND", periodic.deliveryBeltsDemand));
+         * indexBelt.set(ControlMode.PercentOutput,
+         * SmartDashboard.getNumber("INDEXER_DEMAND", periodic.indexBeltDemand));
+         * ballsIntake.set(ControlMode.PercentOutput,
+         * SmartDashboard.getNumber("INTAKE_DEMAND", periodic.intakeDemand)); } else {
+         * deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+         * indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+         * ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+         * extensionArm.set(periodic.armExtension);
+         */
     }
 
-    @Override public void outputTelemetry() {
+    }
+
+    @Override
+    public void outputTelemetry() {
         SmartDashboard.putBoolean("DELIVERY_SENSOR_BOOL", DISTANCE_DELIVERY >= getDeliveryDistance());
         SmartDashboard.putBoolean("INDEXER_SENSOR_BOOL", DISTANCE_INDEXER >= getIndexDistance());
         SmartDashboard.putBoolean("INTAKE_SENSOR_BOOL", DISTANCE_INTAKE >= getIntakeDistance());
@@ -109,7 +140,8 @@ public class Superstructure extends Subsystem {
     /**
      * Reset the values of the sensors, and reinitialize the IO.
      */
-    @Override public void reset() {
+    @Override
+    public void reset() {
         periodic = new SuperIO();
 
         deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
@@ -164,6 +196,8 @@ public class Superstructure extends Subsystem {
     }
 
     public class SuperIO extends Subsystem.PeriodicIO {
+        // Current State
+        public int state = -1;
         // Indexer Data
         public double indexBeltDemand;
         public double deliveryBeltsDemand;
