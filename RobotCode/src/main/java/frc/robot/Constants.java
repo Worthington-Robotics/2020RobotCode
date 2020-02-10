@@ -108,6 +108,10 @@ public class Constants {
     public static final int satLimit = 80;
     public static final int valLimit = 80;
 
+    //Turret Encoder Limits
+    public static final int leftTurretLimit = 0;
+    public static final int rightTurretLimit = 0;
+
     //Limelight Constants
     public static final double fov = 0.0;
 

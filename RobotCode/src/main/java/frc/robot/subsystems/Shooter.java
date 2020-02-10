@@ -197,6 +197,7 @@ public class Shooter extends Subsystem {
     public double limelightRanging()
     {
         //Equation that takes in ta (See Limelight Docs) and outputs distance from target in inches
+        //TODO need to test data points based on actual bot
         return 505 - 409 * periodic.targetArea + 119 * periodic.targetArea * periodic.targetArea; 
     }
 
@@ -220,7 +221,7 @@ public class Shooter extends Subsystem {
     public void setTurretRPM(double demand) {
         if (turretMode != MotorControlMode.PID_MODE)
             turretMode = MotorControlMode.PID_MODE;
-        turretControl.set(ControlMode.Velocity, demand);
+        turretControl.set(ControlMode.Position, demand);
     }
 
     public void setFlywheelDemand(double newDemand) {
@@ -261,6 +262,17 @@ public class Shooter extends Subsystem {
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
         }
+    }
+
+    public double turretAngletoRelAngle(double angle) {
+        double ticksFromOffset = turretControl.getSelectedSensorPosition() + degreesToTicks(angle);
+        if(turretControl.getSelectedSensorPosition() + degreesToTicks(angle) < Constants.leftTurretLimit) {
+            ticksFromOffset = 0.0;
+        }
+        if(turretControl.getSelectedSensorPosition() + degreesToTicks(angle) > Constants.rightTurretLimit) {
+            ticksFromOffset = 0.0;
+        }
+        return 1 / degreesToTicks(ticksFromOffset);
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
