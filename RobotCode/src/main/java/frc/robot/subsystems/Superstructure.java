@@ -141,8 +141,6 @@ public class Superstructure extends Subsystem {
                         periodic.state = SuperState.INIT;
                     } else if (periodic.deliveryDistance < 20 && periodic.indexDistance < 20) { /* C7 */
                         periodic.state = SuperState.ONE_TO_FOUR_BALLS;
-                    } else if (periodic.deliveryDistance < 20) { /* C8 */
-                        periodic.state = SuperState.ONE_BALL;
                     }
                     break;
                 case DUMP_SYSTEM:
