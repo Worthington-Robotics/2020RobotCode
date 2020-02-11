@@ -87,8 +87,6 @@ public class Drive extends Subsystem {
                         break;
                     case OPEN_LOOP:
                         setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[0]));
-                        // System.out.println("X: " + periodic.operatorInput[0] + " Y: " +
-                        // periodic.operatorInput[1] + " Z: " + periodic.operatorInput[2]);
                         break;
                     case ANGLE_PID:
                         periodic.PIDOutput = anglePID.update(periodic.gyro_heading.getDegrees());
@@ -118,10 +116,14 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
-        if (periodic.TransState == DoubleSolenoid.Value.kForward)
+        if (periodic.TransState == DoubleSolenoid.Value.kForward) {
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK_SHIFTED);
-        else
+            periodic.isShifted = true;
+        } else {
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
+            
+            periodic.isShifted = false;
+        }
 
         periodic.AnglePIDError = anglePID.getError();
         periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
@@ -257,12 +259,12 @@ public class Drive extends Subsystem {
 
     private void configTalons() {
         // primary closed-loop, 100 ms timeout
-        ErrorCode sensorPresent = driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100); 
+        ErrorCode sensorPresent = driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
         if (sensorPresent != ErrorCode.OK) {
             DriverStation.reportError("Could not detect left encoder: " + sensorPresent, false);
         }
         // DO NOT FORGET THIS! use 5ms packet time on feedback
-        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100); 
+        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100);
         driveFrontLeft.setSensorPhase(true);
         driveFrontLeft.selectProfileSlot(0, 0);
         driveFrontLeft.config_kF(0, Constants.DRIVE_LEFT_KF, 0);
@@ -291,12 +293,12 @@ public class Drive extends Subsystem {
         driveBackLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         // primary closed-loop, 100ms timeout
-        sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100); 
+        sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
         if (sensorPresent != ErrorCode.OK) {
             DriverStation.reportError("Could not detect right encoder: " + sensorPresent, false);
         }
         // DO NOT FORGET THIS! use 5ms packet time on feedback
-        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100); 
+        driveFrontLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 5, 100);
         driveFrontRight.setSensorPhase(true);
         driveFrontRight.selectProfileSlot(0, 0);
         driveFrontRight.config_kF(0, Constants.DRIVE_RIGHT_KF, 0);
@@ -431,6 +433,7 @@ public class Drive extends Subsystem {
 
         SmartDashboard.putString("Drive/Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
+        SmartDashboard.putBoolean("Drive/Shift", periodic.isShifted);
         SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
         SmartDashboard.putNumber("Drive/Error/Y", periodic.error.y());
 
@@ -461,9 +464,10 @@ public class Drive extends Subsystem {
 
     public class DriveIO extends PeriodicIO {
         // INPUTS
+        public boolean isShifted = false;
         public double left_pos_ticks = 0;
         public double left_error = 0;
-        public double left_velocity_ticks_per_100ms  = 0;
+        public double left_velocity_ticks_per_100ms = 0;
         public double leftCurrent = 0;
 
         public double right_pos_ticks = 0;
@@ -484,7 +488,7 @@ public class Drive extends Subsystem {
         // Smartdashboard Settings
         public double PIDDUpdate = 0;
         public double PIDPUpdate = 0;
-        public boolean savePIDSettings = false;        
+        public boolean savePIDSettings = false;
 
         // OUTPUTS
         public double ramp_Up_Counter = 0;
@@ -532,7 +536,7 @@ public class Drive extends Subsystem {
     }
 
     private static double radiansPerSecondToTicksPer100ms(double rad_s) {
-        return rad_s / (Math.PI * 2.0) * 4096.0 / 10.0;
+        return rad_s / (Math.PI * 2.0) * 4096.0 * 3.68 / 10.0;
     }
 
     private static double inchesPerSecondToRadiansPerSecond(double in_sec) {

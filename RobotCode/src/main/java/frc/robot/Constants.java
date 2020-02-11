@@ -102,7 +102,7 @@ public class Constants {
     public static final double DRIVE_Kv = 0.316426;  // V per rad/s -.335
     public static final double DRIVE_Ka = 0.0801;  // V per rad/s^2    0.0801
     public static final double DRIVE_VCOMP = 10.0; //V
-    public static final double DRIVE_ENCODER_PPR = 4096.0; //encoder counts per revolution
+    public static final double DRIVE_ENCODER_PPR = 4096.0 * 3.68; //encoder counts per revolution * gear ratio
 
     //PID Constants
     public static final double ANGLE_KP = -0.024; // 0.065;
