@@ -205,9 +205,9 @@ public class Superstructure extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putBoolean("DELIVERY_SENSOR_BOOL", DISTANCE_DELIVERY >= getDeliveryDistance());
-        SmartDashboard.putBoolean("INDEXER_SENSOR_BOOL", DISTANCE_INDEXER >= getIndexDistance());
-        SmartDashboard.putBoolean("INTAKE_SENSOR_BOOL", DISTANCE_INTAKE >= getIntakeDistance());
+        SmartDashboard.putBoolean("Superstructure/Delivery_TOF", DISTANCE_DELIVERY >= getDeliveryDistance());
+        SmartDashboard.putBoolean("Superstructure/Index_TOF", DISTANCE_INDEXER >= getIndexDistance());
+        SmartDashboard.putBoolean("Superstructure/Intake_TOF", DISTANCE_INTAKE >= getIntakeDistance());
     }
 
     public void setShoot() {
