@@ -27,8 +27,8 @@ public class Constants {
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 1;
-    public static final int CLIMB_FRONT_LOW_ID = 2;
-    public static final int CLIMB_FRONT_HIGH_ID = 3;
+    public static final int INTAKE_LOW_ID = 2;
+    public static final int INTAKE_HIGH_ID = 3;
     public static final int LOCK_LOW_ID = 4;
     public static final int LOCK_HIGH_ID = 5;
 
@@ -50,7 +50,7 @@ public class Constants {
      */
 
     //DEBUG AND TESTING
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     //Path Following Constants
     public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
     public static final double DRIVETRAIN_UPDATE_RATE = 0;
