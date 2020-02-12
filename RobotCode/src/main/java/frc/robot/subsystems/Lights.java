@@ -5,17 +5,17 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Constants;
 
 public class Lights extends Subsystem {
-    private int colorH = 0;
     private AddressableLED mled;
     private AddressableLEDBuffer mLEDBuffer;
     private int numberOfBalls;
-    private boolean targeted, uprightsUp, intakeDown, climbUp;
-    private Color allianceColor;
-    private lightModes currentLightMode;
+    private boolean targeted, uprightsUp, intakeDown, climbUp, FMSOn;
+    private Color allianceColor, colorWheelColor;
+    private lightModes currentLightMode = lightModes.beforeStart;
     private Value intakeState;
 
     private Lights() {
@@ -33,31 +33,46 @@ public class Lights extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         intakeState = Superstructure.getInstance().getArmExtension();
+        FMSOn = DriverStation.getInstance().isFMSAttached();
         if (intakeState == Value.kForward) {
             intakeDown = true;
         } else {
             intakeDown = false;
         }
-        if (DriverStation.getInstance().getAlliance() == Alliance.Blue) {
-            allianceColor = Color.kBlue;
-        } else if (DriverStation.getInstance().getAlliance() == Alliance.Red) {
-            allianceColor = Color.kRed;
+        if (FMSOn = true) {
+            currentLightMode = lightModes.allianceColor;
+            if (DriverStation.getInstance().getAlliance() == Alliance.Blue) {
+                allianceColor = Color.kFirstBlue;
+            } else if (DriverStation.getInstance().getAlliance() == Alliance.Red) {
+                allianceColor = Color.kDarkRed;
+            } else {
+                allianceColor = Color.kChocolate;
+            }
         } else {
-            allianceColor = Color.kChocolate;
+            currentLightMode = lightModes.beforeStart;
         }
-        colorH = interpretColor(ColorWheel.getInstance().cDetected());
-        // TODO Add Light Implementation for indexer
         // TODO Implement targeting
         uprightsUp = Climber.getInstance().unfolded;
         climbUp = Climber.getInstance().climbed;
         if (uprightsUp && !climbUp) {
             currentLightMode = lightModes.colorWheel;
+            switch(ColorWheel.getInstance().cDetected()) {
+                case 'U': colorWheelColor = Color.kBlack; break;
+                case 'R': colorWheelColor = Color.kRed; break;
+                case 'G': colorWheelColor = Color.kDarkGreen; break;
+                case 'Y': colorWheelColor = Color.kGold; break;
+                case 'B': colorWheelColor = Color.kBlue; break;
+            }
         } else if (uprightsUp && climbUp) {
             currentLightMode = lightModes.allianceColor;
         }
         if (intakeDown) {
             currentLightMode = lightModes.indexNum;
         }
+        //Testing 
+        currentLightMode = lightModes.Testing;
+        //colorWheelColor = Color.kBlue;
+        //numberOfBalls = 5;
     }
 
     @Override
@@ -66,36 +81,50 @@ public class Lights extends Subsystem {
         case colorWheel:
             for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 // Sets the specified LED to the RGB values for red
-                mLEDBuffer.setHSV(i, colorH, 100, 75);
+                mLEDBuffer.setLED(i, colorWheelColor);
+                System.out.println("Lights Set");
             }
             break;
         case targeting:
             if (targeted) {
                 for (var i = 0; i < mLEDBuffer.getLength(); i++) {
-                    mLEDBuffer.setRGB(i, 13, 239, 66);
+                    mLEDBuffer.setRGB(i, 0, 150, 0);
                 }
             } else {
                 for (var i = 0; i < mLEDBuffer.getLength(); i++) {
-                    mLEDBuffer.setRGB(i, 220, 61, 42);
+                    mLEDBuffer.setRGB(i, 150, 0, 0);
                 }
-            }
+            }                
+            System.out.println("Lights Set");
             break;
         case indexNum:
             if (numberOfBalls >= 1 && numberOfBalls <= 4) {
                 for (var i = 0; i < (mLEDBuffer.getLength() * (.2 * numberOfBalls)); i++) {
-                    mLEDBuffer.setRGB(i, 254, 226, 62);
+                    mLEDBuffer.setLED(i, Color.kYellow);
+                }
+            } else {
+                for (var i = 0; i < (mLEDBuffer.getLength() * (.2 * numberOfBalls)); i++) {
+                    mLEDBuffer.setHSV(i, i*(239/mLEDBuffer.getLength()), 226, 62);
                 }
             }
+            System.out.println("Lights Set");
             break;
         case allianceColor:
             for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 mLEDBuffer.setLED(i, allianceColor);
             }
+            System.out.println("Lights Set");
+            break;
+        case beforeStart:
+            for (var i = 0; i < (mLEDBuffer.getLength() * (.2 * numberOfBalls)); i++) {
+                mLEDBuffer.setHSV(i, i*((239/mLEDBuffer.getLength())), 226, 62);
+            }
             break;
         default:
             for (var i = 0; i < mLEDBuffer.getLength(); i++) {
-                mLEDBuffer.setLED(i, Color.kChocolate);
+                mLEDBuffer.setLED(i, Color.kPurple);
             }
+            System.out.println("Lights Set");
             break;
         }
         mled.setData(mLEDBuffer);
@@ -130,17 +159,17 @@ public class Lights extends Subsystem {
         mled.setLength(mLEDBuffer.getLength());
         mled.setData(mLEDBuffer);
         mled.start();
-        currentLightMode = lightModes.colorWheel;
+        currentLightMode = lightModes.allianceColor;
 
     }
 
     @Override
     public void outputTelemetry() {
-
+        SmartDashboard.putNumber("Length of Strind", mLEDBuffer.getLength());
     }
 
     enum lightModes {
-        targeting, colorWheel, indexNum, allianceColor;
+        targeting, colorWheel, indexNum, allianceColor, beforeStart, Testing;
     }
 
 }

@@ -36,13 +36,13 @@ public class Constants {
 
     public static final int CLIMB_FRONT_LOW_ID = 2;
     public static final int CLIMB_FRONT_HIGH_ID = 3;
-    public static final int LOCK_LOW_ID = 4;
-    public static final int LOCK_HIGH_ID = 5;
+    //public static final int LOCK_LOW_ID = 4;
+    //public static final int LOCK_HIGH_ID = 5;
     //Color Sensor Port
-    public static final int COLOR_SENSOR_PORT = 0;
+    public static final int COLOR_SENSOR_PORT = 1;
     
     //LED Data/Ports
-    public static final int LED_PORT = 1;
+    public static final int LED_PORT = 0;
     public static final int LED_LENGTH = 60;
     /*
         Flywheel Tuned Values
