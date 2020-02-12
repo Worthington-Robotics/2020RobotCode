@@ -1,8 +1,6 @@
 package frc.robot.actions.superaction;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.lib.statemachine.Action;
-import frc.robot.Constants;
 import frc.robot.subsystems.Superstructure;
 
 public class Dump extends Action {
@@ -13,7 +11,7 @@ public class Dump extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setDump();
+        superstructure.dumpSystem();
     }
 
     @Override public void onLoop() {
@@ -24,6 +22,6 @@ public class Dump extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setInit();
+        superstructure.initState();
     }
 }

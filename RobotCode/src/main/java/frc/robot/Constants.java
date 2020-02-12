@@ -128,5 +128,5 @@ public class Constants {
     public static final double HIGH_BELT_DEMAND = 0.75;
     public static final double STOP_BELT_DEMAND = 0;
     // Time (ms)
-    public static final double TIME_BEFORE_STATIONARY = 500;
+    public static final double TIME_TILL_STATIONARY = 500;
 }

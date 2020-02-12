@@ -1,18 +1,17 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.util.TimedBoolean;
+import frc.lib.util.DemandUtil;
+import frc.lib.util.TimerBoolean;
 import frc.robot.Constants;
 
-import static frc.robot.Constants.*;
+import static frc.robot.Constants.TIME_TILL_STATIONARY;
 
 /**
  * Combines both the indexer and intake functions for performance economy.
@@ -41,8 +40,8 @@ public class Superstructure extends Subsystem {
     private double DISTANCE_INTAKE = 75;
 
     // TimedBooleans
-    private TimedBoolean indexBoolean;
-    private TimedBoolean intakeBoolean;
+    private TimerBoolean indexBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
+    private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
 
     private static Superstructure instance = new Superstructure();
 
@@ -90,40 +89,39 @@ public class Superstructure extends Subsystem {
             periodic.intakeDetected = SmartDashboard.getBoolean("Superstructure/INTAKE_SENSOR_DISTANCE",
                     periodic.intakeDetected);
         } else {
-            periodic.deliveryDetected = (DISTANCE_DELIVERY >= deliverySensor.getRange()) && (deliverySensor.getRange() != 0);
-            periodic.indexDetected = DISTANCE_INDEXER >= indexSensor.getRange() && (indexSensor.getRange() != 0);
-            periodic.intakeDetected = DISTANCE_INTAKE >= intakeSensor.getRange() && (intakeSensor.getRange() != 0);
+            periodic.deliveryDetected = deliverySensor.getRange() != 0 && DISTANCE_DELIVERY >= deliverySensor.getRange();
+            periodic.indexDetected = indexSensor.getRange() != 0 && DISTANCE_INDEXER >= indexSensor.getRange();
+            periodic.intakeDetected = intakeSensor.getRange() != 0 && DISTANCE_INTAKE >= intakeSensor.getRange();
         }
     }
 
-    /**
-     * Update values of the SRXs, DoubleSolenoid
-     */
-    @Override
-    public synchronized void writePeriodicOutputs() {
+    @Override public synchronized void writePeriodicOutputs() {
         switch (periodic.state) {
-        case INIT:
-            init();
-            break;
-        case ONE_TO_THREE_BALLS:
-            oneToThreeBalls();
-            break;
-        case FOUR_BALLS:
-            fourBalls();
-            break;
-        case FULL_SYSTEM:
-            fullSystem();
-            break;
-        case SHOOT:
-            shoot();
-            break;
-        case DUMP_SYSTEM:
-            dumpSystem();
-            break;
-        default:
-            break;
+            case INIT:
+                DemandUtil.setFullDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
+                break;
+            case ONE_TO_THREE_BALLS:
+                DemandUtil.setFullDemand(deliveryBelts, ballsIntake);
+                DemandUtil.disable(shooterWheel, indexBelt);
+                break;
+            case FOUR_BALLS:
+                DemandUtil.setFullDemand(ballsIntake);
+                DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt);
+                break;
+            case FULL_SYSTEM:
+                DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
+                break;
+            case SHOOT:
+                DemandUtil.setFullDemand(shooterWheel);
+                DemandUtil.disable(deliveryBelts, indexBelt, ballsIntake);
+                break;
+            case DUMP_SYSTEM:
+                dumpSystem();
+                break;
+            default:
+                DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
+                break;
         }
-
     }
 
     @Override
@@ -137,48 +135,45 @@ public class Superstructure extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 switch (periodic.state) {
-                case INIT:
-                    if (periodic.deliveryDetected) { /* C2 */
-                        periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                    case INIT: {
+                        if (periodic.deliveryDetected) {
+                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                        }
+                        break;
                     }
-                    break;
-                case ONE_TO_THREE_BALLS:
-                if (periodic.indexDetected) { /* C4 */
-                    if (indexBoolean == null) {
-                        indexBoolean = new TimedBoolean(Constants.TIME_BEFORE_STATIONARY);
-                    } else if (indexBoolean.getBoolean()) {
-                        periodic.state = SuperState.FOUR_BALLS;
+                    case ONE_TO_THREE_BALLS: {
+                        if (periodic.indexDetected) {
+                            if (indexBoolean.isStarted()) {
+                                indexBoolean.start();
+                            } else if (indexBoolean.getBoolean()) {
+                                periodic.state = SuperState.FOUR_BALLS;
+                            }
+                        } else {
+                            // Invalidate if it isn't true
+                            indexBoolean.stop();
+                        }
+                        break;
                     }
-                } else {
-                    // Invalidate if it isn't true
-                    indexBoolean = null;
-                }
-                    break;
-                case FOUR_BALLS:
-                if (periodic.intakeDetected) { /* C5 */
-                    if (intakeBoolean == null) {
-                        intakeBoolean = new TimedBoolean(Constants.TIME_BEFORE_STATIONARY);
-                    } else if (intakeBoolean.getBoolean()) {
-                        periodic.state = SuperState.FULL_SYSTEM;
+                    case FOUR_BALLS: {
+                        if (periodic.intakeDetected) {
+                            if (intakeBoolean.isStarted()) {
+                                intakeBoolean.start();
+                            } else if (intakeBoolean.getBoolean()) {
+                                periodic.state = SuperState.FULL_SYSTEM;
+                            }
+                        } else {
+                            // Invalidate if it isn't true
+                            intakeBoolean.stop();
+                        }
+                        break;
                     }
-                } else {
-                    // Invalidate if it isn't true
-                    intakeBoolean = null;
-                }
-                    break;
-                case FULL_SYSTEM:
-                    break;
-                case SHOOT:
-                    if ((periodic.indexDetected || periodic.deliveryDetected)) { /* C9 */
-                        periodic.state = SuperState.INIT;
-                    } else if (periodic.deliveryDetected && periodic.indexDetected) { /* C7 */
-                        periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                    case SHOOT: {
+                        if (!periodic.deliveryDetected) {
+                            periodic.state = SuperState.INIT;
+                        }
+                        break;
                     }
-                    break;
-                case DUMP_SYSTEM:
-                    break;
-                default:
-                    break;
+                    case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
                 }
             }
 
@@ -187,48 +182,6 @@ public class Superstructure extends Subsystem {
 
             }
         });
-    }
-
-    public void init() {
-        shooterWheel.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-        deliveryBelts.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-        indexBelt.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-        ballsIntake.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-    }
-
-    public void oneToThreeBalls() {
-        shooterWheel.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        deliveryBelts.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-        indexBelt.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        ballsIntake.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-    }
-
-    public void fourBalls() {
-        shooterWheel.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        deliveryBelts.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        indexBelt.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        ballsIntake.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-    }
-
-    public void fullSystem() {
-        shooterWheel.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        deliveryBelts.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        indexBelt.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        ballsIntake.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-    }
-
-    public void shoot() {
-        shooterWheel.set(ControlMode.PercentOutput, Constants.FULL_BELT_DEMAND);
-        deliveryBelts.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        indexBelt.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-        ballsIntake.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
-    }
-
-    public void dumpSystem() {
-        shooterWheel.set(ControlMode.PercentOutput, -Constants.FULL_BELT_DEMAND);
-        deliveryBelts.set(ControlMode.PercentOutput, -Constants.FULL_BELT_DEMAND);
-        indexBelt.set(ControlMode.PercentOutput, -Constants.FULL_BELT_DEMAND);
-        ballsIntake.set(ControlMode.PercentOutput, -Constants.FULL_BELT_DEMAND);
     }
 
     @Override
@@ -241,22 +194,18 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW",  intakeSensor.getRange());
     }
 
-    public void shootBalls() {
-        periodic.state = SuperState.SHOOT;
-    }
-
-    public void setShoot() {
+    public void shootBall() {
         if (periodic.state == SuperState.ONE_TO_THREE_BALLS || periodic.state == SuperState.FOUR_BALLS
                 || periodic.state == SuperState.FULL_SYSTEM) {
             periodic.state = SuperState.SHOOT;
         }
     }
 
-    public void setDump() {
+    public void dumpSystem() {
         periodic.state = SuperState.DUMP_SYSTEM;
     }
 
-    public void setInit() {
+    public void initState() {
         periodic.state = SuperState.INIT;
     }
 

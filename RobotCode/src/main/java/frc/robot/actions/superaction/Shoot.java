@@ -1,8 +1,6 @@
 package frc.robot.actions.superaction;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.lib.statemachine.Action;
-import frc.robot.Constants;
 import frc.robot.subsystems.Superstructure;
 
 public class Shoot extends Action {
@@ -13,7 +11,7 @@ public class Shoot extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setShoot();
+        superstructure.shootBall();
     }
 
     @Override public void onLoop() {
