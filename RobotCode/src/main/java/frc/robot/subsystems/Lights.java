@@ -32,7 +32,7 @@ public class Lights extends Subsystem {
 
     @Override
     public void readPeriodicInputs() {
-        intakeState = Superstructure.getInstance().getArmExtension();
+        //intakeState = Superstructure.getInstance().getArmExtension();
         FMSOn = DriverStation.getInstance().isFMSAttached();
         if (intakeState == Value.kForward) {
             intakeDown = true;

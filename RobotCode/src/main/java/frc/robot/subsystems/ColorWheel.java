@@ -259,7 +259,7 @@ public class ColorWheel extends Subsystem {
 
         return colorString;
     }
-    
+
     private void configTalon() {
         colorWheelTalon.setSensorPhase(true);
         colorWheelTalon.selectProfileSlot(0, 0);
@@ -292,18 +292,9 @@ public class ColorWheel extends Subsystem {
         public double[] RGB = new double[] { 0, 0, 0 };
         public int color_direction_calc;
         public double demand = 0.0;
-        public boolean colorMotorPidOn = false;
-        public boolean colorWheelReading = false;
-        public colorWheelMode currentWheelMode = colorWheelMode.stopped;
         public Color detected_color = Color.kBlack;
         public String color_sensed = "Unknown";
         public boolean color_motor_pid_on = false;
         public boolean color_wheel_reading = false;
-    }
-    public enum colorWheelMode {
-        rotation,
-        position, 
-        stopped;
-        
     }
 }
