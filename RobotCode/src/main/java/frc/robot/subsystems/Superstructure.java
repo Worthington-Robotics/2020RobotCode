@@ -34,10 +34,13 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight indexSensor;
     private SimTimeOfFlight intakeSensor;
 
-    // Bool
-    private double DISTANCE_DELIVERY = 75;
-    private double DISTANCE_INDEXER = 75;
-    private double DISTANCE_INTAKE = 75;
+    // Double
+    private double THRESHOLD_DELIVERY = 75;
+    private double THRESHOLD_INDEXER = 75;
+    private double THRESHOLD_INTAKE = 75;
+    private double distanceDelivery;
+    private double distanceIndexer;
+    private double distanceIntake;
 
     // TimedBooleans
     private TimerBoolean indexBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
@@ -63,10 +66,12 @@ public class Superstructure extends Subsystem {
 
         reset();
 
-        SmartDashboard.putNumber("Superstructure/BALLS", periodic.ballCount);
         SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
         SmartDashboard.putNumber("Superstructure/INDEXER_DEMAND", periodic.indexBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeDemand);
+        SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
+        SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
+        SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
         SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
         SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
@@ -78,21 +83,22 @@ public class Superstructure extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
-            DISTANCE_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", 0);
-            DISTANCE_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", 0);
-            DISTANCE_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", 0);
+            THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
+            THRESHOLD_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
+            THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
 
-            periodic.deliveryDetected = SmartDashboard.getBoolean("Superstructure/DELIVERY_SENSOR_DISTANCE",
-                    periodic.deliveryDetected);
-            periodic.indexDetected = SmartDashboard.getBoolean("Superstructure/INDEXER_SENSOR_DISTANCE",
-                    periodic.indexDetected);
-            periodic.intakeDetected = SmartDashboard.getBoolean("Superstructure/INTAKE_SENSOR_DISTANCE",
-                    periodic.intakeDetected);
+            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", deliverySensor.getRange());
+            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
+            distanceIntake = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
         } else {
-            periodic.deliveryDetected = deliverySensor.getRange() != 0 && DISTANCE_DELIVERY >= deliverySensor.getRange();
-            periodic.indexDetected = indexSensor.getRange() != 0 && DISTANCE_INDEXER >= indexSensor.getRange();
-            periodic.intakeDetected = intakeSensor.getRange() != 0 && DISTANCE_INTAKE >= intakeSensor.getRange();
+            distanceDelivery = deliverySensor.getRange();
+            distanceIndexer = indexSensor.getRange();
+            distanceIntake = intakeSensor.getRange();
         }
+
+        periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >= distanceDelivery;
+        periodic.indexDetected = distanceIndexer != 0 && THRESHOLD_INDEXER >= distanceIndexer;
+        periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
     }
 
     @Override public synchronized void writePeriodicOutputs() {
@@ -116,10 +122,9 @@ public class Superstructure extends Subsystem {
                 DemandUtil.disable(deliveryBelts, indexBelt, ballsIntake);
                 break;
             case DUMP_SYSTEM:
-                dumpSystem();
+                DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
                 break;
             default:
-                DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
                 break;
         }
     }
@@ -127,13 +132,9 @@ public class Superstructure extends Subsystem {
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
-            @Override
-            public void onStart(double timestamp) {
+            @Override public void onStart(double timestamp) {}
 
-            }
-
-            @Override
-            public void onLoop(double timestamp) {
+            @Override public void onLoop(double timestamp) {
                 switch (periodic.state) {
                     case INIT: {
                         if (periodic.deliveryDetected) {
@@ -143,7 +144,7 @@ public class Superstructure extends Subsystem {
                     }
                     case ONE_TO_THREE_BALLS: {
                         if (periodic.indexDetected) {
-                            if (indexBoolean.isStarted()) {
+                            if (!indexBoolean.isStarted()) {
                                 indexBoolean.start();
                             } else if (indexBoolean.getBoolean()) {
                                 periodic.state = SuperState.FOUR_BALLS;
@@ -156,7 +157,7 @@ public class Superstructure extends Subsystem {
                     }
                     case FOUR_BALLS: {
                         if (periodic.intakeDetected) {
-                            if (intakeBoolean.isStarted()) {
+                            if (!intakeBoolean.isStarted()) {
                                 intakeBoolean.start();
                             } else if (intakeBoolean.getBoolean()) {
                                 periodic.state = SuperState.FULL_SYSTEM;
@@ -177,15 +178,13 @@ public class Superstructure extends Subsystem {
                 }
             }
 
-            @Override
-            public void onStop(double timestamp) {
-
-            }
+            @Override public void onStop(double timestamp) {}
         });
     }
 
     @Override
     public void outputTelemetry() {
+        SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
         SmartDashboard.putBoolean("Superstructure/Delivery_TOF", deliveryDetected());
         SmartDashboard.putBoolean("Superstructure/Index_TOF", indexDetected());
         SmartDashboard.putBoolean("Superstructure/Intake_TOF", intakeDetected());
@@ -222,9 +221,6 @@ public class Superstructure extends Subsystem {
     }
 
     // Setters
-    public void setBallCount(int ballCount) {
-        periodic.ballCount = ballCount;
-    }
 
     public void setArmExtension(DoubleSolenoid.Value armExtension) {
         periodic.armExtension = armExtension;
@@ -243,10 +239,6 @@ public class Superstructure extends Subsystem {
     }
 
     // Getters
-    public int getBallCount() {
-        return periodic.ballCount;
-    }
-
     public DoubleSolenoid.Value getArmExtension() {
         return periodic.armExtension;
     }
@@ -274,7 +266,6 @@ public class Superstructure extends Subsystem {
         public double indexBeltDemand;
         public double deliveryBeltsDemand;
         // Intake Data
-        public int ballCount;
         public double intakeDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;
         // Sensor Booleans

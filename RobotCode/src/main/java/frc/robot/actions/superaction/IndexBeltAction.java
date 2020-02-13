@@ -15,9 +15,7 @@ public class IndexBeltAction extends Action {
         superstructure.setIndexBeltDemand(Constants.HIGH_BELT_DEMAND);
     }
 
-    @Override public void onLoop() {
-
-    }
+    @Override public void onLoop() {}
 
     @Override public boolean isFinished() {
         return false;

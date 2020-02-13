@@ -21,7 +21,6 @@ public class TimerBoolean {
      */
     public TimerBoolean(double waitDuration) {
         this.waitDuration = waitDuration;
-        this.startTimestamp = Timer.getFPGATimestamp();
     }
 
     /**
@@ -29,26 +28,23 @@ public class TimerBoolean {
      * @return if the given boolean has been true for a sufficient amount of time
      */
     public boolean getBoolean() {
-        return started && (startTimestamp + waitDuration < Timer.getFPGATimestamp());
+        return started && startTimestamp != 0 && (startTimestamp + waitDuration < Timer.getFPGATimestamp());
     }
 
     /**
      * Sets the starting timestamp for the calculation.
      */
     public void start() {
-        if (!started) {
-            startTimestamp = Timer.getFPGATimestamp();
-            started = true;
-        }
+        startTimestamp = Timer.getFPGATimestamp();
+        started = true;
     }
 
     /**
      * Ends the timer, forcing the TimerBoolean to return false.
      */
     public void stop() {
-        if (started) {
-            started = false;
-        }
+        startTimestamp = 0;
+        started = false;
     }
 
     /**
@@ -75,7 +71,7 @@ public class TimerBoolean {
     }
 
     /**
-     * Returns the duration that must pass until the TimerBoolean returns true
+     * Returns the duration that must pass until the TimerBoolean returns true.
      * @return the duration that must pass until the TimerBoolean returns true
      */
     public double getWaitDuration() {

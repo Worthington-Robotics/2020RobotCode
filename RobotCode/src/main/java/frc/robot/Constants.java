@@ -50,7 +50,7 @@ public class Constants {
      */
 
     //DEBUG AND TESTING
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     //Path Following Constants
     public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
     public static final double DRIVETRAIN_UPDATE_RATE = 0;
@@ -127,6 +127,6 @@ public class Constants {
     public static final double FULL_BELT_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = 0.75;
     public static final double STOP_BELT_DEMAND = 0;
-    // Time (ms)
-    public static final double TIME_TILL_STATIONARY = 500;
+    // Time (s)
+    public static final double TIME_TILL_STATIONARY = .5;
 }

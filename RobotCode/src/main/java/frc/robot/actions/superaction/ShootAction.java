@@ -3,10 +3,10 @@ package frc.robot.actions.superaction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Superstructure;
 
-public class Shoot extends Action {
+public class ShootAction extends Action {
     private Superstructure superstructure;
 
-    public Shoot() {
+    public ShootAction() {
         superstructure = Superstructure.getInstance();
     }
 
@@ -14,13 +14,11 @@ public class Shoot extends Action {
         superstructure.shootBall();
     }
 
-    @Override public void onLoop() {
-    }
+    @Override public void onLoop() {}
 
     @Override public boolean isFinished() {
         return false;
     }
 
-    @Override public void onStop() {
-    }
+    @Override public void onStop() {}
 }

@@ -3,10 +3,10 @@ package frc.robot.actions.superaction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Superstructure;
 
-public class Dump extends Action {
+public class DumpAction extends Action {
     private Superstructure superstructure;
 
-    public Dump() {
+    public DumpAction() {
         superstructure = Superstructure.getInstance();
     }
 
@@ -14,11 +14,10 @@ public class Dump extends Action {
         superstructure.dumpSystem();
     }
 
-    @Override public void onLoop() {
-    }
+    @Override public void onLoop() {}
 
     @Override public boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override public void onStop() {
