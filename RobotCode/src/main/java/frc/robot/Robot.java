@@ -12,19 +12,24 @@ import java.util.Arrays;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.lib.util.DriveSignal;
+import frc.robot.actions.driveactions.GyroLock;
+import frc.robot.actions.driveactions.Inverse;
+import frc.robot.actions.driveactions.Shift;
+import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.PoseEstimator;
+import frc.robot.actions.colorWheelManual;
 import frc.robot.actions.climberactions.*;
 import frc.robot.actions.colorwheelactions.ColorWheelPosition;
 import frc.robot.actions.colorwheelactions.ColorWheelRotations;
 import frc.robot.actions.colorwheelactions.ColorWheelStop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.Lights;
-import frc.robot.subsystems.Superstructure;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,24 +39,25 @@ import frc.robot.subsystems.Superstructure;
  * project.
  */
 public class Robot extends TimedRobot {
-    private SubsystemManager manager;
+    private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
+        //register subsystems here
+        PoseEstimator.getInstance(),
+        Drive.getInstance(),
+        ColorWheel.getInstance()
+    ), true);;
     private Looper enabledLooper, disabledLooper;
     private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb, colorWheelPos, colorWheelRot, colorWheelStop;
+
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
-    public void robotInit() {
-        manager = new SubsystemManager(Arrays.asList(
-            //register subsystems here
-            Lights.getInstance(),
-            Climber.getInstance(),
-            ColorWheel.getInstance(),
-            Superstructure.getInstance()
-        ), true);
-
+    public void robotInit(){
         //create the master looper threads
         enabledLooper = new Looper();
         disabledLooper = new Looper();
@@ -68,20 +74,24 @@ public class Robot extends TimedRobot {
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
 
-        colorWheelRot = new JoystickButton(Constants.MASTER, 6);
-        colorWheelPos = new JoystickButton(Constants.MASTER, 7);
-        colorWheelStop = new JoystickButton(Constants.MASTER, 8);
-        foldClimb = new JoystickButton(Constants.MASTER, 9);
-        unfoldClimb = new JoystickButton(Constants.MASTER, 10);
-        climbDown = new JoystickButton(Constants.MASTER, 11);
-        climbUp = new JoystickButton(Constants.MASTER, 12);
-        colorWheelRot.whenPressed(Action.toCommand(new ColorWheelRotations()));
-        colorWheelPos.whenPressed(Action.toCommand(new ColorWheelPosition()));
-        colorWheelStop.whenPressed(Action.toCommand(new ColorWheelStop()));
+        //create buttons and register actions
+
+        JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
+        JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
+        JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
+        JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+        JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
+        JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
+
+        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         foldClimb.whenPressed(Action.toCommand(new FoldAction()));
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
         climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
+        inverse.whileHeld(Action.toCommand(new Inverse()));
+        shift.whileHeld(Action.toCommand(new Shift()));
+        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
     }
 
     /**
@@ -150,6 +160,7 @@ public class Robot extends TimedRobot {
         //reset anything here
 
         enabledLooper.start();
+        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
     }
 
     /**
@@ -157,7 +168,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
+        Scheduler.getInstance().run();        
     }
 
     @Override

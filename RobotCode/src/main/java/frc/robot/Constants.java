@@ -12,22 +12,22 @@ public class Constants {
     
     //Pigion ID
     public static final int PIGION_ID = 0;
-    //Talon IDs
+    //Talon SRX IDs
     public static final int SHOOTER_FLYWHEEL_RIGHT = 1;
     public static final int SHOOTER_FLYWHEEL_LEFT = 2;
     public static final int COLOR_WHEEL = 3;
     public static final int TURRET_CONTROL = 13;
-    public static final int DRIVE_FRONT_LEFT_ID = 1;
-    public static final int DRIVE_MIDDLE_LEFT_ID = 2;
-    public static final int DRIVE_BACK_LEFT_ID = 3;
-    public static final int DRIVE_FRONT_RIGHT_ID = 4;
-    public static final int DRIVE_MIDDLE_RIGHT_ID = 5;
-    public static final int DRIVE_BACK_RIGHT_ID = 6;
-
     public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
     public static final int SUPERSTRUCTURE_DELIVERY_ABOVE_BELT = 8;
     public static final int SUPERSTRUCTURE_DELIVERY_BELOW_BELT = 9;
     public static final int SUPERSTRUCTURE_INTAKE = 10;
+    //Talon FX IDs
+    public static final int DRIVE_FRONT_LEFT_ID = 13;
+    public static final int DRIVE_MIDDLE_LEFT_ID = 14;
+    public static final int DRIVE_BACK_LEFT_ID = 15;
+    public static final int DRIVE_FRONT_RIGHT_ID = 0;
+    public static final int DRIVE_MIDDLE_RIGHT_ID = 1;
+    public static final int DRIVE_BACK_RIGHT_ID = 2;
     //Spark Ports
 
     //Solenoid Ports
@@ -44,6 +44,13 @@ public class Constants {
     //LED Data/Ports
     public static final int LED_PORT = 0;
     public static final int LED_LENGTH = 60;
+    //Joystick Constants
+    public static final Joystick MASTER = new Joystick(0);
+    public static final Joystick LAUNCH_PAD = new Joystick(1);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, -0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.1, 0.99, 0.99, 0.8, 2);
+
     /*
         Flywheel Tuned Values
     */
@@ -56,11 +63,12 @@ public class Constants {
     public static final double TURRET_MAX_SPEED = .75;
     public static final double TURRET_CONTROL_PID_P = 0;
     public static final double TURRET_CONTROL_PID_D = 0;
-    
     /**
      * Drivetrain tuned values --------------------------------
      */
 
+    //DEBUG AND TESTING
+    public static final boolean DEBUG = true;
     //Encoder Constants
     public static final double ENCODER_5046_CPR = 1024;
 
@@ -94,20 +102,20 @@ public class Constants {
     public static final double DRIVE_Kv = 0.316426;  // V per rad/s -.335
     public static final double DRIVE_Ka = 0.0801;  // V per rad/s^2    0.0801
     public static final double DRIVE_VCOMP = 10.0; //V
-    public static final double DRIVE_ENCODER_PPR = 4096.0; //encoder counts per revolution
+    public static final double DRIVE_ENCODER_PPR = 4096.0 * 3.68; //encoder counts per revolution * gear ratio
 
     //PID Constants
-    public static final double ANGLE_KP = 0.04; // 0.065;
+    public static final double ANGLE_KP = -0.024; // 0.065;
     public static final double ANGLE_KI = 0; // 0.00125;
     public static final double ANGLE_KD = 0; // 0.1
     public static final double ANGLE_PID_EPISLON = 1;
 
-    public static final double DRIVE_RIGHT_KP = 1.2;
+    public static final double DRIVE_RIGHT_KP = 0;
     public static final double DRIVE_RIGHT_KI = 0.0;
-    public static final double DRIVE_RIGHT_KD = 25; // 20 for practice bot
-    public static final double DRIVE_RIGHT_KF = 0.53; //.485
+    public static final double DRIVE_RIGHT_KD = 0; // 20 for practice bot
+    public static final double DRIVE_RIGHT_KF = 0.25; //.485
 
-    public static final double DRIVE_LEFT_KP = 1.1; // .0885
+    public static final double DRIVE_LEFT_KP = 0; // .0885
     public static final double DRIVE_LEFT_KI = 0.0; //NO INTEGRAL it masks deeper problems
     public static final double DRIVE_LEFT_KD = 25; //20 for practice
     public static final double DRIVE_LEFT_KF = 0.53;
@@ -158,7 +166,7 @@ public class Constants {
     public static final int yellowH = 60;
     public static final int greenH = 120;
     public static final int blueH = 180;
-    public static final int error = 10;
+    public static final int error = 29;
 
     public static final int satLimit = 80;
     public static final int valLimit = 80;
@@ -177,13 +185,4 @@ public class Constants {
     // Sensor distance before stop (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;
     public static final double DISTANCE_EMPTY_MM = 1219.2;
-
-    /**
-     * Joystick
-     */
-    //Stick Constants
-    public static final Joystick MASTER = new Joystick(0);
-    public static final Joystick LAUNCH_PAD = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.2, 0.99, 0.99, 0.6, 2);
-    public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.2, 0.99, 0.99, 0.8, 2);
 }
