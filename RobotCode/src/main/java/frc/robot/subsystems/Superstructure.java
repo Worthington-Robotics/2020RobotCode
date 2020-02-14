@@ -24,7 +24,8 @@ public class Superstructure extends Subsystem {
     // Indexer
     private TalonSRX shooterWheel;
     private TalonSRX deliveryBelts;
-    private TalonSRX indexBelt;
+    private TalonSRX indexTopBelt;
+    private TalonSRX indexBottomBelt;
 
     // Intake
     private TalonSRX ballsIntake;
@@ -56,7 +57,7 @@ public class Superstructure extends Subsystem {
     private Superstructure() {
         shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
-        indexBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
+        indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
         ballsIntake = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
@@ -185,7 +186,7 @@ public class Superstructure extends Subsystem {
                 deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
                 shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
                 
-                indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+                indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
                 
                 ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
             }
@@ -232,8 +233,7 @@ public class Superstructure extends Subsystem {
         intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
     }
 
-    // Setters
-
+    // SettersW
     public void setArmExtension(DoubleSolenoid.Value armExtension) {
         periodic.armExtension = armExtension;
     }
@@ -244,6 +244,10 @@ public class Superstructure extends Subsystem {
 
     public void setDeliveryBeltsDemand(double demand) {
         periodic.deliveryBeltsDemand = demand;
+    }
+    
+    public void setDeliveryWheelDemand(double demand) {
+        periodic.deliveryWheelDemand = demand;
     }
 
     public void setIntakeDemand(double demand) {
@@ -275,6 +279,7 @@ public class Superstructure extends Subsystem {
         // Current State
         public SuperState state = SuperState.INIT;
         // Indexer Data
+        public double deliveryWheelDemand;
         public double indexBeltDemand;
         public double deliveryBeltsDemand;
         // Intake Data

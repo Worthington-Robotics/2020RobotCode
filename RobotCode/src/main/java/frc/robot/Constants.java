@@ -28,6 +28,7 @@ public class Constants {
     public static final int DRIVE_FRONT_LEFT_ID = 13;
     public static final int DRIVE_MIDDLE_LEFT_ID = 14;
     public static final int DRIVE_BACK_LEFT_ID = 15;
+    public static final int SUPERSTRUCTURE_INDEX_BOTTOM_BELT = 16;
     //Spark Ports
 
     //Solenoid Ports

@@ -4,21 +4,15 @@ import frc.lib.statemachine.Action;
 import frc.robot.Constants;
 import frc.robot.subsystems.Superstructure;
 
-public class IndexBeltAction extends Action {
+public class DeliveryWheelAction extends Action {
     private Superstructure superstructure;
-    private boolean isReversed;
 
-    public IndexBeltAction(boolean isReversed) {
+    public DeliveryWheelAction() {
         superstructure = Superstructure.getInstance();
-        this.isReversed = isReversed;
     }
 
     @Override public void onStart() {
-        
-        if(isReversed)
-        superstructure.setIndexBeltDemand(-Constants.INDEXER_DEMAND);
-        else
-        superstructure.setIndexBeltDemand(Constants.INDEXER_DEMAND);
+        superstructure.setDeliveryWheelDemand(-Constants.HIGH_BELT_DEMAND);
     }
 
     @Override public void onLoop() {}
@@ -28,7 +22,6 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setIndexBeltDemand(Constants.STOP_BELT_DEMAND);
-
+        superstructure.setDeliveryWheelDemand(Constants.STOP_BELT_DEMAND);
     }
 }

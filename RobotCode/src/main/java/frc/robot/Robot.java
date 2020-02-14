@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.superaction.DeliveryBeltAction;
+import frc.robot.actions.superaction.DeliveryWheelAction;
 import frc.robot.actions.superaction.IndexBeltAction;
 import frc.robot.actions.superaction.IntakeAction;
 import frc.robot.subsystems.Superstructure;
@@ -52,14 +54,16 @@ public class Robot extends TimedRobot {
 
     private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
     private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton deliveryWheel = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
     private JoystickButton indexer = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
+    private JoystickButton indexerOut = new JoystickButton(Constants.MASTER, 8);
     private JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
     private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
     private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
     private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+    private JoystickButton inverse = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 5);
@@ -100,8 +104,10 @@ public class Robot extends TimedRobot {
 
 //        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
 //        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
+        deliveryWheel.whileHeld(Action.toCommand(new DeliveryWheelAction()));
+        indexerOut.whileHeld(Action.toCommand(new IndexBeltAction(true)));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
-        indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
+        indexer.whileHeld(Action.toCommand(new IndexBeltAction(false)));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         VersionData.WriteBuildInfoToDashboard();
     }
