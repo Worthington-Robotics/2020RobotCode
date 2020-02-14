@@ -1,13 +1,13 @@
-package frc.robot.actions;
+package frc.robot.actions.shooteraction;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class TurretPIDControl extends Action {
+public class SetFlywheelPID extends Action {
 
     private boolean automaticTarget = false;
 
-    public TurretPIDControl(boolean autoTarget) {
+    public SetFlywheelPID(boolean autoTarget) {
         automaticTarget = autoTarget;
     }
 
@@ -18,9 +18,12 @@ public class TurretPIDControl extends Action {
     @Override
     public void onStart() {
         if (automaticTarget) {
-            //LIMELIGHT angle PID (to be Implemented)
+            double length = Shooter.getInstance().limelightRanging();
+            double RPM = Shooter.getInstance().calculateRPM(length);
+            double speed = Shooter.getInstance().RPMToTicksPer100ms(RPM);
+            Shooter.getInstance().setFlywheelRPM(speed);
         } else {
-            Shooter.getInstance().setTurretRPM(0);
+            Shooter.getInstance().setFlywheelRPM(0);
         }
     }
 
