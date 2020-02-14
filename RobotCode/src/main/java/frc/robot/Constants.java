@@ -42,6 +42,7 @@ public class Constants {
     public static final double TURRET_MAX_SPEED = .75;
     public static final double TURRET_CONTROL_PID_P = 0;
     public static final double TURRET_CONTROL_PID_D = 0;
+    public static final double TURRET_DEGREES_TO_TICKS = 85.26;
     /**
      * Drivetrain tuned values --------------------------------
      */

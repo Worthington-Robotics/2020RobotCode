@@ -4,6 +4,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import org.graalvm.compiler.lir.constopt.ConstantTreeAnalyzer;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -186,7 +188,7 @@ public class Shooter extends Subsystem {
     public double degreesToTicks(double degree)
     {
         //implement a ticks to degrees method
-        return degree * 108; // 4096 * 9.5 / 360
+        return degree * Constants.TURRET_DEGREES_TO_TICKS; //empiricly mesured
     }
 
     public double ticksToDegrees(double degree) {
