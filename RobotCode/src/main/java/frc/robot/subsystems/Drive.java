@@ -62,7 +62,6 @@ public class Drive extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 if (periodic.inverse) {
-                    periodic.operatorInput[0] *= -1;
                     periodic.operatorInput[1] *= -1;
                 }
                 synchronized (Drive.this) {

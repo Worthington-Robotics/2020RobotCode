@@ -40,7 +40,8 @@ public class Robot extends TimedRobot {
         //register subsystems here
         PoseEstimator.getInstance(),
         Drive.getInstance(),
-        ColorWheel.getInstance()
+        ColorWheel.getInstance(),
+        Climber.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
@@ -76,7 +77,7 @@ public class Robot extends TimedRobot {
         JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
         JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
         JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
-        JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
+        JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 6);
         JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
 
         colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));

@@ -13,26 +13,26 @@ public class Constants {
     //Pigion ID
     public static final int PIGION_ID = 0;
     //Talon SRX IDs
-    public static final int SHOOTER_FLYWHEEL_RIGHT = 1;
-    public static final int SHOOTER_FLYWHEEL_LEFT = 2;
-    public static final int COLOR_WHEEL = 3;
-    public static final int TURRET_CONTROL = 13;
-    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
-    public static final int SUPERSTRUCTURE_DELIVERY_ABOVE_BELT = 8;
-    public static final int SUPERSTRUCTURE_DELIVERY_BELOW_BELT = 9;
-    public static final int SUPERSTRUCTURE_INTAKE = 10;
     //Talon FX IDs
+    public static final int DRIVE_FRONT_RIGHT_ID = 1;
+    public static final int DRIVE_MIDDLE_RIGHT_ID = 2;
+    public static final int DRIVE_BACK_RIGHT_ID = 3;
+    public static final int COLOR_WHEEL = 4;
+    public static final int SHOOTER_FLYWHEEL_RIGHT = 5;
+    public static final int SHOOTER_FLYWHEEL_LEFT = 6;
+    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
+    public static final int SUPERSTRUCTURE_DELIVERY_BELT = 8;
+    public static final int SUPERSTRUCTURE_DELIVERY_WHEEL = 9;
+    public static final int SUPERSTRUCTURE_INTAKE = 10;
+    public static final int TURRET_CONTROL = 11;
     public static final int DRIVE_FRONT_LEFT_ID = 13;
     public static final int DRIVE_MIDDLE_LEFT_ID = 14;
     public static final int DRIVE_BACK_LEFT_ID = 15;
-    public static final int DRIVE_FRONT_RIGHT_ID = 0;
-    public static final int DRIVE_MIDDLE_RIGHT_ID = 1;
-    public static final int DRIVE_BACK_RIGHT_ID = 2;
     //Spark Ports
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
-    public static final int TRANS_HIGH_ID = 1;
+    public static final int TRANS_HIGH_ID = 7;
 
     public static final int CLIMB_FRONT_LOW_ID = 2;
     public static final int CLIMB_FRONT_HIGH_ID = 3;
