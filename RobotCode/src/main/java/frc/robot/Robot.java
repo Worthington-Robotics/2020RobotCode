@@ -16,6 +16,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.superaction.DeliveryBeltAction;
+import frc.robot.actions.superaction.IndexBeltAction;
+import frc.robot.actions.superaction.IntakeAction;
+import frc.robot.subsystems.Superstructure;
 import frc.lib.util.DriveSignal;
 import frc.robot.actions.driveactions.GyroLock;
 import frc.robot.actions.driveactions.Inverse;
@@ -45,9 +49,14 @@ public class Robot extends TimedRobot {
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
+    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
     private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton shootAll = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton shootOne = new JoystickButton(Constants.MASTER, 5);
+    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 6);
+    private JoystickButton indexer = new JoystickButton(Constants.MASTER, 7);
+    private JoystickButton intake = new JoystickButton(Constants.MASTER, 8);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -89,6 +98,12 @@ public class Robot extends TimedRobot {
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
+
+//        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
+//        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
+        delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
+        indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
+        intake.whileHeld(Action.toCommand(new IntakeAction()));
     }
 
     /**
@@ -165,7 +180,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();        
+        Scheduler.getInstance().run();
     }
 
     @Override
@@ -182,6 +197,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
-        
+        Scheduler.getInstance().run();
     }
 }

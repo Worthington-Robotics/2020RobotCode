@@ -172,7 +172,7 @@ public class Constants {
     public static final int valLimit = 80;
 
     /**
-     * Superstructure belt constants
+     * Superstructure constants
      */
     // IDs
     public static final int FLIGHT_SENSOR_DELIVERY = 0;
@@ -184,5 +184,5 @@ public class Constants {
     public static final double STOP_BELT_DEMAND = 0;
     // Sensor distance before stop (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;
-    public static final double DISTANCE_EMPTY_MM = 1219.2;
+    public static final double TIME_TILL_STATIONARY = .5; //s
 }
