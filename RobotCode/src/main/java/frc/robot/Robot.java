@@ -20,7 +20,9 @@ import frc.robot.actions.superaction.DeliveryBeltAction;
 import frc.robot.actions.superaction.DeliveryWheelAction;
 import frc.robot.actions.superaction.IndexBeltAction;
 import frc.robot.actions.superaction.IntakeAction;
+import frc.robot.actions.superaction.ShootAction;
 import frc.robot.subsystems.Superstructure;
+import frc.robot.subsystems.Superstructure.SuperState;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.VersionData;
 import frc.robot.actions.driveactions.GyroLock;
@@ -29,10 +31,9 @@ import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.PoseEstimator;
-import frc.robot.actions.colorWheelManual;
+import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ColorWheel;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,14 +43,10 @@ import frc.robot.subsystems.ColorWheel;
  * project.
  */
 public class Robot extends TimedRobot {
-    private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
-        //register subsystems here
-        PoseEstimator.getInstance(),
-        Drive.getInstance(),
-        ColorWheel.getInstance(),
-        Climber.getInstance(),
-        Superstructure.getInstance()
-    ), true);;
+    private SubsystemManager manager = new SubsystemManager(Arrays.asList(
+            // register subsystems here
+            PoseEstimator.getInstance(), Drive.getInstance(), ColorWheel.getInstance(), Climber.getInstance(),
+            Superstructure.getInstance()), true);;
     private Looper enabledLooper, disabledLooper;
 
     private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
@@ -66,7 +63,6 @@ public class Robot extends TimedRobot {
     private JoystickButton inverse = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
-    private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
 
     /**
@@ -74,8 +70,8 @@ public class Robot extends TimedRobot {
      * for any initialization code.
      */
     @Override
-    public void robotInit(){
-        //create the master looper threads
+    public void robotInit() {
+        // create the master looper threads
         enabledLooper = new Looper();
         disabledLooper = new Looper();
 
@@ -87,23 +83,20 @@ public class Robot extends TimedRobot {
         manager.addLoggingSource(Arrays.asList(StateMachine.getInstance()));
 
         // publish the auto list to the dashboard "Auto Selector"
-        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
 
-        //create buttons and register actions
+        // create buttons and register actions
 
-
-        /*colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         foldClimb.whenPressed(Action.toCommand(new FoldAction()));
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
-        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));*/
+        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-
-//        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
-//        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
+        shootOne.whenPressed(Action.toCommand(new ShootAction()));
         deliveryWheel.whileHeld(Action.toCommand(new DeliveryWheelAction()));
         indexerOut.whileHeld(Action.toCommand(new IndexBeltAction(true)));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
