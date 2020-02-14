@@ -185,6 +185,7 @@ public class Constants {
     // Demands
     public static final double FULL_BELT_DEMAND = .75;
     public static final double INDEXER_DEMAND = 1;
+    
     public static final double INTAKE_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = .75;
     public static final double STOP_BELT_DEMAND = 0;

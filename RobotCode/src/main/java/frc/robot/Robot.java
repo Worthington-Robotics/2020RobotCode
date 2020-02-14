@@ -21,6 +21,7 @@ import frc.robot.actions.superaction.IndexBeltAction;
 import frc.robot.actions.superaction.IntakeAction;
 import frc.robot.subsystems.Superstructure;
 import frc.lib.util.DriveSignal;
+import frc.lib.util.VersionData;
 import frc.robot.actions.driveactions.GyroLock;
 import frc.robot.actions.driveactions.Inverse;
 import frc.robot.actions.driveactions.Shift;
@@ -105,6 +106,7 @@ public class Robot extends TimedRobot {
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
+        VersionData.WriteBuildInfoToDashboard();
     }
 
     /**
