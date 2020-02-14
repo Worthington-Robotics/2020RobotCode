@@ -45,18 +45,25 @@ public class Robot extends TimedRobot {
         PoseEstimator.getInstance(),
         Drive.getInstance(),
         ColorWheel.getInstance(),
-        Climber.getInstance()
+        Climber.getInstance(),
+        Superstructure.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
     private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton shootAll = new JoystickButton(Constants.MASTER, 4);
-    private JoystickButton shootOne = new JoystickButton(Constants.MASTER, 5);
-    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 6);
-    private JoystickButton indexer = new JoystickButton(Constants.MASTER, 7);
-    private JoystickButton intake = new JoystickButton(Constants.MASTER, 8);
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton indexer = new JoystickButton(Constants.MASTER, 5);
+    private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
+    private JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
+    private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
+    private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
+    private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+    private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
+    private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
+    private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 5);
+    private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -82,19 +89,13 @@ public class Robot extends TimedRobot {
 
         //create buttons and register actions
 
-        JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
-        JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
-        JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
-        JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
-        JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 6);
-        JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
 
-        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        /*colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         foldClimb.whenPressed(Action.toCommand(new FoldAction()));
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
-        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
+        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));*/
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));

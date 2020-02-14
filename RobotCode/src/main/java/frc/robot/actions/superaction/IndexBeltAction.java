@@ -12,7 +12,7 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setIndexBeltDemand(Constants.HIGH_BELT_DEMAND);
+        superstructure.setIndexBeltDemand(Constants.INDEXER_DEMAND);
     }
 
     @Override public void onLoop() {}

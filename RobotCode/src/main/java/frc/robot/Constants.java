@@ -33,11 +33,15 @@ public class Constants {
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 7;
+    
+    public static final int UNFOLD_LOW_ID = 1;
+    public static final int UNFOLD_HIGH_ID = 6;
 
-    public static final int CLIMB_FRONT_LOW_ID = 2;
-    public static final int CLIMB_FRONT_HIGH_ID = 3;
-    public static final int LOCK_LOW_ID = 4;
-    public static final int LOCK_HIGH_ID = 5;
+    public static final int CLIMB_LOW_ID = 2;
+    public static final int CLIMB_HIGH_ID = 5;
+    
+    public static final int INTAKE_LOW_ID = 3;
+    public static final int INTAKE_HIGH_ID = 4;
     //Color Sensor Port
     public static final int COLOR_SENSOR_PORT = 0;
     
@@ -46,10 +50,10 @@ public class Constants {
     public static final int LED_LENGTH = 60;
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
-    public static final Joystick LAUNCH_PAD = new Joystick(1);
+    public static final Joystick SECOND = new Joystick(1);
     public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, -0.65, 0.4, 2);
-    public static final HIDHelper.HIDConstants LAUNCHPAD_STICK = new HIDHelper.HIDConstants(LAUNCH_PAD, 0.1, 0.99, 0.99, 0.8, 2);
+    public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.1, 0.99, 0.99, 0.8, 2);
 
     /*
         Flywheel Tuned Values
@@ -68,7 +72,7 @@ public class Constants {
      */
 
     //DEBUG AND TESTING
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     //Encoder Constants
     public static final double ENCODER_5046_CPR = 1024;
 
@@ -175,12 +179,14 @@ public class Constants {
      * Superstructure constants
      */
     // IDs
-    public static final int FLIGHT_SENSOR_DELIVERY = 0;
-    public static final int FLIGHT_SENSOR_INDEX = 1;
-    public static final int FLIGHT_SENSOR_INTAKE = 2;
+    public static final int FLIGHT_SENSOR_DELIVERY = 3;
+    public static final int FLIGHT_SENSOR_INDEX = 2;
+    public static final int FLIGHT_SENSOR_INTAKE = 1;
     // Demands
-    public static final double FULL_BELT_DEMAND = 1;
-    public static final double HIGH_BELT_DEMAND = 0.75;
+    public static final double FULL_BELT_DEMAND = .75;
+    public static final double INDEXER_DEMAND = 1;
+    public static final double INTAKE_DEMAND = 1;
+    public static final double HIGH_BELT_DEMAND = .75;
     public static final double STOP_BELT_DEMAND = 0;
     // Sensor distance before stop (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;

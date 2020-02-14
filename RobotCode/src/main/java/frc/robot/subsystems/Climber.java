@@ -17,8 +17,8 @@ public class Climber extends Subsystem {
     public double shooterAngle = 90;
 
     public Climber() {
-        unfoldSolenoid = new DoubleSolenoid(1, 6);
-        extendSolenoid = new DoubleSolenoid(2, 5);
+        unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
+        extendSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
     }
     public static Climber mClimber = new Climber();
     public static Climber getInstance() {return mClimber;}

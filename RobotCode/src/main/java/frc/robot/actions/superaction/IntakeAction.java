@@ -12,7 +12,7 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setIntakeDemand(Constants.HIGH_BELT_DEMAND);
+        superstructure.setIntakeDemand(Constants.INTAKE_DEMAND);
     }
 
     @Override public void onLoop() {}

@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -53,7 +54,7 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_SHOOTER_WHEEL);
+        shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
@@ -102,6 +103,7 @@ public class Superstructure extends Subsystem {
     }
 
     @Override public synchronized void writePeriodicOutputs() {
+        /*
         switch (periodic.state) {
             case INIT:
                 DemandUtil.setFullDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
@@ -127,14 +129,17 @@ public class Superstructure extends Subsystem {
             default:
                 break;
         }
+        */
     }
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
+        
         enabledLooper.register(new Loop() {
             @Override public void onStart(double timestamp) {}
 
             @Override public void onLoop(double timestamp) {
+                /*
                 switch (periodic.state) {
                     case INIT: {
                         if (periodic.deliveryDetected) {
@@ -176,6 +181,13 @@ public class Superstructure extends Subsystem {
                     }
                     case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
                 }
+                */
+                deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+                
+                indexBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+                
+                ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
             }
 
             @Override public void onStop(double timestamp) {}
