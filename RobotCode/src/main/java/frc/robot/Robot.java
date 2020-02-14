@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 1892-1893 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
-import frc.robot.actions.superaction.DeliveryBeltAction;
 import frc.robot.actions.superaction.IndexBeltAction;
 import frc.robot.actions.superaction.IntakeAction;
 import frc.robot.subsystems.Superstructure;
@@ -67,8 +66,8 @@ public class Robot extends TimedRobot {
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * This function is run when the robot is first started up and should be used
+     * for any initialization code.
      */
     @Override
     public void robotInit(){
@@ -76,14 +75,12 @@ public class Robot extends TimedRobot {
         enabledLooper = new Looper();
         disabledLooper = new Looper();
 
-        //register the looper threads to the manager to use for enabled and disabled
+        // register the looper threads to the manager to use for enabled and disabled
         manager.registerEnabledLoops(enabledLooper);
         manager.registerDisabledLoops(disabledLooper);
 
-        //add any additional logging sources for capture
-        manager.addLoggingSource(Arrays.asList(
-            StateMachine.getInstance()
-        ));
+        // add any additional logging sources for capture
+        manager.addLoggingSource(Arrays.asList(StateMachine.getInstance()));
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 

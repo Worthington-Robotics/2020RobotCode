@@ -58,6 +58,7 @@ public class Constants {
     /*
         Flywheel Tuned Values
     */
+    public static final double MAX_RPM = 6000;
     public static final double IDLE_RPM = 4000;
     public static final double RPM_ACCEPTIBLE_ERROR = 300; // Ticks per 100 ms
 
@@ -67,6 +68,7 @@ public class Constants {
     public static final double TURRET_MAX_SPEED = .75;
     public static final double TURRET_CONTROL_PID_P = 0;
     public static final double TURRET_CONTROL_PID_D = 0;
+    public static final double TURRET_DEGREES_TO_TICKS = 85.26;
     /**
      * Drivetrain tuned values --------------------------------
      */
@@ -192,4 +194,11 @@ public class Constants {
     // Sensor distance before stop (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;
     public static final double TIME_TILL_STATIONARY = .5; //s
+    //Turret Encoder Limits
+    public static final int leftTurretLimit = 0;
+    public static final int rightTurretLimit = 0;
+
+    //Limelight Constants
+    public static final double fov = 0;
+
 }
