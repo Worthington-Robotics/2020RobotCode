@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.shooteraction.SetFlywheelPID;
+import frc.robot.actions.shooteraction.SetManualFlywheel;
+import frc.robot.actions.shooteraction.TurretPIDControl;
 import frc.robot.actions.superaction.DeliveryBeltAction;
 import frc.robot.actions.superaction.DeliveryWheelAction;
 import frc.robot.actions.superaction.IndexBeltAction;
@@ -60,10 +63,15 @@ public class Robot extends TimedRobot {
     private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
     private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
     private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+
     private JoystickButton inverse = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
+    private JoystickButton turretControl = new JoystickButton(Constants.SECOND, 7);
+    private JoystickButton flyWheelPID = new JoystickButton(Constants.SECOND, 9);
+    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 11);
+    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 12);
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -86,7 +94,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
 
         // create buttons and register actions
-
+        turretPIDControl.whenPressed(Action.toCommand(new TurretPIDControl(false)));
+        manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
+        flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
+        turretControl.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
         colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         foldClimb.whenPressed(Action.toCommand(new FoldAction()));
