@@ -69,8 +69,8 @@ public class Robot extends TimedRobot {
     //private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
     //private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
     //private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
-    private JoystickButton folder = new JoystickButton(Constants.MASTER, 9);
-    private JoystickButton climber = new JoystickButton(Constants.MASTER, 10);
+    private JoystickButton folder = new JoystickButton(Constants.MASTER,11);
+    private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
 
 
 

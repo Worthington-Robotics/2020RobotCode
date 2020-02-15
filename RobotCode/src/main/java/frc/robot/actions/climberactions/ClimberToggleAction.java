@@ -18,7 +18,7 @@ public class ClimberToggleAction extends Action {
 
     @Override
     public boolean isFinished() {
-       return false;
+        if (Climber.getInstance().getUnfolded()) {return true;} else {return false;}
     }
 
     @Override
