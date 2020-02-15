@@ -37,13 +37,14 @@ public class Constants {
     public static final int FLIGHT_SENSOR_INTAKE = 1;
 
     //Solenoid Ports
-    public static final int TRANS_LOW_ID = 0;
-    public static final int TRANS_HIGH_ID = 7;
+    public static final int TRANS_LOW_ID = 7;
+    public static final int TRANS_HIGH_ID = 0;
     
     public static final int UNFOLD_LOW_ID = 3;
     public static final int UNFOLD_HIGH_ID = 4;
 
-    public static final int CLIMB_LOW_ID = 5; //Do Not Change
+    public static final int CLIMB_LOW_ID = 5
+    ; //Do Not Change
     public static final int CLIMB_HIGH_ID = 2; //Do Not ChangeS
     
     public static final int INTAKE_LOW_ID = 6;
@@ -64,7 +65,7 @@ public class Constants {
     /* 
         Turret & flywheel tuned values ------------------------
     */
-    public static final double TURRET_MAX_SPEED = .75;
+    public static final double TURRET_MAX_SPEED = .2;
     public static final double TURRET_ANGLE_KP = 0;
     public static final double TURRET_ANGLE_KD = 0;
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
@@ -77,6 +78,8 @@ public class Constants {
     public static double TURRET_RIGHT_FLY_KP = 0.0; //TODO tune
     public static double TURRET_RIGHT_FLY_KD = 0.0; //TODO tune
     public static double TURRET_RIGHT_FLY_KF = 0.0; //TODO tune
+
+    public static double VOLTAGE_COMP_TURRET = 11.5;
 
     /**
      *   Drivetrain tuned values ------------------------------
@@ -155,9 +158,9 @@ public class Constants {
     
     // Demands
     public static final double FULL_BELT_DEMAND = .75;
-    public static final double INDEXER_DEMAND = 1;
+    public static final double INDEXER_DEMAND = .75;
     
-    public static final double INTAKE_DEMAND = 1;
+    public static final double INTAKE_DEMAND = .75;
     public static final double HIGH_BELT_DEMAND = .75;
     public static final double STOP_BELT_DEMAND = 0;
     // Sensor distance before stop (in mm)

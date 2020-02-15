@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
             Shooter.getInstance()), true);;
     private Looper enabledLooper, disabledLooper;
 
-    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 1);
     private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
     private JoystickButton deliveryWheel = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
     private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
 
-    private JoystickButton inverse = new JoystickButton(Constants.SECOND, 2);
+    private JoystickButton gyroLock = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton releaseIntake = new JoystickButton(Constants.SECOND, 5);
@@ -125,7 +125,7 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         enabledLooper.stop();
 
-        //Run any reset code here
+        Shooter.getInstance().disable();
         StateMachine.getInstance().assertStop();
 
         disabledLooper.start();

@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -186,12 +187,24 @@ public class Shooter extends Subsystem {
         turretControl.config_kP(1, Constants.TURRET_ANGLE_KP);
         turretControl.config_kD(1, Constants.TURRET_ANGLE_KD);
         turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        turretControl.setSelectedSensorPosition(0);
         rightFlywheelFalcon.config_kP(1, Constants.TURRET_RIGHT_FLY_KP);
         rightFlywheelFalcon.config_kD(1, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        rightFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
+        rightFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
         leftFlywheelFalcon.config_kP(1, Constants.TURRET_LEFT_FLY_KP);
         leftFlywheelFalcon.config_kD(1, Constants.TURRET_LEFT_FLY_KD);
         leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+        leftFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
+        leftFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
+        disable();
+    }
+
+    public void disable()
+    {
+        turretMode = MotorControlMode.DISABLED;
+        flywheelMode = MotorControlMode.DISABLED;
     }
 
     /**
@@ -200,7 +213,6 @@ public class Shooter extends Subsystem {
     @Override
     public void reset() {
         periodic = new ShooterIO();
-
         flywheelMode = MotorControlMode.DISABLED;
         turretMode = MotorControlMode.DISABLED;
         configLimelight();
