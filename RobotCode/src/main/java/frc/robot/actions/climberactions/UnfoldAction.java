@@ -1,6 +1,5 @@
 package frc.robot.actions.climberactions;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Climber;
 
