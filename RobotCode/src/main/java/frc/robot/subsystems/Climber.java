@@ -48,10 +48,8 @@ public class Climber extends Subsystem {
             public void onLoop(double timestamp) {
                 if (!Constants.DEBUG) {
                     if (!intakeDown) {
-                        if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,
-                                Constants.CLIMBER_EPSILON_CONST))
-                                || (Util.epsilonEquals(shooterAngle, -Constants.CLIMBER_SHOOTER_REQMT,
-                                        Constants.CLIMBER_EPSILON_CONST))) {
+                        if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,Constants.CLIMBER_EPSILON_CONST))
+                            || (Util.epsilonEquals(shooterAngle, -Constants.CLIMBER_SHOOTER_REQMT, Constants.CLIMBER_EPSILON_CONST))) {
                             if (unfoldCurrentState != unfoldIntendedState && extendCurrentState == Value.kReverse) {
                                 unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
                                 System.out.println("Unfold Happened");
@@ -97,6 +95,8 @@ public class Climber extends Subsystem {
 
     @Override
     public void outputTelemetry() {
+        SmartDashboard.getInstance()
+
 
     }
 
