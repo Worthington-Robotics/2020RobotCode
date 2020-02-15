@@ -187,6 +187,7 @@ public class Superstructure extends Subsystem {
                 shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
                 indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
                 ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+                extensionArm.set(periodic.armExtension);
             }
 
             @Override public void onStop(double timestamp) {}
