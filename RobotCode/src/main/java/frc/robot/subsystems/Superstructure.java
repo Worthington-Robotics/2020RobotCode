@@ -282,7 +282,7 @@ public class Superstructure extends Subsystem {
         public double deliveryBeltsDemand;
         // Intake Data
         public double intakeDemand;
-        public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;
+        public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
         // Sensor Booleans
         public boolean deliveryDetected;
         public boolean indexDetected;
