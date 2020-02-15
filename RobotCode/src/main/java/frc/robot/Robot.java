@@ -49,10 +49,14 @@ public class Robot extends TimedRobot {
     private JoystickButton indexer = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
     private JoystickButton indexerOut = new JoystickButton(Constants.MASTER, 8);
-    private JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
-    private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
-    private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
-    private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+    //private JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
+    //private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
+    //private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
+    //private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
+    private JoystickButton folder = new JoystickButton(Constants.MASTER,11);
+    private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
+
+
 
     private JoystickButton gyroLock = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
@@ -91,10 +95,10 @@ public class Robot extends TimedRobot {
         turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));
         colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
-        foldClimb.whenPressed(Action.toCommand(new FoldAction()));
+        /*foldClimb.whenPressed(Action.toCommand(new FoldAction()));
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
-        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
+        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));*/
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
@@ -104,6 +108,8 @@ public class Robot extends TimedRobot {
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         indexer.whileHeld(Action.toCommand(new IndexBeltAction(false)));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
+        folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
+        climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         releaseIntake.toggleWhenPressed(Action.toCommand(new ArmAction()));
         VersionData.WriteBuildInfoToDashboard();
     }

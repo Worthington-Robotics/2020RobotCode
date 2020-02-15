@@ -4,11 +4,11 @@ import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Climber;
 
 
-public class UnfoldAction extends Action {
+public class FolderToggleAction extends Action {
     @Override
     public void onStart() {
         Climber.getInstance().setUnfold(true);
-        System.out.println("Climb is unfolding.");
+        //System.out.println("Climb is unfolding.");
     }
 
     @Override
@@ -18,11 +18,13 @@ public class UnfoldAction extends Action {
 
     @Override
     public boolean isFinished() {
-        return true;
+        
+            return false;
+
     }
 
     @Override
     public void onStop() {
-        
+        Climber.getInstance().setUnfold(false);
     }
 }

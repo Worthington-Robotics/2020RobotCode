@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
@@ -268,6 +269,16 @@ public class Superstructure extends Subsystem {
 
     public boolean intakeDetected() {
         return periodic.intakeDetected;
+    }
+
+    public boolean getIntakeDown() {
+        if (extensionArm.get() == Value.kForward) {
+            return true;
+        } else if (extensionArm.get() == Value.kReverse) {
+            return false;
+        } else {
+            return false;
+        }
     }
 
     public LogData getLogger() {
