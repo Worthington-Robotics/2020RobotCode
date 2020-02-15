@@ -57,8 +57,8 @@ public class Climber extends Subsystem {
                         }
                     }
 
-                    if (!unfolded) {
-                        climbIntendedState = Value.kReverse;
+                    if (unfolded) {
+                        climbIntendedState = climbBoolean ? Value.kForward : Value.kReverse;
                     } else {
                         climbIntendedState = Value.kReverse;
                     }
