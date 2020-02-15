@@ -31,6 +31,11 @@ public class Constants {
     public static final int SUPERSTRUCTURE_INDEX_BOTTOM_BELT = 16;
     //Spark Ports
 
+    // TOF IDs
+    public static final int FLIGHT_SENSOR_DELIVERY = 3;
+    public static final int FLIGHT_SENSOR_INDEX = 2;
+    public static final int FLIGHT_SENSOR_INTAKE = 1;
+
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 7;
@@ -54,22 +59,25 @@ public class Constants {
     public static final Joystick SECOND = new Joystick(1);
     public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, -0.65, 0.4, 2);
-    public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.01, -0.33, 0.99, 0.8, 2);
-
-    /*
-        Flywheel Tuned Values ---------------------------------
-    */
-    public static final double MAX_RPM = 6000;
-    public static final double IDLE_RPM = 4000;
-    public static final double RPM_ACCEPTIBLE_ERROR = 300; // Ticks per 100 ms
+    public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.01, -0.33, 0.99, 0.8, 2);    
 
     /* 
-        Turret tuned values -----------------------------------
+        Turret & flywheel tuned values ------------------------
     */
     public static final double TURRET_MAX_SPEED = .75;
-    public static final double TURRET_CONTROL_PID_P = 0;
-    public static final double TURRET_CONTROL_PID_D = 0;
+    public static final double TURRET_ANGLE_KP = 0;
+    public static final double TURRET_ANGLE_KD = 0;
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
+    public static final double TURRET_MAX_RPM = 6000; //TODO tune
+
+    public static double TURRET_LEFT_FLY_KP = 0.0; //TODO tune
+    public static double TURRET_LEFT_FLY_KD = 0.0; //TODO tune
+    public static double TURRET_LEFT_FLY_KF = 0.0; //TODO tune
+    
+    public static double TURRET_RIGHT_FLY_KP = 0.0; //TODO tune
+    public static double TURRET_RIGHT_FLY_KD = 0.0; //TODO tune
+    public static double TURRET_RIGHT_FLY_KF = 0.0; //TODO tune
+
     /**
      *   Drivetrain tuned values ------------------------------
      */
@@ -115,11 +123,6 @@ public class Constants {
     public static final double DRIVE_LEFT_KD = 25; //20 for practice
     public static final double DRIVE_LEFT_KF = 0.53;
 
-	public static double LEFTFLYWHEELFALCON_KD = 0.0;
-    public static double LEFTFLYWHEELFALCON_KP = 0.0;
-    public static double RIGHTFLYWHEELFALCON_KD = 0.0;
-    public static double RIGHTFLYWHEELFALCON_KP = 0.0;
-
     /**
      * Color Wheel Constants ---------------------------
      */
@@ -146,24 +149,10 @@ public class Constants {
     
     public static final double CLIMBER_EPSILON_CONST = 10;
 
-
-    public static final int redH1 = 0;
-    public static final int redH2 = 360;
-    public static final int yellowH = 60;
-    public static final int greenH = 120;
-    public static final int blueH = 180;
-    public static final int error = 29;
-
-    public static final int satLimit = 80;
-    public static final int valLimit = 80;
-
     /**
      * Superstructure constants
      */
-    // IDs
-    public static final int FLIGHT_SENSOR_DELIVERY = 3;
-    public static final int FLIGHT_SENSOR_INDEX = 2;
-    public static final int FLIGHT_SENSOR_INTAKE = 1;
+    
     // Demands
     public static final double FULL_BELT_DEMAND = .75;
     public static final double INDEXER_DEMAND = 1;
@@ -177,8 +166,5 @@ public class Constants {
     //Turret Encoder Limits
     public static final int leftTurretLimit = 0;
     public static final int rightTurretLimit = 0;
-
-    //Limelight Constants
-    public static final double fov = 0;
 
 }
