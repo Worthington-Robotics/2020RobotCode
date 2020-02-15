@@ -58,7 +58,7 @@ public class Climber extends Subsystem {
                     }
 
                     if (!unfolded) {
-                        extendIntendedState = Value.kReverse;
+                        climbIntendedState = Value.kReverse;
                     } else {
                         climbIntendedState = Value.kReverse;
                     }
@@ -90,7 +90,7 @@ public class Climber extends Subsystem {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putBoolean("Climb/Want Unfolded", unfoldBoolean);
-        SmartDashboard.putBoolean("Climb/Want Extended", extendBoolean);
+        SmartDashboard.putBoolean("Climb/Want Extended", climbBoolean);
         SmartDashboard.putBoolean("Climb/Unfolded", unfolded);
         SmartDashboard.putBoolean("Climb/Extend", climbed);
     }
