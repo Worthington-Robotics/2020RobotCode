@@ -8,7 +8,6 @@
 package frc.robot;
 
 import java.util.Arrays;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,29 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
-import frc.robot.actions.shooteraction.ManualTurretControl;
-import frc.robot.actions.shooteraction.SetFlywheelPID;
-import frc.robot.actions.shooteraction.SetManualFlywheel;
-import frc.robot.actions.shooteraction.TurretPIDControl;
-import frc.robot.actions.superaction.DeliveryBeltAction;
-import frc.robot.actions.superaction.DeliveryWheelAction;
-import frc.robot.actions.superaction.IndexBeltAction;
-import frc.robot.actions.superaction.IntakeAction;
-import frc.robot.actions.superaction.ShootAction;
-import frc.robot.subsystems.Superstructure;
-import frc.robot.subsystems.Superstructure.SuperState;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.VersionData;
-import frc.robot.actions.driveactions.GyroLock;
-import frc.robot.actions.driveactions.Inverse;
-import frc.robot.actions.driveactions.Shift;
-import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.PoseEstimator;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.*;
+import frc.robot.actions.driveactions.*;
 import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
-import frc.robot.subsystems.Climber;
+import frc.robot.actions.shooteraction.*;
+import frc.robot.actions.superaction.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -126,6 +110,7 @@ public class Robot extends TimedRobot {
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
+        releaseIntake.toggleWhenPressed(Action.toCommand(new ArmAction()));
         VersionData.WriteBuildInfoToDashboard();
     }
 
