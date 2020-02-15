@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.Util;
@@ -95,9 +96,8 @@ public class Climber extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.getInstance()
-
-
+        SmartDashboard.putBoolean("Unfolding", unfoldBoolean);
+        SmartDashboard.putBoolean("Extending", extendBoolean);
     }
 
     @Override
