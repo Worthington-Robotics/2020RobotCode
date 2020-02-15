@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import frc.lib.loops.ILooper;
+import frc.lib.loops.Loop;
 import frc.lib.util.Util;
 import frc.robot.Constants;
 
@@ -29,32 +31,57 @@ public class Climber extends Subsystem {
         extendCurrentState = extendSolenoid.get();
     }
 
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(new Loop() {
+
+			@Override
+			public void onStart(double timestamp) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onLoop(double timestamp) {
+				if (!intakeDown) {
+                    if ((Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST)) || (Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST))) {
+                        if (unfoldCurrentState != unfoldIntendedState && extendCurrentState != Value.kForward) {
+                            unfoldSolenoid.set(unfoldIntendedState);
+                            //System.out.println("Unfold Happened");
+                        }
+                        if (unfoldCurrentState == Value.kForward) {
+                            unfolded = true;
+                        } else if (unfoldCurrentState == Value.kReverse) {
+                           unfolded = false;
+                        }
+                    }
+                }
+                if (!unfolded) {
+                    extendSolenoid.set(Value.kReverse);
+                } else {
+                    extendSolenoid.set(extendIntendedState);
+                    //System.out.println("Extend Happened");
+                }
+                if (extendCurrentState == Value.kForward) {
+                    climbed = true;
+                } else if (extendCurrentState == Value.kReverse) {
+                    climbed = false;
+                }
+				
+			}
+
+			@Override
+			public void onStop(double timestamp) {
+				// TODO Auto-generated method stub
+				
+			}
+
+        });
+    }
+
     @Override
     public void writePeriodicOutputs() {
-        if (!intakeDown) {
-            if ((Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST)) || (Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST))) {
-                if (unfoldCurrentState != unfoldIntendedState && extendCurrentState != Value.kForward) {
-                    unfoldSolenoid.set(unfoldIntendedState);
-                    //System.out.println("Unfold Happened");
-                }
-                if (unfoldCurrentState == Value.kForward) {
-                    unfolded = true;
-                } else if (unfoldCurrentState == Value.kReverse) {
-                   unfolded = false;
-                }
-            }
-        }
-        if (!unfolded) {
-            extendSolenoid.set(Value.kReverse);
-        } else {
-            extendSolenoid.set(extendIntendedState);
-            //System.out.println("Extend Happened");
-        }
-        if (extendCurrentState == Value.kForward) {
-            climbed = true;
-        } else if (extendCurrentState == Value.kReverse) {
-            climbed = false;
-        }
+        extendSolenoid.set(extendIntendedState);
+        unfoldSolenoid.set(unfoldIntendedState);
     }
 
     @Override
