@@ -51,8 +51,12 @@ public class Shooter extends Subsystem {
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
-        periodic.operatorInput = Constants.SECOND.getPOVCount();
-        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0); //Makes all values positive with -1 being 0 and 1 being 1
+        periodic.operatorInput = Constants.SECOND.getPOV();
+        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0); // Makes all
+                                                                                                        // values
+                                                                                                        // positive with
+                                                                                                        // -1 being 0
+                                                                                                        // and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
@@ -72,27 +76,42 @@ public class Shooter extends Subsystem {
             public void onLoop(double timestamp) {
                 periodic.turretAngle = Rotation2d.fromDegrees(ticksToDegrees(periodic.turretEncoder));
                 switch (flywheelMode) {
-                    case OPEN_LOOP:
-                        periodic.flywheelDemand = periodic.operatorFlywheelInput;
-                        break;
-                    case PID_MODE:
-                        periodic.operatorFlywheelInput = periodic.operatorFlywheelInput * Constants.TURRET_MAX_RPM;
-                        periodic.flywheelDemand = RPMToTicksPer100ms(periodic.operatorFlywheelInput);
-                        break;
-                    default:
-                        leftFlywheelFalcon.set(ControlMode.Disabled, 0);
-                        rightFlywheelFalcon.set(ControlMode.Disabled, 0);
-                        break;
+                case OPEN_LOOP:
+                    periodic.flywheelDemand = periodic.operatorFlywheelInput;
+                    break;
+                case PID_MODE:
+                    periodic.operatorFlywheelInput = periodic.operatorFlywheelInput * Constants.TURRET_MAX_RPM;
+                    periodic.flywheelDemand = RPMToTicksPer100ms(periodic.operatorFlywheelInput);
+                    break;
+                default:
+                    leftFlywheelFalcon.set(ControlMode.Disabled, 0);
+                    rightFlywheelFalcon.set(ControlMode.Disabled, 0);
+                    break;
                 }
                 switch (turretMode) {
-                    case OPEN_LOOP:
-                        if(periodic.operatorInput == 90)
-                        break;
-                    default:
-                        turretControl.set(ControlMode.Disabled, 0);
-                        break;
+                case OPEN_LOOP:
+                    if (periodic.operatorInput == 90) {
+                        periodic.turretDemand = -.2;
+                    } else if (periodic.operatorInput == 270) {
+                        periodic.turretDemand = .2;
+                    } else {
+                        periodic.turretDemand = 0;
+                    }
+                    break;
+                case PID_MODE:
+                    if (periodic.operatorInput == 90) {
+                        periodic.turretDemand = -852;
+                    } else if (periodic.operatorInput == 270) {
+                        periodic.turretDemand = 852;
+                    } else {
+                        periodic.turretDemand = 0;
+                    }
+                    break;
+                default:
+                    turretControl.set(ControlMode.Disabled, 0);
+                    break;
+                }
             }
-        }
 
             @Override
             public void onStop(double timestamp) {
@@ -106,35 +125,34 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void writePeriodicOutputs() {
-        
+
         switch (flywheelMode) {
-            case OPEN_LOOP:
-                leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.flywheelDemand);
-                rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
-                break;
-            case PID_MODE:
-                leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
-                rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
-                break;
-            case LIMELIGHT_MODE:
-                break;
-            default:
-                leftFlywheelFalcon.set(ControlMode.Disabled, 0);
-                rightFlywheelFalcon.set(ControlMode.Disabled, 0);
-                break;
+        case OPEN_LOOP:
+            leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.flywheelDemand);
+            rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
+            break;
+        case PID_MODE:
+            leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
+            rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
+            break;
+        case LIMELIGHT_MODE:
+            break;
+        default:
+            leftFlywheelFalcon.set(ControlMode.Disabled, 0);
+            rightFlywheelFalcon.set(ControlMode.Disabled, 0);
+            break;
         }
         switch (turretMode) {
-            case OPEN_LOOP:
-                turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
-                break;
-            case PID_MODE:
-                turretControl.set(ControlMode.Position, periodic.turretDemand);
-                break;
-            case LIMELIGHT_MODE:
-                break;
-            default:
-                turretControl.set(ControlMode.Disabled, 0);
-                break;
+        case OPEN_LOOP:
+            turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
+            break;
+        case PID_MODE:
+            break;
+        case LIMELIGHT_MODE:
+            break;
+        default:
+            turretControl.set(ControlMode.Disabled, 0);
+            break;
         }
     }
 
@@ -154,20 +172,20 @@ public class Shooter extends Subsystem {
     }
 
     public void configLimelight() {
-        //Forces led on
+        // Forces led on
         table.getEntry("ledMode").setNumber(3);
-        //Sets limelight's current pipeline to 0
+        // Sets limelight's current pipeline to 0
         table.getEntry("pipeline").setNumber(0);
-        //Sets the mode of the camera to vision processor mode
+        // Sets the mode of the camera to vision processor mode
         table.getEntry("camMode").setNumber(0);
-        //Defaults Limelight's snapshotting feature to off
+        // Defaults Limelight's snapshotting feature to off
         table.getEntry("snapshot").setNumber(0);
     }
 
     public void configTalons() {
         turretControl.config_kP(1, Constants.TURRET_ANGLE_KP);
         turretControl.config_kD(1, Constants.TURRET_ANGLE_KD);
-        turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative,0,0);
+        turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         rightFlywheelFalcon.config_kP(1, Constants.TURRET_RIGHT_FLY_KP);
         rightFlywheelFalcon.config_kD(1, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -190,46 +208,48 @@ public class Shooter extends Subsystem {
     }
 
     /**
-     * Method that maps the raw input from the slider on the EXTREME 3D and convert the value to a 0 - 1 bottom to top map
+     * Method that maps the raw input from the slider on the EXTREME 3D and convert
+     * the value to a 0 - 1 bottom to top map
      * 
      */
 
-    public double degreesToTicks(double degree)
-    {
-        //implement a ticks to degrees method
-        return degree * Constants.TURRET_DEGREES_TO_TICKS; //empiricly mesured
+    public double degreesToTicks(double degree) {
+        // implement a ticks to degrees method
+        return degree * Constants.TURRET_DEGREES_TO_TICKS; // empiricly mesured
     }
 
     public double ticksToDegrees(double degree) {
         return degree / Constants.TURRET_DEGREES_TO_TICKS; // 360 / (4096 * 9.5)
     }
+
     /**
-     * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches
-     * Equation came from a degree 2 polynomial regression on data points recorded manually
+     * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to
+     * target in inches Equation came from a degree 2 polynomial regression on data
+     * points recorded manually
+     * 
      * @return lateral distance from limelight lens to target in inches
      */
 
-    public double limelightRanging()
-    {
-        //Equation that takes in ta (See Limelight Docs) and outputs distance from target in inches
-        //TODO need to test data points based on actual bot
-        return 505 - 409 * periodic.targetArea + 119 * periodic.targetArea * periodic.targetArea; 
+    public double limelightRanging() {
+        // Equation that takes in ta (See Limelight Docs) and outputs distance from
+        // target in inches
+        // TODO need to test data points based on actual bot
+        return 505 - 409 * periodic.targetArea + 119 * periodic.targetArea * periodic.targetArea;
     }
 
-    public double calculateRPM(double distance)
-    {
-        return 0; //TODO implement the equation to calculate the required inittal velocity and then convert to revolutions per Miniut
+    public double calculateRPM(double distance) {
+        return 0; // TODO implement the equation to calculate the required inittal velocity and
+                  // then convert to revolutions per Miniut
     }
 
-    public double RPMToTicksPer100ms(double RPM)
-    {
+    public double RPMToTicksPer100ms(double RPM) {
         return RPM * 13.653; // .1 * 2048 * 4/60
     }
 
-    public void setFlywheelRPM(double demand){
-        if(flywheelMode != MotorControlMode.PID_MODE)
+    public void setFlywheelRPM(double demand) {
+        if (flywheelMode != MotorControlMode.PID_MODE)
             flywheelMode = MotorControlMode.PID_MODE;
-        leftFlywheelFalcon.set(ControlMode.Velocity, demand); //TODO add safety that moves to hold current speed
+        leftFlywheelFalcon.set(ControlMode.Velocity, demand); // TODO add safety that moves to hold current speed
         rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
 
@@ -251,28 +271,24 @@ public class Shooter extends Subsystem {
         periodic.turretDemand = newDemand;
     }
 
-    public boolean getRPMOnTarget()
-    {
+    public boolean getRPMOnTarget() {
         return periodic.RPMOnTarget;
     }
-    public void setRPMOnTarget(boolean isTarget)
-    {
+
+    public void setRPMOnTarget(boolean isTarget) {
         periodic.RPMOnTarget = isTarget;
     }
-    public double getRPMClosedLoopError(){
+
+    public double getRPMClosedLoopError() {
         return periodic.RPMClosedLoopError;
     }
-
 
     public Subsystem.PeriodicIO getLogger() {
         return periodic;
     }
 
     public enum MotorControlMode {
-        DISABLED,
-        OPEN_LOOP,
-        PID_MODE,
-        LIMELIGHT_MODE;
+        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
@@ -281,10 +297,10 @@ public class Shooter extends Subsystem {
 
     public double turretAngletoRelAngle(double angle) {
         double ticksFromOffset = turretControl.getSelectedSensorPosition() + degreesToTicks(angle);
-        if(turretControl.getSelectedSensorPosition() + degreesToTicks(angle) < Constants.leftTurretLimit) {
+        if (turretControl.getSelectedSensorPosition() + degreesToTicks(angle) < Constants.leftTurretLimit) {
             ticksFromOffset = 0.0;
         }
-        if(turretControl.getSelectedSensorPosition() + degreesToTicks(angle) > Constants.rightTurretLimit) {
+        if (turretControl.getSelectedSensorPosition() + degreesToTicks(angle) > Constants.rightTurretLimit) {
             ticksFromOffset = 0.0;
         }
         return ticksToDegrees(ticksFromOffset);
