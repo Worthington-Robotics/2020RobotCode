@@ -51,7 +51,7 @@ public class Shooter extends Subsystem {
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
-        periodic.operatorInput = HIDHelper.getAdjStick(Constants.SECOND_STICK);
+        periodic.operatorInput = Constants.SECOND.getPOVCount();
         periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0); //Makes all values positive with -1 being 0 and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
@@ -86,11 +86,7 @@ public class Shooter extends Subsystem {
                 }
                 switch (turretMode) {
                     case OPEN_LOOP:
-                        periodic.turretDemand = periodic.operatorInput[0];
-                        break;
-                    case PID_MODE:
-                        periodic.operatorInput[0] = periodic.operatorInput[0] * 90;
-                        periodic.turretDemand = degreesToTicks(periodic.operatorInput[0]);
+                        if(periodic.operatorInput == 90)
                         break;
                     default:
                         turretControl.set(ControlMode.Disabled, 0);
@@ -147,10 +143,10 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput[0]);
+        SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput);
         SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
         SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
-        SmartDashboard.putNumber("Shooter/Turret/Angle", ticksToDegrees(periodic.turretEncoder));
+        SmartDashboard.putNumber("Shooter/Turret/Angle", (ticksToDegrees(periodic.turretEncoder) + 360) % 360);
         SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
         SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
@@ -306,7 +302,7 @@ public class Shooter extends Subsystem {
         public boolean RPMOnTarget = false;
         public double RPMClosedLoopError = 0;
         public double rotationsClosedLoopError = 0;
-        public double[] operatorInput = new double[] {0,0,0};
+        public int operatorInput = 0;
         public double operatorFlywheelInput = 0;
         public double flywheelVelocity = 0;
         public double flywheelClosedLoopError = 0;
