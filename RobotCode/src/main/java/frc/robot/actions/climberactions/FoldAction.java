@@ -9,7 +9,7 @@ public class FoldAction extends Action {
     private boolean done;
     @Override
     public void onStart() {
-        Climber.getInstance().setUnfold(DoubleSolenoid.Value.kForward);
+        Climber.getInstance().setUnfold(false);
         done = true;
     }
 

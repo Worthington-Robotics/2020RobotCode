@@ -9,7 +9,7 @@ public class ClimbDownAction extends Action {
     private boolean done;
     @Override
     public void onStart() {
-        Climber.getInstance().setExtend(DoubleSolenoid.Value.kReverse);
+        Climber.getInstance().setExtend(false);
         done = true;
         System.out.println("Set Climb Down");
     }

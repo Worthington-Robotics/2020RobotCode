@@ -146,8 +146,15 @@ public class Constants {
 
     //Limelight Constants
     public static final double LIMELIGHT_DEG_FOV = 0.0; //TODO CALCULATE FOV
-    
-    public static final double CLIMBER_EPSILON_CONST = 10;
+    public static final double fov = 0;
+    public static final int redH1 = 0;
+    public static final int redH2 = 360;
+    public static final int yellowH = 60;
+    public static final int greenH = 120;
+    public static final int blueH = 180;
+    public static final int error = 29;
+    public static final int satLimit = 80;
+    public static final int valLimit = 80;
 
     /**
      * Superstructure constants
@@ -166,5 +173,10 @@ public class Constants {
     //Turret Encoder Limits
     public static final int leftTurretLimit = 0;
     public static final int rightTurretLimit = 0;
+
+    //Climber Constants
+    public static final double CLIMBER_SHOOTER_REQMT = 90;
+    public static final double CLIMBER_EPSILON_CONST = 10;
+
 
 }
