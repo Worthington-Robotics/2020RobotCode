@@ -32,6 +32,7 @@ public class Climber extends Subsystem {
     public void readPeriodicInputs() {
         unfoldCurrentState = unfoldSolenoid.get();
         extendCurrentState = extendSolenoid.get();
+        intakeDown = true;
         // shooterAngle = Shooter.getInstance();
         //intakeDown = Superstructure.getInstance().getIntakeDown();
     }
@@ -48,7 +49,7 @@ public class Climber extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 if (!Constants.DEBUG) {
-                    if (!intakeDown) {
+                    if (intakeDown) {
                         if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,Constants.CLIMBER_EPSILON_CONST))
                             || (Util.epsilonEquals(shooterAngle, -Constants.CLIMBER_SHOOTER_REQMT, Constants.CLIMBER_EPSILON_CONST))) {
                             if (unfoldCurrentState != unfoldIntendedState && extendCurrentState == Value.kReverse) {
