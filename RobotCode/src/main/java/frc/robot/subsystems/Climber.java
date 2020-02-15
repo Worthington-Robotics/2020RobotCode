@@ -9,16 +9,16 @@ import frc.lib.util.Util;
 import frc.robot.Constants;
 
 public class Climber extends Subsystem {
-    public DoubleSolenoid unfoldSolenoid, extendSolenoid;
+    public DoubleSolenoid unfoldSolenoid, climbSolenoid;
     public Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
-            climbCurrentState = Value.kReverse, extendIntendedState = Value.kReverse;
+            climbCurrentState = Value.kReverse, climbIntendedState = Value.kReverse;
     public boolean unfolded = false, climbed = false, intakeDown = false;
     public double shooterAngle = 90;
-    public boolean extendBoolean, unfoldBoolean;
+    public boolean climbBoolean, unfoldBoolean;
 
     public Climber() {
         unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
-        extendSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
+        climbSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
         reset();
     }
 
@@ -31,10 +31,10 @@ public class Climber extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         unfoldCurrentState = unfoldSolenoid.get();
-        climbCurrentState = extendSolenoid.get();
+        climbCurrentState = climbSolenoid.get();
         intakeDown = true;
         // shooterAngle = Shooter.getInstance();
-        // intakeDown = Superstructure.getInstance().getIntakeDown();
+        //intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -60,14 +60,14 @@ public class Climber extends Subsystem {
                     if (!unfolded) {
                         extendIntendedState = Value.kReverse;
                     } else {
-                        extendIntendedState = extendBoolean ? Value.kForward : Value.kReverse;
+                        climbIntendedState = Value.kReverse;
                     }
 
                     climbed = climbCurrentState == Value.kForward;
 
                 } else {
-                    unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
-                    extendIntendedState = extendBoolean ? Value.kForward : Value.kReverse;
+                    unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
+                    climbIntendedState = climbBoolean? Value.kForward : Value.kReverse;
                 }
 
             }
@@ -83,20 +83,22 @@ public class Climber extends Subsystem {
 
     @Override
     public void writePeriodicOutputs() {
-        extendSolenoid.set(extendIntendedState);
+        climbSolenoid.set(climbIntendedState);
         unfoldSolenoid.set(unfoldIntendedState);
     }
 
     @Override
     public void outputTelemetry() {
         SmartDashboard.putBoolean("Climb/Want Unfolded", unfoldBoolean);
-        SmartDashboard.putBoolean("Climb/Extended", extendBoolean);
+        SmartDashboard.putBoolean("Climb/Want Extended", extendBoolean);
+        SmartDashboard.putBoolean("Climb/Unfolded", unfolded);
+        SmartDashboard.putBoolean("Climb/Extend", climbed);
     }
 
     @Override
     public void reset() {
         unfoldSolenoid.set(Value.kReverse);
-        extendSolenoid.set(Value.kForward);
+        climbSolenoid.set(Value.kForward);
     }
 
     public void setUnfold(Boolean unfoldValue) {
@@ -104,7 +106,7 @@ public class Climber extends Subsystem {
     }
 
     public void setExtend(Boolean extendValue) {
-        extendBoolean = extendValue;
+        climbBoolean = extendValue;
     }
 
 }
