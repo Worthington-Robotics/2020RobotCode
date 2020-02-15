@@ -32,7 +32,7 @@ public class Climber extends Subsystem {
         unfoldCurrentState = unfoldSolenoid.get();
         extendCurrentState = extendSolenoid.get();
         // shooterAngle = Shooter.getInstance();
-        intakeDown = Superstructure.getInstance().getIntakeDown();
+        //intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
