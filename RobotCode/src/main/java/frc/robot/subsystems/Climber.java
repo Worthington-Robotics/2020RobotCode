@@ -55,13 +55,13 @@ public class Climber extends Subsystem {
                                 unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
                                 System.out.println("Unfold Happened");
                             }
-                            if (unfoldCurrentState == Value.kForward) {
+                        }
+                    }
+                    /*if (unfoldCurrentState == Value.kForward) {
                                 unfolded = true;
                             } else if (unfoldCurrentState == Value.kReverse) {
                                 unfolded = false;
-                            }
-                        }
-                    }
+                            }*/
                     if (!unfolded) {
                         extendSolenoid.set(Value.kReverse);
                     } else {
@@ -103,7 +103,7 @@ public class Climber extends Subsystem {
     @Override
     public void reset() {
         unfoldSolenoid.set(Value.kReverse);
-        extendSolenoid.set(Value.kReverse);
+        extendSolenoid.set(Value.kForward);
     }
 
     public void setUnfold(Boolean unfoldValue) {
