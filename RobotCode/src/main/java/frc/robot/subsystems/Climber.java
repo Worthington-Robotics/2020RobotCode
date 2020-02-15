@@ -34,7 +34,7 @@ public class Climber extends Subsystem {
         climbCurrentState = climbSolenoid.get();
         intakeDown = true;
         // shooterAngle = Shooter.getInstance();
-        //intakeDown = Superstructure.getInstance().getIntakeDown();
+        // intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -51,10 +51,8 @@ public class Climber extends Subsystem {
                 if (!Constants.DEBUG) {
                     if (intakeDown) {
                         if (Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,Constants.CLIMBER_EPSILON_CONST)) {
-                            if (climbCurrentState == Value.kReverse) {
                                 unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
                                 System.out.println("Unfold Happened");
-                            }
                         }
                     }
                     /*if (unfoldCurrentState == Value.kForward) {
@@ -96,8 +94,8 @@ public class Climber extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putBoolean("Unfolding", unfoldBoolean);
-        SmartDashboard.putBoolean("Extending", climbBoolean);
+        SmartDashboard.putBoolean("Climb/Unfolded", unfoldBoolean);
+        SmartDashboard.putBoolean("Climb/Extended", extendBoolean);
     }
 
     @Override
