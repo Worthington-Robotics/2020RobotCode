@@ -53,7 +53,7 @@ public class Climber extends Subsystem {
                         if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,
                                 Constants.CLIMBER_EPSILON_CONST))) {
                             unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
-                            System.out.println("Unfold Happened");
+                            //System.out.println("Unfold Happened");
                         }
                     }
                     unfolded = unfoldCurrentState == Value.kForward;
