@@ -8,7 +8,7 @@ import frc.robot.subsystems.Climber;
 public class UnfoldAction extends Action {
     @Override
     public void onStart() {
-        Climber.getInstance().setUnfold(DoubleSolenoid.Value.kForward);
+        Climber.getInstance().setUnfold(DoubleSolenoid.Value.kReverse);
         System.out.println("Climb is unfolding.");
     }
 

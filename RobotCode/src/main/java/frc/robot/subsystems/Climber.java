@@ -33,10 +33,10 @@ public class Climber extends Subsystem {
     public void writePeriodicOutputs() {
         if (!intakeDown) {
             if ((Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST)) || (Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST))) {
-                if (unfoldCurrentState != unfoldIntendedState && extendCurrentState != Value.kForward) {
+                //if (unfoldCurrentState != unfoldIntendedState && extendCurrentState != Value.kForward) {
                     unfoldSolenoid.set(unfoldIntendedState);
                     //System.out.println("Unfold Happened");
-                }
+                //}
                 if (unfoldCurrentState == Value.kForward) {
                     unfolded = true;
                 } else if (unfoldCurrentState == Value.kReverse) {
@@ -44,12 +44,12 @@ public class Climber extends Subsystem {
                 }
             }
         }
-        if (!unfolded) {
-            extendSolenoid.set(Value.kReverse);
-        } else {
+        //if (!unfolded) {
+            //extendSolenoid.set(Value.kReverse);
+        //} else {
             extendSolenoid.set(extendIntendedState);
             //System.out.println("Extend Happened");
-        }
+        //s}
         if (extendCurrentState == Value.kForward) {
             climbed = true;
         } else if (extendCurrentState == Value.kReverse) {

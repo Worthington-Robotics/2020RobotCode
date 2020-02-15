@@ -54,7 +54,8 @@ public class Robot extends TimedRobot {
             Drive.getInstance(), 
             ColorWheel.getInstance(), 
             Climber.getInstance(),
-            Superstructure.getInstance()), true);;
+            Superstructure.getInstance(),
+            Shooter.getInstance()), true);;
     private Looper enabledLooper, disabledLooper;
 
     private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
@@ -72,6 +73,7 @@ public class Robot extends TimedRobot {
     private JoystickButton inverse = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
+    private JoystickButton releaseIntake = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
     private JoystickButton turretControl = new JoystickButton(Constants.SECOND, 7);
     private JoystickButton flyWheelPID = new JoystickButton(Constants.SECOND, 9);

@@ -33,6 +33,9 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
         leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
         turretControl = new TalonSRX(Constants.TURRET_CONTROL);
+        rightFlywheelFalcon.setInverted(true);
+        leftFlywheelFalcon.setInverted(false);
+        turretControl.configContinuousCurrentLimit(10);
         reset();
     }
 
@@ -107,6 +110,7 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void writePeriodicOutputs() {
+        
         switch (flywheelMode) {
             case OPEN_LOOP:
                 leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.flywheelDemand);
@@ -146,7 +150,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput[0]);
         SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
         SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
-        SmartDashboard.putNumber("Shooter/Turret/Angle", periodic.turretEncoder);
+        SmartDashboard.putNumber("Shooter/Turret/Angle", ticksToDegrees(periodic.turretEncoder));
         SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
         SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
@@ -182,6 +186,9 @@ public class Shooter extends Subsystem {
     @Override
     public void reset() {
         periodic = new ShooterIO();
+
+        flywheelMode = MotorControlMode.DISABLED;
+        turretMode = MotorControlMode.DISABLED;
         configLimelight();
         configTalons();
     }
@@ -198,7 +205,7 @@ public class Shooter extends Subsystem {
     }
 
     public double ticksToDegrees(double degree) {
-        return 45 * degree / 4864; // 360 / (4096 * 9.5)
+        return degree / Constants.TURRET_DEGREES_TO_TICKS; // 360 / (4096 * 9.5)
     }
     /**
      * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches
