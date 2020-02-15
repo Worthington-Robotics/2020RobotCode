@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['vallimit_1076',['valLimit',['../classfrc_1_1robot_1_1Constants.html#a572de00e063306b7c2e4ddf1ba905de1',1,'frc::robot::Constants']]],
-  ['value_1077',['value',['../classfrc_1_1lib_1_1math_1_1InterpolatingDouble.html#ad7a0aa554e24cba58c05b33ecd2cf335',1,'frc.lib.math.InterpolatingDouble.value()'],['../classfrc_1_1lib_1_1math_1_1InterpolatingLong.html#aa4e018dcc1f4ccc28b6a7af20c55e666',1,'frc.lib.math.InterpolatingLong.value()']]],
-  ['vel_1078',['vel',['../classfrc_1_1lib_1_1motion_1_1MotionState.html#a79b700a2109d71ff4f0a10d2a41603ec',1,'frc::lib::motion::MotionState']]],
-  ['vel_5ftolerance_1079',['vel_tolerance',['../classfrc_1_1lib_1_1motion_1_1MotionProfileGoal.html#aac55644878c279b80cc0418e5bbaf5af',1,'frc::lib::motion::MotionProfileGoal']]],
-  ['violate_5fmax_5fabs_5fvel_1080',['VIOLATE_MAX_ABS_VEL',['../enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior.html#aa4a3b17ca1550e7aedb616e56fafe822',1,'frc::lib::motion::MotionProfileGoal::CompletionBehavior']]],
-  ['violate_5fmax_5faccel_1081',['VIOLATE_MAX_ACCEL',['../enumfrc_1_1lib_1_1motion_1_1MotionProfileGoal_1_1CompletionBehavior.html#ac9a4107eba5810633f0a29d1cf8d76d8',1,'frc::lib::motion::MotionProfileGoal::CompletionBehavior']]]
+  ['unfold_5fhigh_5fid_2013',['UNFOLD_HIGH_ID',['../classfrc_1_1robot_1_1Constants.html#a748cf109c88922f565b371b1f1355e1c',1,'frc::robot::Constants']]],
+  ['unfold_5flow_5fid_2014',['UNFOLD_LOW_ID',['../classfrc_1_1robot_1_1Constants.html#a333281f538f44eeef22f681c93f74fc0',1,'frc::robot::Constants']]],
+  ['unfoldclimb_2015',['unfoldClimb',['../classfrc_1_1robot_1_1Robot.html#a76dd65bb629b2711268f4a9151deebee',1,'frc::robot::Robot']]],
+  ['unfoldcurrentstate_2016',['unfoldCurrentState',['../classfrc_1_1robot_1_1subsystems_1_1Climber.html#aa086f0a7b7859224e7770c5ad6499178',1,'frc::robot::subsystems::Climber']]],
+  ['unfolded_2017',['unfolded',['../classfrc_1_1robot_1_1subsystems_1_1Climber.html#a320383388a1c884693be98cc18be7725',1,'frc::robot::subsystems::Climber']]],
+  ['unfoldintendedstate_2018',['unfoldIntendedState',['../classfrc_1_1robot_1_1subsystems_1_1Climber.html#a13e1c67b91343d8d93998ce9cd9b4e90',1,'frc::robot::subsystems::Climber']]],
+  ['unfoldsolenoid_2019',['unfoldSolenoid',['../classfrc_1_1robot_1_1subsystems_1_1Climber.html#a014b0e19dbe3795376609039f0f6604b',1,'frc::robot::subsystems::Climber']]]
 ];

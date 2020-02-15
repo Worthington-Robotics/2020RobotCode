@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['setpointgenerator_582',['SetpointGenerator',['../classfrc_1_1lib_1_1motion_1_1SetpointGenerator.html',1,'frc::lib::motion']]],
-  ['state_583',['State',['../interfacefrc_1_1lib_1_1geometry_1_1State.html',1,'frc::lib::geometry']]],
-  ['state_3c_20displacement1d_20_3e_584',['State&lt; Displacement1d &gt;',['../interfacefrc_1_1lib_1_1geometry_1_1State.html',1,'frc::lib::geometry']]],
-  ['statemachine_585',['StateMachine',['../classfrc_1_1lib_1_1statemachine_1_1StateMachine.html',1,'frc::lib::statemachine']]],
-  ['statemachinedescriptor_586',['StateMachineDescriptor',['../classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor.html',1,'frc::lib::statemachine']]],
-  ['subsystem_587',['Subsystem',['../classfrc_1_1robot_1_1subsystems_1_1Subsystem.html',1,'frc::robot::subsystems']]],
-  ['subsystemmanager_588',['SubsystemManager',['../classfrc_1_1robot_1_1SubsystemManager.html',1,'frc::robot']]]
+  ['reflectinglogger_1064',['ReflectingLogger',['../classfrc_1_1lib_1_1util_1_1ReflectingLogger.html',1,'frc::lib::util']]],
+  ['reflectinglogger_3c_20logdata_20_3e_1065',['ReflectingLogger&lt; LogData &gt;',['../classfrc_1_1lib_1_1util_1_1ReflectingLogger.html',1,'frc::lib::util']]],
+  ['robot_1066',['Robot',['../classfrc_1_1robot_1_1Robot.html',1,'frc::robot']]],
+  ['rotation2d_1067',['Rotation2d',['../classfrc_1_1lib_1_1geometry_1_1Rotation2d.html',1,'frc::lib::geometry']]]
 ];

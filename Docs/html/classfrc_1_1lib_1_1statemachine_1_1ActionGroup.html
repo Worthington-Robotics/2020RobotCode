@@ -84,6 +84,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a09b32ff1157e95f6f066ee841c61fcd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a868e7c94b2ed2d18f4c33c3fb55d9c96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1lib_1_1statemachine_1_1ActionGroup.html#a868e7c94b2ed2d18f4c33c3fb55d9c96">onStop</a> ()</td></tr>
 <tr class="separator:a868e7c94b2ed2d18f4c33c3fb55d9c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae042178ccfb62127c54c64a3e9367f2c"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1lib_1_1statemachine_1_1ActionGroup.html#ae042178ccfb62127c54c64a3e9367f2c">toString</a> ()</td></tr>
+<tr class="separator:ae042178ccfb62127c54c64a3e9367f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -107,9 +109,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>determines when to begin state advancement </p>
-<p>handles self terminated actions automatically</p>
-<dl class="section return"><dt>Returns</dt><dd>true when all actions are finished </dd></dl>
+<p>Determines if the state is ready to be advanced. This can happen forcefully on a timeout or if all action in the group time out individually. </p>
+<p>This also handles calling the stop code on actions who have completed independently.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if all actions in the group have finished or if they should be forcibly timed out </dd></dl>
 
 </div>
 </div>
@@ -127,8 +129,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>runs the onloop code of all actions in the group </p>
-<p>executes in order added to group </p>
+<p>Runs the on-loop code for each action in the group. </p>
 
 </div>
 </div>
@@ -146,7 +147,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>records start time of state then executes all actions onStart </p>
+<p>Runs the on-start code for each action in the group. Also records the start time of state </p>
 
 </div>
 </div>
@@ -164,7 +165,25 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>forceful exit for all actions in the group </p>
+<p>forcibly terminate all actions within the group </p>
+
+</div>
+</div>
+<a id="ae042178ccfb62127c54c64a3e9367f2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae042178ccfb62127c54c64a3e9367f2c">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String frc.lib.statemachine.ActionGroup.toString </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>gets a string representation of the class names inside the action group </p><dl class="section return"><dt>Returns</dt><dd>a string of all class names in the group </dd></dl>
 
 </div>
 </div>
