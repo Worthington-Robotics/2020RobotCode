@@ -11,7 +11,7 @@ import frc.robot.Constants;
 public class Climber extends Subsystem {
     public DoubleSolenoid unfoldSolenoid, extendSolenoid;
     public Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
-            extendCurrentState = Value.kReverse, extendIntendedState = Value.kReverse;
+            climbCurrentState = Value.kReverse, extendIntendedState = Value.kReverse;
     public boolean unfolded = false, climbed = false, intakeDown = false;
     public double shooterAngle = 90;
     public boolean extendBoolean, unfoldBoolean;
@@ -31,10 +31,10 @@ public class Climber extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         unfoldCurrentState = unfoldSolenoid.get();
-        extendCurrentState = extendSolenoid.get();
+        climbCurrentState = extendSolenoid.get();
         intakeDown = true;
         // shooterAngle = Shooter.getInstance();
-        //intakeDown = Superstructure.getInstance().getIntakeDown();
+        // intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -50,32 +50,25 @@ public class Climber extends Subsystem {
             public void onLoop(double timestamp) {
                 if (!Constants.DEBUG) {
                     if (intakeDown) {
-                        if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,Constants.CLIMBER_EPSILON_CONST))
-                            || (Util.epsilonEquals(shooterAngle, -Constants.CLIMBER_SHOOTER_REQMT, Constants.CLIMBER_EPSILON_CONST))) {
-                            if (unfoldCurrentState != unfoldIntendedState && extendCurrentState == Value.kReverse) {
-                                unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
-                                System.out.println("Unfold Happened");
-                            }
+                        if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT, Constants.CLIMBER_EPSILON_CONST))) {
+                            unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
+                            System.out.println("Unfold Happened");
                         }
                     }
-                    /*if (unfoldCurrentState == Value.kForward) {
-                                unfolded = true;
-                            } else if (unfoldCurrentState == Value.kReverse) {
-                                unfolded = false;
-                            }*/
+                    
                     if (!unfolded) {
-                        extendSolenoid.set(Value.kReverse);
+                        extendIntendedState = Value.kReverse;
                     } else {
-                        extendIntendedState = extendBoolean? Value.kForward : Value.kReverse;
+                        extendIntendedState = extendBoolean ? Value.kForward : Value.kReverse;
                     }
-                    if (extendCurrentState == Value.kForward) {
+                    if (climbCurrentState == Value.kForward) {
                         climbed = true;
-                    } else if (extendCurrentState == Value.kReverse) {
+                    } else if (climbCurrentState == Value.kReverse) {
                         climbed = false;
                     }
                 } else {
-                    unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
-                    extendIntendedState = extendBoolean? Value.kForward : Value.kReverse;
+                    unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
+                    extendIntendedState = extendBoolean ? Value.kForward : Value.kReverse;
                 }
 
             }
@@ -97,8 +90,8 @@ public class Climber extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putBoolean("Unfolding", unfoldBoolean);
-        SmartDashboard.putBoolean("Extending", extendBoolean);
+        SmartDashboard.putBoolean("Climb/Unfolded", unfoldBoolean);
+        SmartDashboard.putBoolean("Climb/Extended", extendBoolean);
     }
 
     @Override
