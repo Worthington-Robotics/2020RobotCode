@@ -1,8 +1,11 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
@@ -23,7 +26,8 @@ public class Superstructure extends Subsystem {
     // Indexer
     private TalonSRX shooterWheel;
     private TalonSRX deliveryBelts;
-    private TalonSRX indexBelt;
+    private TalonSRX indexTopBelt;
+    private TalonSRX indexBottomBelt;
 
     // Intake
     private TalonSRX ballsIntake;
@@ -46,6 +50,11 @@ public class Superstructure extends Subsystem {
     private TimerBoolean indexBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
     private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
 
+    //Pulse Variables
+    private boolean pulse1 = true;
+    private double timestamp;
+
+
     private static Superstructure instance = new Superstructure();
 
     public static Superstructure getInstance() {
@@ -53,9 +62,9 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_SHOOTER_WHEEL);
+        //shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
-        indexBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
+        indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
         ballsIntake = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
@@ -102,6 +111,7 @@ public class Superstructure extends Subsystem {
     }
 
     @Override public synchronized void writePeriodicOutputs() {
+        /*
         switch (periodic.state) {
             case INIT:
                 DemandUtil.setFullDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
@@ -127,14 +137,17 @@ public class Superstructure extends Subsystem {
             default:
                 break;
         }
+        */
     }
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
+        
         enabledLooper.register(new Loop() {
             @Override public void onStart(double timestamp) {}
 
             @Override public void onLoop(double timestamp) {
+                /*
                 switch (periodic.state) {
                     case INIT: {
                         if (periodic.deliveryDetected) {
@@ -176,6 +189,12 @@ public class Superstructure extends Subsystem {
                     }
                     case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
                 }
+                */
+                deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+                indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+                ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+                extensionArm.set(periodic.armExtension);
             }
 
             @Override public void onStop(double timestamp) {}
@@ -191,6 +210,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
         SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW",  intakeSensor.getRange());
+        SmartDashboard.putNumber("Superstructure/IndexDemand", periodic.intakeDemand);
     }
 
     public void shootBall() {
@@ -220,8 +240,7 @@ public class Superstructure extends Subsystem {
         intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
     }
 
-    // Setters
-
+    // SettersW
     public void setArmExtension(DoubleSolenoid.Value armExtension) {
         periodic.armExtension = armExtension;
     }
@@ -232,6 +251,10 @@ public class Superstructure extends Subsystem {
 
     public void setDeliveryBeltsDemand(double demand) {
         periodic.deliveryBeltsDemand = demand;
+    }
+    
+    public void setDeliveryWheelDemand(double demand) {
+        periodic.deliveryWheelDemand = demand;
     }
 
     public void setIntakeDemand(double demand) {
@@ -255,6 +278,34 @@ public class Superstructure extends Subsystem {
         return periodic.intakeDetected;
     }
 
+    public boolean getIntakeDown() {
+        if (extensionArm.get() == Value.kForward) {
+            return true;
+        } else if (extensionArm.get() == Value.kReverse) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    public void pulse(double motorDemand, double demandMax, double waitTime) {
+        if (pulse1) {
+            timestamp = Timer.getFPGATimestamp();
+            pulse1 = false;
+        }
+        if (motorDemand == 0) {
+            if ((timestamp + waitTime) == Timer.getFPGATimestamp()) {
+                motorDemand = demandMax;
+                pulse1 = true;
+            }
+        } else {
+            if ((timestamp + waitTime) == Timer.getFPGATimestamp()) {
+                motorDemand = 0;
+                pulse1 = true;
+            }
+        }
+    }
+
     public LogData getLogger() {
         return periodic;
     }
@@ -263,11 +314,12 @@ public class Superstructure extends Subsystem {
         // Current State
         public SuperState state = SuperState.INIT;
         // Indexer Data
+        public double deliveryWheelDemand;
         public double indexBeltDemand;
         public double deliveryBeltsDemand;
         // Intake Data
         public double intakeDemand;
-        public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;
+        public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
         // Sensor Booleans
         public boolean deliveryDetected;
         public boolean indexDetected;
