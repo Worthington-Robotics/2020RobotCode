@@ -7,7 +7,9 @@ import frc.robot.subsystems.Climber;
 public class FolderToggleAction extends Action {
     @Override
     public void onStart() {
-        Climber.getInstance().setUnfold(true);
+        if (Climber.getInstance().readyToUnfold) {
+            Climber.getInstance().setUnfold(true);
+        }
         //System.out.println("Climb is unfolding.");
     }
 
@@ -18,13 +20,14 @@ public class FolderToggleAction extends Action {
 
     @Override
     public boolean isFinished() {
-        
-            return false;
+            return !Climber.getInstance().readyToFold;
 
     }
 
     @Override
     public void onStop() {
-        Climber.getInstance().setUnfold(false);
+        if (Climber.getInstance().readyToFold) {
+            Climber.getInstance().setUnfold(false);
+        }
     }
 }

@@ -14,7 +14,7 @@ public class Climber extends Subsystem {
             climbCurrentState = Value.kReverse, climbIntendedState = Value.kReverse;
     public boolean unfolded = false, climbed = false, intakeDown = false;
     public double shooterAngle = 90;
-    public boolean climbBoolean, unfoldBoolean;
+    public boolean climbBoolean, unfoldBoolean, readyToDownClimb, readyToFold, readyToUnfold, readyToClimb, readyFolding;
 
     public Climber() {
         unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
@@ -71,7 +71,10 @@ public class Climber extends Subsystem {
                     unfoldIntendedState = unfoldBoolean? Value.kForward : Value.kReverse;
                     climbIntendedState = climbBoolean? Value.kForward : Value.kReverse;
                 }
-
+                readyToClimb = unfolded;
+                readyToDownClimb = unfolded && climbed;
+                readyToUnfold = !climbed;
+                readyToFold = unfolded && !climbed;    
             }
 
             @Override
