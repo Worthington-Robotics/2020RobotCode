@@ -184,10 +184,8 @@ public class Superstructure extends Subsystem {
                 }
                 */
                 deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                
+                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
                 indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-                
                 ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
             }
 

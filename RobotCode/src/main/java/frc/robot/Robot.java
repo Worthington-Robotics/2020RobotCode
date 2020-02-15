@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.robot.actions.shooteraction.ManualTurretControl;
 import frc.robot.actions.shooteraction.SetFlywheelPID;
 import frc.robot.actions.shooteraction.SetManualFlywheel;
 import frc.robot.actions.shooteraction.TurretPIDControl;
@@ -34,6 +35,7 @@ import frc.robot.actions.driveactions.Shift;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.PoseEstimator;
+import frc.robot.subsystems.Shooter;
 import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
 import frc.robot.subsystems.Climber;
@@ -48,7 +50,10 @@ import frc.robot.subsystems.Climber;
 public class Robot extends TimedRobot {
     private SubsystemManager manager = new SubsystemManager(Arrays.asList(
             // register subsystems here
-            PoseEstimator.getInstance(), Drive.getInstance(), ColorWheel.getInstance(), Climber.getInstance(),
+            PoseEstimator.getInstance(), 
+            Drive.getInstance(), 
+            ColorWheel.getInstance(), 
+            Climber.getInstance(),
             Superstructure.getInstance()), true);;
     private Looper enabledLooper, disabledLooper;
 
@@ -97,7 +102,7 @@ public class Robot extends TimedRobot {
         turretPIDControl.whenPressed(Action.toCommand(new TurretPIDControl(false)));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
         flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
-        turretControl.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
+        turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));
         colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         foldClimb.whenPressed(Action.toCommand(new FoldAction()));

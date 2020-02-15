@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -32,6 +33,7 @@ public class ColorWheel extends Subsystem {
         m_colorMatcher.addColorMatch(Constants.kGreenTarget);
         m_colorMatcher.addColorMatch(Constants.kRedTarget);
         m_colorMatcher.addColorMatch(Constants.kYellowTarget);
+        colorWheelTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         reset();
     }
 

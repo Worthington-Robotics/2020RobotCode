@@ -9,6 +9,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.geometry.Rotation2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.HIDHelper;
@@ -47,8 +48,8 @@ public class Shooter extends Subsystem {
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
-        periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.MASTER.getRawAxis(3), 1, 0); //Makes all values positive with -1 being 0 and 1 being 1
+        periodic.operatorInput = HIDHelper.getAdjStick(Constants.SECOND_STICK);
+        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0); //Makes all values positive with -1 being 0 and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
@@ -66,7 +67,7 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-                periodic.turretAngle = ticksToDegrees(periodic.turretEncoder);
+                periodic.turretAngle = Rotation2d.fromDegrees(ticksToDegrees(periodic.turretEncoder));
                 switch (flywheelMode) {
                     case OPEN_LOOP:
                         periodic.flywheelDemand = periodic.operatorFlywheelInput;
@@ -166,13 +167,13 @@ public class Shooter extends Subsystem {
     public void configTalons() {
         turretControl.config_kP(1, Constants.TURRET_CONTROL_PID_P);
         turretControl.config_kD(1, Constants.TURRET_CONTROL_PID_D);
-        turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 20);
+        turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative,0,0);
         rightFlywheelFalcon.config_kP(1, Constants.RIGHTFLYWHEELFALCON_KP);
         rightFlywheelFalcon.config_kD(1, Constants.RIGHTFLYWHEELFALCON_KD);
-        rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 20);
+        rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         leftFlywheelFalcon.config_kP(1, Constants.LEFTFLYWHEELFALCON_KP);
         leftFlywheelFalcon.config_kD(1, Constants.LEFTFLYWHEELFALCON_KD);
-        leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 20);
+        leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     }
 
     /**
@@ -294,7 +295,7 @@ public class Shooter extends Subsystem {
         public double flywheelRPM = 0.0;
         public double turretDemand = 0.0;
         public double turretEncoder = 0.0;
-        public double turretAngle = 0.0;
+        public Rotation2d turretAngle = Rotation2d.identity();
         public boolean RPMOnTarget = false;
         public double RPMClosedLoopError = 0;
         public double rotationsClosedLoopError = 0;
