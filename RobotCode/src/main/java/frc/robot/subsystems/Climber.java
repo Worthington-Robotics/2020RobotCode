@@ -56,11 +56,13 @@ public class Climber extends Subsystem {
                             System.out.println("Unfold Happened");
                         }
                     }
+                    unfolded = unfoldCurrentState == Value.kForward;
 
                     if (unfolded) {
                         climbIntendedState = climbBoolean ? Value.kForward : Value.kReverse;
                     } else {
                         climbIntendedState = Value.kReverse;
+                        climbBoolean = false;
                     }
 
                     climbed = climbCurrentState == Value.kForward;
