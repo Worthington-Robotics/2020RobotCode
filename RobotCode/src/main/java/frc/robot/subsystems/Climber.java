@@ -9,18 +9,16 @@ import frc.robot.Constants;
 
 public class Climber extends Subsystem {
     public DoubleSolenoid unfoldSolenoid, extendSolenoid;
-    public DoubleSolenoid.Value unfoldCurrentState = Value.kReverse;
-    public DoubleSolenoid.Value unfoldIntendedState = Value.kReverse;
-    public DoubleSolenoid.Value extendCurrentState = Value.kReverse;
-    public DoubleSolenoid.Value extendIntendedState = Value.kReverse;
-    public boolean unfolded = false;
-    public boolean climbed = false;
-    public boolean intakeDown = false;
+    public Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse, 
+        extendCurrentState = Value.kReverse, extendIntendedState = Value.kReverse;
+    public boolean unfolded = false, climbed = false, intakeDown = false;
     public double shooterAngle = 90;
+    public boolean extendBoolean, unfoldBoolean;
 
     public Climber() {
         unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
         extendSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
+        reset();
     }
     public static Climber mClimber = new Climber();
     public static Climber getInstance() {return mClimber;}
@@ -29,6 +27,8 @@ public class Climber extends Subsystem {
     public void readPeriodicInputs() {
         unfoldCurrentState = unfoldSolenoid.get();
         extendCurrentState = extendSolenoid.get();
+        //shooterAngle = Shooter.getInstance();
+        intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -42,11 +42,17 @@ public class Climber extends Subsystem {
 
 			@Override
 			public void onLoop(double timestamp) {
-				if (!intakeDown) {
-                    if ((Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST)) || (Util.epsilonEquals(shooterAngle, 90, Constants.CLIMBER_EPSILON_CONST))) {
-                        if (unfoldCurrentState != unfoldIntendedState && extendCurrentState != Value.kForward) {
-                            unfoldSolenoid.set(unfoldIntendedState);
-                            //System.out.println("Unfold Happened");
+                if (!Constants.DEBUG) {
+                if (!intakeDown) {
+                    if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT, Constants.CLIMBER_EPSILON_CONST)) || (Util.epsilonEquals(shooterAngle, -Constants.CLIMBER_SHOOTER_REQMT, Constants.CLIMBER_EPSILON_CONST))) {
+                        if (unfoldCurrentState != unfoldIntendedState && extendCurrentState == Value.kReverse) {
+                            if (unfoldBoolean == true) {
+                                unfoldIntendedState = Value.kForward;
+            
+                            } else {
+                                unfoldIntendedState = Value.kReverse;
+                            }
+                            System.out.println("Unfold Happened");
                         }
                         if (unfoldCurrentState == Value.kForward) {
                             unfolded = true;
@@ -58,7 +64,12 @@ public class Climber extends Subsystem {
                 if (!unfolded) {
                     extendSolenoid.set(Value.kReverse);
                 } else {
-                    extendSolenoid.set(extendIntendedState);
+                    if (extendBoolean = true) {
+                        extendIntendedState = Value.kForward;
+    
+                    } else {
+                        extendIntendedState = Value.kReverse;
+                    }
                     //System.out.println("Extend Happened");
                 }
                 if (extendCurrentState == Value.kForward) {
@@ -66,6 +77,20 @@ public class Climber extends Subsystem {
                 } else if (extendCurrentState == Value.kReverse) {
                     climbed = false;
                 }
+            } else {
+                if (unfoldBoolean == true) {
+                    unfoldIntendedState = Value.kForward;
+
+                } else {
+                    unfoldIntendedState = Value.kReverse;
+                }
+                if (extendBoolean = true) {
+                    extendIntendedState = Value.kForward;
+
+                } else {
+                    extendIntendedState = Value.kReverse;
+                }
+            }
 				
 			}
 
@@ -91,19 +116,16 @@ public class Climber extends Subsystem {
 
     @Override
     public void reset() {
-
+        unfoldSolenoid.set(Value.kReverse);
+        extendSolenoid.set(Value.kReverse);
     }
 
-    public void setUnfold(Value unfoldValue) {
-        if (extendCurrentState != Value.kForward) {
-            unfoldIntendedState = unfoldValue;
-        }
+    public void setUnfold(Boolean unfoldValue) {
+            unfoldBoolean = unfoldValue;
     }
 
-    public void setExtend(Value extendValue) {
-        if (extendValue != extendIntendedState && unfolded) {
-            extendIntendedState = extendValue;
-        }
+    public void setExtend(Boolean extendValue) {
+            extendBoolean = extendValue;
     }
     
 }

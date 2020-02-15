@@ -9,7 +9,7 @@ public class ClimbUpAction extends Action {
     private boolean done;
     @Override
     public void onStart() {
-        Climber.getInstance().setExtend(DoubleSolenoid.Value.kForward);
+        Climber.getInstance().setExtend(true);
         done = true;
     }
 
