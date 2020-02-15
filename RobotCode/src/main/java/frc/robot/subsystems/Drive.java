@@ -343,8 +343,8 @@ public class Drive extends Subsystem {
                 double max_vel = 0;
                 max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
                 max_vel = Math.max(max_vel, Math.abs(setpoint.getRight()));
-                if (max_vel > Constants.DRIVE_MAX_VEL) {
-                    double scaling = Constants.DRIVE_MAX_VEL / max_vel;
+                if (max_vel > Constants.ROBOT_MAX_VELOCITY) {
+                    double scaling = Constants.ROBOT_MAX_VELOCITY / max_vel;
                     setpoint = new DriveSignal(setpoint.getLeft() * scaling, setpoint.getRight() * scaling);
                 }
                 setpoint = new DriveSignal(

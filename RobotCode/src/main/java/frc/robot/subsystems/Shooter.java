@@ -76,7 +76,7 @@ public class Shooter extends Subsystem {
                         periodic.flywheelDemand = periodic.operatorFlywheelInput;
                         break;
                     case PID_MODE:
-                        periodic.operatorFlywheelInput = periodic.operatorFlywheelInput * Constants.MAX_RPM;
+                        periodic.operatorFlywheelInput = periodic.operatorFlywheelInput * Constants.TURRET_MAX_RPM;
                         periodic.flywheelDemand = RPMToTicksPer100ms(periodic.operatorFlywheelInput);
                         break;
                     default:
@@ -165,14 +165,14 @@ public class Shooter extends Subsystem {
     }
 
     public void configTalons() {
-        turretControl.config_kP(1, Constants.TURRET_CONTROL_PID_P);
-        turretControl.config_kD(1, Constants.TURRET_CONTROL_PID_D);
+        turretControl.config_kP(1, Constants.TURRET_ANGLE_KP);
+        turretControl.config_kD(1, Constants.TURRET_ANGLE_KD);
         turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative,0,0);
-        rightFlywheelFalcon.config_kP(1, Constants.RIGHTFLYWHEELFALCON_KP);
-        rightFlywheelFalcon.config_kD(1, Constants.RIGHTFLYWHEELFALCON_KD);
+        rightFlywheelFalcon.config_kP(1, Constants.TURRET_RIGHT_FLY_KP);
+        rightFlywheelFalcon.config_kD(1, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-        leftFlywheelFalcon.config_kP(1, Constants.LEFTFLYWHEELFALCON_KP);
-        leftFlywheelFalcon.config_kD(1, Constants.LEFTFLYWHEELFALCON_KD);
+        leftFlywheelFalcon.config_kP(1, Constants.TURRET_LEFT_FLY_KP);
+        leftFlywheelFalcon.config_kD(1, Constants.TURRET_LEFT_FLY_KD);
         leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
     }
 
