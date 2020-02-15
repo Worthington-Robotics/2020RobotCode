@@ -18,7 +18,9 @@ public class FolderToggleAction extends Action {
 
     @Override
     public boolean isFinished() {
-        return true;
+        
+            return false;
+
     }
 
     @Override

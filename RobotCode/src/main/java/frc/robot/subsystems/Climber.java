@@ -110,5 +110,13 @@ public class Climber extends Subsystem {
     public void setExtend(Boolean extendValue) {
         climbBoolean = extendValue;
     }
+    
+    public boolean getUnfolded() {
+        return unfolded;
+    }
+
+    public boolean getClimbed() {
+        return climbed;
+    }
 
 }
