@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.networktables.NetworkTable;
@@ -42,6 +44,7 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void readPeriodicInputs() {
+        periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
         periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
@@ -63,6 +66,7 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
+                periodic.turretAngle = ticksToDegrees(periodic.turretEncoder);
                 switch (flywheelMode) {
                     case OPEN_LOOP:
                         periodic.flywheelDemand = periodic.operatorFlywheelInput;
@@ -141,6 +145,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput[0]);
         SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
         SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
+        SmartDashboard.putNumber("Shooter/Turret/Angle", periodic.turretEncoder);
         SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
         SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
@@ -161,10 +166,13 @@ public class Shooter extends Subsystem {
     public void configTalons() {
         turretControl.config_kP(1, Constants.TURRET_CONTROL_PID_P);
         turretControl.config_kD(1, Constants.TURRET_CONTROL_PID_D);
+        turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 20);
         rightFlywheelFalcon.config_kP(1, Constants.RIGHTFLYWHEELFALCON_KP);
         rightFlywheelFalcon.config_kD(1, Constants.RIGHTFLYWHEELFALCON_KD);
+        rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 20);
         leftFlywheelFalcon.config_kP(1, Constants.LEFTFLYWHEELFALCON_KP);
         leftFlywheelFalcon.config_kD(1, Constants.LEFTFLYWHEELFALCON_KD);
+        leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 20);
     }
 
     /**
@@ -285,7 +293,8 @@ public class Shooter extends Subsystem {
         public double flywheelDemand = 0.0;
         public double flywheelRPM = 0.0;
         public double turretDemand = 0.0;
-        public double turretRPM = 0.0;
+        public double turretEncoder = 0.0;
+        public double turretAngle = 0.0;
         public boolean RPMOnTarget = false;
         public double RPMClosedLoopError = 0;
         public double rotationsClosedLoopError = 0;

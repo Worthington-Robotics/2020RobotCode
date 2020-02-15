@@ -276,6 +276,7 @@ public class Drive extends Subsystem {
         driveFrontLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveFrontLeft.enableVoltageCompensation(true);
         driveFrontLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
         driveMiddleLeft.setInverted(true);
         driveMiddleLeft.setNeutralMode(NeutralMode.Brake);
@@ -283,6 +284,7 @@ public class Drive extends Subsystem {
         driveMiddleLeft.enableVoltageCompensation(true);
         driveMiddleLeft.follow(driveFrontLeft);
         driveMiddleLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveMiddleLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
         driveBackLeft.setInverted(true);
         driveBackLeft.setNeutralMode(NeutralMode.Brake);
@@ -290,6 +292,7 @@ public class Drive extends Subsystem {
         driveBackLeft.enableVoltageCompensation(true);
         driveBackLeft.follow(driveFrontLeft);
         driveBackLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveBackLeft.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
         // primary closed-loop, 100ms timeout
         sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
@@ -310,6 +313,7 @@ public class Drive extends Subsystem {
         driveFrontRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveFrontRight.enableVoltageCompensation(true);
         driveFrontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
         driveMiddleRight.setInverted(false);
         driveMiddleRight.setNeutralMode(NeutralMode.Brake);
@@ -317,6 +321,7 @@ public class Drive extends Subsystem {
         driveMiddleRight.enableVoltageCompensation(true);
         driveMiddleRight.follow(driveFrontRight);
         driveMiddleRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveMiddleRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
         driveBackRight.setInverted(false);
         driveBackRight.setNeutralMode(NeutralMode.Brake);
@@ -324,6 +329,7 @@ public class Drive extends Subsystem {
         driveBackRight.enableVoltageCompensation(true);
         driveBackRight.follow(driveFrontRight);
         driveBackRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveBackRight.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
 
     }
 
