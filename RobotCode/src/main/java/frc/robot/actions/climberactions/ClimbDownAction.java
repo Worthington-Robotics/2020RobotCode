@@ -11,6 +11,7 @@ public class ClimbDownAction extends Action {
     public void onStart() {
         Climber.getInstance().setExtend(false);
         done = true;
+        System.out.println("Set Climb Down");
     }
 
     @Override

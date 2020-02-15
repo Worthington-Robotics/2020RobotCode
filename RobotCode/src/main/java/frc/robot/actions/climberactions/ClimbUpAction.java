@@ -11,6 +11,7 @@ public class ClimbUpAction extends Action {
     public void onStart() {
         Climber.getInstance().setExtend(true);
         done = true;
+        System.out.println("Climb is Up");
     }
 
     @Override
