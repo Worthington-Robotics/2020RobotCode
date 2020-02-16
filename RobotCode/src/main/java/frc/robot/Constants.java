@@ -40,11 +40,10 @@ public class Constants {
     public static final int TRANS_LOW_ID = 7;
     public static final int TRANS_HIGH_ID = 0;
     
-    public static final int UNFOLD_LOW_ID = 3;
-    public static final int UNFOLD_HIGH_ID = 4;
+    public static final int UNFOLD_LOW_ID = 4;
+    public static final int UNFOLD_HIGH_ID = 3;
 
-    public static final int CLIMB_LOW_ID = 5
-    ; //Do Not Change
+    public static final int CLIMB_LOW_ID = 5; //Do Not Change
     public static final int CLIMB_HIGH_ID = 2; //Do Not ChangeS
     
     public static final int INTAKE_LOW_ID = 6;
@@ -165,10 +164,10 @@ public class Constants {
     
     // Demands
     public static final double FULL_BELT_DEMAND = .75;
-    public static final double INDEXER_DEMAND = .75;
+    public static final double INDEXER_DEMAND = .33;
     
     public static final double INTAKE_DEMAND = .75;
-    public static final double HIGH_BELT_DEMAND = .75;
+    public static final double HIGH_BELT_DEMAND = 1;
     public static final double STOP_BELT_DEMAND = 0;
     // Sensor distance before stop (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;

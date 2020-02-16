@@ -170,6 +170,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
         SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
+        SmartDashboard.putNumber("Shooter/Flywheel/RPM", TicksPer100msToRPM(periodic.flywheelVelocity));
     }
 
     public void configLimelight() {
@@ -255,7 +256,11 @@ public class Shooter extends Subsystem {
     }
 
     public double RPMToTicksPer100ms(double RPM) {
-        return RPM * 13.653; // .1 * 2048 * 4/60
+        return RPM * 3.413; // .1 * 2048 * 4/60
+    }
+
+    public double TicksPer100msToRPM(double Ticks) {
+        return Ticks / 3.413; // .1 * 2048 * 4 / 60
     }
 
     public void setFlywheelRPM(double demand) {
