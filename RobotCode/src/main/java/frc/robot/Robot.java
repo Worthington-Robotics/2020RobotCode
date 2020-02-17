@@ -19,6 +19,7 @@ import frc.lib.statemachine.StateMachine;
 import frc.robot.actions.superaction.DeliveryBeltAction;
 import frc.robot.actions.superaction.IndexBeltAction;
 import frc.robot.actions.superaction.IntakeAction;
+import frc.robot.actions.superaction.PulseIndexBeltAction;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Superstructure;
 import frc.lib.util.DriveSignal;
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
     private JoystickButton intake = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton shift = new JoystickButton(Constants.MASTER, 6);
     private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 8);
+    private JoystickButton pulse = new JoystickButton(Constants.MASTER, 9);
 
     /**
      * This function is run when the robot is first started up and should be
@@ -85,6 +87,7 @@ public class Robot extends TimedRobot {
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
+        pulse.whileHeld(Action.toCommand(new PulseIndexBeltAction()));
     }
 
     /**

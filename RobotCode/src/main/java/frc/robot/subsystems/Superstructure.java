@@ -51,7 +51,7 @@ public class Superstructure extends Subsystem {
     private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
 
     //Pulse Variables
-    private boolean pulse1 = true;
+    private boolean pulse1 = true, pulse2 = false;
     private double timestamp;
 
 
@@ -190,11 +190,11 @@ public class Superstructure extends Subsystem {
                     case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
                 }
                 */
-                deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
-                indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-                ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
-                extensionArm.set(periodic.armExtension);
+                //deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+                //shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+                //indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+                //ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+                //extensionArm.set(periodic.armExtension);
             }
 
             @Override public void onStop(double timestamp) {}
@@ -210,7 +210,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
         SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW",  intakeSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/IndexDemand", periodic.intakeDemand);
+        SmartDashboard.putNumber("Superstructure/IndexerDemand", periodic.indexBeltDemand);
     }
 
     public void shootBall() {
@@ -246,6 +246,7 @@ public class Superstructure extends Subsystem {
     }
 
     public void setIndexBeltDemand(double indexBeltDemand) {
+        System.out.println("Setting Demand");
         periodic.indexBeltDemand = indexBeltDemand;
     }
 
@@ -288,22 +289,36 @@ public class Superstructure extends Subsystem {
         }
     }
 
-    public void pulse(double motorDemand, double demandMax, double waitTime) {
+    public double pulse(double currentMotorDemand, double demandMax, double waitTime) {
         if (pulse1) {
             timestamp = Timer.getFPGATimestamp();
             pulse1 = false;
+            //System.out.println("got Timestamp");
         }
-        if (motorDemand == 0) {
-            if ((timestamp + waitTime) == Timer.getFPGATimestamp()) {
-                motorDemand = demandMax;
+        //System.out.println("Timestamp: " + timestamp);
+        //System.out.println("Timestamp and Waittime: " + timestamp+waitTime);
+        //System.out.println("FPGA Time: " + Timer.getFPGATimestamp());
+        //System.out.println("Demand: " + periodic.indexBeltDemand);
+            if ((timestamp + waitTime) <= Timer.getFPGATimestamp()) {
+                //System.out.println("Got Through First Printline");
+                if (currentMotorDemand == 0) {
                 pulse1 = true;
+                //System.out.println("Set to Max");
+                return demandMax; 
+                } else {                    
+                    pulse1 = true;
+                    //System.out.println("Set to Min");
+                    return 0;
+                }
+            
+            } else {
+                //System.out.println("Staying the same");
+                return currentMotorDemand;
             }
-        } else {
-            if ((timestamp + waitTime) == Timer.getFPGATimestamp()) {
-                motorDemand = 0;
-                pulse1 = true;
-            }
-        }
+    }
+
+    public double getIndexerDemand() {
+        return periodic.indexBeltDemand;
     }
 
     public LogData getLogger() {

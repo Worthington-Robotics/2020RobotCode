@@ -1,21 +1,20 @@
 package frc.robot.actions.superaction;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Superstructure;
 
 public class PulseIndexBeltAction extends Action {
-    private double demand;
     @Override
     public void onStart() {
-
+        //System.out.println("Action Starting");
     }
 
     @Override
     public void onLoop() {
-        Superstructure.getInstance().pulse(demand, 1, 5000);
-        Superstructure.getInstance().setIntakeDemand(demand);
-        
+        Superstructure.getInstance().setIndexBeltDemand(
+                Superstructure.getInstance().pulse(
+                    Superstructure.getInstance().getIndexerDemand(), 1, 2));
+        //System.out.println("Looping");
     }
 
     @Override
@@ -25,7 +24,7 @@ public class PulseIndexBeltAction extends Action {
 
     @Override
     public void onStop() {
-
+        Superstructure.getInstance().setIndexBeltDemand(0);
     }
 
 }
