@@ -64,6 +64,8 @@ public class Constants {
     /* 
         Turret & flywheel tuned values ------------------------
     */
+    public static final double LIMELIGHT_HIGHT = 0.0;
+    public static final double LIMELIGHT_PITCH = 0.0;
     public static final double TURRET_MAX_SPEED = .2;
     public static final double TURRET_ANGLE_KP = 0;
     public static final double TURRET_ANGLE_KD = 0;
@@ -173,8 +175,8 @@ public class Constants {
     public static final double DISTANCE_STOP_MM = 25.4;
     public static final double TIME_TILL_STATIONARY = .5; //s
     //Turret Encoder Limits
-    public static final int leftTurretLimit = 0;
-    public static final int rightTurretLimit = 0;
+    public static final int leftTurretLimit = -7000;
+    public static final int rightTurretLimit = 7000;
 
     //Climber Constants
     public static final double CLIMBER_SHOOTER_REQMT = 90;

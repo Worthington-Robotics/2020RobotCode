@@ -243,12 +243,6 @@ public class Shooter extends Subsystem {
      * @return lateral distance from limelight lens to target in inches
      */
 
-    public double limelightRanging() {
-        // Equation that takes in ta (See Limelight Docs) and outputs distance from
-        // target in inches
-        // TODO need to test data points based on actual bot
-        return 505 - 409 * periodic.targetArea + 119 * periodic.targetArea * periodic.targetArea;
-    }
 
     public double calculateRPM(double distance) {
         return 0; // TODO implement the equation to calculate the required inittal velocity and
@@ -312,15 +306,30 @@ public class Shooter extends Subsystem {
         }
     }
 
-    public double turretAngletoRelAngle(double angle) {
-        double ticksFromOffset = turretControl.getSelectedSensorPosition() + degreesToTicks(angle);
-        if (turretControl.getSelectedSensorPosition() + degreesToTicks(angle) < Constants.leftTurretLimit) {
-            ticksFromOffset = 0.0;
+    /**
+     * 
+     * @param angle angle offset given by the limelight (tx)
+     * @return goal ticks to turret ticks
+     */
+    public double limelightRanging() {
+        // Equation that takes in ta (See Limelight Docs) and outputs distance from
+        // target in inches
+        // TODO need to test data points based on actual bot
+        double targetHightOffset =  98.5 - Constants.LIMELIGHT_HIGHT;
+        double targetAngleOffset = Constants.LIMELIGHT_PITCH + periodic.targetY;
+        return targetHightOffset / Math.tan(targetAngleOffset);
+
+    }
+
+    public double limelightGoalAngle() {
+        double goal = degreesToTicks(periodic.targetX) - periodic.turretEncoder;
+        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
+            goal = Constants.leftTurretLimit;
         }
-        if (turretControl.getSelectedSensorPosition() + degreesToTicks(angle) > Constants.rightTurretLimit) {
-            ticksFromOffset = 0.0;
+        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) > Constants.rightTurretLimit) {
+            goal = Constants.rightTurretLimit;
         }
-        return ticksToDegrees(ticksFromOffset);
+        return goal;
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
