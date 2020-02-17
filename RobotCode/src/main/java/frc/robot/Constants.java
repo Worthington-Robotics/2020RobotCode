@@ -67,7 +67,7 @@ public class Constants {
     public static final double LIMELIGHT_HIGHT = 0.0;
     public static final double LIMELIGHT_PITCH = 0.0;
     public static final double TURRET_MAX_SPEED = .2;
-    public static final double TURRET_ANGLE_KP = 0;
+    public static final double TURRET_ANGLE_KP = .14;
     public static final double TURRET_ANGLE_KD = 0;
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
     public static final double TURRET_MAX_RPM = 6000; //TODO tune

@@ -49,10 +49,6 @@ public class Robot extends TimedRobot {
     private JoystickButton indexer = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
     private JoystickButton indexerOut = new JoystickButton(Constants.MASTER, 8);
-    //private JoystickButton foldClimb = new JoystickButton(Constants.MASTER, 9);
-    //private JoystickButton unfoldClimb = new JoystickButton(Constants.MASTER, 10);
-    //private JoystickButton climbDown = new JoystickButton(Constants.MASTER, 11);
-    //private JoystickButton climbUp = new JoystickButton(Constants.MASTER, 12);
     private JoystickButton folder = new JoystickButton(Constants.MASTER,11);
     private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
 
@@ -63,10 +59,10 @@ public class Robot extends TimedRobot {
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton releaseIntake = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
-    private JoystickButton turretControl = new JoystickButton(Constants.SECOND, 7);
+    private JoystickButton turretControl = new JoystickButton(Constants.SECOND, 7);//
     private JoystickButton flyWheelPID = new JoystickButton(Constants.SECOND, 9);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 11);
-    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 12);
+    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 12);//
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -95,10 +91,6 @@ public class Robot extends TimedRobot {
         turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));
         colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
-        /*foldClimb.whenPressed(Action.toCommand(new FoldAction()));
-        unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
-        climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
-        climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));*/
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));

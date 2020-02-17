@@ -31,6 +31,9 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry camtran = table.getEntry("camtran");
 
     private Shooter() {
+        SmartDashboard.putNumber("Shooter/Turret/P", 0);
+        SmartDashboard.putNumber("Shooter/Turret/D", 0);
+        SmartDashboard.putBoolean("Shooter/Turret/SaveChanges", false);
         rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
         leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
         turretControl = new TalonSRX(Constants.TURRET_CONTROL);
@@ -49,6 +52,10 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void readPeriodicInputs() {
+        if (SmartDashboard.getBoolean("Shooter/Turret/SaveChanges", false)) {
+            updateTurretPID(SmartDashboard.getNumber("Shooter/Turret/P", 0),
+                    SmartDashboard.getNumber("Shooter/Turret/D", 0));
+        }
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
@@ -92,21 +99,15 @@ public class Shooter extends Subsystem {
                 switch (turretMode) {
                 case OPEN_LOOP:
                     if (periodic.operatorInput == 90) {
-                        periodic.turretDemand = -.2;
-                    } else if (periodic.operatorInput == 270) {
                         periodic.turretDemand = .2;
+                    } else if (periodic.operatorInput == 270) {
+                        periodic.turretDemand = -.2;
                     } else {
                         periodic.turretDemand = 0;
                     }
                     break;
-                case PID_MODE:
-                    if (periodic.operatorInput == 90) {
-                        periodic.turretDemand = -852;
-                    } else if (periodic.operatorInput == 270) {
-                        periodic.turretDemand = 852;
-                    } else {
-                        periodic.turretDemand = 0;
-                    }
+                    case PID_MODE:
+                        periodic.turretDemand = limelightGoalAngle();
                     break;
                 default:
                     turretControl.set(ControlMode.Disabled, 0);
@@ -148,6 +149,7 @@ public class Shooter extends Subsystem {
             turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
             break;
         case PID_MODE:
+            turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
         case LIMELIGHT_MODE:
             break;
@@ -162,6 +164,8 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void outputTelemetry() {
+        SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
+        SmartDashboard.putNumber("Shooter/Turret/AngleGoal", limelightGoalAngle());
         SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput);
         SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
         SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
@@ -185,25 +189,32 @@ public class Shooter extends Subsystem {
     }
 
     public void configTalons() {
-        turretControl.config_kP(1, Constants.TURRET_ANGLE_KP);
-        turretControl.config_kD(1, Constants.TURRET_ANGLE_KD);
+        turretControl.config_kP(0, Constants.TURRET_ANGLE_KP);
+        turretControl.config_kI(0, 0);
+        turretControl.config_kD(0, Constants.TURRET_ANGLE_KD);
         turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         turretControl.setSelectedSensorPosition(0);
-        rightFlywheelFalcon.config_kP(1, Constants.TURRET_RIGHT_FLY_KP);
-        rightFlywheelFalcon.config_kD(1, Constants.TURRET_RIGHT_FLY_KD);
+        turretControl.configContinuousCurrentLimit(5);
+        turretControl.setInverted(true);
+        rightFlywheelFalcon.config_kP(0, Constants.TURRET_RIGHT_FLY_KP);
+        rightFlywheelFalcon.config_kD(0, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         rightFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
         rightFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
-        leftFlywheelFalcon.config_kP(1, Constants.TURRET_LEFT_FLY_KP);
-        leftFlywheelFalcon.config_kD(1, Constants.TURRET_LEFT_FLY_KD);
+        leftFlywheelFalcon.config_kP(0, Constants.TURRET_LEFT_FLY_KP);
+        leftFlywheelFalcon.config_kD(0, Constants.TURRET_LEFT_FLY_KD);
         leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         leftFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
         leftFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
         disable();
     }
 
-    public void disable()
-    {
+    public void updateTurretPID(double P, double D) {
+        turretControl.config_kP(0, P);
+        turretControl.config_kD(0, D);
+    }
+
+    public void disable() {
         turretMode = MotorControlMode.DISABLED;
         flywheelMode = MotorControlMode.DISABLED;
     }
@@ -243,7 +254,6 @@ public class Shooter extends Subsystem {
      * @return lateral distance from limelight lens to target in inches
      */
 
-
     public double calculateRPM(double distance) {
         return 0; // TODO implement the equation to calculate the required inittal velocity and
                   // then convert to revolutions per Miniut
@@ -267,7 +277,7 @@ public class Shooter extends Subsystem {
     public void setTurretRPM(double demand) {
         if (turretMode != MotorControlMode.PID_MODE)
             turretMode = MotorControlMode.PID_MODE;
-        turretControl.set(ControlMode.Position, demand);
+        turretControl.set(ControlMode.Velocity, demand);
     }
 
     public void setFlywheelDemand(double newDemand) {
@@ -315,14 +325,14 @@ public class Shooter extends Subsystem {
         // Equation that takes in ta (See Limelight Docs) and outputs distance from
         // target in inches
         // TODO need to test data points based on actual bot
-        double targetHightOffset =  98.5 - Constants.LIMELIGHT_HIGHT;
+        double targetHightOffset = 98.5 - Constants.LIMELIGHT_HIGHT;
         double targetAngleOffset = Constants.LIMELIGHT_PITCH + periodic.targetY;
         return targetHightOffset / Math.tan(targetAngleOffset);
 
     }
 
     public double limelightGoalAngle() {
-        double goal = degreesToTicks(periodic.targetX) - periodic.turretEncoder;
+        double goal = degreesToTicks(periodic.targetX) + periodic.turretEncoder;
         if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
             goal = Constants.leftTurretLimit;
         }
