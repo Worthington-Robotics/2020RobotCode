@@ -1,0 +1,318 @@
+\hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3}{}\doxysection{frc.\+lib.\+drivers.\+Color\+Sensor\+V3 Class Reference}
+\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3}\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorMeasurementRate}{Color\+Sensor\+Measurement\+Rate}}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorResolution}{Color\+Sensor\+Resolution}}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1GainFactor}{Gain\+Factor}}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDCurrent}{L\+E\+D\+Current}}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDPulseFrequency}{L\+E\+D\+Pulse\+Frequency}}
+\item 
+enum {\bfseries Main\+Control}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorMeasurementRate}{Proximity\+Sensor\+Measurement\+Rate}}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorResolution}{Proximity\+Sensor\+Resolution}}
+\item 
+class {\bfseries Raw\+Color}
+\item 
+enum {\bfseries Register}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ade88544857ab47e4a4f711ea1e1528d8}{Color\+Sensor\+V3}} (I2\+C.\+Port port)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a4e05fa5f4124feda132cd50ce7b867b4}{configure\+Proximity\+Sensor\+L\+ED}} (\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDPulseFrequency}{L\+E\+D\+Pulse\+Frequency}} freq, \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDCurrent}{L\+E\+D\+Current}} curr, int pulses)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2f619e9d82a2d41bb12c61c42bba4303}{configure\+Proximity\+Sensor}} (\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorResolution}{Proximity\+Sensor\+Resolution}} res, \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorMeasurementRate}{Proximity\+Sensor\+Measurement\+Rate}} rate)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a22f48cf9d88c44b5c3a3dd027f6babc3}{configure\+Color\+Sensor}} (\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorResolution}{Color\+Sensor\+Resolution}} res, \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorMeasurementRate}{Color\+Sensor\+Measurement\+Rate}} rate, \mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1GainFactor}{Gain\+Factor}} gain)
+\item 
+Color \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a12915e3538323aec889aee31fbc14879}{get\+Color}} ()
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_af2cab5c2a9ca58709dfc09dce9fca5be}{get\+Proximity}} ()
+\item 
+Raw\+Color \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2fd804ffed324967ecc9b3521c7e5a74}{get\+Raw\+Color}} ()
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aae9c4aa68ceb77793b40e365a1479f74}{get\+Red}} ()
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ae7a92c0e0cf630cfc2fb9de277a32fcd}{get\+Green}} ()
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a1a776cb0fb541631b8ae73e85c3e0283}{get\+Blue}} ()
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a7c34b28ced8adcd5ba5fbfb0bfb81074}{get\+IR}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aeece9c3db8524e0344ac57fa6ca79124}{has\+Reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a27d066ddb83dc367f22a2f469aae5ffb}{check\+Device\+ID}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aaa38fcfeee9a777dc0bd5e1667feb787}{initialize\+Device}} ()
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a45e1a235df46858ef1e1c429ea605567}{read11\+Bit\+Register}} (Register reg)
+\item 
+int \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ab1f6858b73de9af6027e4b54fd4dc5de}{read20\+Bit\+Register}} (Register reg)
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a0e45198660ab6825a70dc0b92da01731}{write8}} (Register reg, int data)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+I2C \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2e8e69a5bbc40cad378ba5e9d7a5e41b}{m\+\_\+i2c}}
+\item 
+Sim\+Device \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a6f9e8c6c90c69ed6e879d249f9ac130f}{m\+\_\+sim\+Device}}
+\item 
+Sim\+Double \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a492467ce5a61e77a0e5e03cd3c1e4347}{m\+\_\+simR}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final byte \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aeb6a4ed1c5db7f3c4e66562ac275d55f}{k\+Address}} = 0x52
+\item 
+static final byte \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_abefc0a16d30bb39bd53a4e53883ce417}{k\+Part\+ID}} = (byte) 0x\+C2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+R\+EV Robotics Color Sensor V3 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ade88544857ab47e4a4f711ea1e1528d8}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ade88544857ab47e4a4f711ea1e1528d8}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!ColorSensorV3@{ColorSensorV3}}
+\index{ColorSensorV3@{ColorSensorV3}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{ColorSensorV3()}{ColorSensorV3()}}
+{\footnotesize\ttfamily frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+Color\+Sensor\+V3 (\begin{DoxyParamCaption}\item[{I2\+C.\+Port}]{port }\end{DoxyParamCaption})}
+
+Constructs a Color\+Sensor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The I2C port the color sensor is attached to \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a27d066ddb83dc367f22a2f469aae5ffb}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a27d066ddb83dc367f22a2f469aae5ffb}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!checkDeviceID@{checkDeviceID}}
+\index{checkDeviceID@{checkDeviceID}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{checkDeviceID()}{checkDeviceID()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+check\+Device\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a22f48cf9d88c44b5c3a3dd027f6babc3}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a22f48cf9d88c44b5c3a3dd027f6babc3}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!configureColorSensor@{configureColorSensor}}
+\index{configureColorSensor@{configureColorSensor}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{configureColorSensor()}{configureColorSensor()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+configure\+Color\+Sensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorResolution}{Color\+Sensor\+Resolution}}}]{res,  }\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorMeasurementRate}{Color\+Sensor\+Measurement\+Rate}}}]{rate,  }\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1GainFactor}{Gain\+Factor}}}]{gain }\end{DoxyParamCaption})}
+
+Configure the color sensor.
+
+These settings are only needed for advanced users, the defaults will work fine for most teams. Consult the A\+P\+D\+S-\/9151 for more information on these configuration settings and how they will affect color sensor measurements.
+
+
+\begin{DoxyParams}{Parameters}
+{\em res} & Bit resolution output by the respective light sensor A\+D\+Cs \\
+\hline
+{\em rate} & Measurement rate of the light sensor \\
+\hline
+{\em gain} & Gain factor applied to light sensor (color) outputs \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2f619e9d82a2d41bb12c61c42bba4303}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2f619e9d82a2d41bb12c61c42bba4303}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!configureProximitySensor@{configureProximitySensor}}
+\index{configureProximitySensor@{configureProximitySensor}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{configureProximitySensor()}{configureProximitySensor()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+configure\+Proximity\+Sensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorResolution}{Proximity\+Sensor\+Resolution}}}]{res,  }\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorMeasurementRate}{Proximity\+Sensor\+Measurement\+Rate}}}]{rate }\end{DoxyParamCaption})}
+
+Configure the proximity sensor.
+
+These settings are only needed for advanced users, the defaults will work fine for most teams. Consult the A\+P\+D\+S-\/9151 for more information on these configuration settings and how they will affect proximity sensor measurements.
+
+
+\begin{DoxyParams}{Parameters}
+{\em res} & Bit resolution output by the proximity sensor A\+DC. \\
+\hline
+{\em rate} & Measurement rate of the proximity sensor \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a4e05fa5f4124feda132cd50ce7b867b4}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a4e05fa5f4124feda132cd50ce7b867b4}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!configureProximitySensorLED@{configureProximitySensorLED}}
+\index{configureProximitySensorLED@{configureProximitySensorLED}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{configureProximitySensorLED()}{configureProximitySensorLED()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+configure\+Proximity\+Sensor\+L\+ED (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDPulseFrequency}{L\+E\+D\+Pulse\+Frequency}}}]{freq,  }\item[{\mbox{\hyperlink{enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDCurrent}{L\+E\+D\+Current}}}]{curr,  }\item[{int}]{pulses }\end{DoxyParamCaption})}
+
+Configure the the IR L\+ED used by the proximity sensor.
+
+These settings are only needed for advanced users, the defaults will work fine for most teams. Consult the A\+P\+D\+S-\/9151 for more information on these configuration settings and how they will affect proximity sensor measurements.
+
+
+\begin{DoxyParams}{Parameters}
+{\em freq} & The pulse modulation frequency for the proximity sensor L\+ED \\
+\hline
+{\em curr} & The pulse current for the proximity sensor L\+ED \\
+\hline
+{\em pulses} & The number of pulses per measurement of the proximity sensor L\+ED (0-\/255) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a1a776cb0fb541631b8ae73e85c3e0283}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a1a776cb0fb541631b8ae73e85c3e0283}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getBlue@{getBlue}}
+\index{getBlue@{getBlue}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getBlue()}{getBlue()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+Blue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the raw color value from the blue A\+DC
+
+\begin{DoxyReturn}{Returns}
+Blue A\+DC value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a12915e3538323aec889aee31fbc14879}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a12915e3538323aec889aee31fbc14879}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getColor@{getColor}}
+\index{getColor@{getColor}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily Color frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the most likely color. Works best when within 2 inches and perpendicular to surface of interest.
+
+\begin{DoxyReturn}{Returns}
+Color enum of the most likely color, including unknown if the minimum threshold is not met 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ae7a92c0e0cf630cfc2fb9de277a32fcd}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ae7a92c0e0cf630cfc2fb9de277a32fcd}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getGreen@{getGreen}}
+\index{getGreen@{getGreen}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getGreen()}{getGreen()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+Green (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the raw color value from the green A\+DC
+
+\begin{DoxyReturn}{Returns}
+Green A\+DC value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a7c34b28ced8adcd5ba5fbfb0bfb81074}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a7c34b28ced8adcd5ba5fbfb0bfb81074}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getIR@{getIR}}
+\index{getIR@{getIR}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getIR()}{getIR()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+IR (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the raw color value from the IR A\+DC
+
+\begin{DoxyReturn}{Returns}
+IR A\+DC value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_af2cab5c2a9ca58709dfc09dce9fca5be}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_af2cab5c2a9ca58709dfc09dce9fca5be}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getProximity@{getProximity}}
+\index{getProximity@{getProximity}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getProximity()}{getProximity()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+Proximity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the raw proximity value from the sensor A\+DC (11 bit). This value is largest when an object is close to the sensor and smallest when far away.
+
+\begin{DoxyReturn}{Returns}
+Proximity measurement value, ranging from 0 to 2047 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2fd804ffed324967ecc9b3521c7e5a74}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2fd804ffed324967ecc9b3521c7e5a74}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getRawColor@{getRawColor}}
+\index{getRawColor@{getRawColor}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getRawColor()}{getRawColor()}}
+{\footnotesize\ttfamily Raw\+Color frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+Raw\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the raw color values from their respective A\+D\+Cs (20-\/bit).
+
+\begin{DoxyReturn}{Returns}
+Color\+Values struct containing red, green, blue and IR values 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aae9c4aa68ceb77793b40e365a1479f74}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aae9c4aa68ceb77793b40e365a1479f74}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!getRed@{getRed}}
+\index{getRed@{getRed}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{getRed()}{getRed()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+get\+Red (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the raw color value from the red A\+DC
+
+\begin{DoxyReturn}{Returns}
+Red A\+DC value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aeece9c3db8524e0344ac57fa6ca79124}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aeece9c3db8524e0344ac57fa6ca79124}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!hasReset@{hasReset}}
+\index{hasReset@{hasReset}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{hasReset()}{hasReset()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+has\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Indicates if the device reset. Based on the power on status flag in the status register. Per the datasheet\+:
+
+Part went through a power-\/up event, either because the part was turned on or because there was power supply voltage disturbance (default at first register read).
+
+This flag is self clearing
+
+\begin{DoxyReturn}{Returns}
+bool indicating if the device was reset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aaa38fcfeee9a777dc0bd5e1667feb787}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aaa38fcfeee9a777dc0bd5e1667feb787}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!initializeDevice@{initializeDevice}}
+\index{initializeDevice@{initializeDevice}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{initializeDevice()}{initializeDevice()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+initialize\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a45e1a235df46858ef1e1c429ea605567}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a45e1a235df46858ef1e1c429ea605567}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!read11BitRegister@{read11BitRegister}}
+\index{read11BitRegister@{read11BitRegister}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{read11BitRegister()}{read11BitRegister()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+read11\+Bit\+Register (\begin{DoxyParamCaption}\item[{Register}]{reg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ab1f6858b73de9af6027e4b54fd4dc5de}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_ab1f6858b73de9af6027e4b54fd4dc5de}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!read20BitRegister@{read20BitRegister}}
+\index{read20BitRegister@{read20BitRegister}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{read20BitRegister()}{read20BitRegister()}}
+{\footnotesize\ttfamily int frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+read20\+Bit\+Register (\begin{DoxyParamCaption}\item[{Register}]{reg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a0e45198660ab6825a70dc0b92da01731}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a0e45198660ab6825a70dc0b92da01731}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!write8@{write8}}
+\index{write8@{write8}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{write8()}{write8()}}
+{\footnotesize\ttfamily void frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+write8 (\begin{DoxyParamCaption}\item[{Register}]{reg,  }\item[{int}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aeb6a4ed1c5db7f3c4e66562ac275d55f}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_aeb6a4ed1c5db7f3c4e66562ac275d55f}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!kAddress@{kAddress}}
+\index{kAddress@{kAddress}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{kAddress}{kAddress}}
+{\footnotesize\ttfamily final byte frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+k\+Address = 0x52\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_abefc0a16d30bb39bd53a4e53883ce417}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_abefc0a16d30bb39bd53a4e53883ce417}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!kPartID@{kPartID}}
+\index{kPartID@{kPartID}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{kPartID}{kPartID}}
+{\footnotesize\ttfamily final byte frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+k\+Part\+ID = (byte) 0x\+C2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2e8e69a5bbc40cad378ba5e9d7a5e41b}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a2e8e69a5bbc40cad378ba5e9d7a5e41b}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!m\_i2c@{m\_i2c}}
+\index{m\_i2c@{m\_i2c}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{m\_i2c}{m\_i2c}}
+{\footnotesize\ttfamily I2C frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+m\+\_\+i2c\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a6f9e8c6c90c69ed6e879d249f9ac130f}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a6f9e8c6c90c69ed6e879d249f9ac130f}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!m\_simDevice@{m\_simDevice}}
+\index{m\_simDevice@{m\_simDevice}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{m\_simDevice}{m\_simDevice}}
+{\footnotesize\ttfamily Sim\+Device frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+m\+\_\+sim\+Device\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a492467ce5a61e77a0e5e03cd3c1e4347}\label{classfrc_1_1lib_1_1drivers_1_1ColorSensorV3_a492467ce5a61e77a0e5e03cd3c1e4347}} 
+\index{frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}!m\_simR@{m\_simR}}
+\index{m\_simR@{m\_simR}!frc.lib.drivers.ColorSensorV3@{frc.lib.drivers.ColorSensorV3}}
+\doxysubsubsection{\texorpdfstring{m\_simR}{m\_simR}}
+{\footnotesize\ttfamily Sim\+Double frc.\+lib.\+drivers.\+Color\+Sensor\+V3.\+m\+\_\+simR\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/drivers/\mbox{\hyperlink{ColorSensorV3_8java}{Color\+Sensor\+V3.\+java}}\end{DoxyCompactItemize}

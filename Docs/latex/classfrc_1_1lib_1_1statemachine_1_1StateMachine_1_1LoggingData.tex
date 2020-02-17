@@ -1,0 +1,60 @@
+\hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{}\doxysection{frc.\+lib.\+statemachine.\+State\+Machine.\+Logging\+Data Class Reference}
+\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}\index{frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}}
+
+
+Inherits frc.\+lib.\+util.\+Logable.\+Log\+Data.
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final Atomic\+Integer \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_add03a283ccc931049c4072b6f69f787e}{state}} = new Atomic\+Integer(-\/1)
+\item 
+final Atomic\+Boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_a567375fe6e43438cd2f85e6cb1f46e2f}{want\+Stop}} = new Atomic\+Boolean(true)
+\item 
+final Atomic\+Boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_ad8091f1311c211cb0cab8948882f5aa7}{state\+Lock}} = new Atomic\+Boolean(false)
+\item 
+volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_aa9499df55e9eaf9d8c344cbc226d9b36}{current\+State}}
+\item 
+volatile double \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_a9ea4114fb381ab288817d7b675e8e887}{t\+\_\+start}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Internal data class for logging the behaviour of the state machine during runtime for use by the reflecting logger. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_aa9499df55e9eaf9d8c344cbc226d9b36}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_aa9499df55e9eaf9d8c344cbc226d9b36}} 
+\index{frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}!currentState@{currentState}}
+\index{currentState@{currentState}!frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}}
+\doxysubsubsection{\texorpdfstring{currentState}{currentState}}
+{\footnotesize\ttfamily volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}} frc.\+lib.\+statemachine.\+State\+Machine.\+Logging\+Data.\+current\+State}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_add03a283ccc931049c4072b6f69f787e}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_add03a283ccc931049c4072b6f69f787e}} 
+\index{frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}!state@{state}}
+\index{state@{state}!frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily final Atomic\+Integer frc.\+lib.\+statemachine.\+State\+Machine.\+Logging\+Data.\+state = new Atomic\+Integer(-\/1)}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_ad8091f1311c211cb0cab8948882f5aa7}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_ad8091f1311c211cb0cab8948882f5aa7}} 
+\index{frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}!stateLock@{stateLock}}
+\index{stateLock@{stateLock}!frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}}
+\doxysubsubsection{\texorpdfstring{stateLock}{stateLock}}
+{\footnotesize\ttfamily final Atomic\+Boolean frc.\+lib.\+statemachine.\+State\+Machine.\+Logging\+Data.\+state\+Lock = new Atomic\+Boolean(false)}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_a9ea4114fb381ab288817d7b675e8e887}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_a9ea4114fb381ab288817d7b675e8e887}} 
+\index{frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}!t\_start@{t\_start}}
+\index{t\_start@{t\_start}!frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}}
+\doxysubsubsection{\texorpdfstring{t\_start}{t\_start}}
+{\footnotesize\ttfamily volatile double frc.\+lib.\+statemachine.\+State\+Machine.\+Logging\+Data.\+t\+\_\+start}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_a567375fe6e43438cd2f85e6cb1f46e2f}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData_a567375fe6e43438cd2f85e6cb1f46e2f}} 
+\index{frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}!wantStop@{wantStop}}
+\index{wantStop@{wantStop}!frc.lib.statemachine.StateMachine.LoggingData@{frc.lib.statemachine.StateMachine.LoggingData}}
+\doxysubsubsection{\texorpdfstring{wantStop}{wantStop}}
+{\footnotesize\ttfamily final Atomic\+Boolean frc.\+lib.\+statemachine.\+State\+Machine.\+Logging\+Data.\+want\+Stop = new Atomic\+Boolean(true)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/statemachine/\mbox{\hyperlink{StateMachine_8java}{State\+Machine.\+java}}\end{DoxyCompactItemize}

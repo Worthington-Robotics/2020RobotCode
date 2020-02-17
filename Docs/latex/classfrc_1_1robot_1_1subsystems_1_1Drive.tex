@@ -1,0 +1,499 @@
+\hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive}{}\doxysection{frc.\+robot.\+subsystems.\+Drive Class Reference}
+\label{classfrc_1_1robot_1_1subsystems_1_1Drive}\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+Inheritance diagram for frc.\+robot.\+subsystems.\+Drive\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classfrc_1_1robot_1_1subsystems_1_1Drive}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Drive\+Control\+State}
+\item 
+class \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO}{Drive\+IO}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO}{Periodic\+IO}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a5448b828c59b085cdb91c4c99b069c68}{get\+Logger}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a4c6a79122eeb93189dadd4a76212ba0d}{register\+Enabled\+Loops}} (\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}} enabled\+Looper)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_ae8814f5692a7d8108bc2829a5e5ed992}{read\+Periodic\+Inputs}} ()
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_ab285d83ca7a2f3d1448140e6291930d3}{write\+Periodic\+Outputs}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF}{P\+I\+DF}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a6c72320428f14f154613ad5125248aa1}{get\+Angle\+P\+ID}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_ab28c266d7eb996367385267dc24e392e}{set\+Trans}} (Double\+Solenoid.\+Value state)
+\item 
+synchronized \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a739bedb025ce1709a4240b578ded2fb1}{get\+Heading}} ()
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a14d431d00b6395da2ce07e03c6403de0}{set\+Heading}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}} heading)
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a5a00151fac9cba8a4a61d3c3e9e41f4f}{get\+Left\+Encoder\+Rotations}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_af71ee191e42d5931625f7e31c01e268b}{get\+Right\+Encoder\+Rotations}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_ad67a063cdb5a3c6cfd1b8b62c1943b54}{get\+Left\+Encoder\+Distance}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a89ea4ffacf88569375746086c945f081}{get\+Right\+Encoder\+Distance}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a65a7e789d17dd2ab07cb3917b0f4b918}{get\+Left\+Velocity\+Native\+Units}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a3b56fa8a2849033cbd975b6067559761}{get\+Right\+Velocity\+Native\+Units}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_af335afbb141b24c0e2d45b8b3b0ced7e}{get\+Left\+Linear\+Velocity}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_aa9f0945b8561f50daa421714546b3d8f}{get\+Right\+Linear\+Velocity}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a6eb3785b87920d18ca7412efa1c78189}{reset}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a5096858c0638c79cecb6c3f7a1c74e1d}{override\+Trajectory}} (boolean value)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_aa73d8997e486c5dd2ad2bbc9e62ec957}{set\+Open\+Loop}} (\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} signal)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_aa29f0a5a16ae21e3e996dcf0cf954ad4}{set\+Angle\+Pid\+Loop}} (\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} signal, double angle)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a99e747ed436216c01c15a46980cf23f5}{get\+P\+I\+D\+On\+Target}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a36411031556d775def4c23ffa812edbc}{set\+Inverse}} (boolean is\+Inverse)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a6d002fbd1978907c8bbe4794ec86a3f0}{set\+Velocity}} (\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} signal, \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} feedforward)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a7f05cedf7865d011f41897464618b0f0}{is\+Done\+With\+Trajectory}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a9e63c78179d0ada70887e0699f74adfe}{output\+Telemetry}} ()
+\item 
+Log\+Data \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a91db0309675720dde1a209188002d4ab}{log\+Data}} ()
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_af0f5efa700003fdc3074ef192526111b}{follow\+Path}} (\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}} path, boolean reversed)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive}{Drive}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_ae71224ad23a9963e882c1f290b0679a7}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a8ba73c197ed7039bc817a81bd3e3a792}{Drive}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a9287ac074f19108f5d4ead065e5ab35b}{reset\+Encoders}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a49204a52448c743226f12c52e9d80326}{config\+P\+ID}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a310b96343c3717aead43ea47130d0b39}{config\+Talons}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_af652ca63e41d668b0a02152fdf5bd1ba}{update\+Path\+Follower}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_ad4f9f62797a2819fd5d08744a977e12f}{arcade\+Drive}} (double x\+Speed, double z\+Rotation)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a79622f67d84775c3084c3d76ae696fec}{rotations\+To\+Inches}} (double rotations)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a7a365126faf8ec1ece80b73fc7548fd1}{rpm\+To\+Inches\+Per\+Second}} (double rpm)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_aa0f6090e928f6fb15d31220522019953}{inches\+To\+Rotations}} (double inches)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a225acdfe6fe5d1300a7e741dc466432b}{inches\+Per\+Second\+To\+Rpm}} (double inches\+\_\+per\+\_\+second)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a01c6a2dbbe87c39c67fe64c36c06da97}{radians\+Per\+Second\+To\+Ticks\+Per100ms}} (double rad\+\_\+s)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_af89cd61e2951e08214331cb8fec9ea76}{inches\+Per\+Second\+To\+Radians\+Per\+Second}} (double in\+\_\+sec)
+\item 
+static double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a70c516be3c54b57adc21d856b236817a}{rpm\+To\+Ticks\+Per100ms}} (double rpm)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Drive\+Control\+State \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a52fa85bdf38a10c129ed35fa2e23ac15}{m\+Drive\+Control\+State}} = Drive\+Control\+State.\+O\+P\+E\+N\+\_\+\+L\+O\+OP
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a4a39f7789ec50be4aa926ac2aa3ca1e2}{m\+Override\+Trajectory}} = false
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO}{Drive\+IO}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_abed886e944185143bced12bde6bf8e09}{periodic}}
+\item 
+Pigeon\+I\+MU \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a993ef0d4b10df82abb15a56f25f7796f}{pigeon\+I\+MU}}
+\item 
+Double\+Solenoid \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a6d7fc0cdc1ab8adf4e9a85e471ac4e86}{trans}}
+\item 
+Talon\+FX \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a5697131c2a4301c52ebd36ee84834dd3}{drive\+Front\+Left}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF}{P\+I\+DF}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a191a7e4e01670814ef3ab77bbcfa3f1c}{angle\+P\+ID}}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController}{Adaptive\+Pure\+Pursuit\+Controller}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a868725b2b37864e1d685eaeee1ac2468}{path\+Following\+Controller}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive}{Drive}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_a7f54ee57b6fa261a486c4960c1c3c1e7}{m\+\_\+\+Drive\+Instance}} = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive}{Drive}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a8ba73c197ed7039bc817a81bd3e3a792}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a8ba73c197ed7039bc817a81bd3e3a792}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!Drive@{Drive}}
+\index{Drive@{Drive}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{Drive()}{Drive()}}
+{\footnotesize\ttfamily frc.\+robot.\+subsystems.\+Drive.\+Drive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_ad4f9f62797a2819fd5d08744a977e12f}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_ad4f9f62797a2819fd5d08744a977e12f}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!arcadeDrive@{arcadeDrive}}
+\index{arcadeDrive@{arcadeDrive}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{arcadeDrive()}{arcadeDrive()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} frc.\+robot.\+subsystems.\+Drive.\+arcade\+Drive (\begin{DoxyParamCaption}\item[{double}]{x\+Speed,  }\item[{double}]{z\+Rotation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Arcade drive method for calculating drivetrain output. 
+
+defined as positive forward on both outputs and turning right yields positive left output and negative right output
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Speed} & desired travel velocity \\
+\hline
+{\em z\+Rotation} & desired rotational velocity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a drivesignal for open loop use 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a49204a52448c743226f12c52e9d80326}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a49204a52448c743226f12c52e9d80326}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!configPID@{configPID}}
+\index{configPID@{configPID}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{configPID()}{configPID()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+config\+P\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a310b96343c3717aead43ea47130d0b39}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a310b96343c3717aead43ea47130d0b39}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!configTalons@{configTalons}}
+\index{configTalons@{configTalons}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{configTalons()}{configTalons()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+config\+Talons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_af0f5efa700003fdc3074ef192526111b}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_af0f5efa700003fdc3074ef192526111b}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!followPath@{followPath}}
+\index{followPath@{followPath}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{followPath()}{followPath()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+follow\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1Path}{Path}}}]{path,  }\item[{boolean}]{reversed }\end{DoxyParamCaption})}
+
+internal methods beyond this point \mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a6c72320428f14f154613ad5125248aa1}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a6c72320428f14f154613ad5125248aa1}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getAnglePID@{getAnglePID}}
+\index{getAnglePID@{getAnglePID}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getAnglePID()}{getAnglePID()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF}{P\+I\+DF}} frc.\+robot.\+subsystems.\+Drive.\+get\+Angle\+P\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a739bedb025ce1709a4240b578ded2fb1}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a739bedb025ce1709a4240b578ded2fb1}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getHeading@{getHeading}}
+\index{getHeading@{getHeading}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getHeading()}{getHeading()}}
+{\footnotesize\ttfamily synchronized \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}} frc.\+robot.\+subsystems.\+Drive.\+get\+Heading (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_ae71224ad23a9963e882c1f290b0679a7}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_ae71224ad23a9963e882c1f290b0679a7}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive}{Drive}} frc.\+robot.\+subsystems.\+Drive.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_ad67a063cdb5a3c6cfd1b8b62c1943b54}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_ad67a063cdb5a3c6cfd1b8b62c1943b54}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getLeftEncoderDistance@{getLeftEncoderDistance}}
+\index{getLeftEncoderDistance@{getLeftEncoderDistance}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getLeftEncoderDistance()}{getLeftEncoderDistance()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Left\+Encoder\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a5a00151fac9cba8a4a61d3c3e9e41f4f}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a5a00151fac9cba8a4a61d3c3e9e41f4f}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getLeftEncoderRotations@{getLeftEncoderRotations}}
+\index{getLeftEncoderRotations@{getLeftEncoderRotations}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getLeftEncoderRotations()}{getLeftEncoderRotations()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Left\+Encoder\+Rotations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_af335afbb141b24c0e2d45b8b3b0ced7e}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_af335afbb141b24c0e2d45b8b3b0ced7e}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getLeftLinearVelocity@{getLeftLinearVelocity}}
+\index{getLeftLinearVelocity@{getLeftLinearVelocity}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getLeftLinearVelocity()}{getLeftLinearVelocity()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Left\+Linear\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a65a7e789d17dd2ab07cb3917b0f4b918}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a65a7e789d17dd2ab07cb3917b0f4b918}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getLeftVelocityNativeUnits@{getLeftVelocityNativeUnits}}
+\index{getLeftVelocityNativeUnits@{getLeftVelocityNativeUnits}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getLeftVelocityNativeUnits()}{getLeftVelocityNativeUnits()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Left\+Velocity\+Native\+Units (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a5448b828c59b085cdb91c4c99b069c68}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a5448b828c59b085cdb91c4c99b069c68}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getLogger@{getLogger}}
+\index{getLogger@{getLogger}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getLogger()}{getLogger()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO}{Periodic\+IO}} frc.\+robot.\+subsystems.\+Drive.\+get\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_affd98b66c2142b99e718fee877a36099}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a99e747ed436216c01c15a46980cf23f5}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a99e747ed436216c01c15a46980cf23f5}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getPIDOnTarget@{getPIDOnTarget}}
+\index{getPIDOnTarget@{getPIDOnTarget}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getPIDOnTarget()}{getPIDOnTarget()}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+subsystems.\+Drive.\+get\+P\+I\+D\+On\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a89ea4ffacf88569375746086c945f081}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a89ea4ffacf88569375746086c945f081}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getRightEncoderDistance@{getRightEncoderDistance}}
+\index{getRightEncoderDistance@{getRightEncoderDistance}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getRightEncoderDistance()}{getRightEncoderDistance()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Right\+Encoder\+Distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_af71ee191e42d5931625f7e31c01e268b}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_af71ee191e42d5931625f7e31c01e268b}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getRightEncoderRotations@{getRightEncoderRotations}}
+\index{getRightEncoderRotations@{getRightEncoderRotations}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getRightEncoderRotations()}{getRightEncoderRotations()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Right\+Encoder\+Rotations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_aa9f0945b8561f50daa421714546b3d8f}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_aa9f0945b8561f50daa421714546b3d8f}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getRightLinearVelocity@{getRightLinearVelocity}}
+\index{getRightLinearVelocity@{getRightLinearVelocity}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getRightLinearVelocity()}{getRightLinearVelocity()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Right\+Linear\+Velocity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a3b56fa8a2849033cbd975b6067559761}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a3b56fa8a2849033cbd975b6067559761}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!getRightVelocityNativeUnits@{getRightVelocityNativeUnits}}
+\index{getRightVelocityNativeUnits@{getRightVelocityNativeUnits}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{getRightVelocityNativeUnits()}{getRightVelocityNativeUnits()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Drive.\+get\+Right\+Velocity\+Native\+Units (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_af89cd61e2951e08214331cb8fec9ea76}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_af89cd61e2951e08214331cb8fec9ea76}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!inchesPerSecondToRadiansPerSecond@{inchesPerSecondToRadiansPerSecond}}
+\index{inchesPerSecondToRadiansPerSecond@{inchesPerSecondToRadiansPerSecond}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{inchesPerSecondToRadiansPerSecond()}{inchesPerSecondToRadiansPerSecond()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+inches\+Per\+Second\+To\+Radians\+Per\+Second (\begin{DoxyParamCaption}\item[{double}]{in\+\_\+sec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a225acdfe6fe5d1300a7e741dc466432b}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a225acdfe6fe5d1300a7e741dc466432b}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!inchesPerSecondToRpm@{inchesPerSecondToRpm}}
+\index{inchesPerSecondToRpm@{inchesPerSecondToRpm}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{inchesPerSecondToRpm()}{inchesPerSecondToRpm()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+inches\+Per\+Second\+To\+Rpm (\begin{DoxyParamCaption}\item[{double}]{inches\+\_\+per\+\_\+second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_aa0f6090e928f6fb15d31220522019953}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_aa0f6090e928f6fb15d31220522019953}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!inchesToRotations@{inchesToRotations}}
+\index{inchesToRotations@{inchesToRotations}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{inchesToRotations()}{inchesToRotations()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+inches\+To\+Rotations (\begin{DoxyParamCaption}\item[{double}]{inches }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a7f05cedf7865d011f41897464618b0f0}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a7f05cedf7865d011f41897464618b0f0}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!isDoneWithTrajectory@{isDoneWithTrajectory}}
+\index{isDoneWithTrajectory@{isDoneWithTrajectory}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{isDoneWithTrajectory()}{isDoneWithTrajectory()}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+subsystems.\+Drive.\+is\+Done\+With\+Trajectory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a91db0309675720dde1a209188002d4ab}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a91db0309675720dde1a209188002d4ab}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!logData@{logData}}
+\index{logData@{logData}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{logData()}{logData()}}
+{\footnotesize\ttfamily Log\+Data frc.\+robot.\+subsystems.\+Drive.\+log\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a9e63c78179d0ada70887e0699f74adfe}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a9e63c78179d0ada70887e0699f74adfe}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!outputTelemetry@{outputTelemetry}}
+\index{outputTelemetry@{outputTelemetry}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{outputTelemetry()}{outputTelemetry()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+output\+Telemetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Outputs all logging information to the Smart\+Dashboard 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a5096858c0638c79cecb6c3f7a1c74e1d}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a5096858c0638c79cecb6c3f7a1c74e1d}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!overrideTrajectory@{overrideTrajectory}}
+\index{overrideTrajectory@{overrideTrajectory}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{overrideTrajectory()}{overrideTrajectory()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+override\+Trajectory (\begin{DoxyParamCaption}\item[{boolean}]{value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a01c6a2dbbe87c39c67fe64c36c06da97}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a01c6a2dbbe87c39c67fe64c36c06da97}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!radiansPerSecondToTicksPer100ms@{radiansPerSecondToTicksPer100ms}}
+\index{radiansPerSecondToTicksPer100ms@{radiansPerSecondToTicksPer100ms}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{radiansPerSecondToTicksPer100ms()}{radiansPerSecondToTicksPer100ms()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+radians\+Per\+Second\+To\+Ticks\+Per100ms (\begin{DoxyParamCaption}\item[{double}]{rad\+\_\+s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_ae8814f5692a7d8108bc2829a5e5ed992}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_ae8814f5692a7d8108bc2829a5e5ed992}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!readPeriodicInputs@{readPeriodicInputs}}
+\index{readPeriodicInputs@{readPeriodicInputs}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{readPeriodicInputs()}{readPeriodicInputs()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+read\+Periodic\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Updates all periodic variables and sensors 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a4c6a79122eeb93189dadd4a76212ba0d}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a4c6a79122eeb93189dadd4a76212ba0d}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!registerEnabledLoops@{registerEnabledLoops}}
+\index{registerEnabledLoops@{registerEnabledLoops}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{registerEnabledLoops()}{registerEnabledLoops()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+register\+Enabled\+Loops (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}}}]{enabled\+Looper }\end{DoxyParamCaption})}
+
+Required for the subsystem\textquotesingle{}s looper to be registered to the state machine not required for subsystems that do not use looper
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled\+Looper} & the subsystem\textquotesingle{}s Looper \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a4d27c0d71c9a6d4f86158568ce742170}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a6eb3785b87920d18ca7412efa1c78189}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a6eb3785b87920d18ca7412efa1c78189}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called to reset and configure the subsystem 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a9287ac074f19108f5d4ead065e5ab35b}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a9287ac074f19108f5d4ead065e5ab35b}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!resetEncoders@{resetEncoders}}
+\index{resetEncoders@{resetEncoders}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{resetEncoders()}{resetEncoders()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+reset\+Encoders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a79622f67d84775c3084c3d76ae696fec}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a79622f67d84775c3084c3d76ae696fec}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!rotationsToInches@{rotationsToInches}}
+\index{rotationsToInches@{rotationsToInches}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{rotationsToInches()}{rotationsToInches()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+rotations\+To\+Inches (\begin{DoxyParamCaption}\item[{double}]{rotations }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a7a365126faf8ec1ece80b73fc7548fd1}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a7a365126faf8ec1ece80b73fc7548fd1}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!rpmToInchesPerSecond@{rpmToInchesPerSecond}}
+\index{rpmToInchesPerSecond@{rpmToInchesPerSecond}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{rpmToInchesPerSecond()}{rpmToInchesPerSecond()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+rpm\+To\+Inches\+Per\+Second (\begin{DoxyParamCaption}\item[{double}]{rpm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a70c516be3c54b57adc21d856b236817a}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a70c516be3c54b57adc21d856b236817a}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!rpmToTicksPer100ms@{rpmToTicksPer100ms}}
+\index{rpmToTicksPer100ms@{rpmToTicksPer100ms}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{rpmToTicksPer100ms()}{rpmToTicksPer100ms()}}
+{\footnotesize\ttfamily static double frc.\+robot.\+subsystems.\+Drive.\+rpm\+To\+Ticks\+Per100ms (\begin{DoxyParamCaption}\item[{double}]{rpm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_aa29f0a5a16ae21e3e996dcf0cf954ad4}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_aa29f0a5a16ae21e3e996dcf0cf954ad4}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!setAnglePidLoop@{setAnglePidLoop}}
+\index{setAnglePidLoop@{setAnglePidLoop}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{setAnglePidLoop()}{setAnglePidLoop()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+set\+Angle\+Pid\+Loop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}}]{signal,  }\item[{double}]{angle }\end{DoxyParamCaption})}
+
+Configure for Angle P\+ID control \mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a14d431d00b6395da2ce07e03c6403de0}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a14d431d00b6395da2ce07e03c6403de0}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!setHeading@{setHeading}}
+\index{setHeading@{setHeading}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{setHeading()}{setHeading()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+set\+Heading (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}}}]{heading }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a36411031556d775def4c23ffa812edbc}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a36411031556d775def4c23ffa812edbc}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!setInverse@{setInverse}}
+\index{setInverse@{setInverse}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{setInverse()}{setInverse()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+set\+Inverse (\begin{DoxyParamCaption}\item[{boolean}]{is\+Inverse }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_aa73d8997e486c5dd2ad2bbc9e62ec957}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_aa73d8997e486c5dd2ad2bbc9e62ec957}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!setOpenLoop@{setOpenLoop}}
+\index{setOpenLoop@{setOpenLoop}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{setOpenLoop()}{setOpenLoop()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+set\+Open\+Loop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}}]{signal }\end{DoxyParamCaption})}
+
+Configure talons for open loop control
+
+
+\begin{DoxyParams}{Parameters}
+{\em signal} & input to drive train \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_ab28c266d7eb996367385267dc24e392e}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_ab28c266d7eb996367385267dc24e392e}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!setTrans@{setTrans}}
+\index{setTrans@{setTrans}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{setTrans()}{setTrans()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+set\+Trans (\begin{DoxyParamCaption}\item[{Double\+Solenoid.\+Value}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a6d002fbd1978907c8bbe4794ec86a3f0}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a6d002fbd1978907c8bbe4794ec86a3f0}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!setVelocity@{setVelocity}}
+\index{setVelocity@{setVelocity}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{setVelocity()}{setVelocity()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+set\+Velocity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}}]{signal,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}}}]{feedforward }\end{DoxyParamCaption})}
+
+Configures talons for velocity control \mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_af652ca63e41d668b0a02152fdf5bd1ba}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_af652ca63e41d668b0a02152fdf5bd1ba}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!updatePathFollower@{updatePathFollower}}
+\index{updatePathFollower@{updatePathFollower}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{updatePathFollower()}{updatePathFollower()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Drive.\+update\+Path\+Follower (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_ab285d83ca7a2f3d1448140e6291930d3}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_ab285d83ca7a2f3d1448140e6291930d3}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!writePeriodicOutputs@{writePeriodicOutputs}}
+\index{writePeriodicOutputs@{writePeriodicOutputs}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{writePeriodicOutputs()}{writePeriodicOutputs()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Drive.\+write\+Periodic\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Writes the periodic outputs to actuators (motors and ect...) 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a191a7e4e01670814ef3ab77bbcfa3f1c}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a191a7e4e01670814ef3ab77bbcfa3f1c}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!anglePID@{anglePID}}
+\index{anglePID@{anglePID}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{anglePID}{anglePID}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1drivers_1_1PIDF}{P\+I\+DF}} frc.\+robot.\+subsystems.\+Drive.\+angle\+P\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a5697131c2a4301c52ebd36ee84834dd3}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a5697131c2a4301c52ebd36ee84834dd3}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!driveFrontLeft@{driveFrontLeft}}
+\index{driveFrontLeft@{driveFrontLeft}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{driveFrontLeft}{driveFrontLeft}}
+{\footnotesize\ttfamily Talon\+FX frc.\+robot.\+subsystems.\+Drive.\+drive\+Front\+Left\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a7f54ee57b6fa261a486c4960c1c3c1e7}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a7f54ee57b6fa261a486c4960c1c3c1e7}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!m\_DriveInstance@{m\_DriveInstance}}
+\index{m\_DriveInstance@{m\_DriveInstance}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{m\_DriveInstance}{m\_DriveInstance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive}{Drive}} frc.\+robot.\+subsystems.\+Drive.\+m\+\_\+\+Drive\+Instance = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive}{Drive}}()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a52fa85bdf38a10c129ed35fa2e23ac15}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a52fa85bdf38a10c129ed35fa2e23ac15}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!mDriveControlState@{mDriveControlState}}
+\index{mDriveControlState@{mDriveControlState}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{mDriveControlState}{mDriveControlState}}
+{\footnotesize\ttfamily Drive\+Control\+State frc.\+robot.\+subsystems.\+Drive.\+m\+Drive\+Control\+State = Drive\+Control\+State.\+O\+P\+E\+N\+\_\+\+L\+O\+OP\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a4a39f7789ec50be4aa926ac2aa3ca1e2}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a4a39f7789ec50be4aa926ac2aa3ca1e2}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!mOverrideTrajectory@{mOverrideTrajectory}}
+\index{mOverrideTrajectory@{mOverrideTrajectory}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{mOverrideTrajectory}{mOverrideTrajectory}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+subsystems.\+Drive.\+m\+Override\+Trajectory = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a868725b2b37864e1d685eaeee1ac2468}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a868725b2b37864e1d685eaeee1ac2468}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!pathFollowingController@{pathFollowingController}}
+\index{pathFollowingController@{pathFollowingController}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{pathFollowingController}{pathFollowingController}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1control_1_1AdaptivePurePursuitController}{Adaptive\+Pure\+Pursuit\+Controller}} frc.\+robot.\+subsystems.\+Drive.\+path\+Following\+Controller\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_abed886e944185143bced12bde6bf8e09}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_abed886e944185143bced12bde6bf8e09}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!periodic@{periodic}}
+\index{periodic@{periodic}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{periodic}{periodic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO}{Drive\+IO}} frc.\+robot.\+subsystems.\+Drive.\+periodic\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a993ef0d4b10df82abb15a56f25f7796f}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a993ef0d4b10df82abb15a56f25f7796f}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!pigeonIMU@{pigeonIMU}}
+\index{pigeonIMU@{pigeonIMU}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{pigeonIMU}{pigeonIMU}}
+{\footnotesize\ttfamily Pigeon\+I\+MU frc.\+robot.\+subsystems.\+Drive.\+pigeon\+I\+MU\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Drive_a6d7fc0cdc1ab8adf4e9a85e471ac4e86}\label{classfrc_1_1robot_1_1subsystems_1_1Drive_a6d7fc0cdc1ab8adf4e9a85e471ac4e86}} 
+\index{frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}!trans@{trans}}
+\index{trans@{trans}!frc.robot.subsystems.Drive@{frc.robot.subsystems.Drive}}
+\doxysubsubsection{\texorpdfstring{trans}{trans}}
+{\footnotesize\ttfamily Double\+Solenoid frc.\+robot.\+subsystems.\+Drive.\+trans\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/subsystems/\mbox{\hyperlink{Drive_8java}{Drive.\+java}}\end{DoxyCompactItemize}

@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -32,6 +33,7 @@ public class ColorWheel extends Subsystem {
         m_colorMatcher.addColorMatch(Constants.kGreenTarget);
         m_colorMatcher.addColorMatch(Constants.kRedTarget);
         m_colorMatcher.addColorMatch(Constants.kYellowTarget);
+        colorWheelTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         reset();
     }
 
@@ -105,44 +107,7 @@ public class ColorWheel extends Subsystem {
     // User Created Methods
 
     private double inchesToTicks(double inches) {
-        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.ENCODER_5046_CPR;
-    }
-
-    /**
-     * Returns the color that the sensor sees on the wheel
-     *
-     * @return color the sensor sees on the wheel (Red, Yellow, Green, or Blue)
-     */
-
-    public static char colorFromRGB(final double[] RGB) {
-        // RGB Values: Blue: 0, 255, 255. Green: 0, 255, 0. Red: 255, 0, 0. Yellow: 255,
-        // 255, 0.
-        // H Values: Blue: 180. Green: 120. Yellow: 60. Red: 0
-
-        final float[] hsv = new float[3];
-        java.awt.Color.RGBtoHSB((int) (RGB[0] * 255), (int) (RGB[1] * 255), (int) (RGB[2] * 255), hsv);
-        // System.out.println(hsv[0] + ", " + hsv[1] + ", " + hsv[2]);
-        hsv[0] *= 360;
-        hsv[1] *= 100;
-        hsv[2] *= 100;
-        // System.out.println(hsv[0] + ", " + hsv[1] + ", " + hsv[2]);
-
-        if (hsv[2] < Constants.COLOR_WHEEL_VAL_LIMIT || hsv[1] < Constants.COLOR_WHEEL_SAT_LIMIT) {
-            return 'U';
-        } else {
-            if (Util.epsilonEquals(hsv[0], Constants.COLOR_WHEEL_RED_HUE1, Constants.COLOR_WHEEL_HUE_ERROR)
-                    || Util.epsilonEquals(hsv[0], Constants.COLOR_WHEEL_RED_HUE2, Constants.COLOR_WHEEL_HUE_ERROR)) {
-                return 'R';
-            } else if (Util.epsilonEquals(hsv[0], Constants.COLOR_WHEEL_YELLOW_HUE, Constants.COLOR_WHEEL_HUE_ERROR)) {
-                return 'Y';
-            } else if (Util.epsilonEquals(hsv[0], Constants.COLOR_WHEEL_GREEN_HUE, Constants.COLOR_WHEEL_HUE_ERROR)) {
-                return 'G';
-            } else if (Util.epsilonEquals(hsv[0], Constants.COLOR_WHEEL_BLUE_HUE, Constants.COLOR_WHEEL_HUE_ERROR)) {
-                return 'B';
-            } else {
-                return 'U';
-            }
-        }
+        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.COLOR_ENCODER_CPR;
     }
 
     /**

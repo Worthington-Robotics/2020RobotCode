@@ -1,8 +1,21 @@
 var searchData=
 [
-  ['led_5flength_987',['LED_LENGTH',['../classfrc_1_1robot_1_1Constants.html#aa911ff16191e9944d43335c8e8fc906b',1,'frc::robot::Constants']]],
-  ['led_5fport_988',['LED_PORT',['../classfrc_1_1robot_1_1Constants.html#ab037af41ff19022b6c77e1335c5280c1',1,'frc::robot::Constants']]],
-  ['logger_989',['logger',['../classfrc_1_1robot_1_1SubsystemManager.html#aa2b507685d28c23113d6280d25610676',1,'frc::robot::SubsystemManager']]],
-  ['looper_5fdt_990',['LOOPER_DT',['../classfrc_1_1robot_1_1Constants.html#aca617ee09eb871a624bab615f42b2857',1,'frc::robot::Constants']]],
-  ['loops_5f_991',['loops_',['../classfrc_1_1lib_1_1loops_1_1Looper.html#a6f31f42a108198ff8e14b316b467b6e6',1,'frc::lib::loops::Looper']]]
+  ['led_5flength_1819',['LED_LENGTH',['../classfrc_1_1robot_1_1Constants.html#aa911ff16191e9944d43335c8e8fc906b',1,'frc::robot::Constants']]],
+  ['led_5fport_1820',['LED_PORT',['../classfrc_1_1robot_1_1Constants.html#ab037af41ff19022b6c77e1335c5280c1',1,'frc::robot::Constants']]],
+  ['left_5faccl_1821',['left_accl',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#abcc570677f3bda37ffa86b42a695bcfc',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['left_5fdemand_1822',['left_demand',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#ac52f13f27f73b2f9d9ed429acc81eb1e',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['left_5fdistance_1823',['left_distance',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#a571c17457c05244864d1a437cfc1a5a6',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['left_5fencoder_5fprev_5fdistance_5f_1824',['left_encoder_prev_distance_',['../classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html#afe2d7caa3d647b7c23a3253461d03265',1,'frc::robot::subsystems::PoseEstimator']]],
+  ['left_5ferror_1825',['left_error',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#a5a3daf3e5710e9cd07ed5f1062be6259',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['left_5fpos_5fticks_1826',['left_pos_ticks',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#ad53b2533c4b8817349aaf5d10e4d1f9e',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['left_5fvelocity_5fticks_5fper_5f100ms_1827',['left_velocity_ticks_per_100ms',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#ad540ccaa494ce5903d16f0db766d492a',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['leftcurrent_1828',['leftCurrent',['../classfrc_1_1robot_1_1subsystems_1_1Drive_1_1DriveIO.html#a9a014f9fd5d55c5ef5c2d6a9d65c6524',1,'frc::robot::subsystems::Drive::DriveIO']]],
+  ['leftflywheelfalcon_5fkd_1829',['LEFTFLYWHEELFALCON_KD',['../classfrc_1_1robot_1_1Constants.html#a4acab985cefd8bc821608bf492cfbdb4',1,'frc::robot::Constants']]],
+  ['leftflywheelfalcon_5fkp_1830',['LEFTFLYWHEELFALCON_KP',['../classfrc_1_1robot_1_1Constants.html#a79a75704ec63e53f7ee44d255b6b3679',1,'frc::robot::Constants']]],
+  ['leftturretlimit_1831',['leftTurretLimit',['../classfrc_1_1robot_1_1Constants.html#a4d79a17631828e29ec6ee29042c70627',1,'frc::robot::Constants']]],
+  ['limelight_5fdeg_5ffov_1832',['LIMELIGHT_DEG_FOV',['../classfrc_1_1robot_1_1Constants.html#ad17932ac002d130dfc2fc5e0062f42e6',1,'frc::robot::Constants']]],
+  ['limelight_5fmode_1833',['LIMELIGHT_MODE',['../enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode.html#a57427c975c8b9017d21b4e16e67857df',1,'frc::robot::subsystems::Shooter::MotorControlMode']]],
+  ['logger_1834',['logger',['../classfrc_1_1robot_1_1SubsystemManager.html#a0a759ac40f0e64ff64dea3faac416925',1,'frc::robot::SubsystemManager']]],
+  ['looper_5fdt_1835',['LOOPER_DT',['../classfrc_1_1robot_1_1Constants.html#aca617ee09eb871a624bab615f42b2857',1,'frc::robot::Constants']]],
+  ['loops_5f_1836',['loops_',['../classfrc_1_1lib_1_1loops_1_1Looper.html#a6f31f42a108198ff8e14b316b467b6e6',1,'frc::lib::loops::Looper']]]
 ];

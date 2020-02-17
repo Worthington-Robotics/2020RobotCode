@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['beta_924',['beta',['../classfrc_1_1lib_1_1math_1_1PolynomialRegression.html#aab830ab85398366485bd2d4ee46333ea',1,'frc::lib::math::PolynomialRegression']]],
-  ['blueh_925',['blueH',['../classfrc_1_1robot_1_1Constants.html#ad2fcfb6858ae9e8865f5a370c776cc19',1,'frc::robot::Constants']]],
-  ['brake_926',['BRAKE',['../classfrc_1_1lib_1_1util_1_1DriveSignal.html#a17b6e72e201f09b5e227a477c5074d6c',1,'frc::lib::util::DriveSignal']]],
-  ['button_927',['button',['../classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction.html#a0d61575d8b8d0bce358b99408a62d98f',1,'frc::robot::actions::buttonactions::ButtonWaitAction']]]
+  ['ballsintake_1598',['ballsIntake',['../classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#a9a7f1273548278c19dc5342616de0563',1,'frc::robot::subsystems::Superstructure']]],
+  ['beta_1599',['beta',['../classfrc_1_1lib_1_1math_1_1PolynomialRegression.html#aab830ab85398366485bd2d4ee46333ea',1,'frc::lib::math::PolynomialRegression']]],
+  ['blueh_1600',['blueH',['../classfrc_1_1robot_1_1Constants.html#ad2fcfb6858ae9e8865f5a370c776cc19',1,'frc::robot::Constants']]],
+  ['brake_1601',['BRAKE',['../classfrc_1_1lib_1_1util_1_1DriveSignal.html#a17b6e72e201f09b5e227a477c5074d6c',1,'frc::lib::util::DriveSignal']]],
+  ['button_1602',['button',['../classfrc_1_1robot_1_1actions_1_1buttonactions_1_1ButtonWaitAction.html#a0d61575d8b8d0bce358b99408a62d98f',1,'frc::robot::actions::buttonactions::ButtonWaitAction']]],
+  ['bval_1603',['bVal',['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1GainFactor.html#a3c3551bf75b13c84e80d270a32874d23',1,'frc.lib.drivers.ColorSensorV3.GainFactor.bVal()'],['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDCurrent.html#a08a0e2cb4bfa44ff397de0b0e0bbb403',1,'frc.lib.drivers.ColorSensorV3.LEDCurrent.bVal()'],['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1LEDPulseFrequency.html#ae24c3becedb9e5cb1ddfbee2839c4fa3',1,'frc.lib.drivers.ColorSensorV3.LEDPulseFrequency.bVal()'],['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorResolution.html#a0c1923421129545df4604d35d73e7955',1,'frc.lib.drivers.ColorSensorV3.ProximitySensorResolution.bVal()'],['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ProximitySensorMeasurementRate.html#a9acc7737a6b291987f8183065101a11a',1,'frc.lib.drivers.ColorSensorV3.ProximitySensorMeasurementRate.bVal()'],['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorResolution.html#a35d097b59e02c75d5b29fcd587fe5fdd',1,'frc.lib.drivers.ColorSensorV3.ColorSensorResolution.bVal()'],['../enumfrc_1_1lib_1_1drivers_1_1ColorSensorV3_1_1ColorSensorMeasurementRate.html#ae2c17f6b6f1f52a556d4c616eca368e1',1,'frc.lib.drivers.ColorSensorV3.ColorSensorMeasurementRate.bVal()']]]
 ];

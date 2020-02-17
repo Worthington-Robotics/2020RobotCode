@@ -62,7 +62,6 @@ public class Drive extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 if (periodic.inverse) {
-                    periodic.operatorInput[0] *= -1;
                     periodic.operatorInput[1] *= -1;
                 }
                 synchronized (Drive.this) {
@@ -277,6 +276,7 @@ public class Drive extends Subsystem {
         driveFrontLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveFrontLeft.enableVoltageCompensation(true);
         driveFrontLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
         driveMiddleLeft.setInverted(true);
         driveMiddleLeft.setNeutralMode(NeutralMode.Brake);
@@ -311,6 +311,7 @@ public class Drive extends Subsystem {
         driveFrontRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
         driveFrontRight.enableVoltageCompensation(true);
         driveFrontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
         driveMiddleRight.setInverted(false);
         driveMiddleRight.setNeutralMode(NeutralMode.Brake);
@@ -342,8 +343,8 @@ public class Drive extends Subsystem {
                 double max_vel = 0;
                 max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
                 max_vel = Math.max(max_vel, Math.abs(setpoint.getRight()));
-                if (max_vel > Constants.DRIVE_MAX_VEL) {
-                    double scaling = Constants.DRIVE_MAX_VEL / max_vel;
+                if (max_vel > Constants.ROBOT_MAX_VELOCITY) {
+                    double scaling = Constants.ROBOT_MAX_VELOCITY / max_vel;
                     setpoint = new DriveSignal(setpoint.getLeft() * scaling, setpoint.getRight() * scaling);
                 }
                 setpoint = new DriveSignal(

@@ -1,60 +1,121 @@
 \hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{}\doxysection{frc.\+lib.\+statemachine.\+State\+Machine Class Reference}
 \label{classfrc_1_1lib_1_1statemachine_1_1StateMachine}\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+Inheritance diagram for frc.\+lib.\+statemachine.\+State\+Machine\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfrc_1_1lib_1_1statemachine_1_1StateMachine}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a25756aca846430ae1b93b1810613232e}{run\+Machine}} (\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} descrip)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aed60cc8e8d39a9fd484b74570abcbbed}{is\+Running}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_ac94100a1594495271e22f20d8efc5a73}{assert\+Stop}} ()
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a5ef45fa370e242d586b098ad11c97d4e}{get\+Logger}} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a6df9406d6ca113e36ef4c3acead6136b}{run\+Machine}} (\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} descrip)
+static \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{State\+Machine}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_abf94a8d7f2dd15b9eb37739ca879828b}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-static boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aecc2cb7458f5e19e2e2cd9515084b2b0}{is\+Running}} ()
+\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a60610e1b7d6725047a3e4a574958392d}{State\+Machine}} ()
 \item 
-static void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a6ca0e5b387f9f858d350a4b80ba53ded}{assert\+Stop}} ()
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a105bf2e9b369583a6aef0d343d1cac6e}{handle\+Null}} (Object o, boolean is\+Descriptor)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+final \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a7b0848c463960b56494801946537bd16}{data}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}}()
+\item 
+final double \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a96a0a63450265a743b66a2ce3e1f2fba}{delay}} = 0.\+020
+\item 
+volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a20d8e3298288611cd2c4a90670b3d968}{descriptor}}
+\item 
+Notifier \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a92ba8340547195275d2c51ea98dbbaba}{thread}}
+\item 
+final Runnable \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a662ff790d727b25272bf4f4106bfc78c}{state\+Machine}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static final Atomic\+Integer \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a711878a908428f87c838f77868f447a5}{state}} = new Atomic\+Integer(-\/1)
-\item 
-static final Atomic\+Boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a813bf658a655825180cce8ee0d384dce}{want\+Stop}} = new Atomic\+Boolean(true)
-\item 
-static final Atomic\+Boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a44fea711aba4a9675ebffdc7302a6e9d}{state\+Lock}} = new Atomic\+Boolean(false)
-\item 
-static volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a20d8e3298288611cd2c4a90670b3d968}{descriptor}}
-\item 
-static volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a521cb5f810e1801cdb762859e8716f37}{current\+State}}
-\item 
-static volatile double \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aabc0658bb1e9efc39a9f5ff6443c667c}{t\+\_\+start}}
-\item 
-static final double \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a96a0a63450265a743b66a2ce3e1f2fba}{delay}} = 0.\+020
-\item 
-static final Runnable \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_ada85dd5ebe99551b74fcf46905c1fcac}{Man}}
+static final \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{State\+Machine}} \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_afa635685a3edb3d377e6cf73f1063e42}{instance}} = new \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{State\+Machine}}()
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a60610e1b7d6725047a3e4a574958392d}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a60610e1b7d6725047a3e4a574958392d}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!StateMachine@{StateMachine}}
+\index{StateMachine@{StateMachine}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{StateMachine()}{StateMachine()}}
+{\footnotesize\ttfamily frc.\+lib.\+statemachine.\+State\+Machine.\+State\+Machine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+prevent the creation of a new state machine object 
+
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a6ca0e5b387f9f858d350a4b80ba53ded}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a6ca0e5b387f9f858d350a4b80ba53ded}} 
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_ac94100a1594495271e22f20d8efc5a73}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_ac94100a1594495271e22f20d8efc5a73}} 
 \index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!assertStop@{assertStop}}
 \index{assertStop@{assertStop}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
 \doxysubsubsection{\texorpdfstring{assertStop()}{assertStop()}}
-{\footnotesize\ttfamily static void frc.\+lib.\+statemachine.\+State\+Machine.\+assert\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+State\+Machine.\+assert\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-forces the state machine to stop and exit within the next iteration. \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aecc2cb7458f5e19e2e2cd9515084b2b0}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aecc2cb7458f5e19e2e2cd9515084b2b0}} 
+Forces the state machine to stop and exit within the next iteration. \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_abf94a8d7f2dd15b9eb37739ca879828b}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_abf94a8d7f2dd15b9eb37739ca879828b}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{State\+Machine}} frc.\+lib.\+statemachine.\+State\+Machine.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+singleton instance of the state machine 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a5ef45fa370e242d586b098ad11c97d4e}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a5ef45fa370e242d586b098ad11c97d4e}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!getLogger@{getLogger}}
+\index{getLogger@{getLogger}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{getLogger()}{getLogger()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}} frc.\+lib.\+statemachine.\+State\+Machine.\+get\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Allows logging access to internal data structure of the state machine. \begin{DoxyReturn}{Returns}
+the state machines internal data class 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacefrc_1_1lib_1_1util_1_1Logable_a6a43ad61f2430105c0daa87451266ede}{frc.\+lib.\+util.\+Logable}}.
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a105bf2e9b369583a6aef0d343d1cac6e}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a105bf2e9b369583a6aef0d343d1cac6e}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!handleNull@{handleNull}}
+\index{handleNull@{handleNull}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{handleNull()}{handleNull()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+statemachine.\+State\+Machine.\+handle\+Null (\begin{DoxyParamCaption}\item[{Object}]{o,  }\item[{boolean}]{is\+Descriptor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aed60cc8e8d39a9fd484b74570abcbbed}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aed60cc8e8d39a9fd484b74570abcbbed}} 
 \index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!isRunning@{isRunning}}
 \index{isRunning@{isRunning}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
 \doxysubsubsection{\texorpdfstring{isRunning()}{isRunning()}}
-{\footnotesize\ttfamily static boolean frc.\+lib.\+statemachine.\+State\+Machine.\+is\+Running (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+statemachine.\+State\+Machine.\+is\+Running (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-gets the current status of the state machine
+Gets the current status of the state machine
 
 \begin{DoxyReturn}{Returns}
 true if the machine is currently running 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a6df9406d6ca113e36ef4c3acead6136b}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a6df9406d6ca113e36ef4c3acead6136b}} 
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a25756aca846430ae1b93b1810613232e}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a25756aca846430ae1b93b1810613232e}} 
 \index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!runMachine@{runMachine}}
 \index{runMachine@{runMachine}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
 \doxysubsubsection{\texorpdfstring{runMachine()}{runMachine()}}
-{\footnotesize\ttfamily static boolean frc.\+lib.\+statemachine.\+State\+Machine.\+run\+Machine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}}}]{descrip }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+statemachine.\+State\+Machine.\+run\+Machine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}}}]{descrip }\end{DoxyParamCaption})}
 
-starts the state machine (if not already runnning a descriptor)
+Starts the state machine (if not already runnning a descriptor)
 
 
 \begin{DoxyParams}{Parameters}
@@ -67,53 +128,41 @@ true if the machine was started successfully
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a521cb5f810e1801cdb762859e8716f37}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a521cb5f810e1801cdb762859e8716f37}} 
-\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!currentState@{currentState}}
-\index{currentState@{currentState}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
-\doxysubsubsection{\texorpdfstring{currentState}{currentState}}
-{\footnotesize\ttfamily volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{Action\+Group}} frc.\+lib.\+statemachine.\+State\+Machine.\+current\+State\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a7b0848c463960b56494801946537bd16}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a7b0848c463960b56494801946537bd16}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!data@{data}}
+\index{data@{data}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily final \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}} frc.\+lib.\+statemachine.\+State\+Machine.\+data = new \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine_1_1LoggingData}{Logging\+Data}}()\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a96a0a63450265a743b66a2ce3e1f2fba}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a96a0a63450265a743b66a2ce3e1f2fba}} 
 \index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!delay@{delay}}
 \index{delay@{delay}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
 \doxysubsubsection{\texorpdfstring{delay}{delay}}
-{\footnotesize\ttfamily final double frc.\+lib.\+statemachine.\+State\+Machine.\+delay = 0.\+020\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily final double frc.\+lib.\+statemachine.\+State\+Machine.\+delay = 0.\+020\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a20d8e3298288611cd2c4a90670b3d968}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a20d8e3298288611cd2c4a90670b3d968}} 
 \index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!descriptor@{descriptor}}
 \index{descriptor@{descriptor}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
 \doxysubsubsection{\texorpdfstring{descriptor}{descriptor}}
-{\footnotesize\ttfamily volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} frc.\+lib.\+statemachine.\+State\+Machine.\+descriptor\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily volatile \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachineDescriptor}{State\+Machine\+Descriptor}} frc.\+lib.\+statemachine.\+State\+Machine.\+descriptor\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_ada85dd5ebe99551b74fcf46905c1fcac}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_ada85dd5ebe99551b74fcf46905c1fcac}} 
-\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!Man@{Man}}
-\index{Man@{Man}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
-\doxysubsubsection{\texorpdfstring{Man}{Man}}
-{\footnotesize\ttfamily final Runnable frc.\+lib.\+statemachine.\+State\+Machine.\+Man\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_afa635685a3edb3d377e6cf73f1063e42}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_afa635685a3edb3d377e6cf73f1063e42}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!instance@{instance}}
+\index{instance@{instance}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily final \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{State\+Machine}} frc.\+lib.\+statemachine.\+State\+Machine.\+instance = new \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1StateMachine}{State\+Machine}}()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a711878a908428f87c838f77868f447a5}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a711878a908428f87c838f77868f447a5}} 
-\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!state@{state}}
-\index{state@{state}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
-\doxysubsubsection{\texorpdfstring{state}{state}}
-{\footnotesize\ttfamily final Atomic\+Integer frc.\+lib.\+statemachine.\+State\+Machine.\+state = new Atomic\+Integer(-\/1)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a662ff790d727b25272bf4f4106bfc78c}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a662ff790d727b25272bf4f4106bfc78c}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!stateMachine@{stateMachine}}
+\index{stateMachine@{stateMachine}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{stateMachine}{stateMachine}}
+{\footnotesize\ttfamily final Runnable frc.\+lib.\+statemachine.\+State\+Machine.\+state\+Machine\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a44fea711aba4a9675ebffdc7302a6e9d}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a44fea711aba4a9675ebffdc7302a6e9d}} 
-\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!stateLock@{stateLock}}
-\index{stateLock@{stateLock}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
-\doxysubsubsection{\texorpdfstring{stateLock}{stateLock}}
-{\footnotesize\ttfamily final Atomic\+Boolean frc.\+lib.\+statemachine.\+State\+Machine.\+state\+Lock = new Atomic\+Boolean(false)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
-
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aabc0658bb1e9efc39a9f5ff6443c667c}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_aabc0658bb1e9efc39a9f5ff6443c667c}} 
-\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!t\_start@{t\_start}}
-\index{t\_start@{t\_start}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
-\doxysubsubsection{\texorpdfstring{t\_start}{t\_start}}
-{\footnotesize\ttfamily volatile double frc.\+lib.\+statemachine.\+State\+Machine.\+t\+\_\+start\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
-
-\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a813bf658a655825180cce8ee0d384dce}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a813bf658a655825180cce8ee0d384dce}} 
-\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!wantStop@{wantStop}}
-\index{wantStop@{wantStop}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
-\doxysubsubsection{\texorpdfstring{wantStop}{wantStop}}
-{\footnotesize\ttfamily final Atomic\+Boolean frc.\+lib.\+statemachine.\+State\+Machine.\+want\+Stop = new Atomic\+Boolean(true)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+The runnable thread object that handles the execution of a state machine descriptor. The machine handles the starting code, running each state for a specified amount of time (unless it ends early) and then advancing to the next state untill complete. \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a92ba8340547195275d2c51ea98dbbaba}\label{classfrc_1_1lib_1_1statemachine_1_1StateMachine_a92ba8340547195275d2c51ea98dbbaba}} 
+\index{frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}!thread@{thread}}
+\index{thread@{thread}!frc.lib.statemachine.StateMachine@{frc.lib.statemachine.StateMachine}}
+\doxysubsubsection{\texorpdfstring{thread}{thread}}
+{\footnotesize\ttfamily Notifier frc.\+lib.\+statemachine.\+State\+Machine.\+thread\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

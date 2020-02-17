@@ -1,0 +1,70 @@
+\hypertarget{classfrc_1_1robot_1_1Kinematics}{}\doxysection{frc.\+robot.\+Kinematics Class Reference}
+\label{classfrc_1_1robot_1_1Kinematics}\index{frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1Kinematics_a12962f68bf003504ad9f652a124f816f}{forward\+Kinematics}} (double left\+\_\+wheel\+\_\+delta, double right\+\_\+wheel\+\_\+delta)
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1Kinematics_a49dd9d8debf440c960f284acc8cc94c4}{forward\+Kinematics}} (double left\+\_\+wheel\+\_\+delta, double right\+\_\+wheel\+\_\+delta, double delta\+\_\+rotation\+\_\+rads)
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1Kinematics_ad3dfb7bef790c926458f7063f2cff025}{forward\+Kinematics}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}} prev\+\_\+heading, double left\+\_\+wheel\+\_\+delta, double right\+\_\+wheel\+\_\+delta, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}} current\+\_\+heading)
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1Kinematics_a8141c67f6d3fc2f49634f6de2d7b978a}{integrate\+Forward\+Kinematics}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} current\+\_\+pose, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} forward\+\_\+kinematics)
+\item 
+static \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} \mbox{\hyperlink{classfrc_1_1robot_1_1Kinematics_acdbfed7970635639b2a4aa5b2d63d48e}{inverse\+Kinematics}} (\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} velocity)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static final double \mbox{\hyperlink{classfrc_1_1robot_1_1Kinematics_a68d45eea22d48041a4064fecf2949e6b}{k\+Epsilon}} = 1E-\/9
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides forward and inverse kinematics equations for the robot modeling the wheelbase as a differential drive (with a corrective factor to account for skidding). 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Kinematics_a12962f68bf003504ad9f652a124f816f}\label{classfrc_1_1robot_1_1Kinematics_a12962f68bf003504ad9f652a124f816f}} 
+\index{frc.robot.Kinematics@{frc.robot.Kinematics}!forwardKinematics@{forwardKinematics}}
+\index{forwardKinematics@{forwardKinematics}!frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsubsection{\texorpdfstring{forwardKinematics()}{forwardKinematics()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+robot.\+Kinematics.\+forward\+Kinematics (\begin{DoxyParamCaption}\item[{double}]{left\+\_\+wheel\+\_\+delta,  }\item[{double}]{right\+\_\+wheel\+\_\+delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Forward kinematics using only encoders, rotation is implicit (less accurate than below, but useful for predicting motion) \mbox{\Hypertarget{classfrc_1_1robot_1_1Kinematics_a49dd9d8debf440c960f284acc8cc94c4}\label{classfrc_1_1robot_1_1Kinematics_a49dd9d8debf440c960f284acc8cc94c4}} 
+\index{frc.robot.Kinematics@{frc.robot.Kinematics}!forwardKinematics@{forwardKinematics}}
+\index{forwardKinematics@{forwardKinematics}!frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsubsection{\texorpdfstring{forwardKinematics()}{forwardKinematics()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+robot.\+Kinematics.\+forward\+Kinematics (\begin{DoxyParamCaption}\item[{double}]{left\+\_\+wheel\+\_\+delta,  }\item[{double}]{right\+\_\+wheel\+\_\+delta,  }\item[{double}]{delta\+\_\+rotation\+\_\+rads }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Kinematics_ad3dfb7bef790c926458f7063f2cff025}\label{classfrc_1_1robot_1_1Kinematics_ad3dfb7bef790c926458f7063f2cff025}} 
+\index{frc.robot.Kinematics@{frc.robot.Kinematics}!forwardKinematics@{forwardKinematics}}
+\index{forwardKinematics@{forwardKinematics}!frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsubsection{\texorpdfstring{forwardKinematics()}{forwardKinematics()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+robot.\+Kinematics.\+forward\+Kinematics (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}}}]{prev\+\_\+heading,  }\item[{double}]{left\+\_\+wheel\+\_\+delta,  }\item[{double}]{right\+\_\+wheel\+\_\+delta,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}}}]{current\+\_\+heading }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Kinematics_a8141c67f6d3fc2f49634f6de2d7b978a}\label{classfrc_1_1robot_1_1Kinematics_a8141c67f6d3fc2f49634f6de2d7b978a}} 
+\index{frc.robot.Kinematics@{frc.robot.Kinematics}!integrateForwardKinematics@{integrateForwardKinematics}}
+\index{integrateForwardKinematics@{integrateForwardKinematics}!frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsubsection{\texorpdfstring{integrateForwardKinematics()}{integrateForwardKinematics()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} frc.\+robot.\+Kinematics.\+integrate\+Forward\+Kinematics (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}}]{current\+\_\+pose,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}}}]{forward\+\_\+kinematics }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+For convenience, integrate forward kinematics with a Twist2d and previous rotation. \mbox{\Hypertarget{classfrc_1_1robot_1_1Kinematics_acdbfed7970635639b2a4aa5b2d63d48e}\label{classfrc_1_1robot_1_1Kinematics_acdbfed7970635639b2a4aa5b2d63d48e}} 
+\index{frc.robot.Kinematics@{frc.robot.Kinematics}!inverseKinematics@{inverseKinematics}}
+\index{inverseKinematics@{inverseKinematics}!frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsubsection{\texorpdfstring{inverseKinematics()}{inverseKinematics()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1DriveSignal}{Drive\+Signal}} frc.\+robot.\+Kinematics.\+inverse\+Kinematics (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}}}]{velocity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Kinematics_a68d45eea22d48041a4064fecf2949e6b}\label{classfrc_1_1robot_1_1Kinematics_a68d45eea22d48041a4064fecf2949e6b}} 
+\index{frc.robot.Kinematics@{frc.robot.Kinematics}!kEpsilon@{kEpsilon}}
+\index{kEpsilon@{kEpsilon}!frc.robot.Kinematics@{frc.robot.Kinematics}}
+\doxysubsubsection{\texorpdfstring{kEpsilon}{kEpsilon}}
+{\footnotesize\ttfamily final double frc.\+robot.\+Kinematics.\+k\+Epsilon = 1E-\/9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/\mbox{\hyperlink{Kinematics_8java}{Kinematics.\+java}}\end{DoxyCompactItemize}

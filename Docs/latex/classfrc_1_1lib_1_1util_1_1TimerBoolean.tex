@@ -1,0 +1,140 @@
+\hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean}{}\doxysection{frc.\+lib.\+util.\+Timer\+Boolean Class Reference}
+\label{classfrc_1_1lib_1_1util_1_1TimerBoolean}\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a0947cbcd4bc160e546b85749862db211}{Timer\+Boolean}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c8cd8184f95dffee53891d1c2e2cf24}{wait\+Duration}})
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c345c90e5d30e4e94fbf4e7cf5d3762}{get\+Boolean}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a1e9571bc828b4bc8895ed6608233ba83}{start}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a5f4c56b5d4b628d1f8cb98e83b9b67b7}{stop}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a5049d0395373145840bfef7163ed4106}{reset}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_aa611d1e47e0f2cd309c361ac56dce035}{is\+Started}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a95f85ab6f7e24028d276e71353dec400}{set\+Wait\+Duration}} (double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c8cd8184f95dffee53891d1c2e2cf24}{wait\+Duration}})
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a3d3d11378794006307966ab269bedd60}{get\+Wait\+Duration}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c8cd8184f95dffee53891d1c2e2cf24}{wait\+Duration}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_ae33ec517a65e122c3c14e0905af3ab1c}{start\+Timestamp}}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean_aca7ab09616d62116314aa8d2eefd8da4}{started}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stores a boolean that must remain true for a set duration before the data returns true. (e.\+g. an object passing a sensor)
+
+\begin{DoxyVersion}{Version}
+1.\+0.\+0-\/B\+E\+TA 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Author}
+Spazzinq (George Fang) 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a0947cbcd4bc160e546b85749862db211}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a0947cbcd4bc160e546b85749862db211}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!TimerBoolean@{TimerBoolean}}
+\index{TimerBoolean@{TimerBoolean}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{TimerBoolean()}{TimerBoolean()}}
+{\footnotesize\ttfamily frc.\+lib.\+util.\+Timer\+Boolean.\+Timer\+Boolean (\begin{DoxyParamCaption}\item[{double}]{wait\+Duration }\end{DoxyParamCaption})}
+
+Sets the wait duration and gets the current timestamp. 
+\begin{DoxyParams}{Parameters}
+{\em wait\+Duration} & the duration that must pass until the \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean}{Timer\+Boolean}} returns true \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c345c90e5d30e4e94fbf4e7cf5d3762}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c345c90e5d30e4e94fbf4e7cf5d3762}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!getBoolean@{getBoolean}}
+\index{getBoolean@{getBoolean}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{getBoolean()}{getBoolean()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+util.\+Timer\+Boolean.\+get\+Boolean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns true if the boolean is started and the current timestamp is past the wait duration. \begin{DoxyReturn}{Returns}
+if the given boolean has been true for a sufficient amount of time 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a3d3d11378794006307966ab269bedd60}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a3d3d11378794006307966ab269bedd60}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!getWaitDuration@{getWaitDuration}}
+\index{getWaitDuration@{getWaitDuration}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{getWaitDuration()}{getWaitDuration()}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Timer\+Boolean.\+get\+Wait\+Duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the duration that must pass until the \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean}{Timer\+Boolean}} returns true. \begin{DoxyReturn}{Returns}
+the duration that must pass until the \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean}{Timer\+Boolean}} returns true 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_aa611d1e47e0f2cd309c361ac56dce035}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_aa611d1e47e0f2cd309c361ac56dce035}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!isStarted@{isStarted}}
+\index{isStarted@{isStarted}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{isStarted()}{isStarted()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+util.\+Timer\+Boolean.\+is\+Started (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns if the boolean is started. \begin{DoxyReturn}{Returns}
+if the boolean is started 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a5049d0395373145840bfef7163ed4106}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a5049d0395373145840bfef7163ed4106}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!reset@{reset}}
+\index{reset@{reset}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+lib.\+util.\+Timer\+Boolean.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Resets the starting timestamp to the current time. \mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a95f85ab6f7e24028d276e71353dec400}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a95f85ab6f7e24028d276e71353dec400}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!setWaitDuration@{setWaitDuration}}
+\index{setWaitDuration@{setWaitDuration}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{setWaitDuration()}{setWaitDuration()}}
+{\footnotesize\ttfamily void frc.\+lib.\+util.\+Timer\+Boolean.\+set\+Wait\+Duration (\begin{DoxyParamCaption}\item[{double}]{wait\+Duration }\end{DoxyParamCaption})}
+
+Sets the duration that must pass until the \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean}{Timer\+Boolean}} returns true. 
+\begin{DoxyParams}{Parameters}
+{\em wait\+Duration} & the duration that must pass until the \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean}{Timer\+Boolean}} returns true \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a1e9571bc828b4bc8895ed6608233ba83}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a1e9571bc828b4bc8895ed6608233ba83}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!start@{start}}
+\index{start@{start}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void frc.\+lib.\+util.\+Timer\+Boolean.\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Sets the starting timestamp for the calculation. \mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a5f4c56b5d4b628d1f8cb98e83b9b67b7}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a5f4c56b5d4b628d1f8cb98e83b9b67b7}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!stop@{stop}}
+\index{stop@{stop}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void frc.\+lib.\+util.\+Timer\+Boolean.\+stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ends the timer, forcing the \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1TimerBoolean}{Timer\+Boolean}} to return false. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_aca7ab09616d62116314aa8d2eefd8da4}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_aca7ab09616d62116314aa8d2eefd8da4}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!started@{started}}
+\index{started@{started}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{started}{started}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+util.\+Timer\+Boolean.\+started\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_ae33ec517a65e122c3c14e0905af3ab1c}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_ae33ec517a65e122c3c14e0905af3ab1c}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!startTimestamp@{startTimestamp}}
+\index{startTimestamp@{startTimestamp}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{startTimestamp}{startTimestamp}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Timer\+Boolean.\+start\+Timestamp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c8cd8184f95dffee53891d1c2e2cf24}\label{classfrc_1_1lib_1_1util_1_1TimerBoolean_a8c8cd8184f95dffee53891d1c2e2cf24}} 
+\index{frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}!waitDuration@{waitDuration}}
+\index{waitDuration@{waitDuration}!frc.lib.util.TimerBoolean@{frc.lib.util.TimerBoolean}}
+\doxysubsubsection{\texorpdfstring{waitDuration}{waitDuration}}
+{\footnotesize\ttfamily double frc.\+lib.\+util.\+Timer\+Boolean.\+wait\+Duration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/util/\mbox{\hyperlink{TimerBoolean_8java}{Timer\+Boolean.\+java}}\end{DoxyCompactItemize}
