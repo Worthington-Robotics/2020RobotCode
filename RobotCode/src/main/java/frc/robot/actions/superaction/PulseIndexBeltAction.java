@@ -13,7 +13,7 @@ public class PulseIndexBeltAction extends Action {
     public void onLoop() {
         Superstructure.getInstance().setIndexBeltDemand(
                 Superstructure.getInstance().pulse(
-                    Superstructure.getInstance().getIndexerDemand(), 1, 2));
+                    Superstructure.getInstance().getIndexerDemand(), 1, 2, 2));
         //System.out.println("Looping");
     }
 

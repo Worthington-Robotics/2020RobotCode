@@ -50,10 +50,9 @@ public class Superstructure extends Subsystem {
     private TimerBoolean indexBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
     private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
 
-    //Pulse Variables
+    // Pulse Variables
     private boolean pulse1 = true, pulse2 = false;
     private double timestamp;
-
 
     private static Superstructure instance = new Superstructure();
 
@@ -62,7 +61,7 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        //shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
+        // shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
@@ -92,12 +91,15 @@ public class Superstructure extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
-            THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
+            THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD",
+                    THRESHOLD_DELIVERY);
             THRESHOLD_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
             THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
 
-            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", deliverySensor.getRange());
-            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
+            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE",
+                    deliverySensor.getRange());
+            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE",
+                    indexSensor.getRange());
             distanceIntake = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
         } else {
             distanceDelivery = deliverySensor.getRange();
@@ -110,94 +112,57 @@ public class Superstructure extends Subsystem {
         periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
     }
 
-    @Override public synchronized void writePeriodicOutputs() {
+    @Override
+    public synchronized void writePeriodicOutputs() {
         /*
-        switch (periodic.state) {
-            case INIT:
-                DemandUtil.setFullDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-                break;
-            case ONE_TO_THREE_BALLS:
-                DemandUtil.setFullDemand(deliveryBelts, ballsIntake);
-                DemandUtil.disable(shooterWheel, indexBelt);
-                break;
-            case FOUR_BALLS:
-                DemandUtil.setFullDemand(ballsIntake);
-                DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt);
-                break;
-            case FULL_SYSTEM:
-                DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-                break;
-            case SHOOT:
-                DemandUtil.setFullDemand(shooterWheel);
-                DemandUtil.disable(deliveryBelts, indexBelt, ballsIntake);
-                break;
-            case DUMP_SYSTEM:
-                DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-                break;
-            default:
-                break;
-        }
-        */
+         * switch (periodic.state) { case INIT: DemandUtil.setFullDemand(shooterWheel,
+         * deliveryBelts, indexBelt, ballsIntake); break; case ONE_TO_THREE_BALLS:
+         * DemandUtil.setFullDemand(deliveryBelts, ballsIntake);
+         * DemandUtil.disable(shooterWheel, indexBelt); break; case FOUR_BALLS:
+         * DemandUtil.setFullDemand(ballsIntake); DemandUtil.disable(shooterWheel,
+         * deliveryBelts, indexBelt); break; case FULL_SYSTEM:
+         * DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
+         * break; case SHOOT: DemandUtil.setFullDemand(shooterWheel);
+         * DemandUtil.disable(deliveryBelts, indexBelt, ballsIntake); break; case
+         * DUMP_SYSTEM: DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts,
+         * indexBelt, ballsIntake); break; default: break; }
+         */
     }
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
-        
-        enabledLooper.register(new Loop() {
-            @Override public void onStart(double timestamp) {}
 
-            @Override public void onLoop(double timestamp) {
-                /*
-                switch (periodic.state) {
-                    case INIT: {
-                        if (periodic.deliveryDetected) {
-                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
-                        }
-                        break;
-                    }
-                    case ONE_TO_THREE_BALLS: {
-                        if (periodic.indexDetected) {
-                            if (!indexBoolean.isStarted()) {
-                                indexBoolean.start();
-                            } else if (indexBoolean.getBoolean()) {
-                                periodic.state = SuperState.FOUR_BALLS;
-                            }
-                        } else {
-                            // Invalidate if it isn't true
-                            indexBoolean.stop();
-                        }
-                        break;
-                    }
-                    case FOUR_BALLS: {
-                        if (periodic.intakeDetected) {
-                            if (!intakeBoolean.isStarted()) {
-                                intakeBoolean.start();
-                            } else if (intakeBoolean.getBoolean()) {
-                                periodic.state = SuperState.FULL_SYSTEM;
-                            }
-                        } else {
-                            // Invalidate if it isn't true
-                            intakeBoolean.stop();
-                        }
-                        break;
-                    }
-                    case SHOOT: {
-                        if (!periodic.deliveryDetected) {
-                            periodic.state = SuperState.INIT;
-                        }
-                        break;
-                    }
-                    case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
-                }
-                */
-                //deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                //shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
-                //indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-                //ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
-                //extensionArm.set(periodic.armExtension);
+        enabledLooper.register(new Loop() {
+            @Override
+            public void onStart(double timestamp) {
             }
 
-            @Override public void onStop(double timestamp) {}
+            @Override
+            public void onLoop(double timestamp) {
+                /*
+                 * switch (periodic.state) { case INIT: { if (periodic.deliveryDetected) {
+                 * periodic.state = SuperState.ONE_TO_THREE_BALLS; } break; } case
+                 * ONE_TO_THREE_BALLS: { if (periodic.indexDetected) { if
+                 * (!indexBoolean.isStarted()) { indexBoolean.start(); } else if
+                 * (indexBoolean.getBoolean()) { periodic.state = SuperState.FOUR_BALLS; } }
+                 * else { // Invalidate if it isn't true indexBoolean.stop(); } break; } case
+                 * FOUR_BALLS: { if (periodic.intakeDetected) { if (!intakeBoolean.isStarted())
+                 * { intakeBoolean.start(); } else if (intakeBoolean.getBoolean()) {
+                 * periodic.state = SuperState.FULL_SYSTEM; } } else { // Invalidate if it isn't
+                 * true intakeBoolean.stop(); } break; } case SHOOT: { if
+                 * (!periodic.deliveryDetected) { periodic.state = SuperState.INIT; } break; }
+                 * case DUMP_SYSTEM: case FULL_SYSTEM: default: break; }
+                 */
+                // deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+                // shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+                // indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+                // ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+                // extensionArm.set(periodic.armExtension);
+            }
+
+            @Override
+            public void onStop(double timestamp) {
+            }
         });
     }
 
@@ -209,7 +174,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putBoolean("Superstructure/Intake_TOF", intakeDetected());
         SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW",  intakeSensor.getRange());
+        SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
         SmartDashboard.putNumber("Superstructure/IndexerDemand", periodic.indexBeltDemand);
     }
 
@@ -253,7 +218,7 @@ public class Superstructure extends Subsystem {
     public void setDeliveryBeltsDemand(double demand) {
         periodic.deliveryBeltsDemand = demand;
     }
-    
+
     public void setDeliveryWheelDemand(double demand) {
         periodic.deliveryWheelDemand = demand;
     }
@@ -289,32 +254,30 @@ public class Superstructure extends Subsystem {
         }
     }
 
-    public double pulse(double currentMotorDemand, double demandMax, double waitTime) {
+    public double pulse(double currentMotorDemand, double demandMax, double waitTimeOff, double waitTimeOn) {
         if (pulse1) {
             timestamp = Timer.getFPGATimestamp();
             pulse1 = false;
-            //System.out.println("got Timestamp");
+            // System.out.println("got Timestamp");
         }
-        //System.out.println("Timestamp: " + timestamp);
-        //System.out.println("Timestamp and Waittime: " + timestamp+waitTime);
-        //System.out.println("FPGA Time: " + Timer.getFPGATimestamp());
-        //System.out.println("Demand: " + periodic.indexBeltDemand);
-            if ((timestamp + waitTime) <= Timer.getFPGATimestamp()) {
-                //System.out.println("Got Through First Printline");
-                if (currentMotorDemand == 0) {
+        if (currentMotorDemand == 0) {
+            if ((timestamp + waitTimeOff) <= Timer.getFPGATimestamp()) {
                 pulse1 = true;
-                //System.out.println("Set to Max");
-                return demandMax; 
-                } else {                    
-                    pulse1 = true;
-                    //System.out.println("Set to Min");
-                    return 0;
-                }
-            
+                return demandMax;
             } else {
-                //System.out.println("Staying the same");
+                // System.out.println("Staying the same");
                 return currentMotorDemand;
             }
+        } else {
+            if ((timestamp + waitTimeOn) <= Timer.getFPGATimestamp()) {
+                pulse1 = true;
+                return 0;
+            } else {
+                // System.out.println("Staying the same");
+                return currentMotorDemand;
+            }
+        }
+
     }
 
     public double getIndexerDemand() {
