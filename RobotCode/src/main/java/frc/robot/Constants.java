@@ -43,7 +43,7 @@ public class Constants {
     
     //LED Data/Ports
     public static final int LED_PORT = 0;
-    public static final int LED_LENGTH = 60;
+    public static final int LED_LENGTH = 36;
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick LAUNCH_PAD = new Joystick(1);
