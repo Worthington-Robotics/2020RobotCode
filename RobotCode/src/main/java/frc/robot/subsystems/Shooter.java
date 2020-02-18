@@ -18,6 +18,8 @@ import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
 
+    private double[] angleToDistance = new double[97];
+
     private static Shooter m_Shooter = new Shooter();
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.DISABLED;
@@ -40,6 +42,9 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.setInverted(true);
         leftFlywheelFalcon.setInverted(false);
         turretControl.configContinuousCurrentLimit(10);
+        for(int i = 0; i <= 96; i++) {
+            angleToDistance[i] = (98.5 - Constants.LIMELIGHT_HIGHT) / Math.tan(i/2);
+        }
         reset();
     }
 
@@ -83,12 +88,12 @@ public class Shooter extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 periodic.turretAngle = Rotation2d.fromDegrees(ticksToDegrees(periodic.turretEncoder));
+                
                 switch (flywheelMode) {
                 case OPEN_LOOP:
                     periodic.flywheelDemand = periodic.operatorFlywheelInput;
                     break;
                 case PID_MODE:
-                    periodic.operatorFlywheelInput = periodic.operatorFlywheelInput * Constants.TURRET_MAX_RPM;
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.operatorFlywheelInput);
                     break;
                 default:
@@ -98,16 +103,18 @@ public class Shooter extends Subsystem {
                 }
                 switch (turretMode) {
                 case OPEN_LOOP:
-                    if (periodic.operatorInput == 90) {
+                    if (periodic.operatorInput == 90 && !(periodic.turretEncoder > Constants.rightTurretLimit)) {
                         periodic.turretDemand = .2;
-                    } else if (periodic.operatorInput == 270) {
+                    } else if (periodic.operatorInput == 270 && !(periodic.turretEncoder < Constants.leftTurretLimit)) {
                         periodic.turretDemand = -.2;
                     } else {
                         periodic.turretDemand = 0;
                     }
                     break;
-                    case PID_MODE:
-                        periodic.turretDemand = limelightGoalAngle();
+                case PID_MODE:
+                if(periodic.turretEncoder < Constants.leftTurretLimit || periodic.turretEncoder > Constants.rightTurretLimit)
+                turretMode = MotorControlMode.DISABLED;
+                    periodic.turretDemand = limelightGoalAngle();
                     break;
                 default:
                     turretControl.set(ControlMode.Disabled, 0);
@@ -151,7 +158,8 @@ public class Shooter extends Subsystem {
         case PID_MODE:
             turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
-        case LIMELIGHT_MODE:
+        case RECENTER_MODE:
+            turretControl.set(ControlMode.MotionMagic, 0);
             break;
         default:
             turretControl.set(ControlMode.Disabled, 0);
@@ -165,7 +173,8 @@ public class Shooter extends Subsystem {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
-        SmartDashboard.putNumber("Shooter/Turret/AngleGoal", limelightGoalAngle());
+        SmartDashboard.putNumber("Shooter/Turret/Range (in)", limelightRanging());
+        SmartDashboard.putNumber("Shooter/Turret/EncoderGoal", limelightGoalAngle());
         SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput);
         SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
         SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
@@ -196,6 +205,9 @@ public class Shooter extends Subsystem {
         turretControl.setSelectedSensorPosition(0);
         turretControl.configContinuousCurrentLimit(5);
         turretControl.setInverted(true);
+        turretControl.setSensorPhase(true);
+        turretControl.configMotionAcceleration((int)degreesToTicks(90));
+        turretControl.configMotionCruiseVelocity((int)degreesToTicks(90));
         rightFlywheelFalcon.config_kP(0, Constants.TURRET_RIGHT_FLY_KP);
         rightFlywheelFalcon.config_kD(0, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -280,6 +292,11 @@ public class Shooter extends Subsystem {
         turretControl.set(ControlMode.Velocity, demand);
     }
 
+    public void setTurretCenter() {
+        if (turretMode != MotorControlMode.RECENTER_MODE)
+            turretMode = MotorControlMode.RECENTER_MODE;
+    }
+
     public void setFlywheelDemand(double newDemand) {
         if (flywheelMode != MotorControlMode.OPEN_LOOP)
             flywheelMode = MotorControlMode.OPEN_LOOP;
@@ -309,7 +326,7 @@ public class Shooter extends Subsystem {
     }
 
     public enum MotorControlMode {
-        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE;
+        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE, RECENTER_MODE;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
@@ -325,10 +342,8 @@ public class Shooter extends Subsystem {
         // Equation that takes in ta (See Limelight Docs) and outputs distance from
         // target in inches
         // TODO need to test data points based on actual bot
-        double targetHightOffset = 98.5 - Constants.LIMELIGHT_HIGHT;
         double targetAngleOffset = Constants.LIMELIGHT_PITCH + periodic.targetY;
-        return targetHightOffset / Math.tan(targetAngleOffset);
-
+        return angleToDistance[(int) (targetAngleOffset * 2)];
     }
 
     public double limelightGoalAngle() {
