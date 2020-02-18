@@ -50,7 +50,8 @@ public class Superstructure extends Subsystem {
     private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
 
     // Pulse Variables
-    private double pulseFinishedTimestamp;
+    private double pulseTimestamp;
+    private double pulseCooldownTimestamp;
 
     private static Superstructure instance = new Superstructure();
 
@@ -59,7 +60,7 @@ public class Superstructure extends Subsystem {
     }
 
     private Superstructure() {
-        // shooterWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
+        deliveryWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
@@ -72,9 +73,6 @@ public class Superstructure extends Subsystem {
 
         reset();
 
-        SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
-        SmartDashboard.putNumber("Superstructure/INDEXER_DEMAND", periodic.indexTopBeltDemand);
-        SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
         SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
         SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
         SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
@@ -218,14 +216,17 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
         SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/IndexDemand", periodic.indexTopBeltDemand);
+        SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
+        SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
+        SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
     }
 
     public void pulseDemand() {
-        if (pulseFinishedTimestamp + PULSE_COOLDOWN <= Timer.getFPGATimestamp()) {
-            pulseFinishedTimestamp = Timer.getFPGATimestamp() + PULSE_LENGTH;
+        if (pulseCooldownTimestamp <= Timer.getFPGATimestamp()) {
+            pulseTimestamp = Timer.getFPGATimestamp() + PULSE_LENGTH;
+            pulseCooldownTimestamp = pulseTimestamp + PULSE_COOLDOWN;
             periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
-        } else {
+        } else if (pulseTimestamp <= Timer.getFPGATimestamp()) {
             periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
         }
     }
