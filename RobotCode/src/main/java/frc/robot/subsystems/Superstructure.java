@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -14,7 +13,7 @@ import frc.lib.util.DemandUtil;
 import frc.lib.util.TimerBoolean;
 import frc.robot.Constants;
 
-import static frc.robot.Constants.TIME_TILL_STATIONARY;
+import static frc.robot.Constants.*;
 
 /**
  * Combines both the indexer and intake functions for performance economy.
@@ -24,13 +23,13 @@ public class Superstructure extends Subsystem {
     private SuperIO periodic;
 
     // Indexer
-    private TalonSRX shooterWheel;
+    private TalonSRX deliveryWheel;
     private TalonSRX deliveryBelts;
     private TalonSRX indexTopBelt;
     private TalonSRX indexBottomBelt;
 
     // Intake
-    private TalonSRX ballsIntake;
+    private TalonSRX intakeWheels;
     private DoubleSolenoid extensionArm;
 
     // Sensors
@@ -51,8 +50,7 @@ public class Superstructure extends Subsystem {
     private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
 
     // Pulse Variables
-    private boolean pulse1 = true, pulse2 = false;
-    private double timestamp;
+    private double pulseFinishedTimestamp;
 
     private static Superstructure instance = new Superstructure();
 
@@ -65,7 +63,7 @@ public class Superstructure extends Subsystem {
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
-        ballsIntake = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
+        intakeWheels = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
         deliverySensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_DELIVERY);
@@ -75,8 +73,8 @@ public class Superstructure extends Subsystem {
         reset();
 
         SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
-        SmartDashboard.putNumber("Superstructure/INDEXER_DEMAND", periodic.indexBeltDemand);
-        SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeDemand);
+        SmartDashboard.putNumber("Superstructure/INDEXER_DEMAND", periodic.indexTopBeltDemand);
+        SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
         SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
         SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
         SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
@@ -114,55 +112,100 @@ public class Superstructure extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-        /*
-         * switch (periodic.state) { case INIT: DemandUtil.setFullDemand(shooterWheel,
-         * deliveryBelts, indexBelt, ballsIntake); break; case ONE_TO_THREE_BALLS:
-         * DemandUtil.setFullDemand(deliveryBelts, ballsIntake);
-         * DemandUtil.disable(shooterWheel, indexBelt); break; case FOUR_BALLS:
-         * DemandUtil.setFullDemand(ballsIntake); DemandUtil.disable(shooterWheel,
-         * deliveryBelts, indexBelt); break; case FULL_SYSTEM:
-         * DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-         * break; case SHOOT: DemandUtil.setFullDemand(shooterWheel);
-         * DemandUtil.disable(deliveryBelts, indexBelt, ballsIntake); break; case
-         * DUMP_SYSTEM: DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts,
-         * indexBelt, ballsIntake); break; default: break; }
-         */
+//        switch (periodic.state) {
+//            case INIT:
+//                periodic.deliveryWheelDemand =
+//                periodic.deliveryBeltsDemand =
+//                periodic.indexTopBeltDemand =
+//                periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+//
+//                break;
+//            case ONE_TO_THREE_BALLS:
+//                periodic.deliveryBeltsDemand = periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+//                periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+//                break;
+//            case FOUR_BALLS:
+//                periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+//                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+//                break;
+//            case FULL_SYSTEM:
+//                periodic.deliveryWheelDemand =
+//                periodic.deliveryBeltsDemand =
+//                periodic.indexTopBeltDemand =
+//                periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
+//                break;
+//            case SHOOT:
+//                periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
+//                periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
+//                break;
+//            case DUMP_SYSTEM:
+//                periodic.deliveryWheelDemand =
+//                periodic.deliveryBeltsDemand =
+//                periodic.indexTopBeltDemand =
+//                periodic.intakeWheelsDemand = -FULL_BELT_DEMAND;
+//                break;
+//            default:
+//                break;
+//        }
+
+        DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
+        DemandUtil.setDemand(periodic.deliveryWheelDemand, deliveryWheel);
+        DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
+        DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
+        extensionArm.set(periodic.armExtension);
     }
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
-
         enabledLooper.register(new Loop() {
-            @Override
-            public void onStart(double timestamp) {
-            }
+            @Override public void onStart(double timestamp) { }
 
             @Override
             public void onLoop(double timestamp) {
-                /*
-                 * switch (periodic.state) { case INIT: { if (periodic.deliveryDetected) {
-                 * periodic.state = SuperState.ONE_TO_THREE_BALLS; } break; } case
-                 * ONE_TO_THREE_BALLS: { if (periodic.indexDetected) { if
-                 * (!indexBoolean.isStarted()) { indexBoolean.start(); } else if
-                 * (indexBoolean.getBoolean()) { periodic.state = SuperState.FOUR_BALLS; } }
-                 * else { // Invalidate if it isn't true indexBoolean.stop(); } break; } case
-                 * FOUR_BALLS: { if (periodic.intakeDetected) { if (!intakeBoolean.isStarted())
-                 * { intakeBoolean.start(); } else if (intakeBoolean.getBoolean()) {
-                 * periodic.state = SuperState.FULL_SYSTEM; } } else { // Invalidate if it isn't
-                 * true intakeBoolean.stop(); } break; } case SHOOT: { if
-                 * (!periodic.deliveryDetected) { periodic.state = SuperState.INIT; } break; }
-                 * case DUMP_SYSTEM: case FULL_SYSTEM: default: break; }
-                 */
-                // deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                // shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
-                // indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-                // ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
-                // extensionArm.set(periodic.armExtension);
+//                switch (periodic.state) {
+//                    case INIT: {
+//                        if (periodic.deliveryDetected) {
+//                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
+//                        }
+//                        break;
+//                    }
+//                    case ONE_TO_THREE_BALLS: {
+//                        if (periodic.indexDetected) {
+//                            if (!indexBoolean.isStarted()) {
+//                                indexBoolean.start();
+//                            } else if (indexBoolean.getBoolean()) {
+//                                periodic.state = SuperState.FOUR_BALLS;
+//                            }
+//                        } else {
+//                            // Invalidate if it isn't true
+//                            indexBoolean.stop();
+//                        }
+//                        break;
+//                    }
+//                    case FOUR_BALLS: {
+//                        if (periodic.intakeDetected) {
+//                            if (!intakeBoolean.isStarted()) {
+//                                intakeBoolean.start();
+//                            } else if (intakeBoolean.getBoolean()) {
+//                                periodic.state = SuperState.FULL_SYSTEM;
+//                            }
+//                        } else {
+//                            // Invalidate if it isn't true
+//                            intakeBoolean.stop();
+//                        }
+//                        break;
+//                    }
+//                    case SHOOT: {
+//                        if (!periodic.deliveryDetected) {
+//                            periodic.state = SuperState.INIT;
+//                        }
+//                        break;
+//                    }
+//                    case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
+//                }
             }
 
-            @Override
-            public void onStop(double timestamp) {
-            }
+            @Override public void onStop(double timestamp) { }
         });
     }
 
@@ -175,11 +218,21 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
         SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/IndexerDemand", periodic.indexBeltDemand);
+        SmartDashboard.putNumber("Superstructure/IndexDemand", periodic.indexTopBeltDemand);
+    }
+
+    public void pulseDemand() {
+        if (pulseFinishedTimestamp + PULSE_COOLDOWN <= Timer.getFPGATimestamp()) {
+            pulseFinishedTimestamp = Timer.getFPGATimestamp() + PULSE_LENGTH;
+            periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
+        } else {
+            periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+        }
     }
 
     public void shootBall() {
-        if (periodic.state == SuperState.ONE_TO_THREE_BALLS || periodic.state == SuperState.FOUR_BALLS
+        if (periodic.state == SuperState.ONE_TO_THREE_BALLS
+                || periodic.state == SuperState.FOUR_BALLS
                 || periodic.state == SuperState.FULL_SYSTEM) {
             periodic.state = SuperState.SHOOT;
         }
@@ -205,14 +258,13 @@ public class Superstructure extends Subsystem {
         intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
     }
 
-    // SettersW
+    // Setters
     public void setArmExtension(DoubleSolenoid.Value armExtension) {
         periodic.armExtension = armExtension;
     }
 
     public void setIndexBeltDemand(double indexBeltDemand) {
-        System.out.println("Setting Demand");
-        periodic.indexBeltDemand = indexBeltDemand;
+        periodic.indexTopBeltDemand = indexBeltDemand;
     }
 
     public void setDeliveryBeltsDemand(double demand) {
@@ -224,12 +276,20 @@ public class Superstructure extends Subsystem {
     }
 
     public void setIntakeDemand(double demand) {
-        periodic.intakeDemand = demand;
+        periodic.intakeWheelsDemand = demand;
     }
 
     // Getters
     public DoubleSolenoid.Value getArmExtension() {
         return periodic.armExtension;
+    }
+
+    public double getIndexBeltDemand() {
+        return periodic.indexTopBeltDemand;
+    }
+
+    public LogData getLogger() {
+        return periodic;
     }
 
     public boolean deliveryDetected() {
@@ -244,48 +304,8 @@ public class Superstructure extends Subsystem {
         return periodic.intakeDetected;
     }
 
-    public boolean getIntakeDown() {
-        if (extensionArm.get() == Value.kForward) {
-            return true;
-        } else if (extensionArm.get() == Value.kReverse) {
-            return false;
-        } else {
-            return false;
-        }
-    }
-
-    public double pulse(double currentMotorDemand, double demandMax, double waitTimeOff, double waitTimeOn) {
-        if (pulse1) {
-            timestamp = Timer.getFPGATimestamp();
-            pulse1 = false;
-            // System.out.println("got Timestamp");
-        }
-        if (currentMotorDemand == 0) {
-            if ((timestamp + waitTimeOff) <= Timer.getFPGATimestamp()) {
-                pulse1 = true;
-                return demandMax;
-            } else {
-                // System.out.println("Staying the same");
-                return currentMotorDemand;
-            }
-        } else {
-            if ((timestamp + waitTimeOn) <= Timer.getFPGATimestamp()) {
-                pulse1 = true;
-                return 0;
-            } else {
-                // System.out.println("Staying the same");
-                return currentMotorDemand;
-            }
-        }
-
-    }
-
-    public double getIndexerDemand() {
-        return periodic.indexBeltDemand;
-    }
-
-    public LogData getLogger() {
-        return periodic;
+    public boolean intakeDown() {
+        return extensionArm.get() == Value.kForward;
     }
 
     public class SuperIO extends Subsystem.PeriodicIO {
@@ -293,10 +313,10 @@ public class Superstructure extends Subsystem {
         public SuperState state = SuperState.INIT;
         // Indexer Data
         public double deliveryWheelDemand;
-        public double indexBeltDemand;
+        public double indexTopBeltDemand;
         public double deliveryBeltsDemand;
         // Intake Data
-        public double intakeDemand;
+        public double intakeWheelsDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
         // Sensor Booleans
         public boolean deliveryDetected;

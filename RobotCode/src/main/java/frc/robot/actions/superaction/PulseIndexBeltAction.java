@@ -4,17 +4,17 @@ import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Superstructure;
 
 public class PulseIndexBeltAction extends Action {
-    @Override
-    public void onStart() {
-        //System.out.println("Action Starting");
+    Superstructure superstructure;
+
+    public PulseIndexBeltAction() {
+        superstructure = Superstructure.getInstance();
     }
+
+    @Override public void onStart() { }
 
     @Override
     public void onLoop() {
-        Superstructure.getInstance().setIndexBeltDemand(
-                Superstructure.getInstance().pulse(
-                    Superstructure.getInstance().getIndexerDemand(), 1, 2, 2));
-        //System.out.println("Looping");
+        superstructure.pulseDemand();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class PulseIndexBeltAction extends Action {
 
     @Override
     public void onStop() {
-        Superstructure.getInstance().setIndexBeltDemand(0);
+        superstructure.setIndexBeltDemand(0);
     }
 
 }

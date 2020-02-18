@@ -127,6 +127,9 @@ public class Constants {
     public static final double FULL_BELT_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = 0.75;
     public static final double STOP_BELT_DEMAND = 0;
-    // Time (s)
+    // Time (in seconds)
     public static final double TIME_TILL_STATIONARY = .5;
+    // Pulse constants (in seconds)
+    public static final double PULSE_LENGTH = 2;
+    public static final double PULSE_COOLDOWN = 2;
 }
