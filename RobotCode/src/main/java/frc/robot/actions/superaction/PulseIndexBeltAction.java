@@ -14,7 +14,7 @@ public class PulseIndexBeltAction extends Action {
 
     @Override
     public void onLoop() {
-        superstructure.pulseDemand();
+        superstructure.pulseIndexDemand();
     }
 
     @Override
