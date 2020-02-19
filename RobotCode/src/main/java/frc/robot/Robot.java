@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
     private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
 
 
-
+    private JoystickButton recenter = new JoystickButton(Constants.SECOND, 1);
     private JoystickButton gyroLock = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
 
         // create buttons and register actions
+        recenter.whileHeld(Action.toCommand(new Recenter()));
         turretPIDControl.whenPressed(Action.toCommand(new TurretPIDControl(false)));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
         flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
