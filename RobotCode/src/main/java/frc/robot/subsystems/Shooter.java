@@ -29,6 +29,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry ty = table.getEntry("ty");
     private NetworkTableEntry ta = table.getEntry("ta");
     private NetworkTableEntry camtran = table.getEntry("camtran");
+    private double[] angleToDistance;
 
     private Shooter() {
         SmartDashboard.putNumber("Shooter/Turret/P", 0);
@@ -40,6 +41,10 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.setInverted(true);
         leftFlywheelFalcon.setInverted(false);
         turretControl.configContinuousCurrentLimit(10);
+        angleToDistance = new double[181];
+        for(int i = 0; i <= 180; i++) {
+            angleToDistance[i] = Math.tan(Math.toRadians((double)i/2));
+        }
         reset();
     }
 
@@ -353,6 +358,14 @@ public class Shooter extends Subsystem {
         // target in inches
         // TODO need to test data points based on actual bot
         return (98.5-Constants.LIMELIGHT_HIGHT) / Math.tan(Math.toRadians(Constants.LIMELIGHT_PITCH + periodic.targetY));
+    }
+
+    public double[] getAngleToDistance() {
+        return angleToDistance;
+    }
+
+    public double limelightRanging(double angle) {
+        return (98.5-Constants.LIMELIGHT_HIGHT) / angleToDistance[(int) (angle*2)];
     }
 
     public double limelightGoalAngle() {
