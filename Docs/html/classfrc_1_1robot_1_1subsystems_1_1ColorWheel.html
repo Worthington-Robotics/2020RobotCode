@@ -84,13 +84,14 @@ Inheritance diagram for frc.robot.subsystems.ColorWheel:</div>
  <div class="center">
   <img src="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.png" usemap="#frc.robot.subsystems.ColorWheel_map" alt=""/>
   <map id="frc.robot.subsystems.ColorWheel_map" name="frc.robot.subsystems.ColorWheel_map">
-<area href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html" alt="frc.robot.subsystems.Subsystem" shape="rect" coords="0,0,199,24"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html" alt="frc.robot.subsystems.Subsystem" shape="rect" coords="0,56,199,80"/>
+<area href="interfacefrc_1_1lib_1_1util_1_1Logable.html" alt="frc.lib.util.Logable" shape="rect" coords="0,0,199,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1PeriodicIO.html">PeriodicIO</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1ColorWheelIO.html">ColorWheelIO</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -101,47 +102,73 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a675e73f185dcae29921da640ea190e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a053bbf9a090627233ae54f09c307e666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a053bbf9a090627233ae54f09c307e666">outputTelemetry</a> ()</td></tr>
 <tr class="separator:a053bbf9a090627233ae54f09c307e666"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00294cfe8fae55b0441e7df55b8cdd1e"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a00294cfe8fae55b0441e7df55b8cdd1e">cDetected</a> ()</td></tr>
-<tr class="separator:a00294cfe8fae55b0441e7df55b8cdd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a6d7b5487586432caf430e17a0a1634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a6a6d7b5487586432caf430e17a0a1634">setEnabled</a> (boolean enabled)</td></tr>
+<tr class="separator:a6a6d7b5487586432caf430e17a0a1634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae37b7c8cedc09e7d79eac0653e6a4a9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#ae37b7c8cedc09e7d79eac0653e6a4a9b">setCCW</a> (boolean CCW)</td></tr>
+<tr class="separator:ae37b7c8cedc09e7d79eac0653e6a4a9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55161c6d89b5b6697d665f590c5ce03e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a55161c6d89b5b6697d665f590c5ce03e">reset</a> ()</td></tr>
 <tr class="separator:a55161c6d89b5b6697d665f590c5ce03e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e373e348d2c40d12d0edc92f9471995"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a6e373e348d2c40d12d0edc92f9471995">setDemand</a> (final double newDemand)</td></tr>
+<tr class="separator:a6e373e348d2c40d12d0edc92f9471995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537f815e7f252ba47855c17a087325c1"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a537f815e7f252ba47855c17a087325c1">isOnTarget</a> ()</td></tr>
+<tr class="separator:a537f815e7f252ba47855c17a087325c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f9d541c917c31aae0c138ee52538f5"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#aa6f9d541c917c31aae0c138ee52538f5">checkColor</a> ()</td></tr>
+<tr class="separator:aa6f9d541c917c31aae0c138ee52538f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae86838bd27918a47e97f39ce868f4ea3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#ae86838bd27918a47e97f39ce868f4ea3">setColorMotorPidOn</a> (final boolean motorOn)</td></tr>
+<tr class="separator:ae86838bd27918a47e97f39ce868f4ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96bf50f955e7c5c62e675b59ae034a38"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a96bf50f955e7c5c62e675b59ae034a38">colorMatch</a> ()</td></tr>
+<tr class="separator:a96bf50f955e7c5c62e675b59ae034a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00294cfe8fae55b0441e7df55b8cdd1e"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a00294cfe8fae55b0441e7df55b8cdd1e">cDetected</a> ()</td></tr>
+<tr class="separator:a00294cfe8fae55b0441e7df55b8cdd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da5732620b81258eb9a09601f1e25f1"><td class="memItemLeft" align="right" valign="top">LogData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a7da5732620b81258eb9a09601f1e25f1">getLogger</a> ()</td></tr>
+<tr class="separator:a7da5732620b81258eb9a09601f1e25f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html">frc.robot.subsystems.Subsystem</a></td></tr>
 <tr class="memitem:a4d27c0d71c9a6d4f86158568ce742170 inherit pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#a4d27c0d71c9a6d4f86158568ce742170">registerEnabledLoops</a> (<a class="el" href="interfacefrc_1_1lib_1_1loops_1_1ILooper.html">ILooper</a> enabledLooper)</td></tr>
 <tr class="separator:a4d27c0d71c9a6d4f86158568ce742170 inherit pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8aef31a06cfdbafe5195b52239e30e7 inherit pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#ac8aef31a06cfdbafe5195b52239e30e7">onStop</a> ()</td></tr>
 <tr class="separator:ac8aef31a06cfdbafe5195b52239e30e7 inherit pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85da3addbc2a686ec984c9319517b972 inherit pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO.html">PeriodicIO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#a85da3addbc2a686ec984c9319517b972">getLogger</a> ()</td></tr>
-<tr class="separator:a85da3addbc2a686ec984c9319517b972 inherit pub_methods_classfrc_1_1robot_1_1subsystems_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a42b997ca339696e61d13252a3128beba"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html">ColorWheel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a42b997ca339696e61d13252a3128beba">getInstance</a> ()</td></tr>
 <tr class="separator:a42b997ca339696e61d13252a3128beba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a059983268ff697e3537b42f724fe6f2e"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a059983268ff697e3537b42f724fe6f2e">colorFromRGB</a> (int[] RGB)</td></tr>
-<tr class="separator:a059983268ff697e3537b42f724fe6f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c43b8d03dae987705d3328955284f61"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a5c43b8d03dae987705d3328955284f61">colorFromRGB</a> (final double[] RGB)</td></tr>
+<tr class="separator:a5c43b8d03dae987705d3328955284f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:ae819e33969fa1015fb0514e31c23b623"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#ae819e33969fa1015fb0514e31c23b623">ColorWheel</a> ()</td></tr>
 <tr class="separator:ae819e33969fa1015fb0514e31c23b623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12c7acce642d6da112289019772200e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a12c7acce642d6da112289019772200e3">direction</a> (char color)</td></tr>
-<tr class="separator:a12c7acce642d6da112289019772200e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0547daa3493acf1a0fe6e870033fb76b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a0547daa3493acf1a0fe6e870033fb76b">inchesToTicks</a> (double inches)</td></tr>
+<tr class="separator:a0547daa3493acf1a0fe6e870033fb76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e8bb2be351fd8d0382e7bc90f990f1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a1e8bb2be351fd8d0382e7bc90f990f1a">distance</a> ()</td></tr>
+<tr class="separator:a1e8bb2be351fd8d0382e7bc90f990f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6054023fd749a4dd6c3b02c04f61e19f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a6054023fd749a4dd6c3b02c04f61e19f">checkIfDone</a> ()</td></tr>
+<tr class="separator:a6054023fd749a4dd6c3b02c04f61e19f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cfdcb3d495ec474ae15f2ad63dd9f5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a7cfdcb3d495ec474ae15f2ad63dd9f5f">configTalon</a> ()</td></tr>
+<tr class="separator:a7cfdcb3d495ec474ae15f2ad63dd9f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
-<tr class="memitem:ad0d6abcf5c487d70fd36d4845daaa4aa"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#ad0d6abcf5c487d70fd36d4845daaa4aa">colorCovert</a> (char color)</td></tr>
-<tr class="separator:ad0d6abcf5c487d70fd36d4845daaa4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b14e1aafcb0fc5090485c07f0f8e5b5"><td class="memItemLeft" align="right" valign="top">static char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a5b14e1aafcb0fc5090485c07f0f8e5b5">colorConvert</a> (final char color)</td></tr>
+<tr class="separator:a5b14e1aafcb0fc5090485c07f0f8e5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:aa3528338c3212370ce72b71e56d6239c"><td class="memItemLeft" align="right" valign="top">final TalonSRX&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#aa3528338c3212370ce72b71e56d6239c">colorWheelTalon</a></td></tr>
+<tr class="separator:aa3528338c3212370ce72b71e56d6239c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa79fae46bf632ea84f41219dcfdad450"><td class="memItemLeft" align="right" valign="top">final I2C.Port&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#aa79fae46bf632ea84f41219dcfdad450">i2cPort</a> = I2C.Port.kOnboard</td></tr>
 <tr class="separator:aa79fae46bf632ea84f41219dcfdad450"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39e0fed493d771128af185bb695adb83"><td class="memItemLeft" align="right" valign="top">final ColorSensorV3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a39e0fed493d771128af185bb695adb83">colorSensor</a></td></tr>
+<tr class="memitem:a39e0fed493d771128af185bb695adb83"><td class="memItemLeft" align="right" valign="top">final <a class="el" href="classfrc_1_1lib_1_1drivers_1_1ColorSensorV3.html">ColorSensorV3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a39e0fed493d771128af185bb695adb83">colorSensor</a></td></tr>
 <tr class="separator:a39e0fed493d771128af185bb695adb83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af264faa737eefd1cbee17086d2b87140"><td class="memItemLeft" align="right" valign="top">final char[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#af264faa737eefd1cbee17086d2b87140">wheelColors</a> = new char[]{'B', 'Y', 'R', 'G'}</td></tr>
+<tr class="memitem:af264faa737eefd1cbee17086d2b87140"><td class="memItemLeft" align="right" valign="top">final char[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#af264faa737eefd1cbee17086d2b87140">wheelColors</a> = new char[] { 'B', 'Y', 'R', 'G' }</td></tr>
 <tr class="separator:af264faa737eefd1cbee17086d2b87140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4f399effac4c753467ecc5ef15c812b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1PeriodicIO.html">PeriodicIO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#ad4f399effac4c753467ecc5ef15c812b">periodic</a></td></tr>
-<tr class="separator:ad4f399effac4c753467ecc5ef15c812b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3c0e2714e6e367bb75a16bfb69b1a1"><td class="memItemLeft" align="right" valign="top">final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a9e3c0e2714e6e367bb75a16bfb69b1a1">wheelColorsOrder</a> = new String(<a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#af264faa737eefd1cbee17086d2b87140">wheelColors</a>)</td></tr>
+<tr class="separator:a9e3c0e2714e6e367bb75a16bfb69b1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae213e9780d735ea2a4be9667aa2982e1"><td class="memItemLeft" align="right" valign="top">final ColorMatch&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#ae213e9780d735ea2a4be9667aa2982e1">m_colorMatcher</a> = new ColorMatch()</td></tr>
+<tr class="separator:ae213e9780d735ea2a4be9667aa2982e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a607a4e78ca5009546c13e2d42f021b49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1ColorWheelIO.html">ColorWheelIO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a607a4e78ca5009546c13e2d42f021b49">periodic</a></td></tr>
+<tr class="separator:a607a4e78ca5009546c13e2d42f021b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
@@ -189,13 +216,28 @@ Static Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This returns the color that the sensor sees on the wheel</p>
-<dl class="section return"><dt>Returns</dt><dd>color the sensor sees on the wheel (Red, Yellow, Green, or Blue) </dd></dl>
 
 </div>
 </div>
-<a id="ad0d6abcf5c487d70fd36d4845daaa4aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0d6abcf5c487d70fd36d4845daaa4aa">&#9670;&nbsp;</a></span>colorCovert()</h2>
+<a id="aa6f9d541c917c31aae0c138ee52538f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6f9d541c917c31aae0c138ee52538f5">&#9670;&nbsp;</a></span>checkColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean frc.robot.subsystems.ColorWheel.checkColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6054023fd749a4dd6c3b02c04f61e19f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6054023fd749a4dd6c3b02c04f61e19f">&#9670;&nbsp;</a></span>checkIfDone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,9 +246,34 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static char frc.robot.subsystems.ColorWheel.colorCovert </td>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.checkIfDone </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b14e1aafcb0fc5090485c07f0f8e5b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b14e1aafcb0fc5090485c07f0f8e5b5">&#9670;&nbsp;</a></span>colorConvert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static char frc.robot.subsystems.ColorWheel.colorConvert </td>
+          <td>(</td>
+          <td class="paramtype">final char&#160;</td>
           <td class="paramname"><em>color</em></td><td>)</td>
           <td></td>
         </tr>
@@ -228,8 +295,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a059983268ff697e3537b42f724fe6f2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a059983268ff697e3537b42f724fe6f2e">&#9670;&nbsp;</a></span>colorFromRGB()</h2>
+<a id="a5c43b8d03dae987705d3328955284f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c43b8d03dae987705d3328955284f61">&#9670;&nbsp;</a></span>colorFromRGB()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +307,7 @@ Static Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">static char frc.robot.subsystems.ColorWheel.colorFromRGB </td>
           <td>(</td>
-          <td class="paramtype">int[]&#160;</td>
+          <td class="paramtype">final double[]&#160;</td>
           <td class="paramname"><em>RGB</em></td><td>)</td>
           <td></td>
         </tr>
@@ -251,11 +318,31 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Returns the color that the sensor sees on the wheel</p>
+<dl class="section return"><dt>Returns</dt><dd>color the sensor sees on the wheel (Red, Yellow, Green, or Blue) </dd></dl>
 
 </div>
 </div>
-<a id="a12c7acce642d6da112289019772200e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12c7acce642d6da112289019772200e3">&#9670;&nbsp;</a></span>direction()</h2>
+<a id="a96bf50f955e7c5c62e675b59ae034a38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96bf50f955e7c5c62e675b59ae034a38">&#9670;&nbsp;</a></span>colorMatch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String frc.robot.subsystems.ColorWheel.colorMatch </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Run the color match algorithm on our detected color</p>
+
+</div>
+</div>
+<a id="a7cfdcb3d495ec474ae15f2ad63dd9f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cfdcb3d495ec474ae15f2ad63dd9f5f">&#9670;&nbsp;</a></span>configTalon()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,10 +351,9 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void frc.robot.subsystems.ColorWheel.direction </td>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.configTalon </td>
           <td>(</td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>color</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -277,13 +363,32 @@ Static Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Picks the direction the wheel has to spin for maximum efficiency</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">color</td><td>takes in a character 'R', 'Y', 'G', 'B' of what the robot sees </td></tr>
-  </table>
-  </dd>
-</dl>
+
+</div>
+</div>
+<a id="a1e8bb2be351fd8d0382e7bc90f990f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e8bb2be351fd8d0382e7bc90f990f1a">&#9670;&nbsp;</a></span>distance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.distance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Picks the direction the wheel has to spin for maximum efficiency and calculates distance to spin the control panel </p>
 
 </div>
 </div>
@@ -308,6 +413,68 @@ Static Private Attributes</h2></td></tr>
 <span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7da5732620b81258eb9a09601f1e25f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7da5732620b81258eb9a09601f1e25f1">&#9670;&nbsp;</a></span>getLogger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LogData frc.robot.subsystems.ColorWheel.getLogger </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#affd98b66c2142b99e718fee877a36099">frc.robot.subsystems.Subsystem</a>.</p>
+
+</div>
+</div>
+<a id="a0547daa3493acf1a0fe6e870033fb76b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0547daa3493acf1a0fe6e870033fb76b">&#9670;&nbsp;</a></span>inchesToTicks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double frc.robot.subsystems.ColorWheel.inchesToTicks </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>inches</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a537f815e7f252ba47855c17a087325c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a537f815e7f252ba47855c17a087325c1">&#9670;&nbsp;</a></span>isOnTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean frc.robot.subsystems.ColorWheel.isOnTarget </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>
@@ -372,6 +539,78 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae37b7c8cedc09e7d79eac0653e6a4a9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae37b7c8cedc09e7d79eac0653e6a4a9b">&#9670;&nbsp;</a></span>setCCW()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.setCCW </td>
+          <td>(</td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>CCW</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae86838bd27918a47e97f39ce868f4ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae86838bd27918a47e97f39ce868f4ea3">&#9670;&nbsp;</a></span>setColorMotorPidOn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.setColorMotorPidOn </td>
+          <td>(</td>
+          <td class="paramtype">final boolean&#160;</td>
+          <td class="paramname"><em>motorOn</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e373e348d2c40d12d0edc92f9471995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e373e348d2c40d12d0edc92f9471995">&#9670;&nbsp;</a></span>setDemand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.setDemand </td>
+          <td>(</td>
+          <td class="paramtype">final double&#160;</td>
+          <td class="paramname"><em>newDemand</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6a6d7b5487586432caf430e17a0a1634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a6d7b5487586432caf430e17a0a1634">&#9670;&nbsp;</a></span>setEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.subsystems.ColorWheel.setEnabled </td>
+          <td>(</td>
+          <td class="paramtype">boolean&#160;</td>
+          <td class="paramname"><em>enabled</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a675e73f185dcae29921da640ea190e47"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a675e73f185dcae29921da640ea190e47">&#9670;&nbsp;</a></span>writePeriodicOutputs()</h2>
 
@@ -403,7 +642,29 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">final ColorSensorV3 frc.robot.subsystems.ColorWheel.colorSensor</td>
+          <td class="memname">final <a class="el" href="classfrc_1_1lib_1_1drivers_1_1ColorSensorV3.html">ColorSensorV3</a> frc.robot.subsystems.ColorWheel.colorSensor</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa3528338c3212370ce72b71e56d6239c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3528338c3212370ce72b71e56d6239c">&#9670;&nbsp;</a></span>colorWheelTalon</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final TalonSRX frc.robot.subsystems.ColorWheel.colorWheelTalon</td>
         </tr>
       </table>
   </td>
@@ -437,6 +698,28 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae213e9780d735ea2a4be9667aa2982e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae213e9780d735ea2a4be9667aa2982e1">&#9670;&nbsp;</a></span>m_colorMatcher</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final ColorMatch frc.robot.subsystems.ColorWheel.m_colorMatcher = new ColorMatch()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a60cd18977b7eb7c78234f09c5c4f3432"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a60cd18977b7eb7c78234f09c5c4f3432">&#9670;&nbsp;</a></span>m_colorWheelInstance</h2>
 
@@ -459,8 +742,8 @@ Static Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad4f399effac4c753467ecc5ef15c812b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4f399effac4c753467ecc5ef15c812b">&#9670;&nbsp;</a></span>periodic</h2>
+<a id="a607a4e78ca5009546c13e2d42f021b49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a607a4e78ca5009546c13e2d42f021b49">&#9670;&nbsp;</a></span>periodic</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -469,7 +752,7 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1PeriodicIO.html">PeriodicIO</a> frc.robot.subsystems.ColorWheel.periodic</td>
+          <td class="memname"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel_1_1ColorWheelIO.html">ColorWheelIO</a> frc.robot.subsystems.ColorWheel.periodic</td>
         </tr>
       </table>
   </td>
@@ -491,7 +774,29 @@ Static Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">final char [] frc.robot.subsystems.ColorWheel.wheelColors = new char[]{'B', 'Y', 'R', 'G'}</td>
+          <td class="memname">final char [] frc.robot.subsystems.ColorWheel.wheelColors = new char[] { 'B', 'Y', 'R', 'G' }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9e3c0e2714e6e367bb75a16bfb69b1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e3c0e2714e6e367bb75a16bfb69b1a1">&#9670;&nbsp;</a></span>wheelColorsOrder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String frc.robot.subsystems.ColorWheel.wheelColorsOrder = new String(<a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#af264faa737eefd1cbee17086d2b87140">wheelColors</a>)</td>
         </tr>
       </table>
   </td>

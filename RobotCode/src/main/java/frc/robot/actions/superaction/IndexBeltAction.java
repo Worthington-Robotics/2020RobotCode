@@ -6,13 +6,19 @@ import frc.robot.subsystems.Superstructure;
 
 public class IndexBeltAction extends Action {
     private Superstructure superstructure;
+    private boolean isReversed;
 
-    public IndexBeltAction() {
+    public IndexBeltAction(boolean isReversed) {
         superstructure = Superstructure.getInstance();
+        this.isReversed = isReversed;
     }
 
     @Override public void onStart() {
-        superstructure.setIndexBeltDemand(Constants.HIGH_BELT_DEMAND);
+        
+        if(isReversed)
+        superstructure.setIndexBeltDemand(-Constants.INDEXER_DEMAND);
+        else
+        superstructure.setIndexBeltDemand(Constants.INDEXER_DEMAND);
     }
 
     @Override public void onLoop() {}

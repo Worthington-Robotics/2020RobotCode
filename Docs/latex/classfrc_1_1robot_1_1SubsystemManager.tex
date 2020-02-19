@@ -16,7 +16,9 @@ class \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_1_1EnabledLoop}{Ena
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_abfb29c28140ecac4de50e2c1e0d37070}{Subsystem\+Manager}} (List$<$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{Subsystem}} $>$ all\+Subsystems, boolean ignore\+Logger)
+\mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a6702d8f5d475db6a3858bf919c2a5e92}{Subsystem\+Manager}} (final List$<$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{Subsystem}} $>$ all\+Subsystems, final boolean ignore\+Logger)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a67d4185fb76792d5d01979c9ff5c6665}{add\+Logging\+Source}} (final List$<$ \mbox{\hyperlink{interfacefrc_1_1lib_1_1util_1_1Logable}{Logable}} $>$ to\+Log)
 \item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a7429c2dc612a27340b9d688cdcb30591}{log\+Telemetry}} ()
 \item 
@@ -26,25 +28,36 @@ void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_ad0958ae1520308ec748
 \item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_af8ddb43969d34bb508e649139892e5f4}{reset\+All\+Subsystems}} ()
 \item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a63271bddb9ff4e4dcbc237e8d6a265f7}{register\+Enabled\+Loops}} (\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper}{Looper}} enabled\+Looper)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a8f41a76f8dfe651e5f79407dc9d95ab8}{register\+Disabled\+Loops}} (\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper}{Looper}} disabled\+Looper)
+\item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a85f2d14c63f7f220ea4ad86db11f8132}{register}} (\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}} loop)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a34ec38fd7615819572a0d114551f3f9b}{create\+Logging}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 final List$<$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{Subsystem}} $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a0e6e0570be57a75864dd8bdcaa33dc3c}{m\+All\+Subsystems}}
 \item 
-List$<$ \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}} $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a75084a51c3ef3858b88d00d184e1d0da}{m\+Loops}} = new Array\+List$<$$>$()
+final List$<$ \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}} $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a0af6819de7e67a141785280a8f2e6e6c}{m\+Loops}} = new Array\+List$<$$>$()
 \item 
-\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}}$<$ Subsystem.\+Periodic\+IO $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_aa2b507685d28c23113d6280d25610676}{logger}}
+\mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}}$<$ Log\+Data $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a0a759ac40f0e64ff64dea3faac416925}{logger}}
+\item 
+final boolean \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager_a5a6a61bee4651b7392af67d8febf5e27}{m\+Ignore\+Logger}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_abfb29c28140ecac4de50e2c1e0d37070}\label{classfrc_1_1robot_1_1SubsystemManager_abfb29c28140ecac4de50e2c1e0d37070}} 
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a6702d8f5d475db6a3858bf919c2a5e92}\label{classfrc_1_1robot_1_1SubsystemManager_a6702d8f5d475db6a3858bf919c2a5e92}} 
 \index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!SubsystemManager@{SubsystemManager}}
 \index{SubsystemManager@{SubsystemManager}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
 \doxysubsubsection{\texorpdfstring{SubsystemManager()}{SubsystemManager()}}
-{\footnotesize\ttfamily frc.\+robot.\+Subsystem\+Manager.\+Subsystem\+Manager (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{Subsystem}} $>$}]{all\+Subsystems,  }\item[{boolean}]{ignore\+Logger }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily frc.\+robot.\+Subsystem\+Manager.\+Subsystem\+Manager (\begin{DoxyParamCaption}\item[{final List$<$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{Subsystem}} $>$}]{all\+Subsystems,  }\item[{final boolean}]{ignore\+Logger }\end{DoxyParamCaption})}
 
 a manager class to handle all of the individual subsystems
 
@@ -58,6 +71,23 @@ a manager class to handle all of the individual subsystems
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a67d4185fb76792d5d01979c9ff5c6665}\label{classfrc_1_1robot_1_1SubsystemManager_a67d4185fb76792d5d01979c9ff5c6665}} 
+\index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!addLoggingSource@{addLoggingSource}}
+\index{addLoggingSource@{addLoggingSource}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
+\doxysubsubsection{\texorpdfstring{addLoggingSource()}{addLoggingSource()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Subsystem\+Manager.\+add\+Logging\+Source (\begin{DoxyParamCaption}\item[{final List$<$ \mbox{\hyperlink{interfacefrc_1_1lib_1_1util_1_1Logable}{Logable}} $>$}]{to\+Log }\end{DoxyParamCaption})}
+
+Registers any additonal logables to be logged when the robot is enabled. 
+\begin{DoxyParams}{Parameters}
+{\em to\+Log} & the list of logable classes to pull data from \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a34ec38fd7615819572a0d114551f3f9b}\label{classfrc_1_1robot_1_1SubsystemManager_a34ec38fd7615819572a0d114551f3f9b}} 
+\index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!createLogging@{createLogging}}
+\index{createLogging@{createLogging}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
+\doxysubsubsection{\texorpdfstring{createLogging()}{createLogging()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Subsystem\+Manager.\+create\+Logging (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a7429c2dc612a27340b9d688cdcb30591}\label{classfrc_1_1robot_1_1SubsystemManager_a7429c2dc612a27340b9d688cdcb30591}} 
 \index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!logTelemetry@{logTelemetry}}
 \index{logTelemetry@{logTelemetry}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
@@ -86,6 +116,18 @@ Runs the output telemetry method on all subsystems to communicate data \mbox{\Hy
 
 Implements \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper_ade8f34d71453a87b1682e7c393d929cd}{frc.\+lib.\+loops.\+I\+Looper}}.
 
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a8f41a76f8dfe651e5f79407dc9d95ab8}\label{classfrc_1_1robot_1_1SubsystemManager_a8f41a76f8dfe651e5f79407dc9d95ab8}} 
+\index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!registerDisabledLoops@{registerDisabledLoops}}
+\index{registerDisabledLoops@{registerDisabledLoops}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
+\doxysubsubsection{\texorpdfstring{registerDisabledLoops()}{registerDisabledLoops()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Subsystem\+Manager.\+register\+Disabled\+Loops (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper}{Looper}}}]{disabled\+Looper }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a63271bddb9ff4e4dcbc237e8d6a265f7}\label{classfrc_1_1robot_1_1SubsystemManager_a63271bddb9ff4e4dcbc237e8d6a265f7}} 
+\index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!registerEnabledLoops@{registerEnabledLoops}}
+\index{registerEnabledLoops@{registerEnabledLoops}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
+\doxysubsubsection{\texorpdfstring{registerEnabledLoops()}{registerEnabledLoops()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Subsystem\+Manager.\+register\+Enabled\+Loops (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper}{Looper}}}]{enabled\+Looper }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_af8ddb43969d34bb508e649139892e5f4}\label{classfrc_1_1robot_1_1SubsystemManager_af8ddb43969d34bb508e649139892e5f4}} 
 \index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!resetAllSubsystems@{resetAllSubsystems}}
 \index{resetAllSubsystems@{resetAllSubsystems}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
@@ -95,11 +137,11 @@ Implements \mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper_ade8f34d7145
 Resets all subsystems in the order that they were registered with the subsystem manager. If the order is incorrect determinism during the reset may be lost 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_aa2b507685d28c23113d6280d25610676}\label{classfrc_1_1robot_1_1SubsystemManager_aa2b507685d28c23113d6280d25610676}} 
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a0a759ac40f0e64ff64dea3faac416925}\label{classfrc_1_1robot_1_1SubsystemManager_a0a759ac40f0e64ff64dea3faac416925}} 
 \index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!logger@{logger}}
 \index{logger@{logger}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
 \doxysubsubsection{\texorpdfstring{logger}{logger}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}}$<$Subsystem.\+Periodic\+IO$>$ frc.\+robot.\+Subsystem\+Manager.\+logger\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1util_1_1ReflectingLogger}{Reflecting\+Logger}}$<$Log\+Data$>$ frc.\+robot.\+Subsystem\+Manager.\+logger\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a0e6e0570be57a75864dd8bdcaa33dc3c}\label{classfrc_1_1robot_1_1SubsystemManager_a0e6e0570be57a75864dd8bdcaa33dc3c}} 
 \index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!mAllSubsystems@{mAllSubsystems}}
@@ -107,11 +149,17 @@ Resets all subsystems in the order that they were registered with the subsystem 
 \doxysubsubsection{\texorpdfstring{mAllSubsystems}{mAllSubsystems}}
 {\footnotesize\ttfamily final List$<$\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem}{Subsystem}}$>$ frc.\+robot.\+Subsystem\+Manager.\+m\+All\+Subsystems\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a75084a51c3ef3858b88d00d184e1d0da}\label{classfrc_1_1robot_1_1SubsystemManager_a75084a51c3ef3858b88d00d184e1d0da}} 
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a5a6a61bee4651b7392af67d8febf5e27}\label{classfrc_1_1robot_1_1SubsystemManager_a5a6a61bee4651b7392af67d8febf5e27}} 
+\index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!mIgnoreLogger@{mIgnoreLogger}}
+\index{mIgnoreLogger@{mIgnoreLogger}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
+\doxysubsubsection{\texorpdfstring{mIgnoreLogger}{mIgnoreLogger}}
+{\footnotesize\ttfamily final boolean frc.\+robot.\+Subsystem\+Manager.\+m\+Ignore\+Logger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1SubsystemManager_a0af6819de7e67a141785280a8f2e6e6c}\label{classfrc_1_1robot_1_1SubsystemManager_a0af6819de7e67a141785280a8f2e6e6c}} 
 \index{frc.robot.SubsystemManager@{frc.robot.SubsystemManager}!mLoops@{mLoops}}
 \index{mLoops@{mLoops}!frc.robot.SubsystemManager@{frc.robot.SubsystemManager}}
 \doxysubsubsection{\texorpdfstring{mLoops}{mLoops}}
-{\footnotesize\ttfamily List$<$\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}}$>$ frc.\+robot.\+Subsystem\+Manager.\+m\+Loops = new Array\+List$<$$>$()\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily final List$<$\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1Loop}{Loop}}$>$ frc.\+robot.\+Subsystem\+Manager.\+m\+Loops = new Array\+List$<$$>$()\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

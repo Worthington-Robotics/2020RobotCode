@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 
 public class SubsystemManager implements ILooper {
 
@@ -72,7 +73,7 @@ public class SubsystemManager implements ILooper {
     /**
      * Runs a pass of the reflection based logger over all substems
      */
-    public void logTelemetry() {
+    public void logTelemetry(double fpgaTimestamp) {
         //make sure logger is properly initialized
         if (logger != null) {
             // create current list of subsystem IO
@@ -80,7 +81,7 @@ public class SubsystemManager implements ILooper {
             logables.forEach((logable) -> logData.add(logable.getLogger()));
 
             //update the logger from the current form of the list
-            logger.update(logData);
+            logger.update(logData, fpgaTimestamp);
         }
     }
 
@@ -120,18 +121,28 @@ public class SubsystemManager implements ILooper {
 
         @Override
         public void onLoop(final double timestamp) {
+            
             for (final Subsystem s : mAllSubsystems) {
+                //final double start = Timer.getFPGATimestamp();
                 s.readPeriodicInputs();
+                //final double end = Timer.getFPGATimestamp();
+                //System.out.println("reading " + s.getClass().getName()+ " took " + (end - start));
             }
             for (final Loop l : mLoops) {
+                //final double start = Timer.getFPGATimestamp();
                 l.onLoop(timestamp);
+                //final double end = Timer.getFPGATimestamp();
+                //System.out.println("looping " + l.getClass().getName()+ " took " + (end - start));
             }
+            
             for (final Subsystem s : mAllSubsystems) {
+                //final double start = Timer.getFPGATimestamp();
                 s.writePeriodicOutputs();
+                //final double end = Timer.getFPGATimestamp();
+                //System.out.println("writing " + s.getClass().getName()+ " took " + (end - start));
             }
-
             //run logging pass
-            logTelemetry();
+            logTelemetry(timestamp);
         }
 
         @Override

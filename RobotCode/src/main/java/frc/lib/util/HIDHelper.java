@@ -21,7 +21,7 @@ public class HIDHelper {
     }
 
     // figures out if the stick value is within the deadband
-    private static double evalDeadBand(double stickInpt, double deadBand, int pow) {
+    static double evalDeadBand(double stickInpt, double deadBand, int pow) {
         if (Math.abs(stickInpt) < deadBand) {
             return 0;
         } else {
@@ -34,7 +34,7 @@ public class HIDHelper {
     }
 
     public static double getAxisMapped(double input, double min_output, double max_output) {
-        return (input - -1) * (max_output - min_output) / (1 - -1) + max_output;
+        return (input + 1) * (max_output - min_output) / (2) + min_output;
     }
 
 

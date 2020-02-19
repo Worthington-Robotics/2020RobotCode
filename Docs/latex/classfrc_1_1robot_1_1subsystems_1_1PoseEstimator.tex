@@ -1,0 +1,229 @@
+\hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{}\doxysection{frc.\+robot.\+subsystems.\+Pose\+Estimator Class Reference}
+\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+Inheritance diagram for frc.\+robot.\+subsystems.\+Pose\+Estimator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_1_1PoseIO}{Pose\+IO}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a16f88f8d692761ce45fb1384088a8fd5}{register\+Enabled\+Loops}} (\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}} looper)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a79242bdaf434717944fce398465cef51}{reset}} (double start\+\_\+time, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} initial\+\_\+field\+\_\+to\+\_\+vehicle)
+\item 
+synchronized Map.\+Entry$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingDouble}{Interpolating\+Double}}, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a6916c522230e852ebc6d5045649699ba}{get\+Latest\+Field\+To\+Vehicle}} ()
+\item 
+synchronized \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ac3666e9113cb5442f1daf5b6f0abd289}{get\+Field\+To\+Vehicle}} (double timestamp)
+\item 
+synchronized \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_abfea86456a8b2934f6806bbb2ca4bdac}{generate\+Odometry\+From\+Sensors}} (double left\+\_\+encoder\+\_\+delta\+\_\+distance, double right\+\_\+encoder\+\_\+delta\+\_\+distance, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}} current\+\_\+gyro\+\_\+angle)
+\item 
+synchronized void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ac21a249f87f0e0e85c85468221065b82}{add\+Observations}} (double timestamp, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} observation)
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ae3b3247fecefc407737ec06db92808e6}{get\+Distance\+Driven}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a20f2d5fd7677415ce41bddac233f064a}{output\+Telemetry}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a141fce9cf8c62c5c34f80c23c17470df}{reset}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a95a81611fad0a5c0c10ba8414df9708e}{read\+Periodic\+Inputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a7ee3ab98e4008e89d6e3853d7d3c52de}{write\+Periodic\+Outputs}} ()
+\item 
+Log\+Data \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a81886ab942c8ad7a8ce82e9c05566623}{log\+Data}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{Pose\+Estimator}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a037e90a0a4bd2aa4c0c7e2bd92647cd7}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a46f39b7b28a867c96ae75df036a38c37}{Pose\+Estimator}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{Interpolating\+Tree\+Map}}$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingDouble}{Interpolating\+Double}}, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_adbacb4ea4a97d76a9f89afcce9147b69}{field\+\_\+to\+\_\+vehicle\+\_\+}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_afe2d7caa3d647b7c23a3253461d03265}{left\+\_\+encoder\+\_\+prev\+\_\+distance\+\_\+}} = 0.\+0
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a7a1a0e435647873f42b2a9f79e35375a}{right\+\_\+encoder\+\_\+prev\+\_\+distance\+\_\+}} = 0.\+0
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_1_1PoseIO}{Pose\+IO}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a90b94ef34bc565a7ffdb869568e4550b}{periodic}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{Pose\+Estimator}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ad9e4d66ebec8bc3d3cf1c118483fe378}{m\+\_\+instance}} = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{Pose\+Estimator}}()
+\item 
+static final int \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a4dfd740c5f901c83d9214ed7a2508eaf}{observation\+\_\+buffer\+\_\+size\+\_\+}} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a46f39b7b28a867c96ae75df036a38c37}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a46f39b7b28a867c96ae75df036a38c37}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!PoseEstimator@{PoseEstimator}}
+\index{PoseEstimator@{PoseEstimator}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{PoseEstimator()}{PoseEstimator()}}
+{\footnotesize\ttfamily frc.\+robot.\+subsystems.\+Pose\+Estimator.\+Pose\+Estimator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ac21a249f87f0e0e85c85468221065b82}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ac21a249f87f0e0e85c85468221065b82}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!addObservations@{addObservations}}
+\index{addObservations@{addObservations}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{addObservations()}{addObservations()}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+add\+Observations (\begin{DoxyParamCaption}\item[{double}]{timestamp,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}}]{observation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_abfea86456a8b2934f6806bbb2ca4bdac}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_abfea86456a8b2934f6806bbb2ca4bdac}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!generateOdometryFromSensors@{generateOdometryFromSensors}}
+\index{generateOdometryFromSensors@{generateOdometryFromSensors}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{generateOdometryFromSensors()}{generateOdometryFromSensors()}}
+{\footnotesize\ttfamily synchronized \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Twist2d}{Twist2d}} frc.\+robot.\+subsystems.\+Pose\+Estimator.\+generate\+Odometry\+From\+Sensors (\begin{DoxyParamCaption}\item[{double}]{left\+\_\+encoder\+\_\+delta\+\_\+distance,  }\item[{double}]{right\+\_\+encoder\+\_\+delta\+\_\+distance,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Rotation2d}{Rotation2d}}}]{current\+\_\+gyro\+\_\+angle }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ae3b3247fecefc407737ec06db92808e6}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ae3b3247fecefc407737ec06db92808e6}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!getDistanceDriven@{getDistanceDriven}}
+\index{getDistanceDriven@{getDistanceDriven}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{getDistanceDriven()}{getDistanceDriven()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Pose\+Estimator.\+get\+Distance\+Driven (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ac3666e9113cb5442f1daf5b6f0abd289}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ac3666e9113cb5442f1daf5b6f0abd289}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!getFieldToVehicle@{getFieldToVehicle}}
+\index{getFieldToVehicle@{getFieldToVehicle}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{getFieldToVehicle()}{getFieldToVehicle()}}
+{\footnotesize\ttfamily synchronized \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}} frc.\+robot.\+subsystems.\+Pose\+Estimator.\+get\+Field\+To\+Vehicle (\begin{DoxyParamCaption}\item[{double}]{timestamp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a037e90a0a4bd2aa4c0c7e2bd92647cd7}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a037e90a0a4bd2aa4c0c7e2bd92647cd7}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{Pose\+Estimator}} frc.\+robot.\+subsystems.\+Pose\+Estimator.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a6916c522230e852ebc6d5045649699ba}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a6916c522230e852ebc6d5045649699ba}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!getLatestFieldToVehicle@{getLatestFieldToVehicle}}
+\index{getLatestFieldToVehicle@{getLatestFieldToVehicle}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{getLatestFieldToVehicle()}{getLatestFieldToVehicle()}}
+{\footnotesize\ttfamily synchronized Map.\+Entry$<$\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingDouble}{Interpolating\+Double}}, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}$>$ frc.\+robot.\+subsystems.\+Pose\+Estimator.\+get\+Latest\+Field\+To\+Vehicle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a81886ab942c8ad7a8ce82e9c05566623}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a81886ab942c8ad7a8ce82e9c05566623}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!logData@{logData}}
+\index{logData@{logData}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{logData()}{logData()}}
+{\footnotesize\ttfamily Log\+Data frc.\+robot.\+subsystems.\+Pose\+Estimator.\+log\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a20f2d5fd7677415ce41bddac233f064a}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a20f2d5fd7677415ce41bddac233f064a}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!outputTelemetry@{outputTelemetry}}
+\index{outputTelemetry@{outputTelemetry}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{outputTelemetry()}{outputTelemetry()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+output\+Telemetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Outputs all logging information to the Smart\+Dashboard 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a95a81611fad0a5c0c10ba8414df9708e}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a95a81611fad0a5c0c10ba8414df9708e}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!readPeriodicInputs@{readPeriodicInputs}}
+\index{readPeriodicInputs@{readPeriodicInputs}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{readPeriodicInputs()}{readPeriodicInputs()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+read\+Periodic\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Updates all periodic variables and sensors 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a16f88f8d692761ce45fb1384088a8fd5}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a16f88f8d692761ce45fb1384088a8fd5}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!registerEnabledLoops@{registerEnabledLoops}}
+\index{registerEnabledLoops@{registerEnabledLoops}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{registerEnabledLoops()}{registerEnabledLoops()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+register\+Enabled\+Loops (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}}}]{enabled\+Looper }\end{DoxyParamCaption})}
+
+Required for the subsystem\textquotesingle{}s looper to be registered to the state machine not required for subsystems that do not use looper
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled\+Looper} & the subsystem\textquotesingle{}s Looper \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a4d27c0d71c9a6d4f86158568ce742170}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a141fce9cf8c62c5c34f80c23c17470df}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a141fce9cf8c62c5c34f80c23c17470df}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called to reset and configure the subsystem 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a79242bdaf434717944fce398465cef51}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a79242bdaf434717944fce398465cef51}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily synchronized void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+reset (\begin{DoxyParamCaption}\item[{double}]{start\+\_\+time,  }\item[{\mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}}]{initial\+\_\+field\+\_\+to\+\_\+vehicle }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a7ee3ab98e4008e89d6e3853d7d3c52de}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a7ee3ab98e4008e89d6e3853d7d3c52de}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!writePeriodicOutputs@{writePeriodicOutputs}}
+\index{writePeriodicOutputs@{writePeriodicOutputs}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{writePeriodicOutputs()}{writePeriodicOutputs()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Pose\+Estimator.\+write\+Periodic\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Writes the periodic outputs to actuators (motors and ect...) 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_adbacb4ea4a97d76a9f89afcce9147b69}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_adbacb4ea4a97d76a9f89afcce9147b69}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!field\_to\_vehicle\_@{field\_to\_vehicle\_}}
+\index{field\_to\_vehicle\_@{field\_to\_vehicle\_}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{field\_to\_vehicle\_}{field\_to\_vehicle\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingTreeMap}{Interpolating\+Tree\+Map}}$<$\mbox{\hyperlink{classfrc_1_1lib_1_1math_1_1InterpolatingDouble}{Interpolating\+Double}}, \mbox{\hyperlink{classfrc_1_1lib_1_1geometry_1_1Pose2d}{Pose2d}}$>$ frc.\+robot.\+subsystems.\+Pose\+Estimator.\+field\+\_\+to\+\_\+vehicle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_afe2d7caa3d647b7c23a3253461d03265}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_afe2d7caa3d647b7c23a3253461d03265}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!left\_encoder\_prev\_distance\_@{left\_encoder\_prev\_distance\_}}
+\index{left\_encoder\_prev\_distance\_@{left\_encoder\_prev\_distance\_}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{left\_encoder\_prev\_distance\_}{left\_encoder\_prev\_distance\_}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Pose\+Estimator.\+left\+\_\+encoder\+\_\+prev\+\_\+distance\+\_\+ = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ad9e4d66ebec8bc3d3cf1c118483fe378}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_ad9e4d66ebec8bc3d3cf1c118483fe378}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!m\_instance@{m\_instance}}
+\index{m\_instance@{m\_instance}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{m\_instance}{m\_instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{Pose\+Estimator}} frc.\+robot.\+subsystems.\+Pose\+Estimator.\+m\+\_\+instance = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator}{Pose\+Estimator}}()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a4dfd740c5f901c83d9214ed7a2508eaf}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a4dfd740c5f901c83d9214ed7a2508eaf}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!observation\_buffer\_size\_@{observation\_buffer\_size\_}}
+\index{observation\_buffer\_size\_@{observation\_buffer\_size\_}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{observation\_buffer\_size\_}{observation\_buffer\_size\_}}
+{\footnotesize\ttfamily final int frc.\+robot.\+subsystems.\+Pose\+Estimator.\+observation\+\_\+buffer\+\_\+size\+\_\+ = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a90b94ef34bc565a7ffdb869568e4550b}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a90b94ef34bc565a7ffdb869568e4550b}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!periodic@{periodic}}
+\index{periodic@{periodic}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{periodic}{periodic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_1_1PoseIO}{Pose\+IO}} frc.\+robot.\+subsystems.\+Pose\+Estimator.\+periodic\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a7a1a0e435647873f42b2a9f79e35375a}\label{classfrc_1_1robot_1_1subsystems_1_1PoseEstimator_a7a1a0e435647873f42b2a9f79e35375a}} 
+\index{frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}!right\_encoder\_prev\_distance\_@{right\_encoder\_prev\_distance\_}}
+\index{right\_encoder\_prev\_distance\_@{right\_encoder\_prev\_distance\_}!frc.robot.subsystems.PoseEstimator@{frc.robot.subsystems.PoseEstimator}}
+\doxysubsubsection{\texorpdfstring{right\_encoder\_prev\_distance\_}{right\_encoder\_prev\_distance\_}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Pose\+Estimator.\+right\+\_\+encoder\+\_\+prev\+\_\+distance\+\_\+ = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/subsystems/\mbox{\hyperlink{PoseEstimator_8java}{Pose\+Estimator.\+java}}\end{DoxyCompactItemize}

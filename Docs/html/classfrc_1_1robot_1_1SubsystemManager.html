@@ -68,6 +68,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classfrc_1_1robot_1_1SubsystemManager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -93,8 +94,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abfb29c28140ecac4de50e2c1e0d37070"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#abfb29c28140ecac4de50e2c1e0d37070">SubsystemManager</a> (List&lt; <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html">Subsystem</a> &gt; allSubsystems, boolean ignoreLogger)</td></tr>
-<tr class="separator:abfb29c28140ecac4de50e2c1e0d37070"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6702d8f5d475db6a3858bf919c2a5e92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a6702d8f5d475db6a3858bf919c2a5e92">SubsystemManager</a> (final List&lt; <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html">Subsystem</a> &gt; allSubsystems, final boolean ignoreLogger)</td></tr>
+<tr class="separator:a6702d8f5d475db6a3858bf919c2a5e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67d4185fb76792d5d01979c9ff5c6665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a67d4185fb76792d5d01979c9ff5c6665">addLoggingSource</a> (final List&lt; <a class="el" href="interfacefrc_1_1lib_1_1util_1_1Logable.html">Logable</a> &gt; toLog)</td></tr>
+<tr class="separator:a67d4185fb76792d5d01979c9ff5c6665"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7429c2dc612a27340b9d688cdcb30591"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a7429c2dc612a27340b9d688cdcb30591">logTelemetry</a> ()</td></tr>
 <tr class="separator:a7429c2dc612a27340b9d688cdcb30591"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b0676e4c0b1ea2a2bdbe2e683301ac6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a0b0676e4c0b1ea2a2bdbe2e683301ac6">outputTelemetry</a> ()</td></tr>
@@ -103,21 +106,32 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad0958ae1520308ec748d5fd80d0a64a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ddb43969d34bb508e649139892e5f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#af8ddb43969d34bb508e649139892e5f4">resetAllSubsystems</a> ()</td></tr>
 <tr class="separator:af8ddb43969d34bb508e649139892e5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63271bddb9ff4e4dcbc237e8d6a265f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a63271bddb9ff4e4dcbc237e8d6a265f7">registerEnabledLoops</a> (<a class="el" href="classfrc_1_1lib_1_1loops_1_1Looper.html">Looper</a> enabledLooper)</td></tr>
+<tr class="separator:a63271bddb9ff4e4dcbc237e8d6a265f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f41a76f8dfe651e5f79407dc9d95ab8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a8f41a76f8dfe651e5f79407dc9d95ab8">registerDisabledLoops</a> (<a class="el" href="classfrc_1_1lib_1_1loops_1_1Looper.html">Looper</a> disabledLooper)</td></tr>
+<tr class="separator:a8f41a76f8dfe651e5f79407dc9d95ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85f2d14c63f7f220ea4ad86db11f8132"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a85f2d14c63f7f220ea4ad86db11f8132">register</a> (<a class="el" href="interfacefrc_1_1lib_1_1loops_1_1Loop.html">Loop</a> loop)</td></tr>
 <tr class="separator:a85f2d14c63f7f220ea4ad86db11f8132"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a34ec38fd7615819572a0d114551f3f9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a34ec38fd7615819572a0d114551f3f9b">createLogging</a> ()</td></tr>
+<tr class="separator:a34ec38fd7615819572a0d114551f3f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a0e6e0570be57a75864dd8bdcaa33dc3c"><td class="memItemLeft" align="right" valign="top">final List&lt; <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html">Subsystem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a0e6e0570be57a75864dd8bdcaa33dc3c">mAllSubsystems</a></td></tr>
 <tr class="separator:a0e6e0570be57a75864dd8bdcaa33dc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75084a51c3ef3858b88d00d184e1d0da"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="interfacefrc_1_1lib_1_1loops_1_1Loop.html">Loop</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a75084a51c3ef3858b88d00d184e1d0da">mLoops</a> = new ArrayList&lt;&gt;()</td></tr>
-<tr class="separator:a75084a51c3ef3858b88d00d184e1d0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2b507685d28c23113d6280d25610676"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrc_1_1lib_1_1util_1_1ReflectingLogger.html">ReflectingLogger</a>&lt; Subsystem.PeriodicIO &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#aa2b507685d28c23113d6280d25610676">logger</a></td></tr>
-<tr class="separator:aa2b507685d28c23113d6280d25610676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0af6819de7e67a141785280a8f2e6e6c"><td class="memItemLeft" align="right" valign="top">final List&lt; <a class="el" href="interfacefrc_1_1lib_1_1loops_1_1Loop.html">Loop</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a0af6819de7e67a141785280a8f2e6e6c">mLoops</a> = new ArrayList&lt;&gt;()</td></tr>
+<tr class="separator:a0af6819de7e67a141785280a8f2e6e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a759ac40f0e64ff64dea3faac416925"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrc_1_1lib_1_1util_1_1ReflectingLogger.html">ReflectingLogger</a>&lt; LogData &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a0a759ac40f0e64ff64dea3faac416925">logger</a></td></tr>
+<tr class="separator:a0a759ac40f0e64ff64dea3faac416925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a6a61bee4651b7392af67d8febf5e27"><td class="memItemLeft" align="right" valign="top">final boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1SubsystemManager.html#a5a6a61bee4651b7392af67d8febf5e27">mIgnoreLogger</a></td></tr>
+<tr class="separator:a5a6a61bee4651b7392af67d8febf5e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="abfb29c28140ecac4de50e2c1e0d37070"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfb29c28140ecac4de50e2c1e0d37070">&#9670;&nbsp;</a></span>SubsystemManager()</h2>
+<a id="a6702d8f5d475db6a3858bf919c2a5e92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6702d8f5d475db6a3858bf919c2a5e92">&#9670;&nbsp;</a></span>SubsystemManager()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,13 +139,13 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">frc.robot.SubsystemManager.SubsystemManager </td>
           <td>(</td>
-          <td class="paramtype">List&lt; <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html">Subsystem</a> &gt;&#160;</td>
+          <td class="paramtype">final List&lt; <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html">Subsystem</a> &gt;&#160;</td>
           <td class="paramname"><em>allSubsystems</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">boolean&#160;</td>
+          <td class="paramtype">final boolean&#160;</td>
           <td class="paramname"><em>ignoreLogger</em>&#160;</td>
         </tr>
         <tr>
@@ -153,6 +167,55 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a67d4185fb76792d5d01979c9ff5c6665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67d4185fb76792d5d01979c9ff5c6665">&#9670;&nbsp;</a></span>addLoggingSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.SubsystemManager.addLoggingSource </td>
+          <td>(</td>
+          <td class="paramtype">final List&lt; <a class="el" href="interfacefrc_1_1lib_1_1util_1_1Logable.html">Logable</a> &gt;&#160;</td>
+          <td class="paramname"><em>toLog</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Registers any additonal logables to be logged when the robot is enabled. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">toLog</td><td>the list of logable classes to pull data from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a34ec38fd7615819572a0d114551f3f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34ec38fd7615819572a0d114551f3f9b">&#9670;&nbsp;</a></span>createLogging()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.SubsystemManager.createLogging </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7429c2dc612a27340b9d688cdcb30591"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7429c2dc612a27340b9d688cdcb30591">&#9670;&nbsp;</a></span>logTelemetry()</h2>
 
@@ -227,6 +290,42 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a8f41a76f8dfe651e5f79407dc9d95ab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f41a76f8dfe651e5f79407dc9d95ab8">&#9670;&nbsp;</a></span>registerDisabledLoops()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.SubsystemManager.registerDisabledLoops </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrc_1_1lib_1_1loops_1_1Looper.html">Looper</a>&#160;</td>
+          <td class="paramname"><em>disabledLooper</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a63271bddb9ff4e4dcbc237e8d6a265f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63271bddb9ff4e4dcbc237e8d6a265f7">&#9670;&nbsp;</a></span>registerEnabledLoops()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frc.robot.SubsystemManager.registerEnabledLoops </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrc_1_1lib_1_1loops_1_1Looper.html">Looper</a>&#160;</td>
+          <td class="paramname"><em>enabledLooper</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="af8ddb43969d34bb508e649139892e5f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8ddb43969d34bb508e649139892e5f4">&#9670;&nbsp;</a></span>resetAllSubsystems()</h2>
 
@@ -246,8 +345,8 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa2b507685d28c23113d6280d25610676"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2b507685d28c23113d6280d25610676">&#9670;&nbsp;</a></span>logger</h2>
+<a id="a0a759ac40f0e64ff64dea3faac416925"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a759ac40f0e64ff64dea3faac416925">&#9670;&nbsp;</a></span>logger</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,7 +355,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classfrc_1_1lib_1_1util_1_1ReflectingLogger.html">ReflectingLogger</a>&lt;Subsystem.PeriodicIO&gt; frc.robot.SubsystemManager.logger</td>
+          <td class="memname"><a class="el" href="classfrc_1_1lib_1_1util_1_1ReflectingLogger.html">ReflectingLogger</a>&lt;LogData&gt; frc.robot.SubsystemManager.logger</td>
         </tr>
       </table>
   </td>
@@ -290,8 +389,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a75084a51c3ef3858b88d00d184e1d0da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75084a51c3ef3858b88d00d184e1d0da">&#9670;&nbsp;</a></span>mLoops</h2>
+<a id="a5a6a61bee4651b7392af67d8febf5e27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a6a61bee4651b7392af67d8febf5e27">&#9670;&nbsp;</a></span>mIgnoreLogger</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +399,29 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="interfacefrc_1_1lib_1_1loops_1_1Loop.html">Loop</a>&gt; frc.robot.SubsystemManager.mLoops = new ArrayList&lt;&gt;()</td>
+          <td class="memname">final boolean frc.robot.SubsystemManager.mIgnoreLogger</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0af6819de7e67a141785280a8f2e6e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0af6819de7e67a141785280a8f2e6e6c">&#9670;&nbsp;</a></span>mLoops</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final List&lt;<a class="el" href="interfacefrc_1_1lib_1_1loops_1_1Loop.html">Loop</a>&gt; frc.robot.SubsystemManager.mLoops = new ArrayList&lt;&gt;()</td>
         </tr>
       </table>
   </td>

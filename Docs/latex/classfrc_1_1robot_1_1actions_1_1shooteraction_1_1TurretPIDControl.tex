@@ -1,0 +1,100 @@
+\hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl}{}\doxysection{frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control Class Reference}
+\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl}\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+Inheritance diagram for frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_a7cdccd404b580deb82eae17c00ad2a72}{Turret\+P\+I\+D\+Control}} (boolean auto\+Target)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_a22b2061072acfbfcb35dd4e9fefda2bd}{on\+Start}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_af69d07c8823fd1b71aa30da22d1ade30}{on\+Loop}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_afeb9f609bdd2b66c9553de343379647f}{is\+Finished}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_aa1d87661f527d00fbee5fe24503f8a92}{on\+Stop}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_ab00d7bedeae8f326188b2e2ec3955920}{automatic\+Target}} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_a7cdccd404b580deb82eae17c00ad2a72}\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_a7cdccd404b580deb82eae17c00ad2a72}} 
+\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}!TurretPIDControl@{TurretPIDControl}}
+\index{TurretPIDControl@{TurretPIDControl}!frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+\doxysubsubsection{\texorpdfstring{TurretPIDControl()}{TurretPIDControl()}}
+{\footnotesize\ttfamily frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control.\+Turret\+P\+I\+D\+Control (\begin{DoxyParamCaption}\item[{boolean}]{auto\+Target }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_afeb9f609bdd2b66c9553de343379647f}\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_afeb9f609bdd2b66c9553de343379647f}} 
+\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}!isFinished@{isFinished}}
+\index{isFinished@{isFinished}!frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+\doxysubsubsection{\texorpdfstring{isFinished()}{isFinished()}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control.\+is\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+method that tells the state machine the action is finished earlier than the scheduler
+
+\begin{DoxyReturn}{Returns}
+true when action is ready to self terminate 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_aa46adc8589149ab919957f865f7615a6}{frc.\+lib.\+statemachine.\+Action}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_af69d07c8823fd1b71aa30da22d1ade30}\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_af69d07c8823fd1b71aa30da22d1ade30}} 
+\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}!onLoop@{onLoop}}
+\index{onLoop@{onLoop}!frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+\doxysubsubsection{\texorpdfstring{onLoop()}{onLoop()}}
+{\footnotesize\ttfamily void frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control.\+on\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run while action loops 
+
+approx every 20 miliseconds 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_a40e48c9038e7bda1b8a309fa56a825dd}{frc.\+lib.\+statemachine.\+Action}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_a22b2061072acfbfcb35dd4e9fefda2bd}\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_a22b2061072acfbfcb35dd4e9fefda2bd}} 
+\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}!onStart@{onStart}}
+\index{onStart@{onStart}!frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control.\+on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run on action start 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_a2163914f4ba190772bc22b649909449c}{frc.\+lib.\+statemachine.\+Action}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_aa1d87661f527d00fbee5fe24503f8a92}\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_aa1d87661f527d00fbee5fe24503f8a92}} 
+\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}!onStop@{onStop}}
+\index{onStop@{onStop}!frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+\doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
+{\footnotesize\ttfamily void frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control.\+on\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+code to run when the action has ben called by the state machine to stop 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action_af91695d73d63291a3b80096b5d520fa2}{frc.\+lib.\+statemachine.\+Action}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_ab00d7bedeae8f326188b2e2ec3955920}\label{classfrc_1_1robot_1_1actions_1_1shooteraction_1_1TurretPIDControl_ab00d7bedeae8f326188b2e2ec3955920}} 
+\index{frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}!automaticTarget@{automaticTarget}}
+\index{automaticTarget@{automaticTarget}!frc.robot.actions.shooteraction.TurretPIDControl@{frc.robot.actions.shooteraction.TurretPIDControl}}
+\doxysubsubsection{\texorpdfstring{automaticTarget}{automaticTarget}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+actions.\+shooteraction.\+Turret\+P\+I\+D\+Control.\+automatic\+Target = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/actions/shooteraction/\mbox{\hyperlink{TurretPIDControl_8java}{Turret\+P\+I\+D\+Control.\+java}}\end{DoxyCompactItemize}

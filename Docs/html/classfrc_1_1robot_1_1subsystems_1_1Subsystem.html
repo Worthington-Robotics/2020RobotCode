@@ -79,9 +79,13 @@ Inheritance diagram for frc.robot.subsystems.Subsystem:</div>
  <div class="center">
   <img src="classfrc_1_1robot_1_1subsystems_1_1Subsystem.png" usemap="#frc.robot.subsystems.Subsystem_map" alt=""/>
   <map id="frc.robot.subsystems.Subsystem_map" name="frc.robot.subsystems.Subsystem_map">
-<area href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html" alt="frc.robot.subsystems.ColorWheel" shape="rect" coords="0,56,199,80"/>
-<area href="classfrc_1_1robot_1_1subsystems_1_1Lights.html" alt="frc.robot.subsystems.Lights" shape="rect" coords="209,56,408,80"/>
-<area href="classfrc_1_1robot_1_1subsystems_1_1Limelight.html" alt="frc.robot.subsystems.Limelight" shape="rect" coords="418,56,617,80"/>
+<area href="interfacefrc_1_1lib_1_1util_1_1Logable.html" alt="frc.lib.util.Logable" shape="rect" coords="567,0,784,24"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1Climber.html" alt="frc.robot.subsystems.Climber" shape="rect" coords="0,112,217,136"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html" alt="frc.robot.subsystems.ColorWheel" shape="rect" coords="227,112,444,136"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1Drive.html" alt="frc.robot.subsystems.Drive" shape="rect" coords="454,112,671,136"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html" alt="frc.robot.subsystems.PoseEstimator" shape="rect" coords="681,112,898,136"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html" alt="frc.robot.subsystems.Shooter" shape="rect" coords="908,112,1125,136"/>
+<area href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html" alt="frc.robot.subsystems.Superstructure" shape="rect" coords="1135,112,1352,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -104,24 +108,28 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3bb39941d0afd2ba588f257ce0950037"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8aef31a06cfdbafe5195b52239e30e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#ac8aef31a06cfdbafe5195b52239e30e7">onStop</a> ()</td></tr>
 <tr class="separator:ac8aef31a06cfdbafe5195b52239e30e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85da3addbc2a686ec984c9319517b972"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO.html">PeriodicIO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#a85da3addbc2a686ec984c9319517b972">getLogger</a> ()</td></tr>
-<tr class="separator:a85da3addbc2a686ec984c9319517b972"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd98b66c2142b99e718fee877a36099"><td class="memItemLeft" align="right" valign="top">LogData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem.html#affd98b66c2142b99e718fee877a36099">getLogger</a> ()</td></tr>
+<tr class="separator:affd98b66c2142b99e718fee877a36099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a85da3addbc2a686ec984c9319517b972"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85da3addbc2a686ec984c9319517b972">&#9670;&nbsp;</a></span>getLogger()</h2>
+<a id="affd98b66c2142b99e718fee877a36099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd98b66c2142b99e718fee877a36099">&#9670;&nbsp;</a></span>getLogger()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Subsystem_1_1PeriodicIO.html">PeriodicIO</a> frc.robot.subsystems.Subsystem.getLogger </td>
+          <td class="memname">LogData frc.robot.subsystems.Subsystem.getLogger </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacefrc_1_1lib_1_1util_1_1Logable.html#a6a43ad61f2430105c0daa87451266ede">frc.lib.util.Logable</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a7da5732620b81258eb9a09601f1e25f1">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#a9048be2b277e0a5bd4fdb0b99af2d540">frc.robot.subsystems.Superstructure</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html#a66fecd7349cc924511a8b168583a1d82">frc.robot.subsystems.Shooter</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Drive.html#a5448b828c59b085cdb91c4c99b069c68">frc.robot.subsystems.Drive</a>.</p>
 
 </div>
 </div>
@@ -167,7 +175,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Outputs all logging information to the SmartDashboard </p>
 
-<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a053bbf9a090627233ae54f09c307e666">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Lights.html#ae04b281880489ed6e8538482d0ba6cce">frc.robot.subsystems.Lights</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Limelight.html#a882529c4bfba2a73690f377c8500fd80">frc.robot.subsystems.Limelight</a>.</p>
+<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Drive.html#a9e63c78179d0ada70887e0699f74adfe">frc.robot.subsystems.Drive</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#aa6b23535a11159312cb3aa6c710d0517">frc.robot.subsystems.Superstructure</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html#a7c4f5ac8cc19d346f81b81706e98e027">frc.robot.subsystems.Shooter</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html#a20f2d5fd7677415ce41bddac233f064a">frc.robot.subsystems.PoseEstimator</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a053bbf9a090627233ae54f09c307e666">frc.robot.subsystems.ColorWheel</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Climber.html#a4fde28f6ae5d8d508fd719eb147fc9a5">frc.robot.subsystems.Climber</a>.</p>
 
 </div>
 </div>
@@ -195,7 +203,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Updates all periodic variables and sensors </p>
 
-<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a5e16df8c374b7fbb272ca15696e094cd">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Limelight.html#a07be92d21d0cf08931cf04c08c6dc775">frc.robot.subsystems.Limelight</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Lights.html#a082a01330909abb68e568c32494a63eb">frc.robot.subsystems.Lights</a>.</p>
+<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html#a95a81611fad0a5c0c10ba8414df9708e">frc.robot.subsystems.PoseEstimator</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Drive.html#ae8814f5692a7d8108bc2829a5e5ed992">frc.robot.subsystems.Drive</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#a6660e28d3d694d37be7cd2ff545cb630">frc.robot.subsystems.Superstructure</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a5e16df8c374b7fbb272ca15696e094cd">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html#af383fae809eda82f832782b593f21176">frc.robot.subsystems.Shooter</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Climber.html#ad989f40b0f67e8e04aac8a3f291b7c80">frc.robot.subsystems.Climber</a>.</p>
 
 </div>
 </div>
@@ -221,6 +229,8 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html#a16f88f8d692761ce45fb1384088a8fd5">frc.robot.subsystems.PoseEstimator</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#a2cafa73d3bdd1684ed990edc8f8d103b">frc.robot.subsystems.Superstructure</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html#a62acfe15b6d57d6b190a34a6072162ad">frc.robot.subsystems.Shooter</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Drive.html#a4c6a79122eeb93189dadd4a76212ba0d">frc.robot.subsystems.Drive</a>.</p>
 
 </div>
 </div>
@@ -248,7 +258,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Called to reset and configure the subsystem </p>
 
-<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a55161c6d89b5b6697d665f590c5ce03e">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Limelight.html#a84d29fdbbcd30756955c791e1e1f75da">frc.robot.subsystems.Limelight</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Lights.html#a13f6463cff002eb3aa2420c573a0ba00">frc.robot.subsystems.Lights</a>.</p>
+<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Drive.html#a6eb3785b87920d18ca7412efa1c78189">frc.robot.subsystems.Drive</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#ac30c8f1c734f3963212fd24edb6d202d">frc.robot.subsystems.Superstructure</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a55161c6d89b5b6697d665f590c5ce03e">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html#a0282c190ab76fec645257f079663e334">frc.robot.subsystems.Shooter</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html#a141fce9cf8c62c5c34f80c23c17470df">frc.robot.subsystems.PoseEstimator</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Climber.html#a6235708176b202b38c888b1ad4fe88f9">frc.robot.subsystems.Climber</a>.</p>
 
 </div>
 </div>
@@ -276,7 +286,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Writes the periodic outputs to actuators (motors and ect...) </p>
 
-<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a675e73f185dcae29921da640ea190e47">frc.robot.subsystems.ColorWheel</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Limelight.html#a87f8a2f8f199e0a8361d2dc6091695f6">frc.robot.subsystems.Limelight</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Lights.html#a85755e63a660201c9c95022326d68fe0">frc.robot.subsystems.Lights</a>.</p>
+<p>Reimplemented in <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Drive.html#ab285d83ca7a2f3d1448140e6291930d3">frc.robot.subsystems.Drive</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1PoseEstimator.html#a7ee3ab98e4008e89d6e3853d7d3c52de">frc.robot.subsystems.PoseEstimator</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Shooter.html#a2485342a9257ed419450ba4a48178b9e">frc.robot.subsystems.Shooter</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Superstructure.html#acb89ec76e03abe8748d1073e963f8a5e">frc.robot.subsystems.Superstructure</a>, <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1ColorWheel.html#a675e73f185dcae29921da640ea190e47">frc.robot.subsystems.ColorWheel</a>, and <a class="el" href="classfrc_1_1robot_1_1subsystems_1_1Climber.html#a4516e9c264c3544ded105c74dda605d1">frc.robot.subsystems.Climber</a>.</p>
 
 </div>
 </div>

@@ -13,27 +13,64 @@ void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a1d28582cf3dc31568c3581f631c92f
 \item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a7e63e32ebe8ad3d33bbc3b09092a9f1f}{robot\+Periodic}} ()
 \item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_ac19810fbf26efd4cd47cbd7568b4ad2a}{disabled\+Init}} ()
+\item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a5b1c022cd3e2b9f6e5dde62571839173}{autonomous\+Init}} ()
 \item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a7dcfe7d0d65d1051eb095b8eb1aebd72}{autonomous\+Periodic}} ()
 \item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a209dbf07bfec75d73fa53126a8e31b88}{teleop\+Init}} ()
+\item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_ae807171661cbc29081bc10f06d6831e7}{teleop\+Periodic}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_acdebc9c7e7e31ffccb3c2496b8d33944}{test\+Init}} ()
 \item 
 void \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_abd152f34b9f33d5cdf835aa61331f33e}{test\+Periodic}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-String \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a1b21da051611678b4f9af38ce2125dfb}{m\+\_\+auto\+Selected}}
+\mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager}{Subsystem\+Manager}} \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_ad939391b3ecbd501d634b39cef76e757}{manager}}
 \item 
-final Sendable\+Chooser$<$ String $>$ \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_aeba62b63304a71f0d8686fc38bfca704}{m\+\_\+chooser}} = new Sendable\+Chooser$<$$>$()
-\end{DoxyCompactItemize}
-\doxysubsection*{Static Private Attributes}
-\begin{DoxyCompactItemize}
+\mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper}{Looper}} \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a549aa498fa002c63468e2c3863cdc25f}{enabled\+Looper}}
 \item 
-static final String \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_afca4ff71c5afc20b4492382a68a94bc6}{k\+Default\+Auto}} = \char`\"{}Default\char`\"{}
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a93270ed58a9c9aca2bedeadd80ebb1ec}{gyro\+Lock}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 1)
 \item 
-static final String \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a54c04bb5c1485d849f56b3f2088d1cb0}{k\+Custom\+Auto}} = \char`\"{}My Auto\char`\"{}
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a8a25a71a82a7006fd44439a4e8616400}{shift}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 2)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a6dbac978909b8b33bc60aed46eccffe6}{delivery\+Wheel}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 3)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a78c3ac9cffa73693e5a391b25fe08552}{delivery}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 4)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a43ec4fd8ad6a32dfa4e4511c9fbbba1f}{indexer}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 5)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_aa03fc8a5941b82131cd7718d37f48465}{intake}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 6)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a3d1bad838d4bb28af7fad1b00a58f305}{indexer\+Out}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 8)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a782f2246cb847cafa138092b8d61e00f}{fold\+Climb}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 9)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a76dd65bb629b2711268f4a9151deebee}{unfold\+Climb}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 10)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a74a87137d89ebc9ea74b9990af4f449e}{climb\+Down}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 11)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a06c5613b6d6ffa6c2f53e172ef4a62c8}{climb\+Up}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 12)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a9c62cc62a72051351416f9ec47ce8230}{inverse}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 2)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a19aff965cec99bf717a6c9047d3d810c}{color\+Wheel\+Manual}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 3)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_ae45c5dda87795a623c0b61a3c56e0aeb}{color\+Wheel\+Manual\+C\+CW}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 4)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a60dd682369a5ae841cdc69a731554274}{shoot\+One}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 6)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_ad64052eff57136ea7b874018c33410e9}{turret\+Control}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 7)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a0e5436f832303e2b974bdbef40ceca9c}{fly\+Wheel\+P\+ID}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 9)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_a1fe5c33fa9c6b8a0c0cab5ab5a78002c}{manual\+Fly\+Wheel}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 11)
+\item 
+Joystick\+Button \mbox{\hyperlink{classfrc_1_1robot_1_1Robot_adf0feb2f95d3ad260ea932a4d107b49c}{turret\+P\+I\+D\+Control}} = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 12)
 \end{DoxyCompactItemize}
 
 
@@ -55,7 +92,13 @@ You can add additional auto modes by adding additional comparisons to the switch
 \doxysubsubsection{\texorpdfstring{autonomousPeriodic()}{autonomousPeriodic()}}
 {\footnotesize\ttfamily void frc.\+robot.\+Robot.\+autonomous\+Periodic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function is called periodically during autonomous. \mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a1d28582cf3dc31568c3581f631c92f13}\label{classfrc_1_1robot_1_1Robot_a1d28582cf3dc31568c3581f631c92f13}} 
+This function is called periodically during autonomous. \mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_ac19810fbf26efd4cd47cbd7568b4ad2a}\label{classfrc_1_1robot_1_1Robot_ac19810fbf26efd4cd47cbd7568b4ad2a}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!disabledInit@{disabledInit}}
+\index{disabledInit@{disabledInit}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{disabledInit()}{disabledInit()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Robot.\+disabled\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a1d28582cf3dc31568c3581f631c92f13}\label{classfrc_1_1robot_1_1Robot_a1d28582cf3dc31568c3581f631c92f13}} 
 \index{frc.robot.Robot@{frc.robot.Robot}!robotInit@{robotInit}}
 \index{robotInit@{robotInit}!frc.robot.Robot@{frc.robot.Robot}}
 \doxysubsubsection{\texorpdfstring{robotInit()}{robotInit()}}
@@ -69,13 +112,25 @@ This function is run when the robot is first started up and should be used for a
 
 This function is called every robot packet, no matter the mode. Use this for items like diagnostics that you want ran during disabled, autonomous, teleoperated and test.
 
-This runs after the mode specific periodic functions, but before Live\+Window and Smart\+Dashboard integrated updating. \mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_ae807171661cbc29081bc10f06d6831e7}\label{classfrc_1_1robot_1_1Robot_ae807171661cbc29081bc10f06d6831e7}} 
+This runs after the mode specific periodic functions, but before Live\+Window and Smart\+Dashboard integrated updating. \mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a209dbf07bfec75d73fa53126a8e31b88}\label{classfrc_1_1robot_1_1Robot_a209dbf07bfec75d73fa53126a8e31b88}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!teleopInit@{teleopInit}}
+\index{teleopInit@{teleopInit}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{teleopInit()}{teleopInit()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Robot.\+teleop\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_ae807171661cbc29081bc10f06d6831e7}\label{classfrc_1_1robot_1_1Robot_ae807171661cbc29081bc10f06d6831e7}} 
 \index{frc.robot.Robot@{frc.robot.Robot}!teleopPeriodic@{teleopPeriodic}}
 \index{teleopPeriodic@{teleopPeriodic}!frc.robot.Robot@{frc.robot.Robot}}
 \doxysubsubsection{\texorpdfstring{teleopPeriodic()}{teleopPeriodic()}}
 {\footnotesize\ttfamily void frc.\+robot.\+Robot.\+teleop\+Periodic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-This function is called periodically during operator control. \mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_abd152f34b9f33d5cdf835aa61331f33e}\label{classfrc_1_1robot_1_1Robot_abd152f34b9f33d5cdf835aa61331f33e}} 
+This function is called periodically during operator control. \mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_acdebc9c7e7e31ffccb3c2496b8d33944}\label{classfrc_1_1robot_1_1Robot_acdebc9c7e7e31ffccb3c2496b8d33944}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!testInit@{testInit}}
+\index{testInit@{testInit}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{testInit()}{testInit()}}
+{\footnotesize\ttfamily void frc.\+robot.\+Robot.\+test\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_abd152f34b9f33d5cdf835aa61331f33e}\label{classfrc_1_1robot_1_1Robot_abd152f34b9f33d5cdf835aa61331f33e}} 
 \index{frc.robot.Robot@{frc.robot.Robot}!testPeriodic@{testPeriodic}}
 \index{testPeriodic@{testPeriodic}!frc.robot.Robot@{frc.robot.Robot}}
 \doxysubsubsection{\texorpdfstring{testPeriodic()}{testPeriodic()}}
@@ -84,29 +139,139 @@ This function is called periodically during operator control. \mbox{\Hypertarget
 This function is called periodically during test mode. 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a54c04bb5c1485d849f56b3f2088d1cb0}\label{classfrc_1_1robot_1_1Robot_a54c04bb5c1485d849f56b3f2088d1cb0}} 
-\index{frc.robot.Robot@{frc.robot.Robot}!kCustomAuto@{kCustomAuto}}
-\index{kCustomAuto@{kCustomAuto}!frc.robot.Robot@{frc.robot.Robot}}
-\doxysubsubsection{\texorpdfstring{kCustomAuto}{kCustomAuto}}
-{\footnotesize\ttfamily final String frc.\+robot.\+Robot.\+k\+Custom\+Auto = \char`\"{}My Auto\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a74a87137d89ebc9ea74b9990af4f449e}\label{classfrc_1_1robot_1_1Robot_a74a87137d89ebc9ea74b9990af4f449e}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!climbDown@{climbDown}}
+\index{climbDown@{climbDown}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{climbDown}{climbDown}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+climb\+Down = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 11)\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_afca4ff71c5afc20b4492382a68a94bc6}\label{classfrc_1_1robot_1_1Robot_afca4ff71c5afc20b4492382a68a94bc6}} 
-\index{frc.robot.Robot@{frc.robot.Robot}!kDefaultAuto@{kDefaultAuto}}
-\index{kDefaultAuto@{kDefaultAuto}!frc.robot.Robot@{frc.robot.Robot}}
-\doxysubsubsection{\texorpdfstring{kDefaultAuto}{kDefaultAuto}}
-{\footnotesize\ttfamily final String frc.\+robot.\+Robot.\+k\+Default\+Auto = \char`\"{}Default\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a06c5613b6d6ffa6c2f53e172ef4a62c8}\label{classfrc_1_1robot_1_1Robot_a06c5613b6d6ffa6c2f53e172ef4a62c8}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!climbUp@{climbUp}}
+\index{climbUp@{climbUp}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{climbUp}{climbUp}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+climb\+Up = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 12)\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a1b21da051611678b4f9af38ce2125dfb}\label{classfrc_1_1robot_1_1Robot_a1b21da051611678b4f9af38ce2125dfb}} 
-\index{frc.robot.Robot@{frc.robot.Robot}!m\_autoSelected@{m\_autoSelected}}
-\index{m\_autoSelected@{m\_autoSelected}!frc.robot.Robot@{frc.robot.Robot}}
-\doxysubsubsection{\texorpdfstring{m\_autoSelected}{m\_autoSelected}}
-{\footnotesize\ttfamily String frc.\+robot.\+Robot.\+m\+\_\+auto\+Selected\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a19aff965cec99bf717a6c9047d3d810c}\label{classfrc_1_1robot_1_1Robot_a19aff965cec99bf717a6c9047d3d810c}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!colorWheelManual@{colorWheelManual}}
+\index{colorWheelManual@{colorWheelManual}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{colorWheelManual}{colorWheelManual}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+color\+Wheel\+Manual = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 3)\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_aeba62b63304a71f0d8686fc38bfca704}\label{classfrc_1_1robot_1_1Robot_aeba62b63304a71f0d8686fc38bfca704}} 
-\index{frc.robot.Robot@{frc.robot.Robot}!m\_chooser@{m\_chooser}}
-\index{m\_chooser@{m\_chooser}!frc.robot.Robot@{frc.robot.Robot}}
-\doxysubsubsection{\texorpdfstring{m\_chooser}{m\_chooser}}
-{\footnotesize\ttfamily final Sendable\+Chooser$<$String$>$ frc.\+robot.\+Robot.\+m\+\_\+chooser = new Sendable\+Chooser$<$$>$()\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_ae45c5dda87795a623c0b61a3c56e0aeb}\label{classfrc_1_1robot_1_1Robot_ae45c5dda87795a623c0b61a3c56e0aeb}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!colorWheelManualCCW@{colorWheelManualCCW}}
+\index{colorWheelManualCCW@{colorWheelManualCCW}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{colorWheelManualCCW}{colorWheelManualCCW}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+color\+Wheel\+Manual\+C\+CW = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 4)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a78c3ac9cffa73693e5a391b25fe08552}\label{classfrc_1_1robot_1_1Robot_a78c3ac9cffa73693e5a391b25fe08552}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!delivery@{delivery}}
+\index{delivery@{delivery}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{delivery}{delivery}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+delivery = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 4)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a6dbac978909b8b33bc60aed46eccffe6}\label{classfrc_1_1robot_1_1Robot_a6dbac978909b8b33bc60aed46eccffe6}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!deliveryWheel@{deliveryWheel}}
+\index{deliveryWheel@{deliveryWheel}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{deliveryWheel}{deliveryWheel}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+delivery\+Wheel = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 3)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a549aa498fa002c63468e2c3863cdc25f}\label{classfrc_1_1robot_1_1Robot_a549aa498fa002c63468e2c3863cdc25f}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!enabledLooper@{enabledLooper}}
+\index{enabledLooper@{enabledLooper}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{enabledLooper}{enabledLooper}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1lib_1_1loops_1_1Looper}{Looper}} frc.\+robot.\+Robot.\+enabled\+Looper\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a0e5436f832303e2b974bdbef40ceca9c}\label{classfrc_1_1robot_1_1Robot_a0e5436f832303e2b974bdbef40ceca9c}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!flyWheelPID@{flyWheelPID}}
+\index{flyWheelPID@{flyWheelPID}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{flyWheelPID}{flyWheelPID}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+fly\+Wheel\+P\+ID = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 9)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a782f2246cb847cafa138092b8d61e00f}\label{classfrc_1_1robot_1_1Robot_a782f2246cb847cafa138092b8d61e00f}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!foldClimb@{foldClimb}}
+\index{foldClimb@{foldClimb}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{foldClimb}{foldClimb}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+fold\+Climb = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 9)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a93270ed58a9c9aca2bedeadd80ebb1ec}\label{classfrc_1_1robot_1_1Robot_a93270ed58a9c9aca2bedeadd80ebb1ec}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!gyroLock@{gyroLock}}
+\index{gyroLock@{gyroLock}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{gyroLock}{gyroLock}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+gyro\+Lock = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 1)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a43ec4fd8ad6a32dfa4e4511c9fbbba1f}\label{classfrc_1_1robot_1_1Robot_a43ec4fd8ad6a32dfa4e4511c9fbbba1f}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!indexer@{indexer}}
+\index{indexer@{indexer}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{indexer}{indexer}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+indexer = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 5)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a3d1bad838d4bb28af7fad1b00a58f305}\label{classfrc_1_1robot_1_1Robot_a3d1bad838d4bb28af7fad1b00a58f305}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!indexerOut@{indexerOut}}
+\index{indexerOut@{indexerOut}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{indexerOut}{indexerOut}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+indexer\+Out = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 8)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_aa03fc8a5941b82131cd7718d37f48465}\label{classfrc_1_1robot_1_1Robot_aa03fc8a5941b82131cd7718d37f48465}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!intake@{intake}}
+\index{intake@{intake}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{intake}{intake}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+intake = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 6)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a9c62cc62a72051351416f9ec47ce8230}\label{classfrc_1_1robot_1_1Robot_a9c62cc62a72051351416f9ec47ce8230}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!inverse@{inverse}}
+\index{inverse@{inverse}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{inverse}{inverse}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+inverse = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 2)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_ad939391b3ecbd501d634b39cef76e757}\label{classfrc_1_1robot_1_1Robot_ad939391b3ecbd501d634b39cef76e757}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!manager@{manager}}
+\index{manager@{manager}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{manager}{manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1SubsystemManager}{Subsystem\+Manager}} frc.\+robot.\+Robot.\+manager\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \textcolor{keyword}{new} SubsystemManager(Arrays.asList(}
+\DoxyCodeLine{            }
+\DoxyCodeLine{            PoseEstimator.getInstance(), Drive.getInstance(), ColorWheel.getInstance(), Climber.getInstance(),}
+\DoxyCodeLine{            Superstructure.getInstance()), \textcolor{keyword}{true})}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a1fe5c33fa9c6b8a0c0cab5ab5a78002c}\label{classfrc_1_1robot_1_1Robot_a1fe5c33fa9c6b8a0c0cab5ab5a78002c}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!manualFlyWheel@{manualFlyWheel}}
+\index{manualFlyWheel@{manualFlyWheel}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{manualFlyWheel}{manualFlyWheel}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+manual\+Fly\+Wheel = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 11)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a8a25a71a82a7006fd44439a4e8616400}\label{classfrc_1_1robot_1_1Robot_a8a25a71a82a7006fd44439a4e8616400}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!shift@{shift}}
+\index{shift@{shift}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{shift}{shift}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+shift = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 2)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a60dd682369a5ae841cdc69a731554274}\label{classfrc_1_1robot_1_1Robot_a60dd682369a5ae841cdc69a731554274}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!shootOne@{shootOne}}
+\index{shootOne@{shootOne}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{shootOne}{shootOne}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+shoot\+One = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 6)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_ad64052eff57136ea7b874018c33410e9}\label{classfrc_1_1robot_1_1Robot_ad64052eff57136ea7b874018c33410e9}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!turretControl@{turretControl}}
+\index{turretControl@{turretControl}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{turretControl}{turretControl}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+turret\+Control = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 7)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_adf0feb2f95d3ad260ea932a4d107b49c}\label{classfrc_1_1robot_1_1Robot_adf0feb2f95d3ad260ea932a4d107b49c}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!turretPIDControl@{turretPIDControl}}
+\index{turretPIDControl@{turretPIDControl}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{turretPIDControl}{turretPIDControl}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+turret\+P\+I\+D\+Control = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a61847a6345aeff56aa7a8a95f0ef71e0}{Constants.\+S\+E\+C\+O\+ND}}, 12)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1Robot_a76dd65bb629b2711268f4a9151deebee}\label{classfrc_1_1robot_1_1Robot_a76dd65bb629b2711268f4a9151deebee}} 
+\index{frc.robot.Robot@{frc.robot.Robot}!unfoldClimb@{unfoldClimb}}
+\index{unfoldClimb@{unfoldClimb}!frc.robot.Robot@{frc.robot.Robot}}
+\doxysubsubsection{\texorpdfstring{unfoldClimb}{unfoldClimb}}
+{\footnotesize\ttfamily Joystick\+Button frc.\+robot.\+Robot.\+unfold\+Climb = new Joystick\+Button(\mbox{\hyperlink{classfrc_1_1robot_1_1Constants_a4db31234be410c00a6eaa90c80d5e80e}{Constants.\+M\+A\+S\+T\+ER}}, 10)\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

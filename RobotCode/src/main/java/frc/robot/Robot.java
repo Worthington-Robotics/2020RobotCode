@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 1992-1993 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 1892-1893 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -8,7 +8,6 @@
 package frc.robot;
 
 import java.util.Arrays;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,18 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
-import frc.robot.actions.superaction.DeliveryBeltAction;
-import frc.robot.actions.superaction.IndexBeltAction;
-import frc.robot.actions.superaction.IntakeAction;
-import frc.robot.actions.superaction.PulseIndexBeltAction;
-import frc.robot.subsystems.Lights;
-import frc.robot.subsystems.Superstructure;
 import frc.lib.util.DriveSignal;
-import frc.robot.actions.driveactions.GyroLock;
-import frc.robot.actions.driveactions.Shift;
-import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.PoseEstimator;
+import frc.lib.util.VersionData;
+import frc.robot.subsystems.*;
+import frc.robot.actions.driveactions.*;
+import frc.robot.actions.colorwheelactions.*;
+import frc.robot.actions.climberactions.*;
+import frc.robot.actions.shooteraction.*;
+import frc.robot.actions.superaction.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,57 +32,79 @@ import frc.robot.subsystems.PoseEstimator;
  * project.
  */
 public class Robot extends TimedRobot {
-    private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
-        //register subsystems here
-        Lights.getInstance(),
-        Superstructure.getInstance(),
-        PoseEstimator.getInstance(),
-        Drive.getInstance(),
-        ColorWheel.getInstance()
-    ), true);
+    private SubsystemManager manager = new SubsystemManager(Arrays.asList(
+            // register subsystems here
+            PoseEstimator.getInstance(), 
+            Drive.getInstance(), 
+            ColorWheel.getInstance(), 
+            Climber.getInstance(),
+            Superstructure.getInstance(),
+            Shooter.getInstance()), true);;
     private Looper enabledLooper, disabledLooper;
-    
-    private JoystickButton shootAll = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton shootOne = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 3);
-    private JoystickButton indexer = new JoystickButton(Constants.MASTER, 4);
-    private JoystickButton intake = new JoystickButton(Constants.MASTER, 5);
-    private JoystickButton shift = new JoystickButton(Constants.MASTER, 6);
-    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 8);
-    private JoystickButton pulse = new JoystickButton(Constants.MASTER, 9);
+
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton deliveryWheel = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton indexer = new JoystickButton(Constants.MASTER, 5);
+    private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
+    private JoystickButton indexerOut = new JoystickButton(Constants.MASTER, 8);
+    private JoystickButton folder = new JoystickButton(Constants.MASTER,11);
+    private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
+
+
+    private JoystickButton recenter = new JoystickButton(Constants.SECOND, 1);
+    private JoystickButton gyroLock = new JoystickButton(Constants.SECOND, 2);
+    private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 3);
+    private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 4);
+    private JoystickButton releaseIntake = new JoystickButton(Constants.SECOND, 5);
+    private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 6);
+    private JoystickButton turretControl = new JoystickButton(Constants.SECOND, 7);//
+    private JoystickButton flyWheelPID = new JoystickButton(Constants.SECOND, 9);
+    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 11);
+    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 12);//
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * This function is run when the robot is first started up and should be used
+     * for any initialization code.
      */
     @Override
-    public void robotInit(){
-        //create the master looper threads
+    public void robotInit() {
+        // create the master looper threads
         enabledLooper = new Looper();
         disabledLooper = new Looper();
 
-        //register the looper threads to the manager to use for enabled and disabled
+        // register the looper threads to the manager to use for enabled and disabled
         manager.registerEnabledLoops(enabledLooper);
         manager.registerDisabledLoops(disabledLooper);
 
-        //add any additional logging sources for capture
-        manager.addLoggingSource(Arrays.asList(
-            StateMachine.getInstance()
-        ));
+        // add any additional logging sources for capture
+        manager.addLoggingSource(Arrays.asList(StateMachine.getInstance()));
 
         // publish the auto list to the dashboard "Auto Selector"
-        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray()); 
+        SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
 
-        //create buttons and register actions
+        // create buttons and register actions
+        recenter.whileHeld(Action.toCommand(new Recenter()));
+        turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
+        manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
+        flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
+        turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));
+        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
+        inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-
-//        shootAll.whenPressed(Action.toCommand(new ShootAction(ShootType.ALL)));
-//        shootOne.whenPressed(Action.toCommand(new ShootAction(ShootType.ONE)));
+        shootOne.whenPressed(Action.toCommand(new ShootAction()));
+        deliveryWheel.whileHeld(Action.toCommand(new DeliveryWheelAction()));
+        indexerOut.whileHeld(Action.toCommand(new IndexBeltAction(true)));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
-        indexer.whileHeld(Action.toCommand(new IndexBeltAction()));
+        indexer.whileHeld(Action.toCommand(new IndexBeltAction(false)));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
-        pulse.whileHeld(Action.toCommand(new PulseIndexBeltAction()));
+        folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
+        climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
+        releaseIntake.toggleWhenPressed(Action.toCommand(new ArmAction()));
+        VersionData.WriteBuildInfoToDashboard();
     }
 
     /**
@@ -107,7 +124,7 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         enabledLooper.stop();
 
-        //Run any reset code here
+        Shooter.getInstance().disable();
         StateMachine.getInstance().assertStop();
 
         disabledLooper.start();

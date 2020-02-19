@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -39,7 +40,7 @@ public class Superstructure extends Subsystem {
 
     // Double
     private double THRESHOLD_DELIVERY = 75;
-    private double THRESHOLD_INDEXER = 75;
+    private double THRESHOLD_INDEXER = 100;
     private double THRESHOLD_INTAKE = 75;
     private double distanceDelivery;
     private double distanceIndexer;
@@ -119,8 +120,9 @@ public class Superstructure extends Subsystem {
 
                break;
            case ONE_TO_THREE_BALLS:
-               periodic.deliveryBeltsDemand = periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
-               periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+               pulseIndexDemand();
+               periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+               periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = STOP_BELT_DEMAND;
                break;
            case FOUR_BALLS:
                periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
@@ -155,55 +157,63 @@ public class Superstructure extends Subsystem {
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
+
         enabledLooper.register(new Loop() {
-            @Override public void onStart(double timestamp) { }
+            @Override
+            public void onStart(double timestamp) {
+            }
 
             @Override
             public void onLoop(double timestamp) {
-               switch (periodic.state) {
-                   case INIT: {
-                       if (periodic.deliveryDetected) {
-                           periodic.state = SuperState.ONE_TO_THREE_BALLS;
-                       }
-                       break;
-                   }
-                   case ONE_TO_THREE_BALLS: {
-                       if (periodic.indexDetected) {
-                           if (!indexBoolean.isStarted()) {
-                               indexBoolean.start();
-                           } else if (indexBoolean.getBoolean()) {
-                               periodic.state = SuperState.FOUR_BALLS;
-                           }
-                       } else {
-                           // Invalidate if it isn't true
-                           indexBoolean.stop();
-                       }
-                       break;
-                   }
-                   case FOUR_BALLS: {
-                       if (periodic.intakeDetected) {
-                           if (!intakeBoolean.isStarted()) {
-                               intakeBoolean.start();
-                           } else if (intakeBoolean.getBoolean()) {
-                               periodic.state = SuperState.FULL_SYSTEM;
-                           }
-                       } else {
-                           // Invalidate if it isn't true
-                           intakeBoolean.stop();
-                       }
-                       break;
-                   }
-                   case SHOOT: {
-                       if (!periodic.deliveryDetected) {
-                           periodic.state = SuperState.INIT;
-                       }
-                       break;
-                   }
-                   case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
-               }
+                switch (periodic.state) {
+                case INIT: {
+                    if (periodic.deliveryDetected) {
+                        periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                    }
+                    break;
+                }
+                case ONE_TO_THREE_BALLS: {
+                    if (periodic.indexDetected) {
+                        if (!indexBoolean.isStarted()) {
+                            indexBoolean.start();
+                        } else if (indexBoolean.getBoolean()) {
+                            periodic.state = SuperState.FOUR_BALLS;
+                        }
+                    } else {
+                        // Invalidate if it isn't true
+                        indexBoolean.stop();
+                    }
+                    break;
+                }
+                case FOUR_BALLS: {
+                    if (periodic.intakeDetected) {
+                        periodic.state = SuperState.FULL_SYSTEM;
+                    }
+                    break;
+                }
+                case FULL_SYSTEM: {
+
+                    if (!periodic.intakeDetected) {
+                        periodic.state = SuperState.FOUR_BALLS;
+                    }
+
+                    break;
+                }
+                case SHOOT: {
+                    if (!periodic.deliveryDetected) {
+                        periodic.state = SuperState.INIT;
+                    }
+                    break;
+                }
+                case DUMP_SYSTEM:
+                default:
+                    break;
+                }
             }
 
-            @Override public void onStop(double timestamp) { }
+            @Override
+            public void onStop(double timestamp) {
+            }
         });
     }
 
@@ -221,7 +231,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
     }
 
-    public void pulseDemand() {
+    public void pulseIndexDemand() {
         if (pulseCooldownTimestamp <= Timer.getFPGATimestamp()) {
             pulseTimestamp = Timer.getFPGATimestamp() + PULSE_LENGTH;
             pulseCooldownTimestamp = pulseTimestamp + PULSE_COOLDOWN;
@@ -248,12 +258,14 @@ public class Superstructure extends Subsystem {
     }
 
     /**
-     * Reset the values of the sensors, and reinitialize the IO.
+     * Reset the values of the sensors, SRX, and reinitialize the IO.
      */
     @Override
     public void reset() {
         periodic = new SuperIO();
 
+        deliveryWheel.setInverted(true);
+        deliveryBelts.setInverted(true);
         deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         indexSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);

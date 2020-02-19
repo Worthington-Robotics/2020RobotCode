@@ -10,6 +10,8 @@ void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a43efabbf3b
 boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a09b32ff1157e95f6f066ee841c61fcd9}{is\+Finished}} ()
 \item 
 void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}{on\+Stop}} ()
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_ae042178ccfb62127c54c64a3e9367f2c}{to\+String}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -27,12 +29,12 @@ double \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_abfcbd863
 \doxysubsubsection{\texorpdfstring{isFinished()}{isFinished()}}
 {\footnotesize\ttfamily boolean frc.\+lib.\+statemachine.\+Action\+Group.\+is\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-determines when to begin state advancement 
+Determines if the state is ready to be advanced. This can happen forcefully on a timeout or if all action in the group time out individually. 
 
-handles self terminated actions automatically
+This also handles calling the stop code on actions who have completed independently.
 
 \begin{DoxyReturn}{Returns}
-true when all actions are finished 
+true if all actions in the group have finished or if they should be forcibly timed out 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a43efabbf3b9971b9b4439ecfbfb7026f}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a43efabbf3b9971b9b4439ecfbfb7026f}} 
 \index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!onLoop@{onLoop}}
@@ -40,21 +42,28 @@ true when all actions are finished
 \doxysubsubsection{\texorpdfstring{onLoop()}{onLoop()}}
 {\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+Action\+Group.\+on\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-runs the onloop code of all actions in the group 
-
-executes in order added to group \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}} 
+Runs the on-\/loop code for each action in the group. \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}} 
 \index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!onStart@{onStart}}
 \index{onStart@{onStart}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
 \doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
 {\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+Action\+Group.\+on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-records start time of state then executes all actions on\+Start \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}} 
+Runs the on-\/start code for each action in the group. Also records the start time of state \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}} 
 \index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!onStop@{onStop}}
 \index{onStop@{onStop}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
 \doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
 {\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+Action\+Group.\+on\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-forceful exit for all actions in the group 
+forcibly terminate all actions within the group \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_ae042178ccfb62127c54c64a3e9367f2c}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_ae042178ccfb62127c54c64a3e9367f2c}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!toString@{toString}}
+\index{toString@{toString}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+statemachine.\+Action\+Group.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+gets a string representation of the class names inside the action group \begin{DoxyReturn}{Returns}
+a string of all class names in the group 
+\end{DoxyReturn}
+
 
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a9537c76a7e0dd0eccc272fda845dd4b9}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a9537c76a7e0dd0eccc272fda845dd4b9}} 

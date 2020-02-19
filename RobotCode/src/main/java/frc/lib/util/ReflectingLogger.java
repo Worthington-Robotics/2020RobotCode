@@ -67,7 +67,7 @@ public class ReflectingLogger<T> {
      * reads a list of data classes and dumps their contents into a file
      * @param dataClasses the list of 
      */
-    public void update(List<T> dataClasses) {
+    public void update(List<T> dataClasses, double fpgaTimestamp) {
 
         //no writer avaliable to update exit the update
         if (output.equals(null)) {
@@ -85,7 +85,7 @@ public class ReflectingLogger<T> {
         final StringBuffer line = new StringBuffer();
 
         //Append starting time
-        line.append(Timer.getFPGATimestamp());
+        line.append(fpgaTimestamp);
 
         //for all fields in map generate
         for (Map.Entry<Field, T> entry : classFieldMap.entrySet()) {

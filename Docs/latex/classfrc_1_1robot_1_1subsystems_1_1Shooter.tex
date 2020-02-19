@@ -1,0 +1,350 @@
+\hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter}{}\doxysection{frc.\+robot.\+subsystems.\+Shooter Class Reference}
+\label{classfrc_1_1robot_1_1subsystems_1_1Shooter}\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+Inheritance diagram for frc.\+robot.\+subsystems.\+Shooter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classfrc_1_1robot_1_1subsystems_1_1Shooter}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode}{Motor\+Control\+Mode}}
+\item 
+class \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_1_1ShooterIO}{Shooter\+IO}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_af383fae809eda82f832782b593f21176}{read\+Periodic\+Inputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a62acfe15b6d57d6b190a34a6072162ad}{register\+Enabled\+Loops}} (\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}} enabled\+Looper)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a2485342a9257ed419450ba4a48178b9e}{write\+Periodic\+Outputs}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7c4f5ac8cc19d346f81b81706e98e027}{output\+Telemetry}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a807e13ed5c697680322ba7dee8a2bde2}{config\+Limelight}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_aad0c14e1453a35450d4ad4ca64fe13e2}{config\+Talons}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a0282c190ab76fec645257f079663e334}{reset}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_af4d170f7e3419a6865846704d826b8b9}{degrees\+To\+Ticks}} (double degree)
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7606a31a5b018ce3bc8e8d2e29cf1d39}{ticks\+To\+Degrees}} (double degree)
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a94881365084b71097966094df933aaff}{limelight\+Ranging}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a23568e6380a439c1267a76222e6c5647}{calculate\+R\+PM}} (double distance)
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a203ea309ac6a847d2c0f46efcb18185b}{R\+P\+M\+To\+Ticks\+Per100ms}} (double R\+PM)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a90d8a8add96b574df8174b9855529287}{set\+Flywheel\+R\+PM}} (double demand)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1a6dc25e446a8e9d56d359e5006d1903}{set\+Turret\+R\+PM}} (double demand)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a32b82ff710928fa39d9e7a6179817c28}{set\+Flywheel\+Demand}} (double new\+Demand)
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_afd259f4d56ac0879e5c84fc79da473cb}{set\+Turret\+Demand}} (double new\+Demand)
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1aaa80493294b9545787e0a291d21d8e}{get\+R\+P\+M\+On\+Target}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a220c66adab48b2d65381a9d72b733974}{set\+R\+P\+M\+On\+Target}} (boolean is\+Target)
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_af15fa921899299fa3633aea9ecbce6e2}{get\+R\+P\+M\+Closed\+Loop\+Error}} ()
+\item 
+Subsystem.\+Periodic\+IO \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a66fecd7349cc924511a8b168583a1d82}{get\+Logger}} ()
+\item 
+double \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_ac12ad7006f619c6251c1637061a3ef56}{turret\+Angleto\+Rel\+Angle}} (double angle)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter}{Shooter}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a4a2f21f5464232d5479e07efb758ac41}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a137db773a51161b83198a707c7c7d4a1}{Shooter}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode}{Motor\+Control\+Mode}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a222ead0b63fa9eea363572400a9676ec}{flywheel\+Mode}} = \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode_a634cd8beea7fab857980cea5faf8cd8b}{Motor\+Control\+Mode.\+D\+I\+S\+A\+B\+L\+ED}}
+\item 
+\mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode}{Motor\+Control\+Mode}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a42673ca6a7ce1793b061859d60daaee0}{turret\+Mode}} = \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode_a634cd8beea7fab857980cea5faf8cd8b}{Motor\+Control\+Mode.\+D\+I\+S\+A\+B\+L\+ED}}
+\item 
+\mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_1_1ShooterIO}{Shooter\+IO}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7a8724998fd337455ab956864e938ea0}{periodic}}
+\item 
+Talon\+FX \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a9b2c95e5986c2ef7707558e51ecb8352}{right\+Flywheel\+Falcon}}
+\item 
+Talon\+S\+RX \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a24a7b3deebca4a7a9249be83683beec0}{turret\+Control}}
+\item 
+Network\+Table \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1a3eedfdd662272143f1fb192ac468ff}{table}} = Network\+Table\+Instance.\+get\+Default().get\+Table(\char`\"{}limelight\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_ada3310d4b6f57872f2aa1f93bca246e9}{tx}} = table.\+get\+Entry(\char`\"{}tx\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a10740eedf9c3214e37c6b6f869aef720}{ty}} = table.\+get\+Entry(\char`\"{}ty\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a76cc1b06aa3b608cf95af72cfc1bded3}{ta}} = table.\+get\+Entry(\char`\"{}ta\char`\"{})
+\item 
+Network\+Table\+Entry \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a017300010c31da1d08e3b30f7e903750}{camtran}} = table.\+get\+Entry(\char`\"{}camtran\char`\"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter}{Shooter}} \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1497c201b7d8e8cc8fc2c8cf37b52b6c}{m\+\_\+\+Shooter}} = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter}{Shooter}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a137db773a51161b83198a707c7c7d4a1}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a137db773a51161b83198a707c7c7d4a1}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!Shooter@{Shooter}}
+\index{Shooter@{Shooter}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{Shooter()}{Shooter()}}
+{\footnotesize\ttfamily frc.\+robot.\+subsystems.\+Shooter.\+Shooter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a23568e6380a439c1267a76222e6c5647}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a23568e6380a439c1267a76222e6c5647}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!calculateRPM@{calculateRPM}}
+\index{calculateRPM@{calculateRPM}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{calculateRPM()}{calculateRPM()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+calculate\+R\+PM (\begin{DoxyParamCaption}\item[{double}]{distance }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a807e13ed5c697680322ba7dee8a2bde2}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a807e13ed5c697680322ba7dee8a2bde2}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!configLimelight@{configLimelight}}
+\index{configLimelight@{configLimelight}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{configLimelight()}{configLimelight()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+config\+Limelight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_aad0c14e1453a35450d4ad4ca64fe13e2}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_aad0c14e1453a35450d4ad4ca64fe13e2}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!configTalons@{configTalons}}
+\index{configTalons@{configTalons}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{configTalons()}{configTalons()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+config\+Talons (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_af4d170f7e3419a6865846704d826b8b9}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_af4d170f7e3419a6865846704d826b8b9}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!degreesToTicks@{degreesToTicks}}
+\index{degreesToTicks@{degreesToTicks}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{degreesToTicks()}{degreesToTicks()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+degrees\+To\+Ticks (\begin{DoxyParamCaption}\item[{double}]{degree }\end{DoxyParamCaption})}
+
+Method that maps the raw input from the slider on the E\+X\+T\+R\+E\+ME 3D and convert the value to a 0 -\/ 1 bottom to top map \mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a4a2f21f5464232d5479e07efb758ac41}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a4a2f21f5464232d5479e07efb758ac41}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter}{Shooter}} frc.\+robot.\+subsystems.\+Shooter.\+get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a66fecd7349cc924511a8b168583a1d82}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a66fecd7349cc924511a8b168583a1d82}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!getLogger@{getLogger}}
+\index{getLogger@{getLogger}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{getLogger()}{getLogger()}}
+{\footnotesize\ttfamily Subsystem.\+Periodic\+IO frc.\+robot.\+subsystems.\+Shooter.\+get\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_affd98b66c2142b99e718fee877a36099}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_af15fa921899299fa3633aea9ecbce6e2}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_af15fa921899299fa3633aea9ecbce6e2}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!getRPMClosedLoopError@{getRPMClosedLoopError}}
+\index{getRPMClosedLoopError@{getRPMClosedLoopError}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{getRPMClosedLoopError()}{getRPMClosedLoopError()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+get\+R\+P\+M\+Closed\+Loop\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1aaa80493294b9545787e0a291d21d8e}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1aaa80493294b9545787e0a291d21d8e}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!getRPMOnTarget@{getRPMOnTarget}}
+\index{getRPMOnTarget@{getRPMOnTarget}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{getRPMOnTarget()}{getRPMOnTarget()}}
+{\footnotesize\ttfamily boolean frc.\+robot.\+subsystems.\+Shooter.\+get\+R\+P\+M\+On\+Target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a94881365084b71097966094df933aaff}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a94881365084b71097966094df933aaff}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!limelightRanging@{limelightRanging}}
+\index{limelightRanging@{limelightRanging}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{limelightRanging()}{limelightRanging()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+limelight\+Ranging (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Takes in ta (See Limelight Docs) and outputs lateral distance from robot to target in inches Equation came from a degree 2 polynomial regression on data points recorded manually \begin{DoxyReturn}{Returns}
+lateral distance from limelight lens to target in inches 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7c4f5ac8cc19d346f81b81706e98e027}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7c4f5ac8cc19d346f81b81706e98e027}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!outputTelemetry@{outputTelemetry}}
+\index{outputTelemetry@{outputTelemetry}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{outputTelemetry()}{outputTelemetry()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+output\+Telemetry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Outputs all logging information to the Smart\+Dashboard 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a054cb76422323a8ccc2afa2658af3b0a}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_af383fae809eda82f832782b593f21176}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_af383fae809eda82f832782b593f21176}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!readPeriodicInputs@{readPeriodicInputs}}
+\index{readPeriodicInputs@{readPeriodicInputs}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{readPeriodicInputs()}{readPeriodicInputs()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+read\+Periodic\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Updates all periodic variables and sensors 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_add513bcc9e791fe7ce42834ec1379baf}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a62acfe15b6d57d6b190a34a6072162ad}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a62acfe15b6d57d6b190a34a6072162ad}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!registerEnabledLoops@{registerEnabledLoops}}
+\index{registerEnabledLoops@{registerEnabledLoops}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{registerEnabledLoops()}{registerEnabledLoops()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+register\+Enabled\+Loops (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacefrc_1_1lib_1_1loops_1_1ILooper}{I\+Looper}}}]{enabled\+Looper }\end{DoxyParamCaption})}
+
+Required for the subsystem\textquotesingle{}s looper to be registered to the state machine not required for subsystems that do not use looper
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled\+Looper} & the subsystem\textquotesingle{}s Looper \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a4d27c0d71c9a6d4f86158568ce742170}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a0282c190ab76fec645257f079663e334}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a0282c190ab76fec645257f079663e334}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!reset@{reset}}
+\index{reset@{reset}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Called to reset and configure the subsystem 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a3bb39941d0afd2ba588f257ce0950037}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a203ea309ac6a847d2c0f46efcb18185b}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a203ea309ac6a847d2c0f46efcb18185b}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!RPMToTicksPer100ms@{RPMToTicksPer100ms}}
+\index{RPMToTicksPer100ms@{RPMToTicksPer100ms}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{RPMToTicksPer100ms()}{RPMToTicksPer100ms()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+R\+P\+M\+To\+Ticks\+Per100ms (\begin{DoxyParamCaption}\item[{double}]{R\+PM }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a32b82ff710928fa39d9e7a6179817c28}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a32b82ff710928fa39d9e7a6179817c28}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!setFlywheelDemand@{setFlywheelDemand}}
+\index{setFlywheelDemand@{setFlywheelDemand}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{setFlywheelDemand()}{setFlywheelDemand()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+set\+Flywheel\+Demand (\begin{DoxyParamCaption}\item[{double}]{new\+Demand }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a90d8a8add96b574df8174b9855529287}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a90d8a8add96b574df8174b9855529287}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!setFlywheelRPM@{setFlywheelRPM}}
+\index{setFlywheelRPM@{setFlywheelRPM}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{setFlywheelRPM()}{setFlywheelRPM()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+set\+Flywheel\+R\+PM (\begin{DoxyParamCaption}\item[{double}]{demand }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a220c66adab48b2d65381a9d72b733974}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a220c66adab48b2d65381a9d72b733974}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!setRPMOnTarget@{setRPMOnTarget}}
+\index{setRPMOnTarget@{setRPMOnTarget}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{setRPMOnTarget()}{setRPMOnTarget()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+set\+R\+P\+M\+On\+Target (\begin{DoxyParamCaption}\item[{boolean}]{is\+Target }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_afd259f4d56ac0879e5c84fc79da473cb}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_afd259f4d56ac0879e5c84fc79da473cb}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!setTurretDemand@{setTurretDemand}}
+\index{setTurretDemand@{setTurretDemand}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{setTurretDemand()}{setTurretDemand()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+set\+Turret\+Demand (\begin{DoxyParamCaption}\item[{double}]{new\+Demand }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1a6dc25e446a8e9d56d359e5006d1903}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1a6dc25e446a8e9d56d359e5006d1903}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!setTurretRPM@{setTurretRPM}}
+\index{setTurretRPM@{setTurretRPM}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{setTurretRPM()}{setTurretRPM()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+set\+Turret\+R\+PM (\begin{DoxyParamCaption}\item[{double}]{demand }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7606a31a5b018ce3bc8e8d2e29cf1d39}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7606a31a5b018ce3bc8e8d2e29cf1d39}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!ticksToDegrees@{ticksToDegrees}}
+\index{ticksToDegrees@{ticksToDegrees}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{ticksToDegrees()}{ticksToDegrees()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+ticks\+To\+Degrees (\begin{DoxyParamCaption}\item[{double}]{degree }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_ac12ad7006f619c6251c1637061a3ef56}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_ac12ad7006f619c6251c1637061a3ef56}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!turretAngletoRelAngle@{turretAngletoRelAngle}}
+\index{turretAngletoRelAngle@{turretAngletoRelAngle}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{turretAngletoRelAngle()}{turretAngletoRelAngle()}}
+{\footnotesize\ttfamily double frc.\+robot.\+subsystems.\+Shooter.\+turret\+Angleto\+Rel\+Angle (\begin{DoxyParamCaption}\item[{double}]{angle }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a2485342a9257ed419450ba4a48178b9e}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a2485342a9257ed419450ba4a48178b9e}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!writePeriodicOutputs@{writePeriodicOutputs}}
+\index{writePeriodicOutputs@{writePeriodicOutputs}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{writePeriodicOutputs()}{writePeriodicOutputs()}}
+{\footnotesize\ttfamily void frc.\+robot.\+subsystems.\+Shooter.\+write\+Periodic\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Writes the periodic outputs to actuators (motors and ect...) 
+
+Reimplemented from \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Subsystem_a2d03af75cee49cf45a73b6f80299c8a4}{frc.\+robot.\+subsystems.\+Subsystem}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a017300010c31da1d08e3b30f7e903750}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a017300010c31da1d08e3b30f7e903750}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!camtran@{camtran}}
+\index{camtran@{camtran}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{camtran}{camtran}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Shooter.\+camtran = table.\+get\+Entry(\char`\"{}camtran\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a222ead0b63fa9eea363572400a9676ec}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a222ead0b63fa9eea363572400a9676ec}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!flywheelMode@{flywheelMode}}
+\index{flywheelMode@{flywheelMode}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{flywheelMode}{flywheelMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode}{Motor\+Control\+Mode}} frc.\+robot.\+subsystems.\+Shooter.\+flywheel\+Mode = \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode_a634cd8beea7fab857980cea5faf8cd8b}{Motor\+Control\+Mode.\+D\+I\+S\+A\+B\+L\+ED}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1497c201b7d8e8cc8fc2c8cf37b52b6c}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1497c201b7d8e8cc8fc2c8cf37b52b6c}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!m\_Shooter@{m\_Shooter}}
+\index{m\_Shooter@{m\_Shooter}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{m\_Shooter}{m\_Shooter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter}{Shooter}} frc.\+robot.\+subsystems.\+Shooter.\+m\+\_\+\+Shooter = new \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter}{Shooter}}()\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7a8724998fd337455ab956864e938ea0}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a7a8724998fd337455ab956864e938ea0}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!periodic@{periodic}}
+\index{periodic@{periodic}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{periodic}{periodic}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrc_1_1robot_1_1subsystems_1_1Shooter_1_1ShooterIO}{Shooter\+IO}} frc.\+robot.\+subsystems.\+Shooter.\+periodic\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a9b2c95e5986c2ef7707558e51ecb8352}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a9b2c95e5986c2ef7707558e51ecb8352}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!rightFlywheelFalcon@{rightFlywheelFalcon}}
+\index{rightFlywheelFalcon@{rightFlywheelFalcon}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{rightFlywheelFalcon}{rightFlywheelFalcon}}
+{\footnotesize\ttfamily Talon\+FX frc.\+robot.\+subsystems.\+Shooter.\+right\+Flywheel\+Falcon\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a76cc1b06aa3b608cf95af72cfc1bded3}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a76cc1b06aa3b608cf95af72cfc1bded3}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!ta@{ta}}
+\index{ta@{ta}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{ta}{ta}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Shooter.\+ta = table.\+get\+Entry(\char`\"{}ta\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1a3eedfdd662272143f1fb192ac468ff}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a1a3eedfdd662272143f1fb192ac468ff}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!table@{table}}
+\index{table@{table}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{table}{table}}
+{\footnotesize\ttfamily Network\+Table frc.\+robot.\+subsystems.\+Shooter.\+table = Network\+Table\+Instance.\+get\+Default().get\+Table(\char`\"{}limelight\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a24a7b3deebca4a7a9249be83683beec0}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a24a7b3deebca4a7a9249be83683beec0}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!turretControl@{turretControl}}
+\index{turretControl@{turretControl}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{turretControl}{turretControl}}
+{\footnotesize\ttfamily Talon\+S\+RX frc.\+robot.\+subsystems.\+Shooter.\+turret\+Control\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a42673ca6a7ce1793b061859d60daaee0}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a42673ca6a7ce1793b061859d60daaee0}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!turretMode@{turretMode}}
+\index{turretMode@{turretMode}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{turretMode}{turretMode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode}{Motor\+Control\+Mode}} frc.\+robot.\+subsystems.\+Shooter.\+turret\+Mode = \mbox{\hyperlink{enumfrc_1_1robot_1_1subsystems_1_1Shooter_1_1MotorControlMode_a634cd8beea7fab857980cea5faf8cd8b}{Motor\+Control\+Mode.\+D\+I\+S\+A\+B\+L\+ED}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_ada3310d4b6f57872f2aa1f93bca246e9}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_ada3310d4b6f57872f2aa1f93bca246e9}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!tx@{tx}}
+\index{tx@{tx}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{tx}{tx}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Shooter.\+tx = table.\+get\+Entry(\char`\"{}tx\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1robot_1_1subsystems_1_1Shooter_a10740eedf9c3214e37c6b6f869aef720}\label{classfrc_1_1robot_1_1subsystems_1_1Shooter_a10740eedf9c3214e37c6b6f869aef720}} 
+\index{frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}!ty@{ty}}
+\index{ty@{ty}!frc.robot.subsystems.Shooter@{frc.robot.subsystems.Shooter}}
+\doxysubsubsection{\texorpdfstring{ty}{ty}}
+{\footnotesize\ttfamily Network\+Table\+Entry frc.\+robot.\+subsystems.\+Shooter.\+ty = table.\+get\+Entry(\char`\"{}ty\char`\"{})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/robot/subsystems/\mbox{\hyperlink{Shooter_8java}{Shooter.\+java}}\end{DoxyCompactItemize}
