@@ -16,11 +16,11 @@ public class LookUpTableTest {
         double[] distance = new double[181];
         double[] angleToDistance = new double[181];
         for(int i = 0; i <= 180; i++) {
-            distance[i] = (98.5 - Constants.LIMELIGHT_HIGHT) / Math.tan((double)i / 2);
+            distance[i] = (98.5 - Constants.LIMELIGHT_HIGHT) / Math.tan(Math.toRadians((double)i / 2));
             angleToDistance[i] = Shooter.getInstance().limelightRanging((double)i/2);
         }
         System.out.println(Arrays.toString(distance));
-        System.out.println(Arrays.toString(Shooter.getInstance().getAngleToDistance()));
+        System.out.println(Arrays.toString(angleToDistance));
         assertEquals(distance, angleToDistance);
     }
 
