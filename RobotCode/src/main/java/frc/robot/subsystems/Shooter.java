@@ -18,8 +18,6 @@ import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
 
-    private double[] angleToDistance = new double[97];
-
     private static Shooter m_Shooter = new Shooter();
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.DISABLED;
@@ -42,9 +40,6 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.setInverted(true);
         leftFlywheelFalcon.setInverted(false);
         turretControl.configContinuousCurrentLimit(10);
-        for(int i = 0; i <= 96; i++) {
-            angleToDistance[i] = (98.5 - Constants.LIMELIGHT_HIGHT) / Math.tan(i/2);
-        }
         reset();
     }
 
@@ -161,6 +156,11 @@ public class Shooter extends Subsystem {
         case RECENTER_MODE:
             turretControl.set(ControlMode.MotionMagic, 0);
             break;
+        case LEFT45_MODE:
+            turretControl.set(ControlMode.MotionMagic, Constants.leftTurretLimit / 2);
+            break;
+        case RIGHT45_MODE:
+            turretControl.set(ControlMode.MotionMagic, Constants.rightTurretLimit / 2);
         default:
             turretControl.set(ControlMode.Disabled, 0);
             break;
@@ -297,6 +297,16 @@ public class Shooter extends Subsystem {
             turretMode = MotorControlMode.RECENTER_MODE;
     }
 
+    public void setTurret45Left() {
+        if (turretMode != MotorControlMode.LEFT45_MODE)
+            turretMode = MotorControlMode.LEFT45_MODE;
+    }
+    
+    public void setTurret45Right() {
+        if (turretMode != MotorControlMode.RIGHT45_MODE)
+            turretMode = MotorControlMode.RIGHT45_MODE;
+    }
+
     public void setFlywheelDemand(double newDemand) {
         if (flywheelMode != MotorControlMode.OPEN_LOOP)
             flywheelMode = MotorControlMode.OPEN_LOOP;
@@ -326,7 +336,7 @@ public class Shooter extends Subsystem {
     }
 
     public enum MotorControlMode {
-        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE, RECENTER_MODE;
+        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE, RECENTER_MODE, LEFT45_MODE, RIGHT45_MODE;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
@@ -342,8 +352,7 @@ public class Shooter extends Subsystem {
         // Equation that takes in ta (See Limelight Docs) and outputs distance from
         // target in inches
         // TODO need to test data points based on actual bot
-        double targetAngleOffset = Constants.LIMELIGHT_PITCH + periodic.targetY;
-        return angleToDistance[(int) (targetAngleOffset * 2)];
+        return (98.5-Constants.LIMELIGHT_HIGHT) / Math.tan(Math.toRadians(Constants.LIMELIGHT_PITCH + periodic.targetY));
     }
 
     public double limelightGoalAngle() {
