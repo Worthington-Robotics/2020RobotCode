@@ -110,41 +110,41 @@ public class Superstructure extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-//        switch (periodic.state) {
-//            case INIT:
-//                periodic.deliveryWheelDemand =
-//                periodic.deliveryBeltsDemand =
-//                periodic.indexTopBeltDemand =
-//                periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
-//
-//                break;
-//            case ONE_TO_THREE_BALLS:
-//                periodic.deliveryBeltsDemand = periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
-//                periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-//                break;
-//            case FOUR_BALLS:
-//                periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
-//                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-//                break;
-//            case FULL_SYSTEM:
-//                periodic.deliveryWheelDemand =
-//                periodic.deliveryBeltsDemand =
-//                periodic.indexTopBeltDemand =
-//                periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
-//                break;
-//            case SHOOT:
-//                periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
-//                periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
-//                break;
-//            case DUMP_SYSTEM:
-//                periodic.deliveryWheelDemand =
-//                periodic.deliveryBeltsDemand =
-//                periodic.indexTopBeltDemand =
-//                periodic.intakeWheelsDemand = -FULL_BELT_DEMAND;
-//                break;
-//            default:
-//                break;
-//        }
+       switch (periodic.state) {
+           case INIT:
+               periodic.deliveryWheelDemand =
+               periodic.deliveryBeltsDemand =
+               periodic.indexTopBeltDemand =
+               periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+
+               break;
+           case ONE_TO_THREE_BALLS:
+               periodic.deliveryBeltsDemand = periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+               periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+               break;
+           case FOUR_BALLS:
+               periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+               periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+               break;
+           case FULL_SYSTEM:
+               periodic.deliveryWheelDemand =
+               periodic.deliveryBeltsDemand =
+               periodic.indexTopBeltDemand =
+               periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
+               break;
+           case SHOOT:
+               periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
+               periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
+               break;
+           case DUMP_SYSTEM:
+               periodic.deliveryWheelDemand =
+               periodic.deliveryBeltsDemand =
+               periodic.indexTopBeltDemand =
+               periodic.intakeWheelsDemand = -FULL_BELT_DEMAND;
+               break;
+           default:
+               break;
+       }
 
         DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
         DemandUtil.setDemand(periodic.deliveryWheelDemand, deliveryWheel);
@@ -160,47 +160,47 @@ public class Superstructure extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-//                switch (periodic.state) {
-//                    case INIT: {
-//                        if (periodic.deliveryDetected) {
-//                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
-//                        }
-//                        break;
-//                    }
-//                    case ONE_TO_THREE_BALLS: {
-//                        if (periodic.indexDetected) {
-//                            if (!indexBoolean.isStarted()) {
-//                                indexBoolean.start();
-//                            } else if (indexBoolean.getBoolean()) {
-//                                periodic.state = SuperState.FOUR_BALLS;
-//                            }
-//                        } else {
-//                            // Invalidate if it isn't true
-//                            indexBoolean.stop();
-//                        }
-//                        break;
-//                    }
-//                    case FOUR_BALLS: {
-//                        if (periodic.intakeDetected) {
-//                            if (!intakeBoolean.isStarted()) {
-//                                intakeBoolean.start();
-//                            } else if (intakeBoolean.getBoolean()) {
-//                                periodic.state = SuperState.FULL_SYSTEM;
-//                            }
-//                        } else {
-//                            // Invalidate if it isn't true
-//                            intakeBoolean.stop();
-//                        }
-//                        break;
-//                    }
-//                    case SHOOT: {
-//                        if (!periodic.deliveryDetected) {
-//                            periodic.state = SuperState.INIT;
-//                        }
-//                        break;
-//                    }
-//                    case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
-//                }
+               switch (periodic.state) {
+                   case INIT: {
+                       if (periodic.deliveryDetected) {
+                           periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                       }
+                       break;
+                   }
+                   case ONE_TO_THREE_BALLS: {
+                       if (periodic.indexDetected) {
+                           if (!indexBoolean.isStarted()) {
+                               indexBoolean.start();
+                           } else if (indexBoolean.getBoolean()) {
+                               periodic.state = SuperState.FOUR_BALLS;
+                           }
+                       } else {
+                           // Invalidate if it isn't true
+                           indexBoolean.stop();
+                       }
+                       break;
+                   }
+                   case FOUR_BALLS: {
+                       if (periodic.intakeDetected) {
+                           if (!intakeBoolean.isStarted()) {
+                               intakeBoolean.start();
+                           } else if (intakeBoolean.getBoolean()) {
+                               periodic.state = SuperState.FULL_SYSTEM;
+                           }
+                       } else {
+                           // Invalidate if it isn't true
+                           intakeBoolean.stop();
+                       }
+                       break;
+                   }
+                   case SHOOT: {
+                       if (!periodic.deliveryDetected) {
+                           periodic.state = SuperState.INIT;
+                       }
+                       break;
+                   }
+                   case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
+               }
             }
 
             @Override public void onStop(double timestamp) { }
