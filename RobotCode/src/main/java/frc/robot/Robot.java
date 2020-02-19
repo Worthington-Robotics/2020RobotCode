@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
 
         // create buttons and register actions
         recenter.whileHeld(Action.toCommand(new Recenter()));
-        turretPIDControl.whenPressed(Action.toCommand(new TurretPIDControl(false)));
+        turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
         flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
         turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));

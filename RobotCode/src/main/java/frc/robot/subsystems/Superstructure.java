@@ -39,7 +39,7 @@ public class Superstructure extends Subsystem {
 
     // Double
     private double THRESHOLD_DELIVERY = 75;
-    private double THRESHOLD_INDEXER = 75;
+    private double THRESHOLD_INDEXER = 100;
     private double THRESHOLD_INTAKE = 75;
     private double distanceDelivery;
     private double distanceIndexer;
@@ -86,12 +86,15 @@ public class Superstructure extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
-            THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
+            THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD",
+                    THRESHOLD_DELIVERY);
             THRESHOLD_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
             THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
 
-            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", deliverySensor.getRange());
-            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
+            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE",
+                    deliverySensor.getRange());
+            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE",
+                    indexSensor.getRange());
             distanceIntake = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
         } else {
             distanceDelivery = deliverySensor.getRange();
@@ -104,94 +107,103 @@ public class Superstructure extends Subsystem {
         periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
     }
 
-    @Override public synchronized void writePeriodicOutputs() {
-        /*
+    @Override
+    public synchronized void writePeriodicOutputs() {
+
         switch (periodic.state) {
-            case INIT:
-                DemandUtil.setFullDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-                break;
-            case ONE_TO_THREE_BALLS:
-                DemandUtil.setFullDemand(deliveryBelts, ballsIntake);
-                DemandUtil.disable(shooterWheel, indexBelt);
-                break;
-            case FOUR_BALLS:
-                DemandUtil.setFullDemand(ballsIntake);
-                DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt);
-                break;
-            case FULL_SYSTEM:
-                DemandUtil.disable(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-                break;
-            case SHOOT:
-                DemandUtil.setFullDemand(shooterWheel);
-                DemandUtil.disable(deliveryBelts, indexBelt, ballsIntake);
-                break;
-            case DUMP_SYSTEM:
-                DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts, indexBelt, ballsIntake);
-                break;
-            default:
-                break;
+        case INIT:
+            DemandUtil.setFullDemand(shooterWheel, deliveryBelts, indexTopBelt, ballsIntake);
+            break;
+        case ONE_TO_THREE_BALLS:
+            DemandUtil.setFullDemand(ballsIntake, indexTopBelt);
+            DemandUtil.disable(shooterWheel, deliveryBelts);
+            break;
+        case FOUR_BALLS:
+            DemandUtil.setFullDemand(ballsIntake);
+            DemandUtil.disable(shooterWheel, deliveryBelts, indexTopBelt);
+            break;
+        case FULL_SYSTEM:
+            DemandUtil.disable(shooterWheel, deliveryBelts, indexTopBelt, ballsIntake);
+            break;
+        case SHOOT:
+            DemandUtil.setFullDemand(shooterWheel);
+            DemandUtil.disable(deliveryBelts, indexTopBelt, ballsIntake);
+            break;
+        case DUMP_SYSTEM:
+            DemandUtil.setFullBackDemand(shooterWheel, deliveryBelts, indexTopBelt, ballsIntake);
+            break;
+        default:
+            break;
         }
-        */
+
+        /*
+         * deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+         * shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+         * indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
+         * ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+         * extensionArm.set(periodic.armExtension);
+         */
     }
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
-        
-        enabledLooper.register(new Loop() {
-            @Override public void onStart(double timestamp) {}
 
-            @Override public void onLoop(double timestamp) {
-                /*
-                switch (periodic.state) {
-                    case INIT: {
-                        if (periodic.deliveryDetected) {
-                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
-                        }
-                        break;
-                    }
-                    case ONE_TO_THREE_BALLS: {
-                        if (periodic.indexDetected) {
-                            if (!indexBoolean.isStarted()) {
-                                indexBoolean.start();
-                            } else if (indexBoolean.getBoolean()) {
-                                periodic.state = SuperState.FOUR_BALLS;
-                            }
-                        } else {
-                            // Invalidate if it isn't true
-                            indexBoolean.stop();
-                        }
-                        break;
-                    }
-                    case FOUR_BALLS: {
-                        if (periodic.intakeDetected) {
-                            if (!intakeBoolean.isStarted()) {
-                                intakeBoolean.start();
-                            } else if (intakeBoolean.getBoolean()) {
-                                periodic.state = SuperState.FULL_SYSTEM;
-                            }
-                        } else {
-                            // Invalidate if it isn't true
-                            intakeBoolean.stop();
-                        }
-                        break;
-                    }
-                    case SHOOT: {
-                        if (!periodic.deliveryDetected) {
-                            periodic.state = SuperState.INIT;
-                        }
-                        break;
-                    }
-                    case DUMP_SYSTEM: case FULL_SYSTEM: default: break;
-                }
-                */
-                deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
-                indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-                ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
-                extensionArm.set(periodic.armExtension);
+        enabledLooper.register(new Loop() {
+            @Override
+            public void onStart(double timestamp) {
             }
 
-            @Override public void onStop(double timestamp) {}
+            @Override
+            public void onLoop(double timestamp) {
+                switch (periodic.state) {
+                case INIT: {
+                    if (periodic.deliveryDetected) {
+                        periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                    }
+                    break;
+                }
+                case ONE_TO_THREE_BALLS: {
+                    if (periodic.indexDetected) {
+                        if (!indexBoolean.isStarted()) {
+                            indexBoolean.start();
+                        } else if (indexBoolean.getBoolean()) {
+                            periodic.state = SuperState.FOUR_BALLS;
+                        }
+                    } else {
+                        // Invalidate if it isn't true
+                        indexBoolean.stop();
+                    }
+                    break;
+                }
+                case FOUR_BALLS: {
+                    if (periodic.intakeDetected) {
+                        periodic.state = SuperState.FULL_SYSTEM;
+                    }
+                    break;
+                }
+                case FULL_SYSTEM: {
+
+                    if (!periodic.intakeDetected) {
+                        periodic.state = SuperState.FOUR_BALLS;
+                    }
+
+                    break;
+                }
+                case SHOOT: {
+                    if (!periodic.deliveryDetected) {
+                        periodic.state = SuperState.INIT;
+                    }
+                    break;
+                }
+                case DUMP_SYSTEM:
+                default:
+                    break;
+                }
+            }
+
+            @Override
+            public void onStop(double timestamp) {
+            }
         });
     }
 
@@ -203,7 +215,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putBoolean("Superstructure/Intake_TOF", intakeDetected());
         SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
         SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW",  intakeSensor.getRange());
+        SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
     }
 
     public void shootBall() {
@@ -228,6 +240,8 @@ public class Superstructure extends Subsystem {
     public void reset() {
         periodic = new SuperIO();
 
+        shooterWheel.setInverted(true);
+        deliveryBelts.setInverted(true);
         deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         indexSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
@@ -245,7 +259,7 @@ public class Superstructure extends Subsystem {
     public void setDeliveryBeltsDemand(double demand) {
         periodic.deliveryBeltsDemand = demand;
     }
-    
+
     public void setDeliveryWheelDemand(double demand) {
         periodic.deliveryWheelDemand = demand;
     }

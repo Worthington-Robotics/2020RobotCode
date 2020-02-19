@@ -5,23 +5,13 @@ import frc.robot.subsystems.Shooter;
 
 public class TurretPIDControl extends Action {
 
-    private boolean automaticTarget = false;
-
-    public TurretPIDControl(boolean autoTarget) {
-        automaticTarget = autoTarget;
-    }
-
     /**
      * code to run on action start
      * 
      */
     @Override
     public void onStart() {
-        if (automaticTarget) {
-            //LIMELIGHT angle PID (to be Implemented)
-        } else {
-            Shooter.getInstance().setTurretRPM(0);
-        }
+        Shooter.getInstance().setTurretRPM(0);
     }
 
     /**
@@ -42,7 +32,7 @@ public class TurretPIDControl extends Action {
      */
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 
     /**
@@ -50,5 +40,6 @@ public class TurretPIDControl extends Action {
      */
     @Override
     public void onStop() {
+        Shooter.getInstance().setTurretDemand(0);
     }
 }
