@@ -86,7 +86,6 @@ public class Superstructure extends Subsystem {
      */
     @Override
     public synchronized void readPeriodicInputs() {
-        
         if (Constants.DEBUG) {
             THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD",
                     THRESHOLD_DELIVERY);
@@ -327,6 +326,10 @@ public class Superstructure extends Subsystem {
     }
 
     public enum SuperState {
-         INIT, ONE_TO_THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+        INIT, ONE_TO_THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
 }
