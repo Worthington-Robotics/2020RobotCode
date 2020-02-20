@@ -115,20 +115,17 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
-        if (periodic.TransState == DoubleSolenoid.Value.kForward) {
+        if (periodic.TransState) {
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK_SHIFTED);
-            periodic.isShifted = true;
         } else {
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
-            
-            periodic.isShifted = false;
         }
 
         periodic.AnglePIDError = anglePID.getError();
         periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
 
-        periodic.left_error = driveFrontLeft.getClosedLoopError();
-        periodic.right_error = driveFrontRight.getClosedLoopError();
+        //periodic.left_error = driveFrontLeft.getClosedLoopError();
+        //periodic.right_error = driveFrontRight.getClosedLoopError();
 
         periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity();
         periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity();
@@ -165,7 +162,7 @@ public class Drive extends Subsystem {
             driveFrontLeft.set(ControlMode.Velocity, periodic.left_demand);
             driveFrontRight.set(ControlMode.Velocity, periodic.right_demand);
         }
-        trans.set(periodic.TransState);
+        trans.set(periodic.TransState? Value.kForward : Value.kReverse);
     }
 
     private Drive() {
@@ -194,7 +191,7 @@ public class Drive extends Subsystem {
     }
 
     public void setTrans(boolean state) {
-        periodic.TransState = state? Value.kForward : Value.kReverse;
+        periodic.TransState = state;
     }
 
     public synchronized Rotation2d getHeading() {
@@ -433,24 +430,22 @@ public class Drive extends Subsystem {
 
         SmartDashboard.putString("Drive/Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
-        SmartDashboard.putBoolean("Drive/Shift", periodic.isShifted);
+        SmartDashboard.putBoolean("Drive/Shift", periodic.TransState);
         SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
         SmartDashboard.putNumber("Drive/Error/Y", periodic.error.y());
-
-        SmartDashboard.putNumber("Drive/Theta/Error", periodic.AnglePIDError);
 
         SmartDashboard.putNumber("Drive/Left/Current", periodic.leftCurrent);
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
-        SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
-        SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
+        //SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
+        //SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
 
         SmartDashboard.putNumber("Drive/Right/Current", periodic.rightCurrent);
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
-        SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
-        SmartDashboard.putNumber("Drive/Right/Talon Voltage Out", driveFrontRight.getMotorOutputVoltage());
+        //SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
+        //SmartDashboard.putNumber("Drive/Right/Talon Voltage Out", driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Right/Encoder Counts", periodic.right_pos_ticks);
         
         if (Constants.DEBUG) {
@@ -469,14 +464,13 @@ public class Drive extends Subsystem {
 
     public class DriveIO extends PeriodicIO {
         // INPUTS
-        public boolean isShifted = false;
         public double left_pos_ticks = 0;
-        public double left_error = 0;
+        //public double left_error = 0;
         public double left_velocity_ticks_per_100ms = 0;
         public double leftCurrent = 0;
 
         public double right_pos_ticks = 0;
-        public double right_error = 0;
+        //public double right_error = 0;
         public double right_velocity_ticks_per_100ms = 0;
         public double rightCurrent = 0;
 
@@ -491,19 +485,19 @@ public class Drive extends Subsystem {
         public double PIDOutput = 0;
 
         // Smartdashboard Settings
-        public double PIDDUpdate = 0;
-        public double PIDPUpdate = 0;
-        public boolean savePIDSettings = false;
+        private double PIDDUpdate = 0;
+        private double PIDPUpdate = 0;
+        private boolean savePIDSettings = false;
 
         // OUTPUTS
         public double ramp_Up_Counter = 0;
-        public DoubleSolenoid.Value TransState = Value.kReverse;
+        public boolean TransState = false;
 
-        public double left_accl = 0.0;
+        //public double left_accl = 0.0;
         public double left_demand = 0.0;
         public double left_distance = 0.0;
 
-        public double right_accl = 0.0;
+        //public double right_accl = 0.0;
         public double right_demand = 0.0;
         public double right_distance = 0.0;
 
