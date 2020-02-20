@@ -16,22 +16,15 @@ public class DriveTra extends Action {
         Drive.getInstance().followPath(mPath, mReversed);
     }
 
-    @Override
-    public void onLoop() {
-        // TODO Auto-generated method stub
-
-    }
+    @Override public void onLoop() {}
 
     @Override
     public boolean isFinished() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public void onStop() {
-
-    }
+    public void onStop() {}
 
     
 }

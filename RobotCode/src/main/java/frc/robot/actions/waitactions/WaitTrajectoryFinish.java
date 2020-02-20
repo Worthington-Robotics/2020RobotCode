@@ -1,9 +1,9 @@
-package frc.robot.actions.driveactions;
+package frc.robot.actions.waitactions;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Drive;
 
-public class WaitForPathFinish extends Action {
+public class WaitTrajectoryFinish extends Action {
     @Override public void onStart() {}
 
     @Override public void onLoop() {}
