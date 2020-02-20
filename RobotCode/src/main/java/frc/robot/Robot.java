@@ -36,7 +36,8 @@ public class Robot extends TimedRobot {
     private SubsystemManager manager  = new SubsystemManager(Arrays.asList(
         //register subsystems here
 
-        ColorWheel.getInstance()
+        ColorWheel.getInstance(),
+        Music.getInstance()
     ), true);;
     private Looper enabledLooper, disabledLooper;
 
@@ -79,7 +80,7 @@ public class Robot extends TimedRobot {
         unfoldClimb.whenPressed(Action.toCommand(new UnfoldAction()));
         climbDown.whenPressed(Action.toCommand(new ClimbDownAction()));
         climbUp.whenPressed(Action.toCommand(new ClimbUpAction()));
-        playMusic.whileHeld(Action.toCommand(new PlayMusic()));
+        playMusic.toggleWhenPressed(Action.toCommand(new PlayMusic()));
     }
 
     /**

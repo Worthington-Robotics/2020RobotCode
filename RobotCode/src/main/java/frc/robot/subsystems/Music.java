@@ -7,27 +7,29 @@ import frc.robot.Constants;
 
 import java.util.ArrayList;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class Music extends Subsystem {
 
     private Orchestra orchestra;
     private MusicIO periodic;
     private TalonFX[] fxs = {
-        new TalonFX(0),
         new TalonFX(1),
         new TalonFX(2),
-        new TalonFX(13),
-        new TalonFX(14),
-        new TalonFX(15)
+        new TalonFX(5),
+        new TalonFX(6)
     };
 
     public Music() {
         ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
         for(int i = 0; i < fxs.length; i++) {
             _instruments.add(fxs[i]);
+            fxs[i].set(ControlMode.MusicTone, 200000000);
         }
         orchestra = new Orchestra(_instruments);
+        periodic = new MusicIO();
     }
 
     private static Music m_musicInstance = new Music();
@@ -37,7 +39,7 @@ public class Music extends Subsystem {
     }
 
     public String[] music = {
-        "spanishFlea.chrp"
+        "mega.chrp"
     };
 
     public void addMusic(String song) {
@@ -56,7 +58,7 @@ public class Music extends Subsystem {
             orchestra.play();
         }
         else {
-            orchestra.stop();
+            //orchestra.stop();
         }
     }
 
@@ -72,7 +74,7 @@ public class Music extends Subsystem {
 
     @Override
     public void reset() {
-        // TODO Auto-generated method stub
+        
 
     }
 

@@ -7,7 +7,7 @@ public class PlayMusic extends Action {
 
     @Override
     public void onStart() {
-        Music.getInstance().addMusic(Music.getInstance().music[0]);
+        Music.getInstance().addMusic("spanishFlea.chrp");
         Music.getInstance().setIsEnabled(true);
     }
 
