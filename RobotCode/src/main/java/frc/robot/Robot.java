@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
 
         // create buttons and register actions
-        recenter.whileHeld(Action.toCommand(new Recenter()));
+        recenter.whileHeld(Action.toCommand(new Recenter(0)));
         turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
         flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));
@@ -96,10 +96,10 @@ public class Robot extends TimedRobot {
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
         shootOne.whenPressed(Action.toCommand(new ShootAction()));
-        deliveryWheel.whileHeld(Action.toCommand(new DeliveryWheelAction()));
-        indexerOut.whileHeld(Action.toCommand(new IndexBeltAction(true)));
+        //deliveryWheel.whileHeld(Action.toCommand(new DeliveryWheelAction()));
+        //indexerOut.whileHeld(Action.toCommand(new IndexBeltAction(true)));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
-        indexer.whileHeld(Action.toCommand(new IndexBeltAction(false)));
+        //indexer.whileHeld(Action.toCommand(new IndexBeltAction(false)));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));

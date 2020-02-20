@@ -82,8 +82,8 @@ public class Constants {
     public static double VOLTAGE_COMP_TURRET = 11.5;
 
     //Turret Encoder Limits
-    public static final int leftTurretLimit = -7000;
-    public static final int rightTurretLimit = 7000;
+    public static final int leftTurretLimit = -8000;
+    public static final int rightTurretLimit = 8000;
 
     /**
      *   Drivetrain tuned values ------------------------------
@@ -112,7 +112,7 @@ public class Constants {
 
     //Electrical Constants
     public static final double DRIVE_VCOMP = 10.0; //V
-    public static final double DRIVE_ENCODER_PPR = 14850; //Empir
+    public static final double DRIVE_ENCODER_PPR = 33261.61; //Empir
 
     //PID Constants
     public static final double ANGLE_KP = -0.024; // 0.065;
@@ -179,8 +179,8 @@ public class Constants {
     // Time (in seconds)
     public static final double TIME_TILL_STATIONARY = 1.1;
     // Pulse constants (in seconds)
-    public static final double PULSE_LENGTH = 2;
-    public static final double PULSE_COOLDOWN = 2;
+    public static final double PULSE_LENGTH = .75;
+    public static final double PULSE_COOLDOWN = .25;
     
     /**
      * Climber constants

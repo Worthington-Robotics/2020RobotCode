@@ -2,20 +2,22 @@ package frc.robot.actions.climberactions;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Shooter;
 
 
 public class FolderToggleAction extends Action {
     @Override
     public void onStart() {
         if (Climber.getInstance().readyToUnfold) {
-            Climber.getInstance().setUnfold(true);
+            Shooter.getInstance().setTurretCenter(90);
         }
-        //System.out.println("Climb is unfolding.");
+        
     }
 
     @Override
     public void onLoop() {
-
+        Shooter.getInstance().setTurretDemand(0);
+        Climber.getInstance().setUnfold(true);
     }
 
     @Override
@@ -27,6 +29,7 @@ public class FolderToggleAction extends Action {
     @Override
     public void onStop() {
         if (Climber.getInstance().readyToFold) {
+            Shooter.getInstance().setTurretCenter(90);
             Climber.getInstance().setUnfold(false);
         }
     }
