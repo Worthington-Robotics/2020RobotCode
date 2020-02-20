@@ -1,39 +1,62 @@
 package frc.robot.actions.waitactions;
 
 import frc.lib.statemachine.Action;
-//import frc.robot.subsystems.PoseEstimator;
+import frc.robot.subsystems.PoseEstimator;
 
 public class WaitLineCross extends Action {
-    private boolean isX, end;
-    private double mCoord;
+    private double lineValue;
+    private Axis axis;
 
-    public WaitLineCross(double coord, boolean isX) {
-        mCoord = coord;
-        this.isX = isX;
-        end = false;
+    private boolean pastLine;
+    private boolean backwardsCross;
+
+    public WaitLineCross(double lineValue, Axis axis, boolean backwardsCross) {
+        this.lineValue = lineValue;
+        this.axis = axis;
+
+        pastLine = false;
+        this.backwardsCross = backwardsCross;
     }
 
-    public void onStart() {
+    @Override public void onStart() {}
 
+    @Override public void onLoop() {
+        double threshold;
+
+        switch (axis) {
+            case X:
+                threshold = getCurrentX();
+                break;
+            case Y:
+                threshold = getCurrentY();
+                break;
+            default:
+                throw new IllegalStateException();
+        }
+
+        if (backwardsCross ? lineValue < threshold : lineValue > threshold) {
+            pastLine = true;
+        }
     }
 
-    public void onLoop() {
-        /*if (isX) {
-            if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x()) {
-                end = true;
-            }
-        } else {
-            if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().y()) {
-                end = true;
-            }
-        }*/
+    @Override public boolean isFinished() {
+        return pastLine;
     }
 
-    public boolean isFinished() {
-        return end;
+    @Override public void onStop() {}
+
+    private double getCurrentX() {
+        return PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x();
     }
 
-    public void onStop() {
+    private double getCurrentY() {
+        return PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().y();
+    }
 
+    /**
+     * Determines which axis line values are for. Probably should go in a separate class.
+     */
+    public enum Axis {
+        X, Y
     }
 }
