@@ -196,11 +196,10 @@ public class Superstructure extends Subsystem {
             default:
             
         }
-
-        DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
-        DemandUtil.setDemand(periodic.deliveryWheelDemand, deliveryWheel);
-        DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
-        DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
+        deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+        deliveryWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+        indexTopBelt.set(ControlMode.PercentOutput, periodic.indexTopBeltDemand);
+        intakeWheels.set(ControlMode.PercentOutput, periodic.intakeWheelsDemand);
         extensionArm.set(periodic.armExtension);
         periodic.currState =  periodic.state.ordinal();
     }
