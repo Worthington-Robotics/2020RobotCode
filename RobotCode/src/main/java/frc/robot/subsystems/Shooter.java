@@ -17,6 +17,7 @@ import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
+    private double[] tangent;
     private static Shooter m_Shooter = new Shooter();
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.DISABLED;
@@ -40,6 +41,10 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.setInverted(true);
         leftFlywheelFalcon.setInverted(false);
         turretControl.configContinuousCurrentLimit(10);
+        tangent = new double[181];
+        for(int i = 0; i <= 180; i++) {
+            tangent[i] = Math.tan(Math.toRadians((double) i / 2));
+        }
         reset();
     }
 
@@ -72,6 +77,11 @@ public class Shooter extends Subsystem {
         periodic.targetY = ty.getDouble(0.0);
         periodic.RPMClosedLoopError = rightFlywheelFalcon.getClosedLoopError();
         periodic.rotationsClosedLoopError = turretControl.getClosedLoopError();
+        if(turretControl.getSelectedSensorPosition() >= 6000) {
+            periodic.canUnfold = true;
+        } else {
+            periodic.canUnfold = false;
+        }
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -156,7 +166,7 @@ public class Shooter extends Subsystem {
             turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
         case RECENTER_MODE:
-            turretControl.set(ControlMode.Position, 0);
+            turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
         default:
             turretControl.set(ControlMode.Disabled, 0);
@@ -183,6 +193,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
         SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
         SmartDashboard.putNumber("Shooter/Flywheel/RPM", TicksPer100msToRPM(periodic.flywheelVelocity));
+        SmartDashboard.putBoolean("Shooter/Turret/Can Unfold", periodic.canUnfold);
     }
 
     public void configLimelight() {
@@ -208,11 +219,13 @@ public class Shooter extends Subsystem {
         turretControl.setSensorPhase(true);
         turretControl.configMotionAcceleration((int)degreesToTicks(90));
         turretControl.configMotionCruiseVelocity((int)degreesToTicks(90));
+
         rightFlywheelFalcon.config_kP(0, Constants.TURRET_RIGHT_FLY_KP);
         rightFlywheelFalcon.config_kD(0, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         rightFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
         rightFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
+        
         leftFlywheelFalcon.config_kP(0, Constants.TURRET_LEFT_FLY_KP);
         leftFlywheelFalcon.config_kD(0, Constants.TURRET_LEFT_FLY_KD);
         leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -292,9 +305,10 @@ public class Shooter extends Subsystem {
         turretControl.set(ControlMode.Velocity, demand);
     }
 
-    public void setTurretCenter() {
+    public void setTurretCenter(double angle) {
         if (turretMode != MotorControlMode.RECENTER_MODE)
             turretMode = MotorControlMode.RECENTER_MODE;
+        periodic.turretDemand = degreesToTicks(angle);
     }
 
     public void setFlywheelDemand(double newDemand) {
@@ -342,7 +356,10 @@ public class Shooter extends Subsystem {
         // Equation that takes in ta (See Limelight Docs) and outputs distance from
         // target in inches
         // TODO need to test data points based on actual bot
-        return (98.5-Constants.LIMELIGHT_HIGHT) / Math.tan(Math.toRadians(Constants.LIMELIGHT_PITCH + periodic.targetY));
+        if(periodic.targetY == 0.0) {
+            return 0.0;
+        }
+        return (98.5-Constants.LIMELIGHT_HIGHT) / tangent[(int) ((Constants.LIMELIGHT_PITCH + periodic.targetY) * 2)];
     }
 
     public double limelightGoalAngle() {
@@ -354,6 +371,10 @@ public class Shooter extends Subsystem {
             goal = Constants.rightTurretLimit;
         }
         return goal;
+    }
+
+    public boolean canUnfold() {
+        return periodic.canUnfold;
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
@@ -374,5 +395,6 @@ public class Shooter extends Subsystem {
         public double flywheelVelocity = 0;
         public double flywheelClosedLoopError = 0;
         public double turretAmps = 0.0;
+        public boolean canUnfold = false;
     }
 }

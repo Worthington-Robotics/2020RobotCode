@@ -4,12 +4,17 @@ import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
 public class Recenter extends Action {
+    private double angle = 0;
+    public Recenter(double angle)
+    {
+        this.angle = angle;
+    }
     /**
      * code to run on action start
      */
     @Override
     public void onStart() {
-            Shooter.getInstance().setTurretCenter();
+            Shooter.getInstance().setTurretCenter(angle);
     }
 
     /**
