@@ -303,16 +303,6 @@ public class Shooter extends Subsystem {
             turretMode = MotorControlMode.RECENTER_MODE;
     }
 
-    public void setTurret45Left() {
-        if (turretMode != MotorControlMode.LEFT45_MODE)
-            turretMode = MotorControlMode.LEFT45_MODE;
-    }
-    
-    public void setTurret45Right() {
-        if (turretMode != MotorControlMode.RIGHT45_MODE)
-            turretMode = MotorControlMode.RIGHT45_MODE;
-    }
-
     public void setFlywheelDemand(double newDemand) {
         if (flywheelMode != MotorControlMode.OPEN_LOOP)
             flywheelMode = MotorControlMode.OPEN_LOOP;
