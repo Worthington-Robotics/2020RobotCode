@@ -17,7 +17,6 @@ import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
-
     private static Shooter m_Shooter = new Shooter();
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.DISABLED;
@@ -28,6 +27,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry tx = table.getEntry("tx");
     private NetworkTableEntry ty = table.getEntry("ty");
     private NetworkTableEntry ta = table.getEntry("ta");
+    private NetworkTableEntry tv = table.getEntry("tv");
     private NetworkTableEntry camtran = table.getEntry("camtran");
     private double[] angleToDistance;
 
@@ -41,10 +41,6 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.setInverted(true);
         leftFlywheelFalcon.setInverted(false);
         turretControl.configContinuousCurrentLimit(10);
-        angleToDistance = new double[181];
-        for(int i = 0; i <= 180; i++) {
-            angleToDistance[i] = Math.tan(Math.toRadians((double)i/2));
-        }
         reset();
     }
 
@@ -65,6 +61,7 @@ public class Shooter extends Subsystem {
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
         periodic.operatorInput = Constants.SECOND.getPOV();
+        periodic.turretAmps = turretControl.getStatorCurrent();
         periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0); // Makes all
                                                                                                         // values
                                                                                                         // positive with
@@ -72,6 +69,7 @@ public class Shooter extends Subsystem {
                                                                                                         // and 1 being 1
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0);
+        periodic.targetV = tv.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
         periodic.RPMClosedLoopError = rightFlywheelFalcon.getClosedLoopError();
         periodic.rotationsClosedLoopError = turretControl.getClosedLoopError();
@@ -159,7 +157,7 @@ public class Shooter extends Subsystem {
             turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
         case RECENTER_MODE:
-            turretControl.set(ControlMode.MotionMagic, 0);
+            turretControl.set(ControlMode.Position, 0);
             break;
         case LEFT45_MODE:
             turretControl.set(ControlMode.MotionMagic, Constants.leftTurretLimit / 2);
@@ -177,6 +175,8 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void outputTelemetry() {
+        SmartDashboard.putNumber("Shooter/Turret/Amps", periodic.turretAmps);
+        SmartDashboard.putBoolean("Shooter/Turret/OnTarget", Math.abs(periodic.targetX) < 2 && periodic.targetV == 1);
         SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
         SmartDashboard.putNumber("Shooter/Turret/Range (in)", limelightRanging());
         SmartDashboard.putNumber("Shooter/Turret/EncoderGoal", limelightGoalAngle());
@@ -204,11 +204,12 @@ public class Shooter extends Subsystem {
 
     public void configTalons() {
         turretControl.config_kP(0, Constants.TURRET_ANGLE_KP);
-        turretControl.config_kI(0, 0);
+        turretControl.config_kI(0, 0.0023);
         turretControl.config_kD(0, Constants.TURRET_ANGLE_KD);
+        turretControl.configMaxIntegralAccumulator(0, 10);
         turretControl.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         turretControl.setSelectedSensorPosition(0);
-        turretControl.configContinuousCurrentLimit(5);
+        turretControl.configContinuousCurrentLimit(15);
         turretControl.setInverted(true);
         turretControl.setSensorPhase(true);
         turretControl.configMotionAcceleration((int)degreesToTicks(90));
@@ -360,14 +361,6 @@ public class Shooter extends Subsystem {
         return (98.5-Constants.LIMELIGHT_HIGHT) / Math.tan(Math.toRadians(Constants.LIMELIGHT_PITCH + periodic.targetY));
     }
 
-    public double[] getAngleToDistance() {
-        return angleToDistance;
-    }
-
-    public double limelightRanging(double angle) {
-        return (98.5-Constants.LIMELIGHT_HIGHT) / angleToDistance[(int) (angle*2)];
-    }
-
     public double limelightGoalAngle() {
         double goal = degreesToTicks(periodic.targetX) + periodic.turretEncoder;
         if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
@@ -382,6 +375,7 @@ public class Shooter extends Subsystem {
     public class ShooterIO extends Subsystem.PeriodicIO {
         public double targetX = 0.0;
         public double targetY = 0.0;
+        public double targetV = 0.0;
         public double targetArea = 0.0;
         public double flywheelDemand = 0.0;
         public double flywheelRPM = 0.0;
@@ -395,5 +389,6 @@ public class Shooter extends Subsystem {
         public double operatorFlywheelInput = 0;
         public double flywheelVelocity = 0;
         public double flywheelClosedLoopError = 0;
+        public double turretAmps = 0.0;
     }
 }

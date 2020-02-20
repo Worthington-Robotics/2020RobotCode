@@ -81,6 +81,10 @@ public class Constants {
 
     public static double VOLTAGE_COMP_TURRET = 11.5;
 
+    //Turret Encoder Limits
+    public static final int leftTurretLimit = -7000;
+    public static final int rightTurretLimit = 7000;
+
     /**
      *   Drivetrain tuned values ------------------------------
      */
@@ -108,7 +112,7 @@ public class Constants {
 
     //Electrical Constants
     public static final double DRIVE_VCOMP = 10.0; //V
-    public static final double DRIVE_ENCODER_PPR = 4096.0 * 3.68; //encoder counts per revolution * gear ratio
+    public static final double DRIVE_ENCODER_PPR = 14850; //Empir
 
     //PID Constants
     public static final double ANGLE_KP = -0.024; // 0.065;
@@ -164,22 +168,23 @@ public class Constants {
      */
     
     // Demands
-    public static final double FULL_BELT_DEMAND = .75;
+    public static final double FULL_BELT_DEMAND = .5;
     public static final double INDEXER_DEMAND = .33;
     
     public static final double INTAKE_DEMAND = .75;
-    public static final double HIGH_BELT_DEMAND = 1;
+    public static final double HIGH_BELT_DEMAND = 1.15;
     public static final double STOP_BELT_DEMAND = 0;
-    // Sensor distance before stop (in mm)
+    // Sensor distance before stopping (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;
-    public static final double TIME_TILL_STATIONARY = .5; //s
-    //Turret Encoder Limits
-    public static final int leftTurretLimit = -7000;
-    public static final int rightTurretLimit = 7000;
-
-    //Climber Constants
+    // Time (in seconds)
+    public static final double TIME_TILL_STATIONARY = 1.1;
+    // Pulse constants (in seconds)
+    public static final double PULSE_LENGTH = 2;
+    public static final double PULSE_COOLDOWN = 2;
+    
+    /**
+     * Climber constants
+     */
     public static final double CLIMBER_SHOOTER_REQMT = 90;
     public static final double CLIMBER_EPSILON_CONST = 10;
-
-
 }
