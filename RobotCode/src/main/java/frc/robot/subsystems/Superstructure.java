@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
@@ -184,11 +185,10 @@ public class Superstructure extends Subsystem {
                 }
                 */
                 deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-                
+                shooterWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
                 indexTopBelt.set(ControlMode.PercentOutput, periodic.indexBeltDemand);
-                
                 ballsIntake.set(ControlMode.PercentOutput, periodic.intakeDemand);
+                extensionArm.set(periodic.armExtension);
             }
 
             @Override public void onStop(double timestamp) {}
@@ -271,6 +271,16 @@ public class Superstructure extends Subsystem {
         return periodic.intakeDetected;
     }
 
+    public boolean getIntakeDown() {
+        if (extensionArm.get() == Value.kForward) {
+            return true;
+        } else if (extensionArm.get() == Value.kReverse) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
     public LogData getLogger() {
         return periodic;
     }
@@ -284,7 +294,7 @@ public class Superstructure extends Subsystem {
         public double deliveryBeltsDemand;
         // Intake Data
         public double intakeDemand;
-        public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kOff;
+        public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
         // Sensor Booleans
         public boolean deliveryDetected;
         public boolean indexDetected;
