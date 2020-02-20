@@ -9,7 +9,7 @@ public class Shift extends Action {
     @Override
     public void onStart() {
         //System.out.print("Shift Engaged");
-        Drive.getInstance().setTrans(Value.kForward);
+        Drive.getInstance().setTrans(true);
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Shift extends Action {
 
     @Override
     public void onStop() {
-        Drive.getInstance().setTrans(Value.kReverse);
+        Drive.getInstance().setTrans(false);
     }
 }

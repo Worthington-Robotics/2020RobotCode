@@ -61,12 +61,12 @@ public class Drive extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-                if (periodic.inverse) {
-                    periodic.operatorInput[1] *= -1;
-                }
                 synchronized (Drive.this) {
                     if (Constants.ENABLE_MP_TEST_MODE && DriverStation.getInstance().isTest()) {
                         mDriveControlState = DriveControlState.PROFILING_TEST;
+                    }
+                    if (periodic.inverse) {
+                        periodic.operatorInput[1] *= -1;
                     }
                     switch (mDriveControlState) {
                     case PATH_FOLLOWING:
@@ -146,10 +146,12 @@ public class Drive extends Subsystem {
         periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
         periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
 
-        periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
-        periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
-        periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
-
+        if (Constants.DEBUG) {
+            periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
+            periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
+            periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);    
+        }
+        
     }
 
     @Override
@@ -157,16 +159,13 @@ public class Drive extends Subsystem {
         // System.out.println(mDriveControlState);
         if (mDriveControlState == DriveControlState.OPEN_LOOP || mDriveControlState == DriveControlState.ANGLE_PID
                 || (mDriveControlState == DriveControlState.PROFILING_TEST && Constants.RAMPUP)) {
-            // sets robot to desired gear
-            trans.set(periodic.TransState);
             driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
             driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand);
         } else {
-            // sets robot to low gear
-            trans.set(Value.kReverse);
             driveFrontLeft.set(ControlMode.Velocity, periodic.left_demand);
             driveFrontRight.set(ControlMode.Velocity, periodic.right_demand);
         }
+        trans.set(periodic.TransState);
     }
 
     private Drive() {
@@ -182,18 +181,20 @@ public class Drive extends Subsystem {
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
-        SmartDashboard.putNumber("D Slider", 0);
-        SmartDashboard.putNumber("P Slider", 0);
-        SmartDashboard.putBoolean("Save Changes", false);
-
+        if (Constants.DEBUG) {
+            SmartDashboard.putNumber("D Slider", 0);
+            SmartDashboard.putNumber("P Slider", 0);
+            SmartDashboard.putBoolean("Save Changes", false);    
+        }
+        
     }
 
     public PIDF getAnglePID() {
         return anglePID;
     }
 
-    public void setTrans(DoubleSolenoid.Value state) {
-        periodic.TransState = state;
+    public void setTrans(boolean state) {
+        periodic.TransState = state? Value.kForward : Value.kReverse;
     }
 
     public synchronized Rotation2d getHeading() {
@@ -425,10 +426,8 @@ public class Drive extends Subsystem {
         // SmartDashboard.putNumber("Drive/Gyro/CurAngle",
         // periodic.gyro_heading.getDegrees());
         SmartDashboard.putBoolean("isInverse", periodic.inverse);
-        SmartDashboard.putNumber("Drive/Gyro/Demand", periodic.PIDOutput);
 
-        SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
-        SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
+        
         SmartDashboard.putNumber("Drive/AnglePID/Set Point", periodic.gyro_pid_angle);
         SmartDashboard.putNumber("Drive/AnglePID/Error", periodic.AnglePIDError);
 
@@ -453,6 +452,11 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
         SmartDashboard.putNumber("Drive/Right/Talon Voltage Out", driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Right/Encoder Counts", periodic.right_pos_ticks);
+        
+        if (Constants.DEBUG) {
+            SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
+            SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
+        }
     }
 
     enum DriveControlState {

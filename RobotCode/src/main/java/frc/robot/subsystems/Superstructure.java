@@ -258,8 +258,8 @@ public class Superstructure extends Subsystem {
     }
 
     // Setters
-    public void setArmExtension(DoubleSolenoid.Value armExtension) {
-        periodic.armExtension = armExtension;
+    public void setArmExtension(boolean armExtension) {
+        periodic.armExtension = armExtension? Value.kForward : Value.kReverse;
     }
 
     public void setIndexBeltDemand(double indexBeltDemand) {
