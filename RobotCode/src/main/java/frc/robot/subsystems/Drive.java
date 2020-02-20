@@ -23,8 +23,6 @@ import frc.lib.geometry.Translation2d;
 import frc.lib.geometry.Twist2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.trajectory.TrajectoryIterator;
-import frc.lib.trajectory.timing.TimedState;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;

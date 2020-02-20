@@ -17,8 +17,8 @@ public class SystemsCheck extends StateMachineDescriptor {
             new DeliveryWheelAction()
         }, 1000);
         addSequential(new SetFlywheel5000RPM(), 2000);
-        addSequential(new Recenter(), 1000);
-        addSequential(new FaceLeft45Deg(), 1000);
-        addSequential(new FaceRight45Deg(), 1000);
+        addSequential(new Recenter(0), 1000);
+        addSequential(new Recenter(-45), 1000);
+        addSequential(new Recenter(45), 1000);
     }
 }

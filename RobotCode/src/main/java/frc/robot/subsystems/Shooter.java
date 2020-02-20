@@ -30,7 +30,6 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry ta = table.getEntry("ta");
     private NetworkTableEntry tv = table.getEntry("tv");
     private NetworkTableEntry camtran = table.getEntry("camtran");
-    private double[] angleToDistance;
 
     private Shooter() {
         SmartDashboard.putNumber("Shooter/Turret/P", 0);
@@ -169,11 +168,6 @@ public class Shooter extends Subsystem {
         case RECENTER_MODE:
             turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
-        case LEFT45_MODE:
-            turretControl.set(ControlMode.MotionMagic, Constants.leftTurretLimit / 2);
-            break;
-        case RIGHT45_MODE:
-            turretControl.set(ControlMode.MotionMagic, Constants.rightTurretLimit / 2);
         default:
             turretControl.set(ControlMode.Disabled, 0);
             break;
