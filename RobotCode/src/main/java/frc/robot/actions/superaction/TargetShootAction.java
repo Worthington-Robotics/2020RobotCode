@@ -4,9 +4,11 @@ import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Superstructure;
 
-public class AutoShootAction extends Action {
+public class TargetShootAction extends Action {
     private Shooter shooter;
     private Superstructure superstructure;
+
+    boolean hasShot;
 
     /**
      * Code to run on action start.
@@ -14,6 +16,8 @@ public class AutoShootAction extends Action {
     @Override public void onStart() {
         shooter = Shooter.getInstance();
         superstructure = Superstructure.getInstance();
+
+        hasShot = false;
     }
 
     /**
@@ -23,6 +27,7 @@ public class AutoShootAction extends Action {
     @Override public void onLoop() {
         if (shooter.isTurretOnTarget()) {
             superstructure.shootBall();
+            hasShot = true;
         }
     }
 
@@ -32,13 +37,11 @@ public class AutoShootAction extends Action {
      * @return true action is ready to self terminate
      */
     @Override public boolean isFinished() {
-        return false;
+        return hasShot;
     }
 
     /**
      * Code to run when the action has been called by the state machine to stop.
      */
-    @Override public void onStop() {
-
-    }
+    @Override public void onStop() {}
 }
