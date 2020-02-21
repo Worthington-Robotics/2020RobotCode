@@ -180,7 +180,7 @@ public class Shooter extends Subsystem {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putNumber("Shooter/Turret/Amps", periodic.turretAmps);
-        SmartDashboard.putBoolean("Shooter/Turret/OnTarget", Math.abs(periodic.targetX) < 2 && periodic.targetV == 1);
+        SmartDashboard.putBoolean("Shooter/Turret/OnTarget", isTurretOnTarget());
         SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
         SmartDashboard.putNumber("Shooter/Turret/Range (in)", limelightRanging());
         SmartDashboard.putNumber("Shooter/Turret/EncoderGoal", limelightGoalAngle());
@@ -333,6 +333,10 @@ public class Shooter extends Subsystem {
 
     public double getRPMClosedLoopError() {
         return periodic.RPMClosedLoopError;
+    }
+
+    public boolean isTurretOnTarget() {
+        return Math.abs(periodic.targetX) < 2 && periodic.targetV == 1;
     }
 
     public Subsystem.PeriodicIO getLogger() {

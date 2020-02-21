@@ -5,15 +5,17 @@ import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Drive;
 
 public class DriveTra extends Action {
-    private Path mPath;
-    private boolean mReversed;
+    private Path path;
+    private boolean reversed;
+
     public DriveTra(Path path, boolean reversed) {
-        mPath = path;
-        mReversed = reversed;
+        this.path = path;
+        this.reversed = reversed;
     }
+
     @Override
     public void onStart() {
-        Drive.getInstance().followPath(mPath, mReversed);
+        Drive.getInstance().followPath(path, reversed);
     }
 
     @Override public void onLoop() {}
@@ -23,8 +25,5 @@ public class DriveTra extends Action {
         return false;
     }
 
-    @Override
-    public void onStop() {}
-
-    
+    @Override public void onStop() {}
 }

@@ -3,9 +3,9 @@ package frc.robot.actions.shooteraction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class Recenter extends Action {
+public class CenterTurret extends Action {
     private double angle = 0;
-    public Recenter(double angle)
+    public CenterTurret(double angle)
     {
         this.angle = angle;
     }

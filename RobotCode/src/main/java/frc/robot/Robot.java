@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
 
         // create buttons and register actions
-        recenter.whileHeld(Action.toCommand(new Recenter(0)));
+        recenter.whileHeld(Action.toCommand(new CenterTurret(0)));
         turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
         flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID(false)));

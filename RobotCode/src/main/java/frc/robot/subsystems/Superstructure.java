@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -42,6 +41,7 @@ public class Superstructure extends Subsystem {
     private double THRESHOLD_DELIVERY = 75;
     private double THRESHOLD_INDEXER = 100;
     private double THRESHOLD_INTAKE = 75;
+
     private double distanceDelivery;
     private double distanceIndexer;
     private double distanceIntake;
@@ -141,7 +141,7 @@ public class Superstructure extends Subsystem {
         DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
         DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
         extensionArm.set(periodic.armExtension);
-        periodic.currState =  periodic.state.ordinal();
+        periodic.stateInt = periodic.state.ordinal();
     }
 
     @Override
@@ -312,7 +312,7 @@ public class Superstructure extends Subsystem {
     public class SuperIO extends Subsystem.PeriodicIO {
         // Current State
         private SuperState state = SuperState.DISABLED;
-        public int currState =  state.ordinal();
+        public int stateInt = state.ordinal();
         // Indexer Data
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;
