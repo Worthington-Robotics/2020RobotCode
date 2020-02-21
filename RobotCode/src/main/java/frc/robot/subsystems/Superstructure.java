@@ -27,7 +27,6 @@ public class Superstructure extends Subsystem {
     private TalonSRX deliveryWheel;
     private TalonSRX deliveryBelts;
     private TalonSRX indexTopBelt;
-    private TalonSRX indexBottomBelt;
 
     // Intake
     private TalonSRX intakeWheels;
@@ -100,7 +99,7 @@ public class Superstructure extends Subsystem {
             distanceIndexer = indexSensor.getRange();
             distanceIntake = intakeSensor.getRange();
         }
-
+        periodic.indexBeltAmps = indexTopBelt.getSupplyCurrent();
         periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >= distanceDelivery;
         periodic.indexDetected = distanceIndexer != 0 && THRESHOLD_INDEXER >= distanceIndexer;
         periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
@@ -114,7 +113,8 @@ public class Superstructure extends Subsystem {
             break;
         case ONE_TO_THREE_BALLS:
             pulseIndexDemand();
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = STOP_BELT_DEMAND;
+            periodic.deliveryBeltsDemand = FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = STOP_BELT_DEMAND;
             break;
         case FOUR_BALLS:
             periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
@@ -127,7 +127,8 @@ public class Superstructure extends Subsystem {
             periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
             break;
         case DUMP_SYSTEM:
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -1 * FULL_BELT_DEMAND;
+            periodic.intakeWheelsDemand = -1 * Constants.INTAKE_DEMAND; 
             break;
         default:
 
@@ -213,6 +214,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
+        SmartDashboard.putNumber("Superstructure/INDEX_AMPS", periodic.indexBeltAmps);
     }
 
     public void pulseIndexDemand() {
@@ -246,7 +248,6 @@ public class Superstructure extends Subsystem {
     @Override
     public void reset() {
         periodic = new SuperIO();
-
         deliveryWheel.setInverted(true);
         deliveryBelts.setInverted(true);
         deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
@@ -311,6 +312,7 @@ public class Superstructure extends Subsystem {
         private SuperState state = SuperState.DISABLED;
         public int currState = state.ordinal();
         // Indexer Data
+        public double indexBeltAmps = 0.0;
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;
         public double deliveryBeltsDemand;
