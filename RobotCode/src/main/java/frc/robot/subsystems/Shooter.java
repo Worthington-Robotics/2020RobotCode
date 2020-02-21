@@ -33,7 +33,9 @@ public class Shooter extends Subsystem {
 
     private Shooter() {
         SmartDashboard.putNumber("Shooter/Turret/P", 0);
+        SmartDashboard.putNumber("Shooter/Turret/I", 0);
         SmartDashboard.putNumber("Shooter/Turret/D", 0);
+        SmartDashboard.putNumber("Shooter/Turret/F", 0);
         SmartDashboard.putBoolean("Shooter/Turret/SaveChanges", false);
         rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
         leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
@@ -58,8 +60,8 @@ public class Shooter extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         if (SmartDashboard.getBoolean("Shooter/Turret/SaveChanges", false)) {
-            updateTurretPID(SmartDashboard.getNumber("Shooter/Turret/P", 0),
-                    SmartDashboard.getNumber("Shooter/Turret/D", 0));
+            updateTurretPID(SmartDashboard.getNumber("Shooter/Turret/P", 0),SmartDashboard.getNumber("Shooter/Turret/I", 0),
+                    SmartDashboard.getNumber("Shooter/Turret/D", 0), SmartDashboard.getNumber("Shooter/Turret/F", 0));
         }
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
@@ -101,11 +103,11 @@ public class Shooter extends Subsystem {
                     periodic.flywheelDemand = periodic.operatorFlywheelInput;
                     break;
                 case PID_MODE:
-                    periodic.flywheelDemand = RPMToTicksPer100ms(periodic.operatorFlywheelInput);
+                    periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * 6200;
+                    periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
                 default:
                     leftFlywheelFalcon.set(ControlMode.Disabled, 0);
-                    rightFlywheelFalcon.set(ControlMode.Disabled, 0);
                     break;
                 }
                 switch (turretMode) {
@@ -145,17 +147,14 @@ public class Shooter extends Subsystem {
         switch (flywheelMode) {
         case OPEN_LOOP:
             leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.flywheelDemand);
-            rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
             break;
         case PID_MODE:
             leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
-            rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
             break;
         case LIMELIGHT_MODE:
             break;
         default:
             leftFlywheelFalcon.set(ControlMode.Disabled, 0);
-            rightFlywheelFalcon.set(ControlMode.Disabled, 0);
             break;
         }
         switch (turretMode) {
@@ -179,6 +178,11 @@ public class Shooter extends Subsystem {
      */
     @Override
     public void outputTelemetry() {
+        if(Constants.DEBUG)
+        {
+            SmartDashboard.putNumber("Shooter/Flywheel/AmpsL", leftFlywheelFalcon.getSupplyCurrent());
+            SmartDashboard.putNumber("Shooter/Flywheel/AmpsR", rightFlywheelFalcon.getSupplyCurrent());
+        }
         SmartDashboard.putNumber("Shooter/Turret/Amps", periodic.turretAmps);
         SmartDashboard.putBoolean("Shooter/Turret/OnTarget", Math.abs(periodic.targetX) < 2 && periodic.targetV == 1);
         SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
@@ -190,6 +194,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Shooter/Turret/Angle", (ticksToDegrees(periodic.turretEncoder) + 360) % 360);
         SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
         SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
+        SmartDashboard.putNumber("Shooter/Flywheel/RPMDemand", periodic.flywheelRPMDemand);
         SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
         SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
         SmartDashboard.putNumber("Shooter/Flywheel/RPM", TicksPer100msToRPM(periodic.flywheelVelocity));
@@ -220,23 +225,25 @@ public class Shooter extends Subsystem {
         turretControl.configMotionAcceleration((int)degreesToTicks(90));
         turretControl.configMotionCruiseVelocity((int)degreesToTicks(90));
 
-        rightFlywheelFalcon.config_kP(0, Constants.TURRET_RIGHT_FLY_KP);
-        rightFlywheelFalcon.config_kD(0, Constants.TURRET_RIGHT_FLY_KD);
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         rightFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
         rightFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
+        rightFlywheelFalcon.follow(leftFlywheelFalcon);
         
         leftFlywheelFalcon.config_kP(0, Constants.TURRET_LEFT_FLY_KP);
         leftFlywheelFalcon.config_kD(0, Constants.TURRET_LEFT_FLY_KD);
+        leftFlywheelFalcon.config_kF(0, Constants.TURRET_LEFT_FLY_KF);
         leftFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         leftFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
         leftFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_TURRET);
         disable();
     }
 
-    public void updateTurretPID(double P, double D) {
-        turretControl.config_kP(0, P);
-        turretControl.config_kD(0, D);
+    public void updateTurretPID(double P, double I, double D, double F) {
+        leftFlywheelFalcon.config_kP(0, P);
+        leftFlywheelFalcon.config_kI(0, I);
+        leftFlywheelFalcon.config_kD(0, D);
+        leftFlywheelFalcon.config_kF(0, F);
     }
 
     public void disable() {
@@ -296,7 +303,6 @@ public class Shooter extends Subsystem {
         if (flywheelMode != MotorControlMode.PID_MODE)
             flywheelMode = MotorControlMode.PID_MODE;
         leftFlywheelFalcon.set(ControlMode.Velocity, demand); // TODO add safety that moves to hold current speed
-        rightFlywheelFalcon.set(ControlMode.Follower, Constants.SHOOTER_FLYWHEEL_LEFT);
     }
 
     public void setTurretRPM(double demand) {
@@ -383,6 +389,7 @@ public class Shooter extends Subsystem {
         public double targetV = 0.0;
         public double targetArea = 0.0;
         public double flywheelDemand = 0.0;
+        public double flywheelRPMDemand = 0.0;
         public double flywheelRPM = 0.0;
         public double turretDemand = 0.0;
         public double turretEncoder = 0.0;

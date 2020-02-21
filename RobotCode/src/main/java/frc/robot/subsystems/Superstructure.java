@@ -39,9 +39,9 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight intakeSensor;
 
     // Double
-    private double THRESHOLD_DELIVERY = 75;
-    private double THRESHOLD_INDEXER = 100;
-    private double THRESHOLD_INTAKE = 75;
+    private double THRESHOLD_DELIVERY = Constants.THRESHOLD_DELIVERY;
+    private double THRESHOLD_INDEXER = Constants.THRESHOLD_INDEXER;
+    private double THRESHOLD_INTAKE = Constants.THRESHOLD_INTAKE;
     private double distanceDelivery;
     private double distanceIndexer;
     private double distanceIntake;
@@ -87,18 +87,15 @@ public class Superstructure extends Subsystem {
      */
     @Override
     public synchronized void readPeriodicInputs() {
-        
         if (Constants.DEBUG) {
             THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD",
                     THRESHOLD_DELIVERY);
             THRESHOLD_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
             THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
 
-            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE",
-                    deliverySensor.getRange());
-            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE",
-                    indexSensor.getRange());
-            distanceIntake = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
+            distanceDelivery = deliverySensor.getRange();
+            distanceIndexer = indexSensor.getRange();
+            distanceIntake = intakeSensor.getRange();
         } else {
             distanceDelivery = deliverySensor.getRange();
             distanceIndexer = indexSensor.getRange();
@@ -109,7 +106,7 @@ public class Superstructure extends Subsystem {
         periodic.indexDetected = distanceIndexer != 0 && THRESHOLD_INDEXER >= distanceIndexer;
         periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
     }
-    
+
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
 
@@ -121,46 +118,46 @@ public class Superstructure extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 switch (periodic.state) {
-                    case DISABLED:
-                    case INIT:
-                        if (periodic.deliveryDetected) {
-                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
-                        }
-                        break;
+                case DISABLED:
+                case INIT:
+                    if (periodic.deliveryDetected) {
+                        periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                    }
+                    break;
 
-                    case ONE_TO_THREE_BALLS:
-                        if (periodic.indexDetected) {
-                            if (!indexBoolean.isStarted()) {
-                                indexBoolean.start();
-                            } else if (indexBoolean.getBoolean()) {
-                                periodic.state = SuperState.FOUR_BALLS;
-                            }
-                        } else {
-                            // Invalidate if it isn't true
-                            indexBoolean.stop();
-                        }
-                        break;
-
-                    case FOUR_BALLS:
-                        if (periodic.intakeDetected) {
-                            periodic.state = SuperState.FULL_SYSTEM;
-                        }
-                        break;
-
-                    case FULL_SYSTEM:
-
-                        if (!periodic.intakeDetected) {
+                case ONE_TO_THREE_BALLS:
+                    if (periodic.indexDetected) {
+                        if (!indexBoolean.isStarted()) {
+                            indexBoolean.start();
+                        } else if (indexBoolean.getBoolean()) {
                             periodic.state = SuperState.FOUR_BALLS;
                         }
+                    } else {
+                        // Invalidate if it isn't true
+                        indexBoolean.stop();
+                    }
+                    break;
 
-                        break;
+                case FOUR_BALLS:
+                    if (periodic.intakeDetected) {
+                        periodic.state = SuperState.FULL_SYSTEM;
+                    }
+                    break;
 
-                    case SHOOT:
-                        if (!periodic.deliveryDetected) {
-                            periodic.state = SuperState.INIT;
-                        }
-                        break;
-                    default:
+                case FULL_SYSTEM:
+
+                    if (!periodic.intakeDetected) {
+                        periodic.state = SuperState.FOUR_BALLS;
+                    }
+
+                    break;
+
+                case SHOOT:
+                    if (!periodic.deliveryDetected) {
+                        periodic.state = SuperState.INIT;
+                    }
+                    break;
+                default:
                 }
             }
 
@@ -316,7 +313,7 @@ public class Superstructure extends Subsystem {
     public class SuperIO extends Subsystem.PeriodicIO {
         // Current State
         private SuperState state = SuperState.DISABLED;
-        public int currState =  state.ordinal();
+        public int currState = state.ordinal();
         // Indexer Data
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;
@@ -331,6 +328,10 @@ public class Superstructure extends Subsystem {
     }
 
     public enum SuperState {
-         INIT, ONE_TO_THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+        INIT, ONE_TO_THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
 }
