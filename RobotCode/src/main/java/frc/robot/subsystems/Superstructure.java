@@ -39,9 +39,9 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight intakeSensor;
 
     // Double
-    private double THRESHOLD_DELIVERY = 75;
-    private double THRESHOLD_INDEXER = 100;
-    private double THRESHOLD_INTAKE = 75;
+    private double THRESHOLD_DELIVERY = Constants.THRESHOLD_DELIVERY;
+    private double THRESHOLD_INDEXER = Constants.THRESHOLD_INDEXER;
+    private double THRESHOLD_INTAKE = Constants.THRESHOLD_INTAKE;
     private double distanceDelivery;
     private double distanceIndexer;
     private double distanceIntake;
@@ -92,11 +92,9 @@ public class Superstructure extends Subsystem {
             THRESHOLD_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
             THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
 
-            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE",
-                    deliverySensor.getRange());
-            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE",
-                    indexSensor.getRange());
-            distanceIntake = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
+            distanceDelivery = deliverySensor.getRange();
+            distanceIndexer = indexSensor.getRange();
+            distanceIntake = intakeSensor.getRange();
         } else {
             distanceDelivery = deliverySensor.getRange();
             distanceIndexer = indexSensor.getRange();
@@ -111,28 +109,28 @@ public class Superstructure extends Subsystem {
     @Override
     public synchronized void writePeriodicOutputs() {
         switch (periodic.state) {
-            case INIT:
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
-                break;
-            case ONE_TO_THREE_BALLS:
-                pulseIndexDemand();
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = STOP_BELT_DEMAND;
-                break;
-            case FOUR_BALLS:
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-                break;
-            case FULL_SYSTEM:
-                periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-                break;
-            case SHOOT:
-                periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
-                periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-                break;
-            case DUMP_SYSTEM:
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -FULL_BELT_DEMAND;
-                break;
-            default:
-            
+        case INIT:
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
+            break;
+        case ONE_TO_THREE_BALLS:
+            pulseIndexDemand();
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = STOP_BELT_DEMAND;
+            break;
+        case FOUR_BALLS:
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            break;
+        case FULL_SYSTEM:
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            break;
+        case SHOOT:
+            periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
+            periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            break;
+        case DUMP_SYSTEM:
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -FULL_BELT_DEMAND;
+            break;
+        default:
+
         }
 
         DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
@@ -140,7 +138,7 @@ public class Superstructure extends Subsystem {
         DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
         DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
         extensionArm.set(periodic.armExtension);
-        periodic.currState =  periodic.state.ordinal();
+        periodic.currState = periodic.state.ordinal();
     }
 
     @Override
@@ -154,46 +152,46 @@ public class Superstructure extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 switch (periodic.state) {
-                    case DISABLED:
-                    case INIT:
-                        if (periodic.deliveryDetected) {
-                            periodic.state = SuperState.ONE_TO_THREE_BALLS;
-                        }
-                        break;
+                case DISABLED:
+                case INIT:
+                    if (periodic.deliveryDetected) {
+                        periodic.state = SuperState.ONE_TO_THREE_BALLS;
+                    }
+                    break;
 
-                    case ONE_TO_THREE_BALLS:
-                        if (periodic.indexDetected) {
-                            if (!indexBoolean.isStarted()) {
-                                indexBoolean.start();
-                            } else if (indexBoolean.getBoolean()) {
-                                periodic.state = SuperState.FOUR_BALLS;
-                            }
-                        } else {
-                            // Invalidate if it isn't true
-                            indexBoolean.stop();
-                        }
-                        break;
-
-                    case FOUR_BALLS:
-                        if (periodic.intakeDetected) {
-                            periodic.state = SuperState.FULL_SYSTEM;
-                        }
-                        break;
-
-                    case FULL_SYSTEM:
-
-                        if (!periodic.intakeDetected) {
+                case ONE_TO_THREE_BALLS:
+                    if (periodic.indexDetected) {
+                        if (!indexBoolean.isStarted()) {
+                            indexBoolean.start();
+                        } else if (indexBoolean.getBoolean()) {
                             periodic.state = SuperState.FOUR_BALLS;
                         }
+                    } else {
+                        // Invalidate if it isn't true
+                        indexBoolean.stop();
+                    }
+                    break;
 
-                        break;
+                case FOUR_BALLS:
+                    if (periodic.intakeDetected) {
+                        periodic.state = SuperState.FULL_SYSTEM;
+                    }
+                    break;
 
-                    case SHOOT:
-                        if (!periodic.deliveryDetected) {
-                            periodic.state = SuperState.INIT;
-                        }
-                        break;
-                    default:
+                case FULL_SYSTEM:
+
+                    if (!periodic.intakeDetected) {
+                        periodic.state = SuperState.FOUR_BALLS;
+                    }
+
+                    break;
+
+                case SHOOT:
+                    if (!periodic.deliveryDetected) {
+                        periodic.state = SuperState.INIT;
+                    }
+                    break;
+                default:
                 }
             }
 
@@ -311,7 +309,7 @@ public class Superstructure extends Subsystem {
     public class SuperIO extends Subsystem.PeriodicIO {
         // Current State
         private SuperState state = SuperState.DISABLED;
-        public int currState =  state.ordinal();
+        public int currState = state.ordinal();
         // Indexer Data
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;

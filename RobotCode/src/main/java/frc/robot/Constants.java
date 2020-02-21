@@ -18,8 +18,8 @@ public class Constants {
     public static final int DRIVE_MIDDLE_RIGHT_ID = 2;
     public static final int DRIVE_BACK_RIGHT_ID = 3;
     public static final int COLOR_WHEEL = 4;
-    public static final int SHOOTER_FLYWHEEL_RIGHT = 5;
-    public static final int SHOOTER_FLYWHEEL_LEFT = 6;
+    public static final int SHOOTER_FLYWHEEL_LEFT = 5;
+    public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
     public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
     public static final int SUPERSTRUCTURE_DELIVERY_BELT = 8;
     public static final int SUPERSTRUCTURE_DELIVERY_WHEEL = 9;
@@ -71,13 +71,9 @@ public class Constants {
     public static final double TURRET_ANGLE_KD = 4;
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
 
-    public static double TURRET_LEFT_FLY_KP = 0.0; //TODO tune
-    public static double TURRET_LEFT_FLY_KD = 0.0; //TODO tune
-    public static double TURRET_LEFT_FLY_KF = 0.0; //TODO tune
-    
-    public static double TURRET_RIGHT_FLY_KP = 0.0; //TODO tune
-    public static double TURRET_RIGHT_FLY_KD = 0.0; //TODO tune
-    public static double TURRET_RIGHT_FLY_KF = 0.0; //TODO tune
+    public static double TURRET_LEFT_FLY_KP = 0.05; //0.05
+    public static double TURRET_LEFT_FLY_KD = 0.0; //0.00
+    public static double TURRET_LEFT_FLY_KF = 0.048; //0.048
 
     public static double VOLTAGE_COMP_TURRET = 11.5;
 
@@ -90,7 +86,7 @@ public class Constants {
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static final boolean RAMPUP = false;
     public static final boolean ENABLE_MP_TEST_MODE = false;
     public static final double MP_TEST_SPEED = 72; //in/s
@@ -181,6 +177,10 @@ public class Constants {
     // Pulse constants (in seconds)
     public static final double PULSE_LENGTH = .75;
     public static final double PULSE_COOLDOWN = .25;
+
+    public static final double THRESHOLD_DELIVERY = 75;
+    public static final double THRESHOLD_INDEXER = 100;
+    public static final double THRESHOLD_INTAKE = 75;
     
     /**
      * Climber constants

@@ -9,21 +9,21 @@ import frc.lib.util.Util;
 import frc.robot.Constants;
 
 public class Climber extends Subsystem {
-    public DoubleSolenoid unfoldSolenoid, climbSolenoid;
-    public Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
+    private DoubleSolenoid unfoldSolenoid, climbSolenoid;
+    private Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
             climbCurrentState = Value.kReverse, climbIntendedState = Value.kReverse;
-    public boolean unfolded = false, climbed = false, intakeDown = false;
-    public double shooterAngle = 90;
-    public boolean climbBoolean, unfoldBoolean, readyToDownClimb, readyToFold, readyToUnfold, readyToClimb,
+            private boolean unfolded = false, climbed = false, intakeDown = false;
+            private double shooterAngle = 90;
+            private boolean climbBoolean, unfoldBoolean, readyToDownClimb, readyToFold, readyToUnfold, readyToClimb,
             readyFolding;
 
-    public Climber() {
+            private Climber() {
         unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
         climbSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
         reset();
     }
 
-    public static Climber mClimber = new Climber();
+    private static Climber mClimber = new Climber();
 
     public static Climber getInstance() {
         return mClimber;
@@ -92,6 +92,22 @@ public class Climber extends Subsystem {
         climbSolenoid.set(climbIntendedState);
         if (Shooter.getInstance().canUnfold())
             unfoldSolenoid.set(unfoldIntendedState);
+    }
+
+    public boolean readyToFold(){
+        return readyToFold;
+    }
+
+    public boolean readyToUnfold(){
+        return readyToUnfold;
+    }
+
+    public boolean readyToClimb(){
+        return readyToClimb;
+    }
+
+    public boolean readyToDownClimb(){
+        return readyToDownClimb;
     }
 
     @Override
