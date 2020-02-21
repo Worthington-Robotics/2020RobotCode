@@ -17,7 +17,7 @@ public class ColorSearch extends Action {
 
     @Override
     public boolean isFinished() {
-        return ColorWheel.getInstance().isOnTarget() && ColorWheel.getInstance().checkColor();
+        return ColorWheel.getInstance().checkColor();
     }
 
     @Override

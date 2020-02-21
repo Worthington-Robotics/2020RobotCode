@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -12,9 +11,7 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import frc.robot.Constants;
 import frc.lib.drivers.ColorSensorV3.*;
-import frc.lib.util.Util;
 import edu.wpi.first.wpilibj.util.Color;
-import static frc.lib.drivers.ColorSensorV3.*;
 
 public class ColorWheel extends Subsystem {
 
@@ -33,7 +30,6 @@ public class ColorWheel extends Subsystem {
         m_colorMatcher.addColorMatch(Constants.kGreenTarget);
         m_colorMatcher.addColorMatch(Constants.kRedTarget);
         m_colorMatcher.addColorMatch(Constants.kYellowTarget);
-        colorWheelTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         reset();
     }
 
@@ -48,8 +44,7 @@ public class ColorWheel extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         periodic.demand = Constants.MASTER.getRawAxis(3);
-        String gameData;
-        gameData = DriverStation.getInstance().getGameSpecificMessage();
+        String gameData = DriverStation.getInstance().getGameSpecificMessage();
         if (gameData.length() > 0) {
             periodic.fms_color = colorConvert(gameData.charAt(0));
         } else {
@@ -58,13 +53,14 @@ public class ColorWheel extends Subsystem {
         periodic.detected_color = colorSensor.getColor();
         periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue,
                 periodic.detected_color.green };
+
         periodic.color_sensed = colorMatch();
-        periodic.close_loop_error = colorWheelTalon.getClosedLoopError();
         if (!(periodic.color_sensed.charAt(0) == 'U')) {
             periodic.color_wheel_reading = true;
         } else {
             periodic.color_wheel_reading = false;
         }
+
     }
 
     @Override
@@ -153,6 +149,7 @@ public class ColorWheel extends Subsystem {
             periodic.distance = periodic.color_direction_calc * 12.5;
         }
     }
+
     public void setEnabled(boolean enabled)
     {
         periodic.isEnabled = enabled;
@@ -185,10 +182,6 @@ public class ColorWheel extends Subsystem {
 
     public void setDemand(final double newDemand) {
         periodic.demand = newDemand;
-    }
-
-    public boolean isOnTarget() {
-        return Util.epsilonEquals(periodic.close_loop_error, 0, 20);
     }
 
     public boolean checkColor() {
@@ -251,7 +244,6 @@ public class ColorWheel extends Subsystem {
     public class ColorWheelIO extends Subsystem.PeriodicIO {
         public boolean CCW = false;
         public boolean isEnabled = false;
-        public double close_loop_error = 0;
         public char fms_color = 'U';
         public double distance = 0;
         public double[] RGB = new double[] { 0, 0, 0 };
