@@ -13,7 +13,6 @@ public class Climber extends Subsystem {
     private Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
             climbCurrentState = Value.kReverse, climbIntendedState = Value.kReverse;
             private boolean unfolded = false, climbed = false, intakeDown = false;
-            private double shooterAngle = 90;
             private boolean climbBoolean, unfoldBoolean, readyToDownClimb, readyToFold, readyToUnfold, readyToClimb,
             readyFolding;
 
@@ -34,7 +33,6 @@ public class Climber extends Subsystem {
         unfoldCurrentState = unfoldSolenoid.get();
         climbCurrentState = climbSolenoid.get();
         intakeDown = true;
-        // shooterAngle = Shooter.getInstance();
         // intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
@@ -51,8 +49,7 @@ public class Climber extends Subsystem {
             public void onLoop(double timestamp) {
                 if (!Constants.DEBUG) {
                     if (intakeDown) {
-                        if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,
-                                Constants.CLIMBER_EPSILON_CONST))) {
+                        if ((Shooter.getInstance().canUnfold())) {
                             unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
                             // System.out.println("Unfold Happened");
                         }

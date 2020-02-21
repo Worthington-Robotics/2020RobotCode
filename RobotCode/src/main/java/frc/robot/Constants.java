@@ -78,8 +78,8 @@ public class Constants {
     public static double VOLTAGE_COMP_TURRET = 11.5;
 
     //Turret Encoder Limits
-    public static final int leftTurretLimit = -8000;
-    public static final int rightTurretLimit = 8000;
+    public static final int leftTurretLimit = -7000;
+    public static final int rightTurretLimit = 7000;
 
     /**
      *   Drivetrain tuned values ------------------------------
@@ -173,10 +173,10 @@ public class Constants {
     // Sensor distance before stopping (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;
     // Time (in seconds)
-    public static final double TIME_TILL_STATIONARY = 1.1;
+    public static final double TIME_TILL_STATIONARY = .25;
     // Pulse constants (in seconds)
-    public static final double PULSE_LENGTH = .75;
-    public static final double PULSE_COOLDOWN = .25;
+    public static final double PULSE_LENGTH = .25;
+    public static final double PULSE_COOLDOWN = .1;
 
     public static final double THRESHOLD_DELIVERY = 75;
     public static final double THRESHOLD_INDEXER = 100;

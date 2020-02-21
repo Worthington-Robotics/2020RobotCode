@@ -18,6 +18,7 @@ import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.VersionData;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.Superstructure.SuperState;
 import frc.robot.actions.driveactions.*;
 import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
@@ -48,6 +49,7 @@ public class Robot extends TimedRobot {
     private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
     private JoystickButton disableSuperstructure = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
+    private JoystickButton dump = new JoystickButton(Constants.MASTER, 8);
     private JoystickButton folder = new JoystickButton(Constants.MASTER,11);
     private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
 
@@ -86,6 +88,7 @@ public class Robot extends TimedRobot {
         recenter.whileHeld(Action.toCommand(new Recenter(0)));
         //disableSuperstructure.whenPressed(Action.toCommand(action));
         turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
+        dump.whileHeld(Action.toCommand(new DumpAction()));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
         flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID()));
         turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));
@@ -122,6 +125,7 @@ public class Robot extends TimedRobot {
 
         Shooter.getInstance().disable();
         StateMachine.getInstance().assertStop();
+        Superstructure.getInstance().reset();
 
         disabledLooper.start();
     }

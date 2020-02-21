@@ -27,7 +27,6 @@ public class Superstructure extends Subsystem {
     private TalonSRX deliveryWheel;
     private TalonSRX deliveryBelts;
     private TalonSRX indexTopBelt;
-    private TalonSRX indexBottomBelt;
 
     // Intake
     private TalonSRX intakeWheels;
@@ -101,10 +100,47 @@ public class Superstructure extends Subsystem {
             distanceIndexer = indexSensor.getRange();
             distanceIntake = intakeSensor.getRange();
         }
-
+        periodic.indexBeltAmps = indexTopBelt.getSupplyCurrent();
         periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >= distanceDelivery;
         periodic.indexDetected = distanceIndexer != 0 && THRESHOLD_INDEXER >= distanceIndexer;
         periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
+    }
+
+    @Override
+    public synchronized void writePeriodicOutputs() {
+        switch (periodic.state) {
+        case INIT:
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
+            break;
+        case ONE_TO_THREE_BALLS:
+            pulseIndexDemand();
+            periodic.deliveryBeltsDemand = FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = STOP_BELT_DEMAND;
+            break;
+        case FOUR_BALLS:
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            break;
+        case FULL_SYSTEM:
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            break;
+        case SHOOT:
+            periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
+            periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            break;
+        case DUMP_SYSTEM:
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -1 * FULL_BELT_DEMAND;
+            periodic.intakeWheelsDemand = -1 * Constants.INTAKE_DEMAND; 
+            break;
+        default:
+
+        }
+
+        DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
+        DemandUtil.setDemand(periodic.deliveryWheelDemand, deliveryWheel);
+        DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
+        DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
+        extensionArm.set(periodic.armExtension);
+        periodic.currState = periodic.state.ordinal();
     }
 
     @Override
@@ -211,12 +247,12 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
-
         if (Constants.DEBUG) {
             SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
             SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
             SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
         }
+        SmartDashboard.putNumber("Superstructure/INDEX_AMPS", periodic.indexBeltAmps);
     }
 
     public void pulseIndexDemand() {
@@ -250,7 +286,6 @@ public class Superstructure extends Subsystem {
     @Override
     public void reset() {
         periodic = new SuperIO();
-
         deliveryWheel.setInverted(true);
         deliveryBelts.setInverted(true);
         deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
@@ -315,6 +350,7 @@ public class Superstructure extends Subsystem {
         private SuperState state = SuperState.DISABLED;
         public int currState = state.ordinal();
         // Indexer Data
+        public double indexBeltAmps = 0.0;
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;
         public double deliveryBeltsDemand;
