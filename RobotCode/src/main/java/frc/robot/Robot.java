@@ -108,6 +108,7 @@ public class Robot extends TimedRobot {
 
         StateMachine.getInstance().assertStop();
         Superstructure.getInstance().reset();
+        Shooter.getInstance().disable();
 
         disabledLooper.start();
     }
@@ -211,7 +212,7 @@ public class Robot extends TimedRobot {
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         releaseIntake.toggleWhenPressed(Action.toCommand(new ArmAction()));
-        limelightRPM.whenPressed(Action.toCommand(new limelightRPM()));
+        limelightRPM.whenPressed(Action.toCommand(new softStart()));
         VersionData.WriteBuildInfoToDashboard();
     }
 }

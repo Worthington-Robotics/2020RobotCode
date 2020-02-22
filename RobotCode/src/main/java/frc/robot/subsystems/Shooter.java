@@ -18,6 +18,7 @@ import frc.lib.geometry.Rotation2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.HIDHelper;
+import frc.lib.util.Util;
 import frc.robot.Constants;
 
 public class Shooter extends Subsystem {
@@ -102,14 +103,19 @@ public class Shooter extends Subsystem {
                 switch (flywheelMode) {
                 case OPEN_LOOP:
                     periodic.flywheelDemand = periodic.operatorFlywheelInput;
+                    periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * 6200;
                     break;
                 case PID_MODE:
                     periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * 6200;
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
                 case RAMP_UP:
-                    periodic.flywheelRPMDemand = 2400 * Math.min(Timer.getFPGATimestamp() - periodic.rampUpTime, 2);
-                    periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
+                    if (Util.epsilonEquals(periodic.flywheelRPMDemand, 4800, 100)) {
+                        setLimelightRPM();
+                    } else {
+                        periodic.flywheelRPMDemand = Math.min(periodic.flywheelRPMDemand + 32, 4800);
+                        periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
+                    }
                     break;
                 case LIMELIGHT_MODE:
                     double range = limelightRanging();
@@ -196,26 +202,26 @@ public class Shooter extends Subsystem {
         if (Constants.DEBUG) {
             SmartDashboard.putNumber("Shooter/Flywheel/AmpsL", periodic.AmpsL);
             SmartDashboard.putNumber("Shooter/Flywheel/AmpsR", periodic.AmpsR);
+            SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput);
+            SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
+            SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
+            SmartDashboard.putNumber("Shooter/Turret/Range (in)", limelightRanging());
+            SmartDashboard.putNumber("Shooter/Turret/EncoderGoal", limelightGoalAngle());
+            SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
+            SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
+            SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
+            SmartDashboard.putNumber("Shooter/Flywheel/RPMDemand", periodic.flywheelRPMDemand);
+            SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
+            SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
+            SmartDashboard.putBoolean("Shooter/Turret/Can Unfold", periodic.canUnfold);
         }
         SmartDashboard.putBoolean("Shooter/Flywheel/AmpDeltaError",
                 Math.abs(periodic.AmpsL - periodic.AmpsR) > Constants.FLYWHEEL_DELTA_AMPS);
         SmartDashboard.putNumber("Shooter/Turret/Amps", periodic.turretAmps);
         SmartDashboard.putBoolean("Shooter/Turret/OnTarget",
                 Math.abs(periodic.targetX) < Constants.TURRET_LOCKON_DELTA && periodic.targetV == 1);
-        SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
-        SmartDashboard.putNumber("Shooter/Turret/Range (in)", limelightRanging());
-        SmartDashboard.putNumber("Shooter/Turret/EncoderGoal", limelightGoalAngle());
-        SmartDashboard.putNumber("Shooter/Turret/OperatorInput", periodic.operatorInput);
-        SmartDashboard.putNumber("Shooter/Turret/Demand", periodic.turretDemand);
-        SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
         SmartDashboard.putNumber("Shooter/Turret/Angle", (ticksToDegrees(periodic.turretEncoder) + 360) % 360);
-        SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
-        SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
-        SmartDashboard.putNumber("Shooter/Flywheel/RPMDemand", periodic.flywheelRPMDemand);
-        SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
-        SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
         SmartDashboard.putNumber("Shooter/Flywheel/RPM", TicksPer100msToRPM(periodic.flywheelVelocity));
-        SmartDashboard.putBoolean("Shooter/Turret/Can Unfold", periodic.canUnfold);
     }
 
     public void configLimelight() {
@@ -317,6 +323,10 @@ public class Shooter extends Subsystem {
         }
     }
 
+    public double getShooterAngle() {
+        return (ticksToDegrees(periodic.turretEncoder) + 360) % 360;
+    }
+
     public void setLimelightRPM() {
         if (flywheelMode != MotorControlMode.LIMELIGHT_MODE)
             flywheelMode = MotorControlMode.LIMELIGHT_MODE;
@@ -356,10 +366,6 @@ public class Shooter extends Subsystem {
 
     public double getRPMClosedLoopError() {
         return periodic.RPMClosedLoopError;
-    }
-
-    public boolean canUnfold() {
-        return periodic.canUnfold;
     }
 
     public Subsystem.PeriodicIO getLogger() {

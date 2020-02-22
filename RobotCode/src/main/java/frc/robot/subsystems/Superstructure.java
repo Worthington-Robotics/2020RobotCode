@@ -36,9 +36,11 @@ public class Superstructure extends Subsystem {
     private DoubleSolenoid extensionArm;
 
     // Sensors
-    private SimTimeOfFlight deliverySensor;
-    private SimTimeOfFlight indexSensor;
-    private SimTimeOfFlight intakeSensor;
+    private SimTimeOfFlight TOF1;
+    private SimTimeOfFlight TOF2;
+    private SimTimeOfFlight TOF3;
+    private SimTimeOfFlight TOF4;
+    private SimTimeOfFlight TOF5;
 
     // Double
     private double THRESHOLD_DELIVERY = Constants.THRESHOLD_DELIVERY;
@@ -56,18 +58,20 @@ public class Superstructure extends Subsystem {
         intakeWheels = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
-        deliverySensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_DELIVERY);
-        indexSensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_INDEX);
-        intakeSensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_INTAKE);
+        TOF1 = new SimTimeOfFlight(1);
+        TOF2 = new SimTimeOfFlight(2);
+        TOF3 = new SimTimeOfFlight(3);
+        TOF4 = new SimTimeOfFlight(4);
+        TOF5 = new SimTimeOfFlight(5);
 
         reset();
         if (Constants.DEBUG) {
             SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
             SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
             SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
-            SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", deliverySensor.getRange());
-            SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
-            SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
+            SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", TOF1.getRange());
+            //SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
+            //SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
         }
     }
 
@@ -82,14 +86,14 @@ public class Superstructure extends Subsystem {
             THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
         }
 
-        final double distanceDelivery = deliverySensor.getRange();
+        /*final double distanceDelivery = deliverySensor.getRange();
         final double distanceIndexer = indexSensor.getRange();
-        final double distanceIntake = intakeSensor.getRange();
+        final double distanceIntake = intakeSensor.getRange();*/
 
         periodic.indexBeltAmps = indexTopBelt.getSupplyCurrent();
-        periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >= distanceDelivery;
+        /*periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >= distanceDelivery;
         periodic.indexDetected = distanceIndexer != 0 && THRESHOLD_INDEXER >= distanceIndexer;
-        periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
+        periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;*/
     }
 
     @Override
@@ -102,7 +106,7 @@ public class Superstructure extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-                switch (periodic.state) {
+               /* switch (periodic.state) {
                 case DISABLED:
                 case INIT:
                     if (periodic.deliveryDetected) {
@@ -143,7 +147,7 @@ public class Superstructure extends Subsystem {
                     }
                     break;
                 default:
-                }
+                }*/
             }
 
             @Override
@@ -154,7 +158,7 @@ public class Superstructure extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-        switch (periodic.state) {
+        /*switch (periodic.state) {
         case INIT:
             periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
             periodic.deliveryBeltsDemand = Constants.STOP_BELT_DEMAND;
@@ -180,7 +184,7 @@ public class Superstructure extends Subsystem {
         default:
 
         }
-
+*/
         deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
         deliveryWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
         indexTopBelt.set(ControlMode.PercentOutput, periodic.indexTopBeltDemand);
@@ -199,9 +203,9 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
         if (Constants.DEBUG) {
-            SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
+            /*SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
             SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
-            SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
+            SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());*/
             SmartDashboard.putNumber("Superstructure/INDEX_AMPS", periodic.indexBeltAmps);
         }
         
@@ -234,9 +238,9 @@ public class Superstructure extends Subsystem {
         intakeWheels.setInverted(false);
         deliveryBelts.setInverted(false);
 
-        deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        /*deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         indexSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
-        intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);*/
     }
 
     // Setters
