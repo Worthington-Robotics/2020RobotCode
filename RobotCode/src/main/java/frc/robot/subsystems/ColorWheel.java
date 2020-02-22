@@ -18,8 +18,7 @@ public class ColorWheel extends Subsystem {
     private final TalonSRX colorWheelTalon;
     private final I2C.Port i2cPort = I2C.Port.kOnboard;
     private final ColorSensorV3 colorSensor;
-    private final char[] wheelColors = new char[] { 'B', 'Y', 'R', 'G' };
-    private final String wheelColorsOrder = new String(wheelColors);
+
     // Color Match Stuff
     private final ColorMatch m_colorMatcher = new ColorMatch();
 
@@ -76,17 +75,6 @@ public class ColorWheel extends Subsystem {
         {
             colorWheelTalon.set(ControlMode.PercentOutput, 0);
         }
-
-        /*
-         * periodic.RGB = new double[] { (periodic.detected_color.red * 255),
-         * (periodic.detected_color.green * 255), (periodic.detected_color.blue * 255)
-         * }; if (periodic.color_wheel_reading) { if (periodic.fms_color == 'U') { if
-         * (!periodic.color_motor_pid_on) { colorWheelTalon.set(ControlMode.Position,
-         * inchesToTicks(Constants.COLOR_WHEEL_ROTATION_DISTANCE)); } } else { if
-         * (!periodic.color_motor_pid_on) { checkIfDone();
-         * colorWheelTalon.set(ControlMode.Position, inchesToTicks(periodic.demand)); }
-         * } } else { }
-         */
     }
 
     @Override
@@ -98,12 +86,6 @@ public class ColorWheel extends Subsystem {
         SmartDashboard.putString("Color Wheel/Detected Color", periodic.color_sensed);
         SmartDashboard.putString("Color Wheel/FMS Color", periodic.fms_color + "");
         SmartDashboard.putNumber("Color Wheel/Confidence", m_colorMatcher.matchClosestColor(periodic.detected_color).confidence);
-    }
-
-    // User Created Methods
-
-    private double inchesToTicks(double inches) {
-        return (inches / (Constants.COLOR_WHEEL_SPINNER_DIA * Math.PI)) / Constants.COLOR_ENCODER_CPR;
     }
 
     /**
@@ -127,26 +109,6 @@ public class ColorWheel extends Subsystem {
             return 'Y';
         default:
             return 'U';
-        }
-    }
-
-    /**
-     * Picks the direction the wheel has to spin for maximum efficiency and
-     * calculates distance to spin the control panel
-     *
-     */
-    private void distance() {
-        periodic.color_direction_calc = wheelColorsOrder.indexOf(colorConvert(periodic.fms_color))
-                - wheelColorsOrder.indexOf(periodic.color_sensed.charAt(0));
-        if (wheelColorsOrder.indexOf(colorConvert(periodic.fms_color)) == -1
-                || wheelColorsOrder.indexOf(periodic.color_sensed.charAt(0)) == -1) {
-            periodic.distance = 0;
-        } else if (periodic.color_direction_calc == -3) {
-            periodic.distance = -12.5;
-        } else if (periodic.color_direction_calc == 3) {
-            periodic.distance = 12.5;
-        } else {
-            periodic.distance = periodic.color_direction_calc * 12.5;
         }
     }
 
@@ -197,8 +159,8 @@ public class ColorWheel extends Subsystem {
         /**
          * Run the color match algorithm on our detected color
          */
-        String colorString;
-        ColorMatchResult match = m_colorMatcher.matchClosestColor(periodic.detected_color);
+        final String colorString;
+        final ColorMatchResult match = m_colorMatcher.matchClosestColor(periodic.detected_color);
 
         if (match.confidence <= .95)
             return "Unknown";

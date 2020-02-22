@@ -10,11 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.util.DemandUtil;
 import frc.lib.util.TimerBoolean;
 import frc.robot.Constants;
-
-import static frc.robot.Constants.*;
 
 /**
  * Combines both the indexer and intake functions for performance economy.
@@ -46,7 +43,7 @@ public class Superstructure extends Subsystem {
     private double distanceIntake;
 
     // TimedBooleans
-    private TimerBoolean indexBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
+    private TimerBoolean indexBoolean = new TimerBoolean(Constants.TIME_TILL_STATIONARY);
 
     // Pulse Variables
     private double pulseTimestamp;
@@ -110,35 +107,36 @@ public class Superstructure extends Subsystem {
     public synchronized void writePeriodicOutputs() {
         switch (periodic.state) {
         case INIT:
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
+            periodic.deliveryBeltsDemand = Constants.STOP_BELT_DEMAND;
             break;
         case ONE_TO_THREE_BALLS:
             pulseIndexDemand();
-            periodic.deliveryBeltsDemand = FULL_BELT_DEMAND;
-            periodic.deliveryWheelDemand = STOP_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = Constants.STOP_BELT_DEMAND;
             break;
         case FOUR_BALLS:
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
             break;
         case FULL_SYSTEM:
-            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
             break;
         case SHOOT:
-            periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
-            periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            periodic.deliveryBeltsDemand = .5;
+            periodic.deliveryWheelDemand = Constants.FULL_BELT_DEMAND;
+            periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
             break;
         case DUMP_SYSTEM:
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -1 * FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -1 * Constants.FULL_BELT_DEMAND;
             periodic.intakeWheelsDemand = -1 * Constants.INTAKE_DEMAND; 
             break;
         default:
 
         }
 
-        DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
-        DemandUtil.setDemand(periodic.deliveryWheelDemand, deliveryWheel);
-        DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
-        DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
+        deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
+        deliveryWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+        indexTopBelt.set(ControlMode.PercentOutput, periodic.indexTopBeltDemand);
+        intakeWheels.set(ControlMode.PercentOutput, periodic.intakeWheelsDemand);
         extensionArm.set(periodic.armExtension);
         periodic.currState = periodic.state.ordinal();
     }
@@ -202,42 +200,6 @@ public class Superstructure extends Subsystem {
             }
         });
     }
-
-    @Override
-    public synchronized void writePeriodicOutputs() {
-        switch (periodic.state) {
-            case INIT:
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
-                break;
-            case ONE_TO_THREE_BALLS:
-                pulseIndexDemand();
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = STOP_BELT_DEMAND;
-                break;
-            case FOUR_BALLS:
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-                break;
-            case FULL_SYSTEM:
-                periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-                break;
-            case SHOOT:
-                periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
-                periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-                break;
-            case DUMP_SYSTEM:
-                periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -FULL_BELT_DEMAND;
-                break;
-            default:
-            
-        }
-        deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
-        deliveryWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
-        indexTopBelt.set(ControlMode.PercentOutput, periodic.indexTopBeltDemand);
-        intakeWheels.set(ControlMode.PercentOutput, periodic.intakeWheelsDemand);
-        extensionArm.set(periodic.armExtension);
-        periodic.currState =  periodic.state.ordinal();
-    }
-
-
     @Override
     public void outputTelemetry() {
         SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
@@ -257,11 +219,11 @@ public class Superstructure extends Subsystem {
 
     public void pulseIndexDemand() {
         if (pulseCooldownTimestamp <= Timer.getFPGATimestamp()) {
-            pulseTimestamp = Timer.getFPGATimestamp() + PULSE_LENGTH;
-            pulseCooldownTimestamp = pulseTimestamp + PULSE_COOLDOWN;
-            periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
+            pulseTimestamp = Timer.getFPGATimestamp() + Constants.PULSE_LENGTH;
+            pulseCooldownTimestamp = pulseTimestamp + Constants.PULSE_COOLDOWN;
+            periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
         } else if (pulseTimestamp <= Timer.getFPGATimestamp()) {
-            periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+            periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
         }
     }
 
@@ -287,7 +249,6 @@ public class Superstructure extends Subsystem {
     public void reset() {
         periodic = new SuperIO();
         deliveryWheel.setInverted(true);
-        deliveryBelts.setInverted(true);
         deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         indexSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);

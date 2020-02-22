@@ -66,12 +66,16 @@ public class Constants {
     */
     public static final double LIMELIGHT_HIGHT = 23;
     public static final double LIMELIGHT_PITCH = 30;
-    public static final double TURRET_MAX_SPEED = .2;
-    public static final double TURRET_ANGLE_KP = .23;
-    public static final double TURRET_ANGLE_KD = 4;
+    public static final double TURRET_MAX_SPEED = .13;
+    public static final double TURRET_ANGLE_KP = .3;
+    public static final double TURRET_ANGLE_KI = 0.001;
+    public static final double TURRET_ANGLE_KD = 12;
+    public static final double TURRET_OFFSET = 1.25; //VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
+    public static final double FLYWHEEL_DELTA_AMPS = 2.5;
+    public static final double TURRET_LOCKON_DELTA = 2;
 
-    public static double TURRET_LEFT_FLY_KP = 0.05; //0.05
+    public static double TURRET_LEFT_FLY_KP = 0.08; //0.05
     public static double TURRET_LEFT_FLY_KD = 0.0; //0.00
     public static double TURRET_LEFT_FLY_KF = 0.048; //0.048
 
@@ -164,8 +168,8 @@ public class Constants {
      */
     
     // Demands
-    public static final double FULL_BELT_DEMAND = .5;
-    public static final double INDEXER_DEMAND = .33;
+    public static final double FULL_BELT_DEMAND = .66;
+    public static final double INDEXER_DEMAND = .5;
     
     public static final double INTAKE_DEMAND = .75;
     public static final double HIGH_BELT_DEMAND = 1.15;
