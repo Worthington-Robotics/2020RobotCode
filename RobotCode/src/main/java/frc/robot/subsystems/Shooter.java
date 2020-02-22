@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.loops.ILooper;
@@ -64,8 +65,8 @@ public class Shooter extends Subsystem {
     public void readPeriodicInputs() {
         if (SmartDashboard.getBoolean("Shooter/Turret/SaveChanges", false)) {
             updateTurretPID(SmartDashboard.getNumber("Shooter/Turret/P", 0),
-            SmartDashboard.getNumber("Shooter/Turret/I", 0), SmartDashboard.getNumber("Shooter/Turret/D", 0),
-            SmartDashboard.getNumber("Shooter/Turret/F", 0));
+                    SmartDashboard.getNumber("Shooter/Turret/I", 0), SmartDashboard.getNumber("Shooter/Turret/D", 0),
+                    SmartDashboard.getNumber("Shooter/Turret/F", 0));
         }
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
@@ -104,6 +105,10 @@ public class Shooter extends Subsystem {
                     break;
                 case PID_MODE:
                     periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * 6200;
+                    periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
+                    break;
+                case RAMP_UP:
+                    periodic.flywheelRPMDemand = 2400 * Math.min(Timer.getFPGATimestamp() - periodic.rampUpTime, 2);
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
                 case LIMELIGHT_MODE:
@@ -159,9 +164,8 @@ public class Shooter extends Subsystem {
             leftFlywheelFalcon.set(ControlMode.PercentOutput, periodic.flywheelDemand);
             break;
         case PID_MODE:
-            leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
-            break;
         case LIMELIGHT_MODE:
+        case RAMP_UP:
             leftFlywheelFalcon.set(ControlMode.Velocity, periodic.flywheelDemand);
             break;
         default:
@@ -291,17 +295,11 @@ public class Shooter extends Subsystem {
         return degree / Constants.TURRET_DEGREES_TO_TICKS; // 360 / (4096 * 9.5)
     }
 
-    /**
-     * Takes in ta (See Limelight Docs) and outputs lateral distance from robot to
-     * target in inches Equation came from a degree 2 polynomial regression on data
-     * points recorded manually
-     * 
-     * @return lateral distance from limelight lens to target in inches
-     */
-
-    public double calculateRPM(double distance) {
-        return 0; // TODO implement the equation to calculate the required inittal velocity and
-                  // then convert to revolutions per Miniut
+    public void setRampUp() {
+        if (flywheelMode != MotorControlMode.RAMP_UP) {
+            flywheelMode = MotorControlMode.RAMP_UP;
+            periodic.rampUpTime = Timer.getFPGATimestamp();
+        }
     }
 
     public double RPMToTicksPer100ms(double RPM) {
@@ -365,7 +363,7 @@ public class Shooter extends Subsystem {
     }
 
     public enum MotorControlMode {
-        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE, RECENTER_MODE;
+        DISABLED, OPEN_LOOP, PID_MODE, LIMELIGHT_MODE, RECENTER_MODE, RAMP_UP;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
@@ -403,6 +401,7 @@ public class Shooter extends Subsystem {
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
+        public double rampUpTime = 0.0;
         public double AmpsL = 0.0;
         public double AmpsR = 0.0;
         public double targetX = 0.0;
