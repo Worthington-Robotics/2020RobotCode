@@ -141,9 +141,11 @@ public class Superstructure extends Subsystem {
     public synchronized void writePeriodicOutputs() {
         if (periodic.state == SuperState.INTAKE) {
             periodic.intakeWheelsDemand = Constants.FULL_BELT_DEMAND;
-        }
-        if (periodic.state != SuperState.DUMP_SYSTEM && periodic.state != SuperState.SHOOT
-                && periodic.state != SuperState.INTAKE) {
+        } else if (periodic.state == SuperState.SHOOT) {
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
+        } else if (periodic.state == SuperState.DUMP_SYSTEM) {
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -Constants.FULL_BELT_DEMAND;
+        } else {
             if (!BALL2Detected() && BALL5Detected()) {
                 periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
             } else {
