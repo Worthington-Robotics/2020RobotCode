@@ -13,7 +13,7 @@ public class ArmAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setArmExtension(Value.kForward);
+        superstructure.setArmExtension(true);
     }
 
     @Override public void onLoop() {}
@@ -23,7 +23,7 @@ public class ArmAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setArmExtension(Value.kReverse);
+        superstructure.setArmExtension(false);
 
     }
 }

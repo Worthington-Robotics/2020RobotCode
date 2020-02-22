@@ -17,7 +17,7 @@ public class ShootAction extends Action {
     @Override public void onLoop() {}
 
     @Override public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override public void onStop() {}

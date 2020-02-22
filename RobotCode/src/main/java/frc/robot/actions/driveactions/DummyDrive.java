@@ -8,12 +8,12 @@ public class DummyDrive extends Action {
 
     @Override
     public void onStart() {
-        Drive.getInstance().setOpenLoop(new DriveSignal(0.1, 0.1));
+        Drive.getInstance().setOpenLoop(new DriveSignal(0.25, 0.25));
     }
 
     @Override
     public void onLoop() {
-        Drive.getInstance().setOpenLoop(new DriveSignal(0.1, 0.1));
+        Drive.getInstance().setOpenLoop(new DriveSignal(0.25, 0.25));
     }
 
     @Override
