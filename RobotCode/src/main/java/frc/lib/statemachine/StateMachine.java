@@ -44,7 +44,7 @@ public class StateMachine implements Logable{
 
             //validate the descriptor before use
             if(handleNull(descriptor, true)) return;
-
+            System.out.println("Starting auto " + descriptor.getClass().getName());
             //run the onStart code from the descriptor
             descriptor.onStart();
 

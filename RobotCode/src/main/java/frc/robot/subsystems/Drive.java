@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -85,7 +86,9 @@ public class Drive extends Subsystem {
                         }
                         break;
                     case OPEN_LOOP:
-                        setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[0]));
+                        if (!DriverStation.getInstance().isAutonomous()) {
+                            setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[0]));
+                        }
                         break;
                     case ANGLE_PID:
                         periodic.PIDOutput = anglePID.update(periodic.gyro_heading.getDegrees());
@@ -124,8 +127,8 @@ public class Drive extends Subsystem {
         periodic.AnglePIDError = anglePID.getError();
         periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
 
-        //periodic.left_error = driveFrontLeft.getClosedLoopError();
-        //periodic.right_error = driveFrontRight.getClosedLoopError();
+        // periodic.left_error = driveFrontLeft.getClosedLoopError();
+        // periodic.right_error = driveFrontRight.getClosedLoopError();
 
         periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity();
         periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity();
@@ -146,9 +149,9 @@ public class Drive extends Subsystem {
         if (Constants.DEBUG) {
             periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
             periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
-            periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);    
+            periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
         }
-        
+
     }
 
     @Override
@@ -162,7 +165,7 @@ public class Drive extends Subsystem {
             driveFrontLeft.set(ControlMode.Velocity, periodic.left_demand);
             driveFrontRight.set(ControlMode.Velocity, periodic.right_demand);
         }
-        trans.set(periodic.TransState? Value.kForward : Value.kReverse);
+        trans.set(periodic.TransState ? Value.kForward : Value.kReverse);
     }
 
     private Drive() {
@@ -181,9 +184,9 @@ public class Drive extends Subsystem {
         if (Constants.DEBUG) {
             SmartDashboard.putNumber("D Slider", 0);
             SmartDashboard.putNumber("P Slider", 0);
-            SmartDashboard.putBoolean("Save Changes", false);    
+            SmartDashboard.putBoolean("Save Changes", false);
         }
-        
+
     }
 
     public PIDF getAnglePID() {
@@ -424,7 +427,6 @@ public class Drive extends Subsystem {
         // periodic.gyro_heading.getDegrees());
         SmartDashboard.putBoolean("isInverse", periodic.inverse);
 
-        
         SmartDashboard.putNumber("Drive/AnglePID/Set Point", periodic.gyro_pid_angle);
         SmartDashboard.putNumber("Drive/AnglePID/Error", periodic.AnglePIDError);
 
@@ -437,17 +439,19 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Drive/Left/Current", periodic.leftCurrent);
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
-        //SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
-        //SmartDashboard.putNumber("Drive/Left/Talon Voltage Out", driveFrontLeft.getMotorOutputVoltage());
+        // SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
+        // SmartDashboard.putNumber("Drive/Left/Talon Voltage Out",
+        // driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
 
         SmartDashboard.putNumber("Drive/Right/Current", periodic.rightCurrent);
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
-        //SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
-        //SmartDashboard.putNumber("Drive/Right/Talon Voltage Out", driveFrontRight.getMotorOutputVoltage());
+        // SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
+        // SmartDashboard.putNumber("Drive/Right/Talon Voltage Out",
+        // driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Right/Encoder Counts", periodic.right_pos_ticks);
-        
+
         if (Constants.DEBUG) {
             SmartDashboard.putNumber("Drive/AnglePID/P", PIDData[0]);
             SmartDashboard.putNumber("Drive/AnglePID/D", PIDData[2]);
@@ -465,12 +469,12 @@ public class Drive extends Subsystem {
     public class DriveIO extends PeriodicIO {
         // INPUTS
         public double left_pos_ticks = 0;
-        //public double left_error = 0;
+        // public double left_error = 0;
         public double left_velocity_ticks_per_100ms = 0;
         public double leftCurrent = 0;
 
         public double right_pos_ticks = 0;
-        //public double right_error = 0;
+        // public double right_error = 0;
         public double right_velocity_ticks_per_100ms = 0;
         public double rightCurrent = 0;
 
@@ -493,11 +497,11 @@ public class Drive extends Subsystem {
         public double ramp_Up_Counter = 0;
         public boolean TransState = false;
 
-        //public double left_accl = 0.0;
+        // public double left_accl = 0.0;
         public double left_demand = 0.0;
         public double left_distance = 0.0;
 
-        //public double right_accl = 0.0;
+        // public double right_accl = 0.0;
         public double right_demand = 0.0;
         public double right_distance = 0.0;
 

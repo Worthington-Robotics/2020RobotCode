@@ -64,8 +64,8 @@ public class Shooter extends Subsystem {
     public void readPeriodicInputs() {
         if (SmartDashboard.getBoolean("Shooter/Turret/SaveChanges", false)) {
             updateTurretPID(SmartDashboard.getNumber("Shooter/Turret/P", 0),
-                    SmartDashboard.getNumber("Shooter/Turret/I", 0), SmartDashboard.getNumber("Shooter/Turret/D", 0),
-                    SmartDashboard.getNumber("Shooter/Turret/F", 0));
+            SmartDashboard.getNumber("Shooter/Turret/I", 0), SmartDashboard.getNumber("Shooter/Turret/D", 0),
+            SmartDashboard.getNumber("Shooter/Turret/F", 0));
         }
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
@@ -74,16 +74,12 @@ public class Shooter extends Subsystem {
         periodic.turretAmps = turretControl.getStatorCurrent();
         periodic.AmpsL = leftFlywheelFalcon.getSupplyCurrent();
         periodic.AmpsR = rightFlywheelFalcon.getSupplyCurrent();
-        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0); // Makes all
-                                                                                                        // values
-                                                                                                        // positive with
-                                                                                                        // -1 being 0
-                                                                                                        // and 1 being 1
+        // Makes all values positive with -1 being 0 and 1 being 1
+        periodic.operatorFlywheelInput = HIDHelper.getAxisMapped(Constants.SECOND.getRawAxis(3), 1, 0);
         periodic.targetArea = ta.getDouble(0.0);
         periodic.targetX = tx.getDouble(0.0) + Constants.TURRET_OFFSET;
         periodic.targetV = tv.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
-        periodic.RPMClosedLoopError = rightFlywheelFalcon.getClosedLoopError();
         periodic.rotationsClosedLoopError = turretControl.getClosedLoopError();
         if (turretControl.getSelectedSensorPosition() >= 6000) {
             periodic.canUnfold = true;

@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.StateMachineDescriptor;
 //import frc.robot.autoactiongroups.*;
+import frc.robot.autoactiongroups.get10easy;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
@@ -13,7 +14,7 @@ import frc.lib.statemachine.StateMachineDescriptor;
  */
 enum UserSelection {
 
-    Auto1("Auto 1", 1),
+    Auto1("DummyDrive", 1),
     Auto2("Auto 2", 2),
     Auto3("Auto 3", 3),
     Auto4("Auto 4", 4),
@@ -89,7 +90,7 @@ public class AutoSelector {
         switch (usrAuto) {
 
             case Auto1:
-                return null;
+                return new get10easy();
 
             case Auto2:
                 return null;
