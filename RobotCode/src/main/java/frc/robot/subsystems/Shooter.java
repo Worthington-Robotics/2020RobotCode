@@ -68,7 +68,6 @@ public class Shooter extends Subsystem {
             SmartDashboard.getNumber("Shooter/Turret/F", 0));
         }
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
-        periodic.flywheelClosedLoopError = leftFlywheelFalcon.getClosedLoopError();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
         periodic.operatorInput = Constants.SECOND.getPOV();
         periodic.turretAmps = turretControl.getStatorCurrent();
@@ -80,7 +79,6 @@ public class Shooter extends Subsystem {
         periodic.targetX = tx.getDouble(0.0) + Constants.TURRET_OFFSET;
         periodic.targetV = tv.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
-        periodic.rotationsClosedLoopError = turretControl.getClosedLoopError();
         if (turretControl.getSelectedSensorPosition() >= 6000) {
             periodic.canUnfold = true;
         } else {

@@ -127,9 +127,6 @@ public class Drive extends Subsystem {
         periodic.AnglePIDError = anglePID.getError();
         periodic.gyro_heading = Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).rotateBy(periodic.gyro_offset);
 
-        // periodic.left_error = driveFrontLeft.getClosedLoopError();
-        // periodic.right_error = driveFrontRight.getClosedLoopError();
-
         periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity();
         periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity();
 
