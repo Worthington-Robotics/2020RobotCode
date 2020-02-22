@@ -56,22 +56,24 @@ public class Superstructure extends Subsystem {
         intakeWheels = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
-        TOF1 = new SimTimeOfFlight(1);
-        TOF2 = new SimTimeOfFlight(2);
-        TOF3 = new SimTimeOfFlight(3);
-        TOF4 = new SimTimeOfFlight(4);
-        TOF5 = new SimTimeOfFlight(5);
+        TOF1 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF1_ID);
+        TOF2 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF2_ID);
+        TOF3 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF3_ID);
+        TOF4 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF4_ID);
+        TOF5 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF5_ID);
 
         reset();
         if (Constants.DEBUG) {
-            SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", TOF1.getRange());
-            SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_DISTANCE", TOF2.getRange());
-            SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_DISTANCE", TOF3.getRange());
-            SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
-            SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
-            SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);
-            SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", THRESHOLD_TOF4);
-            SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF5", THRESHOLD_TOF5);
+            SmartDashboard.putNumber("Superstructure/TOF_1_DISTANCE", TOF1.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_2_DISTANCE", TOF2.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_3_DISTANCE", TOF3.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", TOF5.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", TOF3.getRange());
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF4", THRESHOLD_TOF4);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF5", THRESHOLD_TOF5);
         }
     }
 
@@ -81,6 +83,11 @@ public class Superstructure extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
+            SmartDashboard.putNumber("Superstructure/TOF_1_DISTANCE", TOF1.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_2_DISTANCE", TOF2.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_3_DISTANCE", TOF3.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", TOF5.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", TOF3.getRange());
             THRESHOLD_TOF1 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
             THRESHOLD_TOF2 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
             THRESHOLD_TOF3 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);

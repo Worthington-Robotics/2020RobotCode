@@ -32,9 +32,11 @@ public class Constants {
     //Spark Ports
 
     // TOF IDs
-    public static final int FLIGHT_SENSOR_DELIVERY = 3;
-    public static final int FLIGHT_SENSOR_INDEX = 2;
-    public static final int FLIGHT_SENSOR_INTAKE = 1;
+    public static final int SUPERSTURCTURE_TOF1_ID = 1;
+    public static final int SUPERSTURCTURE_TOF2_ID = 2;
+    public static final int SUPERSTURCTURE_TOF3_ID = 3;
+    public static final int SUPERSTURCTURE_TOF4_ID = 4;
+    public static final int SUPERSTURCTURE_TOF5_ID = 5;
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 7;
