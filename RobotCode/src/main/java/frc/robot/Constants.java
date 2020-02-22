@@ -18,8 +18,8 @@ public class Constants {
     public static final int DRIVE_MIDDLE_RIGHT_ID = 2;
     public static final int DRIVE_BACK_RIGHT_ID = 3;
     public static final int COLOR_WHEEL = 4;
-    public static final int SHOOTER_FLYWHEEL_RIGHT = 5;
-    public static final int SHOOTER_FLYWHEEL_LEFT = 6;
+    public static final int SHOOTER_FLYWHEEL_LEFT = 5;
+    public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
     public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
     public static final int SUPERSTRUCTURE_DELIVERY_BELT = 8;
     public static final int SUPERSTRUCTURE_DELIVERY_WHEEL = 9;
@@ -66,31 +66,38 @@ public class Constants {
     */
     public static final double LIMELIGHT_HIGHT = 23;
     public static final double LIMELIGHT_PITCH = 30;
-    public static final double TURRET_MAX_SPEED = .2;
-    public static final double TURRET_ANGLE_KP = .23;
-    public static final double TURRET_ANGLE_KD = 4;
+    public static final double TURRET_MAX_SPEED = .13;
+    public static final double TURRET_ANGLE_KP = .3;
+    public static final double TURRET_ANGLE_KI = 0.001;
+    public static final double TURRET_ANGLE_KD = 12;
+    public static final double TURRET_OFFSET = 1.25; //VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
+    public static final double TURRET_LOCKON_DELTA = 2;
 
-    public static double TURRET_LEFT_FLY_KP = 0.0; //TODO tune
-    public static double TURRET_LEFT_FLY_KD = 0.0; //TODO tune
-    public static double TURRET_LEFT_FLY_KF = 0.0; //TODO tune
-    
-    public static double TURRET_RIGHT_FLY_KP = 0.0; //TODO tune
-    public static double TURRET_RIGHT_FLY_KD = 0.0; //TODO tune
-    public static double TURRET_RIGHT_FLY_KF = 0.0; //TODO tune
+    public static double TURRET_LEFT_FLY_KP = 0.08; //0.05
+    public static double TURRET_LEFT_FLY_KD = 0.0; //0.00
+    public static double TURRET_LEFT_FLY_KF = 0.048; //0.048
 
     public static double VOLTAGE_COMP_TURRET = 11.5;
+    public static final double FLYWHEEL_DELTA_AMPS = 2.5;
+
+    public static final double FLYWHEEL_RPM_PER_IN = 4.4;
+    public static final double FLYWHEEL_BASE_RPM = 4000;
+    public static final double FLYWHEEL_SPINUP_TIME = 1500; //ms 
+    public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
+    public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
+    public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
-    public static final int leftTurretLimit = -8000;
-    public static final int rightTurretLimit = 8000;
+    public static final int leftTurretLimit = -7000;
+    public static final int rightTurretLimit = 7000;
 
     /**
      *   Drivetrain tuned values ------------------------------
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static final boolean RAMPUP = false;
     public static final boolean ENABLE_MP_TEST_MODE = false;
     public static final double MP_TEST_SPEED = 72; //in/s
@@ -168,8 +175,8 @@ public class Constants {
      */
     
     // Demands
-    public static final double FULL_BELT_DEMAND = .5;
-    public static final double INDEXER_DEMAND = .33;
+    public static final double FULL_BELT_DEMAND = .66;
+    public static final double INDEXER_DEMAND = .5;
     
     public static final double INTAKE_DEMAND = .75;
     public static final double HIGH_BELT_DEMAND = 1.15;
@@ -177,10 +184,14 @@ public class Constants {
     // Sensor distance before stopping (in mm)
     public static final double DISTANCE_STOP_MM = 25.4;
     // Time (in seconds)
-    public static final double TIME_TILL_STATIONARY = 1.1;
+    public static final double TIME_TILL_STATIONARY = .25;
     // Pulse constants (in seconds)
-    public static final double PULSE_LENGTH = .75;
-    public static final double PULSE_COOLDOWN = .25;
+    public static final double PULSE_LENGTH = .25;
+    public static final double PULSE_COOLDOWN = .1;
+
+    public static final double THRESHOLD_DELIVERY = 75;
+    public static final double THRESHOLD_INDEXER = 100;
+    public static final double THRESHOLD_INTAKE = 75;
     
     /**
      * Climber constants

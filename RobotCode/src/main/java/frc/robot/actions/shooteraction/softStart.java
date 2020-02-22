@@ -3,31 +3,25 @@ package frc.robot.actions.shooteraction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class SetFlywheelPID extends Action {
-
-
+public class softStart extends Action {
     /**
      * code to run on action start
-     * 
      */
     @Override
     public void onStart() {
-            Shooter.getInstance().setFlywheelRPM(0);
+            Shooter.getInstance().setRampUp();
     }
 
     /**
      * code to run while action loops
-     * <p>
-     * approx every 20 miliseconds
+     * <p>approx every 20 miliseconds
      */
     @Override
     public void onLoop() {
-
     }
 
     /**
-     * method that tells the state machine the action is finished earlier than the
-     * scheduler
+     * method that tells the state machine the action is finished earlier than the scheduler
      *
      * @return true when action is ready to self terminate
      */

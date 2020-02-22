@@ -22,5 +22,6 @@ public class DumpAction extends Action {
 
     @Override public void onStop() {
         superstructure.initState();
+        superstructure.setIntakeDemand(0);
     }
 }

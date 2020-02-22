@@ -5,25 +5,22 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.util.Util;
 import frc.robot.Constants;
 
 public class Climber extends Subsystem {
-    public DoubleSolenoid unfoldSolenoid, climbSolenoid;
-    public Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
+    private DoubleSolenoid unfoldSolenoid, climbSolenoid;
+    private Value unfoldCurrentState = Value.kReverse, unfoldIntendedState = Value.kReverse,
             climbCurrentState = Value.kReverse, climbIntendedState = Value.kReverse;
-    public boolean unfolded = false, climbed = false, intakeDown = false;
-    public double shooterAngle = 90;
-    public boolean climbBoolean, unfoldBoolean, readyToDownClimb, readyToFold, readyToUnfold, readyToClimb,
-            readyFolding;
+    private boolean unfolded = false, climbed = false, intakeDown = false;
+    private boolean climbBoolean, unfoldBoolean;
 
-    public Climber() {
+    private Climber() {
         unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
         climbSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
         reset();
     }
 
-    public static Climber mClimber = new Climber();
+    private static Climber mClimber = new Climber();
 
     public static Climber getInstance() {
         return mClimber;
@@ -34,7 +31,8 @@ public class Climber extends Subsystem {
         unfoldCurrentState = unfoldSolenoid.get();
         climbCurrentState = climbSolenoid.get();
         intakeDown = true;
-        // shooterAngle = Shooter.getInstance();
+        unfolded = unfoldCurrentState == Value.kForward;
+        climbed = climbCurrentState == Value.kForward;
         // intakeDown = Superstructure.getInstance().getIntakeDown();
     }
 
@@ -50,32 +48,24 @@ public class Climber extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 if (!Constants.DEBUG) {
-                    if (intakeDown) {
-                        if ((Util.epsilonEquals(shooterAngle, Constants.CLIMBER_SHOOTER_REQMT,
-                                Constants.CLIMBER_EPSILON_CONST))) {
-                            unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
-                            // System.out.println("Unfold Happened");
+                    if (!climbed) {
+                        if (intakeDown) {
+                            if (Shooter.getInstance().canUnfold()) {
+                                unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
+                            }    
                         }
                     }
-                    unfolded = unfoldCurrentState == Value.kForward;
-
                     if (unfolded) {
                         climbIntendedState = climbBoolean ? Value.kForward : Value.kReverse;
                     } else {
                         climbIntendedState = Value.kReverse;
                         climbBoolean = false;
                     }
-
-                    climbed = climbCurrentState == Value.kForward;
-
                 } else {
                     unfoldIntendedState = unfoldBoolean ? Value.kForward : Value.kReverse;
                     climbIntendedState = climbBoolean ? Value.kForward : Value.kReverse;
                 }
-                readyToClimb = unfolded;
-                readyToDownClimb = unfolded && climbed;
-                readyToUnfold = !climbed;
-                readyToFold = unfolded && !climbed;
+                
             }
 
             @Override
