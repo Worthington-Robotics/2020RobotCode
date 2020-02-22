@@ -93,7 +93,7 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onStart(double timestamp) {
-
+                periodic.flywheelRPMDemand = periodic.flywheelRPM;
             }
 
             @Override
@@ -271,7 +271,7 @@ public class Shooter extends Subsystem {
 
     public void disable() {
         turretMode = MotorControlMode.OPEN_LOOP;
-        flywheelMode = MotorControlMode.DISABLED;
+        flywheelMode = MotorControlMode.RAMP_UP;
     }
 
     /**
