@@ -358,6 +358,10 @@ public class Shooter extends Subsystem {
         return periodic.RPMClosedLoopError;
     }
 
+    public boolean canUnfold() {
+        return periodic.canUnfold;
+    }
+
     public Subsystem.PeriodicIO getLogger() {
         return periodic;
     }
