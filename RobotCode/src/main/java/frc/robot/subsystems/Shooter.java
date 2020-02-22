@@ -103,26 +103,26 @@ public class Shooter extends Subsystem {
                 switch (flywheelMode) {
                 case OPEN_LOOP:
                     periodic.flywheelDemand = periodic.operatorFlywheelInput;
-                    periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * 6200;
+                    periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * Constants.FLYWHEEL_MAX_RPM;
                     break;
                 case PID_MODE:
-                    periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * 6200;
+                    periodic.flywheelRPMDemand = periodic.operatorFlywheelInput * Constants.FLYWHEEL_MAX_RPM;
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
                 case RAMP_UP:
-                    if (Util.epsilonEquals(periodic.flywheelRPMDemand, 4800, 100)) {
+                    if (Util.epsilonEquals(periodic.flywheelRPMDemand, Constants.FLYWHEEL_IDLE_RPM, 100)) {
                         setLimelightRPM();
                     } else {
-                        periodic.flywheelRPMDemand = Math.min(periodic.flywheelRPMDemand + 32, 4800);
+                        periodic.flywheelRPMDemand = Math.min(periodic.flywheelRPMDemand + (Constants.FLYWHEEL_IDLE_RPM/(Constants.FLYWHEEL_SPINUP_TIME)), Constants.FLYWHEEL_IDLE_RPM);
                         periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     }
                     break;
                 case LIMELIGHT_MODE:
                     double range = limelightRanging();
                     if (range > 60 && range < 400) {
-                        periodic.flywheelRPMDemand = (limelightRanging() * 4.4) + 4000;
+                        periodic.flywheelRPMDemand = (limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM;
                     } else {
-                        periodic.flywheelRPMDemand = 4800;
+                        periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM;
                     }
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
@@ -309,11 +309,11 @@ public class Shooter extends Subsystem {
     }
 
     public double RPMToTicksPer100ms(double RPM) {
-        return RPM * 3.413; // .1 * 2048 * 4/60
+        return RPM * Constants.FLYWHEEL_TP100MS; // .1 * 2048 * 4/60
     }
 
     public double TicksPer100msToRPM(double Ticks) {
-        return Ticks / 3.413; // .1 * 2048 * 4 / 60
+        return Ticks / Constants.FLYWHEEL_TP100MS; // .1 * 2048 * 4 / 60
     }
 
     public void setFlywheelRPM(double demand) {

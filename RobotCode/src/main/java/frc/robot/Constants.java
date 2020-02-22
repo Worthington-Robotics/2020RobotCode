@@ -72,7 +72,6 @@ public class Constants {
     public static final double TURRET_ANGLE_KD = 12;
     public static final double TURRET_OFFSET = 1.25; //VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
-    public static final double FLYWHEEL_DELTA_AMPS = 2.5;
     public static final double TURRET_LOCKON_DELTA = 2;
 
     public static double TURRET_LEFT_FLY_KP = 0.08; //0.05
@@ -80,6 +79,14 @@ public class Constants {
     public static double TURRET_LEFT_FLY_KF = 0.048; //0.048
 
     public static double VOLTAGE_COMP_TURRET = 11.5;
+    public static final double FLYWHEEL_DELTA_AMPS = 2.5;
+
+    public static final double FLYWHEEL_RPM_PER_IN = 4.4;
+    public static final double FLYWHEEL_BASE_RPM = 4000;
+    public static final double FLYWHEEL_SPINUP_TIME = 1500; //ms 
+    public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
+    public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
+    public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
     public static final int leftTurretLimit = -7000;
