@@ -193,11 +193,11 @@ public class Constants {
     public static final double THRESHOLD_INDEXER = 100;
     public static final double THRESHOLD_INTAKE = 75;
 
-    public static final double THRESHOLD_TOF1 = 75;
-    public static final double THRESHOLD_TOF2 = 75;
-    public static final double THRESHOLD_TOF3 = 75;
-    public static final double THRESHOLD_TOF4 = 75;
-    public static final double THRESHOLD_TOF5 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF2 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF3 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF4 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF5 = 75;
     
     /**
      * Climber constants

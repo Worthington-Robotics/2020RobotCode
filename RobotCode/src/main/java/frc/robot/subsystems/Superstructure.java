@@ -42,11 +42,11 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight TOF4;
     private SimTimeOfFlight TOF5;
 
-    private double THRESHOLD_TOF1 = Constants.THRESHOLD_TOF1;
-    private double THRESHOLD_TOF2 = Constants.THRESHOLD_TOF2;
-    private double THRESHOLD_TOF3 = Constants.THRESHOLD_TOF3;
-    private double THRESHOLD_TOF4 = Constants.THRESHOLD_TOF4;
-    private double THRESHOLD_TOF5 = Constants.THRESHOLD_TOF5;
+    private double THRESHOLD_TOF1 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF1;
+    private double THRESHOLD_TOF2 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF2;
+    private double THRESHOLD_TOF3 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF3;
+    private double THRESHOLD_TOF4 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF4;
+    private double THRESHOLD_TOF5 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF5;
 
     private Superstructure() {
         deliveryWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
@@ -102,11 +102,11 @@ public class Superstructure extends Subsystem {
          * distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
          */
 
-        periodic.TOF1Detected = TOF1.getRange() < Constants.THRESHOLD_TOF1;
-        periodic.TOF2Detected = TOF2.getRange() < Constants.THRESHOLD_TOF2;
-        periodic.TOF3Detected = TOF3.getRange() < Constants.THRESHOLD_TOF3;
-        periodic.TOF4Detected = TOF4.getRange() < Constants.THRESHOLD_TOF4;
-        periodic.TOF5Detected = TOF5.getRange() < Constants.THRESHOLD_TOF5;
+        periodic.BALL1Detected = TOF1.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF1;
+        periodic.BALL2Detected = TOF2.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF2;
+        periodic.BALL3Detected = TOF3.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF3;
+        periodic.BALL4Detected = TOF4.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF4;
+        periodic.BALL5Detected = TOF5.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF5;
     }
 
     @Override
@@ -267,23 +267,23 @@ public class Superstructure extends Subsystem {
     }
 
     public boolean BALL1Detected() {
-        return periodic.TOF1Detected;
+        return periodic.BALL1Detected;
     }
 
     public boolean BALL2Detected() {
-        return periodic.TOF2Detected;
+        return periodic.BALL2Detected;
     }
 
     public boolean BALL3Detected() {
-        return periodic.TOF3Detected;
+        return periodic.BALL3Detected;
     }
 
     public boolean BALL4Detected() {
-        return periodic.TOF4Detected;
+        return periodic.BALL4Detected;
     }
 
     public boolean BALL5Detected() {
-        return periodic.TOF5Detected;
+        return periodic.BALL5Detected;
     }
 
     public boolean intakeDown() {
@@ -311,11 +311,11 @@ public class Superstructure extends Subsystem {
         public boolean indexDetected;
         public boolean intakeDetected;
         // TOF Booleans
-        public boolean TOF1Detected;
-        public boolean TOF2Detected;
-        public boolean TOF3Detected;
-        public boolean TOF4Detected;
-        public boolean TOF5Detected;
+        public boolean BALL1Detected;
+        public boolean BALL2Detected;
+        public boolean BALL3Detected;
+        public boolean BALL4Detected;
+        public boolean BALL5Detected;
     }
 
     public enum SuperState {
