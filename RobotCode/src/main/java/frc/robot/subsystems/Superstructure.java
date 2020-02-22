@@ -25,6 +25,7 @@ public class Superstructure extends Subsystem {
 
     // Global
     private SuperIO periodic;
+    private TimerBoolean ball4Timer;
 
     // Indexer
     private TalonSRX deliveryWheel;
@@ -49,6 +50,7 @@ public class Superstructure extends Subsystem {
     private double THRESHOLD_TOF5 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF5;
 
     private Superstructure() {
+        ball4Timer = new TimerBoolean(.25);
         deliveryWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
         deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
@@ -67,8 +69,8 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/TOF_1_DISTANCE", TOF1.getRange());
             SmartDashboard.putNumber("Superstructure/TOF_2_DISTANCE", TOF2.getRange());
             SmartDashboard.putNumber("Superstructure/TOF_3_DISTANCE", TOF3.getRange());
-            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", TOF5.getRange());
-            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", TOF3.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", TOF4.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", TOF5.getRange());
             SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
             SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
             SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);
@@ -86,8 +88,8 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/TOF_1_DISTANCE", TOF1.getRange());
             SmartDashboard.putNumber("Superstructure/TOF_2_DISTANCE", TOF2.getRange());
             SmartDashboard.putNumber("Superstructure/TOF_3_DISTANCE", TOF3.getRange());
-            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", TOF5.getRange());
-            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", TOF3.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", TOF4.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", TOF5.getRange());
             THRESHOLD_TOF1 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
             THRESHOLD_TOF2 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
             THRESHOLD_TOF3 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);
@@ -109,11 +111,11 @@ public class Superstructure extends Subsystem {
          * distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
          */
 
-        periodic.BALL1Detected = TOF1.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF1;
-        periodic.BALL2Detected = TOF2.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF2;
-        periodic.BALL3Detected = TOF3.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF3;
-        periodic.BALL4Detected = TOF4.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF4;
-        periodic.BALL5Detected = TOF5.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF5;
+        periodic.BALL1Detected = TOF1.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF1 && TOF1.getRange() != 0.0;
+        periodic.BALL2Detected = TOF2.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF2 && TOF2.getRange() != 0.0;
+        periodic.BALL3Detected = TOF3.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF3 && TOF3.getRange() != 0.0;
+        periodic.BALL4Detected = TOF4.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF4 && TOF4.getRange() != 0.0;
+        periodic.BALL5Detected = TOF5.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF5 && TOF5.getRange() != 0.0;
     }
 
     @Override
@@ -126,7 +128,7 @@ public class Superstructure extends Subsystem {
 
             @Override
             public void onLoop(double timestamp) {
-                
+
             }
 
             @Override
@@ -177,11 +179,11 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/DELIVERY_WHEELS_DEMAND", periodic.deliveryWheelDemand);
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
-        SmartDashboard.putBoolean("Superstructure/BALL1", BALL1Detected());
-        SmartDashboard.putBoolean("Superstructure/BALL2", BALL2Detected());
-        SmartDashboard.putBoolean("Superstructure/BALL3", BALL3Detected());
-        SmartDashboard.putBoolean("Superstructure/BALL4", BALL4Detected());
-        SmartDashboard.putBoolean("Superstructure/BALL5", BALL5Detected());
+        SmartDashboard.putBoolean("Superstructure/BALL1", periodic.BALL1Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL2", periodic.BALL2Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL3", periodic.BALL3Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL4", periodic.BALL4Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL5", periodic.BALL5Detected);
         if (Constants.DEBUG) {
             /*
              * SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW",
@@ -286,7 +288,15 @@ public class Superstructure extends Subsystem {
     }
 
     public boolean BALL4Detected() {
-        return periodic.BALL4Detected;
+        if (periodic.BALL4Detected) {
+            if (!ball4Timer.isStarted()) {
+                ball4Timer.start();
+            } else if (ball4Timer.getBoolean()) {
+                return true;
+            }
+        }
+        ball4Timer.stop();
+        return false;
     }
 
     public boolean BALL5Detected() {
