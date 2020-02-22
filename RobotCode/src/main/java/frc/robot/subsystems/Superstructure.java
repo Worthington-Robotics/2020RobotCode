@@ -184,7 +184,11 @@ public class Superstructure extends Subsystem {
          * 
          * }
          */
-        if (periodic.state != SuperState.DUMP_SYSTEM && periodic.state != SuperState.SHOOT) {
+        if (periodic.state == SuperState.INTAKE) {
+            periodic.intakeWheelsDemand = Constants.FULL_BELT_DEMAND;
+        }
+        if (periodic.state != SuperState.DUMP_SYSTEM && periodic.state != SuperState.SHOOT
+                && periodic.state != SuperState.INTAKE) {
             if (!BALL2Detected() && BALL5Detected()) {
                 periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
             } else {
@@ -217,6 +221,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putBoolean("Superstructure/Index_TOF", indexDetected());
         SmartDashboard.putBoolean("Superstructure/Intake_TOF", intakeDetected());
         SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
+        SmartDashboard.putNumber("Superstructure/DELIVERY_WHEELS_DEMAND", periodic.deliveryWheelDemand);
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
         SmartDashboard.putBoolean("Superstructure/BALL1", BALL1Detected());
@@ -250,6 +255,10 @@ public class Superstructure extends Subsystem {
 
     public void initState() {
         periodic.state = SuperState.INIT;
+    }
+
+    public void intakeState() {
+        periodic.state = SuperState.INTAKE;
     }
 
     /**
