@@ -1,11 +1,8 @@
 package frc.robot.subsystems;
 
-import javax.lang.model.util.ElementScanner6;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -81,11 +78,6 @@ public class Shooter extends Subsystem {
         periodic.targetX = tx.getDouble(0.0) + Constants.TURRET_OFFSET;
         periodic.targetV = tv.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
-        if (turretControl.getSelectedSensorPosition() >= 6000) {
-            periodic.canUnfold = true;
-        } else {
-            periodic.canUnfold = false;
-        }
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -213,7 +205,6 @@ public class Shooter extends Subsystem {
             SmartDashboard.putNumber("Shooter/Flywheel/RPMDemand", periodic.flywheelRPMDemand);
             SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
             SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
-            SmartDashboard.putBoolean("Shooter/Turret/Can Unfold", periodic.canUnfold);
         }
         SmartDashboard.putBoolean("Shooter/Flywheel/AmpDeltaError",
                 Math.abs(periodic.AmpsL - periodic.AmpsR) > Constants.FLYWHEEL_DELTA_AMPS);
@@ -406,10 +397,6 @@ public class Shooter extends Subsystem {
         return goal;
     }
 
-    public boolean canUnfold() {
-        return periodic.canUnfold;
-    }
-
     public class ShooterIO extends Subsystem.PeriodicIO {
         public double rampUpTime = 0.0;
         public double AmpsL = 0.0;
@@ -432,6 +419,5 @@ public class Shooter extends Subsystem {
         public double flywheelVelocity = 0;
         public double flywheelClosedLoopError = 0;
         public double turretAmps = 0.0;
-        public boolean canUnfold = false;
     }
 }

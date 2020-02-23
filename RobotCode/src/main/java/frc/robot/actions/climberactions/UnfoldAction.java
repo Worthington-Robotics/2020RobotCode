@@ -7,7 +7,7 @@ import frc.robot.subsystems.Climber;
 public class UnfoldAction extends Action {
     @Override
     public void onStart() {
-        Climber.getInstance().setUnfold(true);
+        Climber.getInstance().wantUnfold(true);
         System.out.println("Climb is unfolding.");
     }
 
