@@ -54,8 +54,8 @@ public class Robot extends TimedRobot {
     private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton intake = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
-    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 5);
-    private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 6);
+    private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
+    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -203,7 +203,7 @@ public class Robot extends TimedRobot {
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whenPressed(Action.toCommand(new ShootAction()));
+        shootOne.whileHeld(Action.toCommand(new ShootAction()));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));

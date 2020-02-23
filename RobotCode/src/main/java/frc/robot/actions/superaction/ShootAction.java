@@ -17,8 +17,10 @@ public class ShootAction extends Action {
     @Override public void onLoop() {}
 
     @Override public boolean isFinished() {
-        return true;
+        return false;
     }
 
-    @Override public void onStop() {}
+    @Override public void onStop() {
+        superstructure.initState();
+    }
 }
