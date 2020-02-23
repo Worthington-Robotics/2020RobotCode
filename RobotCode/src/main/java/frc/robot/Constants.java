@@ -85,14 +85,14 @@ public class Constants {
 
     public static final double FLYWHEEL_RPM_PER_IN = 4.4;
     public static final double FLYWHEEL_BASE_RPM = 4000;
-    public static final double FLYWHEEL_SPINUP_TIME = 1500; //ms 
+    public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
     public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
     public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
-    public static final int leftTurretLimit = -7000;
-    public static final int rightTurretLimit = 7000;
+    public static final int leftTurretLimit = -7400;
+    public static final int rightTurretLimit = 7400;
 
     /**
      *   Drivetrain tuned values ------------------------------
@@ -177,10 +177,10 @@ public class Constants {
      */
     
     // Demands
-    public static final double FULL_BELT_DEMAND = .66;
+    public static final double FULL_BELT_DEMAND = 1;
     public static final double INDEXER_DEMAND = .5;
     
-    public static final double INTAKE_DEMAND = .75;
+    public static final double INTAKE_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = 1.15;
     public static final double STOP_BELT_DEMAND = 0;
     // Sensor distance before stopping (in mm)

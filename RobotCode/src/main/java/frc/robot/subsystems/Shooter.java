@@ -93,7 +93,7 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onStart(double timestamp) {
-                periodic.flywheelRPMDemand = periodic.flywheelRPM;
+                periodic.flywheelRPMDemand = TicksPer100msToRPM(leftFlywheelFalcon.getSelectedSensorVelocity());
             }
 
             @Override
