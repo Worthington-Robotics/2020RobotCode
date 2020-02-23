@@ -51,9 +51,6 @@ public class Robot extends TimedRobot {
     private JoystickButton folder = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton climber = new JoystickButton(Constants.MASTER, 6);
 
-    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
-    private JoystickButton releaseIntake = new JoystickButton(Constants.MASTER, 5);
-
     //Co-pilot joystick buttons
     private POVTrigger recenter = new POVTrigger(Constants.SECOND);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
@@ -76,7 +73,9 @@ public class Robot extends TimedRobot {
             ColorWheel.getInstance(), 
             Climber.getInstance(),
             Superstructure.getInstance(),
-            Shooter.getInstance()), true);
+            Shooter.getInstance(),
+            Lights.getInstance()),
+             true);
 
         // create the master looper threads
         enabledLooper = new Looper();
@@ -210,11 +209,9 @@ public class Robot extends TimedRobot {
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
         shootOne.whileHeld(Action.toCommand(new ShootAction()));
-        delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
-        releaseIntake.toggleWhenPressed(Action.toCommand(new ArmAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
         VersionData.WriteBuildInfoToDashboard();
     }

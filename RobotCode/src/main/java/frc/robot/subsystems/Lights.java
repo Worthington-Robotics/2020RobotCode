@@ -52,8 +52,8 @@ public class Lights extends Subsystem {
             currentLightMode = lightModes.beforeStart;
         }
         // TODO Implement targeting
-        uprightsUp = Climber.getInstance().unfolded;
-        climbUp = Climber.getInstance().climbed;
+        uprightsUp = Climber.getInstance().getUnfolded();
+        climbUp = Climber.getInstance().getClimbed();
         if (uprightsUp && !climbUp) {
             currentLightMode = lightModes.colorWheel;
             switch(ColorWheel.getInstance().cDetected()) {
@@ -70,7 +70,7 @@ public class Lights extends Subsystem {
             currentLightMode = lightModes.indexNum;
         }
         //Testing 
-        currentLightMode = lightModes.Testing;
+        //currentLightMode = lightModes.Testing;
         //colorWheelColor = Color.kBlue;
         //numberOfBalls = 5;
     }
