@@ -16,6 +16,7 @@ import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
+import frc.lib.util.POVTrigger;
 import frc.lib.util.VersionData;
 import frc.robot.subsystems.*;
 import frc.robot.actions.driveactions.*;
@@ -42,26 +43,25 @@ public class Robot extends TimedRobot {
     private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb, colorWheelPos, colorWheelRot, colorWheelStop;
 
     //Master joystick buttons
-    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton shift = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 3);
+    private POVTrigger shift = new POVTrigger(Constants.MASTER);
+    private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton folder = new JoystickButton(Constants.MASTER, 5);
+    private JoystickButton climber = new JoystickButton(Constants.MASTER, 6);
+
     private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
     private JoystickButton releaseIntake = new JoystickButton(Constants.MASTER, 5);
-    private JoystickButton intake = new JoystickButton(Constants.MASTER, 6);
-    private JoystickButton dump = new JoystickButton(Constants.MASTER, 8);
-    private JoystickButton folder = new JoystickButton(Constants.MASTER,11);
-    private JoystickButton climber = new JoystickButton(Constants.MASTER, 12);
 
     //Co-pilot joystick buttons
+    private POVTrigger recenter = new POVTrigger(Constants.SECOND);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
-    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);//
-    private JoystickButton recenter = new JoystickButton(Constants.SECOND, 3);
-    private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 4);
-    private JoystickButton colorWheelManual = new JoystickButton(Constants.SECOND, 5);
-    private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.SECOND, 6);
-    private JoystickButton turretControl = new JoystickButton(Constants.SECOND, 7);//
-    private JoystickButton flyWheelPID = new JoystickButton(Constants.SECOND, 9);
-    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 11);
+    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
+    private JoystickButton intake = new JoystickButton(Constants.SECOND, 3);
+    private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
+    private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
+    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -201,18 +201,15 @@ public class Robot extends TimedRobot {
     public void initButtons(){
         // create buttons and register actions
         recenter.whileHeld(Action.toCommand(new Recenter(0)));
-        //disableSuperstructure.whenPressed(Action.toCommand(action));
         turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
         dump.whileHeld(Action.toCommand(new DumpAction()));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
-        flyWheelPID.whenPressed(Action.toCommand(new SetFlywheelPID()));
-        turretControl.whenPressed(Action.toCommand(new ManualTurretControl()));
         colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
         colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whenPressed(Action.toCommand(new ShootAction()));
+        shootOne.whileHeld(Action.toCommand(new ShootAction()));
         delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
