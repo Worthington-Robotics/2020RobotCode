@@ -3,7 +3,7 @@ package frc.robot.actions.shooteraction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class softStart extends Action {
+public class SoftStart extends Action {
     /**
      * code to run on action start
      */

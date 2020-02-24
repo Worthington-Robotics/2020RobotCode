@@ -3,8 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.StateMachineDescriptor;
 //import frc.robot.autoactiongroups.*;
-import frc.robot.autoactiongroups.get10easy;
-import frc.robot.autoactiongroups.get10hard;
+import frc.robot.autoactiongroups.GetTenEasy;
+import frc.robot.autoactiongroups.GetTenHard;
 import frc.robot.autoactiongroups.ThreeBallAnywhere;
 
 /**
@@ -92,13 +92,13 @@ public class AutoSelector {
         switch (usrAuto) {
 
             case Auto1:
-                return new get10easy();
+                return new GetTenEasy();
 
             case Auto2:
                 return new ThreeBallAnywhere();
 
             case Auto3:
-                return new get10hard();
+                return new GetTenHard();
 
             case Auto4:
                 return null;
