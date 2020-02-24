@@ -19,7 +19,7 @@ public class DemandUtil {
 
     public static void disable(TalonSRX... motors) {
         for (TalonSRX motor : motors) {
-            motor.set(ControlMode.PercentOutput, Constants.STOP_BELT_DEMAND);
+            motor.set(ControlMode.PercentOutput, Constants.STOP_DEMAND);
         }
     }
 

@@ -179,10 +179,10 @@ public class Superstructure extends Subsystem {
             break;
         case ONE_TO_THREE_BALLS:
         case FOUR_BALLS:
-            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_DEMAND;
             break;
         case FULL_SYSTEM:
-            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_DEMAND;
             break;
         case SHOOT:
             periodic.deliveryWheelDemand = 1;

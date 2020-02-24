@@ -28,7 +28,7 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setIndexBeltDemand(Constants.STOP_BELT_DEMAND);
+        superstructure.setIndexBeltDemand(Constants.STOP_DEMAND);
 
     }
 }

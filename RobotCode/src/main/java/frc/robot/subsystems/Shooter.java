@@ -125,17 +125,17 @@ public class Shooter extends Subsystem {
                 }
                 switch (turretMode) {
                 case OPEN_LOOP:
-                    if (periodic.operatorInput == 90 && !(periodic.turretEncoder > Constants.rightTurretLimit)) {
+                    if (periodic.operatorInput == 90 && !(periodic.turretEncoder > Constants.RIGHT_TURRET_LIMIT)) {
                         periodic.turretDemand = Constants.TURRET_MAX_SPEED;
-                    } else if (periodic.operatorInput == 270 && !(periodic.turretEncoder < Constants.leftTurretLimit)) {
+                    } else if (periodic.operatorInput == 270 && !(periodic.turretEncoder < Constants.LEFT_TURRET_LIMIT)) {
                         periodic.turretDemand = -Constants.TURRET_MAX_SPEED;
                     } else {
                         periodic.turretDemand = 0;
                     }
                     break;
                 case PID_MODE:
-                    if (periodic.turretEncoder < Constants.leftTurretLimit
-                            || periodic.turretEncoder > Constants.rightTurretLimit)
+                    if (periodic.turretEncoder < Constants.LEFT_TURRET_LIMIT
+                            || periodic.turretEncoder > Constants.RIGHT_TURRET_LIMIT)
                         turretMode = MotorControlMode.DISABLED;
                     periodic.turretDemand = limelightGoalAngle();
                     break;
@@ -351,6 +351,10 @@ public class Shooter extends Subsystem {
         periodic.turretDemand = newDemand;
     }
 
+    public double getTurretEncoder() {
+        return periodic.turretEncoder;
+    }
+
     public boolean getRPMOnTarget() {
         return periodic.RPMOnTarget;
     }
@@ -375,11 +379,6 @@ public class Shooter extends Subsystem {
         }
     }
 
-    /**
-     * 
-     * @param angle angle offset given by the limelight (tx)
-     * @return goal ticks to turret ticks
-     */
     public double limelightRanging() {
         // Equation that takes in ta (See Limelight Docs) and outputs distance from
         // target in inches
@@ -392,11 +391,11 @@ public class Shooter extends Subsystem {
 
     public double limelightGoalAngle() {
         double goal = degreesToTicks(periodic.targetX) + periodic.turretEncoder;
-        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
-            goal = Constants.leftTurretLimit;
+        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.LEFT_TURRET_LIMIT) {
+            goal = Constants.LEFT_TURRET_LIMIT;
         }
-        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) > Constants.rightTurretLimit) {
-            goal = Constants.rightTurretLimit;
+        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) > Constants.RIGHT_TURRET_LIMIT) {
+            goal = Constants.RIGHT_TURRET_LIMIT;
         }
         return goal;
     }

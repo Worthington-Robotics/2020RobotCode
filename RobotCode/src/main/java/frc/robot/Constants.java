@@ -91,8 +91,8 @@ public class Constants {
     public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
-    public static final int leftTurretLimit = -7400;
-    public static final int rightTurretLimit = 7400;
+    public static final int LEFT_TURRET_LIMIT = -7400;
+    public static final int RIGHT_TURRET_LIMIT = 7400;
 
     /**
      *   Drivetrain tuned values ------------------------------
@@ -175,31 +175,23 @@ public class Constants {
     /**
      * Superstructure constants
      */
-    
     // Demands
     public static final double FULL_BELT_DEMAND = 1;
     public static final double INDEXER_DEMAND = .5;
-    
     public static final double INTAKE_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = 1.15;
-    public static final double STOP_BELT_DEMAND = 0;
-    // Sensor distance before stopping (in mm)
-    public static final double DISTANCE_STOP_MM = 25.4;
-    // Time (in seconds)
-    public static final double TIME_TILL_STATIONARY = .25;
-    // Pulse constants (in seconds)
-    public static final double PULSE_LENGTH = .25;
-    public static final double PULSE_COOLDOWN = .1;
-
-    public static final double THRESHOLD_DELIVERY = 75;
-    public static final double THRESHOLD_INDEXER = 100;
-    public static final double THRESHOLD_INTAKE = 75;
-
+    public static final double STOP_DEMAND = 0;
+    // Thresholds (in mm)
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 75;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF2 = 75;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF3 = 75;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF4 = 75;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF5 = 75;
+    // Time (in seconds)
+    public static final double TIME_TILL_STATIONARY = .25;
+    // Pulse constants (in seconds) -- Deprecated
+//    public static final double PULSE_LENGTH = .25;
+//    public static final double PULSE_COOLDOWN = .1;
     
     /**
      * Climber constants
