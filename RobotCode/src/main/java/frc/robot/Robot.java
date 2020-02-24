@@ -55,10 +55,11 @@ public class Robot extends TimedRobot {
     private POVTrigger recenter = new POVTrigger(Constants.SECOND);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
     private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
-    private JoystickButton intake = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
+    private JoystickButton intakeUP = new JoystickButton(Constants.SECOND, 9);
+    private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
 
     /**
      * This function is run when the robot is first started up and should be used

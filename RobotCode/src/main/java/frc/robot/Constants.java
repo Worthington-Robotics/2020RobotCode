@@ -59,7 +59,7 @@ public class Constants {
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, 0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, -0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.01, -0.33, 0.99, 0.8, 2);    
 
@@ -83,8 +83,8 @@ public class Constants {
     public static double VOLTAGE_COMP_TURRET = 11.5;
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
-    public static final double FLYWHEEL_RPM_PER_IN = 4.4;
-    public static final double FLYWHEEL_BASE_RPM = 4000;
+    public static final double FLYWHEEL_RPM_PER_IN = 4.6; //4.4
+    public static final double FLYWHEEL_BASE_RPM = 4100; //4000
     public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
     public static final double FLYWHEEL_MAX_RPM = 6200; //RPM

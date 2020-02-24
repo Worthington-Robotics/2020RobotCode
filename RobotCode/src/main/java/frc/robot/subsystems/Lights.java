@@ -63,11 +63,8 @@ public class Lights extends Subsystem {
                 case 'Y': colorWheelColor = Color.kGold; break;
                 case 'B': colorWheelColor = Color.kBlue; break;
             }
-        } else if (uprightsUp && climbUp) {
-            currentLightMode = lightModes.allianceColor;
-        }
-        if (intakeDown) {
-            currentLightMode = lightModes.indexNum;
+        } else{
+            currentLightMode = lightModes.targeting;
         }
         //Testing 
         //currentLightMode = lightModes.Testing;
@@ -86,7 +83,7 @@ public class Lights extends Subsystem {
             }
             break;
         case targeting:
-            if (targeted) {
+            if (Shooter.getInstance().onTarget()) {
                 for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                     mLEDBuffer.setRGB(i, 0, 150, 0);
                 }
@@ -165,7 +162,7 @@ public class Lights extends Subsystem {
 
     @Override
     public void outputTelemetry() {
-        SmartDashboard.putNumber("Length of Strind", mLEDBuffer.getLength());
+        SmartDashboard.putNumber("Length of String", mLEDBuffer.getLength());
     }
 
     enum lightModes {
