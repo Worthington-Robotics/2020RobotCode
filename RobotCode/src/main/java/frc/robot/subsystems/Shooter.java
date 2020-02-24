@@ -78,6 +78,7 @@ public class Shooter extends Subsystem {
         periodic.targetX = tx.getDouble(0.0) + Constants.TURRET_OFFSET;
         periodic.targetV = tv.getDouble(0.0);
         periodic.targetY = ty.getDouble(0.0);
+        periodic.onTarget = Math.abs(periodic.targetX) < Constants.TURRET_LOCKON_DELTA && periodic.targetV == 1;
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -209,8 +210,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putBoolean("Shooter/Flywheel/AmpDeltaError",
                 Math.abs(periodic.AmpsL - periodic.AmpsR) > Constants.FLYWHEEL_DELTA_AMPS);
         SmartDashboard.putNumber("Shooter/Turret/Amps", periodic.turretAmps);
-        SmartDashboard.putBoolean("Shooter/Turret/OnTarget",
-                Math.abs(periodic.targetX) < Constants.TURRET_LOCKON_DELTA && periodic.targetV == 1);
+        SmartDashboard.putBoolean("Shooter/Turret/OnTarget", periodic.onTarget);
         SmartDashboard.putNumber("Shooter/Turret/Angle", (ticksToDegrees(periodic.turretEncoder) + 360) % 360);
         SmartDashboard.putNumber("Shooter/Flywheel/RPM", TicksPer100msToRPM(periodic.flywheelVelocity));
     }
@@ -292,6 +292,10 @@ public class Shooter extends Subsystem {
         return degree / Constants.TURRET_DEGREES_TO_TICKS; // 360 / (4096 * 9.5)
     }
 
+    public boolean onTarget()
+    {
+        return periodic.onTarget;
+    }
     public void setRampUp() {
         if (flywheelMode != MotorControlMode.RAMP_UP) {
             flywheelMode = MotorControlMode.RAMP_UP;
@@ -419,5 +423,6 @@ public class Shooter extends Subsystem {
         public double flywheelVelocity = 0;
         public double flywheelClosedLoopError = 0;
         public double turretAmps = 0.0;
+        public boolean onTarget = false;
     }
 }

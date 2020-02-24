@@ -22,6 +22,11 @@ import frc.robot.subsystems.*;
 import frc.robot.actions.driveactions.*;
 import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
+//import frc.robot.actions.colorwheelactions.ColorWheelPosition;
+//import frc.robot.actions.colorwheelactions.ColorWheelRotations;
+//import frc.robot.actions.colorwheelactions.ColorWheelStop;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.actions.shooteraction.*;
 import frc.robot.actions.superaction.*;
 
@@ -35,6 +40,7 @@ import frc.robot.actions.superaction.*;
 public class Robot extends TimedRobot {
     private SubsystemManager manager;
     private Looper enabledLooper, disabledLooper;
+    private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb, colorWheelPos, colorWheelRot, colorWheelStop;
 
     //Master joystick buttons
     private POVTrigger shift = new POVTrigger(Constants.MASTER);
@@ -45,17 +51,15 @@ public class Robot extends TimedRobot {
     private JoystickButton folder = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton climber = new JoystickButton(Constants.MASTER, 6);
 
-    private JoystickButton delivery = new JoystickButton(Constants.MASTER, 4);
-    private JoystickButton releaseIntake = new JoystickButton(Constants.MASTER, 5);
-
     //Co-pilot joystick buttons
     private POVTrigger recenter = new POVTrigger(Constants.SECOND);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
     private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
-    private JoystickButton intake = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
+    private JoystickButton intakeUP = new JoystickButton(Constants.SECOND, 9);
+    private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -70,7 +74,9 @@ public class Robot extends TimedRobot {
             ColorWheel.getInstance(), 
             Climber.getInstance(),
             Superstructure.getInstance(),
-            Shooter.getInstance()), true);
+            Shooter.getInstance(),
+            Lights.getInstance()),
+             true);
 
         // create the master looper threads
         enabledLooper = new Looper();
@@ -204,11 +210,9 @@ public class Robot extends TimedRobot {
         shift.whileHeld(Action.toCommand(new Shift()));
         gyroLock.whileHeld(Action.toCommand(new GyroLock()));
         shootOne.whileHeld(Action.toCommand(new ShootAction()));
-        delivery.whileHeld(Action.toCommand(new DeliveryBeltAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
-        releaseIntake.toggleWhenPressed(Action.toCommand(new ArmAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
         VersionData.WriteBuildInfoToDashboard();
     }
