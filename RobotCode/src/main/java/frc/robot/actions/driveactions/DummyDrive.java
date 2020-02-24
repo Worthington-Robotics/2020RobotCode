@@ -13,7 +13,7 @@ public class DummyDrive extends Action {
 
     @Override
     public void onLoop() {
-        Drive.getInstance().setOpenLoop(new DriveSignal(0.25, 0.25));
+        Drive.getInstance().setOpenLoop(new DriveSignal(0.15, 0.15));
     }
 
     @Override

@@ -32,9 +32,11 @@ public class Constants {
     //Spark Ports
 
     // TOF IDs
-    public static final int FLIGHT_SENSOR_DELIVERY = 3;
-    public static final int FLIGHT_SENSOR_INDEX = 2;
-    public static final int FLIGHT_SENSOR_INTAKE = 1;
+    public static final int SUPERSTURCTURE_TOF1_ID = 1;
+    public static final int SUPERSTURCTURE_TOF2_ID = 2;
+    public static final int SUPERSTURCTURE_TOF3_ID = 3;
+    public static final int SUPERSTURCTURE_TOF4_ID = 4;
+    public static final int SUPERSTURCTURE_TOF5_ID = 5;
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 7;
@@ -49,16 +51,16 @@ public class Constants {
     public static final int INTAKE_LOW_ID = 6;
     public static final int INTAKE_HIGH_ID = 1;
     //Color Sensor Port
-    public static final int COLOR_SENSOR_PORT = 0;
+    public static final int COLOR_SENSOR_PORT = 1;
     
     //LED Data/Ports
-    public static final int LED_PORT = 1;
-    public static final int LED_LENGTH = 60;
+    public static final int LED_PORT = 0;
+    public static final int LED_LENGTH = 36;
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, -0.65, 0.4, 2);
-    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, -0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, 0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, 0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.01, -0.33, 0.99, 0.8, 2);    
 
     /* 
@@ -70,7 +72,7 @@ public class Constants {
     public static final double TURRET_ANGLE_KP = .3;
     public static final double TURRET_ANGLE_KI = 0.001;
     public static final double TURRET_ANGLE_KD = 12;
-    public static final double TURRET_OFFSET = 1.25; //VISION FINE TUNING 25ft
+    public static final double TURRET_OFFSET = 1.5; //1.25 VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
     public static final double TURRET_LOCKON_DELTA = 2;
 
@@ -81,16 +83,16 @@ public class Constants {
     public static double VOLTAGE_COMP_TURRET = 11.5;
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
-    public static final double FLYWHEEL_RPM_PER_IN = 4.4;
-    public static final double FLYWHEEL_BASE_RPM = 4000;
-    public static final double FLYWHEEL_SPINUP_TIME = 1500; //ms 
+    public static final double FLYWHEEL_RPM_PER_IN = 5; //4.4
+    public static final double FLYWHEEL_BASE_RPM = 3900; //4000
+    public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
     public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
     public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
-    public static final int leftTurretLimit = -7000;
-    public static final int rightTurretLimit = 7000;
+    public static final int leftTurretLimit = -7400;
+    public static final int rightTurretLimit = 7400;
 
     /**
      *   Drivetrain tuned values ------------------------------
@@ -175,10 +177,10 @@ public class Constants {
      */
     
     // Demands
-    public static final double FULL_BELT_DEMAND = .66;
+    public static final double FULL_BELT_DEMAND = 1;
     public static final double INDEXER_DEMAND = .5;
     
-    public static final double INTAKE_DEMAND = .75;
+    public static final double INTAKE_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = 1.15;
     public static final double STOP_BELT_DEMAND = 0;
     // Sensor distance before stopping (in mm)
@@ -192,6 +194,12 @@ public class Constants {
     public static final double THRESHOLD_DELIVERY = 75;
     public static final double THRESHOLD_INDEXER = 100;
     public static final double THRESHOLD_INTAKE = 75;
+
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF2 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF3 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF4 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF5 = 75;
     
     /**
      * Climber constants

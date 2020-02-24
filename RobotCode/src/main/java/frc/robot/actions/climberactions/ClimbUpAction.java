@@ -1,17 +1,14 @@
 package frc.robot.actions.climberactions;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Climber;
 
 
 public class ClimbUpAction extends Action {
-    private boolean done;
+
     @Override
     public void onStart() {
-        Climber.getInstance().setExtend(true);
-        done = true;
-        System.out.println("Climb is Up");
+        Climber.getInstance().wantClimb(true);
     }
 
     @Override
@@ -21,7 +18,7 @@ public class ClimbUpAction extends Action {
 
     @Override
     public boolean isFinished() {
-        return done;
+        return true;
     }
 
     @Override
