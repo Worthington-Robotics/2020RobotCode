@@ -29,7 +29,6 @@ public class Superstructure extends Subsystem {
 
     // Indexer
     private TalonSRX deliveryWheel;
-    private TalonSRX deliveryBelts;
     private TalonSRX indexTopBelt;
 
     // Intake
@@ -51,7 +50,6 @@ public class Superstructure extends Subsystem {
 
     private Superstructure() {
         deliveryWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
-        deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
         intakeWheels = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
@@ -160,11 +158,9 @@ public class Superstructure extends Subsystem {
                     if (!periodic.ball5Detected) {
                         periodic.state = SuperState.FOUR_BALLS;
                     }
-
                     break;
 
-                case SHOOT:
-                    break;
+                case SHOOT: break;
                 default:
                 }
             }
@@ -180,29 +176,26 @@ public class Superstructure extends Subsystem {
         switch (periodic.state) {
         case INIT:
             periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
-            periodic.deliveryBeltsDemand = Constants.STOP_BELT_DEMAND;
             break;
         case ONE_TO_THREE_BALLS:
         case FOUR_BALLS:
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
             break;
         case FULL_SYSTEM:
-            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
             break;
         case SHOOT:
-            periodic.deliveryBeltsDemand = 1;
             periodic.deliveryWheelDemand = 1;
             periodic.indexTopBeltDemand = .75;
             periodic.intakeWheelsDemand = 1;
             break;
         case DUMP_SYSTEM:
-            periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = -Constants.FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = -Constants.FULL_BELT_DEMAND;
             periodic.intakeWheelsDemand = -Constants.INTAKE_DEMAND;
             break;
         default:
         }
 
-        deliveryBelts.set(ControlMode.PercentOutput, periodic.deliveryBeltsDemand);
         deliveryWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
         indexTopBelt.set(ControlMode.PercentOutput, periodic.indexTopBeltDemand);
         intakeWheels.set(ControlMode.PercentOutput, periodic.intakeWheelsDemand);
@@ -213,7 +206,6 @@ public class Superstructure extends Subsystem {
     @Override
     public void outputTelemetry() {
         SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
-        SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
         SmartDashboard.putNumber("Superstructure/DELIVERY_WHEELS_DEMAND", periodic.deliveryWheelDemand);
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
@@ -260,7 +252,6 @@ public class Superstructure extends Subsystem {
         deliveryWheel.setInverted(true);
         indexTopBelt.setInverted(false);
         intakeWheels.setInverted(false);
-        deliveryBelts.setInverted(false);
 
         tof1.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         tof2.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
@@ -276,10 +267,6 @@ public class Superstructure extends Subsystem {
 
     public void setIndexBeltDemand(double indexBeltDemand) {
         periodic.indexTopBeltDemand = indexBeltDemand;
-    }
-
-    public void setDeliveryBeltsDemand(double demand) {
-        periodic.deliveryBeltsDemand = demand;
     }
 
     public void setDeliveryWheelDemand(double demand) {
@@ -313,7 +300,6 @@ public class Superstructure extends Subsystem {
         public double indexBeltAmps = 0.0;
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;
-        public double deliveryBeltsDemand;
         // Intake Data
         public double intakeWheelsDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;

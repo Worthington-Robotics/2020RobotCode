@@ -5,7 +5,7 @@ import frc.lib.statemachine.StateMachineDescriptor;
 //import frc.robot.autoactiongroups.*;
 import frc.robot.autoactiongroups.get10easy;
 import frc.robot.autoactiongroups.get10hard;
-import frc.robot.autoactiongroups.get10medium;
+import frc.robot.autoactiongroups.ThreeBallAnywhere;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
@@ -95,7 +95,7 @@ public class AutoSelector {
                 return new get10easy();
 
             case Auto2:
-                return new get10medium();
+                return new ThreeBallAnywhere();
 
             case Auto3:
                 return new get10hard();
