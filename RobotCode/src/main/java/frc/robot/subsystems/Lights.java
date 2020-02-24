@@ -32,7 +32,7 @@ public class Lights extends Subsystem {
 
     @Override
     public void readPeriodicInputs() {
-        //intakeState = Superstructure.getInstance().getArmExtension();
+        //intakeState = Superstructure.getInstance().intakeDown();
         FMSOn = DriverStation.getInstance().isFMSAttached();
         if (intakeState == Value.kForward) {
             intakeDown = true;
@@ -79,7 +79,7 @@ public class Lights extends Subsystem {
             for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 // Sets the specified LED to the RGB values for red
                 mLEDBuffer.setLED(i, colorWheelColor);
-                System.out.println("Lights Set");
+                //System.out.println("Lights Set");
             }
             break;
         case targeting:
@@ -92,7 +92,7 @@ public class Lights extends Subsystem {
                     mLEDBuffer.setRGB(i, 150, 0, 0);
                 }
             }                
-            System.out.println("Lights Set");
+            //System.out.println("Lights Set");
             break;
         case indexNum:
             if (numberOfBalls >= 1 && numberOfBalls <= 4) {
@@ -104,13 +104,13 @@ public class Lights extends Subsystem {
                     mLEDBuffer.setHSV(i, i*(239/mLEDBuffer.getLength()), 226, 62);
                 }
             }
-            System.out.println("Lights Set");
+            //System.out.println("Lights Set");
             break;
         case allianceColor:
             for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 mLEDBuffer.setLED(i, allianceColor);
             }
-            System.out.println("Lights Set");
+            //System.out.println("Lights Set");
             break;
         case beforeStart:
             for (var i = 0; i < (mLEDBuffer.getLength() * (.2 * numberOfBalls)); i++) {
@@ -121,7 +121,7 @@ public class Lights extends Subsystem {
             for (var i = 0; i < mLEDBuffer.getLength(); i++) {
                 mLEDBuffer.setLED(i, Color.kPurple);
             }
-            System.out.println("Lights Set");
+            //System.out.println("Lights Set");
             break;
         }
         mled.setData(mLEDBuffer);

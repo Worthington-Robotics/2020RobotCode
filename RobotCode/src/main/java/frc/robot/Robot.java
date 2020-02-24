@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
+import frc.lib.util.DebouncedJoystickButton;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.POVTrigger;
 import frc.lib.util.VersionData;
@@ -48,8 +49,8 @@ public class Robot extends TimedRobot {
     private JoystickButton inverse = new JoystickButton(Constants.MASTER, 2);
     private JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
-    private JoystickButton folder = new JoystickButton(Constants.MASTER, 5);
-    private JoystickButton climber = new JoystickButton(Constants.MASTER, 6);
+    private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
+    private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
 
     //Co-pilot joystick buttons
     private POVTrigger recenter = new POVTrigger(Constants.SECOND);
@@ -58,7 +59,7 @@ public class Robot extends TimedRobot {
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
-    private JoystickButton intakeUP = new JoystickButton(Constants.SECOND, 9);
+    private DebouncedJoystickButton intakeUP = new DebouncedJoystickButton(Constants.SECOND, 9);
     private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
 
     /**

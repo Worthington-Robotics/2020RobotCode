@@ -8,9 +8,8 @@ import frc.robot.actions.superaction.ShootAction;
 
 public class get10hard extends StateMachineDescriptor {
     public get10hard() {
-        addSequential(new TurretPIDControl(), 1000);
-        addParallel(new Action[] {new DummyDrive(), new TurretPIDControl()}, 2000);
-        addParallel(new Action[] {new ShootAction(), new TurretPIDControl(), new DummyDrive()}, 7000);
-        addParallel(new Action[] {new ShootAction(), new TurretPIDControl()}, 5000);
+        addParallel(new Action[] {new DummyDrive(), new TurretPIDControl()}, 2500);
+        addParallel(new Action[] {new ShootAction(), new TurretPIDControl(), new DummyDrive()}, 8000);
+        addParallel(new Action[] {new ShootAction(), new TurretPIDControl()}, 4500);
     }
 }
