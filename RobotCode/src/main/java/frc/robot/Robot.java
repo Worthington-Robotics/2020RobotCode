@@ -214,6 +214,7 @@ public class Robot extends TimedRobot {
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
+        intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));
         VersionData.WriteBuildInfoToDashboard();
     }
 }

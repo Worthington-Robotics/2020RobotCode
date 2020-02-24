@@ -72,7 +72,7 @@ public class Constants {
     public static final double TURRET_ANGLE_KP = .3;
     public static final double TURRET_ANGLE_KI = 0.001;
     public static final double TURRET_ANGLE_KD = 12;
-    public static final double TURRET_OFFSET = 1.25; //VISION FINE TUNING 25ft
+    public static final double TURRET_OFFSET = 1.25; //1.25 VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
     public static final double TURRET_LOCKON_DELTA = 2;
 
@@ -84,7 +84,7 @@ public class Constants {
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
     public static final double FLYWHEEL_RPM_PER_IN = 4.6; //4.4
-    public static final double FLYWHEEL_BASE_RPM = 4100; //4000
+    public static final double FLYWHEEL_BASE_RPM = 4000; //4000
     public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
     public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
