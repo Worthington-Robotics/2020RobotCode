@@ -104,7 +104,11 @@ public class ReflectingLogger<T> {
                     for(int i = 0; i < len; i++){
                         line.append(Array.get(entry.getKey().get(entry.getValue()), i) + " ");
                     }
-                }else if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
+                } else if(List.class.isAssignableFrom(entry.getKey().getType())){
+                    for(Object o : ((List)entry.getKey().get(entry.getValue()))){
+                        if(o != null)line.append(o + ", ");
+                    }
+                } else if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
                     line.append(((CSVWritable) entry.getKey().get(entry.getValue())).toCSV());
                 } else {
                     line.append(entry.getKey().get(entry.getValue()).toString());
@@ -180,7 +184,7 @@ public class ReflectingLogger<T> {
             return fileref;
         }
         else{
-            return new File(Filesystem.getLaunchDirectory(), "src\\main\\deploy\\" + getTimeStampedFileName(fileName));
+            return new File(Filesystem.getLaunchDirectory(), "src\\main\\sim\\" + getTimeStampedFileName(fileName));
         }
 
     }
