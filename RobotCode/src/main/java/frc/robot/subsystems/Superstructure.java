@@ -136,6 +136,9 @@ public class Superstructure extends Subsystem {
                     break;
 
                 case ONE_TO_THREE_BALLS:
+                    if (!periodic.ball1Detected) {
+                        periodic.state = SuperState.INIT;
+                    }
                     if (periodic.ball4Detected) {
                         if (!indexBoolean.isStarted()) {
                             indexBoolean.start();
@@ -149,6 +152,9 @@ public class Superstructure extends Subsystem {
                     break;
 
                 case FOUR_BALLS:
+                    if (!periodic.ball1Detected) {
+                        periodic.state = SuperState.INIT;
+                    }
                     if (periodic.ball5Detected) {
                         periodic.state = SuperState.FULL_SYSTEM;
                     }
@@ -160,7 +166,8 @@ public class Superstructure extends Subsystem {
                     }
                     break;
 
-                case SHOOT: break;
+                case SHOOT:
+                    break;
                 default:
                 }
             }
@@ -175,7 +182,8 @@ public class Superstructure extends Subsystem {
     public synchronized void writePeriodicOutputs() {
         switch (periodic.state) {
         case INIT:
-            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.FULL_BELT_DEMAND;
+            periodic.deliveryWheelDemand = .25;
+            periodic.indexTopBeltDemand = .75;
             break;
         case ONE_TO_THREE_BALLS:
         case FOUR_BALLS:
@@ -210,7 +218,6 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.ball1Detected);
-        // SmartDashboard.putBoolean("Superstructure/BALL2", periodic.ball2Detected);
         // SmartDashboard.putBoolean("Superstructure/BALL3", periodic.ball3Detected);
         SmartDashboard.putBoolean("Superstructure/BALL4", periodic.ball4Detected);
         SmartDashboard.putBoolean("Superstructure/BALL5", periodic.ball5Detected);
@@ -232,6 +239,10 @@ public class Superstructure extends Subsystem {
         if (!(periodic.state == SuperState.SHOOT)) {
             periodic.state = SuperState.SHOOT;
         }
+    }
+
+    public SuperState getState() {
+        return periodic.state;
     }
 
     public void dumpSystem() {

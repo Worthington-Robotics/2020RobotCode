@@ -39,8 +39,8 @@ public class Constants {
     public static final int SUPERSTURCTURE_TOF5_ID = 5;
 
     //Solenoid Ports
-    public static final int TRANS_LOW_ID = 7;
-    public static final int TRANS_HIGH_ID = 0;
+    public static final int TRANS_LOW_ID = 0;
+    public static final int TRANS_HIGH_ID = 7;
     
     public static final int UNFOLD_LOW_ID = 4;
     public static final int UNFOLD_HIGH_ID = 3;
@@ -59,8 +59,8 @@ public class Constants {
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, 0.65, 0.4, 2);
-    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, 0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0, 0.65, 0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0, 0.45, 0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.01, -0.33, 0.99, 0.8, 2);    
 
     /* 
@@ -68,23 +68,23 @@ public class Constants {
     */
     public static final double LIMELIGHT_HIGHT = 23;
     public static final double LIMELIGHT_PITCH = 30;
-    public static final double TURRET_MAX_SPEED = .13;
-    public static final double TURRET_ANGLE_KP = .3;
-    public static final double TURRET_ANGLE_KI = 0.001;
-    public static final double TURRET_ANGLE_KD = 12;
-    public static final double TURRET_OFFSET = 1.5; //1.25 VISION FINE TUNING 25ft
+    public static final double TURRET_MAX_SPEED = .17;
+    public static final double TURRET_ANGLE_KP = .8; // SAFE .3
+    public static final double TURRET_ANGLE_KI = 0.003; // SAFE .001
+    public static final double TURRET_ANGLE_KD = 50; // SAFE 12
+    public static final double TURRET_OFFSET = 1.25; //1.25 VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
-    public static final double TURRET_LOCKON_DELTA = 2;
+    public static final double TURRET_LOCKON_DELTA = 1.5;
 
-    public static double TURRET_LEFT_FLY_KP = 0.08; //0.05
+    public static double TURRET_LEFT_FLY_KP = 0.08; //0.08
     public static double TURRET_LEFT_FLY_KD = 0.0; //0.00
     public static double TURRET_LEFT_FLY_KF = 0.048; //0.048
 
-    public static double VOLTAGE_COMP_TURRET = 11.5;
+    public static double VOLTAGE_COMP_FLYWHEEL = 10;
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
-    public static final double FLYWHEEL_RPM_PER_IN = 5; //4.4
-    public static final double FLYWHEEL_BASE_RPM = 3900; //4000
+    public static final double FLYWHEEL_RPM_PER_IN = 4.4; //4.4
+    public static final double FLYWHEEL_BASE_RPM = 4000; //4000
     public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
     public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
@@ -99,7 +99,7 @@ public class Constants {
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final boolean RAMPUP = false;
     public static final boolean ENABLE_MP_TEST_MODE = false;
     public static final double MP_TEST_SPEED = 72; //in/s
@@ -195,7 +195,7 @@ public class Constants {
     public static final double THRESHOLD_INDEXER = 100;
     public static final double THRESHOLD_INTAKE = 75;
 
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 75;
+    public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 50;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF2 = 75;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF3 = 75;
     public static final double SUPERSTRUCTURE_THRESHOLD_TOF4 = 75;
