@@ -118,6 +118,10 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
+        if (SmartDashboard.getBoolean("Drive/PID/SaveChanges", false) && Constants.DEBUG) {
+            updateDrivePID(SmartDashboard.getNumber("Drive/PID/P", 0), SmartDashboard.getNumber("Drive/PID/I", 0),
+                    SmartDashboard.getNumber("Drive/PID/D", 0), SmartDashboard.getNumber("Drive/PID//F", 0));
+        }
         if (periodic.TransState) {
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK_SHIFTED);
         } else {
@@ -143,11 +147,6 @@ public class Drive extends Subsystem {
         periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
         periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
 
-        if (Constants.DEBUG) {
-            periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
-            periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
-            periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
-        }
 
     }
 
@@ -166,6 +165,11 @@ public class Drive extends Subsystem {
     }
 
     private Drive() {
+        SmartDashboard.putBoolean("Drive/PID/SaveChanges", false);
+        SmartDashboard.putNumber("Drive/PID/P", 0);
+        SmartDashboard.putNumber("Drive/PID/I", 0);
+        SmartDashboard.putNumber("Drive/PID/D", 0);
+        SmartDashboard.putNumber("Drive/PID/F", 0);
         anglePID = new PIDF(Constants.ANGLE_KP, Constants.ANGLE_KD);
         anglePID.setContinuous(true);
         driveFrontLeft = new TalonFX(Constants.DRIVE_FRONT_LEFT_ID);
@@ -178,11 +182,6 @@ public class Drive extends Subsystem {
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
-        if (Constants.DEBUG) {
-            SmartDashboard.putNumber("D Slider", 0);
-            SmartDashboard.putNumber("P Slider", 0);
-            SmartDashboard.putBoolean("Save Changes", false);
-        }
 
     }
 
@@ -203,6 +202,18 @@ public class Drive extends Subsystem {
         periodic.gyro_offset = heading.rotateBy(Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).inverse());
         System.out.println("Gyro offset: " + periodic.gyro_offset.getDegrees());
         periodic.gyro_heading = heading;
+    }
+
+    public void updateDrivePID(double P, double I, double D, double F) {
+        driveFrontLeft.config_kP(0, P);
+        driveFrontLeft.config_kI(0, I);
+        driveFrontLeft.config_kD(0, D);
+        driveFrontLeft.config_kF(0, F);
+
+        driveFrontRight.config_kP(0, P);
+        driveFrontRight.config_kI(0, I);
+        driveFrontRight.config_kD(0, D);
+        driveFrontRight.config_kF(0, F);
     }
 
     public double getLeftEncoderRotations() {

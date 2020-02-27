@@ -99,9 +99,9 @@ public class Constants {
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static final boolean RAMPUP = false;
-    public static final boolean ENABLE_MP_TEST_MODE = false;
+    public static final boolean ENABLE_MP_TEST_MODE = true;
     public static final double MP_TEST_SPEED = 72; //in/s
 
     public static double LOOPER_DT = 0.01;    
@@ -129,15 +129,15 @@ public class Constants {
     public static final double ANGLE_KD = 0; // 0.1
     public static final double ANGLE_PID_EPISLON = 1;
 
-    public static final double DRIVE_RIGHT_KP = 0;
+    public static final double DRIVE_RIGHT_KP = .25;
     public static final double DRIVE_RIGHT_KI = 0.0;
-    public static final double DRIVE_RIGHT_KD = 0; // 20 for practice bot
-    public static final double DRIVE_RIGHT_KF = 0.25; //.485
+    public static final double DRIVE_RIGHT_KD = 5; // 20 for practice bot
+    public static final double DRIVE_RIGHT_KF = 0.065; //.485
 
-    public static final double DRIVE_LEFT_KP = 0; // .0885
+    public static final double DRIVE_LEFT_KP = .25; // .0885
     public static final double DRIVE_LEFT_KI = 0.0; //NO INTEGRAL it masks deeper problems
-    public static final double DRIVE_LEFT_KD = 25; //20 for practice
-    public static final double DRIVE_LEFT_KF = 0.53;
+    public static final double DRIVE_LEFT_KD = 5; //20 for practice
+    public static final double DRIVE_LEFT_KF = 0.065;
 
     /**
      * Color Wheel Constants ---------------------------

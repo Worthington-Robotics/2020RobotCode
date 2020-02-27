@@ -253,6 +253,11 @@ public class Superstructure extends Subsystem {
         periodic.state = SuperState.INIT;
     }
 
+    public void disable()
+    {
+        periodic.state = SuperState.DISABLED;
+    }
+
     /**
      * Reset the values of the sensors, SRX, and reinitialize the IO.
      */

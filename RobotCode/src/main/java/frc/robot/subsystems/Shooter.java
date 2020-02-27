@@ -67,7 +67,7 @@ public class Shooter extends Subsystem {
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
         periodic.operatorInput = Constants.SECOND.getPOV();
-        periodic.turretAmps = turretControl.getStatorCurrent();
+        periodic.turretAmps = turretControl.getSupplyCurrent();
         periodic.AmpsL = leftFlywheelFalcon.getSupplyCurrent();
         periodic.AmpsR = rightFlywheelFalcon.getSupplyCurrent();
         // Makes all values positive with -1 being 0 and 1 being 1
@@ -86,6 +86,7 @@ public class Shooter extends Subsystem {
             @Override
             public void onStart(double timestamp) {
                 periodic.flywheelRPMDemand = TicksPer100msToRPM(leftFlywheelFalcon.getSelectedSensorVelocity());
+                periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
             }
 
             @Override
