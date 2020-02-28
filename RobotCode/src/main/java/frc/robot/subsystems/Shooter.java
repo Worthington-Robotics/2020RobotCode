@@ -21,6 +21,7 @@ import frc.robot.Constants;
 public class Shooter extends Subsystem {
     private double[] tangent;
     private static Shooter m_Shooter = new Shooter();
+    private NetworkTable limelight;
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.OPEN_LOOP;
     private ShooterIO periodic;
@@ -32,6 +33,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry tv = table.getEntry("tv");
 
     private Shooter() {
+        limelight = NetworkTableInstance.getDefault().getTable("limelight");
         SmartDashboard.putNumber("Shooter/Turret/P", 0);
         SmartDashboard.putNumber("Shooter/Turret/I", 0);
         SmartDashboard.putNumber("Shooter/Turret/D", 0);
@@ -111,9 +113,9 @@ public class Shooter extends Subsystem {
                     }
                     break;
                 case LIMELIGHT_MODE:
-                    double range = limelightRanging();
-                    if (range > 60 && range < 700) {
-                        periodic.flywheelRPMDemand = (limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM;
+                    periodic.limelight_distance = limelightRanging();
+                    if (periodic.limelight_distance > 60 && periodic.limelight_distance < 700) {
+                        periodic.flywheelRPMDemand = Math.max(((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM), Constants.FLYWHEEL_MAX_RPM);
                     } else {
                         periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM;
                     }
@@ -143,7 +145,13 @@ public class Shooter extends Subsystem {
                     turretControl.set(ControlMode.Disabled, 0);
                     break;
                 }
+                if (periodic.targetV == 1) {
+                    limelight.getEntry("snapshot").setNumber(1);
+                } else {
+                    limelight.getEntry("snapshot").setNumber(0);
+                }
             }
+            
 
             @Override
             public void onStop(double timestamp) {
@@ -378,6 +386,11 @@ public class Shooter extends Subsystem {
         }
     }
 
+    public double getSupplyCurrent()
+    {
+        return periodic.turretAmps;
+    }
+
     /**
      * 
      * @param angle angle offset given by the limelight (tx)
@@ -426,5 +439,6 @@ public class Shooter extends Subsystem {
         public double flywheelClosedLoopError = 0;
         public double turretAmps = 0.0;
         public boolean onTarget = false;
+        public double limelight_distance = 0.0;
     }
 }

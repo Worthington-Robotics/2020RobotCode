@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +29,7 @@ public class Superstructure extends Subsystem {
     // Global
     private SuperIO periodic;
     private TimerBoolean indexBoolean = new TimerBoolean(Constants.TIME_TILL_STATIONARY);
+    private NetworkTable limelight;
 
     // Indexer
     private TalonSRX deliveryWheel;
@@ -60,6 +64,8 @@ public class Superstructure extends Subsystem {
         tof3 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF3_ID);
         tof4 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF4_ID);
         tof5 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF5_ID);
+
+        limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
         reset();
 
@@ -140,14 +146,7 @@ public class Superstructure extends Subsystem {
                         periodic.state = SuperState.INIT;
                     }
                     if (periodic.ball4Detected) {
-                        if (!indexBoolean.isStarted()) {
-                            indexBoolean.start();
-                        } else if (indexBoolean.getBoolean()) {
-                            periodic.state = SuperState.FULL_SYSTEM;
-                        }
-                    } else {
-                        // Invalidate if it isn't true
-                        indexBoolean.stop();
+                        periodic.state = SuperState.FOUR_BALLS;
                     }
                     break;
 
@@ -161,6 +160,9 @@ public class Superstructure extends Subsystem {
                     break;
 
                 case FULL_SYSTEM:
+                    if (!periodic.ball1Detected) {
+                        periodic.state = SuperState.INIT;
+                    }
                     if (!periodic.ball5Detected) {
                         periodic.state = SuperState.FOUR_BALLS;
                     }
@@ -186,6 +188,9 @@ public class Superstructure extends Subsystem {
             periodic.indexTopBeltDemand = .75;
             break;
         case ONE_TO_THREE_BALLS:
+            periodic.deliveryWheelDemand = Constants.STOP_BELT_DEMAND;
+            periodic.indexTopBeltDemand = .5;
+            break;
         case FOUR_BALLS:
             periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
             break;
@@ -219,7 +224,7 @@ public class Superstructure extends Subsystem {
         SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.ball1Detected);
         // SmartDashboard.putBoolean("Superstructure/BALL3", periodic.ball3Detected);
-        SmartDashboard.putBoolean("Superstructure/BALL4", periodic.ball4Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL3", periodic.ball4Detected);
         SmartDashboard.putBoolean("Superstructure/BALL5", periodic.ball5Detected);
         if (Constants.DEBUG) {
             /*
@@ -253,8 +258,7 @@ public class Superstructure extends Subsystem {
         periodic.state = SuperState.INIT;
     }
 
-    public void disable()
-    {
+    public void disable() {
         periodic.state = SuperState.DISABLED;
     }
 

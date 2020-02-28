@@ -16,7 +16,7 @@ public class TurretToStop extends Action {
      */
     @Override
     public void onStart() {
-        Shooter.getInstance().setTurretRPM(.2);
+        Shooter.getInstance().setTurretDemand(.2);
     }
 
     /**
@@ -26,7 +26,7 @@ public class TurretToStop extends Action {
      */
     @Override
     public void onLoop() {
-        Shooter.getInstance().setTurretRPM(.2);
+        Shooter.getInstance().setTurretDemand(.2);
     }
 
     /**
@@ -37,7 +37,7 @@ public class TurretToStop extends Action {
      */
     @Override
     public boolean isFinished() {
-        return Shooter.getInstance().getShooterAngle() > 80 || Shooter.getInstance().getShooterAngle() < -80;
+        return Shooter.getInstance().getSupplyCurrent() > 4;
     }
 
     /**
