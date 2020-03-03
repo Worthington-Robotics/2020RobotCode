@@ -2,12 +2,19 @@ package frc.robot.actions.colorwheelactions;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Lights;
 
-public class ColorSearch extends Action {
+public class LightsStateTest extends Action {
+    private int state = 0;
+
+    public LightsStateTest(int state)
+    {
+        this.state = state;
+    }
 
     @Override
     public void onStart() {
-        ColorWheel.getInstance().setColorMotorPidOn(true);
+        Lights.getInstance().testLights(state);
     }
 
     @Override
@@ -17,11 +24,10 @@ public class ColorSearch extends Action {
 
     @Override
     public boolean isFinished() {
-        return ColorWheel.getInstance().checkColor();
+        return true;
     }
 
     @Override
     public void onStop() {
-        ColorWheel.getInstance().setColorMotorPidOn(false);
     }
 }

@@ -3,36 +3,41 @@ package frc.robot.actions.shooteraction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class Recenter extends Action {
-    private double angle = 0;
-    public Recenter(double angle)
+public class TurretToStop extends Action {
+    public boolean isReversed = false;
+    public TurretToStop(boolean isReversed)
     {
-        this.angle = angle;
+        this.isReversed = isReversed;
     }
+
     /**
      * code to run on action start
+     * 
      */
     @Override
     public void onStart() {
-            Shooter.getInstance().setTurretCenter(angle);
+        Shooter.getInstance().setTurretRPM(.2);
     }
 
     /**
      * code to run while action loops
-     * <p>approx every 20 miliseconds
+     * <p>
+     * approx every 20 miliseconds
      */
     @Override
     public void onLoop() {
+        Shooter.getInstance().setTurretRPM(.2);
     }
 
     /**
-     * method that tells the state machine the action is finished earlier than the scheduler
+     * method that tells the state machine the action is finished earlier than the
+     * scheduler
      *
      * @return true when action is ready to self terminate
      */
     @Override
     public boolean isFinished() {
-        return false;
+        return Shooter.getInstance().getShooterAngle() > 80 || Shooter.getInstance().getShooterAngle() < -80;
     }
 
     /**

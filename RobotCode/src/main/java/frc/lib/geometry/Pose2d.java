@@ -198,6 +198,11 @@ public class Pose2d implements IPose2d<Pose2d> {
     }
 
     @Override
+    public int getNumFields() {
+        return translation_.getNumFields() + rotation_.getNumFields();
+    }
+
+    @Override
     public double distance(final Pose2d other) {
         return Pose2d.log(inverse().transformBy(other)).norm();
     }

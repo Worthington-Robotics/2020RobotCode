@@ -4,55 +4,18 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.util.DemandUtil;
 import frc.lib.util.TimerBoolean;
 import frc.robot.Constants;
-
-import static frc.robot.Constants.*;
 
 /**
  * Combines both the indexer and intake functions for performance economy.
  */
 public class Superstructure extends Subsystem {
-    // Global
-    private SuperIO periodic;
-
-    // Indexer
-    private TalonSRX deliveryWheel;
-    private TalonSRX deliveryBelts;
-    private TalonSRX indexTopBelt;
-    private TalonSRX indexBottomBelt;
-
-    // Intake
-    private TalonSRX intakeWheels;
-    private DoubleSolenoid extensionArm;
-
-    // Sensors
-    private SimTimeOfFlight deliverySensor;
-    private SimTimeOfFlight indexSensor;
-    private SimTimeOfFlight intakeSensor;
-
-    // Double
-    private double THRESHOLD_DELIVERY = 75;
-    private double THRESHOLD_INDEXER = 100;
-    private double THRESHOLD_INTAKE = 75;
-    private double distanceDelivery;
-    private double distanceIndexer;
-    private double distanceIntake;
-
-    // TimedBooleans
-    private TimerBoolean indexBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
-    private TimerBoolean intakeBoolean = new TimerBoolean(TIME_TILL_STATIONARY);
-
-    // Pulse Variables
-    private double pulseTimestamp;
-    private double pulseCooldownTimestamp;
 
     private static Superstructure instance = new Superstructure();
 
@@ -60,26 +23,58 @@ public class Superstructure extends Subsystem {
         return instance;
     }
 
+    // Global
+    private SuperIO periodic;
+    private TimerBoolean indexBoolean = new TimerBoolean(Constants.TIME_TILL_STATIONARY);
+
+    // Indexer
+    private TalonSRX deliveryWheel;
+    private TalonSRX indexTopBelt;
+
+    // Intake
+    private TalonSRX intakeWheels;
+    private DoubleSolenoid extensionArm;
+
+    // Sensors
+    private SimTimeOfFlight tof1;
+    private SimTimeOfFlight tof2;
+    private SimTimeOfFlight tof3;
+    private SimTimeOfFlight tof4;
+    private SimTimeOfFlight tof5;
+
+    private double THRESHOLD_TOF1 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF1;
+    private double THRESHOLD_TOF2 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF2;
+    private double THRESHOLD_TOF3 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF3;
+    private double THRESHOLD_TOF4 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF4;
+    private double THRESHOLD_TOF5 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF5;
+
     private Superstructure() {
         deliveryWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
-        deliveryBelts = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_BELT);
         indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
 
         intakeWheels = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
-        deliverySensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_DELIVERY);
-        indexSensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_INDEX);
-        intakeSensor = new SimTimeOfFlight(Constants.FLIGHT_SENSOR_INTAKE);
+        tof1 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF1_ID);
+        tof2 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF2_ID);
+        tof3 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF3_ID);
+        tof4 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF4_ID);
+        tof5 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF5_ID);
 
         reset();
 
-        SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD", THRESHOLD_DELIVERY);
-        SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
-        SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
-        SmartDashboard.putNumber("Superstructure/DELIVERY_SENSOR_DISTANCE", deliverySensor.getRange());
-        SmartDashboard.putNumber("Superstructure/INDEXER_SENSOR_DISTANCE", indexSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
+        if (Constants.DEBUG) {
+            SmartDashboard.putNumber("Superstructure/TOF_1_DISTANCE", tof1.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_2_DISTANCE", tof2.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_3_DISTANCE", tof3.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", tof4.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", tof5.getRange());
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF4", THRESHOLD_TOF4);
+            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF5", THRESHOLD_TOF5);
+        }
     }
 
     /**
@@ -88,76 +83,43 @@ public class Superstructure extends Subsystem {
     @Override
     public synchronized void readPeriodicInputs() {
         if (Constants.DEBUG) {
-            THRESHOLD_DELIVERY = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_THRESHOLD",
-                    THRESHOLD_DELIVERY);
-            THRESHOLD_INDEXER = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_THRESHOLD", THRESHOLD_INDEXER);
-            THRESHOLD_INTAKE = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_THRESHOLD", THRESHOLD_INTAKE);
-
-            distanceDelivery = SmartDashboard.getNumber("Superstructure/DELIVERY_SENSOR_DISTANCE",
-                    deliverySensor.getRange());
-            distanceIndexer = SmartDashboard.getNumber("Superstructure/INDEXER_SENSOR_DISTANCE",
-                    indexSensor.getRange());
-            distanceIntake = SmartDashboard.getNumber("Superstructure/INTAKE_SENSOR_DISTANCE", intakeSensor.getRange());
-        } else {
-            distanceDelivery = deliverySensor.getRange();
-            distanceIndexer = indexSensor.getRange();
-            distanceIntake = intakeSensor.getRange();
+            SmartDashboard.putNumber("Superstructure/TOF_1_DISTANCE", tof1.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_2_DISTANCE", tof2.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_3_DISTANCE", tof3.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_4_DISTANCE", tof4.getRange());
+            SmartDashboard.putNumber("Superstructure/TOF_5_DISTANCE", tof5.getRange());
+            THRESHOLD_TOF1 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", THRESHOLD_TOF1);
+            THRESHOLD_TOF2 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", THRESHOLD_TOF2);
+            THRESHOLD_TOF3 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", THRESHOLD_TOF3);
+            THRESHOLD_TOF4 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", THRESHOLD_TOF4);
+            THRESHOLD_TOF5 = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF5", THRESHOLD_TOF5);
         }
 
-        periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >= distanceDelivery;
-        periodic.indexDetected = distanceIndexer != 0 && THRESHOLD_INDEXER >= distanceIndexer;
-        periodic.intakeDetected = distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
-    }
+        /*
+         * final double distanceDelivery = deliverySensor.getRange(); final double
+         * distanceIndexer = indexSensor.getRange(); final double distanceIntake =
+         * intakeSensor.getRange();
+         */
 
-    @Override
-    public synchronized void writePeriodicOutputs() {
-       switch (periodic.state) {
-           case INIT:
-               periodic.deliveryWheelDemand =
-               periodic.deliveryBeltsDemand =
-               periodic.indexTopBeltDemand =
-               periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
+        periodic.indexBeltAmps = indexTopBelt.getSupplyCurrent();
+        /*
+         * periodic.deliveryDetected = distanceDelivery != 0 && THRESHOLD_DELIVERY >=
+         * distanceDelivery; periodic.indexDetected = distanceIndexer != 0 &&
+         * THRESHOLD_INDEXER >= distanceIndexer; periodic.intakeDetected =
+         * distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
+         */
 
-               break;
-           case ONE_TO_THREE_BALLS:
-               pulseIndexDemand();
-               periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
-               periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = STOP_BELT_DEMAND;
-               break;
-           case FOUR_BALLS:
-               periodic.intakeWheelsDemand = FULL_BELT_DEMAND;
-               periodic.deliveryWheelDemand = periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
-               break;
-           case FULL_SYSTEM:
-               periodic.deliveryWheelDemand =
-               periodic.deliveryBeltsDemand =
-               periodic.indexTopBeltDemand =
-               periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
-               break;
-           case SHOOT:
-               periodic.deliveryWheelDemand = FULL_BELT_DEMAND;
-               periodic.deliveryBeltsDemand = periodic.indexTopBeltDemand = periodic.intakeWheelsDemand = STOP_BELT_DEMAND;
-               break;
-           case DUMP_SYSTEM:
-               periodic.deliveryWheelDemand =
-               periodic.deliveryBeltsDemand =
-               periodic.indexTopBeltDemand =
-               periodic.intakeWheelsDemand = -FULL_BELT_DEMAND;
-               break;
-           default:
-               break;
-       }
-
-        DemandUtil.setDemand(periodic.deliveryBeltsDemand, deliveryBelts);
-        DemandUtil.setDemand(periodic.deliveryWheelDemand, deliveryWheel);
-        DemandUtil.setDemand(periodic.indexTopBeltDemand, indexTopBelt);
-        DemandUtil.setDemand(periodic.intakeWheelsDemand, intakeWheels);
-        extensionArm.set(periodic.armExtension);
+        periodic.ball1Detected = tof1.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF1 && tof1.getRange() != 0.0;
+        // periodic.ball2Detected = tof2.getRange() <
+        // Constants.SUPERSTRUCTURE_THRESHOLD_TOF2 && tof2.getRange() != 0.0;
+        // periodic.ball3Detected = tof3.getRange() <
+        // Constants.SUPERSTRUCTURE_THRESHOLD_TOF3 && tof3.getRange() != 0.0;
+        periodic.ball4Detected = tof4.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF4 && tof4.getRange() != 0.0;
+        periodic.ball5Detected = tof5.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF5 && tof5.getRange() != 0.0;
     }
 
     @Override
     public void registerEnabledLoops(ILooper enabledLooper) {
-
         enabledLooper.register(new Loop() {
             @Override
             public void onStart(double timestamp) {
@@ -166,48 +128,47 @@ public class Superstructure extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 switch (periodic.state) {
-                case INIT: {
-                    if (periodic.deliveryDetected) {
+                case DISABLED:
+                case INIT:
+                    if (periodic.ball1Detected) {
                         periodic.state = SuperState.ONE_TO_THREE_BALLS;
                     }
                     break;
-                }
-                case ONE_TO_THREE_BALLS: {
-                    if (periodic.indexDetected) {
+
+                case ONE_TO_THREE_BALLS:
+                    if (!periodic.ball1Detected) {
+                        periodic.state = SuperState.INIT;
+                    }
+                    if (periodic.ball4Detected) {
                         if (!indexBoolean.isStarted()) {
                             indexBoolean.start();
                         } else if (indexBoolean.getBoolean()) {
-                            periodic.state = SuperState.FOUR_BALLS;
+                            periodic.state = SuperState.FULL_SYSTEM;
                         }
                     } else {
                         // Invalidate if it isn't true
                         indexBoolean.stop();
                     }
                     break;
-                }
-                case FOUR_BALLS: {
-                    if (periodic.intakeDetected) {
+
+                case FOUR_BALLS:
+                    if (!periodic.ball1Detected) {
+                        periodic.state = SuperState.INIT;
+                    }
+                    if (periodic.ball5Detected) {
                         periodic.state = SuperState.FULL_SYSTEM;
                     }
                     break;
-                }
-                case FULL_SYSTEM: {
 
-                    if (!periodic.intakeDetected) {
+                case FULL_SYSTEM:
+                    if (!periodic.ball5Detected) {
                         periodic.state = SuperState.FOUR_BALLS;
                     }
+                    break;
 
+                case SHOOT:
                     break;
-                }
-                case SHOOT: {
-                    if (!periodic.deliveryDetected) {
-                        periodic.state = SuperState.INIT;
-                    }
-                    break;
-                }
-                case DUMP_SYSTEM:
                 default:
-                    break;
                 }
             }
 
@@ -218,35 +179,70 @@ public class Superstructure extends Subsystem {
     }
 
     @Override
-    public void outputTelemetry() {
-        SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
-        SmartDashboard.putBoolean("Superstructure/Delivery_TOF", deliveryDetected());
-        SmartDashboard.putBoolean("Superstructure/Index_TOF", indexDetected());
-        SmartDashboard.putBoolean("Superstructure/Intake_TOF", intakeDetected());
-        SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW", deliverySensor.getRange());
-        SmartDashboard.putNumber("Superstructure/Index_TOF_RAW", indexSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW", intakeSensor.getRange());
-        SmartDashboard.putNumber("Superstructure/DELIVERY_DEMAND", periodic.deliveryBeltsDemand);
-        SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
-        SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
+    public synchronized void writePeriodicOutputs() {
+        switch (periodic.state) {
+        case INIT:
+            periodic.deliveryWheelDemand = .25;
+            periodic.indexTopBeltDemand = .75;
+            break;
+        case ONE_TO_THREE_BALLS:
+        case FOUR_BALLS:
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            break;
+        case FULL_SYSTEM:
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            break;
+        case SHOOT:
+            periodic.deliveryWheelDemand = 1;
+            periodic.indexTopBeltDemand = .75;
+            periodic.intakeWheelsDemand = 1;
+            break;
+        case DUMP_SYSTEM:
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = -Constants.FULL_BELT_DEMAND;
+            periodic.intakeWheelsDemand = -Constants.INTAKE_DEMAND;
+            break;
+        default:
+        }
+
+        deliveryWheel.set(ControlMode.PercentOutput, periodic.deliveryWheelDemand);
+        indexTopBelt.set(ControlMode.PercentOutput, periodic.indexTopBeltDemand);
+        intakeWheels.set(ControlMode.PercentOutput, periodic.intakeWheelsDemand);
+        extensionArm.set(periodic.armExtension);
+        periodic.currState = periodic.state.ordinal();
     }
 
-    public void pulseIndexDemand() {
-        if (pulseCooldownTimestamp <= Timer.getFPGATimestamp()) {
-            pulseTimestamp = Timer.getFPGATimestamp() + PULSE_LENGTH;
-            pulseCooldownTimestamp = pulseTimestamp + PULSE_COOLDOWN;
-            periodic.indexTopBeltDemand = FULL_BELT_DEMAND;
-        } else if (pulseTimestamp <= Timer.getFPGATimestamp()) {
-            periodic.indexTopBeltDemand = STOP_BELT_DEMAND;
+    @Override
+    public void outputTelemetry() {
+        SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
+        SmartDashboard.putNumber("Superstructure/DELIVERY_WHEELS_DEMAND", periodic.deliveryWheelDemand);
+        SmartDashboard.putNumber("Superstructure/INDEX_DEMAND", periodic.indexTopBeltDemand);
+        SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.intakeWheelsDemand);
+        SmartDashboard.putBoolean("Superstructure/BALL1", periodic.ball1Detected);
+        // SmartDashboard.putBoolean("Superstructure/BALL3", periodic.ball3Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL4", periodic.ball4Detected);
+        SmartDashboard.putBoolean("Superstructure/BALL5", periodic.ball5Detected);
+        if (Constants.DEBUG) {
+            /*
+             * SmartDashboard.putNumber("Superstructure/Delivery_TOF_RAW",
+             * deliverySensor.getRange());
+             * SmartDashboard.putNumber("Superstructure/Index_TOF_RAW",
+             * indexSensor.getRange());
+             * SmartDashboard.putNumber("Superstructure/Intake_TOF_RAW",
+             * intakeSensor.getRange());
+             */
+            SmartDashboard.putNumber("Superstructure/INDEX_AMPS", periodic.indexBeltAmps);
         }
+
     }
 
     public void shootBall() {
-        if (periodic.state == SuperState.ONE_TO_THREE_BALLS
-                || periodic.state == SuperState.FOUR_BALLS
-                || periodic.state == SuperState.FULL_SYSTEM) {
+        if (!(periodic.state == SuperState.SHOOT)) {
             periodic.state = SuperState.SHOOT;
         }
+    }
+
+    public SuperState getState() {
+        return periodic.state;
     }
 
     public void dumpSystem() {
@@ -257,6 +253,11 @@ public class Superstructure extends Subsystem {
         periodic.state = SuperState.INIT;
     }
 
+    public void disable()
+    {
+        periodic.state = SuperState.DISABLED;
+    }
+
     /**
      * Reset the values of the sensors, SRX, and reinitialize the IO.
      */
@@ -265,23 +266,23 @@ public class Superstructure extends Subsystem {
         periodic = new SuperIO();
 
         deliveryWheel.setInverted(true);
-        deliveryBelts.setInverted(true);
-        deliverySensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
-        indexSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
-        intakeSensor.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        indexTopBelt.setInverted(false);
+        intakeWheels.setInverted(false);
+
+        tof1.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        tof2.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        tof3.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        tof4.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        tof5.setRangingMode(TimeOfFlight.RangingMode.Short, 10);
     }
 
     // Setters
-    public void setArmExtension(DoubleSolenoid.Value armExtension) {
-        periodic.armExtension = armExtension;
+    public void setArmExtension(boolean armExtension) {
+        periodic.armExtension = armExtension ? Value.kForward : Value.kReverse;
     }
 
     public void setIndexBeltDemand(double indexBeltDemand) {
         periodic.indexTopBeltDemand = indexBeltDemand;
-    }
-
-    public void setDeliveryBeltsDemand(double demand) {
-        periodic.deliveryBeltsDemand = demand;
     }
 
     public void setDeliveryWheelDemand(double demand) {
@@ -289,65 +290,48 @@ public class Superstructure extends Subsystem {
     }
 
     public void setIntakeDemand(double demand) {
+        if (periodic.state == SuperState.DISABLED)
+            periodic.state = SuperState.INIT;
         periodic.intakeWheelsDemand = demand;
     }
 
     // Getters
-    public DoubleSolenoid.Value getArmExtension() {
-        return periodic.armExtension;
-    }
-
     public double getIndexBeltDemand() {
         return periodic.indexTopBeltDemand;
-    }
-
-    public LogData getLogger() {
-        return periodic;
-    }
-
-    public boolean deliveryDetected() {
-        return periodic.deliveryDetected;
-    }
-
-    public boolean indexDetected() {
-        return periodic.indexDetected;
-    }
-
-    public boolean intakeDetected() {
-        return periodic.intakeDetected;
     }
 
     public boolean intakeDown() {
         return extensionArm.get() == Value.kForward;
     }
 
+    public LogData getLogger() {
+        return periodic;
+    }
+
     public class SuperIO extends Subsystem.PeriodicIO {
         // Current State
-        public SuperState state = SuperState.INIT;
+        private SuperState state = SuperState.DISABLED;
+        public int currState = state.ordinal();
         // Indexer Data
+        public double indexBeltAmps = 0.0;
         public double deliveryWheelDemand;
         public double indexTopBeltDemand;
-        public double deliveryBeltsDemand;
         // Intake Data
         public double intakeWheelsDemand;
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
-        // Sensor Booleans
-        public boolean deliveryDetected;
-        public boolean indexDetected;
-        public boolean intakeDetected;
+        // TOF Booleans
+        public boolean ball1Detected;
+        // public boolean ball2Detected;
+        // public boolean ball3Detected;
+        public boolean ball4Detected;
+        public boolean ball5Detected;
     }
 
     public enum SuperState {
-        INIT(0), ONE_TO_THREE_BALLS(1), FOUR_BALLS(2), FULL_SYSTEM(3), SHOOT(4), DUMP_SYSTEM(5);
+        INIT, ONE_TO_THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
 
-        private int stateNumber;
-
-        SuperState(int stateNumber) {
-            this.stateNumber = stateNumber;
-        }
-
-        public int getStateNumber() {
-            return stateNumber;
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
         }
     }
 }

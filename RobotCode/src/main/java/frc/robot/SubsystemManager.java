@@ -5,7 +5,6 @@ import frc.lib.loops.Loop;
 import frc.lib.loops.Looper;
 import frc.lib.util.Logable;
 import frc.lib.util.ReflectingLogger;
-import frc.lib.util.Logable.LogData;
 import frc.robot.subsystems.Subsystem;
 
 import java.util.ArrayList;
@@ -14,13 +13,14 @@ import java.util.List;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 
-public class SubsystemManager implements ILooper {
+public class SubsystemManager implements ILooper, Logable {
 
     private final List<Subsystem> mAllSubsystems;
     private final List<Loop> mLoops = new ArrayList<>();
     final List<Logable> logables = new ArrayList<>();
     private ReflectingLogger<LogData> logger;
     private final boolean mIgnoreLogger;
+    private Timing timing = new Timing();
 
     /**
      * a manager class to handle all of the individual subsystems
@@ -44,6 +44,7 @@ public class SubsystemManager implements ILooper {
      */
     public void addLoggingSource(final List<Logable> toLog){
         logables.addAll(new ArrayList<Logable>(toLog));
+        logables.add(this);
     }
 
     private void createLogging(){
@@ -121,25 +122,22 @@ public class SubsystemManager implements ILooper {
 
         @Override
         public void onLoop(final double timestamp) {
-            
+            timing.timing.clear();
             for (final Subsystem s : mAllSubsystems) {
-                //final double start = Timer.getFPGATimestamp();
+                final double start = Timer.getFPGATimestamp();
                 s.readPeriodicInputs();
-                //final double end = Timer.getFPGATimestamp();
-                //System.out.println("reading " + s.getClass().getName()+ " took " + (end - start));
+                timing.timing.add(Timer.getFPGATimestamp() - start);
             }
             for (final Loop l : mLoops) {
-                //final double start = Timer.getFPGATimestamp();
+                final double start = Timer.getFPGATimestamp();
                 l.onLoop(timestamp);
-                //final double end = Timer.getFPGATimestamp();
-                //System.out.println("looping " + l.getClass().getName()+ " took " + (end - start));
+                timing.timing.add(Timer.getFPGATimestamp() - start);
             }
             
             for (final Subsystem s : mAllSubsystems) {
-                //final double start = Timer.getFPGATimestamp();
+                final double start = Timer.getFPGATimestamp();
                 s.writePeriodicOutputs();
-                //final double end = Timer.getFPGATimestamp();
-                //System.out.println("writing " + s.getClass().getName()+ " took " + (end - start));
+                timing.timing.add(Timer.getFPGATimestamp() - start);
             }
             //run logging pass
             logTelemetry(timestamp);
@@ -189,6 +187,14 @@ public class SubsystemManager implements ILooper {
     @Override
     public void register(Loop loop) {
         mLoops.add(loop);
+    }
+
+    public LogData getLogger(){
+        return timing;
+    }
+
+    public class Timing extends LogData{
+        public List<Double> timing = new ArrayList<>();
     }
 
 }

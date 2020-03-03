@@ -3,18 +3,13 @@ package frc.robot.actions.shooteraction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class Recenter extends Action {
-    private double angle = 0;
-    public Recenter(double angle)
-    {
-        this.angle = angle;
-    }
+public class softStart extends Action {
     /**
      * code to run on action start
      */
     @Override
     public void onStart() {
-            Shooter.getInstance().setTurretCenter(angle);
+            Shooter.getInstance().setRampUp();
     }
 
     /**
@@ -32,7 +27,7 @@ public class Recenter extends Action {
      */
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     /**
@@ -40,6 +35,5 @@ public class Recenter extends Action {
      */
     @Override
     public void onStop() {
-        Shooter.getInstance().setTurretDemand(0);
     }
 }
