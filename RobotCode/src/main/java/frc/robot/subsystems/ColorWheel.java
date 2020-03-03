@@ -211,7 +211,7 @@ public class ColorWheel extends Subsystem {
         public double[] RGB = new double[] { 0, 0, 0 };
         public int color_direction_calc;
         public double demand = 0.0;
-        public Color detected_color = Color.kBlack;
+        private Color detected_color = Color.kBlack;
         public String color_sensed = "Unknown";
         public boolean color_motor_pid_on = false;
         public boolean color_wheel_reading = false;

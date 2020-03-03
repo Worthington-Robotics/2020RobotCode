@@ -125,6 +125,11 @@ public class Translation2d implements ITranslation2d<Translation2d> {
         return fmt.format(x_) + "," + fmt.format(y_);
     }
 
+    @Override
+    public int getNumFields() {
+        return 2;
+    }
+
     public static double dot(final Translation2d a, final Translation2d b) {
         return a.x_ * b.x_ + a.y_ * b.y_;
     }

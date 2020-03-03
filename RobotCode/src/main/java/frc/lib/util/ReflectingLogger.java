@@ -29,15 +29,16 @@ public class ReflectingLogger<T> {
     }
 
     public ReflectingLogger(List<T> dataClasses, File loggingFile, Boolean allowRethrow) {
-        //generate map of subsystem IO's and fields
+        // generate map of subsystem IO's and fields
         for (T dataClass : dataClasses) {
-            if(dataClass == null) continue;
+            if (dataClass == null)
+                continue;
             for (Field field : dataClass.getClass().getFields()) {
                 classFieldMap.put(field, dataClass);
             }
         }
 
-        //create file reference
+        // create file reference
         try {
             output = new PrintWriter(loggingFile.getAbsolutePath());
 
@@ -46,7 +47,26 @@ public class ReflectingLogger<T> {
             line.append("time");
             for (Map.Entry<Field, T> entry : classFieldMap.entrySet()) {
                 line.append(dataSeperator);
-                line.append(entry.getKey().getName());
+                String name = entry.getKey().getName();
+                try {
+                    if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
+                        for (int i = 0; i < ((CSVWritable) entry.getKey().get(entry.getValue())).getNumFields(); i++) {
+                            if(i != 0) line.append(dataSeperator);
+                            line.append(name + "_" + i);
+                        }
+                    } else if(entry.getKey().getType().isArray()){
+                        final int len = Array.getLength(entry.getKey().get(entry.getValue()));
+                        for(int i = 0; i < len; i++){
+                            if(i != 0) line.append(dataSeperator);
+                            line.append(name + "_" + i);
+                        }
+                    }
+                    else{
+                        line.append(name);
+                    }
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    line.append(name);
+                }
             }
 
             //Write the first line of the file
@@ -102,11 +122,14 @@ public class ReflectingLogger<T> {
                 } else if (entry.getKey().getType().isArray()){
                     final int len = Array.getLength(entry.getKey().get(entry.getValue()));
                     for(int i = 0; i < len; i++){
-                        line.append(Array.get(entry.getKey().get(entry.getValue()), i) + " ");
+                        if(i != 0) line.append(dataSeperator);
+                        line.append(Array.get(entry.getKey().get(entry.getValue()), i));
                     }
                 } else if(List.class.isAssignableFrom(entry.getKey().getType())){
-                    for(Object o : ((List)entry.getKey().get(entry.getValue()))){
-                        if(o != null)line.append(o + ", ");
+                    for(int i = 0; i < ((List)entry.getKey().get(entry.getValue())).size(); i++){
+                        if(i != 0) line.append(dataSeperator);
+                        final Object current = ((List)entry.getKey().get(entry.getValue())).get(i);
+                        if(current != null)line.append(current);
                     }
                 } else if (CSVWritable.class.isAssignableFrom(entry.getKey().getType())) {
                     line.append(((CSVWritable) entry.getKey().get(entry.getValue())).toCSV());
