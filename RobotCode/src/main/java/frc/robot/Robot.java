@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
             // register subsystems here
             PoseEstimator.getInstance(), 
             Drive.getInstance(), 
-            ColorWheel.getInstance(), 
+            ColorWheel.getInstance(),
             Climber.getInstance(),
             Superstructure.getInstance(),
             Shooter.getInstance(),
@@ -207,8 +207,8 @@ public class Robot extends TimedRobot {
         turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
         dump.whileHeld(Action.toCommand(new DumpAction()));
         manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
-        colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
-        colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
+        // colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
+        // colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shiftButton.whileHeld(Action.toCommand(new Shift()));
         gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));

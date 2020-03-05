@@ -11,6 +11,8 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import frc.robot.Constants;
 import frc.lib.drivers.ColorSensorV3.*;
+import frc.lib.loops.ILooper;
+import frc.lib.loops.Loop;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class ColorWheel extends Subsystem {
@@ -43,23 +45,39 @@ public class ColorWheel extends Subsystem {
     @Override
     public void readPeriodicInputs() {
         periodic.demand = Constants.MASTER.getRawAxis(3);
-        String gameData = DriverStation.getInstance().getGameSpecificMessage();
-        if (gameData.length() > 0) {
-            periodic.fms_color = colorConvert(gameData.charAt(0));
-        } else {
-            periodic.fms_color = 'U';
-        }
+        periodic.game_data = DriverStation.getInstance().getGameSpecificMessage();
         periodic.detected_color = colorSensor.getColor();
-        periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue,
-                periodic.detected_color.green };
+    }
 
-        periodic.color_sensed = colorMatch();
-        if (!(periodic.color_sensed.charAt(0) == 'U')) {
-            periodic.color_wheel_reading = true;
-        } else {
-            periodic.color_wheel_reading = false;
-        }
+    @Override
+    public void registerEnabledLoops(ILooper enabledLooper) {
+        enabledLooper.register(new Loop() {
 
+            @Override
+            public void onStart(double timestamp) {
+                
+            }
+
+            @Override
+            public void onLoop(double timestamp) {
+                periodic.color_sensed = colorMatch();
+                if (periodic.game_data.length() > 0) {
+                    periodic.fms_color = colorConvert(periodic.game_data.charAt(0));
+                } else {
+                    periodic.fms_color = 'U';
+                }
+                
+                periodic.RGB = new double[] { periodic.detected_color.red, periodic.detected_color.blue,
+                        periodic.detected_color.green };        
+        
+            }
+            
+
+            @Override
+            public void onStop(double timestamp) {
+                
+            }
+        });
     }
 
     @Override
@@ -111,6 +129,7 @@ public class ColorWheel extends Subsystem {
             return 'U';
         }
     }
+    
 
     public void setEnabled(boolean enabled)
     {
@@ -204,6 +223,7 @@ public class ColorWheel extends Subsystem {
     }
 
     public class ColorWheelIO extends Subsystem.PeriodicIO {
+        public String game_data = "";
         public boolean CCW = false;
         public boolean isEnabled = false;
         public char fms_color = 'U';
@@ -214,6 +234,6 @@ public class ColorWheel extends Subsystem {
         private Color detected_color = Color.kBlack;
         public String color_sensed = "Unknown";
         public boolean color_motor_pid_on = false;
-        public boolean color_wheel_reading = false;
     }
+    
 }

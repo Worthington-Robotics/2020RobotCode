@@ -1,4 +1,4 @@
-package frc.robot.actions.colorwheelactions;
+/*package frc.robot.actions.colorwheelactions;
 
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.ColorWheel;
@@ -32,3 +32,4 @@ public class colorWheelManual extends Action {
         ColorWheel.getInstance().setEnabled(false);
     }
 }
+*/
