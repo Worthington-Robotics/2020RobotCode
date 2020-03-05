@@ -27,7 +27,6 @@ import frc.robot.actions.climberactions.*;
 //import frc.robot.actions.colorwheelactions.ColorWheelRotations;
 //import frc.robot.actions.colorwheelactions.ColorWheelStop;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ColorWheel;
 import frc.robot.actions.shooteraction.*;
 import frc.robot.actions.superaction.*;
 
@@ -73,8 +72,7 @@ public class Robot extends TimedRobot {
         manager = new SubsystemManager(Arrays.asList(
             // register subsystems here
             PoseEstimator.getInstance(), 
-            Drive.getInstance(), 
-            ColorWheel.getInstance(),
+            Drive.getInstance(),
             Climber.getInstance(),
             Superstructure.getInstance(),
             Shooter.getInstance(),
