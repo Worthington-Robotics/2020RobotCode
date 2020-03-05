@@ -56,7 +56,7 @@ public class Lights extends Subsystem {
         // TODO Implement targeting
         uprightsUp = Climber.getInstance().getUnfolded();
         climbUp = Climber.getInstance().getClimbed();
-        if (uprightsUp && !climbUp) {
+        /*if (uprightsUp && !climbUp) {
             currentLightMode = lightModes.colorWheel;
             switch (ColorWheel.getInstance().cDetected()) {
             case 'U':
@@ -75,9 +75,9 @@ public class Lights extends Subsystem {
                 colorWheelColor = Color.kBlue;
                 break;
             }
-        } else {
+        } else {*/
             currentLightMode = lightModes.targeting;
-        }
+        //}
         // Testing
         // currentLightMode = lightModes.Testing;
         // colorWheelColor = Color.kBlue;

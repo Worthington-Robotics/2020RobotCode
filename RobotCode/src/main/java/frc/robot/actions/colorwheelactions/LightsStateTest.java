@@ -1,7 +1,6 @@
 package frc.robot.actions.colorwheelactions;
 
 import frc.lib.statemachine.Action;
-import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Lights;
 
 public class LightsStateTest extends Action {
