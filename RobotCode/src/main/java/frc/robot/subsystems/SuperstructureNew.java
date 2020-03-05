@@ -99,10 +99,16 @@ public class SuperstructureNew extends Subsystem {
     @Override public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
-                for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+                if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                    periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
+                }
+
+                for (int n = INDEXER_ONE; n < INTAKE; n++) {
                     // Ensure that the Intake is not in manual control before auto-moving
                     if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
                         // If Ball n detected and Ball n-1 not detected
+                        // TODO If BLACK_WHEEL then turn it down probably
+                        // TODO Set varying values so the motors in front are always faster
                         periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
                                 Constants.SUPER_DEMAND_DEFAULT : Constants.SUPER_DEMAND_STOP;
                     }
@@ -115,15 +121,23 @@ public class SuperstructureNew extends Subsystem {
     }
 
     /**
-     * Called to reset and configure the subsystem.
+     * Enables the black wheel to shoot a ball.
      */
-    @Override public void reset() {
-        periodic = new SuperIO();
+    public void shootBall() {
+        if (periodic.sensorsDetected[BLACK_WHEEL]) {
+            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
+        }
+    }
 
-        motors[BLACK_WHEEL].setInverted(true);
-
-        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
-            sensors[n].setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+    /**
+     * Sets all motor demands to negative in order to dump the balls.
+     */
+    public void dumpBalls() {
+        for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
+            if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
+                // TODO Set varying values so the motors in BACK are always faster
+                periodic.motorDemands[n] = Constants.SUPER_DEMAND_DUMP;
+            }
         }
     }
 
@@ -143,6 +157,22 @@ public class SuperstructureNew extends Subsystem {
         public double[] motorDemands = new double[5];
 
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
+    }
+    public LogData getLogger() {
+        return periodic;
+    }
+
+    /**
+     * Called to reset and configure the subsystem.
+     */
+    @Override public void reset() {
+        periodic = new SuperIO();
+
+        motors[BLACK_WHEEL].setInverted(true);
+
+        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+            sensors[n].setRangingMode(TimeOfFlight.RangingMode.Short, 10);
+        }
     }
 
     /**

@@ -180,10 +180,14 @@ public class Constants {
     // Demands
     public static final double SUPER_DEMAND_DEFAULT = .2; // FIXME Update!
     public static final double SUPER_DEMAND_INTAKE_MANUAL = 1; // WARNING: MUST BE DIFFERENT FROM THE DEFAULT INTAKE DEMAND (unless you want me to implement a boolean for manual control)
+    public static final double SUPER_DEMAND_SHOOT = 1;
+    public static final double SUPER_DEMAND_DUMP = -1;
+    public static final double SUPER_DEMAND_STOP = 0;
+    // TODO Deprecated
     public static final double FULL_BELT_DEMAND = 1;
     public static final double INTAKE_DEMAND = 1;
     public static final double HIGH_BELT_DEMAND = 1.15;
-    public static final double SUPER_DEMAND_STOP = 0;
+
     // Time (in seconds)
     public static final double TIME_TILL_STATIONARY = .25;
     
