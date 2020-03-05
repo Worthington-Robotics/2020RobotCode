@@ -22,6 +22,6 @@ public class DeliveryWheelAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setDeliveryWheelDemand(Constants.STOP_BELT_DEMAND);
+        superstructure.setDeliveryWheelDemand(Constants.SUPER_DEMAND_STOP);
     }
 }

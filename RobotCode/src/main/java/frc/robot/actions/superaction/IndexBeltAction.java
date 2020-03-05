@@ -16,9 +16,9 @@ public class IndexBeltAction extends Action {
     @Override public void onStart() {
         
         if(isReversed)
-        superstructure.setIndexBeltDemand(-Constants.INDEXER_DEMAND);
+        superstructure.setIndexBeltDemand(-Constants.SUPER_DEMAND_DEFAULT);
         else
-        superstructure.setIndexBeltDemand(Constants.INDEXER_DEMAND);
+        superstructure.setIndexBeltDemand(Constants.SUPER_DEMAND_DEFAULT);
     }
 
     @Override public void onLoop() {}
@@ -28,7 +28,7 @@ public class IndexBeltAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setIndexBeltDemand(Constants.STOP_BELT_DEMAND);
+        superstructure.setIndexBeltDemand(Constants.SUPER_DEMAND_STOP);
 
     }
 }

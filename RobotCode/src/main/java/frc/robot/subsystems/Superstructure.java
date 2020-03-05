@@ -42,24 +42,24 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight tof4;
     private SimTimeOfFlight tof5;
 
-    private double THRESHOLD_TOF1 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF1;
-    private double THRESHOLD_TOF2 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF2;
-    private double THRESHOLD_TOF3 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF3;
-    private double THRESHOLD_TOF4 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF4;
-    private double THRESHOLD_TOF5 = Constants.SUPERSTRUCTURE_THRESHOLD_TOF5;
+    private double THRESHOLD_TOF1 = 50;
+    private double THRESHOLD_TOF2 = 75;
+    private double THRESHOLD_TOF3 = 75;
+    private double THRESHOLD_TOF4 = 75;
+    private double THRESHOLD_TOF5 = 75;
 
     private Superstructure() {
-        deliveryWheel = new TalonSRX(Constants.SUPERSTRUCTURE_DELIVERY_WHEEL);
-        indexTopBelt = new TalonSRX(Constants.SUPERSTRUCTURE_INDEX_BELT);
+        deliveryWheel = new TalonSRX(Constants.ID_SUPER_DELIVERY_WHEEL);
+        indexTopBelt = new TalonSRX(Constants.ID_SUPER_INDEX1);
 
-        intakeWheels = new TalonSRX(Constants.SUPERSTRUCTURE_INTAKE);
+        intakeWheels = new TalonSRX(Constants.ID_SUPER_INTAKE);
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
-        tof1 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF1_ID);
-        tof2 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF2_ID);
-        tof3 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF3_ID);
-        tof4 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF4_ID);
-        tof5 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF5_ID);
+        tof1 = new SimTimeOfFlight(Constants.ID_SUPER_TOF1);
+        tof2 = new SimTimeOfFlight(Constants.ID_SUPER_TOF2);
+        tof3 = new SimTimeOfFlight(Constants.ID_SUPER_TOF3);
+        tof4 = new SimTimeOfFlight(Constants.ID_SUPER_TOF4);
+        tof5 = new SimTimeOfFlight(Constants.ID_SUPER_TOF5);
 
         reset();
 
@@ -109,13 +109,13 @@ public class Superstructure extends Subsystem {
          * distanceIntake != 0 && THRESHOLD_INTAKE >= distanceIntake;
          */
 
-        periodic.ball1Detected = tof1.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF1 && tof1.getRange() != 0.0;
+        periodic.ball1Detected = tof1.getRange() < THRESHOLD_TOF1 && tof1.getRange() != 0.0;
         // periodic.ball2Detected = tof2.getRange() <
         // Constants.SUPERSTRUCTURE_THRESHOLD_TOF2 && tof2.getRange() != 0.0;
         // periodic.ball3Detected = tof3.getRange() <
         // Constants.SUPERSTRUCTURE_THRESHOLD_TOF3 && tof3.getRange() != 0.0;
-        periodic.ball4Detected = tof4.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF4 && tof4.getRange() != 0.0;
-        periodic.ball5Detected = tof5.getRange() < Constants.SUPERSTRUCTURE_THRESHOLD_TOF5 && tof5.getRange() != 0.0;
+        periodic.ball4Detected = tof4.getRange() < THRESHOLD_TOF4 && tof4.getRange() != 0.0;
+        periodic.ball5Detected = tof5.getRange() < THRESHOLD_TOF5 && tof5.getRange() != 0.0;
     }
 
     @Override
@@ -187,10 +187,10 @@ public class Superstructure extends Subsystem {
             break;
         case ONE_TO_THREE_BALLS:
         case FOUR_BALLS:
-            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.SUPER_DEMAND_STOP;
             break;
         case FULL_SYSTEM:
-            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.STOP_BELT_DEMAND;
+            periodic.intakeWheelsDemand = periodic.deliveryWheelDemand = periodic.indexTopBeltDemand = Constants.SUPER_DEMAND_STOP;
             break;
         case SHOOT:
             periodic.deliveryWheelDemand = 1;

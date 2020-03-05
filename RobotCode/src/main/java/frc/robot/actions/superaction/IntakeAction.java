@@ -23,6 +23,6 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setIntakeDemand(Constants.STOP_BELT_DEMAND);
+        superstructure.setIntakeDemand(Constants.SUPER_DEMAND_STOP);
     }
 }

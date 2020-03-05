@@ -5,8 +5,7 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  * Stores a boolean that must remain true for a set duration before the data returns true.
  * (e.g. an object passing a sensor)
- * 
- * @version 1.0.0-BETA
+ *
  * @author Spazzinq (George Fang)
  */
 public class TimerBoolean {
