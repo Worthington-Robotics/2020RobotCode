@@ -26,6 +26,14 @@ public class SuperstructureNew extends Subsystem {
 
     private TalonSRX[] motors = new TalonSRX[5];
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
+    private double[] defaultMotorDemands = new double[] {
+            // TODO Move to constants once done debugging demands
+            .2, // BLACK_WHEEL - needs to go slow or will shoot...
+            .5, // INDEXER_ONE
+            .45, // INDEXER_TWO
+            .4, // INDEXER_THREE
+            .35, // INTAKE
+    };
 
     // Constants
     private static final short BLACK_WHEEL = 0;
@@ -33,6 +41,7 @@ public class SuperstructureNew extends Subsystem {
     private static final short INDEXER_TWO = 2;
     private static final short INDEXER_THREE = 3;
     private static final short INTAKE = 4;
+    // TODO Move to constants once done debugging thresholds
     // (in mm)
     public static double SUPER_TOF1_THRESHOLD = 75;
     public static double SUPER_TOF2_THRESHOLD = 75;
@@ -65,6 +74,18 @@ public class SuperstructureNew extends Subsystem {
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
         reset();
+        // Put value on dashboard so it appears and can be modified
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", SUPER_TOF3_THRESHOLD);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF4", SUPER_TOF4_THRESHOLD);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF5", SUPER_TOF5_THRESHOLD);
+
+        SmartDashboard.putNumber("Superstructure/DEMAND_BLACK_WHEEL_DEFAULT", defaultMotorDemands[BLACK_WHEEL]);
+        SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER1_DEFAULT", defaultMotorDemands[INDEXER_ONE]);
+        SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER2_DEFAULT", defaultMotorDemands[INDEXER_TWO]);
+        SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER3_DEFAULT", defaultMotorDemands[INDEXER_THREE]);
+        SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_DEFAULT", defaultMotorDemands[INTAKE]);
     }
 
     /**
@@ -99,19 +120,17 @@ public class SuperstructureNew extends Subsystem {
     @Override public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
+                // When ball is no longer detected after shot
                 if (!periodic.sensorsDetected[BLACK_WHEEL]) {
                     periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
                 }
 
-                for (int n = INDEXER_ONE; n < INTAKE; n++) {
+                for (int n = INDEXER_ONE; n <= INTAKE; n++) {
                     // Ensure that the Intake is not in manual control before auto-moving
-                    // FIXME Is this actually always true?
                     if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
                         // If Ball n detected and Ball n-1 not detected
-                        // TODO If BLACK_WHEEL then turn it down probably
-                        // TODO Set varying values so the motors in front are always faster
                         periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
-                                Constants.SUPER_DEMAND_DEFAULT : Constants.SUPER_DEMAND_STOP;
+                                defaultMotorDemands[n] : Constants.SUPER_DEMAND_STOP;
                     }
                 }
             }
@@ -136,8 +155,8 @@ public class SuperstructureNew extends Subsystem {
     public void dumpBalls() {
         for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
             if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
-                // TODO Set varying values so the motors in BACK are always faster
-                periodic.motorDemands[n] = Constants.SUPER_DEMAND_DUMP;
+                // Opposite and flip the default motor demands so the back is faster
+                periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - n];
             }
         }
     }
@@ -181,29 +200,35 @@ public class SuperstructureNew extends Subsystem {
      */
     @Override public void outputTelemetry() {
         if (Constants.DEBUG) {
-            SmartDashboard.putNumber("Superstructure/TOF1_DISTANCE", sensors[0].getRange());
-            SmartDashboard.putNumber("Superstructure/TOF2_DISTANCE", sensors[1].getRange());
-            SmartDashboard.putNumber("Superstructure/TOF3_DISTANCE", sensors[2].getRange());
-            SmartDashboard.putNumber("Superstructure/TOF4_DISTANCE", sensors[3].getRange());
-            SmartDashboard.putNumber("Superstructure/TOF5_DISTANCE", sensors[4].getRange());
-
             SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
             SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
             SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", SUPER_TOF3_THRESHOLD);
             SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", SUPER_TOF4_THRESHOLD);
             SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF5", SUPER_TOF5_THRESHOLD);
 
-            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
-            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
-            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", SUPER_TOF3_THRESHOLD);
-            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF4", SUPER_TOF4_THRESHOLD);
-            SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF5", SUPER_TOF5_THRESHOLD);
+            defaultMotorDemands[BLACK_WHEEL] = SmartDashboard.getNumber("Superstructure/DEMAND_BLACK_WHEEL_DEFAULT", defaultMotorDemands[BLACK_WHEEL]);
+            defaultMotorDemands[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER1_DEFAULT", defaultMotorDemands[INDEXER_ONE]);
+            defaultMotorDemands[INDEXER_TWO] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER2_DEFAULT", defaultMotorDemands[INDEXER_TWO]);
+            defaultMotorDemands[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER3_DEFAULT", defaultMotorDemands[INDEXER_THREE]);
+            defaultMotorDemands[INTAKE] = SmartDashboard.getNumber("Superstructure/DEMAND_INTAKE_DEFAULT", defaultMotorDemands[INTAKE]);
 
-            SmartDashboard.putNumber("Superstructure/BLACK_WHEEL_DEMAND", periodic.motorDemands[BLACK_WHEEL]);
-            SmartDashboard.putNumber("Superstructure/INDEXER1_DEMAND", periodic.motorDemands[INDEXER_ONE]);
-            SmartDashboard.putNumber("Superstructure/INDEXER2_DEMAND", periodic.motorDemands[INDEXER_TWO]);
-            SmartDashboard.putNumber("Superstructure/INDEXER3_DEMAND", periodic.motorDemands[INDEXER_THREE]);
-            SmartDashboard.putNumber("Superstructure/INTAKE_DEMAND", periodic.motorDemands[INTAKE]);
+            SmartDashboard.putNumber("Superstructure/DISTANCE_TOF1_RAW", sensors[BLACK_WHEEL].getRange());
+            SmartDashboard.putNumber("Superstructure/DISTANCE_TOF2_RAW", sensors[INDEXER_ONE].getRange());
+            SmartDashboard.putNumber("Superstructure/DISTANCE_TOF3_RAW", sensors[INDEXER_TWO].getRange());
+            SmartDashboard.putNumber("Superstructure/DISTANCE_TOF4_RAW", sensors[INDEXER_THREE].getRange());
+            SmartDashboard.putNumber("Superstructure/DISTANCE_TOF5_RAW", sensors[INTAKE].getRange());
+
+            SmartDashboard.putNumber("Superstructure/DEMAND_BLACK_WHEEL_RAW", periodic.motorDemands[BLACK_WHEEL]);
+            SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER1_RAW", periodic.motorDemands[INDEXER_ONE]);
+            SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER2_RAW", periodic.motorDemands[INDEXER_TWO]);
+            SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER3_RAW", periodic.motorDemands[INDEXER_THREE]);
+            SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_RAW", periodic.motorDemands[INTAKE]);
         }
+        // FIXME Name differently if possible after changing driver station value
+        SmartDashboard.putBoolean("Superstructure/BALL1", periodic.sensorsDetected[BLACK_WHEEL]);
+        SmartDashboard.putBoolean("Superstructure/BALL2", periodic.sensorsDetected[INDEXER_ONE]);
+        SmartDashboard.putBoolean("Superstructure/BALL3", periodic.sensorsDetected[INDEXER_TWO]);
+        SmartDashboard.putBoolean("Superstructure/BALL4", periodic.sensorsDetected[INDEXER_THREE]);
+        SmartDashboard.putBoolean("Superstructure/BALL5", periodic.sensorsDetected[INTAKE]);
     }
 }
