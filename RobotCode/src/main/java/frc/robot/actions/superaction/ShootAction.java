@@ -20,7 +20,5 @@ public class ShootAction extends Action {
         return false;
     }
 
-    @Override public void onStop() {
-        superstructure.initState();
-    }
+    @Override public void onStop() {}
 }
