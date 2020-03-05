@@ -5,6 +5,6 @@ import frc.robot.actions.driveactions.DummyDrive;
 
 public class get10easy extends StateMachineDescriptor {
     public get10easy() {
-        addSequential(new DummyDrive(), 2000);
+        addSequential(new DummyDrive(true), 2000);
     }
 }

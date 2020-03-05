@@ -21,6 +21,7 @@ import frc.robot.Constants;
 public class Shooter extends Subsystem {
     private double[] tangent;
     private static Shooter m_Shooter = new Shooter();
+    private NetworkTable limelight;
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.OPEN_LOOP;
     private ShooterIO periodic;
@@ -32,6 +33,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry tv = table.getEntry("tv");
 
     private Shooter() {
+        limelight = NetworkTableInstance.getDefault().getTable("limelight");
         SmartDashboard.putNumber("Shooter/Turret/P", 0);
         SmartDashboard.putNumber("Shooter/Turret/I", 0);
         SmartDashboard.putNumber("Shooter/Turret/D", 0);
@@ -120,6 +122,7 @@ public class Shooter extends Subsystem {
                         periodic.flywheelRPMDemand = Math.min(
                                 ((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM),
                                 Constants.FLYWHEEL_MAX_RPM);
+                        periodic.flywheelRPMDemand = Math.max(((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM), Constants.FLYWHEEL_IDLE_RPM);
                     } else {
                         periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM;
                     }
@@ -149,7 +152,13 @@ public class Shooter extends Subsystem {
                     turretControl.set(ControlMode.Disabled, 0);
                     break;
                 }
+                if (periodic.targetV == 1) {
+                    limelight.getEntry("snapshot").setNumber(1);
+                } else {
+                    limelight.getEntry("snapshot").setNumber(0);
+                }
             }
+            
 
             @Override
             public void onStop(double timestamp) {
@@ -383,6 +392,11 @@ public class Shooter extends Subsystem {
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
         }
+    }
+
+    public double getSupplyCurrent()
+    {
+        return periodic.turretAmps;
     }
 
     /**

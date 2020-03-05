@@ -3,6 +3,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +29,7 @@ public class Superstructure extends Subsystem {
     // Global
     private SuperIO periodic;
     private TimerBoolean indexBoolean = new TimerBoolean(Constants.TIME_TILL_STATIONARY);
+    private NetworkTable limelight;
 
     // Indexer
     private TalonSRX deliveryWheel;
@@ -59,6 +63,8 @@ public class Superstructure extends Subsystem {
         tof3 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF3_ID);
         tof4 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF4_ID);
         tof5 = new SimTimeOfFlight(Constants.SUPERSTURCTURE_TOF5_ID);
+
+        limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
         reset();
 
@@ -144,6 +150,9 @@ public class Superstructure extends Subsystem {
                     break;
 
                 case FULL_SYSTEM:
+                    if (!periodic.ball1Detected) {
+                        periodic.state = SuperState.INIT;
+                    }
                     if (!periodic.ball5Detected) {
                         periodic.state = SuperState.FOUR_BALLS;
                     }
@@ -240,8 +249,7 @@ public class Superstructure extends Subsystem {
         periodic.state = SuperState.INIT;
     }
 
-    public void disable()
-    {
+    public void disable() {
         periodic.state = SuperState.DISABLED;
     }
 
