@@ -50,17 +50,17 @@ public class SuperstructureNew extends Subsystem {
      * resets IO, motors, and sensors to default functioning settings.
      */
     public SuperstructureNew() {
-        motors[0] = new TalonSRX(Constants.ID_SUPER_DELIVERY_WHEEL);
-        motors[1] = new TalonSRX(Constants.ID_SUPER_INDEX1);
-        motors[2] = new TalonSRX(Constants.ID_SUPER_INDEX2);
-        motors[3] = new TalonSRX(Constants.ID_SUPER_INDEX3);
-        motors[4] = new TalonSRX(Constants.ID_SUPER_INTAKE);
+        motors[BLACK_WHEEL] = new TalonSRX(Constants.ID_SUPER_DELIVERY_WHEEL);
+        motors[INDEXER_ONE] = new TalonSRX(Constants.ID_SUPER_INDEX1);
+        motors[INDEXER_TWO] = new TalonSRX(Constants.ID_SUPER_INDEX2);
+        motors[INDEXER_THREE] = new TalonSRX(Constants.ID_SUPER_INDEX3);
+        motors[INTAKE] = new TalonSRX(Constants.ID_SUPER_INTAKE);
 
-        sensors[0] = new SimTimeOfFlight(Constants.ID_SUPER_TOF1);
-        sensors[1] = new SimTimeOfFlight(Constants.ID_SUPER_TOF2);
-        sensors[2] = new SimTimeOfFlight(Constants.ID_SUPER_TOF3);
-        sensors[3] = new SimTimeOfFlight(Constants.ID_SUPER_TOF4);
-        sensors[4] = new SimTimeOfFlight(Constants.ID_SUPER_TOF5);
+        sensors[BLACK_WHEEL] = new SimTimeOfFlight(Constants.ID_SUPER_TOF1);
+        sensors[INDEXER_ONE] = new SimTimeOfFlight(Constants.ID_SUPER_TOF2);
+        sensors[INDEXER_TWO] = new SimTimeOfFlight(Constants.ID_SUPER_TOF3);
+        sensors[INDEXER_THREE] = new SimTimeOfFlight(Constants.ID_SUPER_TOF4);
+        sensors[INTAKE] = new SimTimeOfFlight(Constants.ID_SUPER_TOF5);
 
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
@@ -105,6 +105,7 @@ public class SuperstructureNew extends Subsystem {
 
                 for (int n = INDEXER_ONE; n < INTAKE; n++) {
                     // Ensure that the Intake is not in manual control before auto-moving
+                    // FIXME Is this actually always true?
                     if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
                         // If Ball n detected and Ball n-1 not detected
                         // TODO If BLACK_WHEEL then turn it down probably
