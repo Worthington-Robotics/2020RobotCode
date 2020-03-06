@@ -22,8 +22,8 @@ public class Constants {
 
     public static final int ID_SUPER_DELIVERY_WHEEL = 9;
     public static final int ID_SUPER_INDEX1 = 7;
-    public static final int ID_SUPER_INDEX2 = -1; // FIXME Add ID!
-    public static final int ID_SUPER_INDEX3 = -1; // FIXME Add ID!
+    public static final int ID_SUPER_INDEX2 = 8; // FIXME Config ID
+    public static final int ID_SUPER_INDEX3 = 12; // FIXME Config ID
     public static final int ID_SUPER_INTAKE = 10;
 
     public static final int TURRET_CONTROL = 11;
@@ -98,7 +98,7 @@ public class Constants {
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
     public static final boolean RAMPUP = false;
     public static final boolean ENABLE_MP_TEST_MODE = false;
     public static final double MP_TEST_SPEED = 72; //in/s
@@ -174,11 +174,8 @@ public class Constants {
     /**
      * Superstructure constants
      */
-    // Demands
-    public static final double SUPER_DEMAND_DEFAULT = .2;
-    public static final double SUPER_DEMAND_INTAKE_MANUAL = 1; // FIXME Update!// WARNING: MUST BE DIFFERENT FROM THE DEFAULT INTAKE DEMAND (unless you want me to implement a boolean for manual control)
+    public static final double SUPER_DEMAND_INTAKE_MANUAL = 1; // FIXME WARNING: MUST BE DIFFERENT FROM THE DEFAULT INTAKE DEMAND (unless you want me to implement a boolean for manual control)
     public static final double SUPER_DEMAND_SHOOT = 1;
-    public static final double SUPER_DEMAND_DUMP = -1;
     public static final double SUPER_DEMAND_STOP = 0;
     
     /**

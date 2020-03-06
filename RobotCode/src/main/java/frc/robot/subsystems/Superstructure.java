@@ -4,8 +4,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
@@ -78,6 +76,7 @@ public class Superstructure extends Subsystem {
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
         reset();
+
         // Put value on dashboard so it appears and can be modified
         SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
         SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
@@ -220,7 +219,7 @@ public class Superstructure extends Subsystem {
     }
 
     /**
-     * Called to reset and configure the subsystem.
+     * Resets and configures the subsystem.
      */
     @Override public void reset() {
         periodic = new SuperIO();
