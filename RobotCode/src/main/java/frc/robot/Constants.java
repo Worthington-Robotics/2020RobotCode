@@ -183,12 +183,6 @@ public class Constants {
     public static final double SUPER_DEMAND_SHOOT = 1;
     public static final double SUPER_DEMAND_DUMP = -1;
     public static final double SUPER_DEMAND_STOP = 0;
-    // TODO Deprecated
-    public static final double FULL_BELT_DEMAND = 1;
-    public static final double HIGH_BELT_DEMAND = 1.15;
-
-    // Time (in seconds)
-    public static final double TIME_TILL_STATIONARY = .25;
     
     /**
      * Climber constants
