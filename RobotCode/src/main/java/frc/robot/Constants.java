@@ -87,6 +87,9 @@ public class Constants {
     public static final double FLYWHEEL_SPINUP_TIME = 100; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 5500; //RPM
     public static final double FLYWHEEL_MAX_RPM = 5900; //RPM
+    public static final int FLYWHEEL_MIN_RPM_OFFSET = -200;
+    public static final int FLYWHEEL_MAX_RPM_OFFSET = 600;
+    public static final int FLYWHEEL_OFFSET_RPM_INCREMENT = 100;
     public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits

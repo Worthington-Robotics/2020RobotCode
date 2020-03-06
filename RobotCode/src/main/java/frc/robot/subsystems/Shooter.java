@@ -49,6 +49,10 @@ public class Shooter extends Subsystem {
         for (int i = 0; i <= 180; i++) {
             tangent[i] = Math.tan(Math.toRadians((double) i / 2));
         }
+        
+        SmartDashboard.putNumber("Shooter/Flywheel/OffsetStep", Constants.FLYWHEEL_OFFSET_RPM_INCREMENT);
+        SmartDashboard.putNumber("Shooter/Flywheel/OffsetMax", Constants.FLYWHEEL_MAX_RPM_OFFSET);
+        SmartDashboard.putNumber("Shooter/Flywheel/OffsetMin", Constants.FLYWHEEL_MIN_RPM_OFFSET);
         reset();
     }
 
@@ -119,10 +123,12 @@ public class Shooter extends Subsystem {
                 case LIMELIGHT_MODE:
                     periodic.limelight_distance = limelightRanging();
                     if (periodic.limelight_distance > 60 && periodic.limelight_distance < 700) {
-                        periodic.flywheelRPMDemand = Math.min(
-                                ((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM),
+                        periodic.flywheelRPMDemand = Math.min(((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN)
+                                + Constants.FLYWHEEL_BASE_RPM + periodic.FlywheelBaseRPMOffset),
                                 Constants.FLYWHEEL_MAX_RPM);
-                        periodic.flywheelRPMDemand = Math.max(((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM), Constants.FLYWHEEL_IDLE_RPM);
+                        periodic.flywheelRPMDemand = Math.max(
+                                ((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM),
+                                Constants.FLYWHEEL_IDLE_RPM);
                     } else {
                         periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM;
                     }
@@ -158,7 +164,6 @@ public class Shooter extends Subsystem {
                     limelight.getEntry("snapshot").setNumber(0);
                 }
             }
-            
 
             @Override
             public void onStop(double timestamp) {
@@ -226,6 +231,7 @@ public class Shooter extends Subsystem {
             SmartDashboard.putString("Shooter/Flywheel/Mode", "" + flywheelMode);
             SmartDashboard.putNumber("Shooter/Flywheel/Velocity", periodic.flywheelVelocity);
         }
+        SmartDashboard.putNumber("Shooter/Flywheel/CurrOffset", periodic.FlywheelBaseRPMOffset);
         SmartDashboard.putBoolean("Shooter/Flywheel/AmpDeltaError",
                 Math.abs(periodic.AmpsL - periodic.AmpsR) > Constants.FLYWHEEL_DELTA_AMPS);
         SmartDashboard.putNumber("Shooter/Turret/Amps", periodic.turretAmps);
@@ -296,10 +302,10 @@ public class Shooter extends Subsystem {
         configTalons();
     }
 
-    public void softStart()
-    {
+    public void softStart() {
         flywheelMode = MotorControlMode.RAMP_UP;
     }
+
     /**
      * Method that maps the raw input from the slider on the EXTREME 3D and convert
      * the value to a 0 - 1 bottom to top map
@@ -378,6 +384,14 @@ public class Shooter extends Subsystem {
         return periodic.RPMOnTarget;
     }
 
+    public void increaseRPMOffset() {
+        periodic.FlywheelBaseRPMOffset = Math.min(periodic.FlywheelBaseRPMOffset + Constants.FLYWHEEL_OFFSET_RPM_INCREMENT, Constants.FLYWHEEL_MAX_RPM_OFFSET);
+    }
+
+    public void decreaseRPMOffset() {
+        periodic.FlywheelBaseRPMOffset = Math.max(periodic.FlywheelBaseRPMOffset - Constants.FLYWHEEL_OFFSET_RPM_INCREMENT, Constants.FLYWHEEL_MIN_RPM_OFFSET);
+    }
+
     public void setRPMOnTarget(boolean isTarget) {
         periodic.RPMOnTarget = isTarget;
     }
@@ -398,8 +412,7 @@ public class Shooter extends Subsystem {
         }
     }
 
-    public double getSupplyCurrent()
-    {
+    public double getSupplyCurrent() {
         return periodic.turretAmps;
     }
 
@@ -435,6 +448,7 @@ public class Shooter extends Subsystem {
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
+        public int FlywheelBaseRPMOffset = 0;
         public double rampUpTime = 0.0;
         public double AmpsL = 0.0;
         public double AmpsR = 0.0;
