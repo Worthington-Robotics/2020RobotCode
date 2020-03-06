@@ -28,7 +28,7 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
-            .2, // BLACK_WHEEL - needs to go slow or will shoot...
+            .55, // BLACK_WHEEL - needs to go slow or will shoot...
             .5, // INDEXER_ONE
             .45, // INDEXER_TWO
             .4, // INDEXER_THREE
@@ -121,11 +121,6 @@ public class Superstructure extends Subsystem {
     @Override public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
-                // When ball is no longer detected after shot
-                if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                    periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
-                }
-
                 // Ignore motor setting if dumping and automatically disable once empty
                 if (dumping) {
                     boolean empty = true;
@@ -141,6 +136,11 @@ public class Superstructure extends Subsystem {
                         dumping = false;
                     }
                 } else {
+                    // When ball is no longer detected after shot
+                    if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                       periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
+                    }
+
                     for (int n = INDEXER_ONE; n <= INTAKE; n++) {
                         // Ensure that the Intake is not in manual control before auto-moving
                         if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
@@ -194,7 +194,7 @@ public class Superstructure extends Subsystem {
             for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
                 if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
                     // Opposite and flip the default motor demands so the back is faster
-                    periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - n];
+                    periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - 1 - n];
                 }
             }
         }
@@ -254,6 +254,8 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER2_RAW", periodic.motorDemands[INDEXER_TWO]);
             SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER3_RAW", periodic.motorDemands[INDEXER_THREE]);
             SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_RAW", periodic.motorDemands[INTAKE]);
+
+            SmartDashboard.putBoolean("Superstructure/DUMPING", dumping);
         }
         // FIXME Name differently if possible after changing driver station value
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.sensorsDetected[BLACK_WHEEL]);
