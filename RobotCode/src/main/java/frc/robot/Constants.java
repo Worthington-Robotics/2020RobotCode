@@ -19,22 +19,23 @@ public class Constants {
     public static final int COLOR_WHEEL = 4;
     public static final int SHOOTER_FLYWHEEL_LEFT = 5;
     public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
-    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
-    public static final int SUPERSTRUCTURE_DELIVERY_BELT = 8;
-    public static final int SUPERSTRUCTURE_DELIVERY_WHEEL = 9;
-    public static final int SUPERSTRUCTURE_INTAKE = 10;
+
+    public static final int ID_SUPER_DELIVERY_WHEEL = 9;
+    public static final int ID_SUPER_INDEX1 = 7;
+    public static final int ID_SUPER_INDEX2 = -1; // FIXME Add ID!
+    public static final int ID_SUPER_INDEX3 = -1; // FIXME Add ID!
+    public static final int ID_SUPER_INTAKE = 10;
+
     public static final int TURRET_CONTROL = 11;
     public static final int DRIVE_BACK_LEFT_ID = 14;
     public static final int DRIVE_FRONT_LEFT_ID = 15;
-    public static final int SUPERSTRUCTURE_INDEX_BOTTOM_BELT = 16;
-    //Spark Ports
 
     // TOF IDs
-    public static final int SUPERSTURCTURE_TOF1_ID = 1;
-    public static final int SUPERSTURCTURE_TOF2_ID = 2;
-    public static final int SUPERSTURCTURE_TOF3_ID = 3;
-    public static final int SUPERSTURCTURE_TOF4_ID = 4;
-    public static final int SUPERSTURCTURE_TOF5_ID = 5;
+    public static final int ID_SUPER_TOF1 = 1;
+    public static final int ID_SUPER_TOF2 = 2;
+    public static final int ID_SUPER_TOF3 = 3;
+    public static final int ID_SUPER_TOF4 = 4;
+    public static final int ID_SUPER_TOF5 = 5;
 
     //Solenoid Ports
     public static final int TRANS_LOW_ID = 0;
@@ -173,31 +174,12 @@ public class Constants {
     /**
      * Superstructure constants
      */
-    
     // Demands
-    public static final double FULL_BELT_DEMAND = 1;
-    public static final double INDEXER_DEMAND = .5;
-    
-    public static final double INTAKE_DEMAND = 1;
-    public static final double HIGH_BELT_DEMAND = 1.15;
-    public static final double STOP_BELT_DEMAND = 0;
-    // Sensor distance before stopping (in mm)
-    public static final double DISTANCE_STOP_MM = 25.4;
-    // Time (in seconds)
-    public static final double TIME_TILL_STATIONARY = .25;
-    // Pulse constants (in seconds)
-    public static final double PULSE_LENGTH = .25;
-    public static final double PULSE_COOLDOWN = .1;
-
-    public static final double THRESHOLD_DELIVERY = 75;
-    public static final double THRESHOLD_INDEXER = 100;
-    public static final double THRESHOLD_INTAKE = 75;
-
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 50;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF2 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF3 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF4 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF5 = 75;
+    public static final double SUPER_DEMAND_DEFAULT = .2;
+    public static final double SUPER_DEMAND_INTAKE_MANUAL = 1; // FIXME Update!// WARNING: MUST BE DIFFERENT FROM THE DEFAULT INTAKE DEMAND (unless you want me to implement a boolean for manual control)
+    public static final double SUPER_DEMAND_SHOOT = 1;
+    public static final double SUPER_DEMAND_DUMP = -1;
+    public static final double SUPER_DEMAND_STOP = 0;
     
     /**
      * Climber constants
