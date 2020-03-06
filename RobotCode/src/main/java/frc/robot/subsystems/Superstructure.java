@@ -197,6 +197,9 @@ public class Superstructure extends Subsystem {
                     periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - 1 - n];
                 }
             }
+        } else {
+            // Stop wheel manually because the non-dumping mode does not override it automatically
+            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
         }
     }
 
