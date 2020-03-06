@@ -21,6 +21,7 @@ import frc.robot.Constants;
 public class Shooter extends Subsystem {
     private double[] tangent;
     private static Shooter m_Shooter = new Shooter();
+    private NetworkTable limelight;
     private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
     private MotorControlMode turretMode = MotorControlMode.OPEN_LOOP;
     private ShooterIO periodic;
@@ -32,6 +33,7 @@ public class Shooter extends Subsystem {
     private NetworkTableEntry tv = table.getEntry("tv");
 
     private Shooter() {
+        limelight = NetworkTableInstance.getDefault().getTable("limelight");
         SmartDashboard.putNumber("Shooter/Turret/P", 0);
         SmartDashboard.putNumber("Shooter/Turret/I", 0);
         SmartDashboard.putNumber("Shooter/Turret/D", 0);
@@ -106,14 +108,21 @@ public class Shooter extends Subsystem {
                     if (Util.epsilonEquals(periodic.flywheelRPMDemand, Constants.FLYWHEEL_IDLE_RPM, 100)) {
                         setLimelightRPM();
                     } else {
-                        periodic.flywheelRPMDemand = Math.min(periodic.flywheelRPMDemand + (Constants.FLYWHEEL_IDLE_RPM/(Constants.FLYWHEEL_SPINUP_TIME)), Constants.FLYWHEEL_IDLE_RPM);
+                        periodic.flywheelRPMDemand = Math.max(
+                                periodic.flywheelRPMDemand
+                                        + (Constants.FLYWHEEL_IDLE_RPM / (Constants.FLYWHEEL_SPINUP_TIME)),
+                                Constants.FLYWHEEL_IDLE_RPM);
+                        periodic.flywheelRPMDemand = Math.min(periodic.flywheelRPMDemand, Constants.FLYWHEEL_MAX_RPM);
                         periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     }
                     break;
                 case LIMELIGHT_MODE:
-                    double range = limelightRanging();
-                    if (range > 60 && range < 700) {
-                        periodic.flywheelRPMDemand = (limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM;
+                    periodic.limelight_distance = limelightRanging();
+                    if (periodic.limelight_distance > 60 && periodic.limelight_distance < 700) {
+                        periodic.flywheelRPMDemand = Math.min(
+                                ((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM),
+                                Constants.FLYWHEEL_MAX_RPM);
+                        periodic.flywheelRPMDemand = Math.max(((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM), Constants.FLYWHEEL_IDLE_RPM);
                     } else {
                         periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM;
                     }
@@ -143,7 +152,13 @@ public class Shooter extends Subsystem {
                     turretControl.set(ControlMode.Disabled, 0);
                     break;
                 }
+                if (periodic.targetV == 1) {
+                    limelight.getEntry("snapshot").setNumber(1);
+                } else {
+                    limelight.getEntry("snapshot").setNumber(0);
+                }
             }
+            
 
             @Override
             public void onStop(double timestamp) {
@@ -202,7 +217,8 @@ public class Shooter extends Subsystem {
             SmartDashboard.putNumber("Shooter/Turret/Range (in)", limelightRanging());
             SmartDashboard.putNumber("Shooter/Turret/Encoder", periodic.turretEncoder);
             SmartDashboard.putNumber("Shooter/Turret/EncoderGoal", limelightGoalAngle());
-            SmartDashboard.putNumber("Shooter/Turret/AngleError", ticksToDegrees(limelightGoalAngle() - periodic.turretEncoder) + Constants.TURRET_OFFSET);
+            SmartDashboard.putNumber("Shooter/Turret/AngleError",
+                    ticksToDegrees(limelightGoalAngle() - periodic.turretEncoder) + Constants.TURRET_OFFSET);
             SmartDashboard.putString("Shooter/Turret/Mode", "" + turretMode);
             SmartDashboard.putNumber("Shooter/Flywheel/OperatorInput", periodic.operatorFlywheelInput);
             SmartDashboard.putNumber("Shooter/Flywheel/Demand", periodic.flywheelDemand);
@@ -295,10 +311,10 @@ public class Shooter extends Subsystem {
         return degree / Constants.TURRET_DEGREES_TO_TICKS; // 360 / (4096 * 9.5)
     }
 
-    public boolean onTarget()
-    {
+    public boolean onTarget() {
         return periodic.onTarget;
     }
+
     public void setRampUp() {
         if (flywheelMode != MotorControlMode.RAMP_UP) {
             flywheelMode = MotorControlMode.RAMP_UP;
@@ -378,6 +394,11 @@ public class Shooter extends Subsystem {
         }
     }
 
+    public double getSupplyCurrent()
+    {
+        return periodic.turretAmps;
+    }
+
     /**
      * 
      * @param angle angle offset given by the limelight (tx)
@@ -394,12 +415,17 @@ public class Shooter extends Subsystem {
     }
 
     public double limelightGoalAngle() {
-        double goal = degreesToTicks(periodic.targetX) + periodic.turretEncoder;
-        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
-            goal = Constants.leftTurretLimit;
-        }
-        if (periodic.turretEncoder + degreesToTicks(periodic.targetX) > Constants.rightTurretLimit) {
-            goal = Constants.rightTurretLimit;
+        double goal = 0;
+        if (periodic.targetV == 1) {
+            goal = degreesToTicks(periodic.targetX) + periodic.turretEncoder;
+            if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
+                goal = Constants.leftTurretLimit;
+            }
+            if (periodic.turretEncoder + degreesToTicks(periodic.targetX) > Constants.rightTurretLimit) {
+                goal = Constants.rightTurretLimit;
+            }
+        } else {
+            goal = periodic.turretEncoder;
         }
         return goal;
     }
@@ -426,5 +452,6 @@ public class Shooter extends Subsystem {
         public double flywheelClosedLoopError = 0;
         public double turretAmps = 0.0;
         public boolean onTarget = false;
+        public double limelight_distance = 0.0;
     }
 }

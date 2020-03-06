@@ -15,8 +15,7 @@ public class Constants {
 
     //Talon SRX & FX IDs
     public static final int DRIVE_FRONT_RIGHT_ID = 1;
-    public static final int DRIVE_MIDDLE_RIGHT_ID = 2;
-    public static final int DRIVE_BACK_RIGHT_ID = 3;
+    public static final int DRIVE_BACK_RIGHT_ID = 2;
     public static final int COLOR_WHEEL = 4;
     public static final int SHOOTER_FLYWHEEL_LEFT = 5;
     public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
@@ -28,10 +27,8 @@ public class Constants {
     public static final int ID_SUPER_INTAKE = 10;
 
     public static final int TURRET_CONTROL = 11;
-    public static final int DRIVE_FRONT_LEFT_ID = 13;
-    public static final int DRIVE_MIDDLE_LEFT_ID = 14;
-    public static final int DRIVE_BACK_LEFT_ID = 15;
-    //Spark Ports
+    public static final int DRIVE_BACK_LEFT_ID = 14;
+    public static final int DRIVE_FRONT_LEFT_ID = 15;
 
     // TOF IDs
     public static final int ID_SUPER_TOF1 = 1;
@@ -47,8 +44,8 @@ public class Constants {
     public static final int UNFOLD_LOW_ID = 4;
     public static final int UNFOLD_HIGH_ID = 3;
 
-    public static final int CLIMB_LOW_ID = 5; //Do Not Change
-    public static final int CLIMB_HIGH_ID = 2; //Do Not ChangeS
+    public static final int CLIMB_LOW_ID = 2; //Do Not Change
+    public static final int CLIMB_HIGH_ID = 5; //Do Not ChangeS
     
     public static final int INTAKE_LOW_ID = 6;
     public static final int INTAKE_HIGH_ID = 1;
@@ -70,7 +67,7 @@ public class Constants {
     */
     public static final double LIMELIGHT_HIGHT = 23;
     public static final double LIMELIGHT_PITCH = 30;
-    public static final double TURRET_MAX_SPEED = .17;
+    public static final double TURRET_MAX_SPEED = .145;
     public static final double TURRET_ANGLE_KP = .8; // SAFE .3
     public static final double TURRET_ANGLE_KI = 0.003; // SAFE .001
     public static final double TURRET_ANGLE_KD = 50; // SAFE 12
@@ -85,11 +82,11 @@ public class Constants {
     public static double VOLTAGE_COMP_FLYWHEEL = 10;
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
-    public static final double FLYWHEEL_RPM_PER_IN = 4.4; //4.4
-    public static final double FLYWHEEL_BASE_RPM = 4000; //4000
-    public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
-    public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
-    public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
+    public static final double FLYWHEEL_RPM_PER_IN = 4.6; //4.4
+    public static final double FLYWHEEL_BASE_RPM = 4350; //4000
+    public static final double FLYWHEEL_SPINUP_TIME = 100; //10 ms 
+    public static final double FLYWHEEL_IDLE_RPM = 5500; //RPM
+    public static final double FLYWHEEL_MAX_RPM = 5900; //RPM
     public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
@@ -101,9 +98,9 @@ public class Constants {
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final boolean RAMPUP = false;
-    public static final boolean ENABLE_MP_TEST_MODE = true;
+    public static final boolean ENABLE_MP_TEST_MODE = false;
     public static final double MP_TEST_SPEED = 72; //in/s
 
     public static double LOOPER_DT = 0.01;    

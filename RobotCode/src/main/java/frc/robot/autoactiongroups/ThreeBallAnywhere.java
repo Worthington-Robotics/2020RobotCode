@@ -8,7 +8,7 @@ import frc.robot.actions.superaction.ShootAction;
 
 public class ThreeBallAnywhere extends StateMachineDescriptor {
     public ThreeBallAnywhere() {
-        addParallel(new Action[] {new DummyDrive(), new TurretPIDControl()}, 2000);
+        addParallel(new Action[] {new DummyDrive(true), new TurretPIDControl()}, 2000);
         addParallel(new Action[] {new ShootAction(), new TurretPIDControl()}, 4000);
     }
 }

@@ -5,6 +5,7 @@ import frc.lib.statemachine.StateMachineDescriptor;
 //import frc.robot.autoactiongroups.*;
 import frc.robot.autoactiongroups.get10easy;
 import frc.robot.autoactiongroups.get10hard;
+import frc.robot.autoactiongroups.SystemsCheck;
 import frc.robot.autoactiongroups.ThreeBallAnywhere;
 
 /**
@@ -110,7 +111,7 @@ public class AutoSelector {
                 return null;
 
             case Auto7:
-                return null;
+                return new SystemsCheck();
 
 
             default:

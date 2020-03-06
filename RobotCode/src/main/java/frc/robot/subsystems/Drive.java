@@ -47,7 +47,7 @@ public class Drive extends Subsystem {
     private DriveIO periodic;
     private PigeonIMU pigeonIMU;
     private DoubleSolenoid trans;
-    private TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveMiddleLeft, driveMiddleRight, driveBackLeft;
+    private TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveBackLeft;
     private PIDF anglePID;
     private AdaptivePurePursuitController pathFollowingController;
 
@@ -173,10 +173,8 @@ public class Drive extends Subsystem {
         anglePID = new PIDF(Constants.ANGLE_KP, Constants.ANGLE_KD);
         anglePID.setContinuous(true);
         driveFrontLeft = new TalonFX(Constants.DRIVE_FRONT_LEFT_ID);
-        driveMiddleLeft = new TalonFX(Constants.DRIVE_MIDDLE_LEFT_ID);
         driveBackLeft = new TalonFX(Constants.DRIVE_BACK_LEFT_ID);
         driveFrontRight = new TalonFX(Constants.DRIVE_FRONT_RIGHT_ID);
-        driveMiddleRight = new TalonFX(Constants.DRIVE_MIDDLE_RIGHT_ID);
         driveBackRight = new TalonFX(Constants.DRIVE_BACK_RIGHT_ID);
         pigeonIMU = new PigeonIMU(Constants.PIGION_ID);
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
@@ -287,13 +285,6 @@ public class Drive extends Subsystem {
         driveFrontLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
         driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-        driveMiddleLeft.setInverted(true);
-        driveMiddleLeft.setNeutralMode(NeutralMode.Brake);
-        driveMiddleLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
-        driveMiddleLeft.enableVoltageCompensation(true);
-        driveMiddleLeft.follow(driveFrontLeft);
-        driveMiddleLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
-
         driveBackLeft.setInverted(true);
         driveBackLeft.setNeutralMode(NeutralMode.Brake);
         driveBackLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
@@ -321,13 +312,6 @@ public class Drive extends Subsystem {
         driveFrontRight.enableVoltageCompensation(true);
         driveFrontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
         driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-
-        driveMiddleRight.setInverted(false);
-        driveMiddleRight.setNeutralMode(NeutralMode.Brake);
-        driveMiddleRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
-        driveMiddleRight.enableVoltageCompensation(true);
-        driveMiddleRight.follow(driveFrontRight);
-        driveMiddleRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
 
         driveBackRight.setInverted(false);
         driveBackRight.setNeutralMode(NeutralMode.Brake);
