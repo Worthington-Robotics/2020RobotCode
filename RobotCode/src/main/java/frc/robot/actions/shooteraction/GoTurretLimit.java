@@ -41,6 +41,6 @@ public class GoTurretLimit extends Action {
      * Code to run when the action has been called by the state machine to stop.
      */
     @Override public void onStop() {
-        shooter.setTurretDemand(Constants.STOP_DEMAND);
+        //shooter.setTurretDemand(Constants.STOP_DEMAND);
     }
 }

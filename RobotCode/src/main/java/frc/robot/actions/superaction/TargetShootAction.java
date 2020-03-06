@@ -25,7 +25,7 @@ public class TargetShootAction extends Action {
      * <p>approx. every 20ms
      */
     @Override public void onLoop() {
-        if (shooter.isTurretOnTarget()) {
+        if (shooter.onTarget()) {
             superstructure.shootBall();
             hasShot = true;
         }

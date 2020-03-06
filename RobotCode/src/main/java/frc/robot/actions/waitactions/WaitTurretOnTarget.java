@@ -27,7 +27,7 @@ public class WaitTurretOnTarget extends Action {
      * @return true action is ready to self terminate
      */
     @Override public boolean isFinished() {
-        return shooter.isTurretOnTarget();
+        return shooter.onTarget();
     }
 
     /**
