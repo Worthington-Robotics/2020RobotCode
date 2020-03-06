@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Pose2d;
 import frc.lib.statemachine.Action;
 import frc.lib.util.Util;
-//import frc.robot.subsystems.PoseEstimator;
+import frc.robot.subsystems.PoseEstimator;
 
 public class PointCloudWait extends Action {
     private boolean isX, isY, isTheta;
@@ -28,7 +28,7 @@ public class PointCloudWait extends Action {
     }
 
     public void onLoop() {
-        /*double mX = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x();
+        double mX = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x();
         double mY = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().y();
         double mTheta = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getRotation().getDegrees();
         isX = Util.epsilonEquals(X, mX, epsilonX);
@@ -36,7 +36,7 @@ public class PointCloudWait extends Action {
         isTheta = Util.epsilonEquals(Theta, mTheta, epsilonTheta);
         SmartDashboard.putBoolean("isX", isX);
         SmartDashboard.putBoolean("isY", isY);
-        SmartDashboard.putBoolean("isTheta", isTheta);*/
+        SmartDashboard.putBoolean("isTheta", isTheta);
     }
 
     public boolean isFinished() {

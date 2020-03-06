@@ -248,7 +248,6 @@ public class Drive extends Subsystem {
 
     public void reset() {
         mOverrideTrajectory = false;
-        pigeonIMU.enterCalibrationMode(PigeonIMU.CalibrationMode.Temperature);
         periodic = new DriveIO();
         setHeading(Rotation2d.fromDegrees(0));
         resetEncoders();
@@ -332,17 +331,18 @@ public class Drive extends Subsystem {
                 Pose2d robot_pose = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue();
                 Twist2d command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
                 DriveSignal setpoint = Kinematics.inverseKinematics(command);
+
                 // Scaling the controler to a set max velocity
                 double max_vel = 0;
-                max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
                 max_vel = Math.max(max_vel, Math.abs(setpoint.getRight()));
+                max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
                 if (max_vel > Constants.ROBOT_MAX_VELOCITY) {
                     double scaling = Constants.ROBOT_MAX_VELOCITY / max_vel;
                     setpoint = new DriveSignal(setpoint.getLeft() * scaling, setpoint.getRight() * scaling);
                 }
                 setpoint = new DriveSignal(
-                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getLeft())),
-                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getRight())));
+                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getRight())),
+                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getLeft())));
                 setVelocity(setpoint, DriveSignal.NEUTRAL);
             } else {
                 setVelocity(DriveSignal.BRAKE, DriveSignal.BRAKE);
@@ -511,6 +511,7 @@ public class Drive extends Subsystem {
         pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
                 Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 1);
         mDriveControlState = DriveControlState.PATH_FOLLOWING;
+        System.out.println("Now entering into path following mode");
         updatePathFollower();
     }
 

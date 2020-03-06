@@ -1,7 +1,7 @@
 package frc.robot.actions.waitactions;
 
 import frc.lib.statemachine.Action;
-//import frc.robot.subsystems.PoseEstimator;
+import frc.robot.subsystems.PoseEstimator;
 
 public class LineCrossWait extends Action {
     private boolean isX, end;
@@ -18,7 +18,7 @@ public class LineCrossWait extends Action {
     }
 
     public void onLoop() {
-        /*if (isX) {
+        if (isX) {
             if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().x()) {
                 end = true;
             }
@@ -26,7 +26,7 @@ public class LineCrossWait extends Action {
             if (mCoord < PoseEstimator.getInstance().getLatestFieldToVehicle().getValue().getTranslation().y()) {
                 end = true;
             }
-        }*/
+        }
     }
 
     public boolean isFinished() {

@@ -114,9 +114,9 @@ public class Constants {
     //Path following Constants
     public static final double ROBOT_MAX_VELOCITY = 120.0; // in/s
     public static final double ROBOT_MAX_ACCEL = 60.0; // in/s^2
-    public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
+    public static final double PATH_FOLLOWING_LOOKAHEAD = 24;
     public static final double DRIVETRAIN_UPDATE_RATE = LOOPER_DT;
-    public static final double PATH_FOLLOWING_MAX_ACCELERATION = 0;
+    public static final double PATH_FOLLOWING_MAX_ACCELERATION = 60;
 
     //Electrical Constants
     public static final double DRIVE_VCOMP = 10.0; //V

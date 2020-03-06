@@ -21,7 +21,6 @@ import frc.lib.util.POVTrigger;
 import frc.lib.util.VersionData;
 import frc.robot.subsystems.*;
 import frc.robot.actions.driveactions.*;
-import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
 //import frc.robot.actions.colorwheelactions.ColorWheelPosition;
 //import frc.robot.actions.colorwheelactions.ColorWheelRotations;
@@ -40,28 +39,24 @@ import frc.robot.actions.superaction.*;
 public class Robot extends TimedRobot {
     private SubsystemManager manager;
     private Looper enabledLooper, disabledLooper;
-    private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb, colorWheelPos, colorWheelRot, colorWheelStop;
+    //private JoystickButton climbUp, climbDown, unfoldClimb, foldClimb, colorWheelPos, colorWheelRot, colorWheelStop;
 
     //Master joystick buttons
-    private POVTrigger shift = new POVTrigger(Constants.MASTER);
     private POVTrigger gyrPovTrigger = new POVTrigger(Constants.MASTER);
-    //private JoystickButton gyroLock = new JoystickButton(Constants.MASTER, 1);
     private JoystickButton shiftButton = new JoystickButton(Constants.MASTER, 1);
     private JoystickButton inverse = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton colorWheelManual = new JoystickButton(Constants.MASTER, 3);
-    private JoystickButton colorWheelManualCCW = new JoystickButton(Constants.MASTER, 4);
-    private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
-    private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
+    //private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
+    //private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
 
     //Co-pilot joystick buttons
-    private POVTrigger recenter = new POVTrigger(Constants.SECOND);
+    /*private POVTrigger recenter = new POVTrigger(Constants.SECOND);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
     private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
     private DebouncedJoystickButton intakeUP = new DebouncedJoystickButton(Constants.SECOND, 9);
-    private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
+    private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);*/
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -72,11 +67,7 @@ public class Robot extends TimedRobot {
         manager = new SubsystemManager(Arrays.asList(
             // register subsystems here
             PoseEstimator.getInstance(), 
-            Drive.getInstance(),
-            Climber.getInstance(),
-            Superstructure.getInstance(),
-            Shooter.getInstance(),
-            Lights.getInstance()),
+            Drive.getInstance()),
              true);
 
         // create the master looper threads
@@ -114,8 +105,8 @@ public class Robot extends TimedRobot {
         enabledLooper.stop();
 
         StateMachine.getInstance().assertStop();
-        Superstructure.getInstance().reset();
-        Shooter.getInstance().disable();
+        //Superstructure.getInstance().reset();
+        //Shooter.getInstance().disable();
 
         disabledLooper.start();
     }
@@ -136,6 +127,7 @@ public class Robot extends TimedRobot {
         disabledLooper.stop();
 
         //reset anything here
+        //Shooter.getInstance().softStart();
         Drive.getInstance().reset(); 
         PoseEstimator.getInstance().reset();
         Superstructure.getInstance().reset();
@@ -185,8 +177,8 @@ public class Robot extends TimedRobot {
         //reset anything here
         Drive.getInstance().reset();
         PoseEstimator.getInstance().reset();
-        Shooter.getInstance().disable();
-        Superstructure.getInstance().reset();
+        //Shooter.getInstance().disable();
+        //Superstructure.getInstance().reset();
 
         enabledLooper.start();
     }
@@ -201,21 +193,19 @@ public class Robot extends TimedRobot {
 
     public void initButtons(){
         // create buttons and register actions
-        recenter.whileHeld(Action.toCommand(new Recenter(0)));
+        /*recenter.whileHeld(Action.toCommand(new Recenter(0)));
         turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
         dump.whileHeld(Action.toCommand(new DumpAction()));
-        manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
-        // colorWheelManual.whileHeld(Action.toCommand(new colorWheelManual(false)));
-        // colorWheelManualCCW.whileHeld(Action.toCommand(new colorWheelManual(true)));
+        manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));*/
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shiftButton.whileHeld(Action.toCommand(new Shift()));
         gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whileHeld(Action.toCommand(new ShootAction()));
+        /*shootOne.whileHeld(Action.toCommand(new ShootAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
-        intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));
+        intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));*/
         VersionData.WriteBuildInfoToDashboard();
     }
 }

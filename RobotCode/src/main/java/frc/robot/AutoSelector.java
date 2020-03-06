@@ -5,8 +5,11 @@ import frc.lib.statemachine.StateMachineDescriptor;
 //import frc.robot.autoactiongroups.*;
 import frc.robot.autoactiongroups.get10easy;
 import frc.robot.autoactiongroups.get10hard;
+import frc.robot.autoactiongroups.SkewLeft;
+import frc.robot.autoactiongroups.SkewRight;
 import frc.robot.autoactiongroups.SystemsCheck;
 import frc.robot.autoactiongroups.ThreeBallAnywhere;
+import frc.robot.autoactiongroups.get10Impossible;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
@@ -20,9 +23,9 @@ enum UserSelection {
     Auto1("DummyDrive", 1),
     Auto2("SmrtDrive", 2),
     Auto3("SmartDrive", 3),
-    Auto4("Auto 4", 4),
-    Auto5("Auto 5", 5),
-    Auto6("Auto 6", 6),
+    Auto4("Personal 9", 4),
+    Auto5("Swerve Right", 5),
+    Auto6("Swerve Left", 6),
 
     
     Auto7("Auto Test Protocol", 7),
@@ -102,13 +105,13 @@ public class AutoSelector {
                 return new get10hard();
 
             case Auto4:
-                return null;
+                return new get10Impossible();
 
             case Auto5:
-                return null;
+                return new SkewRight();
 
             case Auto6:
-                return null;
+                return new SkewLeft();
 
             case Auto7:
                 return new SystemsCheck();

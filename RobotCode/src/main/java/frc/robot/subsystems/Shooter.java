@@ -296,6 +296,10 @@ public class Shooter extends Subsystem {
         configTalons();
     }
 
+    public void softStart()
+    {
+        flywheelMode = MotorControlMode.RAMP_UP;
+    }
     /**
      * Method that maps the raw input from the slider on the EXTREME 3D and convert
      * the value to a 0 - 1 bottom to top map
