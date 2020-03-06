@@ -48,7 +48,7 @@ public class Drive extends Subsystem {
     private DriveIO periodic;
     private PigeonIMU pigeonIMU;
     private DoubleSolenoid trans;
-    private TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveMiddleLeft, driveMiddleRight, driveBackLeft;
+    private TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveBackLeft;
     private PIDF anglePID;
     private AdaptivePurePursuitController pathFollowingController;
 
@@ -119,6 +119,10 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void readPeriodicInputs() {
+        if (SmartDashboard.getBoolean("Drive/PID/SaveChanges", false) && Constants.DEBUG) {
+            updateDrivePID(SmartDashboard.getNumber("Drive/PID/P", 0), SmartDashboard.getNumber("Drive/PID/I", 0),
+                    SmartDashboard.getNumber("Drive/PID/D", 0), SmartDashboard.getNumber("Drive/PID//F", 0));
+        }
         if (periodic.TransState) {
             periodic.operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK_SHIFTED);
         } else {
@@ -144,11 +148,6 @@ public class Drive extends Subsystem {
         periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
         periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
 
-        if (Constants.DEBUG) {
-            periodic.PIDDUpdate = SmartDashboard.getNumber("D Slider", 0);
-            periodic.PIDPUpdate = SmartDashboard.getNumber("P Slider", 0);
-            periodic.savePIDSettings = SmartDashboard.getBoolean("Save Changes", false);
-        }
 
     }
 
@@ -167,23 +166,21 @@ public class Drive extends Subsystem {
     }
 
     private Drive() {
+        SmartDashboard.putBoolean("Drive/PID/SaveChanges", false);
+        SmartDashboard.putNumber("Drive/PID/P", 0);
+        SmartDashboard.putNumber("Drive/PID/I", 0);
+        SmartDashboard.putNumber("Drive/PID/D", 0);
+        SmartDashboard.putNumber("Drive/PID/F", 0);
         anglePID = new PIDF(Constants.ANGLE_KP, Constants.ANGLE_KD);
         anglePID.setContinuous(true);
         driveFrontLeft = new TalonFX(Constants.DRIVE_FRONT_LEFT_ID);
-        driveMiddleLeft = new TalonFX(Constants.DRIVE_MIDDLE_LEFT_ID);
         driveBackLeft = new TalonFX(Constants.DRIVE_BACK_LEFT_ID);
         driveFrontRight = new TalonFX(Constants.DRIVE_FRONT_RIGHT_ID);
-        driveMiddleRight = new TalonFX(Constants.DRIVE_MIDDLE_RIGHT_ID);
         driveBackRight = new TalonFX(Constants.DRIVE_BACK_RIGHT_ID);
         pigeonIMU = new PigeonIMU(Constants.PIGION_ID);
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
-        if (Constants.DEBUG) {
-            SmartDashboard.putNumber("D Slider", 0);
-            SmartDashboard.putNumber("P Slider", 0);
-            SmartDashboard.putBoolean("Save Changes", false);
-        }
 
     }
 
@@ -204,6 +201,18 @@ public class Drive extends Subsystem {
         periodic.gyro_offset = heading.rotateBy(Rotation2d.fromDegrees(pigeonIMU.getFusedHeading()).inverse());
         System.out.println("Gyro offset: " + periodic.gyro_offset.getDegrees());
         periodic.gyro_heading = heading;
+    }
+
+    public void updateDrivePID(double P, double I, double D, double F) {
+        driveFrontLeft.config_kP(0, P);
+        driveFrontLeft.config_kI(0, I);
+        driveFrontLeft.config_kD(0, D);
+        driveFrontLeft.config_kF(0, F);
+
+        driveFrontRight.config_kP(0, P);
+        driveFrontRight.config_kI(0, I);
+        driveFrontRight.config_kD(0, D);
+        driveFrontRight.config_kF(0, F);
     }
 
     public double getLeftEncoderRotations() {
@@ -240,7 +249,6 @@ public class Drive extends Subsystem {
 
     public void reset() {
         mOverrideTrajectory = false;
-        pigeonIMU.enterCalibrationMode(PigeonIMU.CalibrationMode.Temperature);
         periodic = new DriveIO();
         setHeading(Rotation2d.fromDegrees(0));
         resetEncoders();
@@ -277,13 +285,6 @@ public class Drive extends Subsystem {
         driveFrontLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
         driveFrontLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-        driveMiddleLeft.setInverted(true);
-        driveMiddleLeft.setNeutralMode(NeutralMode.Brake);
-        driveMiddleLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
-        driveMiddleLeft.enableVoltageCompensation(true);
-        driveMiddleLeft.follow(driveFrontLeft);
-        driveMiddleLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
-
         driveBackLeft.setInverted(true);
         driveBackLeft.setNeutralMode(NeutralMode.Brake);
         driveBackLeft.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
@@ -312,13 +313,6 @@ public class Drive extends Subsystem {
         driveFrontRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
         driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
 
-        driveMiddleRight.setInverted(false);
-        driveMiddleRight.setNeutralMode(NeutralMode.Brake);
-        driveMiddleRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
-        driveMiddleRight.enableVoltageCompensation(true);
-        driveMiddleRight.follow(driveFrontRight);
-        driveMiddleRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
-
         driveBackRight.setInverted(false);
         driveBackRight.setNeutralMode(NeutralMode.Brake);
         driveBackRight.configVoltageCompSaturation(Constants.DRIVE_VCOMP);
@@ -338,17 +332,18 @@ public class Drive extends Subsystem {
                 Pose2d robot_pose = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue();
                 Twist2d command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
                 DriveSignal setpoint = Kinematics.inverseKinematics(command);
+
                 // Scaling the controler to a set max velocity
                 double max_vel = 0;
-                max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
                 max_vel = Math.max(max_vel, Math.abs(setpoint.getRight()));
+                max_vel = Math.max(max_vel, Math.abs(setpoint.getLeft()));
                 if (max_vel > Constants.ROBOT_MAX_VELOCITY) {
                     double scaling = Constants.ROBOT_MAX_VELOCITY / max_vel;
                     setpoint = new DriveSignal(setpoint.getLeft() * scaling, setpoint.getRight() * scaling);
                 }
                 setpoint = new DriveSignal(
-                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getLeft())),
-                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getRight())));
+                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getRight())),
+                        radiansPerSecondToTicksPer100ms(inchesPerSecondToRadiansPerSecond(setpoint.getLeft())));
                 setVelocity(setpoint, DriveSignal.NEUTRAL);
             } else {
                 setVelocity(DriveSignal.BRAKE, DriveSignal.BRAKE);
@@ -517,6 +512,7 @@ public class Drive extends Subsystem {
         pathFollowingController = new AdaptivePurePursuitController(Constants.PATH_FOLLOWING_LOOKAHEAD,
                 Constants.PATH_FOLLOWING_MAX_ACCELERATION, Constants.DRIVETRAIN_UPDATE_RATE, path, reversed, 1);
         mDriveControlState = DriveControlState.PATH_FOLLOWING;
+        System.out.println("Now entering into path following mode");
         updatePathFollower();
     }
 

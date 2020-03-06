@@ -2,30 +2,27 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.StateMachineDescriptor;
-//import frc.robot.autoactiongroups.*;
-import frc.robot.autoactiongroups.GetTenEasy;
-import frc.robot.autoactiongroups.GetTenHard;
+import frc.robot.autoactiongroups.SkewLeft;
+import frc.robot.autoactiongroups.SkewRight;
+import frc.robot.autoactiongroups.SystemsCheck;
 import frc.robot.autoactiongroups.ThreeBallAnywhere;
+import frc.robot.autoactiongroups.get10Impossible;
+import frc.robot.autoactiongroups.getTenEasy;
+import frc.robot.autoactiongroups.getTenHard;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
- * commands.
- * <p>
- * It has two parameters, a visible name and an associated ID number
- * from 1 to n.
+ *         commands.
+ *         <p>
+ *         It has two parameters, a visible name and an associated ID number
+ *         from 1 to n.
  */
 enum UserSelection {
 
-    Auto1("DummyDrive", 1),
-    Auto2("SmrtDrive", 2),
-    Auto3("SmartDrive", 3),
-    Auto4("Auto 4", 4),
-    Auto5("Auto 5", 5),
-    Auto6("Auto 6", 6),
+    Auto1("DummyDrive", 1), Auto2("SmrtDrive", 2), Auto3("SmartDrive", 3), Auto4("Personal 9", 4),
+    Auto5("Swerve Right", 5), Auto6("Swerve Left", 6),
 
-    
-    Auto7("Auto Test Protocol", 7),
-    Auto20("Remote Operation", 20);
+    Auto7("Auto Test Protocol", 7), Auto20("Remote Operation", 20);
 
     private String name;
     private int num;
@@ -77,40 +74,39 @@ public class AutoSelector {
         return UserSelection.values()[UserSelection.values().length - 1];
     }
 
-
     /**
      * This method determines the Auto mode based on the fed game data and the
      * dashboard data.
      *
      * @param selection - a string with the name of the selected autonomous.
      * @return the proper auto command to run. It should include all movements in
-     * one command
+     *         one command
      */
     public static StateMachineDescriptor autoSelect(String selection) {
         UserSelection usrAuto = getSelFromStr(selection);
         SmartDashboard.putString("Final Auto Choice", usrAuto.toString());
         switch (usrAuto) {
 
-            case Auto1:
-                return new GetTenEasy();
+        case Auto1:
+            return new getTenEasy();
 
             case Auto2:
                 return new ThreeBallAnywhere();
 
             case Auto3:
-                return new GetTenHard();
+                return new getTenHard();
 
             case Auto4:
-                return null;
+                return new get10Impossible();
 
             case Auto5:
-                return null;
+                return new SkewRight();
 
             case Auto6:
-                return null;
+                return new SkewLeft();
 
             case Auto7:
-                return null;
+                return new SystemsCheck();
 
 
             default:

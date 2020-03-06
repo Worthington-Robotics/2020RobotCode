@@ -6,14 +6,28 @@ import frc.robot.subsystems.Drive;
 
 public class DummyDrive extends Action {
 
+    private boolean forward = true;
+
+    public DummyDrive(boolean forward) {
+        this.forward = forward;
+    }
+
     @Override
     public void onStart() {
-        Drive.getInstance().setOpenLoop(new DriveSignal(0.25, 0.25));
+        if (forward) {
+            Drive.getInstance().setOpenLoop(new DriveSignal(0.25, 0.25));
+        } else {
+            Drive.getInstance().setOpenLoop(new DriveSignal(-0.25, -0.25));
+        }
     }
 
     @Override
     public void onLoop() {
-        Drive.getInstance().setOpenLoop(new DriveSignal(0.15, 0.15));
+        if (forward) {
+            Drive.getInstance().setOpenLoop(new DriveSignal(0.15, 0.15));
+        } else {
+            Drive.getInstance().setOpenLoop(new DriveSignal(-0.15, -0.15));
+        }
     }
 
     @Override

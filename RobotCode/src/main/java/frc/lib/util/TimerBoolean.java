@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
  * (e.g. an object passing a sensor)
  * 
  * @version 1.0.0
+ *
  * @author Spazzinq (George Fang)
  */
 public class TimerBoolean {

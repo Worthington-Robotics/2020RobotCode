@@ -144,6 +144,11 @@ public class Rotation2d implements IRotation2d<Rotation2d> {
     }
 
     @Override
+    public int getNumFields() {
+        return 1;
+    }
+
+    @Override
     public double distance(final Rotation2d other) {
         return inverse().rotateBy(other).getRadians();
     }

@@ -1,18 +1,19 @@
 package frc.robot.actions.superaction;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.lib.statemachine.Action;
 import frc.robot.Constants;
 import frc.robot.subsystems.Superstructure;
 
-public class DeliveryWheelAction extends Action {
+public class ArmActionUp extends Action {
     private Superstructure superstructure;
 
-    public DeliveryWheelAction() {
+    public ArmActionUp() {
         superstructure = Superstructure.getInstance();
     }
 
     @Override public void onStart() {
-        superstructure.setDeliveryWheelDemand(-Constants.HIGH_BELT_DEMAND);
+        superstructure.setArmExtension(true);
     }
 
     @Override public void onLoop() {}
@@ -21,7 +22,7 @@ public class DeliveryWheelAction extends Action {
         return false;
     }
 
-    @Override public void onStop() {
-        superstructure.setDeliveryWheelDemand(Constants.STOP_DEMAND);
+    @Override public void onStop() {;
+
     }
 }

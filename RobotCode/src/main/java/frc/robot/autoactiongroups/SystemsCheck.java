@@ -2,19 +2,28 @@ package frc.robot.autoactiongroups;
 
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachineDescriptor;
-import frc.robot.actions.climberactions.*;
-import frc.robot.actions.shooteraction.*;
-import frc.robot.actions.superaction.*;
+import frc.robot.actions.climberactions.ClimbDownAction;
+import frc.robot.actions.climberactions.ClimbUpAction;
+import frc.robot.actions.climberactions.FoldAction;
+import frc.robot.actions.climberactions.UnfoldAction;
+import frc.robot.actions.colorwheelactions.LightsStateTest;
+import frc.robot.actions.driveactions.DummyDrive;
+import frc.robot.actions.driveactions.Shift;
+import frc.robot.actions.shooteraction.Recenter;
+import frc.robot.actions.shooteraction.SetManualFlywheel;
+import frc.robot.actions.superaction.ArmAction;
+import frc.robot.actions.superaction.ArmActionUp;
+import frc.robot.actions.superaction.IntakeAction;
+import frc.robot.actions.superaction.ShootAction;
 
 public class SystemsCheck extends StateMachineDescriptor {
     public SystemsCheck() {
-        addSequential(new UnfoldAction(), 1000);
-        addParallel(new Action[]{new ClimberToggleAction(), new ArmAction()}, 2000);
-        addSequential(new FoldAction(), 1000);
-        addSequential(new IntakeAction(), 1000);
-        addSequential(new SetFlywheel5000RPM(), 2000);
-        addSequential(new GoTurretLimit(false), 1000);
-        addSequential(new GoTurretLimit(true), 1000);
-        addSequential(new CenterTurret(0), 1000);
+        addParallel(new Action[] {new DummyDrive(true), new IntakeAction(), new LightsStateTest(1)}, 5000);
+        addParallel(new Action[] {new UnfoldAction(), new ClimbUpAction(), new DummyDrive(true), new Shift(), new LightsStateTest(2)}, 5000);
+        addParallel(new Action[] {new ArmAction(), new LightsStateTest(3)}, 5000);
+        addParallel(new Action[] {new ClimbDownAction(), new FoldAction(), new LightsStateTest(4)}, 5000);
+        addParallel(new Action[] {new SetManualFlywheel(), new Recenter(0), new ArmActionUp(), new LightsStateTest(5)}, 5000);  
+        addParallel(new Action[] {new ShootAction(), new LightsStateTest(6)}, 5000);
+        addParallel(new Action[] {new LightsStateTest(7)}, 5000);
     }
 }

@@ -100,8 +100,8 @@ public class Climber extends Subsystem {
     }*/
 
     private boolean shooterReady(){
-        return Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 270, 10) ||
-        Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 90, 10);
+        return Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 270, 25) ||
+        Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 90, 25);
 
         /*return Util.epsilonEquals(getTurretAngle(), 270, 10) ||
         Util.epsilonEquals(getTurretAngle(), 90, 10);*/

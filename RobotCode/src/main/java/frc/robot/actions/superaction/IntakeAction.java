@@ -12,7 +12,7 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setIntakeDemand(Constants.INTAKE_DEMAND);
+        superstructure.setMotorDemand(Superstructure.INTAKE, Constants.SUPER_DEMAND_INTAKE_MANUAL);
     }
 
     @Override public void onLoop() {}
@@ -22,6 +22,6 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setIntakeDemand(Constants.STOP_DEMAND);
+        superstructure.setMotorDemand(Superstructure.INTAKE, Constants.SUPER_DEMAND_STOP);
     }
 }

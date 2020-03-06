@@ -15,38 +15,37 @@ public class Constants {
 
     //Talon SRX & FX IDs
     public static final int DRIVE_FRONT_RIGHT_ID = 1;
-    public static final int DRIVE_MIDDLE_RIGHT_ID = 2;
-    public static final int DRIVE_BACK_RIGHT_ID = 3;
+    public static final int DRIVE_BACK_RIGHT_ID = 2;
     public static final int COLOR_WHEEL = 4;
     public static final int SHOOTER_FLYWHEEL_LEFT = 5;
     public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
-    public static final int SUPERSTRUCTURE_INDEX_BELT = 7;
-    public static final int SUPERSTRUCTURE_DELIVERY_BELT = 8;
-    public static final int SUPERSTRUCTURE_DELIVERY_WHEEL = 9;
-    public static final int SUPERSTRUCTURE_INTAKE = 10;
+
+    public static final int ID_SUPER_DELIVERY_WHEEL = 9;
+    public static final int ID_SUPER_INDEX1 = 7;
+    public static final int ID_SUPER_INDEX2 = -1; // FIXME Add ID!
+    public static final int ID_SUPER_INDEX3 = -1; // FIXME Add ID!
+    public static final int ID_SUPER_INTAKE = 10;
+
     public static final int TURRET_CONTROL = 11;
-    public static final int DRIVE_FRONT_LEFT_ID = 13;
-    public static final int DRIVE_MIDDLE_LEFT_ID = 14;
-    public static final int DRIVE_BACK_LEFT_ID = 15;
-    public static final int SUPERSTRUCTURE_INDEX_BOTTOM_BELT = 16;
-    //Spark Ports
+    public static final int DRIVE_BACK_LEFT_ID = 14;
+    public static final int DRIVE_FRONT_LEFT_ID = 15;
 
     // TOF IDs
-    public static final int SUPERSTURCTURE_TOF1_ID = 1;
-    public static final int SUPERSTURCTURE_TOF2_ID = 2;
-    public static final int SUPERSTURCTURE_TOF3_ID = 3;
-    public static final int SUPERSTURCTURE_TOF4_ID = 4;
-    public static final int SUPERSTURCTURE_TOF5_ID = 5;
+    public static final int ID_SUPER_TOF1 = 1;
+    public static final int ID_SUPER_TOF2 = 2;
+    public static final int ID_SUPER_TOF3 = 3;
+    public static final int ID_SUPER_TOF4 = 4;
+    public static final int ID_SUPER_TOF5 = 5;
 
     //Solenoid Ports
-    public static final int TRANS_LOW_ID = 7;
-    public static final int TRANS_HIGH_ID = 0;
+    public static final int TRANS_LOW_ID = 0;
+    public static final int TRANS_HIGH_ID = 7;
     
     public static final int UNFOLD_LOW_ID = 4;
     public static final int UNFOLD_HIGH_ID = 3;
 
-    public static final int CLIMB_LOW_ID = 5; //Do Not Change
-    public static final int CLIMB_HIGH_ID = 2; //Do Not ChangeS
+    public static final int CLIMB_LOW_ID = 2; //Do Not Change
+    public static final int CLIMB_HIGH_ID = 5; //Do Not ChangeS
     
     public static final int INTAKE_LOW_ID = 6;
     public static final int INTAKE_HIGH_ID = 1;
@@ -59,8 +58,8 @@ public class Constants {
     //Joystick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.05, 0.65, 0.65, 0.4, 2);
-    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0.05, 0.45, 0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0, 0.65, 0.65, 0.4, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK_SHIFTED = new HIDHelper.HIDConstants(MASTER, 0, 0.45, 0.65, 0.4, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.01, -0.33, 0.99, 0.8, 2);    
 
     /* 
@@ -68,26 +67,29 @@ public class Constants {
     */
     public static final double LIMELIGHT_HIGHT = 23;
     public static final double LIMELIGHT_PITCH = 30;
-    public static final double TURRET_MAX_SPEED = .13;
-    public static final double TURRET_ANGLE_KP = .3;
-    public static final double TURRET_ANGLE_KI = 0.001;
-    public static final double TURRET_ANGLE_KD = 12;
-    public static final double TURRET_OFFSET = 1.5; //1.25 VISION FINE TUNING 25ft
+    public static final double TURRET_MAX_SPEED = .145;
+    public static final double TURRET_ANGLE_KP = .8; // SAFE .3
+    public static final double TURRET_ANGLE_KI = 0.003; // SAFE .001
+    public static final double TURRET_ANGLE_KD = 50; // SAFE 12
+    public static final double TURRET_OFFSET = 1.25; //1.25 VISION FINE TUNING 25ft
     public static final double TURRET_DEGREES_TO_TICKS = 85.26;
-    public static final double TURRET_LOCKON_DELTA = 2;
+    public static final double TURRET_LOCKON_DELTA = 1.5;
 
-    public static double TURRET_LEFT_FLY_KP = 0.08; //0.05
+    public static double TURRET_LEFT_FLY_KP = 0.08; //0.08
     public static double TURRET_LEFT_FLY_KD = 0.0; //0.00
     public static double TURRET_LEFT_FLY_KF = 0.048; //0.048
 
-    public static double VOLTAGE_COMP_TURRET = 11.5;
+    public static double TURRET_LEFT_LIMIT = 90;
+    public static double TURRET_RIGHT_LIMIT = -90;
+
+    public static double VOLTAGE_COMP_FLYWHEEL = 10;
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
-    public static final double FLYWHEEL_RPM_PER_IN = 5; //4.4
-    public static final double FLYWHEEL_BASE_RPM = 3900; //4000
-    public static final double FLYWHEEL_SPINUP_TIME = 150; //10 ms 
-    public static final double FLYWHEEL_IDLE_RPM = 4800; //RPM
-    public static final double FLYWHEEL_MAX_RPM = 6200; //RPM
+    public static final double FLYWHEEL_RPM_PER_IN = 4.6; //4.4
+    public static final double FLYWHEEL_BASE_RPM = 4350; //4000
+    public static final double FLYWHEEL_SPINUP_TIME = 100; //10 ms 
+    public static final double FLYWHEEL_IDLE_RPM = 5500; //RPM
+    public static final double FLYWHEEL_MAX_RPM = 5900; //RPM
     public static final double FLYWHEEL_TP100MS = 3.413;
 
     //Turret Encoder Limits
@@ -99,12 +101,12 @@ public class Constants {
      */
 
     //DEBUG AND TESTING flags
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final boolean RAMPUP = false;
     public static final boolean ENABLE_MP_TEST_MODE = false;
     public static final double MP_TEST_SPEED = 72; //in/s
 
-    public static double LOOPER_DT = 0.01;    
+    public static double LOOPER_DT = 0.01;
     
     //Physical Constants
     public static final double DRIVE_WHEEL_TRACK_WIDTH_INCHES = 21.75;
@@ -115,9 +117,9 @@ public class Constants {
     //Path following Constants
     public static final double ROBOT_MAX_VELOCITY = 120.0; // in/s
     public static final double ROBOT_MAX_ACCEL = 60.0; // in/s^2
-    public static final double PATH_FOLLOWING_LOOKAHEAD = 0;
+    public static final double PATH_FOLLOWING_LOOKAHEAD = 24;
     public static final double DRIVETRAIN_UPDATE_RATE = LOOPER_DT;
-    public static final double PATH_FOLLOWING_MAX_ACCELERATION = 0;
+    public static final double PATH_FOLLOWING_MAX_ACCELERATION = 60;
 
     //Electrical Constants
     public static final double DRIVE_VCOMP = 10.0; //V
@@ -129,15 +131,15 @@ public class Constants {
     public static final double ANGLE_KD = 0; // 0.1
     public static final double ANGLE_PID_EPISLON = 1;
 
-    public static final double DRIVE_RIGHT_KP = 0;
+    public static final double DRIVE_RIGHT_KP = .25;
     public static final double DRIVE_RIGHT_KI = 0.0;
-    public static final double DRIVE_RIGHT_KD = 0; // 20 for practice bot
-    public static final double DRIVE_RIGHT_KF = 0.25; //.485
+    public static final double DRIVE_RIGHT_KD = 5; // 20 for practice bot
+    public static final double DRIVE_RIGHT_KF = 0.065; //.485
 
-    public static final double DRIVE_LEFT_KP = 0; // .0885
+    public static final double DRIVE_LEFT_KP = .25; // .0885
     public static final double DRIVE_LEFT_KI = 0.0; //NO INTEGRAL it masks deeper problems
-    public static final double DRIVE_LEFT_KD = 25; //20 for practice
-    public static final double DRIVE_LEFT_KF = 0.53;
+    public static final double DRIVE_LEFT_KD = 5; //20 for practice
+    public static final double DRIVE_LEFT_KF = 0.065;
 
     /**
      * Color Wheel Constants ---------------------------
@@ -176,22 +178,11 @@ public class Constants {
      * Superstructure constants
      */
     // Demands
-    public static final double FULL_BELT_DEMAND = 1;
-    public static final double INDEXER_DEMAND = .5;
-    public static final double INTAKE_DEMAND = 1;
-    public static final double HIGH_BELT_DEMAND = 1.15;
-    public static final double STOP_DEMAND = 0;
-    // Thresholds (in mm)
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF1 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF2 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF3 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF4 = 75;
-    public static final double SUPERSTRUCTURE_THRESHOLD_TOF5 = 75;
-    // Time (in seconds)
-    public static final double TIME_TILL_STATIONARY = .25;
-    // Pulse constants (in seconds) -- Deprecated
-//    public static final double PULSE_LENGTH = .25;
-//    public static final double PULSE_COOLDOWN = .1;
+    public static final double SUPER_DEMAND_DEFAULT = .2;
+    public static final double SUPER_DEMAND_INTAKE_MANUAL = 1; // FIXME Update!// WARNING: MUST BE DIFFERENT FROM THE DEFAULT INTAKE DEMAND (unless you want me to implement a boolean for manual control)
+    public static final double SUPER_DEMAND_SHOOT = 1;
+    public static final double SUPER_DEMAND_DUMP = -1;
+    public static final double SUPER_DEMAND_STOP = 0;
     
     /**
      * Climber constants
