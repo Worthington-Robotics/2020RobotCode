@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,6 +22,7 @@ import frc.lib.geometry.Translation2d;
 import frc.lib.geometry.Twist2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
+import frc.lib.util.DemandUtil;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
@@ -87,12 +87,12 @@ public class Drive extends Subsystem {
                         break;
                     case OPEN_LOOP:
                         if (!DriverStation.getInstance().isAutonomous()) {
-                            setOpenLoop(arcadeDrive(periodic.operatorInput[1], periodic.operatorInput[0]));
+                            setOpenLoop(DemandUtil.arcadeToSignal(periodic.operatorInput[1], periodic.operatorInput[0]));
                         }
                         break;
                     case ANGLE_PID:
                         periodic.PIDOutput = anglePID.update(periodic.gyro_heading.getDegrees());
-                        DriveSignal drivesignal = arcadeDrive(periodic.operatorInput[1], periodic.PIDOutput);
+                        DriveSignal drivesignal = DemandUtil.arcadeToSignal(periodic.operatorInput[1], periodic.PIDOutput);
                         periodic.right_demand = drivesignal.getRight();
                         periodic.left_demand = drivesignal.getLeft();
                         break;
@@ -541,24 +541,4 @@ public class Drive extends Subsystem {
     private static double rpmToTicksPer100ms(double rpm) {
         return ((rpm * 512.0) / 75.0);
     }
-
-    /**
-     * Arcade drive method for calculating drivetrain output.
-     * <p>
-     * defined as positive forward on both outputs and turning right yields positive
-     * left output and negative right output
-     * 
-     * @param xSpeed    desired travel velocity
-     * @param zRotation desired rotational velocity
-     * @return a drivesignal for open loop use
-     */
-    private DriveSignal arcadeDrive(double xSpeed, double zRotation) {
-        final double maxInput = Math.max(Math.max(Math.abs(xSpeed - zRotation), Math.abs(xSpeed + zRotation)), 1);
-
-        final double rightMotorOutput = (xSpeed + zRotation) / maxInput;
-        final double leftMotorOutput = (xSpeed - zRotation) / maxInput;
-
-        return new DriveSignal(rightMotorOutput, leftMotorOutput);
-    }
-
 }

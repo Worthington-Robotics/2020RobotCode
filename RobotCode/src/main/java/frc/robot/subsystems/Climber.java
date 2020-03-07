@@ -6,6 +6,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.util.DemandUtil;
+import frc.lib.util.DriveSignal;
+import frc.lib.util.HIDHelper;
 import frc.lib.util.Util;
 import frc.robot.Constants;
 
@@ -33,7 +36,15 @@ public class Climber extends Subsystem {
         return instance;
     }
 
-    @Override public void readPeriodicInputs() {}
+    @Override public void readPeriodicInputs() {
+        if (isKickstandRaised() && isPinReleased()) {
+            periodic.operatorInput = HIDHelper.getAdjStick(Constants.SECOND_STICK);
+            DriveSignal signal = DemandUtil.arcadeToSignal(periodic.operatorInput[1], periodic.operatorInput[0]);
+
+            periodic.leftMotorDemand = signal.getLeft();
+            periodic.rightMotorDemand = signal.getRight();
+        }
+    }
 
     @Override public void writePeriodicOutputs() {
         kickstand.set(periodic.kickstandState);
@@ -88,6 +99,8 @@ public class Climber extends Subsystem {
 
         public double leftMotorDemand;
         public double rightMotorDemand;
+
+        public double[] operatorInput = new double[3];
     }
     public LogData getLogger() {
         return periodic;

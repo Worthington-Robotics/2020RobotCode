@@ -49,9 +49,7 @@ public class Robot extends TimedRobot {
     private JoystickButton inverse = new JoystickButton(Constants.MASTER, 2);
     //private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
     //private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
-
-    private JoystickButton leftClimb = new JoystickButton(Constants.MASTER, 3);
-    private JoystickButton rightClimb = new JoystickButton(Constants.MASTER, 4);
+    
     private JoystickButton toggleKickstand = new JoystickButton(Constants.MASTER, 5);
     private JoystickButton togglePin = new JoystickButton(Constants.MASTER, 6);
 
@@ -216,8 +214,6 @@ public class Robot extends TimedRobot {
 
         toggleKickstand.toggleWhenPressed(Action.toCommand(new KickstandToggleAction()));
         togglePin.toggleWhenPressed(Action.toCommand(new PinToggleAction()));
-        leftClimb.whenPressed(Action.toCommand(new LeftClimbAction()));
-        rightClimb.whenPressed(Action.toCommand(new RightClimbAction()));
 
         VersionData.WriteBuildInfoToDashboard();
     }

@@ -150,7 +150,7 @@ public class Superstructure extends Subsystem {
                 } else {
                     // When ball is no longer detected after shot
                     if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                       periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
+                       periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
                     }
 
                     for (int n = INDEXER_ONE; n <= INTAKE; n++) {
@@ -158,7 +158,7 @@ public class Superstructure extends Subsystem {
                         if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
                             // If Ball n detected and Ball n-1 not detected
                             periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
-                                    defaultMotorDemands[n] : Constants.SUPER_DEMAND_STOP;
+                                    defaultMotorDemands[n] : Constants.DEMAND_STOP;
                         }
                     }
                 }
@@ -211,7 +211,7 @@ public class Superstructure extends Subsystem {
             }
         } else {
             // Stop wheel manually because the non-dumping mode does not override it automatically
-            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
+            periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
         }
     }
 
