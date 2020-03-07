@@ -52,6 +52,14 @@ public class Climber extends Subsystem {
         Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 90, 25); // 90, 10
     }
 
+    public boolean isKickstandRaised() {
+        return periodic.kickstandState == Value.kForward;
+    }
+
+    public boolean isPinReleased() {
+        return periodic.pinState == Value.kReverse;
+    }
+
     // Setters
     public void setKickstand(Value value) {
         periodic.kickstandState = value;
@@ -60,8 +68,9 @@ public class Climber extends Subsystem {
     public void setPin(Value value) {
         periodic.pinState = value;
     }
-    // TODO Implement gyro climb
-    // TODO Implement DriveToggleAction
+
+    // TODO Implement gyro climb - equation?
+    // TODO Implement DriveToggleAction -
     public void setLeftMotorDemand(double leftMotorDemand) {
         periodic.leftMotorDemand = leftMotorDemand;
     }

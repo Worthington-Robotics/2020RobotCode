@@ -180,7 +180,6 @@ public class Drive extends Subsystem {
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
-
     }
 
     public PIDF getAnglePID() {
@@ -451,7 +450,7 @@ public class Drive extends Subsystem {
     }
 
     enum DriveControlState {
-        OPEN_LOOP, PATH_FOLLOWING, PROFILING_TEST, GYRO_LOCK, ANGLE_PID;
+        OPEN_LOOP, PATH_FOLLOWING, PROFILING_TEST, DISABLED, ANGLE_PID;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();

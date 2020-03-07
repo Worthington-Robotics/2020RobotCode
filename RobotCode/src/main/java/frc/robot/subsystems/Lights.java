@@ -54,8 +54,8 @@ public class Lights extends Subsystem {
             currentLightMode = lightModes.beforeStart;
         }
         // TODO Implement targeting
-        uprightsUp = Climber.getInstance().getUnfolded();
-        climbUp = Climber.getInstance().getClimbed();
+        uprightsUp = Climber.getInstance().isKickstandRaised();
+        climbUp = Climber.getInstance().isPinReleased();
         /*if (uprightsUp && !climbUp) {
             currentLightMode = lightModes.colorWheel;
             switch (ColorWheel.getInstance().cDetected()) {

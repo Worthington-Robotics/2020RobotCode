@@ -8,6 +8,8 @@
 package frc.robot;
 
 import java.util.Arrays;
+import java.util.Collections;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -48,6 +50,11 @@ public class Robot extends TimedRobot {
     //private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
     //private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
 
+    private JoystickButton leftClimb = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton rightClimb = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton toggleKickstand = new JoystickButton(Constants.MASTER, 5);
+    private JoystickButton togglePin = new JoystickButton(Constants.MASTER, 6);
+
     //Co-pilot joystick buttons
     /*private POVTrigger recenter = new POVTrigger(Constants.SECOND);
     private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
@@ -79,7 +86,7 @@ public class Robot extends TimedRobot {
         manager.registerDisabledLoops(disabledLooper);
 
         // add any additional logging sources for capture
-        manager.addLoggingSource(Arrays.asList(StateMachine.getInstance()));
+        manager.addLoggingSource(Collections.singletonList(StateMachine.getInstance()));
 
         // publish the auto list to the dashboard "Auto Selector"
         SmartDashboard.putStringArray("Auto List", AutoSelector.buildArray());
@@ -206,6 +213,12 @@ public class Robot extends TimedRobot {
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
         intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));*/
+
+        toggleKickstand.toggleWhenPressed(Action.toCommand(new KickstandToggleAction()));
+        togglePin.toggleWhenPressed(Action.toCommand(new PinToggleAction()));
+        leftClimb.whenPressed(Action.toCommand(new LeftClimbAction()));
+        rightClimb.whenPressed(Action.toCommand(new RightClimbAction()));
+
         VersionData.WriteBuildInfoToDashboard();
     }
 }
