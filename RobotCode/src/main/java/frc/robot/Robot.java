@@ -21,7 +21,6 @@ import frc.lib.util.POVTrigger;
 import frc.lib.util.VersionData;
 import frc.robot.subsystems.*;
 import frc.robot.actions.driveactions.*;
-import frc.robot.actions.colorwheelactions.*;
 import frc.robot.actions.climberactions.*;
 //import frc.robot.actions.colorwheelactions.ColorWheelPosition;
 //import frc.robot.actions.colorwheelactions.ColorWheelRotations;
@@ -55,7 +54,7 @@ public class Robot extends TimedRobot {
 
     //Co-pilot joystick buttons
     private POVTrigger recenter = new POVTrigger(Constants.SECOND);
-    private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
+    private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 1);
     private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
@@ -210,7 +209,7 @@ public class Robot extends TimedRobot {
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shiftButton.whileHeld(Action.toCommand(new Shift()));
         gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whileHeld(Action.toCommand(new ShootAction()));
+        shootAll.whileHeld(Action.toCommand(new ShootAllAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));

@@ -174,9 +174,10 @@ public class Constants {
     /**
      * Superstructure constants
      */
+    public static final double DEMAND_STOP = 0;
+
     public static final double SUPER_DEMAND_INTAKE_MANUAL = 1; // FIXME WARNING: MUST BE DIFFERENT FROM THE DEFAULT INTAKE DEMAND (unless you want me to implement a boolean for manual control)
     public static final double SUPER_DEMAND_SHOOT = 1;
-    public static final double SUPER_DEMAND_STOP = 0;
     
     /**
      * Climber constants
