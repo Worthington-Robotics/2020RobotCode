@@ -3,36 +3,31 @@ package frc.robot.actions.shooteraction;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Shooter;
 
-public class TurretPIDControl extends Action {
-
+public class FieldCentricTurret extends Action {
     /**
      * code to run on action start
-     * 
      */
     @Override
     public void onStart() {
-        Shooter.getInstance().setTurretLimelightControl(0);
+            Shooter.getInstance().setTurretFieldCentric();
     }
 
     /**
      * code to run while action loops
-     * <p>
-     * approx every 20 miliseconds
+     * <p>approx every 20 miliseconds
      */
     @Override
     public void onLoop() {
-
     }
 
     /**
-     * method that tells the state machine the action is finished earlier than the
-     * scheduler
+     * method that tells the state machine the action is finished earlier than the scheduler
      *
      * @return true when action is ready to self terminate
      */
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     /**
@@ -40,6 +35,5 @@ public class TurretPIDControl extends Action {
      */
     @Override
     public void onStop() {
-        Shooter.getInstance().setTurretDemand(0);
     }
 }

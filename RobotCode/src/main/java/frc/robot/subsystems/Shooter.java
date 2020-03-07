@@ -34,11 +34,16 @@ public class Shooter extends Subsystem {
 
     private Shooter() {
         limelight = NetworkTableInstance.getDefault().getTable("limelight");
-        SmartDashboard.putNumber("Shooter/Turret/P", 0);
-        SmartDashboard.putNumber("Shooter/Turret/I", 0);
-        SmartDashboard.putNumber("Shooter/Turret/D", 0);
-        SmartDashboard.putNumber("Shooter/Turret/F", 0);
-        SmartDashboard.putBoolean("Shooter/Turret/SaveChanges", false);
+        if (Constants.DEBUG) {
+            SmartDashboard.putNumber("Shooter/Turret/P", 0);
+            SmartDashboard.putNumber("Shooter/Turret/I", 0);
+            SmartDashboard.putNumber("Shooter/Turret/D", 0);
+            SmartDashboard.putNumber("Shooter/Turret/F", 0);
+            SmartDashboard.putNumber("Shooter/Flywheel/OffsetStep", Constants.FLYWHEEL_OFFSET_RPM_INCREMENT);
+            SmartDashboard.putNumber("Shooter/Flywheel/OffsetMax", Constants.FLYWHEEL_MAX_RPM_OFFSET);
+            SmartDashboard.putNumber("Shooter/Flywheel/OffsetMin", Constants.FLYWHEEL_MIN_RPM_OFFSET);
+            SmartDashboard.putBoolean("Shooter/Turret/SaveChanges", false);
+        }
         rightFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_RIGHT);
         leftFlywheelFalcon = new TalonFX(Constants.SHOOTER_FLYWHEEL_LEFT);
         turretControl = new TalonSRX(Constants.TURRET_CONTROL);
@@ -49,10 +54,7 @@ public class Shooter extends Subsystem {
         for (int i = 0; i <= 180; i++) {
             tangent[i] = Math.tan(Math.toRadians((double) i / 2));
         }
-        
-        SmartDashboard.putNumber("Shooter/Flywheel/OffsetStep", Constants.FLYWHEEL_OFFSET_RPM_INCREMENT);
-        SmartDashboard.putNumber("Shooter/Flywheel/OffsetMax", Constants.FLYWHEEL_MAX_RPM_OFFSET);
-        SmartDashboard.putNumber("Shooter/Flywheel/OffsetMin", Constants.FLYWHEEL_MIN_RPM_OFFSET);
+
         reset();
     }
 
@@ -98,6 +100,9 @@ public class Shooter extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 periodic.turretAngle = Rotation2d.fromDegrees(ticksToDegrees(periodic.turretEncoder));
+                if (periodic.targetV == 1) {
+                    turretMode = MotorControlMode.LIMELIGHT_MODE;
+                }
 
                 switch (flywheelMode) {
                 case OPEN_LOOP:
@@ -149,6 +154,18 @@ public class Shooter extends Subsystem {
                     }
                     break;
                 case PID_MODE:
+                    if (periodic.turretEncoder < Constants.leftTurretLimit
+                            || periodic.turretEncoder > Constants.rightTurretLimit)
+                        turretMode = MotorControlMode.DISABLED;
+                    periodic.turretDemand = -1 * degreesToTicks(Drive.getInstance().getHeading().getDegrees());
+                    if (periodic.turretDemand <= Constants.leftTurretLimit) {
+                        periodic.turretDemand = Constants.leftTurretLimit;
+                    }
+                    if (periodic.turretDemand > Constants.rightTurretLimit) {
+                        periodic.turretDemand = Constants.rightTurretLimit;
+                    }
+                    break;
+                case LIMELIGHT_MODE:
                     if (periodic.turretEncoder < Constants.leftTurretLimit
                             || periodic.turretEncoder > Constants.rightTurretLimit)
                         turretMode = MotorControlMode.DISABLED;
@@ -356,10 +373,15 @@ public class Shooter extends Subsystem {
             flywheelMode = MotorControlMode.LIMELIGHT_MODE;
     }
 
-    public void setTurretRPM(double demand) {
+    public void setTurretLimelightControl(double demand) {
+        if (turretMode != MotorControlMode.LIMELIGHT_MODE)
+            turretMode = MotorControlMode.LIMELIGHT_MODE;
+        turretControl.set(ControlMode.Velocity, demand);
+    }
+
+    public void setTurretFieldCentric() {
         if (turretMode != MotorControlMode.PID_MODE)
             turretMode = MotorControlMode.PID_MODE;
-        turretControl.set(ControlMode.Velocity, demand);
     }
 
     public void setTurretCenter(double angle) {
@@ -385,11 +407,15 @@ public class Shooter extends Subsystem {
     }
 
     public void increaseRPMOffset() {
-        periodic.FlywheelBaseRPMOffset = Math.min(periodic.FlywheelBaseRPMOffset + Constants.FLYWHEEL_OFFSET_RPM_INCREMENT, Constants.FLYWHEEL_MAX_RPM_OFFSET);
+        periodic.FlywheelBaseRPMOffset = Math.min(
+                periodic.FlywheelBaseRPMOffset + Constants.FLYWHEEL_OFFSET_RPM_INCREMENT,
+                Constants.FLYWHEEL_MAX_RPM_OFFSET);
     }
 
     public void decreaseRPMOffset() {
-        periodic.FlywheelBaseRPMOffset = Math.max(periodic.FlywheelBaseRPMOffset - Constants.FLYWHEEL_OFFSET_RPM_INCREMENT, Constants.FLYWHEEL_MIN_RPM_OFFSET);
+        periodic.FlywheelBaseRPMOffset = Math.max(
+                periodic.FlywheelBaseRPMOffset - Constants.FLYWHEEL_OFFSET_RPM_INCREMENT,
+                Constants.FLYWHEEL_MIN_RPM_OFFSET);
     }
 
     public void setRPMOnTarget(boolean isTarget) {
@@ -435,10 +461,10 @@ public class Shooter extends Subsystem {
         double goal = 0;
         if (periodic.targetV == 1) {
             goal = degreesToTicks(periodic.targetX) + periodic.turretEncoder;
-            if (periodic.turretEncoder + degreesToTicks(periodic.targetX) <= Constants.leftTurretLimit) {
+            if (goal <= Constants.leftTurretLimit) {
                 goal = Constants.leftTurretLimit;
             }
-            if (periodic.turretEncoder + degreesToTicks(periodic.targetX) > Constants.rightTurretLimit) {
+            if (goal > Constants.rightTurretLimit) {
                 goal = Constants.rightTurretLimit;
             }
         } else {
