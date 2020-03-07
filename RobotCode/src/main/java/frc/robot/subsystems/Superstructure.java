@@ -43,7 +43,7 @@ public class Superstructure extends Subsystem {
     public static final short INDEXER_THREE = 3;
     public static final short INTAKE = 4;
     // TODO Move to constants once done debugging thresholds
-    // (in mm)
+    // (millimeters)
     public static double SUPER_TOF1_THRESHOLD = 75;
     public static double SUPER_TOF2_THRESHOLD = 75;
     public static double SUPER_TOF3_THRESHOLD = 75;
