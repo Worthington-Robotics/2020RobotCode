@@ -22,6 +22,6 @@ public class IntakeAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setMotorDemand(Superstructure.INTAKE, Constants.SUPER_DEMAND_STOP);
+        superstructure.setMotorDemand(Superstructure.INTAKE, Constants.DEMAND_STOP);
     }
 }

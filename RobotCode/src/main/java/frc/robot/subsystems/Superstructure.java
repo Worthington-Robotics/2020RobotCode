@@ -5,8 +5,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.drivers.SimTimeOfFlight;
@@ -38,7 +36,6 @@ public class Superstructure extends Subsystem {
             .4, // INDEXER_THREE
             .35, // INTAKE
     };
-    private boolean dumping;
 
     // Constants
     public static final short BLACK_WHEEL = 0;
@@ -47,7 +44,7 @@ public class Superstructure extends Subsystem {
     public static final short INDEXER_THREE = 3;
     public static final short INTAKE = 4;
     // TODO Move to constants once done debugging thresholds
-    // (in mm)
+    // (millimeters)
     public static double SUPER_TOF1_THRESHOLD = 75;
     public static double SUPER_TOF2_THRESHOLD = 75;
     public static double SUPER_TOF3_THRESHOLD = 75;
@@ -79,6 +76,7 @@ public class Superstructure extends Subsystem {
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
         reset();
+
         // Put value on dashboard so it appears and can be modified
         SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
         SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
@@ -133,24 +131,11 @@ public class Superstructure extends Subsystem {
     @Override public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
-                // Ignore motor setting if dumping and automatically disable once empty
-                if (dumping) {
-                    boolean empty = true;
-
-                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
-                        if (periodic.sensorsDetected[n]) {
-                            empty = false;
-                            break;
-                        }
-                    }
-
-                    if (empty) {
-                        dumping = false;
-                    }
-                } else {
+                // Ignore motor setting if dumping
+                if (periodic.state == SuperState.DEFAULT) {
                     // When ball is no longer detected after shot
                     if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                       periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
+                        periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
                     }
 
                     for (int n = INDEXER_ONE; n <= INTAKE; n++) {
@@ -158,7 +143,7 @@ public class Superstructure extends Subsystem {
                         if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
                             // If Ball n detected and Ball n-1 not detected
                             periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
-                                    defaultMotorDemands[n] : Constants.SUPER_DEMAND_STOP;
+                                    defaultMotorDemands[n] : Constants.DEMAND_STOP;
                         }
                     }
                 }
@@ -176,6 +161,15 @@ public class Superstructure extends Subsystem {
         if (periodic.sensorsDetected[BLACK_WHEEL]) {
             periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
         }
+    }
+
+    public boolean isSystemEmpty() {
+        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+            if (periodic.sensorsDetected[n]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -196,22 +190,29 @@ public class Superstructure extends Subsystem {
     }
 
     /**
-     * If true, set all motor demands to negative in order to dump the balls.
-     * @param dumping if system should dump balls
+     * Sets the new state and performs a task based on the new state.
+     * @param newState the new state of the subsystem
      */
-    public void setDumping(boolean dumping) {
-        this.dumping = dumping;
+    public void setState(SuperState newState) {
+        periodic.state = newState;
 
-        if (dumping) {
-            for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
-                if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
-                    // Opposite and flip the default motor demands so the back is faster
-                    periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - 1 - n];
+        switch (periodic.state) {
+            case DUMP: {
+                for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
+                    if ((n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL)
+                            && (n != BLACK_WHEEL || periodic.motorDemands[BLACK_WHEEL] != Constants.SUPER_DEMAND_SHOOT)) {
+                        // Opposite and flip the default motor demands so the back is faster
+                        periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - 1 - n];
+                    }
+                }
+                break;
+            }
+            case DEFAULT: default: {
+                if (periodic.motorDemands[BLACK_WHEEL] != Constants.SUPER_DEMAND_SHOOT) {
+                    // Stop wheel manually because the non-dumping mode does not override it automatically
+                    periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
                 }
             }
-        } else {
-            // Stop wheel manually because the non-dumping mode does not override it automatically
-            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_STOP;
         }
     }
 
@@ -223,13 +224,15 @@ public class Superstructure extends Subsystem {
         public double[] motorDemands = new double[5];
 
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
+
+        public SuperState state = SuperState.DEFAULT;
     }
     public LogData getLogger() {
         return periodic;
     }
 
     /**
-     * Called to reset and configure the subsystem.
+     * Resets and configures the subsystem.
      */
     @Override public void reset() {
         periodic = new SuperIO();
@@ -239,6 +242,10 @@ public class Superstructure extends Subsystem {
         for (int n = BLACK_WHEEL; n < INTAKE; n++) {
             sensors[n].setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         }
+    }
+
+    public enum SuperState {
+        DEFAULT, DUMP
     }
 
     /**
@@ -270,7 +277,7 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER3_RAW", periodic.motorDemands[INDEXER_THREE]);
             SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_RAW", periodic.motorDemands[INTAKE]);
 
-            SmartDashboard.putBoolean("Superstructure/DUMPING", dumping);
+            SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
         }
         // FIXME Name differently if possible after changing driver station value
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.sensorsDetected[BLACK_WHEEL]);
