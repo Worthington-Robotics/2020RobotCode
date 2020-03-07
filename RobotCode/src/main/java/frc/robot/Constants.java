@@ -30,6 +30,9 @@ public class Constants {
     public static final int DRIVE_BACK_LEFT_ID = 14;
     public static final int DRIVE_FRONT_LEFT_ID = 15;
 
+    public static final int ID_CLIMBER_LEFT = 3;
+    public static final int ID_CLIMBER_RIGHT = 13;
+
     // TOF IDs
     public static final int ID_SUPER_TOF1 = 1;
     public static final int ID_SUPER_TOF2 = 2;
@@ -41,11 +44,11 @@ public class Constants {
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 7;
     
-    public static final int UNFOLD_LOW_ID = 4;
-    public static final int UNFOLD_HIGH_ID = 3;
+    public static final int ID_KICKSTAND_LOW = 4;
+    public static final int ID_KICKSTAND_HIGH = 3;
 
-    public static final int CLIMB_LOW_ID = 2; //Do Not Change
-    public static final int CLIMB_HIGH_ID = 5; //Do Not ChangeS
+    public static final int ID_PIN_LOW = 2; //Do Not Change
+    public static final int ID_PIN_HIGH = 5; //Do Not ChangeS
     
     public static final int INTAKE_LOW_ID = 6;
     public static final int INTAKE_HIGH_ID = 1;

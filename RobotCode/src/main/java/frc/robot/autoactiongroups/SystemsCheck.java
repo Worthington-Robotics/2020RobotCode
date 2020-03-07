@@ -2,10 +2,6 @@ package frc.robot.autoactiongroups;
 
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachineDescriptor;
-import frc.robot.actions.climberactions.ClimbDownAction;
-import frc.robot.actions.climberactions.ClimbUpAction;
-import frc.robot.actions.climberactions.FoldAction;
-import frc.robot.actions.climberactions.UnfoldAction;
 import frc.robot.actions.colorwheelactions.LightsStateTest;
 import frc.robot.actions.driveactions.DummyDrive;
 import frc.robot.actions.driveactions.Shift;

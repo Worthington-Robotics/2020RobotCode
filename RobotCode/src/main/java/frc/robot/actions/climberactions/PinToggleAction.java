@@ -1,14 +1,14 @@
 package frc.robot.actions.climberactions;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Climber;
 
 
-public class UnfoldAction extends Action {
+public class PinToggleAction extends Action {
     @Override
     public void onStart() {
-        Climber.getInstance().wantUnfold(true);
-        System.out.println("Climb is unfolding.");
+        Climber.getInstance().setPin(DoubleSolenoid.Value.kReverse);
     }
 
     @Override
@@ -18,11 +18,11 @@ public class UnfoldAction extends Action {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override
     public void onStop() {
-        
+        Climber.getInstance().setPin(DoubleSolenoid.Value.kForward);
     }
 }
