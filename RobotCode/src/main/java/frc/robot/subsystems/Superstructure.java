@@ -122,26 +122,19 @@ public class Superstructure extends Subsystem {
     @Override public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
-                // Ignore motor setting if dumping and automatically disable once empty
-                switch (periodic.state) {
-                    case DUMP: {
-                        if (isSystemEmpty()) {
-                            periodic.state = SuperState.DEFAULT;
-                        }
+                // Ignore motor setting if dumping
+                if (periodic.state == SuperState.DEFAULT) {
+                    // When ball is no longer detected after shot
+                    if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                        periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
                     }
-                    case DEFAULT: default: {
-                        // When ball is no longer detected after shot
-                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
-                        }
 
-                        for (int n = INDEXER_ONE; n <= INTAKE; n++) {
-                            // Ensure that the Intake is not in manual control before auto-moving
-                            if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
-                                // If Ball n detected and Ball n-1 not detected
-                                periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
-                                        defaultMotorDemands[n] : Constants.DEMAND_STOP;
-                            }
+                    for (int n = INDEXER_ONE; n <= INTAKE; n++) {
+                        // Ensure that the Intake is not in manual control before auto-moving
+                        if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
+                            // If Ball n detected and Ball n-1 not detected
+                            periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
+                                    defaultMotorDemands[n] : Constants.DEMAND_STOP;
                         }
                     }
                 }
@@ -197,15 +190,19 @@ public class Superstructure extends Subsystem {
         switch (periodic.state) {
             case DUMP: {
                 for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
-                    if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
+                    if ((n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL)
+                            && (n != BLACK_WHEEL || periodic.motorDemands[BLACK_WHEEL] != Constants.SUPER_DEMAND_SHOOT)) {
                         // Opposite and flip the default motor demands so the back is faster
                         periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - 1 - n];
                     }
                 }
+                break;
             }
             case DEFAULT: default: {
-                // Stop wheel manually because the non-dumping mode does not override it automatically
-                periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                if (periodic.motorDemands[BLACK_WHEEL] != Constants.SUPER_DEMAND_SHOOT) {
+                    // Stop wheel manually because the non-dumping mode does not override it automatically
+                    periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                }
             }
         }
     }
@@ -271,7 +268,7 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER3_RAW", periodic.motorDemands[INDEXER_THREE]);
             SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_RAW", periodic.motorDemands[INTAKE]);
 
-            SmartDashboard.putBoolean("Superstructure/DUMPING", periodic.state == SuperState.DUMP);
+            SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
         }
         // FIXME Name differently if possible after changing driver station value
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.sensorsDetected[BLACK_WHEEL]);
