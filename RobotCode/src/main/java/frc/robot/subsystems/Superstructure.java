@@ -32,7 +32,7 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
-            .5, // BLACK_WHEEL - needs to go slow or will shoot...
+            .88, // BLACK_WHEEL - needs to go slow or will shoot...
             .88, // INDEXER_ONE
             .88, // INDEXER_TWO
             .88, // INDEXER_THREE
@@ -56,7 +56,7 @@ public class Superstructure extends Subsystem {
     // (millimeters)
     public static double[] threshold = {
             75, // BLACK_WHEEL
-            75, // INDEXER_ONE
+            100, // INDEXER_ONE
             75, // INDEXER_TWO
             75, // INDEXER_THREE
             75 // INTAKE
@@ -149,8 +149,15 @@ public class Superstructure extends Subsystem {
                     for (int n = INDEXER_ONE; n <= INTAKE; n++) {
                         if (!manualControl[n]) {
                             // If Ball n detected and Ball n-1 not detected
-                            periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
-                                    defaultMotorDemands[n] : Constants.DEMAND_STOP;
+                            periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]
+                                    ? defaultMotorDemands[n] : Constants.DEMAND_STOP;
+
+                            // FIXME New logic to deal with dead sensor zones
+                            // if (periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]) {
+                            //     periodic.motorDemands[n] = defaultMotorDemands[n];
+                            // } else if (periodic.sensorsDetected[n - 1]) {
+                            //     periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                            // }
                         }
                     }
                 }
@@ -199,7 +206,7 @@ public class Superstructure extends Subsystem {
                 }
                 break;
             }
-            case DEFAULT: default: {
+            default: {
                 if (!manualControl[BLACK_WHEEL]) {
                     // Stop wheel manually because the non-dumping mode does not override it automatically
                     periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
