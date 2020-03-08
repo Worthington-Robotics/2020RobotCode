@@ -33,10 +33,10 @@ public class Superstructure extends Subsystem {
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
             .88, // BLACK_WHEEL - needs to go slow or will shoot...
-            .88, // INDEXER_ONE
-            .88, // INDEXER_TWO
-            .88, // INDEXER_THREE
-            .88 // INTAKE
+            .5, // INDEXER_ONE
+            .5, // INDEXER_TWO
+            .5, // INDEXER_THREE
+            .5 // INTAKE
     };
     private double[] purgeDemands = new double[] {
             -1, // BLACK_WHEEL
@@ -55,7 +55,7 @@ public class Superstructure extends Subsystem {
     // TODO Move to constants once done debugging thresholds
     // (millimeters)
     public static double[] threshold = {
-            75, // BLACK_WHEEL
+            45, // BLACK_WHEEL
             100, // INDEXER_ONE
             75, // INDEXER_TWO
             75, // INDEXER_THREE
@@ -139,27 +139,38 @@ public class Superstructure extends Subsystem {
                             periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
                         }
                     // Not manual control
-                    } else if (periodic.sensorsDetected[BLACK_WHEEL]) {
-                        periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
-                    } else if (periodic.sensorsDetected[INDEXER_ONE]) {
-                        periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
-                    }
+                    }// else if (periodic.sensorsDetected[BLACK_WHEEL]) {
+                    //     periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                    // } else if (periodic.sensorsDetected[INDEXER_ONE]) {
+                    //     periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
+                    // }
 
                     // Iterate over all EXCEPT Intake
                     for (int n = INDEXER_ONE; n <= INTAKE; n++) {
                         if (!manualControl[n]) {
                             // If Ball n detected and Ball n-1 not detected
-                            periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]
-                                    ? defaultMotorDemands[n] : Constants.DEMAND_STOP;
+                            // periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]
+                            //         ? defaultMotorDemands[n] : Constants.DEMAND_STOP;
 
                             // FIXME New logic to deal with dead sensor zones
-                            // if (periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]) {
-                            //     periodic.motorDemands[n] = defaultMotorDemands[n];
-                            // } else if (periodic.sensorsDetected[n - 1]) {
-                            //     periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                            // }
+                            if (periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]) {
+                                periodic.motorDemands[n] = defaultMotorDemands[n];
+                                periodic.motorDemands[n - 1] = defaultMotorDemands[n - 1];
+                            } else {
+                                if (!periodic.sensorsDetected[n]) {
+                                    periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                                }
+                                if (periodic.sensorsDetected[n - 1]) {
+                                    periodic.motorDemands[n - 1] = Constants.DEMAND_STOP;
+                                }
+                            }
                         }
                     }
+                    // if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL]) {
+                    //     periodic.motorDemands[INDEXER_ONE] = defaultMotorDemands[INDEXER_ONE];
+                    // } else if (!periodic.sensorsDetected[INDEXER_ONE]) {
+                    //     periodic.motorDemands[INDEXER_ONE] = Constants.DEMAND_STOP;
+                    // }
                 }
             }
 
@@ -253,10 +264,16 @@ public class Superstructure extends Subsystem {
     }
 
     private void configTalons() {
-        for (TalonSRX talon : motors) {
-            talon.setNeutralMode(NeutralMode.Brake);
-            talon.configSupplyCurrentLimit(
+        motors[BLACK_WHEEL].configSupplyCurrentLimit(
+            new SupplyCurrentLimitConfiguration(true, 15, 15, .2));
+
+        for (int n = INDEXER_ONE; n < INTAKE; n++) {
+            motors[n].configSupplyCurrentLimit(
                     new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
+        }
+
+        for (TalonSRX motor : motors) {
+            motor.setNeutralMode(NeutralMode.Brake);
         }
     }
 
