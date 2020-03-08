@@ -153,24 +153,45 @@ public class Superstructure extends Subsystem {
                             //         ? defaultMotorDemands[n] : Constants.DEMAND_STOP;
 
                             // FIXME New logic to deal with dead sensor zones
-                            if (periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]) {
-                                periodic.motorDemands[n] = defaultMotorDemands[n];
-                                periodic.motorDemands[n - 1] = defaultMotorDemands[n - 1];
-                            } else {
-                                if (!periodic.sensorsDetected[n]) {
-                                    periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                                }
-                                if (periodic.sensorsDetected[n - 1]) {
-                                    periodic.motorDemands[n - 1] = Constants.DEMAND_STOP;
-                                }
-                            }
+                            // if (periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]) {
+                            //     periodic.motorDemands[n] = defaultMotorDemands[n];
+                            //     periodic.motorDemands[n - 1] = defaultMotorDemands[n - 1];
+                            // } else {
+                            //     if (!periodic.sensorsDetected[n]) {
+                            //         periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                            //     }
+                            //     if (periodic.sensorsDetected[n - 1]) {
+                            //         periodic.motorDemands[n - 1] = Constants.DEMAND_STOP;
+                            //     }
+                            // }
                         }
                     }
-                    // if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL]) {
-                    //     periodic.motorDemands[INDEXER_ONE] = defaultMotorDemands[INDEXER_ONE];
-                    // } else if (!periodic.sensorsDetected[INDEXER_ONE]) {
-                    //     periodic.motorDemands[INDEXER_ONE] = Constants.DEMAND_STOP;
-                    // }
+                    if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL] ||
+                        periodic.sensorsDetected[INDEXER_TWO] && !periodic.sensorsDetected[INDEXER_ONE]) {
+                        periodic.motorDemands[INDEXER_ONE] = defaultMotorDemands[INDEXER_ONE];
+                    } else if (!periodic.sensorsDetected[INDEXER_ONE]) {
+                        periodic.motorDemands[INDEXER_ONE] = Constants.DEMAND_STOP;
+                    }
+
+                    if (periodic.sensorsDetected[INDEXER_TWO] && !periodic.sensorsDetected[INDEXER_ONE] ||
+                        periodic.sensorsDetected[INDEXER_THREE] && !periodic.sensorsDetected[INDEXER_TWO]) {
+                        periodic.motorDemands[INDEXER_TWO] = defaultMotorDemands[INDEXER_TWO];
+                    } else if (!periodic.sensorsDetected[INDEXER_TWO]) {
+                        periodic.motorDemands[INDEXER_TWO] = Constants.DEMAND_STOP;
+                    }
+
+                    if (periodic.sensorsDetected[INDEXER_THREE] && !periodic.sensorsDetected[INDEXER_TWO] ||
+                        periodic.sensorsDetected[INTAKE] && !periodic.sensorsDetected[INDEXER_THREE]) {
+                        periodic.motorDemands[INDEXER_THREE] = defaultMotorDemands[INDEXER_THREE];
+                    } else if (!periodic.sensorsDetected[INDEXER_THREE]) {
+                        periodic.motorDemands[INDEXER_THREE] = Constants.DEMAND_STOP;
+                    }
+
+                    if (periodic.sensorsDetected[INTAKE] && !periodic.sensorsDetected[INDEXER_THREE]) {
+                        periodic.motorDemands[INTAKE] = defaultMotorDemands[INTAKE];
+                    } else if (!periodic.sensorsDetected[INTAKE]) {
+                        periodic.motorDemands[INTAKE] = Constants.DEMAND_STOP;
+                    }
                 }
             }
 
