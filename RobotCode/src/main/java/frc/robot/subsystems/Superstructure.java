@@ -27,12 +27,11 @@ public class Superstructure extends Subsystem {
     private SuperIO periodic;
     private DoubleSolenoid extensionArm;
 
-    private boolean[] manualControl = new boolean[5];
     private TalonSRX[] motors = new TalonSRX[5];
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
-            .88, // BLACK_WHEEL - needs to go slow or will shoot...
+            .4, // BLACK_WHEEL - needs to go slow or will shoot...
             .5, // INDEXER_ONE
             .5, // INDEXER_TWO
             .5, // INDEXER_THREE
@@ -55,8 +54,8 @@ public class Superstructure extends Subsystem {
     // TODO Move to constants once done debugging thresholds
     // (millimeters)
     public static double[] threshold = {
-            45, // BLACK_WHEEL
-            100, // INDEXER_ONE
+            75, // BLACK_WHEEL
+            75, // INDEXER_ONE
             75, // INDEXER_TWO
             75, // INDEXER_THREE
             75 // INTAKE
@@ -116,12 +115,9 @@ public class Superstructure extends Subsystem {
      * Writes the periodic outputs to actuators (motors, etc.).
      */
     @Override public void writePeriodicOutputs() {
-        // Set motor demands
         for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             motors[n].set(ControlMode.PercentOutput, periodic.motorDemands[n]);
         }
-
-        extensionArm.set(periodic.armExtension);
     }
 
     /**
@@ -131,79 +127,107 @@ public class Superstructure extends Subsystem {
     @Override public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
-                // Ignore motor setting if dumping
-                if (periodic.state == SuperState.DEFAULT) {
-                    // If in shoot mode, shoot
-                    if (manualControl[BLACK_WHEEL]) {
+                switch (periodic.state) {
+                    case DISABLED:
+                    case INIT:
                         if (periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
+                            periodic.state = SuperState.ONE_BALL;
                         }
-                    }
-                    // // Not manual control
-                    // } else if (periodic.sensorsDetected[BLACK_WHEEL]) {
-                    //     periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
-                    // } else if (periodic.sensorsDetected[INDEXER_ONE]) {
-                    //     periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
-                    // }
+                        break;
 
-                    // Iterate over all EXCEPT Intake
-                    for (int n = INDEXER_ONE; n <= INTAKE; n++) {
-                        if (!manualControl[n]) {
-                            // If Ball n detected and Ball n-1 not detected
-                            // periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]
-                            //         ? defaultMotorDemands[n] : Constants.DEMAND_STOP;
-
-                            // FIXME New logic to deal with dead sensor zones
-                            // if (periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1]) {
-                            //     periodic.motorDemands[n] = defaultMotorDemands[n];
-                            //     periodic.motorDemands[n - 1] = defaultMotorDemands[n - 1];
-                            // } else {
-                            //     if (!periodic.sensorsDetected[n]) {
-                            //         periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                            //     }
-                            //     if (periodic.sensorsDetected[n - 1]) {
-                            //         periodic.motorDemands[n - 1] = Constants.DEMAND_STOP;
-                            //     }
-                            // }
+                    case ONE_BALL:
+                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.state = SuperState.INIT;
                         }
-                    }
-
-                    if (!manualControl[BLACK_WHEEL]) {
-                        if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
-                        } else if (periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                        if (periodic.sensorsDetected[INDEXER_ONE]) {
+                            periodic.state = SuperState.TWO_BALLS;
                         }
-                    }
-                    
-                    if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL] ||
-                        periodic.sensorsDetected[INDEXER_TWO] && !periodic.sensorsDetected[INDEXER_ONE]) {
-                        periodic.motorDemands[INDEXER_ONE] = defaultMotorDemands[INDEXER_ONE];
-                    } else if (!periodic.sensorsDetected[INDEXER_ONE]) {
-                        periodic.motorDemands[INDEXER_ONE] = Constants.DEMAND_STOP;
-                    }
+                        break;
 
-                    if (periodic.sensorsDetected[INDEXER_TWO] && !periodic.sensorsDetected[INDEXER_ONE] ||
-                        periodic.sensorsDetected[INDEXER_THREE] && !periodic.sensorsDetected[INDEXER_TWO]) {
-                        periodic.motorDemands[INDEXER_TWO] = defaultMotorDemands[INDEXER_TWO];
-                    } else if (!periodic.sensorsDetected[INDEXER_TWO]) {
-                        periodic.motorDemands[INDEXER_TWO] = Constants.DEMAND_STOP;
-                    }
+                    case TWO_BALLS:
+                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.state = SuperState.INIT;
+                        }
+                        if (periodic.sensorsDetected[INDEXER_TWO]) {
+                            periodic.state = SuperState.THREE_BALLS;
+                        }
+                        break;
 
-                    if (periodic.sensorsDetected[INDEXER_THREE] && !periodic.sensorsDetected[INDEXER_TWO] ||
-                        periodic.sensorsDetected[INTAKE] && !periodic.sensorsDetected[INDEXER_THREE]) {
-                        periodic.motorDemands[INDEXER_THREE] = defaultMotorDemands[INDEXER_THREE];
-                    } else if (!periodic.sensorsDetected[INDEXER_THREE]) {
-                        periodic.motorDemands[INDEXER_THREE] = Constants.DEMAND_STOP;
-                    }
+                    case THREE_BALLS:
+                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.state = SuperState.INIT;
+                        }
+                        if (periodic.sensorsDetected[INDEXER_THREE]) {
+                            periodic.state = SuperState.FOUR_BALLS;
+                        }
+                        break;
 
-                    if (!manualControl[INTAKE]) {
-                        if (periodic.sensorsDetected[INTAKE] && !periodic.sensorsDetected[INDEXER_THREE]) {
-                        periodic.motorDemands[INTAKE] = defaultMotorDemands[INTAKE];
-                    } else if (!periodic.sensorsDetected[INTAKE]) {
+                    case FOUR_BALLS:
+                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.state = SuperState.INIT;
+                        }
+                        if (periodic.sensorsDetected[INTAKE]) {
+                            periodic.state = SuperState.FULL_SYSTEM;
+                        }
+                        break;
+
+                    case FULL_SYSTEM:
+                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.state = SuperState.INIT;
+                        }
+                        if (!periodic.sensorsDetected[INTAKE]) {
+                            periodic.state = SuperState.FOUR_BALLS;
+                        }
+                        break;
+
+                    case SHOOT:
+                        break;
+                    default:
+                }
+
+                switch (periodic.state) {
+                    case INIT:
+                        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+                            periodic.motorDemands[n] = defaultMotorDemands[n];
+                        }
+                        break;
+                    case ONE_BALL:
+                        for (int n = BLACK_WHEEL; n < INDEXER_ONE; n++) {
+                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                        }
+                        for (int n = INDEXER_ONE; n < INTAKE; n++) {
+                            periodic.motorDemands[n] = defaultMotorDemands[n];
+                        }
+                        break;
+                    case TWO_BALLS:
+                        for (int n = BLACK_WHEEL; n < INDEXER_TWO; n++) {
+                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                        }
+                        for (int n = INDEXER_TWO; n < INTAKE; n++) {
+                            periodic.motorDemands[n] = defaultMotorDemands[n];
+                        }
+                    case THREE_BALLS:
+                        for (int n = BLACK_WHEEL; n < INDEXER_THREE; n++) {
+                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                        }
+                        for (int n = INDEXER_THREE; n < INTAKE; n++) {
+                            periodic.motorDemands[n] = defaultMotorDemands[n];
+                        }
+                    case FOUR_BALLS:
+                        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                        }
+                    case FULL_SYSTEM:
                         periodic.motorDemands[INTAKE] = Constants.DEMAND_STOP;
-                    }
-                    }
+                    case SHOOT:
+                        periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
+                        break;
+                    case DUMP_SYSTEM:
+                        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                            periodic.motorDemands[n] = purgeDemands[n];
+                        }
+                        break;
+                    default:
                 }
             }
 
@@ -233,39 +257,26 @@ public class Superstructure extends Subsystem {
         periodic.armExtension = armExtension ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
     }
 
-    /**
-     * Sets the new state and performs a task based on the new state.
-     * @param newState the new state of the subsystem
-     */
-    public void setState(SuperState newState) {
-        periodic.state = newState;
-
-        switch (periodic.state) {
-            case DUMP: {
-                for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
-                    if (!manualControl[n]) {
-                        // Opposite and flip the default motor demands so the back is faster
-                        periodic.motorDemands[n] = purgeDemands[n];
-                    }
-                }
-                break;
-            }
-            default: {
-                if (!manualControl[BLACK_WHEEL]) {
-                    // Stop wheel manually because the non-dumping mode does not override it automatically
-                    periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
-                }
-            }
+    public void shootBall() {
+        if (periodic.sensorsDetected[BLACK_WHEEL]) {
+            periodic.state = SuperState.SHOOT;
         }
     }
 
-    public void setShooting(boolean shooting) {
-        manualControl[BLACK_WHEEL] = shooting;
+    public void setIntaking(boolean intaking) {
+        if (periodic.state == SuperState.DISABLED) {
+            periodic.state = SuperState.INIT;
+        }
+        if (periodic.state != SuperState.FULL_SYSTEM && intaking) {
+            periodic.motorDemands[INTAKE] = Constants.SUPER_DEMAND_INTAKE_MANUAL;
+        } else {
+            periodic.motorDemands[INTAKE] = Constants.DEMAND_STOP;
+        }
+
     }
 
-    public void setIntaking(boolean intaking) {
-        manualControl[INTAKE] = intaking;
-        periodic.motorDemands[INTAKE] = intaking ? Constants.SUPER_DEMAND_INTAKE_MANUAL : Constants.DEMAND_STOP;
+    public void setDumping(boolean dumping) {
+        periodic.state = dumping ? SuperState.DUMP_SYSTEM : SuperState.INIT;
     }
 
     /**
@@ -277,7 +288,7 @@ public class Superstructure extends Subsystem {
 
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
 
-        public SuperState state = SuperState.DEFAULT;
+        public SuperState state = SuperState.DISABLED;
     }
     public LogData getLogger() {
         return periodic;
@@ -297,13 +308,16 @@ public class Superstructure extends Subsystem {
     }
 
     private void configTalons() {
-        motors[BLACK_WHEEL].configSupplyCurrentLimit(
-            new SupplyCurrentLimitConfiguration(true, 15, 15, .2));
-
-        for (int n = INDEXER_ONE; n < INTAKE; n++) {
+        for (int n = INDEXER_ONE; n <= INTAKE; n++) {
             motors[n].configSupplyCurrentLimit(
                     new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
         }
+
+        motors[BLACK_WHEEL].configSupplyCurrentLimit(
+                new SupplyCurrentLimitConfiguration(true, 15, 15, .2));
+
+        motors[INDEXER_TWO].configSupplyCurrentLimit(
+                new SupplyCurrentLimitConfiguration(true, 10, 10, .2));
 
         for (TalonSRX motor : motors) {
             motor.setNeutralMode(NeutralMode.Brake);
@@ -311,7 +325,11 @@ public class Superstructure extends Subsystem {
     }
 
     public enum SuperState {
-        DEFAULT, DUMP
+        INIT, ONE_BALL, TWO_BALLS, THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
 
     /**

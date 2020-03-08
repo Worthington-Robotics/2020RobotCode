@@ -11,7 +11,7 @@ public class DumpAction extends Action {
     }
 
     @Override public void onStart() {
-        superstructure.setState(Superstructure.SuperState.DUMP);
+        superstructure.setDumping(true);
     }
 
     @Override public void onLoop() {}
@@ -21,6 +21,6 @@ public class DumpAction extends Action {
     }
 
     @Override public void onStop() {
-        superstructure.setState(Superstructure.SuperState.DEFAULT);
+        superstructure.setDumping(false);
     }
 }
