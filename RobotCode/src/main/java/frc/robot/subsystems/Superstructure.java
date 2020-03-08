@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.playingwithfusion.TimeOfFlight;
 
@@ -35,14 +36,14 @@ public class Superstructure extends Subsystem {
             .88, // INDEXER_ONE
             .88, // INDEXER_TWO
             .88, // INDEXER_THREE
-            .88, // INTAKE
+            .88 // INTAKE
     };
     private double[] purgeDemands = new double[] {
             -1, // BLACK_WHEEL
             -1, // INDEXER_ONE
             -1, // INDEXER_TWO
             -1, // INDEXER_THREE
-            -1, // INTAKE
+            -1 // INTAKE
     };
 
     // Constants
@@ -54,11 +55,11 @@ public class Superstructure extends Subsystem {
     // TODO Move to constants once done debugging thresholds
     // (millimeters)
     public static double[] threshold = {
-            75,
-            75,
-            75,
-            75,
-            75
+            75, // BLACK_WHEEL
+            75, // INDEXER_ONE
+            75, // INDEXER_TWO
+            75, // INDEXER_THREE
+            75 // INTAKE
     };
 
     private static Superstructure instance = new Superstructure();
@@ -241,6 +242,8 @@ public class Superstructure extends Subsystem {
     private void configTalons() {
         for (TalonSRX talon : motors) {
             talon.setNeutralMode(NeutralMode.Brake);
+            talon.configSupplyCurrentLimit(
+                    new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
         }
     }
 
