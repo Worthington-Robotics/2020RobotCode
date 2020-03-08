@@ -138,8 +138,9 @@ public class Superstructure extends Subsystem {
                         if (periodic.sensorsDetected[BLACK_WHEEL]) {
                             periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
                         }
-                    // Not manual control
-                    }// else if (periodic.sensorsDetected[BLACK_WHEEL]) {
+                    }
+                    // // Not manual control
+                    // } else if (periodic.sensorsDetected[BLACK_WHEEL]) {
                     //     periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
                     // } else if (periodic.sensorsDetected[INDEXER_ONE]) {
                     //     periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
@@ -166,6 +167,15 @@ public class Superstructure extends Subsystem {
                             // }
                         }
                     }
+
+                    if (!manualControl[BLACK_WHEEL]) {
+                        if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
+                        } else if (periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                        }
+                    }
+                    
                     if (periodic.sensorsDetected[INDEXER_ONE] && !periodic.sensorsDetected[BLACK_WHEEL] ||
                         periodic.sensorsDetected[INDEXER_TWO] && !periodic.sensorsDetected[INDEXER_ONE]) {
                         periodic.motorDemands[INDEXER_ONE] = defaultMotorDemands[INDEXER_ONE];
@@ -187,10 +197,12 @@ public class Superstructure extends Subsystem {
                         periodic.motorDemands[INDEXER_THREE] = Constants.DEMAND_STOP;
                     }
 
-                    if (periodic.sensorsDetected[INTAKE] && !periodic.sensorsDetected[INDEXER_THREE]) {
+                    if (!manualControl[INTAKE]) {
+                        if (periodic.sensorsDetected[INTAKE] && !periodic.sensorsDetected[INDEXER_THREE]) {
                         periodic.motorDemands[INTAKE] = defaultMotorDemands[INTAKE];
                     } else if (!periodic.sensorsDetected[INTAKE]) {
                         periodic.motorDemands[INTAKE] = Constants.DEMAND_STOP;
+                    }
                     }
                 }
             }
