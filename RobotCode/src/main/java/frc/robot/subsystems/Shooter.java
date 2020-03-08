@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -72,6 +73,9 @@ public class Shooter extends Subsystem {
                     SmartDashboard.getNumber("Shooter/Turret/I", 0), SmartDashboard.getNumber("Shooter/Turret/D", 0),
                     SmartDashboard.getNumber("Shooter/Turret/F", 0));
         }
+        periodic.limelightPrev = periodic.limelight_distance;
+        periodic.limelight_distance = limelightRanging();
+        periodic.limelightDelta = (periodic.limelightDelta + periodic.limelight_distance - periodic.limelightPrev)/2;
         periodic.turretEncoder = turretControl.getSelectedSensorPosition();
         periodic.flywheelVelocity = leftFlywheelFalcon.getSelectedSensorVelocity();
         periodic.operatorInput = Constants.SECOND.getPOV();
@@ -100,10 +104,10 @@ public class Shooter extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 periodic.turretAngle = Rotation2d.fromDegrees(ticksToDegrees(periodic.turretEncoder));
-                if (periodic.targetV == 1) {
+                /*if (periodic.targetV == 1) {
                     turretMode = MotorControlMode.LIMELIGHT_MODE;
                 }
-
+*/
                 switch (flywheelMode) {
                 case OPEN_LOOP:
                     periodic.flywheelDemand = periodic.operatorFlywheelInput;
@@ -117,7 +121,7 @@ public class Shooter extends Subsystem {
                     if (Util.epsilonEquals(periodic.flywheelRPMDemand, Constants.FLYWHEEL_IDLE_RPM, 100)) {
                         setLimelightRPM();
                     } else {
-                        periodic.flywheelRPMDemand = Math.max(
+                        periodic.flywheelRPMDemand = Math.min(
                                 periodic.flywheelRPMDemand
                                         + (Constants.FLYWHEEL_IDLE_RPM / (Constants.FLYWHEEL_SPINUP_TIME)),
                                 Constants.FLYWHEEL_IDLE_RPM);
@@ -126,16 +130,16 @@ public class Shooter extends Subsystem {
                     }
                     break;
                 case LIMELIGHT_MODE:
-                    periodic.limelight_distance = limelightRanging();
                     if (periodic.limelight_distance > 60 && periodic.limelight_distance < 700) {
-                        periodic.flywheelRPMDemand = Math.min(((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN)
-                                + Constants.FLYWHEEL_BASE_RPM + periodic.FlywheelBaseRPMOffset),
+                        periodic.RPMGoal = (limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN)
+                        + Constants.FLYWHEEL_BASE_RPM + periodic.FlywheelBaseRPMOffset + periodic.limelightDelta * 0;
+                        periodic.flywheelRPMDemand = Math.min(periodic.RPMGoal,
                                 Constants.FLYWHEEL_MAX_RPM);
                         periodic.flywheelRPMDemand = Math.max(
-                                ((limelightRanging() * Constants.FLYWHEEL_RPM_PER_IN) + Constants.FLYWHEEL_BASE_RPM),
-                                Constants.FLYWHEEL_IDLE_RPM);
+                                periodic.RPMGoal,
+                                Constants.FLYWHEEL_IDLE_RPM + periodic.FlywheelBaseRPMOffset);
                     } else {
-                        periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM;
+                        periodic.flywheelRPMDemand = Constants.FLYWHEEL_IDLE_RPM + periodic.FlywheelBaseRPMOffset;
                     }
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
@@ -284,6 +288,8 @@ public class Shooter extends Subsystem {
         rightFlywheelFalcon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         rightFlywheelFalcon.setNeutralMode(NeutralMode.Coast);
         rightFlywheelFalcon.configVoltageCompSaturation(Constants.VOLTAGE_COMP_FLYWHEEL);
+        rightFlywheelFalcon.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255, 0);
+        rightFlywheelFalcon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255, 0);
         rightFlywheelFalcon.follow(leftFlywheelFalcon);
 
         leftFlywheelFalcon.config_kP(0, Constants.TURRET_LEFT_FLY_KP);
@@ -474,6 +480,9 @@ public class Shooter extends Subsystem {
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
+        public double RPMGoal = 0.0;
+        public double limelightPrev = 0.0;
+        public double limelightDelta = 0.0;
         public int FlywheelBaseRPMOffset = 0;
         public double rampUpTime = 0.0;
         public double AmpsL = 0.0;

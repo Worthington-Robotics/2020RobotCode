@@ -30,11 +30,11 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
-            .55, // BLACK_WHEEL - needs to go slow or will shoot...
-            .5, // INDEXER_ONE
-            .45, // INDEXER_TWO
-            .4, // INDEXER_THREE
-            .35, // INTAKE
+            .3, // BLACK_WHEEL - needs to go slow or will shoot...
+            .3, // INDEXER_ONE
+            .3, // INDEXER_TWO
+            .3, // INDEXER_THREE
+            .3, // INTAKE
     };
 
     // Constants
@@ -117,7 +117,7 @@ public class Superstructure extends Subsystem {
      */
     @Override public void writePeriodicOutputs() {
         // Set motor demands
-        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             motors[n].set(ControlMode.PercentOutput, periodic.motorDemands[n]);
         }
 
@@ -164,7 +164,7 @@ public class Superstructure extends Subsystem {
     }
 
     public boolean isSystemEmpty() {
-        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             if (periodic.sensorsDetected[n]) {
                 return false;
             }
@@ -239,7 +239,7 @@ public class Superstructure extends Subsystem {
 
         motors[BLACK_WHEEL].setInverted(true);
 
-        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             sensors[n].setRangingMode(TimeOfFlight.RangingMode.Short, 10);
         }
     }

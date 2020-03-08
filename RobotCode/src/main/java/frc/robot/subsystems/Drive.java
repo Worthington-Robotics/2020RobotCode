@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -146,7 +145,6 @@ public class Drive extends Subsystem {
 
         periodic.rightCurrent = driveFrontRight.getSupplyCurrent();
         periodic.leftCurrent = driveFrontLeft.getSupplyCurrent();
-
 
     }
 
@@ -290,6 +288,8 @@ public class Drive extends Subsystem {
         driveBackLeft.enableVoltageCompensation(true);
         driveBackLeft.follow(driveFrontLeft);
         driveBackLeft.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveBackLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255, 0);
+        driveBackLeft.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255, 0);
 
         // primary closed-loop, 100ms timeout
         sensorPresent = driveFrontRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor, 0, 100);
@@ -318,6 +318,8 @@ public class Drive extends Subsystem {
         driveBackRight.enableVoltageCompensation(true);
         driveBackRight.follow(driveFrontRight);
         driveBackRight.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 0, 0.02));
+        driveBackRight.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255, 0);
+        driveBackRight.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255, 0);
 
     }
 

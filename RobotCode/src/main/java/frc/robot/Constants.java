@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.lib.util.HIDHelper;
 
 public class Constants {
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     /**
      * device ID declarations ---------------------------------
@@ -18,17 +18,16 @@ public class Constants {
     //Talon SRX & FX IDs
     public static final int DRIVE_FRONT_RIGHT_ID = 1;
     public static final int DRIVE_BACK_RIGHT_ID = 2;
-    public static final int COLOR_WHEEL = 4;
     public static final int SHOOTER_FLYWHEEL_LEFT = 5;
     public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
 
-    public static final int ID_SUPER_DELIVERY_WHEEL = 9;
-    public static final int ID_SUPER_INDEX1 = 7;
-    public static final int ID_SUPER_INDEX2 = 8; // FIXME Config ID
-    public static final int ID_SUPER_INDEX3 = 12; // FIXME Config ID
-    public static final int ID_SUPER_INTAKE = 10;
+    public static final int ID_SUPER_DELIVERY_WHEEL = 7;
+    public static final int ID_SUPER_INDEX1 = 8;
+    public static final int ID_SUPER_INDEX2 = 9;
+    public static final int ID_SUPER_INDEX3 = 10;
+    public static final int ID_SUPER_INTAKE = 11;
 
-    public static final int TURRET_CONTROL = 11;
+    public static final int TURRET_CONTROL = 12;
     public static final int DRIVE_BACK_LEFT_ID = 14;
     public static final int DRIVE_FRONT_LEFT_ID = 15;
 
