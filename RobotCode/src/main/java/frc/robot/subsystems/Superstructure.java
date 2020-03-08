@@ -32,7 +32,7 @@ public class Superstructure extends Subsystem {
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
-            .88, // BLACK_WHEEL - needs to go slow or will shoot...
+            .5, // BLACK_WHEEL - needs to go slow or will shoot...
             .88, // INDEXER_ONE
             .88, // INDEXER_TWO
             .88, // INDEXER_THREE
@@ -107,7 +107,7 @@ public class Superstructure extends Subsystem {
      * Updates all periodic variables and sensors.
      */
     @Override public void readPeriodicInputs() {
-        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             periodic.sensorsDetected[n] = sensorDetected(n);
         }
     }
@@ -138,9 +138,15 @@ public class Superstructure extends Subsystem {
                         if (periodic.sensorsDetected[BLACK_WHEEL]) {
                             periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
                         }
+                    // Not manual control
+                    } else if (periodic.sensorsDetected[BLACK_WHEEL]) {
+                        periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                    } else if (periodic.sensorsDetected[INDEXER_ONE]) {
+                        periodic.motorDemands[BLACK_WHEEL] = defaultMotorDemands[BLACK_WHEEL];
                     }
 
-                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                    // Iterate over all EXCEPT Intake
+                    for (int n = INDEXER_ONE; n <= INTAKE; n++) {
                         if (!manualControl[n]) {
                             // If Ball n detected and Ball n-1 not detected
                             periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
@@ -256,7 +262,7 @@ public class Superstructure extends Subsystem {
      */
     @Override public void outputTelemetry() {
         if (Constants.DEBUG) {
-            threshold[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", threshold[BLACK_WHEEL]);
+            threshold[BLACK_WHEEL] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", threshold[BLACK_WHEEL]);
             threshold[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", threshold[INDEXER_ONE]);
             threshold[INDEXER_TWO] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", threshold[INDEXER_TWO]);
             threshold[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", threshold[INDEXER_THREE]);
