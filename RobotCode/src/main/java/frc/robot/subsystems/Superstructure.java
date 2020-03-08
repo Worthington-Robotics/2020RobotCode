@@ -26,15 +26,23 @@ public class Superstructure extends Subsystem {
     private SuperIO periodic;
     private DoubleSolenoid extensionArm;
 
+    private boolean[] manualControl = new boolean[5];
     private TalonSRX[] motors = new TalonSRX[5];
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
     private double[] defaultMotorDemands = new double[] {
             // TODO Move to constants once done debugging demands
-            .3, // BLACK_WHEEL - needs to go slow or will shoot...
-            .3, // INDEXER_ONE
-            .3, // INDEXER_TWO
-            .3, // INDEXER_THREE
-            .3, // INTAKE
+            .88, // BLACK_WHEEL - needs to go slow or will shoot...
+            .88, // INDEXER_ONE
+            .88, // INDEXER_TWO
+            .88, // INDEXER_THREE
+            .88, // INTAKE
+    };
+    private double[] purgeDemands = new double[] {
+            -1, // BLACK_WHEEL
+            -1, // INDEXER_ONE
+            -1, // INDEXER_TWO
+            -1, // INDEXER_THREE
+            -1, // INTAKE
     };
 
     // Constants
@@ -45,11 +53,13 @@ public class Superstructure extends Subsystem {
     public static final short INTAKE = 4;
     // TODO Move to constants once done debugging thresholds
     // (millimeters)
-    public static double SUPER_TOF1_THRESHOLD = 75;
-    public static double SUPER_TOF2_THRESHOLD = 75;
-    public static double SUPER_TOF3_THRESHOLD = 75;
-    public static double SUPER_TOF4_THRESHOLD = 75;
-    public static double SUPER_TOF5_THRESHOLD = 75;
+    public static double[] threshold = {
+            75,
+            75,
+            75,
+            75,
+            75
+    };
 
     private static Superstructure instance = new Superstructure();
     public static Superstructure getInstance() {
@@ -76,40 +86,29 @@ public class Superstructure extends Subsystem {
         extensionArm = new DoubleSolenoid(Constants.INTAKE_HIGH_ID, Constants.INTAKE_LOW_ID);
 
         reset();
+        configTalons();
 
         // Put value on dashboard so it appears and can be modified
-        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
-        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
-        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", SUPER_TOF3_THRESHOLD);
-        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF4", SUPER_TOF4_THRESHOLD);
-        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF5", SUPER_TOF5_THRESHOLD);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF1", threshold[BLACK_WHEEL]);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF2", threshold[INDEXER_ONE]);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF3", threshold[INDEXER_TWO]);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF4", threshold[INDEXER_THREE]);
+        SmartDashboard.putNumber("Superstructure/THRESHOLD_TOF5", threshold[INTAKE]);
 
         SmartDashboard.putNumber("Superstructure/DEMAND_BLACK_WHEEL_DEFAULT", defaultMotorDemands[BLACK_WHEEL]);
         SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER1_DEFAULT", defaultMotorDemands[INDEXER_ONE]);
         SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER2_DEFAULT", defaultMotorDemands[INDEXER_TWO]);
         SmartDashboard.putNumber("Superstructure/DEMAND_INDEXER3_DEFAULT", defaultMotorDemands[INDEXER_THREE]);
         SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_DEFAULT", defaultMotorDemands[INTAKE]);
-        configTalons();
-    }
-
-    private void configTalons() {
-        for(TalonSRX talon : motors)
-        {
-            talon.setNeutralMode(NeutralMode.Brake);
-        }
     }
 
     /**
      * Updates all periodic variables and sensors.
      */
     @Override public void readPeriodicInputs() {
-        periodic.sensorsDetected = new boolean[] {
-                sensors[BLACK_WHEEL].getRange() != 0 && sensors[BLACK_WHEEL].getRange() < SUPER_TOF1_THRESHOLD,
-                sensors[INDEXER_ONE].getRange() != 0 && sensors[INDEXER_ONE].getRange() < SUPER_TOF2_THRESHOLD,
-                sensors[INDEXER_TWO].getRange() != 0 && sensors[INDEXER_TWO].getRange() < SUPER_TOF3_THRESHOLD,
-                sensors[INDEXER_THREE].getRange() != 0 && sensors[INDEXER_THREE].getRange() < SUPER_TOF4_THRESHOLD,
-                sensors[INTAKE].getRange() != 0 && sensors[INTAKE].getRange() < SUPER_TOF5_THRESHOLD,
-        };
+        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+            periodic.sensorsDetected[n] = sensorDetected(n);
+        }
     }
 
     /**
@@ -133,14 +132,15 @@ public class Superstructure extends Subsystem {
             @Override public void onLoop(double timestamp) {
                 // Ignore motor setting if dumping
                 if (periodic.state == SuperState.DEFAULT) {
-                    // When ball is no longer detected after shot
-                    if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                        periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
+                    // If in shoot mode, shoot
+                    if (manualControl[BLACK_WHEEL]) {
+                        if (periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
+                        }
                     }
 
-                    for (int n = INDEXER_ONE; n <= INTAKE; n++) {
-                        // Ensure that the Intake is not in manual control before auto-moving
-                        if (n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL) {
+                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                        if (!manualControl[n]) {
                             // If Ball n detected and Ball n-1 not detected
                             periodic.motorDemands[n] = periodic.sensorsDetected[n] && !periodic.sensorsDetected[n - 1] ?
                                     defaultMotorDemands[n] : Constants.DEMAND_STOP;
@@ -154,15 +154,6 @@ public class Superstructure extends Subsystem {
         });
     }
 
-    /**
-     * Enables the black wheel to shoot a ball.
-     */
-    public void shootBall() {
-        if (periodic.sensorsDetected[BLACK_WHEEL]) {
-            periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
-        }
-    }
-
     public boolean isSystemEmpty() {
         for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             if (periodic.sensorsDetected[n]) {
@@ -170,6 +161,10 @@ public class Superstructure extends Subsystem {
             }
         }
         return true;
+    }
+
+    public boolean sensorDetected(int id) {
+        return sensors[id].getRange() != 0 && sensors[id].getRange() < threshold[id];
     }
 
     /**
@@ -181,15 +176,6 @@ public class Superstructure extends Subsystem {
     }
 
     /**
-     * Sets a motor to a demand.
-     * @param id the motor ID
-     * @param demand the demand
-     */
-    public void setMotorDemand(int id, double demand) {
-        periodic.motorDemands[id] = demand;
-    }
-
-    /**
      * Sets the new state and performs a task based on the new state.
      * @param newState the new state of the subsystem
      */
@@ -198,22 +184,30 @@ public class Superstructure extends Subsystem {
 
         switch (periodic.state) {
             case DUMP: {
-                for (int n = INTAKE; n >= BLACK_WHEEL; n--) {
-                    if ((n != INTAKE || periodic.motorDemands[INTAKE] != Constants.SUPER_DEMAND_INTAKE_MANUAL)
-                            && (n != BLACK_WHEEL || periodic.motorDemands[BLACK_WHEEL] != Constants.SUPER_DEMAND_SHOOT)) {
+                for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                    if (!manualControl[n]) {
                         // Opposite and flip the default motor demands so the back is faster
-                        periodic.motorDemands[n] = -defaultMotorDemands[defaultMotorDemands.length - 1 - n];
+                        periodic.motorDemands[n] = purgeDemands[n];
                     }
                 }
                 break;
             }
             case DEFAULT: default: {
-                if (periodic.motorDemands[BLACK_WHEEL] != Constants.SUPER_DEMAND_SHOOT) {
+                if (!manualControl[BLACK_WHEEL]) {
                     // Stop wheel manually because the non-dumping mode does not override it automatically
                     periodic.motorDemands[BLACK_WHEEL] = Constants.DEMAND_STOP;
                 }
             }
         }
+    }
+
+    public void setShooting(boolean shooting) {
+        manualControl[BLACK_WHEEL] = shooting;
+    }
+
+    public void setIntaking(boolean intaking) {
+        manualControl[INTAKE] = intaking;
+        periodic.motorDemands[INTAKE] = intaking ? Constants.SUPER_DEMAND_INTAKE_MANUAL : Constants.DEMAND_STOP;
     }
 
     /**
@@ -244,6 +238,12 @@ public class Superstructure extends Subsystem {
         }
     }
 
+    private void configTalons() {
+        for (TalonSRX talon : motors) {
+            talon.setNeutralMode(NeutralMode.Brake);
+        }
+    }
+
     public enum SuperState {
         DEFAULT, DUMP
     }
@@ -253,11 +253,11 @@ public class Superstructure extends Subsystem {
      */
     @Override public void outputTelemetry() {
         if (Constants.DEBUG) {
-            SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", SUPER_TOF1_THRESHOLD);
-            SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", SUPER_TOF2_THRESHOLD);
-            SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", SUPER_TOF3_THRESHOLD);
-            SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", SUPER_TOF4_THRESHOLD);
-            SUPER_TOF2_THRESHOLD = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF5", SUPER_TOF5_THRESHOLD);
+            threshold[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", threshold[BLACK_WHEEL]);
+            threshold[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", threshold[INDEXER_ONE]);
+            threshold[INDEXER_TWO] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", threshold[INDEXER_TWO]);
+            threshold[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", threshold[INDEXER_THREE]);
+            threshold[INTAKE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF5", threshold[INTAKE]);
 
             defaultMotorDemands[BLACK_WHEEL] = SmartDashboard.getNumber("Superstructure/DEMAND_BLACK_WHEEL_DEFAULT", defaultMotorDemands[BLACK_WHEEL]);
             defaultMotorDemands[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER1_DEFAULT", defaultMotorDemands[INDEXER_ONE]);
