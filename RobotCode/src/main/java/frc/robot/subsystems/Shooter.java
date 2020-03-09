@@ -217,7 +217,7 @@ public class Shooter extends Subsystem {
         case OPEN_LOOP:
             turretControl.set(ControlMode.PercentOutput, periodic.turretDemand);
             break;
-        case PID_MODE:
+        case PID_MODE:case LIMELIGHT_MODE:
             turretControl.set(ControlMode.Position, periodic.turretDemand);
             break;
         case RECENTER_MODE:
@@ -382,7 +382,6 @@ public class Shooter extends Subsystem {
     public void setTurretLimelightControl(double demand) {
         if (turretMode != MotorControlMode.LIMELIGHT_MODE)
             turretMode = MotorControlMode.LIMELIGHT_MODE;
-        turretControl.set(ControlMode.Velocity, demand);
     }
 
     public void setTurretFieldCentric() {

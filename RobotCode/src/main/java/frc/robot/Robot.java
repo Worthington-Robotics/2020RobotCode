@@ -46,12 +46,13 @@ public class Robot extends TimedRobot {
 
     //Co-pilot joystick buttons
     private POVTrigger recenter = new POVTrigger(Constants.SECOND);
-    private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 1);
+    private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
     private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
     private JoystickButton fieldCentricTurret = new JoystickButton(Constants.SECOND, 3);
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
+    private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 8);
     private DebouncedJoystickButton intakeUP = new DebouncedJoystickButton(Constants.SECOND, 9);
     private JoystickButton OffsetUp = new JoystickButton(Constants.SECOND, 10);
     private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
@@ -206,12 +207,13 @@ public class Robot extends TimedRobot {
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shiftButton.whileHeld(Action.toCommand(new Shift()));
         gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));
-        shootAll.whileHeld(Action.toCommand(new ShootAllAction()));
+        shootOne.whileHeld(Action.toCommand(new ShootAllAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
         intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));
+        shootAll.whileHeld(Action.toCommand(new ShootAll()));
         VersionData.WriteBuildInfoToDashboard();
 
     }

@@ -14,12 +14,12 @@ import frc.lib.loops.Loop;
 import frc.robot.Constants;
 
 /**
- * The Superstructure subsystem combines both the
- * Indexer and Intake systems for performance economy.
+ * The Superstructure subsystem combines both the Indexer and Intake systems for
+ * performance economy.
  *
- * This version of the Superstructure is designed for the second
- * design iteration of the robot, specifically noting the new top
- * wheels used in the Indexer.
+ * This version of the Superstructure is designed for the second design
+ * iteration of the robot, specifically noting the new top wheels used in the
+ * Indexer.
  *
  * @author Spazzinq (George Fang)
  */
@@ -29,21 +29,33 @@ public class Superstructure extends Subsystem {
 
     private TalonSRX[] motors = new TalonSRX[5];
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
+
+    // TODO Move to constants once done debugging demands
     private double[] defaultMotorDemands = new double[] {
-            // TODO Move to constants once done debugging demands
-            .4, // BLACK_WHEEL - needs to go slow or will shoot...
-            .5, // INDEXER_ONE
+            .88, // BLACK_WHEEL - needs to go slow or will shoot...
+            .7, // INDEXER_ONE
             .5, // INDEXER_TWO
             .5, // INDEXER_THREE
             .5 // INTAKE
     };
-    private double[] purgeDemands = new double[] {
-            -1, // BLACK_WHEEL
+    // TODO Move to constants once done debugging demands
+    private double[] purgeDemands = new double[] { -1, // BLACK_WHEEL
             -1, // INDEXER_ONE
             -1, // INDEXER_TWO
             -1, // INDEXER_THREE
             -1 // INTAKE
     };
+
+    // TODO Move to constants once done debugging thresholds
+    // (millimeters)
+    public static double[] threshold = {
+            75, // BLACK_WHEEL
+            60, // INDEXER_ONE
+            60, // INDEXER_TWO
+            75, // INDEXER_THREE
+            75 // INTAKE
+    };
+
 
     // Constants
     public static final short BLACK_WHEEL = 0;
@@ -51,15 +63,6 @@ public class Superstructure extends Subsystem {
     public static final short INDEXER_TWO = 2;
     public static final short INDEXER_THREE = 3;
     public static final short INTAKE = 4;
-    // TODO Move to constants once done debugging thresholds
-    // (millimeters)
-    public static double[] threshold = {
-            75, // BLACK_WHEEL
-            75, // INDEXER_ONE
-            75, // INDEXER_TWO
-            75, // INDEXER_THREE
-            75 // INTAKE
-    };
 
     private static Superstructure instance = new Superstructure();
     public static Superstructure getInstance() {
@@ -67,8 +70,8 @@ public class Superstructure extends Subsystem {
     }
 
     /**
-     * Initializes motors, sensors, and the intake's DoubleSolenoid arm. Also
-     * resets IO, motors, and sensors to default functioning settings.
+     * Initializes motors, sensors, and the intake's DoubleSolenoid arm. Also resets
+     * IO, motors, and sensors to default functioning settings.
      */
     public Superstructure() {
         motors[BLACK_WHEEL] = new TalonSRX(Constants.ID_SUPER_DELIVERY_WHEEL);
@@ -105,7 +108,8 @@ public class Superstructure extends Subsystem {
     /**
      * Updates all periodic variables and sensors.
      */
-    @Override public void readPeriodicInputs() {
+    @Override
+    public void readPeriodicInputs() {
         for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             periodic.sensorsDetected[n] = sensorDetected(n);
         }
@@ -114,20 +118,26 @@ public class Superstructure extends Subsystem {
     /**
      * Writes the periodic outputs to actuators (motors, etc.).
      */
-    @Override public void writePeriodicOutputs() {
+    @Override
+    public void writePeriodicOutputs() {
         for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             motors[n].set(ControlMode.PercentOutput, periodic.motorDemands[n]);
         }
+        extensionArm.set(periodic.armExtension);
     }
 
     /**
      * Registers Loops to loop while the robot is active.
+     * 
      * @param enabledLooper the subsystem's Looper
      */
-    @Override public void registerEnabledLoops(ILooper enabledLooper) {
+    @Override
+    public void registerEnabledLoops(ILooper enabledLooper) {
         enabledLooper.register(new Loop() {
-            @Override public void onLoop(double timestamp) {
+            @Override
+            public void onLoop(double timestamp) {
                 switch (periodic.state) {
+                    // TODO Simplify
                     case DISABLED:
                     case INIT:
                         if (periodic.sensorsDetected[BLACK_WHEEL]) {
@@ -136,103 +146,123 @@ public class Superstructure extends Subsystem {
                         break;
 
                     case ONE_BALL:
-                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.state = SuperState.INIT;
-                        }
                         if (periodic.sensorsDetected[INDEXER_ONE]) {
                             periodic.state = SuperState.TWO_BALLS;
+                        }
+                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
+                            periodic.state = SuperState.INIT;
                         }
                         break;
 
                     case TWO_BALLS:
-                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.state = SuperState.INIT;
-                        }
                         if (periodic.sensorsDetected[INDEXER_TWO]) {
                             periodic.state = SuperState.THREE_BALLS;
                         }
+                        if (!periodic.sensorsDetected[INDEXER_ONE]) {
+                            periodic.state = SuperState.ONE_BALL;
+                        }
+                        periodic.stateNum = 2;
                         break;
 
                     case THREE_BALLS:
-                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.state = SuperState.INIT;
+                        if (!periodic.sensorsDetected[INDEXER_TWO]) {
+                            periodic.state = SuperState.TWO_BALLS;
                         }
                         if (periodic.sensorsDetected[INDEXER_THREE]) {
                             periodic.state = SuperState.FOUR_BALLS;
                         }
+                        periodic.stateNum = 3;
                         break;
 
                     case FOUR_BALLS:
-                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.state = SuperState.INIT;
+                        if (!periodic.sensorsDetected[INDEXER_THREE]) {
+                            periodic.state = SuperState.THREE_BALLS;
                         }
                         if (periodic.sensorsDetected[INTAKE]) {
                             periodic.state = SuperState.FULL_SYSTEM;
                         }
+                        periodic.stateNum = 4;
                         break;
 
                     case FULL_SYSTEM:
-                        if (!periodic.sensorsDetected[BLACK_WHEEL]) {
-                            periodic.state = SuperState.INIT;
-                        }
                         if (!periodic.sensorsDetected[INTAKE]) {
                             periodic.state = SuperState.FOUR_BALLS;
                         }
+                        periodic.stateNum = 5;
                         break;
 
-                    case SHOOT:
-                        break;
-                    default:
+                case SHOOT:
+                    break;
+                default:
                 }
 
                 switch (periodic.state) {
-                    case INIT:
-                        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
-                        break;
-                    case ONE_BALL:
-                        for (int n = BLACK_WHEEL; n < INDEXER_ONE; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                        for (int n = INDEXER_ONE; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
-                        break;
-                    case TWO_BALLS:
-                        for (int n = BLACK_WHEEL; n < INDEXER_TWO; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                        for (int n = INDEXER_TWO; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
-                    case THREE_BALLS:
-                        for (int n = BLACK_WHEEL; n < INDEXER_THREE; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                        for (int n = INDEXER_THREE; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
-                    case FOUR_BALLS:
-                        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                    case FULL_SYSTEM:
-                        periodic.motorDemands[INTAKE] = Constants.DEMAND_STOP;
-                    case SHOOT:
-                        periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
-                        break;
-                    case DUMP_SYSTEM:
-                        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
-                            periodic.motorDemands[n] = purgeDemands[n];
-                        }
-                        break;
-                    default:
+                case SHOOT_ALL:
+                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = defaultMotorDemands[n];
+                    }
+                    break;
+                case INIT:
+                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = defaultMotorDemands[n];
+                    }
+                    break;
+                case ONE_BALL:
+                    for (int n = BLACK_WHEEL; n < INDEXER_ONE; n++) {
+                        periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                    }
+                    for (int n = INDEXER_ONE; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = defaultMotorDemands[n];
+                    }
+                    break;
+                case TWO_BALLS:
+                    for (int n = BLACK_WHEEL; n < INDEXER_TWO; n++) {
+                        periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                    }
+                    for (int n = INDEXER_TWO; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = defaultMotorDemands[n];
+                    }
+                    break;
+                case THREE_BALLS:
+                    for (int n = BLACK_WHEEL; n < INDEXER_THREE; n++) {
+                        periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                    }
+                    for (int n = INDEXER_THREE; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = defaultMotorDemands[n];
+                    }
+                    break;
+                case FOUR_BALLS:
+                    for (int n = BLACK_WHEEL; n < INTAKE; n++) {
+                        periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                    }
+                    for (int n = INTAKE; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = defaultMotorDemands[n];
+                    }
+                    break;
+                case FULL_SYSTEM:
+                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                    }
+                    break;
+                case SHOOT:
+                    periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
+                    break;
+                case DUMP_SYSTEM:
+                    for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
+                        periodic.motorDemands[n] = purgeDemands[n];
+                    }
+                    break;
+                default:
                 }
             }
 
-            @Override public void onStart(double timestamp) {}
-            @Override public void onStop(double timestamp) {}
+            @Override
+            public void onStart(double timestamp) {
+            }
+
+            @Override
+            public void onStop(double timestamp) {
+            }
         });
     }
 
@@ -251,6 +281,7 @@ public class Superstructure extends Subsystem {
 
     /**
      * Sets the arm extension of the intake.
+     * 
      * @param armExtension if the intake arm is extended
      */
     public void setArmExtension(boolean armExtension) {
@@ -261,6 +292,16 @@ public class Superstructure extends Subsystem {
         if (periodic.sensorsDetected[BLACK_WHEEL]) {
             periodic.state = SuperState.SHOOT;
         }
+    }
+
+    public void shootAll() {
+
+        periodic.state = SuperState.SHOOT_ALL;
+
+    }
+
+    public void setInit() {
+        periodic.state = SuperState.INIT;
     }
 
     public void setIntaking(boolean intaking) {
@@ -285,11 +326,13 @@ public class Superstructure extends Subsystem {
     public class SuperIO extends Subsystem.PeriodicIO {
         public boolean[] sensorsDetected = new boolean[5];
         public double[] motorDemands = new double[5];
+        public int stateNum = 0;
 
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
 
         public SuperState state = SuperState.DISABLED;
     }
+
     public LogData getLogger() {
         return periodic;
     }
@@ -297,7 +340,8 @@ public class Superstructure extends Subsystem {
     /**
      * Resets and configures the subsystem.
      */
-    @Override public void reset() {
+    @Override
+    public void reset() {
         periodic = new SuperIO();
 
         motors[BLACK_WHEEL].setInverted(true);
@@ -309,15 +353,12 @@ public class Superstructure extends Subsystem {
 
     private void configTalons() {
         for (int n = INDEXER_ONE; n <= INTAKE; n++) {
-            motors[n].configSupplyCurrentLimit(
-                    new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
+            motors[n].configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
         }
 
-        motors[BLACK_WHEEL].configSupplyCurrentLimit(
-                new SupplyCurrentLimitConfiguration(true, 15, 15, .2));
+        motors[BLACK_WHEEL].configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 15, 15, .2));
 
-        motors[INDEXER_TWO].configSupplyCurrentLimit(
-                new SupplyCurrentLimitConfiguration(true, 10, 10, .2));
+        motors[INDEXER_TWO].configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 10, 10, .2));
 
         for (TalonSRX motor : motors) {
             motor.setNeutralMode(NeutralMode.Brake);
@@ -325,7 +366,7 @@ public class Superstructure extends Subsystem {
     }
 
     public enum SuperState {
-        INIT, ONE_BALL, TWO_BALLS, THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+        DISABLED, INIT, ONE_BALL, TWO_BALLS, THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, SHOOT_ALL;
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
@@ -335,19 +376,26 @@ public class Superstructure extends Subsystem {
     /**
      * Outputs and reads all logging information to/from the SmartDashboard.
      */
-    @Override public void outputTelemetry() {
+    @Override
+    public void outputTelemetry() {
         if (Constants.DEBUG) {
             threshold[BLACK_WHEEL] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF1", threshold[BLACK_WHEEL]);
             threshold[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF2", threshold[INDEXER_ONE]);
             threshold[INDEXER_TWO] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF3", threshold[INDEXER_TWO]);
-            threshold[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4", threshold[INDEXER_THREE]);
+            threshold[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF4",
+                    threshold[INDEXER_THREE]);
             threshold[INTAKE] = SmartDashboard.getNumber("Superstructure/THRESHOLD_TOF5", threshold[INTAKE]);
 
-            defaultMotorDemands[BLACK_WHEEL] = SmartDashboard.getNumber("Superstructure/DEMAND_BLACK_WHEEL_DEFAULT", defaultMotorDemands[BLACK_WHEEL]);
-            defaultMotorDemands[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER1_DEFAULT", defaultMotorDemands[INDEXER_ONE]);
-            defaultMotorDemands[INDEXER_TWO] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER2_DEFAULT", defaultMotorDemands[INDEXER_TWO]);
-            defaultMotorDemands[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER3_DEFAULT", defaultMotorDemands[INDEXER_THREE]);
-            defaultMotorDemands[INTAKE] = SmartDashboard.getNumber("Superstructure/DEMAND_INTAKE_DEFAULT", defaultMotorDemands[INTAKE]);
+            defaultMotorDemands[BLACK_WHEEL] = SmartDashboard.getNumber("Superstructure/DEMAND_BLACK_WHEEL_DEFAULT",
+                    defaultMotorDemands[BLACK_WHEEL]);
+            defaultMotorDemands[INDEXER_ONE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER1_DEFAULT",
+                    defaultMotorDemands[INDEXER_ONE]);
+            defaultMotorDemands[INDEXER_TWO] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER2_DEFAULT",
+                    defaultMotorDemands[INDEXER_TWO]);
+            defaultMotorDemands[INDEXER_THREE] = SmartDashboard.getNumber("Superstructure/DEMAND_INDEXER3_DEFAULT",
+                    defaultMotorDemands[INDEXER_THREE]);
+            defaultMotorDemands[INTAKE] = SmartDashboard.getNumber("Superstructure/DEMAND_INTAKE_DEFAULT",
+                    defaultMotorDemands[INTAKE]);
 
             SmartDashboard.putNumber("Superstructure/DISTANCE_TOF1_RAW", sensors[BLACK_WHEEL].getRange());
             SmartDashboard.putNumber("Superstructure/DISTANCE_TOF2_RAW", sensors[INDEXER_ONE].getRange());
@@ -362,6 +410,7 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_RAW", periodic.motorDemands[INTAKE]);
 
             SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
+            SmartDashboard.putNumber("Superstructure/STATENUM", periodic.stateNum);
         }
         // FIXME Name differently if possible after changing driver station value
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.sensorsDetected[BLACK_WHEEL]);
