@@ -137,7 +137,6 @@ public class Superstructure extends Subsystem {
             @Override
             public void onLoop(double timestamp) {
                 switch (periodic.state) {
-                    // TODO Simplify
                     case DISABLED:
                     case INIT:
                         if (periodic.sensorsDetected[BLACK_WHEEL]) {
@@ -161,7 +160,6 @@ public class Superstructure extends Subsystem {
                         if (!periodic.sensorsDetected[INDEXER_ONE]) {
                             periodic.state = SuperState.ONE_BALL;
                         }
-                        periodic.stateNum = 2;
                         break;
 
                     case THREE_BALLS:
@@ -171,7 +169,6 @@ public class Superstructure extends Subsystem {
                         if (periodic.sensorsDetected[INDEXER_THREE]) {
                             periodic.state = SuperState.FOUR_BALLS;
                         }
-                        periodic.stateNum = 3;
                         break;
 
                     case FOUR_BALLS:
@@ -181,14 +178,12 @@ public class Superstructure extends Subsystem {
                         if (periodic.sensorsDetected[INTAKE]) {
                             periodic.state = SuperState.FULL_SYSTEM;
                         }
-                        periodic.stateNum = 4;
                         break;
 
                     case FULL_SYSTEM:
                         if (!periodic.sensorsDetected[INTAKE]) {
                             periodic.state = SuperState.FOUR_BALLS;
                         }
-                        periodic.stateNum = 5;
                         break;
 
                 case SHOOT:
@@ -197,20 +192,15 @@ public class Superstructure extends Subsystem {
                 }
 
                 switch (periodic.state) {
-                    case INIT:
+                    case INIT: case SHOOT_ALL:
                         // Set all motors to their DEFAULT demands
-                        System.arraycopy(defaultMotorDemands, BLACK_WHEEL, periodic.motorDemands, BLACK_WHEEL, INTAKE);
+                        System.arraycopy(defaultMotorDemands, BLACK_WHEEL, periodic.motorDemands, BLACK_WHEEL, INTAKE + 1);
                         break;
                     case ONE_BALL: case TWO_BALLS: case THREE_BALLS: case FOUR_BALLS: case FULL_SYSTEM:
                         periodic.motorDemands[periodic.state.getID()] = Constants.DEMAND_STOP;
                         break;
                     case SHOOT:
                         periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
-                        break;
-                    case SHOOT_ALL:
-                        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
                         break;
                     case DUMP_SYSTEM:
                         // Set all motors to their PURGE demands
@@ -220,13 +210,9 @@ public class Superstructure extends Subsystem {
                 }
             }
 
-            @Override
-            public void onStart(double timestamp) {
-            }
+            @Override public void onStart(double timestamp) {}
 
-            @Override
-            public void onStop(double timestamp) {
-            }
+            @Override public void onStop(double timestamp) {}
         });
     }
 
@@ -290,13 +276,10 @@ public class Superstructure extends Subsystem {
     public class SuperIO extends Subsystem.PeriodicIO {
         public boolean[] sensorsDetected = new boolean[5];
         public double[] motorDemands = new double[5];
-        public int stateNum = 0;
-
         public DoubleSolenoid.Value armExtension = DoubleSolenoid.Value.kReverse;
 
         public SuperState state = SuperState.DISABLED;
     }
-
     public LogData getLogger() {
         return periodic;
     }
@@ -398,7 +381,6 @@ public class Superstructure extends Subsystem {
             SmartDashboard.putNumber("Superstructure/DEMAND_INTAKE_RAW", periodic.motorDemands[INTAKE]);
 
             SmartDashboard.putString("Superstructure/STATE", periodic.state.toString());
-            SmartDashboard.putNumber("Superstructure/STATENUM", periodic.stateNum);
         }
         // FIXME Name differently if possible after changing driver station value
         SmartDashboard.putBoolean("Superstructure/BALL1", periodic.sensorsDetected[BLACK_WHEEL]);

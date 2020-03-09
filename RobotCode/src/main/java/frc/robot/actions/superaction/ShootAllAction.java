@@ -7,11 +7,11 @@ public class ShootAllAction extends Action {
     @Override public void onStart() {}
 
     @Override public void onLoop() {
-        Superstructure.getInstance().shootBall();
+        Superstructure.getInstance().shootAll();
     }
 
     @Override public boolean isFinished() {
-        return Superstructure.getInstance().isSystemEmpty();
+        return false;
     }
 
     @Override public void onStop() {

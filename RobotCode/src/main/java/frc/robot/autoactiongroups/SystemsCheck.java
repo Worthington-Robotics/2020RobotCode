@@ -20,7 +20,7 @@ public class SystemsCheck extends StateMachineDescriptor {
         addParallel(new Action[] {new ArmAction(), new LightsStateTest(3)}, 5000);
         addParallel(new Action[] {new ClimbDownAction(), new FoldAction(), new LightsStateTest(4)}, 5000);
         addParallel(new Action[] {new SetManualFlywheel(), new Recenter(0), new ArmActionUp(), new LightsStateTest(5)}, 5000);  
-        addParallel(new Action[] {new ShootAllAction(), new LightsStateTest(6)}, 5000);
+        addParallel(new Action[] {new ShootBallAction(), new LightsStateTest(6)}, 5000);
         addParallel(new Action[] {new LightsStateTest(7)}, 5000);
     }
 }

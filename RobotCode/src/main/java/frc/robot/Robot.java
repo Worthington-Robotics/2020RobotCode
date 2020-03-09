@@ -207,13 +207,13 @@ public class Robot extends TimedRobot {
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shiftButton.whileHeld(Action.toCommand(new Shift()));
         gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whileHeld(Action.toCommand(new ShootAllAction()));
+        shootOne.whileHeld(Action.toCommand(new ShootBallAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
         intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));
-        shootAll.whileHeld(Action.toCommand(new ShootAll()));
+        shootAll.whileHeld(Action.toCommand(new ShootAllAction()));
         VersionData.WriteBuildInfoToDashboard();
 
     }
