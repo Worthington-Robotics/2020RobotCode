@@ -29,14 +29,15 @@ public class Superstructure extends Subsystem {
 
     private TalonSRX[] motors = new TalonSRX[5];
     private SimTimeOfFlight[] sensors = new SimTimeOfFlight[5];
+    // TODO Move to constants once done debugging demands
     private double[] defaultMotorDemands = new double[] {
-            // TODO Move to constants once done debugging demands
             .4, // BLACK_WHEEL - needs to go slow or will shoot...
             .5, // INDEXER_ONE
             .5, // INDEXER_TWO
             .5, // INDEXER_THREE
             .5 // INTAKE
     };
+    // TODO Move to constants once done debugging thresholds
     private double[] purgeDemands = new double[] {
             -1, // BLACK_WHEEL
             -1, // INDEXER_ONE
@@ -44,13 +45,6 @@ public class Superstructure extends Subsystem {
             -1, // INDEXER_THREE
             -1 // INTAKE
     };
-
-    // Constants
-    public static final short BLACK_WHEEL = 0;
-    public static final short INDEXER_ONE = 1;
-    public static final short INDEXER_TWO = 2;
-    public static final short INDEXER_THREE = 3;
-    public static final short INTAKE = 4;
     // TODO Move to constants once done debugging thresholds
     // (millimeters)
     public static double[] threshold = {
@@ -60,6 +54,13 @@ public class Superstructure extends Subsystem {
             75, // INDEXER_THREE
             75 // INTAKE
     };
+
+    // Constants
+    public static final short BLACK_WHEEL = 0;
+    public static final short INDEXER_ONE = 1;
+    public static final short INDEXER_TWO = 2;
+    public static final short INDEXER_THREE = 3;
+    public static final short INTAKE = 4;
 
     private static Superstructure instance = new Superstructure();
     public static Superstructure getInstance() {
@@ -118,6 +119,7 @@ public class Superstructure extends Subsystem {
         for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
             motors[n].set(ControlMode.PercentOutput, periodic.motorDemands[n]);
         }
+        extensionArm.set(periodic.armExtension);
     }
 
     /**
@@ -128,6 +130,7 @@ public class Superstructure extends Subsystem {
         enabledLooper.register(new Loop() {
             @Override public void onLoop(double timestamp) {
                 switch (periodic.state) {
+                    // TODO Simplify
                     case DISABLED:
                     case INIT:
                         if (periodic.sensorsDetected[BLACK_WHEEL]) {
@@ -187,45 +190,18 @@ public class Superstructure extends Subsystem {
 
                 switch (periodic.state) {
                     case INIT:
-                        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
+                        // Set all motors to their DEFAULT demands
+                        System.arraycopy(defaultMotorDemands, BLACK_WHEEL, periodic.motorDemands, BLACK_WHEEL, INTAKE);
                         break;
-                    case ONE_BALL:
-                        for (int n = BLACK_WHEEL; n < INDEXER_ONE; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                        for (int n = INDEXER_ONE; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
+                    case ONE_BALL: case TWO_BALLS: case THREE_BALLS: case FOUR_BALLS: case FULL_SYSTEM:
+                        periodic.motorDemands[periodic.state.getID()] = Constants.DEMAND_STOP;
                         break;
-                    case TWO_BALLS:
-                        for (int n = BLACK_WHEEL; n < INDEXER_TWO; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                        for (int n = INDEXER_TWO; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
-                    case THREE_BALLS:
-                        for (int n = BLACK_WHEEL; n < INDEXER_THREE; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                        for (int n = INDEXER_THREE; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = defaultMotorDemands[n];
-                        }
-                    case FOUR_BALLS:
-                        for (int n = BLACK_WHEEL; n < INTAKE; n++) {
-                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
-                        }
-                    case FULL_SYSTEM:
-                        periodic.motorDemands[INTAKE] = Constants.DEMAND_STOP;
                     case SHOOT:
                         periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;
                         break;
                     case DUMP_SYSTEM:
-                        for (int n = BLACK_WHEEL; n <= INTAKE; n++) {
-                            periodic.motorDemands[n] = purgeDemands[n];
-                        }
+                        // Set all motors to their PURGE demands
+                        System.arraycopy(purgeDemands, BLACK_WHEEL, periodic.motorDemands, BLACK_WHEEL, INTAKE + 1);
                         break;
                     default:
                 }
@@ -249,6 +225,12 @@ public class Superstructure extends Subsystem {
         return sensors[id].getRange() != 0 && sensors[id].getRange() < threshold[id];
     }
 
+    public void shootBall() {
+        if (periodic.sensorsDetected[BLACK_WHEEL]) {
+            periodic.state = SuperState.SHOOT;
+        }
+    }
+
     /**
      * Sets the arm extension of the intake.
      * @param armExtension if the intake arm is extended
@@ -257,16 +239,12 @@ public class Superstructure extends Subsystem {
         periodic.armExtension = armExtension ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
     }
 
-    public void shootBall() {
-        if (periodic.sensorsDetected[BLACK_WHEEL]) {
-            periodic.state = SuperState.SHOOT;
-        }
-    }
-
     public void setIntaking(boolean intaking) {
+        // Enable the state system
         if (periodic.state == SuperState.DISABLED) {
             periodic.state = SuperState.INIT;
         }
+
         if (periodic.state != SuperState.FULL_SYSTEM && intaking) {
             periodic.motorDemands[INTAKE] = Constants.SUPER_DEMAND_INTAKE_MANUAL;
         } else {
@@ -308,16 +286,16 @@ public class Superstructure extends Subsystem {
     }
 
     private void configTalons() {
-        for (int n = INDEXER_ONE; n <= INTAKE; n++) {
-            motors[n].configSupplyCurrentLimit(
-                    new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
-        }
-
         motors[BLACK_WHEEL].configSupplyCurrentLimit(
                 new SupplyCurrentLimitConfiguration(true, 15, 15, .2));
-
+        motors[INDEXER_ONE].configSupplyCurrentLimit(
+                new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
         motors[INDEXER_TWO].configSupplyCurrentLimit(
                 new SupplyCurrentLimitConfiguration(true, 10, 10, .2));
+        motors[INDEXER_THREE].configSupplyCurrentLimit(
+                new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
+        motors[INTAKE].configSupplyCurrentLimit(
+                new SupplyCurrentLimitConfiguration(true, 5, 5, .2));
 
         for (TalonSRX motor : motors) {
             motor.setNeutralMode(NeutralMode.Brake);
@@ -325,7 +303,27 @@ public class Superstructure extends Subsystem {
     }
 
     public enum SuperState {
-        INIT, ONE_BALL, TWO_BALLS, THREE_BALLS, FOUR_BALLS, FULL_SYSTEM, SHOOT, DUMP_SYSTEM, DISABLED;
+        DISABLED(-2),
+        INIT(-1),
+
+        ONE_BALL(BLACK_WHEEL),
+        TWO_BALLS(INDEXER_ONE),
+        THREE_BALLS(INDEXER_TWO),
+        FOUR_BALLS(INDEXER_THREE),
+        FULL_SYSTEM(INTAKE),
+
+        SHOOT(5),
+        DUMP_SYSTEM(6);
+
+        private int id;
+
+        SuperState(int id) {
+            this.id = id;
+        }
+
+        public int getID() {
+            return id;
+        }
 
         public String toString() {
             return name().charAt(0) + name().substring(1).toLowerCase();
