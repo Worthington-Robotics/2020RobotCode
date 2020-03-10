@@ -133,7 +133,7 @@ public class PoseEstimator extends Subsystem {
 
     }
 
-    public LogData logData()
+    public LogData getLogger()
     {
         return periodic;
     } 

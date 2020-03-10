@@ -32,11 +32,11 @@ public class Superstructure extends Subsystem {
 
     // TODO Move to constants once done debugging demands
     private double[] defaultMotorDemands = new double[] {
-            .88, // BLACK_WHEEL - needs to go slow or will shoot...
-            .7, // INDEXER_ONE
-            .5, // INDEXER_TWO
-            .5, // INDEXER_THREE
-            .5 // INTAKE
+            1, // BLACK_WHEEL - needs to go slow or will shoot...
+            .97, // INDEXER_ONE .88
+            .85, // INDEXER_TWO .8
+            .82, // INDEXER_THREE .7
+            1 // INTAKE
     };
     // TODO Move to constants once done debugging demands
     private double[] purgeDemands = new double[] {
@@ -197,7 +197,12 @@ public class Superstructure extends Subsystem {
                         System.arraycopy(defaultMotorDemands, BLACK_WHEEL, periodic.motorDemands, BLACK_WHEEL, INTAKE + 1);
                         break;
                     case ONE_BALL: case TWO_BALLS: case THREE_BALLS: case FOUR_BALLS: case FULL_SYSTEM:
-                        periodic.motorDemands[periodic.state.getID()] = Constants.DEMAND_STOP;
+                        for (int n = BLACK_WHEEL; n <= periodic.state.getID(); n++) {
+                            periodic.motorDemands[n] = Constants.DEMAND_STOP;
+                        }
+                        for (int n = periodic.state.getID() + 1; n <= INTAKE; n++) {
+                            periodic.motorDemands[n] = defaultMotorDemands[n];
+                        }
                         break;
                     case SHOOT:
                         periodic.motorDemands[BLACK_WHEEL] = Constants.SUPER_DEMAND_SHOOT;

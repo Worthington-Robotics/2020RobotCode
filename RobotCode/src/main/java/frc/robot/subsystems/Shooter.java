@@ -480,6 +480,7 @@ public class Shooter extends Subsystem {
 
     public class ShooterIO extends Subsystem.PeriodicIO {
         public double RPMGoal = 0.0;
+        public double limelight_distance = 0.0;
         public double limelightPrev = 0.0;
         public double limelightDelta = 0.0;
         public int FlywheelBaseRPMOffset = 0;
@@ -504,6 +505,5 @@ public class Shooter extends Subsystem {
         public double flywheelClosedLoopError = 0;
         public double turretAmps = 0.0;
         public boolean onTarget = false;
-        public double limelight_distance = 0.0;
     }
 }

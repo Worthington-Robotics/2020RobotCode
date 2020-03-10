@@ -52,7 +52,6 @@ public class Robot extends TimedRobot {
     private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
     private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
     private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
-    private JoystickButton shootAll = new JoystickButton(Constants.SECOND, 8);
     private DebouncedJoystickButton intakeUP = new DebouncedJoystickButton(Constants.SECOND, 9);
     private JoystickButton OffsetUp = new JoystickButton(Constants.SECOND, 10);
     private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
@@ -207,13 +206,13 @@ public class Robot extends TimedRobot {
         inverse.whileHeld(Action.toCommand(new Inverse()));
         shiftButton.whileHeld(Action.toCommand(new Shift()));
         gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whileHeld(Action.toCommand(new ShootBallAction()));
+        shootOne.whenPressed(Action.toCommand(new ShootBallAction()));
         intake.whileHeld(Action.toCommand(new IntakeAction()));
         folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
         climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
         limelightRPM.whenPressed(Action.toCommand(new softStart()));
         intakeUP.toggleWhenPressed(Action.toCommand(new ArmAction()));
-        shootAll.whileHeld(Action.toCommand(new ShootAllAction()));
+        shootOne.whileHeld(Action.toCommand(new ShootAllAction()));
         VersionData.WriteBuildInfoToDashboard();
 
     }
