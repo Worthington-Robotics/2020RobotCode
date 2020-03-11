@@ -29,7 +29,7 @@ public class PIDF {
      * @param kP
      * @param kI
      * @param kD
-     * @param kF   Not yet implemented
+     * @param kF   
      * @param dT   discrete time step for control loop
      * @param iMax maximum integral windup
      */
@@ -53,7 +53,7 @@ public class PIDF {
         calculationMutex.lock();
         try {
             error = lastError = derivative = integral = setPoint = 0;
-            continuous = enabled = false;
+            enabled = false;
         } finally {
             calculationMutex.unlock();
         }
@@ -73,6 +73,10 @@ public class PIDF {
         enabled = false;
     }
 
+    /**
+     * sets the current setpoint to the system
+     * @param setPoint 
+     */
     public void setPoint(double setPoint) {
         calculationMutex.lock();
         try {
@@ -90,9 +94,16 @@ public class PIDF {
      * @param kD
      */
     public void setPID(double kP, double kI, double kD) {
-        setPIDF(kP, kI, kD, kF);
+        setPIDF(kP, kI, kD, 0);
     }
 
+    /**
+     * sets the P, I, D and F gains
+     * @param kP
+     * @param kI
+     * @param kD
+     * @param kF
+     */
     public void setPIDF(double kP, double kI, double kD, double kF) {
         calculationMutex.lock();
         try {
@@ -105,7 +116,11 @@ public class PIDF {
         }
     }
 
-    public double[] getPID(){
+    /**
+     * gets the current PIDF parameters
+     * @return a double of length 4 with the pidf variables in order
+     */
+    public double[] getPIDF(){
         double[] out = new double[4];
         calculationMutex.lock();
         try {
@@ -150,7 +165,8 @@ public class PIDF {
             // save last error for d term
             lastError = error;
 
-            result = error * kP + integral * kI + derivative * kD;
+            result = error * kP + integral * kI +
+                derivative * kD + setPoint * kF;
         } finally {
             calculationMutex.unlock();
         }

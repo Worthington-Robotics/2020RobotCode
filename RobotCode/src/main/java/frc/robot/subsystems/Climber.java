@@ -19,8 +19,6 @@ public class Climber extends Subsystem {
         unfoldSolenoid = new DoubleSolenoid(Constants.UNFOLD_LOW_ID, Constants.UNFOLD_HIGH_ID);
         climbSolenoid = new DoubleSolenoid(Constants.CLIMB_LOW_ID, Constants.CLIMB_HIGH_ID);
         reset();
-
-        //SmartDashboard.putNumber("turretsim", 0);
     }
 
     private static Climber mClimber = new Climber();
@@ -95,16 +93,9 @@ public class Climber extends Subsystem {
         return unfoldBoolean;
     }
 
-    /*private double getTurretAngle(){
-        return SmartDashboard.getNumber("turretsim", 0);
-    }*/
-
     private boolean shooterReady(){
         return Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 270, 25) ||
         Util.epsilonEquals(Shooter.getInstance().getShooterAngle(), 90, 25);
-
-        /*return Util.epsilonEquals(getTurretAngle(), 270, 10) ||
-        Util.epsilonEquals(getTurretAngle(), 90, 10);*/
     }
 
     @Override

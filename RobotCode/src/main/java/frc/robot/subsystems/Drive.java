@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -46,7 +46,7 @@ public class Drive extends Subsystem {
     private DriveIO periodic;
     private PigeonIMU pigeonIMU;
     private DoubleSolenoid trans;
-    private TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveBackLeft;
+    private WPI_TalonFX driveFrontLeft, driveBackRight, driveFrontRight, driveBackLeft;
     private PIDF anglePID;
     private AdaptivePurePursuitController pathFollowingController;
 
@@ -163,22 +163,22 @@ public class Drive extends Subsystem {
     }
 
     private Drive() {
-        SmartDashboard.putBoolean("Drive/PID/SaveChanges", false);
-        SmartDashboard.putNumber("Drive/PID/P", 0);
-        SmartDashboard.putNumber("Drive/PID/I", 0);
-        SmartDashboard.putNumber("Drive/PID/D", 0);
-        SmartDashboard.putNumber("Drive/PID/F", 0);
         anglePID = new PIDF(Constants.ANGLE_KP, Constants.ANGLE_KD);
         anglePID.setContinuous(true);
-        driveFrontLeft = new TalonFX(Constants.DRIVE_FRONT_LEFT_ID);
-        driveBackLeft = new TalonFX(Constants.DRIVE_BACK_LEFT_ID);
-        driveFrontRight = new TalonFX(Constants.DRIVE_FRONT_RIGHT_ID);
-        driveBackRight = new TalonFX(Constants.DRIVE_BACK_RIGHT_ID);
+        driveFrontLeft = new WPI_TalonFX(Constants.DRIVE_FRONT_LEFT_ID);
+        driveBackLeft = new WPI_TalonFX(Constants.DRIVE_BACK_LEFT_ID);
+        driveFrontRight = new WPI_TalonFX(Constants.DRIVE_FRONT_RIGHT_ID);
+        driveBackRight = new WPI_TalonFX(Constants.DRIVE_BACK_RIGHT_ID);
         pigeonIMU = new PigeonIMU(Constants.PIGION_ID);
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
         configTalons();
         reset();
 
+        SmartDashboard.putBoolean("Drive/PID/SaveChanges", false);
+        SmartDashboard.putNumber("Drive/PID/P", 0);
+        SmartDashboard.putNumber("Drive/PID/I", 0);
+        SmartDashboard.putNumber("Drive/PID/D", 0);
+        SmartDashboard.putNumber("Drive/PID/F", 0);
     }
 
     public PIDF getAnglePID() {
@@ -415,7 +415,7 @@ public class Drive extends Subsystem {
     }
 
     public void outputTelemetry() {
-        double[] PIDData = anglePID.getPID();
+        double[] PIDData = anglePID.getPIDF();
 
         // SmartDashboard.putNumber("Drive/Gyro/CurAngle",
         // periodic.gyro_heading.getDegrees());
