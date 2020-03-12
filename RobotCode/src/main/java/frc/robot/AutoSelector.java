@@ -2,15 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.StateMachineDescriptor;
-//import frc.robot.autoactiongroups.*;
-import frc.robot.autoactiongroups.get10easy;
-import frc.robot.autoactiongroups.get10hard;
-import frc.robot.autoactiongroups.SixBallEasy;
-import frc.robot.autoactiongroups.SkewLeft;
-import frc.robot.autoactiongroups.SkewRight;
-import frc.robot.autoactiongroups.SystemsCheck;
-import frc.robot.autoactiongroups.ThreeBallAnywhere;
-import frc.robot.autoactiongroups.get10Impossible;
+import frc.robot.autoactiongroups.*;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
@@ -30,7 +22,7 @@ enum UserSelection {
 
     
     Auto7("Auto Test Protocol", 7),
-    Auto8("SixBallEasy", 8),
+    Auto8("BigEasy", 8),
     Auto20("Remote Operation", 20);
 
     private String name;
@@ -118,7 +110,7 @@ public class AutoSelector {
             case Auto7:
                 return new SystemsCheck();
             case Auto8:
-                return new SixBallEasy();
+                return new EightBallEasy();
 
 
             default:

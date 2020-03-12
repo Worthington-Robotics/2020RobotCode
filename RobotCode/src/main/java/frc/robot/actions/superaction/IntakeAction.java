@@ -1,7 +1,6 @@
 package frc.robot.actions.superaction;
 
 import frc.lib.statemachine.Action;
-import frc.robot.Constants;
 import frc.robot.subsystems.Superstructure;
 
 public class IntakeAction extends Action {
@@ -15,7 +14,8 @@ public class IntakeAction extends Action {
         superstructure.setIntaking(true);
     }
 
-    @Override public void onLoop() {}
+    @Override public void onLoop() {
+        superstructure.setIntaking(true);}
 
     @Override public boolean isFinished() {
         return false;

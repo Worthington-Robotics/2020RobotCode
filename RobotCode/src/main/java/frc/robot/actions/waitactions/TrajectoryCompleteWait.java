@@ -2,6 +2,7 @@ package frc.robot.actions.waitactions;
 
 import frc.lib.statemachine.Action;
 //import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Drive;
 
 public class TrajectoryCompleteWait extends Action {
     /**
@@ -28,7 +29,7 @@ public class TrajectoryCompleteWait extends Action {
      */
     @Override
     public boolean isFinished() {
-        return false;//Drive.getInstance().isDoneWithTrajectory();
+        return Drive.getInstance().isDoneWithTrajectory();
     }
 
     /**
