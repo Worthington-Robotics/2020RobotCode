@@ -11,7 +11,7 @@ public class get10Impossible extends StateMachineDescriptor {
     public get10Impossible() {
         addSequential(new DummyDrive(false), 250);
         addParallel(new Action[] {new DummyDrive(true), new TurretPIDControl()}, 2500);
-        addParallel(new Action[] {new ShootBallAction(), new TurretPIDControl(), new DummyDrive(true), new LineCrossWait(108, true)}, 9500);
+        addParallel(new Action[] {new ShootBallAction(), new TurretPIDControl(), new DummyDrive(true), new LineCrossWait(108, false, false)}, 9500);
         addParallel(new Action[] {new ShootBallAction(), new TurretPIDControl()}, 3000);
     }
 }
