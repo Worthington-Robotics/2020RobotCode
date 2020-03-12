@@ -15,8 +15,8 @@ public class TimerBoolean {
     private boolean started;
 
     /**
-     * Sets the wait duration and gets the current timestamp.
-     * @param waitDuration the duration that must pass until the TimerBoolean returns true
+     * Sets the wait duration (seconds) and gets the current timestamp.
+     * @param waitDuration the duration (seconds) that must pass until the TimerBoolean returns true
      */
     public TimerBoolean(double waitDuration) {
         this.waitDuration = waitDuration;
