@@ -33,9 +33,9 @@ public class Superstructure extends Subsystem {
     // TODO Move to constants once done debugging demands
     private double[] defaultMotorDemands = new double[] {
         1, // BLACK_WHEEL -
-        .88, // INDEXER_ONE .88
-        .75, // INDEXER_TWO .8
-        .7, // INDEXER_THREE .7
+        .85, // INDEXER_ONE .88
+        .7, // INDEXER_TWO .75
+        .62, // INDEXER_THREE .7
         1 // INTAKE
     };
 
