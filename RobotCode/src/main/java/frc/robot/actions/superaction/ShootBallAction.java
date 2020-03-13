@@ -11,10 +11,8 @@ public class ShootBallAction extends Action {
     }
 
     @Override public boolean isFinished() {
-        return !Superstructure.getInstance().sensorDetected(1);
+        return true;
     }
 
-    @Override public void onStop() {
-        Superstructure.getInstance().setInit();
-    }
+    @Override public void onStop() {}
 }

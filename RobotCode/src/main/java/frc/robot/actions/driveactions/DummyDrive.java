@@ -24,9 +24,9 @@ public class DummyDrive extends Action {
     @Override
     public void onLoop() {
         if (forward) {
-            Drive.getInstance().setOpenLoop(new DriveSignal(0.15, 0.15));
+            Drive.getInstance().setOpenLoop(new DriveSignal(0.5, 0.5));
         } else {
-            Drive.getInstance().setOpenLoop(new DriveSignal(-0.15, -0.15));
+            Drive.getInstance().setOpenLoop(new DriveSignal(-0.5, -0.5));
         }
     }
 

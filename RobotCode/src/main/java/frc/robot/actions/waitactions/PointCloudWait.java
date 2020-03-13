@@ -2,6 +2,7 @@ package frc.robot.actions.waitactions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Pose2d;
+import frc.lib.geometry.Translation2d;
 import frc.lib.statemachine.Action;
 import frc.lib.util.Util;
 import frc.robot.subsystems.PoseEstimator;
@@ -10,10 +11,10 @@ public class PointCloudWait extends Action {
     private boolean isX, isY, isTheta;
     private double epsilonX, epsilonY, epsilonTheta, X, Y, Theta;
 
-    public PointCloudWait(Pose2d pose, double epsilonX, double epsilonY, double epsilonTheta) {
-        Theta = pose.getRotation().getDegrees();
-        X = pose.getTranslation().x();
-        Y = pose.getTranslation().y();
+    public PointCloudWait(Pose2d pose2d, double epsilonX, double epsilonY, double epsilonTheta) {
+        Theta = pose2d.getRotation().getDegrees();
+        X = pose2d.getTranslation().x();
+        Y = pose2d.getTranslation().y();
         this.epsilonX = epsilonX;
         this.epsilonY = epsilonY;
         this.epsilonTheta = epsilonTheta;

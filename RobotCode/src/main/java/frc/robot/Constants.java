@@ -67,7 +67,7 @@ public class Constants {
         Turret & flywheel tuned values ------------------------
     */
     public static final double LIMELIGHT_HIGHT = 23;
-    public static final double LIMELIGHT_PITCH = 30;
+    public static final double LIMELIGHT_PITCH = 31;
     public static final double TURRET_MAX_SPEED = .145;
     public static final double TURRET_ANGLE_KP = .8; // SAFE .3
     public static final double TURRET_ANGLE_KI = 0.003; // SAFE .001
@@ -83,7 +83,7 @@ public class Constants {
     public static double VOLTAGE_COMP_FLYWHEEL = 10;
     public static final double FLYWHEEL_DELTA_AMPS = 2.5;
 
-    public static final double FLYWHEEL_RPM_PER_IN = 4.6; //4.4
+    public static final double FLYWHEEL_RPM_PER_IN = 5; //4.4
     public static final double FLYWHEEL_BASE_RPM = 4350; //4000
     public static final double FLYWHEEL_SPINUP_TIME = 100; //10 ms 
     public static final double FLYWHEEL_IDLE_RPM = 5500; //RPM

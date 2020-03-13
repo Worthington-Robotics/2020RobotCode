@@ -23,7 +23,7 @@ public class Shooter extends Subsystem {
     private double[] tangent;
     private static Shooter m_Shooter = new Shooter();
     private NetworkTable limelight;
-    private MotorControlMode flywheelMode = MotorControlMode.DISABLED;
+    private MotorControlMode flywheelMode = MotorControlMode.RAMP_UP;
     private MotorControlMode turretMode = MotorControlMode.OPEN_LOOP;
     private ShooterIO periodic;
     private TalonFX rightFlywheelFalcon, leftFlywheelFalcon;
@@ -97,8 +97,8 @@ public class Shooter extends Subsystem {
 
             @Override
             public void onStart(double timestamp) {
-                periodic.flywheelRPMDemand = TicksPer100msToRPM(leftFlywheelFalcon.getSelectedSensorVelocity());
-                periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
+                periodic.flywheelDemand = leftFlywheelFalcon.getSelectedSensorVelocity();
+                periodic.flywheelRPMDemand = TicksPer100msToRPM(periodic.flywheelDemand);
             }
 
             @Override
@@ -118,13 +118,13 @@ public class Shooter extends Subsystem {
                     periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     break;
                 case RAMP_UP:
-                    if (Util.epsilonEquals(periodic.flywheelRPMDemand, Constants.FLYWHEEL_IDLE_RPM, 100)) {
+                    if (Util.epsilonEquals(periodic.flywheelRPM, Constants.FLYWHEEL_IDLE_RPM, 100)) {
                         setLimelightRPM();
                     } else {
                         periodic.flywheelRPMDemand = Math.min(
                                 periodic.flywheelRPMDemand
                                         + (Constants.FLYWHEEL_IDLE_RPM / (Constants.FLYWHEEL_SPINUP_TIME)),
-                                Constants.FLYWHEEL_IDLE_RPM);
+                                Constants.FLYWHEEL_IDLE_RPM + 200);
                         periodic.flywheelRPMDemand = Math.min(periodic.flywheelRPMDemand, Constants.FLYWHEEL_MAX_RPM);
                         periodic.flywheelDemand = RPMToTicksPer100ms(periodic.flywheelRPMDemand);
                     }
@@ -453,13 +453,10 @@ public class Shooter extends Subsystem {
      * @return goal ticks to turret ticks
      */
     public double limelightRanging() {
-        // Equation that takes in ta (See Limelight Docs) and outputs distance from
-        // target in inches
-        // TODO need to test data points based on actual bot
-        if (periodic.targetY == 0.0) {
+        if (periodic.targetV == 0.0) {
             return 0.0;
         }
-        return (98.5 - Constants.LIMELIGHT_HIGHT) / tangent[(int) ((Constants.LIMELIGHT_PITCH + periodic.targetY) * 2)];
+        return (98.5 - Constants.LIMELIGHT_HIGHT) / limeTan((Math.toRadians(Constants.LIMELIGHT_PITCH + periodic.targetY)));
     }
 
     public double limelightGoalAngle() {
@@ -476,6 +473,12 @@ public class Shooter extends Subsystem {
             goal = periodic.turretEncoder;
         }
         return goal;
+    }
+
+    public double limeTan(double angle)
+    {
+        double angle2 = angle * angle;
+        return (angle * (1 - angle2/6)) / (1 - (angle2 * (1 - angle2/12) / 2));
     }
 
     public class ShooterIO extends Subsystem.PeriodicIO {
