@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import frc.lib.control.AdaptivePurePursuitController.ControllerOutput;
 import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.geometry.Translation2d;
@@ -52,14 +53,14 @@ public class AdaptivePurePursuitControllerTest {
         final DecimalFormat fmt = new DecimalFormat("#0.000");
 
         for(double t = 0.0; t < 5.0; t += nominal_dt){
-            Twist2d update = controller.update(pose, t);
+            ControllerOutput update = controller.update(pose, t);
 
             //scale the update of the pose by by the friction and turn factors
-            update = new Twist2d(update.dx * friction_factor, update.dy * 
-             friction_factor, update.dtheta * turn_factor);
+            Twist2d sim = new Twist2d(update.command.dx * friction_factor, update.command.dy * 
+             friction_factor, update.command.dtheta * turn_factor);
 
             //update the pose with the specified transform
-            pose = pose.transformBy(Pose2d.exp(update));
+            pose = pose.transformBy(Pose2d.exp(sim));
 
             //print the data to the console to see what is going on
             System.out.println(fmt.format(t) + ", " + pose.toString() + ", " + update.toString());

@@ -181,8 +181,8 @@ public class AdaptivePurePursuitController {
         
         @Override
         public String toString() {
-            return "twist: " + command.toString() + " lookahead point: " + lookahead.translation.toString() + 
-            " Lookahead speed: " + lookahead.speed + " remaining path: " + remaining_distance;
+            return "Twist: " + command.toString() + ", Lookahead point: " + lookahead.translation.toString() + 
+            ", Lookahead speed: " + lookahead.speed + ", Remaining path: " + remaining_distance;
         }
 
     }   
