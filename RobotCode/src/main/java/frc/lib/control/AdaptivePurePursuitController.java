@@ -7,6 +7,7 @@ import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.geometry.Translation2d;
 import frc.lib.geometry.Twist2d;
+import frc.lib.util.CSVWritable;
 
 /**
  * Implements an adaptive pure pursuit controller. See:
@@ -46,7 +47,7 @@ public class AdaptivePurePursuitController {
         return remainingLength <= mPathCompletionTolerance;
     }
 
-    public Twist2d update(Pose2d robot_pose, double now) {
+    public ControllerOutput update(Pose2d robot_pose, double now) {
         Pose2d pose = robot_pose;
         if (mReversed) {
             pose = new Pose2d(robot_pose.getTranslation(),
@@ -55,7 +56,7 @@ public class AdaptivePurePursuitController {
 
         double distance_from_path = mPath.update(robot_pose.getTranslation());
         if (this.isDone()) {
-            return new Twist2d(0, 0, 0);
+            return ControllerOutput.identity();
         }
 
         PathSegment.Sample lookahead_point = mPath.getLookaheadPoint(robot_pose.getTranslation(),
@@ -103,7 +104,7 @@ public class AdaptivePurePursuitController {
         }
         mLastTime = now;
         mLastCommand = rv;
-        return rv;
+        return new ControllerOutput(rv, lookahead_point, remaining_distance);
     }
 
     public Set<String> getMarkersCrossed() {
@@ -152,5 +153,38 @@ public class AdaptivePurePursuitController {
                         (-my * (-y1 * y1 + y2 * y2 + dx * dx) + 2 * mx * y1 * dx) / (2 * cross_term)),
                 .5 * Math.abs((dx * dx + dy * dy) / cross_term), cross_product > 0));
     }
+
+    public static class ControllerOutput implements CSVWritable{
+        public Twist2d command;
+        public PathSegment.Sample lookahead;
+        public double remaining_distance;
+
+        private static final ControllerOutput identity = new ControllerOutput(Twist2d.identity(), 
+            new PathSegment.Sample(Translation2d.identity(), 0), 0);
+        public static ControllerOutput identity(){ return identity;}
+        
+        public ControllerOutput(Twist2d command, PathSegment.Sample lookahead, double remaining_distance){
+            this.command = command;
+            this.lookahead = lookahead;
+            this.remaining_distance = remaining_distance;
+        }
+
+		@Override
+		public String toCSV() {
+			return command.toCSV() + ", " + lookahead.translation.toCSV() + ", " + lookahead.speed + ", " + remaining_distance;
+		}
+
+		@Override
+		public int getNumFields() {
+			return command.getNumFields() + lookahead.translation.getNumFields() + 1 + 1;
+        }
+        
+        @Override
+        public String toString() {
+            return "twist: " + command.toString() + " lookahead point: " + lookahead.translation.toString() + 
+            " Lookahead speed: " + lookahead.speed + " remaining path: " + remaining_distance;
+        }
+
+    }   
 
 }

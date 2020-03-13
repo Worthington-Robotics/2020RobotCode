@@ -8,6 +8,8 @@ import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
+
+import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
@@ -15,6 +17,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.control.AdaptivePurePursuitController;
 import frc.lib.control.Path;
+import frc.lib.control.AdaptivePurePursuitController.ControllerOutput;
 import frc.lib.drivers.PIDF;
 import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Rotation2d;
@@ -331,8 +334,8 @@ public class Drive extends Subsystem {
         if (mDriveControlState == DriveControlState.PATH_FOLLOWING) {
             if (!mOverrideTrajectory) {
                 Pose2d robot_pose = PoseEstimator.getInstance().getLatestFieldToVehicle().getValue();
-                Twist2d command = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
-                DriveSignal setpoint = Kinematics.inverseKinematics(command);
+                periodic.pathFollower = pathFollowingController.update(robot_pose, Timer.getFPGATimestamp());
+                DriveSignal setpoint = Kinematics.inverseKinematics(periodic.pathFollower.command);
 
                 // Scaling the controler to a set max velocity
                 double max_vel = 0;
@@ -419,31 +422,27 @@ public class Drive extends Subsystem {
 
         // SmartDashboard.putNumber("Drive/Gyro/CurAngle",
         // periodic.gyro_heading.getDegrees());
-        SmartDashboard.putBoolean("isInverse", periodic.inverse);
-
+        SmartDashboard.putBoolean("isInverse", periodic.inverse); //FIXME why is this still here?
         SmartDashboard.putNumber("Drive/AnglePID/Set Point", periodic.gyro_pid_angle);
         SmartDashboard.putNumber("Drive/AnglePID/Error", periodic.AnglePIDError);
 
         SmartDashboard.putString("Drive/Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("Drive/Stick", periodic.operatorInput);
         SmartDashboard.putBoolean("Drive/Shift", periodic.TransState);
-        SmartDashboard.putNumber("Drive/Error/X", periodic.error.x());
-        SmartDashboard.putNumber("Drive/Error/Y", periodic.error.y());
+
+        SmartDashboard.putNumber("Drive/Path/LookaheadX", periodic.pathFollower.lookahead.translation.x());
+        SmartDashboard.putNumber("Drive/Path/LookaheadY", periodic.pathFollower.lookahead.translation.y());
+        SmartDashboard.putNumber("Drive/Path/Remaining Distance", periodic.pathFollower.remaining_distance);
+        SmartDashboard.putNumber("Drive/Path/Allowed Speed", periodic.pathFollower.lookahead.speed);
 
         SmartDashboard.putNumber("Drive/Left/Current", periodic.leftCurrent);
         SmartDashboard.putNumber("Drive/Left/Demand", periodic.left_demand);
         SmartDashboard.putNumber("Drive/Left/Talon Velocity", periodic.left_velocity_ticks_per_100ms);
-        // SmartDashboard.putNumber("Drive/Left/Talon Error", periodic.left_error);
-        // SmartDashboard.putNumber("Drive/Left/Talon Voltage Out",
-        // driveFrontLeft.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Left/Encoder Counts", periodic.left_pos_ticks);
 
         SmartDashboard.putNumber("Drive/Right/Current", periodic.rightCurrent);
         SmartDashboard.putNumber("Drive/Right/Demand", periodic.right_demand);
         SmartDashboard.putNumber("Drive/Right/Talon Velocity", periodic.right_velocity_ticks_per_100ms);
-        // SmartDashboard.putNumber("Drive/Right/Talon Error", periodic.right_error);
-        // SmartDashboard.putNumber("Drive/Right/Talon Voltage Out",
-        // driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Drive/Right/Encoder Counts", periodic.right_pos_ticks);
 
         if (Constants.DEBUG) {
@@ -463,12 +462,10 @@ public class Drive extends Subsystem {
     public class DriveIO extends PeriodicIO {
         // INPUTS
         public double left_pos_ticks = 0;
-        // public double left_error = 0;
         public double left_velocity_ticks_per_100ms = 0;
         public double leftCurrent = 0;
 
         public double right_pos_ticks = 0;
-        // public double right_error = 0;
         public double right_velocity_ticks_per_100ms = 0;
         public double rightCurrent = 0;
 
@@ -477,7 +474,8 @@ public class Drive extends Subsystem {
         public double gyro_pid_angle = 0;
         public double AnglePIDError = 0;
 
-        public Translation2d error = new Translation2d(0, 0);
+        public ControllerOutput pathFollower = ControllerOutput.identity();
+
         public double[] operatorInput = { 0, 0, 0 };
         public boolean inverse = false;
         public double PIDOutput = 0;

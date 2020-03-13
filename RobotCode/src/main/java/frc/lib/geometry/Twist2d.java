@@ -1,5 +1,6 @@
 package frc.lib.geometry;
 
+import frc.lib.util.CSVWritable;
 import frc.lib.util.Util;
 
 import java.text.DecimalFormat;
@@ -10,7 +11,7 @@ import java.text.DecimalFormat;
  * <p>
  * A Twist can be used to represent a difference between two poses, a velocity, an acceleration, etc.
  */
-public class Twist2d {
+public class Twist2d implements CSVWritable{
     protected static final Twist2d kIdentity = new Twist2d(0.0, 0.0, 0.0);
 
     public static final Twist2d identity() {
@@ -50,5 +51,16 @@ public class Twist2d {
     public String toString() {
         final DecimalFormat fmt = new DecimalFormat("#0.000");
         return "(" + fmt.format(dx) + "," + fmt.format(dy) + "," + fmt.format(Math.toDegrees(dtheta)) + " deg)";
+    }
+
+    @Override
+    public String toCSV() {
+        final DecimalFormat fmt = new DecimalFormat("#0.000");
+        return fmt.format(dx) + "," + fmt.format(dy) + "," + fmt.format(Math.toDegrees(dtheta));
+    }
+
+    @Override
+    public int getNumFields() {
+        return 3;
     }
 }
